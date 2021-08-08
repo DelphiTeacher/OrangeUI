@@ -1,0 +1,21 @@
+object frmSelectPopup: TfrmSelectPopup
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  ClientHeight = 266
+  ClientWidth = 390
+  Color = clWindow
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
+  OnKeyUp = FormKeyUp
+  PixelsPerInch = 96
+  TextHeight = 13
+end
