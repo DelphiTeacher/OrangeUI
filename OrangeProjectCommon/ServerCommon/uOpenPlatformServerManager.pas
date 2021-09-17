@@ -22,6 +22,7 @@ uses
   uFileCommon,
   uOpenCommon,
   uFuncCommon,
+  uDatasetToJson,
 
   uDataBaseConfig,
   DataBaseConfigForm,
@@ -38,6 +39,7 @@ uses
   Redis.Commons,
   uRedisClientPool,
   uBaseDataBaseModule,
+  uCommandLineHelper,
 //  uRestInterfaceCall,
 
 
@@ -116,6 +118,7 @@ type
 //    name:String;
 //    icon_path:String;
 //    app_desc:String;
+    Json:ISuperObject;
     procedure LoadFromDataset(ADataset:TDataset);
   end;
   TOpenPlatformAppList=class(TBaseList)
@@ -260,6 +263,7 @@ type
 
     //是否启用接口参数验签名
     IsEnableRestAPICheckSign:Boolean;
+    IsNeedLoadAppList:Boolean;
 
     NonceList:TStringList;
     NonceListLock:TCriticalSection;
@@ -284,6 +288,9 @@ type
     MaxParallelCallCountPerSecond:Integer;
     //输出服务端状态的线程
     FServiceStatusOutputThread:TServiceStatusOutputThread;
+
+    FOnGetCommandLineOutput: TGetCommandLineOutputEvent;
+    procedure DoGetCommandLineOutput(ACommandLine:String;ATag:String;AOutput:String);
   public
     FRedis_Host:String;
     FRedis_Port:Integer;
@@ -400,6 +407,7 @@ var
 
   //是否需要从Ini文件加载端口的配置,像汽修服务就不需要从配置中加载
   IsNeedLoadServiceProjectFromIni:Boolean;
+  IsNeedSaveServiceProjectFromIni:Boolean;
 
 
 var
@@ -1128,6 +1136,15 @@ begin
   Inherited;
 end;
 
+procedure TServiceProject.DoGetCommandLineOutput(ACommandLine, ATag,
+  AOutput: String);
+begin
+  if Assigned(FOnGetCommandLineOutput) then
+  begin
+    FOnGetCommandLineOutput(ACommandLine,ATag,AOutput);
+  end;
+end;
+
 procedure TServiceProject.FreeRedisClient(ARedisClient: TRedisClient);
 begin
   GetGlobalRedisClientPool.FreeCustomObject(ARedisClient);
@@ -1326,6 +1343,8 @@ procedure TServiceProject.Save;
 var
   AIniFile:TIniFile;
 begin
+  
+
   AIniFile:=TIniFile.Create(GetApplicationPath+'Config.ini');
 
 
@@ -1411,6 +1430,41 @@ begin
 
 
 
+      //所有模块使用同一个数据库连接
+      //先启动这个数据库连接，因为其他模块可能需要使用数据库连接查询一些东西
+      if Self.IsUseOneDBModule then
+      begin
+          AError:='';
+          if not FDBModule.DoPrepareStart(AError) then
+          begin
+              AMessages:='FDBModule.DoPrepareStart '+AMessages+AError+#13#10;
+          end;
+      end;
+
+
+
+      //取到开放平台的APP列表
+      //顺序不能换
+      if IsEnableRestAPICheckSign or IsNeedLoadAppList then
+      begin
+          //查询所有App列有
+          AError:='';
+          if not FDBModule.DoPrepareStart(AError) then
+          begin
+              AMessages:='FDBModule.DoPrepareStart '+AMessages+AError+#13#10;
+          end
+          else
+          begin
+              AppList.Clear();
+
+              if not Self.SyncAppList(AError) then
+              begin
+                AMessages:='SyncAppList '+AMessages+AError+#13#10;
+              end;
+
+          end;
+      end;
+
 
 
       //启动各个服务模块
@@ -1434,39 +1488,6 @@ begin
           end;
       end;
 
-
-      //所有模块使用同一个数据库连接
-      if Self.IsUseOneDBModule then
-      begin
-          AError:='';
-          if not FDBModule.DoPrepareStart(AError) then
-          begin
-              AMessages:='FDBModule.DoPrepareStart '+AMessages+AError+#13#10;
-          end;
-      end;
-
-
-
-      //取到开放平台的APP列表
-      if IsEnableRestAPICheckSign then
-      begin
-          //查询所有App列有
-          AError:='';
-          if not FDBModule.DoPrepareStart(AError) then
-          begin
-              AMessages:='FDBModule.DoPrepareStart '+AMessages+AError+#13#10;
-          end
-          else
-          begin
-              AppList.Clear();
-
-              if not Self.SyncAppList(AError) then
-              begin
-                AMessages:='SyncAppList '+AMessages+AError+#13#10;
-              end;
-
-          end;
-      end;
 
 
 
@@ -1881,6 +1902,7 @@ begin
 
   Self.service_user_fid:=ADataset.FieldByName('service_user_fid').AsString;
 
+  Json:=JsonFromRecord(ADataset);
 end;
 
 
@@ -2021,7 +2043,7 @@ initialization
   GlobalServiceProject.Port:=10000;
 
   IsNeedLoadServiceProjectFromIni:=True;
-
+//  IsNeedSaveServiceProjectFromIni:=True;
 
 
   //REDIS默认的缓存时间

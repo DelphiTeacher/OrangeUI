@@ -65,7 +65,6 @@ type
   //FireMonkey平台下Unidac数据库访问模块
   TFMXUnidacDatabaseModule = class(TBaseDatabaseModule)
   private
-    UniConnection1: TUniConnection;
 //    FSQLiteUniProvider:TSQLiteUniProvider;
 //    FMySQLUniProvider:TMySQLUniProvider;
 //    FSQLServerUniProvider:TSQLServerUniProvider;
@@ -80,6 +79,7 @@ type
     constructor Create; override;
     destructor Destroy; override;
   public
+    UniConnection1: TUniConnection;
     //在服务启动的时候,会调用它们,确保数据库能连接成功
     //准备启动
     function DoPrepareStart(var AError:String): Boolean;override;

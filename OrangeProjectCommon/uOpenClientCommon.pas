@@ -73,6 +73,11 @@ uses
 
 
 
+
+  {$IFDEF OPEN_PLATFORM_SERVER}
+  //在开放平台服务端中使用
+  {$ELSE}
+  //在开放平台客户端中使用
 type
 
   TImageType=(itNone,
@@ -81,6 +86,97 @@ type
               itUserHeadMale,
               itUserHeadFemale
               );
+
+  {$REGION '用户TUser'}
+  TUser=class(TBaseJsonObject)
+  public
+    //wn
+    fid:String;//Int64;//64,
+
+
+//    //appid:Int64;//1002,
+    email:String;//"",
+    phone:String;//"18957901025",
+//    password:String;//"123456",
+    name:String;//"用户王能",
+    name_s:String;//"",
+    isvip:Int64;//0,
+    age:Int64;//0,
+    head_pic_path:String;//"",
+    cert_audit_state:Int64;//0,
+    sex:Int64;//0,
+    user_type:Int64;//0,
+    register_type:String;//"phone_num",
+
+//    birth:String;
+//    sign:string;
+
+    wx_auth_code:String;//"",
+    wx_union_id:String;//"",
+    wx_open_id:String;//"",
+    wx_auth_token:String;//"",
+
+    alipay_open_id:String;//"",
+    alipay_auth_token:String;//"",
+
+    apple_open_id:String;
+    apple_auth_token:String;
+
+
+    fb_auth_code:String;//"",
+    fb_open_id:String;//"",
+    fb_auth_token:String;//"",
+
+
+    tw_auth_code:String;//"",
+    tw_open_id:String;//"",
+    tw_auth_token:String;//"",
+
+
+    score:Double;//0,
+    is_deleted:Int64;//0,
+    createtime:String;//"2018-03-29 09:57:27",
+    is_active:Int64;//0
+
+    notice_unread_count:Int64;//14,
+
+    key:String;
+
+    second_contactor_name:String;
+    second_contactor_phone:String;
+
+
+    fastmsg_user_id:Integer;
+
+    followers_count:Integer;
+    friends_count:Integer;
+    published_news_count:Integer;
+
+    published_community_count:Integer;
+    published_group_count:Integer;
+
+
+    Json:ISuperObject;
+  private
+    procedure AssignTo(Dest: TPersistent);override;
+  public
+    constructor Create;override;
+    destructor Destroy;override;
+  public
+    function GetHeadPicUrl: String;
+  public
+    procedure Clear;
+    function ParseFromJson(AJson: ISuperObject): Boolean;override;
+  end;
+  TUserList=class(TBaseJsonObjectList)
+  private
+    function GetItem(Index: Integer): TUser;
+  public
+    function GetArray: TStringDynArray;
+    property Items[Index:Integer]:TUser read GetItem;default;
+  end;
+  {$ENDREGION}
+
 
   {$REGION '实名信息TUserCertInfo'}
   //用户实名认证信息
@@ -197,92 +293,6 @@ type
     property Items[Index:Integer]:TNoticeClassify read GetItem;default;
   end;
   {$ENDREGION '通知'}
-
-
-  {$REGION '用户TUser'}
-  TUser=class(TBaseJsonObject)
-  public
-    //wn
-    fid:String;//Int64;//64,
-
-
-//    //appid:Int64;//1002,
-    email:String;//"",
-    phone:String;//"18957901025",
-//    password:String;//"123456",
-    name:String;//"用户王能",
-    name_s:String;//"",
-    isvip:Int64;//0,
-    age:Int64;//0,
-    head_pic_path:String;//"",
-    cert_audit_state:Int64;//0,
-    sex:Int64;//0,
-    user_type:Int64;//0,
-    register_type:String;//"phone_num",
-
-//    birth:String;
-//    sign:string;
-
-    wx_auth_code:String;//"",
-    wx_union_id:String;//"",
-    wx_open_id:String;//"",
-    wx_auth_token:String;//"",
-
-    alipay_open_id:String;//"",
-    alipay_auth_token:String;//"",
-
-    apple_open_id:String;
-    apple_auth_token:String;
-
-
-    fb_auth_code:String;//"",
-    fb_open_id:String;//"",
-    fb_auth_token:String;//"",
-    tw_auth_code:String;//"",
-    tw_open_id:String;//"",
-    tw_auth_token:String;//"",
-    score:Double;//0,
-    is_deleted:Int64;//0,
-    createtime:String;//"2018-03-29 09:57:27",
-    is_active:Int64;//0
-
-    notice_unread_count:Int64;//14,
-
-    key:String;
-
-    second_contactor_name:String;
-    second_contactor_phone:String;
-
-
-    fastmsg_user_id:Integer;
-
-    followers_count:Integer;
-    friends_count:Integer;
-    published_news_count:Integer;
-    published_community_count:Integer;
-    published_group_count:Integer;
-
-
-    Json:ISuperObject;
-  private
-    procedure AssignTo(Dest: TPersistent);override;
-  public
-    constructor Create;override;
-    destructor Destroy;override;
-  public
-    function GetHeadPicUrl: String;
-  public
-    procedure Clear;
-    function ParseFromJson(AJson: ISuperObject): Boolean;override;
-  end;
-  TUserList=class(TBaseJsonObjectList)
-  private
-    function GetItem(Index: Integer): TUser;
-  public
-    function GetArray: TStringDynArray;
-    property Items[Index:Integer]:TUser read GetItem;default;
-  end;
-  {$ENDREGION}
 
 
   {$REGION '用户银行卡'}
@@ -2224,6 +2234,9 @@ type
 
 
 
+  {$ENDIF}
+
+
 
 
 
@@ -2303,6 +2316,10 @@ var
 
 
 
+{$IFDEF OPEN_PLATFORM_SERVER}
+//在开放平台服务端中使用
+{$ELSE}
+//在开放平台客户端中使用
 
 var
   //程序ID(公共配置,用于济胜汽修、门业管理)
@@ -2317,15 +2334,44 @@ var
   //用户类型名称,比如client,shop,rider,emp
   APPUserTypeName:String;
 
-
-
-
+  //是否需要登录的时候根据手机号获取AppID
+  GlobalIsNeedAPPIDSetting:Boolean;
 
 var
   GlobalBaseManager:TBaseManager;
+{$ENDIF}
+
+
+
+
 
 //更新服务器设置
 procedure CommonSyncServerSetting(AServer:String;APort:Integer);
+
+//授权信息
+function GetVIPProductAuthInfo(AAuthJson:ISuperObject):String;
+//授权结束日期
+function GetVIPProductAuthEndDate(AAuthJson:ISuperObject):String;
+
+function GetImageLocalPath(APicPath:String):String;
+
+
+
+
+
+
+{$IFDEF OPEN_PLATFORM_SERVER}
+//在开放平台服务端中使用
+{$ELSE}
+//在开放平台客户端中使用
+
+
+
+procedure SaveJsonToFile(AJson:ISuperObject;AFilePath:String);
+procedure SaveJsonArrayToFile(AJsonArray:ISuperArray;AFilePath:String);
+procedure LoadJsonFromFile(var AJson:ISuperObject;AFilePath:String);
+procedure LoadJsonArrayFromFile(var AJsonArray:ISuperArray;AFilePath:String);
+
 
 function GetDefaultUserHeadUrl:String;
 function GetDefaultGroupHeadUrl:String;
@@ -2333,17 +2379,8 @@ function GetDefaultGroupHeadUrl:String;
 function GetImageUrl(APicPath:String;
                     AImageType:TImageType=itNone;
                     AIsThumb:Boolean=False):String;
-function GetImageLocalPath(APicPath:String):String;
 
 
-
-
-
-//获取图片链接
-procedure SaveJsonToFile(AJson:ISuperObject;AFilePath:String);
-procedure SaveJsonArrayToFile(AJsonArray:ISuperArray;AFilePath:String);
-procedure LoadJsonFromFile(var AJson:ISuperObject;AFilePath:String);
-procedure LoadJsonArrayFromFile(var AJsonArray:ISuperArray;AFilePath:String);
 
 
 //店铺当前是否正在营业
@@ -2370,14 +2407,54 @@ function GetMonthTime(AMonday:Integer;
                       ASunday:Integer ):String;
 
 function IsTakeAwayFoodShop(AShop:TShop):Boolean;
+{$ENDIF}
+
+
 
 implementation
 
+
+//授权信息
+function GetVIPProductAuthInfo(AAuthJson:ISuperObject):String;
+begin
+  Result:='';
+  if AAuthJson.Contains('ValidVIPDateAreaJson') then
+  begin
+    Result:=AAuthJson.O['ValidVIPDateAreaJson'].S['name'];
+
+    if (AAuthJson.O['ValidVIPDateAreaJson'].I['is_trial']=1) then
+    begin
+      Result:=Result+' 试用';
+    end;
+
+  end;
+end;
+
+//授权结束日期
+function GetVIPProductAuthEndDate(AAuthJson:ISuperObject):String;
+var
+  AEndDate:TDateTime;
+begin
+  Result:='';
+  if AAuthJson.Contains('ValidVIPDateAreaJson') then
+  begin
+    Result:=AAuthJson.O['ValidVIPDateAreaJson'].S['end_date'];
+
+    AEndDate:=StdStrToDateTime(Result);
+    Result:=FormatDateTime('YYYY-MM-DD',AEndDate);
+  end;
+end;
+
+{$IFDEF OPEN_PLATFORM_SERVER}
+//在开放平台服务端中使用
+{$ELSE}
+//在开放平台客户端中使用
 
 function IsTakeAwayFoodShop(AShop:TShop):Boolean;
 begin
   Result:=(Pos('外卖',AShop.app_business_category_name)>0)
 end;
+{$ENDIF}
 
 procedure CommonSyncServerSetting(AServer: String; APort: Integer);
 begin
@@ -2444,6 +2521,42 @@ begin
 
 end;
 
+
+
+function GetImageLocalPath(APicPath:String):String;
+var
+  ATempIndex:Integer;
+begin
+  Result:='';
+  if APicPath='' then
+  begin
+  end
+  else
+  begin
+      if (Pos('http:',LowerCase(APicPath))>0)
+        or (Pos('https:',LowerCase(APicPath))>0) then
+      begin
+          Result:='';
+      end
+      else
+      begin
+          APicPath:=GetApplicationPath+APicPath;
+
+          Result:=APicPath;
+      end;
+  end;
+end;
+
+
+
+
+
+{$IFDEF OPEN_PLATFORM_SERVER}
+//在开放平台服务端中使用
+{$ELSE}
+//在开放平台客户端中使用
+
+
 function GetDefaultUserHeadUrl:String;
 begin
   //默认用户头像
@@ -2509,30 +2622,6 @@ begin
 //            APicPath:=ExtractFilePath(APicPath)+'thumb_'+ExtractFileName(APicPath);
           end;
           {$IFEND}
-
-          Result:=APicPath;
-      end;
-  end;
-end;
-
-function GetImageLocalPath(APicPath:String):String;
-var
-  ATempIndex:Integer;
-begin
-  Result:='';
-  if APicPath='' then
-  begin
-  end
-  else
-  begin
-      if (Pos('http:',LowerCase(APicPath))>0)
-        or (Pos('https:',LowerCase(APicPath))>0) then
-      begin
-          Result:='';
-      end
-      else
-      begin
-          APicPath:=GetApplicationPath+APicPath;
 
           Result:=APicPath;
       end;
@@ -2625,8 +2714,14 @@ begin
 
 
 end;
+{$ENDIF}
 
 
+
+{$IFDEF OPEN_PLATFORM_SERVER}
+//在开放平台服务端中使用
+{$ELSE}
+//在开放平台客户端中使用
 
 //获取等待营业的时间
 function GetDayWaitBusinessTime(AShop:TShop;ADay:TDateTime):String;
@@ -3504,9 +3599,15 @@ begin
     end;
 
 end;
+{$ENDIF}
 
 
 
+
+{$IFDEF OPEN_PLATFORM_SERVER}
+//在开放平台服务端中使用
+{$ELSE}
+//在开放平台客户端中使用
 
 { TNotice }
 
@@ -3569,396 +3670,6 @@ begin
   Result:=TNoticeClassify(Inherited Items[Index]);
 end;
 
-
-{ TUser }
-
-procedure TUser.Clear;
-begin
-  //wn
-  fid:='';
-
-
-//  //Self.appid:=0;
-
-  email:='';
-  phone:='';
-//  password:='';
-  name:='';
-  name_s:='';
-  age:=0;
-  head_pic_path:='';
-  cert_audit_state:=0;
-  sex:=0;
-  user_type:=0;
-  register_type:='';
-
-  wx_auth_code:='';
-  wx_union_id:='';
-  wx_open_id:='';
-  wx_auth_token:='';
-
-
-  alipay_open_id:='';
-  alipay_auth_token:='';
-
-  apple_open_id:='';
-  apple_auth_token:='';
-
-  fb_auth_code:='';
-  fb_open_id:='';
-  fb_auth_token:='';
-  tw_auth_code:='';
-  tw_open_id:='';
-  tw_auth_token:='';
-  score:=0;
-  is_deleted:=0;
-  createtime:='';
-  is_active:=0;
-
-  second_contactor_name:='';
-  second_contactor_phone:='';
-
-  fastmsg_user_id:=0;
-
-  followers_count:=0;
-  friends_count:=0;
-  published_news_count:=0;
-  published_community_count:=0;
-  published_group_count:=0;
-
-end;
-
-procedure TUser.AssignTo(Dest: TPersistent);
-var
-  DestObject:TUser;
-begin
-
-  DestObject:=TUser(Dest);
-  DestObject.fid:=fid;
-//  //DestObject.//Self.appid:=Self.appid;
-  DestObject.email:=email;
-  DestObject.phone:=phone;
-//  DestObject.password:=password;
-  DestObject.name:=name;
-  DestObject.name_s:=name_s;
-  DestObject.age:=age;
-  DestObject.head_pic_path:=head_pic_path;
-  DestObject.cert_audit_state:=cert_audit_state;
-  DestObject.sex:=sex;
-  DestObject.user_type:=user_type;
-  DestObject.register_type:=register_type;
-
-
-  DestObject.wx_auth_code:=wx_auth_code;
-  DestObject.wx_union_id:=wx_union_id;
-  DestObject.wx_open_id:=wx_open_id;
-  DestObject.wx_auth_token:=wx_auth_token;
-
-
-  DestObject.alipay_open_id:=alipay_open_id;
-  DestObject.alipay_auth_token:=alipay_auth_token;
-
-  DestObject.apple_open_id:=apple_open_id;
-  DestObject.apple_auth_token:=apple_auth_token;
-
-
-
-  DestObject.fb_auth_code:=fb_auth_code;
-  DestObject.fb_open_id:=fb_open_id;
-  DestObject.fb_auth_token:=fb_auth_token;
-  DestObject.tw_auth_code:=tw_auth_code;
-  DestObject.tw_open_id:=tw_open_id;
-  DestObject.tw_auth_token:=tw_auth_token;
-  DestObject.score:=score;
-  DestObject.is_deleted:=is_deleted;
-  DestObject.createtime:=createtime;
-  DestObject.is_active:=is_active;
-
-  DestObject.second_contactor_name:=second_contactor_name;
-  DestObject.second_contactor_phone:=second_contactor_phone;
-
-
-  DestObject.fastmsg_user_id:=fastmsg_user_id;
-
-
-  DestObject.followers_count:=followers_count;
-  DestObject.friends_count:=followers_count;
-  DestObject.published_news_count:=followers_count;
-  DestObject.published_community_count:=followers_count;
-  DestObject.published_group_count:=published_group_count;
-
-
-
-end;
-
-constructor TUser.Create;
-begin
-  inherited;
-end;
-
-destructor TUser.Destroy;
-begin
-  inherited;
-end;
-
-//function TUser.GetArea: String;
-//begin
-//  Result:=Self.province+' '+Self.city+' '+Self.area;
-//end;
-
-function TUser.GetHeadPicUrl: String;
-begin
-//  if HeadPicPath='' then
-//  begin
-//    Result:=ImageHttpServerUrl+'/Upload/UserHead/'+'default.png';
-//  end
-//  else
-//  begin
-//    Result:=ImageHttpServerUrl+ReplaceStr(Self.head_pic_path,'\','/');
-//  end;
-
-  Result:=GetImageUrl(head_pic_path,itUserHead);
-//  Result:='';
-//  if Self.head_pic_path<>'' then
-//  begin
-//      if (Pos('http:',LowerCase(head_pic_path))>0)
-//        or (Pos('https:',LowerCase(head_pic_path))>0) then
-//      begin
-//          Result:=head_pic_path;
-//      end
-//      else
-//      begin
-//          Result:=ImageHttpServerUrl+'/'+ReplaceStr(Self.head_pic_path,'\','/');
-//      end;
-//  end
-//  else
-//  begin
-//    if APPUserType=utRider then
-//    begin
-//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\userhead_pic\Default_Pic\rider_pic.png','\','/');
-//    end;
-//
-//    if APPUserType=utClient then
-//    begin
-//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\userhead_pic\Default_Pic\user_pic.png','\','/');
-//    end;
-//
-//    if APPUserType=utShop then
-//    begin
-//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\userhead_pic\Default_Pic\user_pic.png','\','/');
-//    end;
-//  end;
-end;
-
-procedure LoadJsonFromFile(var AJson:ISuperObject;AFilePath: String);
-var
-  AStringStream:TStringStream;
-begin
-  if FileExists(AFilePath) then
-  begin
-    AStringStream:=TStringStream.Create('',TEncoding.UTF8);
-    try
-      AStringStream.LoadFromFile(AFilePath);
-      AStringStream.Position:=0;
-
-      AJson:=TSuperObject.Create(AStringStream.DataString);
-
-
-    finally
-      FreeAndNil(AStringStream);
-    end;
-
-  end;
-end;
-
-procedure LoadJsonArrayFromFile(var AJsonArray:ISuperArray;AFilePath: String);
-var
-  AStringStream:TStringStream;
-begin
-  if FileExists(AFilePath) then
-  begin
-    AStringStream:=TStringStream.Create('',TEncoding.UTF8);
-    try
-      AStringStream.LoadFromFile(AFilePath);
-      AStringStream.Position:=0;
-
-      AJsonArray:=TSuperArray.Create(AStringStream.DataString);
-
-
-    finally
-      FreeAndNil(AStringStream);
-    end;
-
-  end;
-end;
-
-function TUser.ParseFromJson(AJson: ISuperObject): Boolean;
-begin
-//  fid:=AJson.I['fid'];//2,
-//  //Self.appid:=AJson.I['appid'];//1001,
-//  phone:=AJson.S['phone'];//"18957901025",
-//  name:=AJson.S['name'];//"ggggcexx",
-//
-//  province:=AJson.S['province'];//"",
-//  city:=AJson.S['city'];//"",
-//  area:=AJson.S['area'];//"",
-//  phone_imei:=AJson.S['phone_imei'];//"",
-//  phone_uuid:=AJson.S['phone_uuid'];//""
-//  addr:=AJson.S['addr'];//"",
-//  phone_type:=AJson.S['phone_type'];//"",
-//  password:=AJson.S['password'];//"123456",
-//  headpicpath:=AJson.S['headpicpath'];//"",
-//  createtime:=AJson.S['createtime'];//"2017-07-12 16:08:54",
-//  sex:=AJson.I['sex'];//"",
-//
-//  wx_union_id:=AJson.S['wx_union_id'];
-//  wx_open_id:=AJson.S['wx_open_id'];
-//  wx_auth_token:=AJson.S['wx_auth_token'];
-//
-//  alipay_open_id:=AJson.S['alipay_open_id'];
-//  alipay_auth_token:=AJson.S['alipay_auth_token'];
-//
-//
-//  apple_open_id:=AJson.S['apple_open_id'];//"",
-//  apple_auth_token:=AJson.S['apple_auth_token'];//"",
-//
-//  score:=AJson.I['score'];
-//
-//  is_hotel_manager:=AJson.I['is_hotel_manager'];//"",
-//  is_emp:=AJson.I['is_emp'];//"",
-//  is_admin:=AJson.I['is_admin'];//"",
-//  is_deleted:=AJson.I['is_deleted'];//"",
-//  is_leave:=AJson.I['is_leave'];//"",
-//
-//  cert_audit_user_fid:=AJson.V['cert_audit_user_fid'];//0,
-//  cert_audit_state:=AJson.I['cert_audit_state'];//0,
-//  cert_audit_remark:=AJson.S['cert_audit_remark'];//"",
-//  cert_audit_time:=AJson.S['cert_audit_time'];//"",
-//
-////  is_valid_manager:=AJson.I['is_valid_manager'];//"",
-//  bind_introducer_fid:=AJson.I['bind_introducer_fid'];//2,
-//  bind_introducer_name:=AJson.S['bind_introducer_name'];//"",
-//  bind_introducer_phone:=AJson.S['bind_introducer_phone'];//"",
-//
-//  audit_user_fid:=AJson.V['audit_user_fid'];//1,
-//  audit_state:=AJson.I['audit_state'];//1,
-//  audit_remark:=AJson.S['audit_remark'];//"",
-//  audit_time:=AJson.S['audit_time'];//"2017-07-13 07:12:40",
-//
-//  remark:=AJson.S['remark'];//"",
-//  tel:=AJson.S['tel'];//"",
-//
-//  notice_unread_count:=AJson.I['notice_unread_count'];
-//
-//  region_fids:=AJson.S['region_fids'];//管辖区域fid
-//  region_names:=AJson.S['region_names']; //管辖区域名称
-  Json:=AJson;
-
-
-  //wn
-//  fid:=AJson.I['fid'];//64,
-  try
-    fid:=AJson.V['fid'];//64,
-  except
-    //兼容旧版本
-    fid:=IntToStr(AJson.I['fid']);//64,
-  end;
-
-
-
-
-//  //Self.appid:=AJson.I['appid'];//1002,
-  email:=AJson.S['email'];//"",
-  phone:=AJson.S['phone'];//"18957901025",
-//  password:=AJson.S['password'];//"123456",
-  name:=AJson.S['name'];//"用户王能",
-  name_s:=AJson.S['name_s'];//"",
-  isvip:=AJson.I['isvip'];//0,
-  age:=AJson.I['age'];//0,
-  head_pic_path:=AJson.S['head_pic_path'];//"",
-  cert_audit_state:=AJson.I['cert_audit_state'];//0,
-  sex:=AJson.I['sex'];//0,
-  user_type:=AJson.I['user_type'];//0,
-  register_type:=AJson.S['register_type'];//"phone_num",
-
-//  birth:=AJson.S['birth'];
-//  sign:= AJson.S['sign'];
-
-  wx_auth_code:=AJson.S['wx_auth_code'];//"",
-  wx_union_id:=AJson.S['wx_union_id'];//"",
-  wx_open_id:=AJson.S['wx_open_id'];//"",
-  wx_auth_token:=AJson.S['wx_auth_token'];//"",
-
-
-  alipay_open_id:=AJson.S['alipay_open_id'];//"",
-  alipay_auth_token:=AJson.S['alipay_auth_token'];//"",
-
-  apple_open_id:=AJson.S['apple_open_id'];//"",
-  apple_auth_token:=AJson.S['apple_auth_token'];//"",
-
-
-
-
-  fb_auth_code:=AJson.S['fb_auth_code'];//"",
-  fb_open_id:=AJson.S['fb_open_id'];//"",
-  fb_auth_token:=AJson.S['fb_auth_token'];//"",
-  tw_auth_code:=AJson.S['tw_auth_code'];//"",
-  tw_open_id:=AJson.S['tw_open_id'];//"",
-  tw_auth_token:=AJson.S['tw_auth_token'];//"",
-  score:=AJson.F['score'];//0,
-  is_deleted:=AJson.I['is_deleted'];//0,
-  createtime:=AJson.S['createtime'];//"2018-03-29 09:57:27",
-  is_active:=AJson.I['is_active'];//0
-
-  second_contactor_name:=AJson.S['second_contactor_name'];//0
-  second_contactor_phone:=AJson.S['second_contactor_phone'];//0
-
-  fastmsg_user_id:=AJson.I['fastmsg_user_id'];//0
-
-
-  followers_count:=AJson.I['followers_count'];
-  friends_count:=AJson.I['friends_count'];
-  published_news_count:=AJson.I['published_news_count'];
-  published_community_count:=AJson.I['published_community_count'];
-  published_group_count:=AJson.I['published_group_count'];
-
-
-
-end;
-
-procedure SaveJsonToFile(AJson:ISuperObject;AFilePath: String);
-var
-  AStringStream:TStringStream;
-begin
-  if AJson<>nil then
-  begin
-    AStringStream:=TStringStream.Create('',TEncoding.UTF8);
-    try
-      AStringStream.WriteString(AJson.AsJSON);
-      AStringStream.Position:=0;
-      AStringStream.SaveToFile(AFilePath);
-    finally
-      FreeAndNil(AStringStream);
-    end;
-  end;
-end;
-
-procedure SaveJsonArrayToFile(AJsonArray:ISuperArray;AFilePath: String);
-var
-  AStringStream:TStringStream;
-begin
-  if AJsonArray<>nil then
-  begin
-    AStringStream:=TStringStream.Create('',TEncoding.UTF8);
-    try
-      AStringStream.WriteString(AJsonArray.AsJSON);
-      AStringStream.Position:=0;
-      AStringStream.SaveToFile(AFilePath);
-    finally
-      FreeAndNil(AStringStream);
-    end;
-  end;
-end;
 
 { TUserList }
 
@@ -8259,6 +7970,402 @@ begin
 end;
 
 
+
+{ TUser }
+
+procedure TUser.Clear;
+begin
+  //wn
+  fid:='';
+
+
+//  //Self.appid:=0;
+
+  email:='';
+  phone:='';
+//  password:='';
+  name:='';
+  name_s:='';
+  age:=0;
+  head_pic_path:='';
+  cert_audit_state:=0;
+  sex:=0;
+  user_type:=0;
+  register_type:='';
+
+  wx_auth_code:='';
+  wx_union_id:='';
+  wx_open_id:='';
+  wx_auth_token:='';
+
+
+  alipay_open_id:='';
+  alipay_auth_token:='';
+
+  apple_open_id:='';
+  apple_auth_token:='';
+
+  fb_auth_code:='';
+  fb_open_id:='';
+  fb_auth_token:='';
+  tw_auth_code:='';
+  tw_open_id:='';
+  tw_auth_token:='';
+  score:=0;
+  is_deleted:=0;
+  createtime:='';
+  is_active:=0;
+
+  second_contactor_name:='';
+  second_contactor_phone:='';
+
+  fastmsg_user_id:=0;
+
+  followers_count:=0;
+  friends_count:=0;
+  published_news_count:=0;
+
+  published_community_count:=0;
+  published_group_count:=0;
+
+end;
+
+procedure TUser.AssignTo(Dest: TPersistent);
+var
+  DestObject:TUser;
+begin
+
+  DestObject:=TUser(Dest);
+  DestObject.fid:=fid;
+//  //DestObject.//Self.appid:=Self.appid;
+  DestObject.email:=email;
+  DestObject.phone:=phone;
+//  DestObject.password:=password;
+  DestObject.name:=name;
+  DestObject.name_s:=name_s;
+  DestObject.age:=age;
+  DestObject.head_pic_path:=head_pic_path;
+  DestObject.cert_audit_state:=cert_audit_state;
+  DestObject.sex:=sex;
+  DestObject.user_type:=user_type;
+  DestObject.register_type:=register_type;
+
+
+  DestObject.wx_auth_code:=wx_auth_code;
+  DestObject.wx_union_id:=wx_union_id;
+  DestObject.wx_open_id:=wx_open_id;
+  DestObject.wx_auth_token:=wx_auth_token;
+
+
+  DestObject.alipay_open_id:=alipay_open_id;
+  DestObject.alipay_auth_token:=alipay_auth_token;
+
+  DestObject.apple_open_id:=apple_open_id;
+  DestObject.apple_auth_token:=apple_auth_token;
+
+
+
+  DestObject.fb_auth_code:=fb_auth_code;
+  DestObject.fb_open_id:=fb_open_id;
+  DestObject.fb_auth_token:=fb_auth_token;
+  DestObject.tw_auth_code:=tw_auth_code;
+  DestObject.tw_open_id:=tw_open_id;
+  DestObject.tw_auth_token:=tw_auth_token;
+  DestObject.score:=score;
+  DestObject.is_deleted:=is_deleted;
+  DestObject.createtime:=createtime;
+  DestObject.is_active:=is_active;
+
+  DestObject.second_contactor_name:=second_contactor_name;
+  DestObject.second_contactor_phone:=second_contactor_phone;
+
+
+  DestObject.fastmsg_user_id:=fastmsg_user_id;
+
+
+  DestObject.followers_count:=followers_count;
+  DestObject.friends_count:=followers_count;
+  DestObject.published_news_count:=followers_count;
+
+  DestObject.published_community_count:=followers_count;
+  DestObject.published_group_count:=published_group_count;
+
+
+
+end;
+
+constructor TUser.Create;
+begin
+  inherited;
+end;
+
+destructor TUser.Destroy;
+begin
+  inherited;
+end;
+
+//function TUser.GetArea: String;
+//begin
+//  Result:=Self.province+' '+Self.city+' '+Self.area;
+//end;
+
+function TUser.GetHeadPicUrl: String;
+begin
+//  if HeadPicPath='' then
+//  begin
+//    Result:=ImageHttpServerUrl+'/Upload/UserHead/'+'default.png';
+//  end
+//  else
+//  begin
+//    Result:=ImageHttpServerUrl+ReplaceStr(Self.head_pic_path,'\','/');
+//  end;
+
+  Result:=GetImageUrl(head_pic_path,itUserHead);
+//  Result:='';
+//  if Self.head_pic_path<>'' then
+//  begin
+//      if (Pos('http:',LowerCase(head_pic_path))>0)
+//        or (Pos('https:',LowerCase(head_pic_path))>0) then
+//      begin
+//          Result:=head_pic_path;
+//      end
+//      else
+//      begin
+//          Result:=ImageHttpServerUrl+'/'+ReplaceStr(Self.head_pic_path,'\','/');
+//      end;
+//  end
+//  else
+//  begin
+//    if APPUserType=utRider then
+//    begin
+//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\userhead_pic\Default_Pic\rider_pic.png','\','/');
+//    end;
+//
+//    if APPUserType=utClient then
+//    begin
+//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\userhead_pic\Default_Pic\user_pic.png','\','/');
+//    end;
+//
+//    if APPUserType=utShop then
+//    begin
+//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\userhead_pic\Default_Pic\user_pic.png','\','/');
+//    end;
+//  end;
+end;
+
+procedure LoadJsonFromFile(var AJson:ISuperObject;AFilePath: String);
+var
+  AStringStream:TStringStream;
+begin
+  if FileExists(AFilePath) then
+  begin
+    AStringStream:=TStringStream.Create('',TEncoding.UTF8);
+    try
+      AStringStream.LoadFromFile(AFilePath);
+      AStringStream.Position:=0;
+
+      AJson:=TSuperObject.Create(AStringStream.DataString);
+
+
+    finally
+      FreeAndNil(AStringStream);
+    end;
+
+  end;
+end;
+
+procedure LoadJsonArrayFromFile(var AJsonArray:ISuperArray;AFilePath: String);
+var
+  AStringStream:TStringStream;
+begin
+  if FileExists(AFilePath) then
+  begin
+    AStringStream:=TStringStream.Create('',TEncoding.UTF8);
+    try
+      AStringStream.LoadFromFile(AFilePath);
+      AStringStream.Position:=0;
+
+      AJsonArray:=TSuperArray.Create(AStringStream.DataString);
+
+
+    finally
+      FreeAndNil(AStringStream);
+    end;
+
+  end;
+end;
+
+function TUser.ParseFromJson(AJson: ISuperObject): Boolean;
+begin
+//  fid:=AJson.I['fid'];//2,
+//  //Self.appid:=AJson.I['appid'];//1001,
+//  phone:=AJson.S['phone'];//"18957901025",
+//  name:=AJson.S['name'];//"ggggcexx",
+//
+//  province:=AJson.S['province'];//"",
+//  city:=AJson.S['city'];//"",
+//  area:=AJson.S['area'];//"",
+//  phone_imei:=AJson.S['phone_imei'];//"",
+//  phone_uuid:=AJson.S['phone_uuid'];//""
+//  addr:=AJson.S['addr'];//"",
+//  phone_type:=AJson.S['phone_type'];//"",
+//  password:=AJson.S['password'];//"123456",
+//  headpicpath:=AJson.S['headpicpath'];//"",
+//  createtime:=AJson.S['createtime'];//"2017-07-12 16:08:54",
+//  sex:=AJson.I['sex'];//"",
+//
+//  wx_union_id:=AJson.S['wx_union_id'];
+//  wx_open_id:=AJson.S['wx_open_id'];
+//  wx_auth_token:=AJson.S['wx_auth_token'];
+//
+//  alipay_open_id:=AJson.S['alipay_open_id'];
+//  alipay_auth_token:=AJson.S['alipay_auth_token'];
+//
+//
+//  apple_open_id:=AJson.S['apple_open_id'];//"",
+//  apple_auth_token:=AJson.S['apple_auth_token'];//"",
+//
+//  score:=AJson.I['score'];
+//
+//  is_hotel_manager:=AJson.I['is_hotel_manager'];//"",
+//  is_emp:=AJson.I['is_emp'];//"",
+//  is_admin:=AJson.I['is_admin'];//"",
+//  is_deleted:=AJson.I['is_deleted'];//"",
+//  is_leave:=AJson.I['is_leave'];//"",
+//
+//  cert_audit_user_fid:=AJson.V['cert_audit_user_fid'];//0,
+//  cert_audit_state:=AJson.I['cert_audit_state'];//0,
+//  cert_audit_remark:=AJson.S['cert_audit_remark'];//"",
+//  cert_audit_time:=AJson.S['cert_audit_time'];//"",
+//
+////  is_valid_manager:=AJson.I['is_valid_manager'];//"",
+//  bind_introducer_fid:=AJson.I['bind_introducer_fid'];//2,
+//  bind_introducer_name:=AJson.S['bind_introducer_name'];//"",
+//  bind_introducer_phone:=AJson.S['bind_introducer_phone'];//"",
+//
+//  audit_user_fid:=AJson.V['audit_user_fid'];//1,
+//  audit_state:=AJson.I['audit_state'];//1,
+//  audit_remark:=AJson.S['audit_remark'];//"",
+//  audit_time:=AJson.S['audit_time'];//"2017-07-13 07:12:40",
+//
+//  remark:=AJson.S['remark'];//"",
+//  tel:=AJson.S['tel'];//"",
+//
+//  notice_unread_count:=AJson.I['notice_unread_count'];
+//
+//  region_fids:=AJson.S['region_fids'];//管辖区域fid
+//  region_names:=AJson.S['region_names']; //管辖区域名称
+  Json:=AJson;
+
+
+  //wn
+//  fid:=AJson.I['fid'];//64,
+  try
+    fid:=AJson.V['fid'];//64,
+  except
+    //兼容旧版本
+    fid:=IntToStr(AJson.I['fid']);//64,
+  end;
+
+
+
+
+//  //Self.appid:=AJson.I['appid'];//1002,
+  email:=AJson.S['email'];//"",
+  phone:=AJson.S['phone'];//"18957901025",
+//  password:=AJson.S['password'];//"123456",
+  name:=AJson.S['name'];//"用户王能",
+  name_s:=AJson.S['name_s'];//"",
+  isvip:=AJson.I['isvip'];//0,
+  age:=AJson.I['age'];//0,
+  head_pic_path:=AJson.S['head_pic_path'];//"",
+  cert_audit_state:=AJson.I['cert_audit_state'];//0,
+  sex:=AJson.I['sex'];//0,
+  user_type:=AJson.I['user_type'];//0,
+  register_type:=AJson.S['register_type'];//"phone_num",
+
+//  birth:=AJson.S['birth'];
+//  sign:= AJson.S['sign'];
+
+  wx_auth_code:=AJson.S['wx_auth_code'];//"",
+  wx_union_id:=AJson.S['wx_union_id'];//"",
+  wx_open_id:=AJson.S['wx_open_id'];//"",
+  wx_auth_token:=AJson.S['wx_auth_token'];//"",
+
+
+  alipay_open_id:=AJson.S['alipay_open_id'];//"",
+  alipay_auth_token:=AJson.S['alipay_auth_token'];//"",
+
+  apple_open_id:=AJson.S['apple_open_id'];//"",
+  apple_auth_token:=AJson.S['apple_auth_token'];//"",
+
+
+
+
+  fb_auth_code:=AJson.S['fb_auth_code'];//"",
+  fb_open_id:=AJson.S['fb_open_id'];//"",
+  fb_auth_token:=AJson.S['fb_auth_token'];//"",
+  tw_auth_code:=AJson.S['tw_auth_code'];//"",
+  tw_open_id:=AJson.S['tw_open_id'];//"",
+  tw_auth_token:=AJson.S['tw_auth_token'];//"",
+  score:=AJson.F['score'];//0,
+  is_deleted:=AJson.I['is_deleted'];//0,
+  createtime:=AJson.S['createtime'];//"2018-03-29 09:57:27",
+  is_active:=AJson.I['is_active'];//0
+
+  second_contactor_name:=AJson.S['second_contactor_name'];//0
+  second_contactor_phone:=AJson.S['second_contactor_phone'];//0
+
+  fastmsg_user_id:=AJson.I['fastmsg_user_id'];//0
+
+
+  followers_count:=AJson.I['followers_count'];
+  friends_count:=AJson.I['friends_count'];
+  published_news_count:=AJson.I['published_news_count'];
+
+  published_community_count:=AJson.I['published_community_count'];
+  published_group_count:=AJson.I['published_group_count'];
+
+
+
+end;
+
+procedure SaveJsonToFile(AJson:ISuperObject;AFilePath: String);
+var
+  AStringStream:TStringStream;
+begin
+  if AJson<>nil then
+  begin
+    AStringStream:=TStringStream.Create('',TEncoding.UTF8);
+    try
+      AStringStream.WriteString(AJson.AsJSON);
+      AStringStream.Position:=0;
+      AStringStream.SaveToFile(AFilePath);
+    finally
+      FreeAndNil(AStringStream);
+    end;
+  end;
+end;
+
+procedure SaveJsonArrayToFile(AJsonArray:ISuperArray;AFilePath: String);
+var
+  AStringStream:TStringStream;
+begin
+  if AJsonArray<>nil then
+  begin
+    AStringStream:=TStringStream.Create('',TEncoding.UTF8);
+    try
+      AStringStream.WriteString(AJsonArray.AsJSON);
+      AStringStream.Position:=0;
+      AStringStream.SaveToFile(AFilePath);
+    finally
+      FreeAndNil(AStringStream);
+    end;
+  end;
+end;
+
+
+
 { TBaseManager }
 
 
@@ -8322,7 +8429,7 @@ function TBaseManager.LoadFromINI(AINIFilePath: String): Boolean;
 var
   AIniFile:TIniFile;
 begin
-  Result:=False;
+//  Result:=False;
 
   AIniFile:=TIniFile.Create(AINIFilePath{$IFNDEF MSWINDOWS},TEncoding.UTF8{$ENDIF});
 
@@ -8375,7 +8482,10 @@ begin
 
 
   Self.CompanyName:=AIniFile.ReadString('','CompanyName',Self.CompanyName);
-  AppID:=AIniFile.ReadInteger('','AppID',AppID);
+  if (AppID=0) or GlobalIsNeedAPPIDSetting then
+  begin
+    AppID:=AIniFile.ReadInteger('','AppID',AppID);
+  end;
 
 
   CustomLoadFromINI(AIniFile);
@@ -8404,7 +8514,7 @@ function TBaseManager.SaveToINI(AINIFilePath: String): Boolean;
 var
   AIniFile:TIniFile;
 begin
-  Result:=False;
+//  Result:=False;
   AIniFile:=TIniFile.Create(AINIFilePath{$IFNDEF MSWINDOWS},TEncoding.UTF8{$ENDIF});
 
   //是否第一次启动
@@ -8482,6 +8592,7 @@ begin
 end;
 
 
+{$ENDIF}
 
 
 

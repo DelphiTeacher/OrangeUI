@@ -113,9 +113,11 @@ type
   {$ENDIF}
 
   //是否可以添加记录的事件
-  TCanAddRecordEvent=function(Sender:TObject;const AAppID:Integer;const
+  TCanAddRecordEvent=function(Sender:TObject;
+                              const AAppID:Integer;const
                               AUserFID: String;
-                              const AKey, ARestName: String;
+                              const AKey,
+                              ARestName: String;
                               const ARemoteLocation: String;
                               ARecordDataJson:ISuperObject;
                               var ACode:Integer;
@@ -239,6 +241,17 @@ type
                  [kbmMW_Rest('value: "$where_key_json", required: false')] const AWhereKeyJson:String;
                  [kbmMW_Rest('value: "$where_sql", required: false')] const ACustomConditionSQL:String;
                  [kbmMW_Arg(mwatRemoteLocation)] const ARemoteLocation:String):String;
+      [kbmMW_Method]
+      [kbmMW_Rest('method:post, path: "update_record_post"')]
+      function UpdateRecordPost([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+                 [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
+                 [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
+                 [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
+                 [kbmMW_Rest('value: "$where_key_json", required: false')] const AWhereKeyJson:String;
+                 [kbmMW_Rest('value: "$where_sql", required: false')] const ACustomConditionSQL:String;
+                 [kbmMW_Arg(mwatRemoteLocation)] const ARemoteLocation:String):String;
+
+
       //修改记录
       [kbmMW_Method]
       [kbmMW_Rest('method:get, path: "update_record_list"')]
@@ -316,7 +329,6 @@ type
 
 
     public
-      OnCanAddRecord:TCanAddRecordEvent;
       {$IFDEF USE_IDHTTPSERVERMODE}
       {$ELSE}
       function ProcessRequest(const Func:string; const ClientIdent:TkbmMWClientIdentity; const Args:array of Variant):Variant; override;
@@ -454,9 +466,15 @@ type
 
 var
   CommonRestServiceModule:TCommonRestServiceModule;
+  //是否可以添加记录的事件
+  GlobalOnCanAddRecord:TCanAddRecordEvent;
+
+
 
 
 implementation
+
+
 
 {$IFDEF USE_IDHTTPSERVERMODE}
 {$ELSE}
@@ -559,16 +577,13 @@ begin
 
 
     //插入新记录
-<<<<<<< HEAD
 //    ARecordJson:=SO(ARecordDataJson);
-=======
->>>>>>> 5dbd2f7c6b25ec6c515f12b30ae831edc669db52
     ARecordJson:=TSuperObject.Create(ARecordDataJson);
 
     AIsCanAddRecord:=True;
-    if Assigned(OnCanAddRecord) then
+    if Assigned(GlobalOnCanAddRecord) then
     begin
-      AIsCanAddRecord:=OnCanAddRecord(Self,AAppID,AUserFID,AKey,ARestName,ARemoteLocation,ARecordJson,ACode,ADesc);
+      AIsCanAddRecord:=GlobalOnCanAddRecord(Self,AAppID,AUserFID,AKey,ARestName,ARemoteLocation,ARecordJson,ACode,ADesc);
     end;
 
     if AIsCanAddRecord then
@@ -1709,6 +1724,24 @@ end;
 
 
 
+
+function TsrvTableCommonRestService.UpdateRecordPost(const AAppID: Integer;
+  const AUserFID, AKey, ARestName, AWhereKeyJson, ACustomConditionSQL,
+  ARemoteLocation: String): String;
+var
+  AStringStream:TStringStream;
+begin
+  AStringStream:=TStringStream.Create('',TEncoding.UTF8);
+  try
+    RequestStream.Position:=0;
+    AStringStream.LoadFromStream(RequestStream);
+
+    Result:=UpdateRecord(AAppID,AUserFID,AKey,ARestName,AStringStream.DataString,AWhereKeyJson,ACustomConditionSQL,ARemoteLocation);
+  finally
+    FreeAndNil(AStringStream);
+  end;
+
+end;
 
 { TCommonRestServiceModule }
 

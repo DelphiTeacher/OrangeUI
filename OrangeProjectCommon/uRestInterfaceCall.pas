@@ -121,6 +121,17 @@ type
 //  end;
 
 
+//拼接参数到链接中
+function GetUrl(API: String;
+                  AInterfaceUrl:String;
+                  AUrlParamNames:TStringDynArray;
+                  AUrlParamValues:TVariantDynArray;
+                  ASignType:String;
+                  ASignSecret:String):String;
+
+
+procedure SaveServerResponseLog(API:String;AResponseStream:TStringStream);
+
 //调用rest接口,返回数据流
 function SimpleGet(API: String;
                   AHttpControl: THttpControl;
@@ -588,16 +599,16 @@ begin
                               nil,
                               AInterfaceUrl+'tablecommonrest/',
                               ConvertToStringDynArray(
-                              ['appid',
-                              'user_fid',
-                              'key',
-                              'rest_name',
-                              'record_data_json']),
+                                                      ['appid',
+                                                      'user_fid',
+                                                      'key',
+                                                      'rest_name',
+                                                      'record_data_json']),
                               ConvertToVariantDynArray([AAppID,
-                              AUserFID,
-                              AKey,
-                              ATableCommonRestName,
-                              ARecordDataJson.AsJson]),
+                                                        AUserFID,
+                                                        AKey,
+                                                        ATableCommonRestName,
+                                                        ARecordDataJson.AsJson]),
                               ACode,
                               ADesc,
                               ADataJson,
@@ -648,27 +659,31 @@ begin
   else
   begin
       //更新记录
-      if not SimpleCallAPI('update_record',
+      if not SimpleCallAPI('update_record_post',
                               nil,
                               AInterfaceUrl+'tablecommonrest/',
                               ConvertToStringDynArray(['appid',
-                              'user_fid',
-                              'key',
-                              'rest_name',
-                              'record_data_json',
-                              'where_key_json']),
+                                                      'user_fid',
+                                                      'key',
+                                                      'rest_name',
+//                                                      'record_data_json',
+                                                      'where_key_json']),
                               ConvertToVariantDynArray([AAppID,
-                              AUserFID,
-                              AKey,
-                              ATableCommonRestName,
-                              ARecordDataJson.AsJson,
-                              AWhereKeyJsonStr//GetWhereKeyJson(['appid','fid'],[AAppID,AFID])
-                              ]),
+                                                        AUserFID,
+                                                        AKey,
+                                                        ATableCommonRestName,
+//                                                        ARecordDataJson.AsJson,
+                                                        AWhereKeyJsonStr//GetWhereKeyJson(['appid','fid'],[AAppID,AFID])
+                                                        ]),
                               ACode,
                               ADesc,
                               ADataJson,
                               ASignType,
-                              ASignSecret) or (ACode<>SUCC)  then
+                              ASignSecret,
+                              True,
+                              nil,
+                              ARecordDataJson.AsJson
+                              ) or (ACode<>SUCC)  then
       begin
         uBaseLog.HandleException(nil,'SaveRecordToServer '+ADesc);
         Exit;
@@ -827,6 +842,51 @@ begin
 end;
 
 
+procedure SaveServerResponseLog(API:String;AResponseStream:TStringStream);
+var
+  ALogDir:String;
+  ARandom:Integer;
+begin
+        {$IFDEF MSWINDOWS}
+        if DirectoryExists('C:\MyFiles') or DirectoryExists('D:\MyFiles') then
+        begin
+          Randomize();
+          ARandom:=Random(1000);
+
+          try
+            AResponseStream.Position:=0;
+
+            ALogDir:=GetApplicationPath+'log\ServerReponse\';
+            if not DirectoryExists(ALogDir) then
+            begin
+              SysUtils.ForceDirectories(ALogDir);
+            end;
+            if Pos('://',API)>0 then
+            begin
+              AResponseStream.SaveToFile(ALogDir
+                              //+ReplaceStr(API,'/','_')+' '
+                              +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+' '+IntToStr(ARandom)+'.json');
+
+            end
+            else
+            begin
+
+              AResponseStream.SaveToFile(ALogDir
+                              +ReplaceStr(API,'/','_')+' '
+                              +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+' '+IntToStr(ARandom)+'.json');
+            end;
+
+          except
+
+          end;
+        end;
+        {$ENDIF}
+
+
+
+end;
+
+
 function SimpleCallAPI(API: String;
                       AHttpControl:THttpControl;
                       AInterfaceUrl:String;
@@ -870,63 +930,31 @@ begin
 
 
         //保存成临时文件,用来查日志
-        {$IFDEF MSWINDOWS}
-        if DirectoryExists('C:\MyFiles') or DirectoryExists('D:\MyFiles') then
-        begin
-          try
-            AResponseStream.Position:=0;
-
-            ALogDir:=GetApplicationPath+'log\ServerReponse\';
-            if not DirectoryExists(ALogDir) then
-            begin
-              SysUtils.ForceDirectories(ALogDir);
-            end;
-            if Pos('://',API)>0 then
-            begin
-              AResponseStream.SaveToFile(ALogDir
-                              //+ReplaceStr(API,'/','_')+' '
-                              +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+'.json');
-
-            end
-            else
-            begin
-
-              AResponseStream.SaveToFile(ALogDir
-                              +ReplaceStr(API,'/','_')+' '
-                              +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+'.json');
-            end;
-
-          except
-
-          end;
-        end;
-        {$ENDIF}
-
-
+        SaveServerResponseLog(API,AResponseStream);
 
 
         AResponseStream.Position:=0;
         Result:=AResponseStream.DataString;
 
-        //服务不可用
-        if Result='Service Unavailable' then
-        begin
-          Result:='';
-        end;
-
-        //'Service . not available.'
-
-        if Result='Internal Server Error' then
-        begin
-          Result:='';
-        end;
-
-        if Result='Service . not available.' then
-        begin
-          Result:='';
-        end;
-
-        //'Service . not available.'
+//        //服务不可用
+//        if Result='Service Unavailable' then
+//        begin
+//          Result:='';
+//        end;
+//
+//        //'Service . not available.'
+//
+//        if Result='Internal Server Error' then
+//        begin
+//          Result:='';
+//        end;
+//
+//        if Result='Service . not available.' then
+//        begin
+//          Result:='';
+//        end;
+//
+//        //'Service . not available.'
     end
     else
     begin
@@ -1038,6 +1066,34 @@ begin
 //    and not SameText(AHttpResponse,'Service Unavailable')
     then
   begin
+
+      //服务不可用
+      if AHttpResponse='Service Unavailable' then
+      begin
+        ADesc:=AHttpResponse;
+        Result:=False;
+        Exit;
+      end;
+
+      //'Service . not available.'
+
+      if AHttpResponse='Internal Server Error' then
+      begin
+        ADesc:=AHttpResponse;
+        Result:=False;
+        Exit;
+      end;
+
+      if AHttpResponse='Service . not available.' then
+      begin
+        ADesc:=AHttpResponse;
+        Result:=False;
+        Exit;
+      end;
+
+      //'Service . not available.'
+
+
       try
           ASuperObject:=SO(AHttpResponse);
 
@@ -1091,10 +1147,9 @@ function SignParam(
                   AUrlParamValues:TVariantDynArray;
                   ASignType:String;
                   ASignSecret:String):String;
-var
-  I:Integer;
-  AStrValue:String;
-  sl:TStringList;
+//var
+//  AStrValue:String;
+//  sl:TStringList;
 begin
   Result:='';
   if ASignType='' then
@@ -1174,43 +1229,25 @@ begin
 
 end;
 
-function SimpleGet(API: String;
-                  AHttpControl:THttpControl;
+
+//拼接参数到链接中
+function GetUrl(API: String;
                   AInterfaceUrl:String;
                   AUrlParamNames:TStringDynArray;
                   AUrlParamValues:TVariantDynArray;
-                  AResponseStream: TStream;
                   ASignType:String;
-                  ASignSecret:String;
-                  AIsPost:Boolean;
-                  APostStream:TStream): Boolean;
+                  ASignSecret:String
+                  ):String;
 var
   I:Integer;
   AStrValue:String;
   AParamsStr:String;
-  ABefore:TDateTime;
-  AIsNeedFreeAHttpControl:Boolean;
   AUrlEncode:String;
   AHasSignParam:Boolean;
   AHasTimestamp:Boolean;
   AHasNonce:Boolean;
-
-  ALogDir:String;
-  ALogs:TStringList;
-  ARecvStream: TStream;
-  AExtractResponseStream: TStream;
 begin
-  ABefore:=Now;
-  uBaseLog.HandleException(nil,'SimplePost'+' '+'begin'+' '+FormatDateTime('HH:MM:SS',ABefore));
-
-
-  AIsNeedFreeAHttpControl:=False;
-  if AHttpControl=nil then
-  begin
-    AIsNeedFreeAHttpControl:=True;
-    AHttpControl:=TSystemHttpControl.Create;
-  end;
-  try
+      Result:='';
 
       AParamsStr:='';
 //      for I:=0 to Length(AUrlParamNames)-1 do
@@ -1309,10 +1346,7 @@ begin
 
 
 
-      if Assigned(OnCallAPIEvent) then
-      begin
-        OnCallAPIEvent(AHttpControl,AInterfaceUrl+API+'?'+AParamsStr);
-      end;
+
 
       if AParamsStr<>'' then
       begin
@@ -1327,6 +1361,52 @@ begin
 //          {$IF CompilerVersion > 21.0}
           AUrlEncode:=TIdURI.URLEncode(AInterfaceUrl+API);
 //          {$IFEND}
+      end;
+
+
+      Result:=AUrlEncode;
+
+end;
+
+
+function SimpleGet(API: String;
+                  AHttpControl:THttpControl;
+                  AInterfaceUrl:String;
+                  AUrlParamNames:TStringDynArray;
+                  AUrlParamValues:TVariantDynArray;
+                  AResponseStream: TStream;
+                  ASignType:String;
+                  ASignSecret:String;
+                  AIsPost:Boolean;
+                  APostStream:TStream): Boolean;
+var
+  ABefore:TDateTime;
+  AIsNeedFreeAHttpControl:Boolean;
+
+  ALogDir:String;
+  ALogs:TStringList;
+  ARecvStream: TStream;
+  AExtractResponseStream: TStream;
+
+  AUrlEncode:String;
+begin
+  ABefore:=Now;
+  uBaseLog.HandleException(nil,'SimplePost'+' '+'begin'+' '+FormatDateTime('HH:MM:SS',ABefore));
+
+
+  AIsNeedFreeAHttpControl:=False;
+  if AHttpControl=nil then
+  begin
+    AIsNeedFreeAHttpControl:=True;
+    AHttpControl:=TSystemHttpControl.Create;
+  end;
+  try
+
+      AUrlEncode:=GetUrl(API,AInterfaceUrl,AUrlParamNames,AUrlParamValues,ASignType,ASignSecret);
+
+      if Assigned(OnCallAPIEvent) then
+      begin
+        OnCallAPIEvent(AHttpControl,AUrlEncode);//AInterfaceUrl+API+'?'+AParamsStr);
       end;
 
 

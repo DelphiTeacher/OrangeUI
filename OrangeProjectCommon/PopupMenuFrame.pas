@@ -29,6 +29,7 @@ uses
   WaitingFrame,
   MessageBoxFrame,
   uTimerTask,
+  uSkinImageList,
 
 
   XSuperObject,
@@ -59,6 +60,7 @@ type
                                       ACategoryItem:TSkinItem;
                                       var AIsOfThisCategory:Boolean) of object;
 
+  TIntegerArray=array of Integer;
   TFramePopupMenu = class(TFrame,IFrameHistroyVisibleEvent)
     BackRectangle: TRectangle;
     pnlPopupMenu: TSkinFMXPanel;
@@ -132,7 +134,12 @@ type
                     AIsShowFilter:Boolean=False;
                     //窗体宽度
                     AWidth:Double=320;
-                    ARecordListArray:ISuperArray=nil);overload;
+                    ARecordListArray:ISuperArray=nil;
+                    //图片列表
+                    AMenuImageList:TSkinImageList=nil;
+                    //每个菜单的图标
+                    AMenuIconImageIndexs:TIntegerArray=[]);overload;
+
     procedure Init( //菜单框标题
                     const ACaption:String;
                     //菜单项数组,['男','女','未知']
@@ -155,6 +162,7 @@ type
                     AItemCaptionBindingFieldName:String;
                     //列表项的样式
                     AItemStyle:String='';
+                    //是否显示过滤框
                     AIsShowFilter:Boolean=False;
                     AWidth:Double=320;
                     //是否需要插入第一个空的列表项
@@ -174,6 +182,7 @@ type
                     AItemDataType:Array of String;
                     //列表项的样式
                     AItemStyle:String='';
+                    //是否显示过滤框
                     AIsShowFilter:Boolean=False;
                     AWidth:Double=320;
                     //是否需要插入第一个空的列表项
@@ -500,12 +509,15 @@ procedure TFramePopupMenu.Init(
   AIsShowFilter:Boolean;
   AWidth:Double);
 begin
+  //静态初始
   Init(ACaption,
       AMenuCaptions,
+      //没有name
       [],
       AItemStyle,
       AIsShowFilter,
-      AWidth);
+      AWidth,
+      nil);
 end;
 
 procedure TFramePopupMenu.lbItemCategoryClickItem(AItem: TSkinItem);
@@ -594,9 +606,13 @@ begin
   Self.pnlPopupMenu.Width:=AWidth;
 
 
+  //DefaultTypeItemStyle这个功能是先设置好ItemMaterial，而不是使用设计面板
+//  Self.lbMenus.SelfOwnMaterialToDefault.DefaultTypeItemStyle:=AItemStyle;
 
-  Self.lbMenus.SelfOwnMaterialToDefault.DefaultTypeItemStyle:=AItemStyle;
+
+  Self.lbMenus.Prop.DefaultItemStyle:=AItemStyle;
   Self.lbMenus.Prop.ParentTypeItemStyle:='';
+
 
 
 
@@ -622,15 +638,22 @@ procedure TFramePopupMenu.Init(const ACaption:String;
                               AItemStyle:String;
                               AIsShowFilter:Boolean;
                               AWidth:Double;
-                              ARecordListArray:ISuperArray);
+                              ARecordListArray:ISuperArray;
+                              AMenuImageList:TSkinImageList;
+                              AMenuIconImageIndexs:TIntegerArray);
 var
   I: Integer;
   AItem:TSkinItem;
 begin
   Clear;
 
-  PrepareForShow(ACaption,AItemStyle,AIsShowFilter,AWidth);
+  PrepareForShow(ACaption,
+                  AItemStyle,
+                  AIsShowFilter,
+                  AWidth);
 
+
+  Self.lbMenus.Prop.SkinImageList:=AMenuImageList;
 
   //加载菜单项到ListBox
   Self.lbMenus.Prop.Items.BeginUpdate;
@@ -648,6 +671,12 @@ begin
       begin
         AItem.Json:=ARecordListArray.O[I];
       end;
+
+      if Length(AMenuIconImageIndexs)>I then
+      begin
+        AItem.Icon.ImageIndex:=AMenuIconImageIndexs[I];
+      end;
+
     end;
   finally
     Self.lbMenus.Prop.Items.EndUpdate;

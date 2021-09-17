@@ -3,7 +3,7 @@ unit DES;
 interface
 
 uses
-  SysUtils, Windows, System.Classes;
+  SysUtils, Windows, Classes;
 
 // CBC with PKCS
 function TripleDESEncrypt(Src, Key, IV: TBytes): TBytes;

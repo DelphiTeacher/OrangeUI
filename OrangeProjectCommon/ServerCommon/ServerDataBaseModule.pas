@@ -28,7 +28,7 @@ uses
   uBaseDatabaseModule,
 //  uTableCommonRestCenter,
 
-  UniProvider, Data.DB, DBAccess, Uni, SQLServerUniProvider,MySQLUniProvider,
+  UniProvider, Data.DB, DBAccess, Uni, SQLServerUniProvider,MySQLUniProvider,SQLiteUniProvider,
   kbmMWUniDAC,
   kbmMWCustomSQLMetaData, kbmMWMSSQLMetaData;
 
@@ -39,6 +39,7 @@ type
   TdmServerDataBase = class(TDataModule)
     UniConnection1: TUniConnection;
     MySQLUniProvider1: TMySQLUniProvider;
+    SQLiteUniProvider1: TSQLiteUniProvider;
     SQLServerUniProvider1: TSQLServerUniProvider;
     kbmMWPooledSession1: TkbmMWPooledSession;
     kbmMWUNIDACConnectionPool1: TkbmMWUNIDACConnectionPool;
@@ -238,6 +239,7 @@ begin
               //连接池中的所有Connection也要切换数据库
               dmServerDataBase.kbmMWUNIDACConnectionPool1.Active:=False;
               dmServerDataBase.kbmMWUNIDACConnectionPool1.Active:=True;
+              //SQLITE不支持并发
               dmServerDataBase.kbmMWUNIDACConnectionPool1.MaxConnections:=DBConfig.FMaxConnections;
 
 

@@ -194,6 +194,11 @@
         <DCCReference Include="ListItemStyle_VertSelectedGray_CaptionLeft.pas">
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="ListItemStyle_HorzSelectedSignBottom_CaptionCenter.pas">
+            <Form>FrameListItemStyle_HorzSelectedSignBottom_CaptionCenter</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

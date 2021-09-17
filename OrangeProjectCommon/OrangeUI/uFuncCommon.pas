@@ -234,10 +234,10 @@ function ConvertToVariantDynArray(AVariants:Array of Variant):TVariantDynArray;
 
 function SaveStringToFile(AString:String;AFilePath:String{$IF CompilerVersion >= 21.0};AEncoding:TEncoding{$IFEND}):Boolean;
 function GetStringFromFile(AFilePath:String{$IF CompilerVersion >= 21.0};AEncoding:TEncoding{$IFEND}):String;
-{$IF CompilerVersion >= 30.0}
+//{$IF CompilerVersion >= 30.0}
 //比2007高的版本
 function GetStringFromTextFile(AFilePath:String):String;
-{$IFEND}
+//{$IFEND}
 
 
 
@@ -336,11 +336,11 @@ function FindSameAndroidResourceNode(AXMLNode: IXMLNode;ANeedFindXMLNode:IXMLNod
 procedure CopyXMLNode(ASrcNode:IXMLNode;ADestNode:IXMLNode);
 
 
-{$IF CompilerVersion >= 30.0}
+//{$IF CompilerVersion >= 30.0}
 function UTFStrToUnicode(UTFStr:String):String;
 //格式化Json字符串
 function formatJson(inputStr : string;indent : string='      ') : string;
-{$IFEND}
+//{$IFEND}
 
 
 var
@@ -363,11 +363,12 @@ begin
 end;
 
 
-{$IF CompilerVersion >= 30.0}
+//{$IF CompilerVersion >= 30.0}
 function UTFStrToUnicode(UTFStr:String):String;
 var
   I:Integer;
   Index:Integer;
+  Len:Integer;
   HexStr:String;
   LowerCaseUTFStr:String;
   WChar:Char;
@@ -377,8 +378,15 @@ begin
   //您的验证码错误
   Result:='';
   LowerCaseUTFStr:=LowerCase(UTFStr);
+  {$IFDEF FMX}
   Index:=Low(LowerCaseUTFStr);
-  while Index<=High(LowerCaseUTFStr) do
+  Len:=High(LowerCaseUTFStr);
+  {$ENDIF}
+  {$IFDEF VCL}
+  Index:=1;
+  Len:=Length(LowerCaseUTFStr);
+  {$ENDIF}
+  while Index<=Len do
   begin
       if (LowerCaseUTFStr[Index]='\')
         and (LowerCaseUTFStr[Index+1]='u') then
@@ -542,7 +550,7 @@ begin
 
    result := outStr;
 end;
-{$IFEND}
+//{$IFEND}
 
 
 
@@ -1581,7 +1589,7 @@ type
 const
   TextFormatFlag:array[tfAnsi..tfUtf8] of word=($0000,$FFFE,$FEFF,$EFBB);
 
-{$IF CompilerVersion >= 30.0}
+
 //比2007高的版本
 //获取文本文件的编码
 function GetTextFileEncoding(const AFileName: string): TEncoding;
@@ -1601,7 +1609,7 @@ begin
     else if w = TextFormatFlag[tfUtf8] then
       Result := TEncoding.UTF8
     else
-      Result := TEncoding.ANSI;
+      Result := TEncoding.{$IF CompilerVersion >= 30.0}ANSI{$ELSE}ASCII{$IFEND};
   finally
     Free;
   end;
@@ -1625,7 +1633,6 @@ begin
     end;
   end;
 end;
-{$IFEND}
 
 
 function SaveStringToFile(AString:String;AFilePath:String{$IF CompilerVersion >= 21.0};AEncoding:TEncoding{$IFEND}):Boolean;

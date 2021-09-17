@@ -64,7 +64,7 @@ type
     lblInvalidCallCount: TLabel;
     tmrSyncUI: TTimer;
     tsLog: TTabSheet;
-    Memo1: TMemo;
+    memLog: TMemo;
     tsDatabasePool: TTabSheet;
     gridDatabasePool: TStringGrid;
     Label6: TLabel;
@@ -78,6 +78,7 @@ type
     procedure tmrStartServerTimer(Sender: TObject);
     procedure tmrSyncUITimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure memLogDblClick(Sender: TObject);
   private
     FDBHelper:TBaseDBHelper;
 
@@ -85,6 +86,14 @@ type
     LastSumCallCount:Integer;
     //最高每秒并发
     MaxParallelCallCountPerSecond:Integer;
+
+
+  public
+
+    FIsAddLogToMemo:Boolean;
+    FHideLogList:TStringList;
+
+    procedure DoGetCommandLineOutput(ACommandLine:String;ATag:String;AOutput:String);
     { Private declarations }
   public
     { Public declarations }
@@ -232,10 +241,52 @@ begin
   GlobalServiceProject.Stop;
 end;
 
+procedure TfrmServerMain.DoGetCommandLineOutput(ACommandLine, ATag,
+  AOutput: String);
+var
+  ALogList:TStrings;
+begin
+  uBaseLog.HandleException(nil,AOutput);
+
+  if Self.FIsAddLogToMemo then
+  begin
+      ALogList:=Self.memLog.Lines;
+
+      TThread.Synchronize(nil,procedure
+      begin
+      //    memLog.Text:=memLog.Text+AOutput;
+          if ATag<>'' then
+          begin
+            ALogList.Add(ATag+':'+AOutput);
+          end
+          else
+          begin
+            ALogList.Add(AOutput);
+          end;
+      end);
+  end
+  else
+  begin
+      ALogList:=Self.FHideLogList;
+      if ATag<>'' then
+      begin
+        ALogList.Add(ATag+':'+AOutput);
+      end
+      else
+      begin
+        ALogList.Add(AOutput);
+      end;
+  end;
+
+
+end;
+
 procedure TfrmServerMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   GlobalServiceProject.Stop;
   FreeAndNil(GlobalServiceProject);
+
+  FreeAndNil(FHideLogList);
 end;
 
 procedure TfrmServerMain.FormCreate(Sender: TObject);
@@ -244,6 +295,7 @@ begin
   FDBHelper:=TUniDBHelper.Create;
 
 
+  GlobalServiceProject.FOnGetCommandLineOutput:=Self.DoGetCommandLineOutput;
   if IsNeedLoadServiceProjectFromIni then
   begin
     GlobalServiceProject.Load;
@@ -255,6 +307,9 @@ begin
   Self.edtSSLPort.Text:=IntToStr(GlobalServiceProject.SSLPort);
 
 
+  FIsAddLogToMemo:=True;
+  FHideLogList:=TStringList.Create;
+
 end;
 
 procedure TfrmServerMain.FormShow(Sender: TObject);
@@ -262,6 +317,18 @@ begin
 
   //测试备份
   timerCopySQLTimer(nil);
+end;
+
+procedure TfrmServerMain.memLogDblClick(Sender: TObject);
+begin
+
+  FIsAddLogToMemo:=not FIsAddLogToMemo;
+  if FIsAddLogToMemo then
+  begin
+    Self.memLog.Lines.AddStrings(Self.FHideLogList);
+    FHideLogList.Clear;
+  end;
+
 end;
 
 procedure TfrmServerMain.timerCopySQLTimer(Sender: TObject);

@@ -173,7 +173,7 @@ type
 
 
 
-//
+
 //type
 //
 //  //调用接口的事件
@@ -213,7 +213,7 @@ var
   IsNetworkConnected:Boolean;
   //网络数据使用更改
   OnNetworkDataUsageChange:TNetworkDataUsageNotifyEvent;
-
+  GlobalSystemHttpControlClass:THttpControlClass;
 
 
 
@@ -1221,6 +1221,9 @@ end;
 
 initialization
   IsNetworkConnected:=True;
+  {$IFDEF NEED_SystemHttpControl}
+  GlobalSystemHttpControlClass:=TSystemHttpControl;
+  {$ENDIF}
 
 
 end.

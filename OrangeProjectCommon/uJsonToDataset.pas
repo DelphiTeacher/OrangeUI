@@ -58,6 +58,8 @@ function JsonToDataset(ADataJson:ISuperObject):TFDMemTable;
 function JsonArrayToDataset(ADataJsonArray:ISuperArray):TFDMemTable;
 function JsonCreateDatasetStructure(ADataJson:ISuperObject):TFDMemTable;
 procedure DoJsonCreateDatasetStructure(ADataJson:ISuperObject;var AFDMemTable:TFDMemTable);
+
+
 procedure LoadJsonToDataset(ADataJson:ISuperObject;ADataset:TDataset);
 function LoadDataJsonTokbmMemTable(AMemTable:TFDMemTable;
                                   ADataJson:ISuperObject;

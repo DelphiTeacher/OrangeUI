@@ -100,7 +100,7 @@ type
 
 
   //加载数据时的参数
-  TLoadDataSetting=Record
+  TLoadDataSetting=class
 
     //加载列表时使用//
     PageIndex:Integer;
@@ -162,7 +162,7 @@ type
     //从按钮或其他控件点击跳转到页面
     JumpFromControlMap:TObject;
   public
-    procedure Clear;
+    constructor Create;
   end;
 
 
@@ -242,7 +242,8 @@ type
 
     function IsEmpty:Boolean;virtual;
     //获取字段列表
-    function GetFieldList(var ADesc:String;
+    function GetFieldList(AppID:Integer;
+                          var ADesc:String;
                           var ADataJson:ISuperObject
                            ):Boolean;virtual;abstract;
     //获取记录列表
@@ -295,10 +296,10 @@ type
                       //原数据
 //                      ALoadDataIntfResult:TDataIntfResult;
                       ADataIntfResult:TDataIntfResult):Boolean;virtual;abstract;
-    //删除记录
-    function DelData( //原数据,用于生成删除的条件
-                      ALoadDataIntfResult:TDataIntfResult;
-                      ADataIntfResult:TDataIntfResult):Boolean;virtual;abstract;
+//    //删除记录
+//    function DelData( //原数据,用于生成删除的条件
+//                      ALoadDataIntfResult:TDataIntfResult;
+//                      ADataIntfResult:TDataIntfResult):Boolean;virtual;abstract;
   published
 
     //英文名称,主要用于定位
@@ -324,9 +325,15 @@ type
   end;
 
 
+
+
   //列表项的数据接口
   TSkinItemsDataInterface=class(TDataInterface)
   public
+    //接口类型为SkinItems时使用,Page的DataSkinItems属性
+    //以便让接口支持设计时的静态列表项
+    PageDataSkinItems:TObject;
+
     function IsEmpty:Boolean;override;
     //获取记录列表
     function GetDataList(
@@ -342,9 +349,9 @@ type
     function SaveData(ASaveDataSetting:TSaveDataSetting;
 //                      ALoadDataIntfResult:TDataIntfResult;
                       ADataIntfResult:TDataIntfResult):Boolean;override;
-    //删除记录
-    function DelData(ALoadDataIntfResult:TDataIntfResult;
-                      ADataIntfResult:TDataIntfResult):Boolean;override;
+//    //删除记录
+//    function DelData(ALoadDataIntfResult:TDataIntfResult;
+//                      ADataIntfResult:TDataIntfResult):Boolean;override;
   end;
 
 
@@ -547,7 +554,8 @@ end;
 
 { TLoadDataSetting }
 
-procedure TLoadDataSetting.Clear;
+
+constructor TLoadDataSetting.Create;
 begin
 
   PageIndex:=1;
@@ -556,7 +564,7 @@ begin
 
 
   //GetRecordList
-//  AppID:=0;
+  AppID:=0;
 
   //查询条件,Json数组
   WhereKeyJson:='';
@@ -592,23 +600,23 @@ begin
   JumpFromSourceItem:=nil;
 
   JumpFromControlMap:=nil;
-end;
 
+end;
 
 { TSkinItemsDataInterface }
 
-function TSkinItemsDataInterface.DelData(ALoadDataIntfResult:TDataIntfResult;
-  ADataIntfResult: TDataIntfResult): Boolean;
-begin
-  Result:=False;
-
-
-  ADataIntfResult.Succ:=True;
-  ADataIntfResult.Desc:='删除成功';
-
-  Result:=True;
-
-end;
+//function TSkinItemsDataInterface.DelData(ALoadDataIntfResult:TDataIntfResult;
+//  ADataIntfResult: TDataIntfResult): Boolean;
+//begin
+//  Result:=False;
+//
+//
+//  ADataIntfResult.Succ:=True;
+//  ADataIntfResult.Desc:='删除成功';
+//
+//  Result:=True;
+//
+//end;
 
 function TSkinItemsDataInterface.GetDataDetail(
   ALoadDataSetting: TLoadDataSetting;
@@ -628,8 +636,12 @@ function TSkinItemsDataInterface.GetDataList(ALoadDataSetting: TLoadDataSetting;
 begin
   Result:=False;
   ADataIntfResult.Succ:=True;
+
+
   ADataIntfResult.DataSkinItems:=ALoadDataSetting.PageDataSkinItems;
   ADataIntfResult.DataType:=TDataIntfResultType.ldtSkinItems;
+
+
   ADataIntfResult.Desc:='加载成功';
   Result:=True;
 end;

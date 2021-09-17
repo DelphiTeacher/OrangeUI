@@ -928,7 +928,8 @@ begin
       {$IFDEF ANDROID}
       PermissionsService.RequestPermissions([JStringToString(TJManifest_permission.JavaClass.CAMERA)],
             //不能为nil,不然会闪退,RequestPermissions调用两次会闪退
-            procedure(const APermissions: TArray<string>;const AGrantResults: TArray<TPermissionStatus>)
+          procedure(const APermissions: {$IF CompilerVersion >= 35.0}TClassicStringDynArray{$ELSE}TArray<string>{$IFEND};
+            const AGrantResults: {$IF CompilerVersion >= 35.0}TClassicPermissionStatusDynArray{$ELSE}TArray<TPermissionStatus>{$IFEND})
             var
               I:Integer;
             begin

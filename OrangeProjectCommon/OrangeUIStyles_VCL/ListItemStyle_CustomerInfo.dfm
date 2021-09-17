@@ -1,14 +1,14 @@
 object FrameListItemStyle_CustomerInfo: TFrameListItemStyle_CustomerInfo
   Left = 0
   Top = 0
-  Width = 709
-  Height = 765
+  Width = 801
+  Height = 944
   TabOrder = 0
   object ItemDesignerPanel: TSkinWinItemDesignerPanel
-    Left = 52
-    Top = 96
+    Left = 60
+    Top = 104
     Width = 300
-    Height = 297
+    Height = 489
     ParentMouseEvent = True
     DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
@@ -68,7 +68,7 @@ object FrameListItemStyle_CustomerInfo: TFrameListItemStyle_CustomerInfo
       Left = 16
       Top = 24
       Width = 56
-      Height = 263
+      Height = 455
       Margins.Left = 16
       Margins.Top = 24
       Margins.Right = 0
@@ -16211,13 +16211,14 @@ object FrameListItemStyle_CustomerInfo: TFrameListItemStyle_CustomerInfo
       Properties.Rotated = False
       Properties.RotateSpeed = 5.000000000000000000
       Properties.RotateIncrement = 20
+      ExplicitHeight = 263
     end
     object pnlClient: TSkinWinPanel
       AlignWithMargins = True
       Left = 88
       Top = 20
       Width = 209
-      Height = 274
+      Height = 466
       Margins.Left = 16
       Margins.Top = 20
       ParentMouseEvent = True
@@ -16268,6 +16269,7 @@ object FrameListItemStyle_CustomerInfo: TFrameListItemStyle_CustomerInfo
       MouseDownFocus = False
       Align = alClient
       TabOrder = 1
+      ExplicitHeight = 274
       object pnlName: TSkinWinPanel
         Left = 0
         Top = 0
@@ -16384,7 +16386,7 @@ object FrameListItemStyle_CustomerInfo: TFrameListItemStyle_CustomerInfo
           AlignWithMargins = True
           Left = 54
           Top = 0
-          Width = 89
+          Width = 116
           Height = 24
           Margins.Left = 5
           Margins.Top = 0
@@ -18439,8 +18441,8 @@ object FrameListItemStyle_CustomerInfo: TFrameListItemStyle_CustomerInfo
     end
   end
   object memMemo: TMemo
-    Left = 140
-    Top = 399
+    Left = 130
+    Top = 655
     Width = 185
     Height = 89
     Font.Charset = DEFAULT_CHARSET

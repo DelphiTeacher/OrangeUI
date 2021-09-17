@@ -131,12 +131,13 @@ object frmDataBaseConfig: TfrmDataBaseConfig
     Top = 8
     Width = 160
     Height = 21
-    ItemIndex = 0
     TabOrder = 7
     Text = 'MYSQL'
     Items.Strings = (
       'MYSQL'
-      'MSSQL')
+      'MSSQL'
+      'MSSQL2000'
+      'SQLite')
   end
   object btnSelect: TButton
     Left = 8

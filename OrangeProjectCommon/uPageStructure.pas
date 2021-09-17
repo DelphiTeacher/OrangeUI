@@ -62,8 +62,6 @@ uses
 
 
 //  uLang,
-  uFrameContext,
-  UITypes,
   uDrawParam,
   uOpenCommon,
   uGraphicCommon,
@@ -102,14 +100,22 @@ uses
 //  uSkinPageControl,
 //  uBasePageStructure,
   uSkinVirtualListType,
+  uSkinItemDesignerPanelType,
   uDataInterface,
 //  uTableCommonRestCenter,
   uLang,
 //  uComponentType,
   uSkinItemJsonHelper,
   uBasePageStructure,
-  System.Math.Vectors,
-  System.UIConsts,
+  uFrameContext,
+
+
+//  System.Math.Vectors,
+//  System.UIConsts,
+//  UITypes,
+//  System.Net.URLClient,
+
+
 //  uSkinCommonFrames,
 //  uTimerTask,
   DateUtils,
@@ -134,7 +140,6 @@ uses
 
 
   StrUtils,
-  System.Net.URLClient,
   uTimerTask,
   uTimerTaskEvent;
 
@@ -606,8 +611,8 @@ type
     procedure AssignTo(Dest: TPersistent); override;
 
 
-    //初始列表页面所需要的控件
-    procedure LoadLayoutControlListEnd;virtual;
+    //初始列表页面所需要的控件ListView
+    procedure LoadLayoutControlListEnd;
   public
     constructor Create(AOwner:TComponent);override;
     destructor Destroy;override;
@@ -682,6 +687,7 @@ type
     //页面自定义加载数据到界面上的事件
     property OnLoadedDataToUI:TPageLoadedDataToUIEvent read FOnLoadedDataToUI write FOnLoadedDataToUI;
   published
+    //静态列表数据
     property DataSkinItems:TSkinItems read FDataSkinItems write SetDataSkinItems;
 
     //列表页面时的静态列表项
@@ -693,10 +699,10 @@ type
     //页面其他区域的控件(一些按钮)
     property BottomToolbarLayoutControlList:TFieldControlSettingList read FBottomToolbarLayoutControlList write SetBottomToolbarLayoutControlList;
 
-    //自定义调用保存数据的接口
-    property OnCustomCallSaveDataIntf:TOnCustomCallSaveDataIntfEvent read FOnCustomCallSaveDataIntf write FOnCustomCallSaveDataIntf;
     //自定义调用加载数据的接口
     property OnCustomCallLoadDataIntf:TOnCustomCallLoadDataIntfEvent read FOnCustomCallLoadDataIntf write FOnCustomCallLoadDataIntf;
+    //自定义调用保存数据的接口
+    property OnCustomCallSaveDataIntf:TOnCustomCallSaveDataIntfEvent read FOnCustomCallSaveDataIntf write FOnCustomCallSaveDataIntf;
 
 
   end;
@@ -813,7 +819,7 @@ type
     function Find(AFieldName:String):TFieldControlSettingMap;
     function FindControlByName(AName:String):TComponent;
     function FindControlByFid(AFid:Integer):TComponent;
-    function FindComponent(AComponent:TObject):TFieldControlSettingMap;
+    function FindByComponent(AComponent:TObject):TFieldControlSettingMap;
     procedure DelComponent(AComponent:TObject);
   public
     constructor Create(
@@ -854,13 +860,6 @@ type
   //用于在控件中设置除了Value之外,还能设置其他字段的值,提交时
   TBaseSetRecordFieldValue=class(TInterfacedObject,ISetRecordFieldValue)
   public
-    //上传到服务器
-    //例如:ImageHttpServerUrl+'/upload'
-    //                 +'?appid='+IntToStr(AppID)
-    //                 +'&filename='+'%s'//用于替换文件名
-    //                 +'&filedir='+'repair_car_order_pic'
-    //                 +'&fileext='+'.png',
-    function GetImageUploadTemplateUrl(ASetting:TFieldControlSetting):String;
     procedure SetFieldValue(AFieldName:String;AFieldValue:Variant);virtual;abstract;
   end;
   TSetJsonRecordFieldValue=class(TBaseSetRecordFieldValue)
@@ -874,13 +873,44 @@ type
 
 
 
-  //给图片加上服务器链接
+  //给图片字段加上服务器链接
   TSkinPageStructureJsonItem=class(TSkinJsonItem)
   public
     //根据绑定的FieldName获取Item的值,然后赋给绑定的控件
+    //如果是图片类型的字段,加上图片链接基址
     function GetValueByBindItemField(AFieldName:String):Variant;override;
   end;
+  //列表项控件,用于在页面上放TSkinItem到ListView中
+  TSkinRealSkinItemComponent=class(TComponent,IControlForPageFramework)
+  protected
+    //针对页面框架的控件接口
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+    //获取与设置自定义属性
+    function GetPropJsonStr:String;
+    procedure SetPropJsonStr(AJsonStr:String);
 
+    //获取提交的值
+    function GetPostValue(ASetting:TFieldControlSetting;
+                            APageDataDir:String;
+                            //可以获取其他字段的值
+                            ASetRecordFieldValueIntf:ISetRecordFieldValue;
+                            var AErrorMessage:String):Variant;
+    //设置值
+    procedure SetControlValue(ASetting:TFieldControlSetting;
+                            APageDataDir:String;
+                            AImageServerUrl:String;
+                            AValue:Variant;
+                            AValueCaption:String;
+                            //要设置多个值,整个字段的记录
+                            AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
+    //设置属性
+    function GetProp(APropName:String):Variant;
+    procedure SetProp(APropName:String;APropValue:Variant);
+
+  public
+    FSkinItem:TRealSkinItem;
+    constructor Create(AOwner:TComponent);override;
+  end;
 
 
 //  TPageFrameworkControlSetPostValueEvent=procedure(AControl:TControl;
@@ -954,11 +984,19 @@ type
     //    procedure DoSaveRecordSuccMessageBoxModalResult(AMessageBoxFrame:TFrame);
     procedure DoSaveRecordTimerTaskExecute(ATimerTask:TObject);
     procedure DoSaveRecordTimerTaskExecuteEnd(ATimerTask:TObject);
+
+    //  //保存记录
+    //  Const_PageAction_SaveRecord='save_record';
+    procedure DoSaveRecordAction(AIsNeedStartThread:Boolean);virtual;
+
+    //调用DoSaveRecordAction去保存记录
+    procedure SaveRecord;
   public
-    //用于提交接口
-    AppID:Integer;
-    UserFID:Integer;
-    Key:String;
+    //注释掉,因为一个程序里面,AppID,UserFID,Key都是统一的，不需要每个PageInstance单独设置
+//    //用于提交接口
+//    AppID:Integer;
+//    UserFID:Integer;
+//    Key:String;
   public
 //    PageDataDir:String;
     //页面结构
@@ -994,7 +1032,7 @@ type
                                   AValue:Variant);
     function GetFieldControlValue(AFieldName:String):Variant;
   public
-    //加载数据结束之后,是否需要加载数据到控件
+    //加载数据结束之后,是否需要加载数据到控件，什么情况下不用？
     FIsNeedLoadDataIntfResultToControls:Boolean;
     //调用接口的设置
     FLoadDataSetting:TLoadDataSetting;
@@ -1003,13 +1041,15 @@ type
     FLoadDataIntfResult:TDataIntfResult;
     FLoadDataIntfResult2:TDataIntfResult;
     //加载数据,获取数据
-    function LoadData(ALoadDataSetting:TLoadDataSetting;AIsNeedStartThread:Boolean=True):Boolean;
+    function LoadData(AIsNeedStartThread:Boolean=True):Boolean;
 
     //将调用接口返回的数据加载到界面,比如将Json中的Key值赋给对应的控件
     function LoadDataIntfResultToControls(ADataIntfResult:TDataIntfResult;
                                           ADataIntfResult2:TDataIntfResult):Boolean;virtual;
     function LoadDataJsonToControls(ADataJson:ISuperObject):Boolean;virtual;
 
+    //刷新
+    procedure Refresh;
   public
     //默认的添加记录的初始Json
     AddPostInitJson:ISuperObject;
@@ -1035,15 +1075,11 @@ type
 //    property LoadDataIntfResult2:TDataIntfResult read FLoadDataIntfResult2 write SetLoadDataIntfResult2;
 
 
-    //  //保存记录
-    //  Const_PageAction_SaveRecord='save_record';
-    procedure DoSaveRecordAction(AIsNeedStartThread:Boolean);virtual;
 
 
     //添加编辑保存取消动作
     procedure BeginAddRecord;
     procedure BeginEditRecord;
-    procedure SaveRecord;
     procedure CancelAddRecord;
     procedure CancelEditRecord;
 
@@ -1056,7 +1092,7 @@ type
 
     //自定义初始控件,比如ListView
     procedure DoPageFrameCustomInitFieldControl(AControl:TComponent;AFieldControlSetting:TFieldControlSetting);virtual;
-    //控件点击事件
+    //控件点击事件,在里面找到Sender对应的FieldControlSetting，然后调用DoPageLayoutControlClick
     procedure DoFieldControlClick(Sender:TObject);
     //控件点击事件
     procedure DoPageLayoutControlClick(Sender:TObject;APageLayoutControlMap:TFieldControlSettingMap);virtual;
@@ -1137,6 +1173,10 @@ type
   TListPageInstance=class(TPageInstance)
   public
     FlvData:TSkinVirtualList;
+
+    //自定义列表项点击事件
+    FOnCustomClickListSkinItem:TVirtualListClickItemEvent;
+
     //自定义初始控件,比如ListView的上拉下拉点击事件
     procedure DoPageFrameCustomInitFieldControl(AControl:TComponent;AFieldControlSetting:TFieldControlSetting);override;
 
@@ -1146,18 +1186,24 @@ type
     //加载数据线程结束
     procedure DoLoadDataTaskExecuteEnd(ATimerTask:TTimerTask);override;
 
-
     //列表项点击事件,跳转到编辑页面或查看页面
     procedure lvDataClickItemEx(Sender:TObject;
-                                        AItem:TSkinItem;
-                                        X:Double;Y:Double);
+                                AItem:TSkinItem;
+                                X:Double;Y:Double);
 
+//    //点击设计面板上面子控件的事件
+//    procedure lvDataCustomListClickItemDesignerPanelChild(Sender:TObject;
+//                                                          AItem:TBaseSkinItem;//这里应该用TBaseSkinItem
+//                                                          AItemDesignerPanel:TItemDesignerPanel;
+//                                                          AChild:TChildControl);
+
+  public
     //从编辑页面返回到列表页面
     procedure DoReturnFrameFromEditPageFrame(AFrame:TFrame);override;
 
-    //跳转到编辑页面
-    procedure DoJumpToEditRecordPageAction(ALoadDataSetting:TLoadDataSetting);override;
-
+//    //跳转到编辑页面
+//    procedure DoJumpToEditRecordPageAction(ALoadDataSetting:TLoadDataSetting);override;
+//
 //    //跳转到编辑页面
 //    procedure DoJumpToListRecordPageAction(ALoadDataSetting:TLoadDataSetting);override;
   end;
@@ -1172,7 +1218,7 @@ type
     //控件点击事件
     procedure DoPageLayoutControlClick(Sender:TObject;APageLayoutControlMap:TFieldControlSettingMap);override;
 
-    function CallDelDataInterface:Boolean;override;
+//    function CallDelDataInterface:Boolean;override;
 
     //编辑页面中跳转到选项列表页面,选项列表页面点击列表项选中并返回
     procedure DoReturnFrameFromOptionsListPage(AFrame:TFrame);
@@ -1180,67 +1226,6 @@ type
     procedure DoDelRecordAction;override;
   end;
 
-
-
-
-
-
-
-  //通用接口框架的Rest接口
-  TTableCommonRestHttpDataInterface=class(TDataInterface)
-  public
-    FInterfaceUrl:String;
-    //获取字段列表
-    function GetFieldList(var ADesc:String;
-                          var ADataJson:ISuperObject
-                           ):Boolean;override;
-    //获取记录列表
-    function GetDataList(
-                           ALoadDataSetting:TLoadDataSetting;
-                           ADataIntfResult:TDataIntfResult
-                           ):Boolean;override;
-    //获取记录
-    function GetDataDetail(
-                       ALoadDataSetting:TLoadDataSetting;
-                       ADataIntfResult:TDataIntfResult
-                       ):Boolean;override;
-    //保存记录
-    function SaveData(ASaveDataSetting:TSaveDataSetting;
-                      ADataIntfResult:TDataIntfResult):Boolean;override;
-    //删除记录
-    function DelData(ALoadDataIntfResult:TDataIntfResult;
-                      ADataIntfResult:TDataIntfResult):Boolean;override;
-  end;
-
-
-
-
-
-  //Http的Rest接口
-  TRestHttpDataInterface=class(TDataInterface)
-  public
-    //比如http://www.orangeui.cn:10000/usercenter/
-    InterfaceUrl:String;
-    //比如appid,user_fid,key,........
-    Params:String;
-
-    //获取记录列表
-    function GetDataList(
-                         ALoadDataSetting:TLoadDataSetting;
-                         ADataIntfResult:TDataIntfResult
-                         ):Boolean;override;
-    //获取记录
-    function GetDataDetail(
-                       ALoadDataSetting:TLoadDataSetting;
-                       ADataIntfResult:TDataIntfResult
-                       ):Boolean;override;
-    //保存记录
-    function SaveData(ASaveDataSetting:TSaveDataSetting;
-                      ADataIntfResult:TDataIntfResult):Boolean;override;
-    //删除记录
-    function DelData(ALoadDataIntfResult:TDataIntfResult;
-                      ADataIntfResult:TDataIntfResult):Boolean;override;
-  end;
 
 
 
@@ -1255,7 +1240,7 @@ type
   TOnNeedShowPageEvent=procedure(Sender:TObject;
                                   APageFID:Integer;
                                   APage:TPage;
-                                  ALoadDataSetting:TLoadDataSetting;
+//                                  ALoadDataSetting:TLoadDataSetting;
                                   //返回
                                   AOnReturnFrame:TReturnFromFrameEvent) of object;
   //需要返回上一页
@@ -1352,7 +1337,7 @@ type
 //    FHotHandle: TGrabHandle;
 //    FDownPos: TPointF;
 //    FShowHandles: Boolean;
-    FColor: TAlphaColor;
+//    FColor: TAlphaColor;
 //    procedure SetHideSelection(const Value: Boolean);
 //    procedure SetMinSize(const Value: Integer);
 //    procedure SetGripSize(const Value: Single);
@@ -1550,35 +1535,6 @@ type
 
 
 
-
-  //应用程序的数据源,
-  //可以是Json可以是Ini,
-  //直接放在程序的根目录,
-  //local_data_source.json
-  //初始本地数据源,调用接口的有些参数从这里取出来的
-  TLocalDataSource=class
-  public
-    constructor Create;
-    destructor Destroy;override;
-  public
-    //本地数据,比如医院显示屏项目,保存办公室fid
-    FDataJson:ISuperObject;
-    //商家版登录后商家信息
-    //$login_shop.fid
-    FLoginShopJson:ISuperObject;
-//    //用户登录后用户信息
-//    //$login_user.fid
-//    function GetLoginUserJson:ISuperObject;
-
-    function GetParamValue(AParamName:String):Variant;
-    procedure SetParamValue(AParamName:String;AValue:Variant);
-
-    procedure Load;
-    procedure Save;
-  end;
-
-
-//
 //  IRestInterfaceCall=interface
 //    ['{8AD273E6-9AA5-4198-9609-E77CF11C8FED}']
 //    //调用rest接口,返回字符串,在服务端中使用
@@ -1596,19 +1552,62 @@ type
 //                          APostStream:TStream=nil): Boolean;overload;
 //
 //  end;
-//
+
+
+  TLocalJsonPageFrameworkDataSourceManager=class(TPageFrameworkDataSourceManager)
+  public
+    //本地数据,比如医院显示屏项目,保存办公室fid
+    FDataJson:ISuperObject;
+
+  public
+    constructor Create;override;
+    destructor Destroy;override;
+
+  public
+    procedure Load;override;
+    procedure Save;override;
+    function GetParamValue(AValueFrom:String;AParamName:String):Variant;override;
+    procedure SetParamValue(AValueFrom:String;AParamName:String;AValue:Variant);override;
+
+  end;
+
+
+
+  TPageCheckBox=class(TCheckBox,IControlForPageFramework)
+    //针对页面框架的控件接口
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+    //获取与设置自定义属性
+    function GetPropJsonStr:String;
+    procedure SetPropJsonStr(AJsonStr:String);
+    //获取提交的值
+    function GetPostValue(ASetting:TFieldControlSetting;
+                            APageDataDir:String;
+                            //可以获取其他字段的值
+                            ASetRecordFieldValueIntf:ISetRecordFieldValue;
+                            var AErrorMessage:String):Variant;
+    //设置值
+    procedure SetControlValue(ASetting:TFieldControlSetting;
+                            APageDataDir:String;
+                            AImageServerUrl:String;
+                            AValue:Variant;
+                            AValueCaption:String;
+                            //要设置多个值,整个字段的记录
+                            AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
+    //设置属性
+    function GetProp(APropName:String):Variant;
+    procedure SetProp(APropName:String;APropValue:Variant);
+
+  end;
+
 
 
 
 
 
 var
-  //本地参数的数据源
-  //初始本地数据源,调用接口的有些参数从这里取出来的
-  GlobalLocalDataSource:TLocalDataSource;
-
   //主程序设置
   GlobalMainProgramSetting:TOpenPlatformProgramSetting;
+
 
 
 function DoCreateControl(
@@ -1689,6 +1688,9 @@ function CallLoadDataIntf(APageStructure:TPage;
 
 //获取参数的值
 function GetLoadDataParamValue(AParamJson:ISuperObject;var AError:String):Variant;
+
+//获取变量值
+function GetPageFrameworkVariableValue(AVariableName:String):Variant;
 //根据字段名从接口的返回中获取数据
 //可能有多级的情况,比如DataJson.Summary.I['SumCount']
 //AFieldNameList,$data_intf,Summary,SumCount
@@ -1805,7 +1807,7 @@ uses
   uSkinPanelType,
   uSkinDrawPanelType,
 //  uSkinPageControlType,
-  uSkinItemDesignerPanelType,
+//  uSkinItemDesignerPanelType,
 //  uSkinDirectUIParentType,
   uSkinImageType,
   uSkinFrameImageType,
@@ -1936,11 +1938,14 @@ var
   FInnterGlobalMainProgramSetting:TOpenPlatformProgramSetting;
 
 
+
 procedure Register;
 begin
-  RegisterComponents('OrangePageFramework',[TPage,TOpenPlatformProgramSetting]);
+  RegisterComponents('OrangePageFramework',
+                      [TPage,
+                      TOpenPlatformProgramSetting,
+                      TPageFrameworkDataSource]);
 end;
-
 
 
 procedure InitFieldControlBySetting(AControlMap:TFieldControlSettingMap;APageDataDir:String);
@@ -1988,32 +1993,69 @@ begin
               AControlMap.PageFrameworkControlIntf.SetControlValue(AControlMap.Setting,
                                                                     APageDataDir,
                                                                     GlobalMainProgramSetting.OpenPlatformImageUrl,
-                                                                    AControlMap.Setting.value,
+                                                                    //Setting.value支持变量，比如$login_user_name，$my_vip_end_date
+                                                                    GetPageFrameworkVariableValue(AControlMap.Setting.value),
                                                                     '',//AFieldControlSetting.caption,
                                                                     nil);
 
     //      end;
       end
-      else
+//      else if AControlMap.Component is TSkinRealSkinItemComponent then
+//      begin
+//          if TSkinRealSkinItemComponent(AControlMap.Component).FSkinItem.GetInterface(IID_IControlForPageFramework,AControlMap.PageFrameworkControlIntf) then
+//          begin
+//      //        AControlMap.PageFrameworkControlIntf:=AControlForPageFrameworkIntf;
+//              //加载设置
+//              AControlMap.PageFrameworkControlIntf.LoadFromFieldControlSetting(AControlMap.Setting);
+//              //设置自定义的值
+//              AControlMap.PageFrameworkControlIntf.SetPropJsonStr(AControlMap.Setting.prop);
+//              //赋设计时的值
+//              AControlMap.PageFrameworkControlIntf.SetControlValue(AControlMap.Setting,
+//                                                                    APageDataDir,
+//                                                                    GlobalMainProgramSetting.OpenPlatformImageUrl,
+//                                                                    //Setting.value支持变量，比如$login_user_name，$my_vip_end_date
+//                                                                    GetPageFrameworkVariableValue(AControlMap.Setting.value),
+//                                                                    '',//AFieldControlSetting.caption,
+//                                                                    nil);
+//
+//          end;
+//      end
+      else if AControlMap.Component is TComboBox then
       begin
           //标准控件
-          if AControlMap.Component is TComboBox then
-          begin
-            TComboBox(AControlMap.Component).Items.CommaText:=AControlMap.Setting.options_value;
-            TComboBox(AControlMap.Component).ItemIndex:=-1;
-          end;
-
-      end;
+          TComboBox(AControlMap.Component).Items.CommaText:=AControlMap.Setting.options_caption;
+          TComboBox(AControlMap.Component).ItemIndex:=-1;
+      end
+      else if AControlMap.Component is TCheckBox then
+      begin
+          //标准控件
+          TCheckBox(AControlMap.Component).{$IFDEF VCL}Checked{$ENDIF}{$IFDEF FMX}IsChecked{$ENDIF}:=SameText(AControlMap.Setting.value,'True')
+                                                    or SameText(AControlMap.Setting.value,'1');
+      end
+      else if AControlMap.Component is TMemo then
+      begin
+          //标准控件
+          TMemo(AControlMap.Component).Text:=AControlMap.Setting.value;
+      end
+      else if AControlMap.Component is TEdit then
+      begin
+          //标准控件
+          TEdit(AControlMap.Component).Text:=AControlMap.Setting.value;
+      end
+      ;
 end;
 
 procedure SetFieldControlPostValue(
-                            AFieldControlSettingMap:TFieldControlSettingMap;
-                            APageDataDir:String;
-                            AImageServerUrl:String;
-                            AValue:Variant;
-                            AValueCaption:String;
-                            //要设置多个值,整个字段的记录
-                            AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
+                                  AFieldControlSettingMap:TFieldControlSettingMap;
+                                  APageDataDir:String;
+                                  AImageServerUrl:String;
+                                  AValue:Variant;
+                                  AValueCaption:String;
+                                  //要设置多个值,整个字段的记录
+                                  AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
+var
+  AStringList:TStringList;
+  AValueStr:String;
 begin
   if AFieldControlSettingMap.PageFrameworkControlIntf<>nil then
   begin
@@ -2034,9 +2076,31 @@ begin
     begin
       TMemo(AFieldControlSettingMap.Component).Text:=AValue;
     end
+    else if AFieldControlSettingMap.Component is TCheckBox then
+    begin
+      AValueStr:=AValue;
+      if AValueStr='' then
+      begin
+        AValue:=False;
+      end;
+      TCheckBox(AFieldControlSettingMap.Component).{$IFDEF VCL}Checked{$ENDIF}{$IFDEF FMX}IsChecked{$ENDIF}:=AValue;
+
+    end
     else if AFieldControlSettingMap.Component is TComboBox then
     begin
-      TComboBox(AFieldControlSettingMap.Component).Text:=AValue;
+      {$IFDEF FMX}
+      TComboBox(AFieldControlSettingMap.Component).ItemIndex:=TComboBox(AFieldControlSettingMap.Component).Items.IndexOf(AValue);
+      {$ENDIF}
+      {$IFDEF VCL}
+      //TComboBox(AFieldControlSettingMap.Component).Text:=AValue;
+      AStringList:=TStringList.Create;
+      try
+        AStringList.CommaText:=AFieldControlSettingMap.Setting.options_value;
+        TComboBox(AFieldControlSettingMap.Component).ItemIndex:=AStringList.IndexOf(AValue);
+      finally
+        FreeAndNil(AStringList);
+      end;
+      {$ENDIF}
     end
     ;
   end;
@@ -2048,6 +2112,8 @@ function GetFieldControlPostValue(AFieldControlSettingMap:TFieldControlSettingMa
                                   APageDataDir:String;
                                   ASetRecordFieldValueIntf:ISetRecordFieldValue;
                                   var AErrorMessage:String):Variant;
+var
+  AStringList:TStringList;
 begin
   Result:='';
   if AFieldControlSettingMap.PageFrameworkControlIntf<>nil then
@@ -2069,9 +2135,25 @@ begin
     begin
       Result:=TMemo(AFieldControlSettingMap.Component).Text;
     end
+    else if AFieldControlSettingMap.Component is TCheckBox then
+    begin
+      Result:=TCheckBox(AFieldControlSettingMap.Component).{$IFDEF VCL}Checked{$ENDIF}{$IFDEF FMX}IsChecked{$ENDIF};
+    end
     else if AFieldControlSettingMap.Component is TComboBox then
     begin
-      Result:=TComboBox(AFieldControlSettingMap.Component).Text;
+      {$IFDEF FMX}
+      Result:=TComboBox(AFieldControlSettingMap.Component).Items[TComboBox(AFieldControlSettingMap.Component).ItemIndex];
+      {$ENDIF}
+      {$IFDEF VCL}
+//      Result:=TComboBox(AFieldControlSettingMap.Component).Text;
+      AStringList:=TStringList.Create;
+      try
+        AStringList.CommaText:=AFieldControlSettingMap.Setting.options_value;
+        Result:=AStringList[TComboBox(AFieldControlSettingMap.Component).ItemIndex];
+      finally
+        FreeAndNil(AStringList);
+      end;
+      {$ENDIF}
     end
     ;
   end;
@@ -2340,8 +2422,14 @@ begin
 end;
 
 procedure SetComponentLeft(AComponent:TComponent;ALeft:TControlSize);
+{$IFDEF FMX}
 var
   ADesignInfo:TDesignInfo;
+{$ENDIF}
+{$IFDEF VCL}
+var
+  ADesignInfo:LongInt;
+{$ENDIF}
 begin
   if AComponent is TControl then
   begin
@@ -2359,8 +2447,14 @@ begin
 end;
 
 procedure SetComponentTop(AComponent:TComponent;ATop:TControlSize);
+{$IFDEF FMX}
 var
   ADesignInfo:TDesignInfo;
+{$ENDIF}
+{$IFDEF VCL}
+var
+  ADesignInfo:LongInt;
+{$ENDIF}
 begin
   if AComponent is TControl then
   begin
@@ -2971,6 +3065,8 @@ begin
 
             //是否显示
             AControl.Visible:=(AFieldControlSetting.Visible=1);
+            if AControlMap.InputPanel<>nil then AControlMap.InputPanel.Visible:=(AFieldControlSetting.Visible=1);
+            
             {$IFDEF FMX}
             AControl.HitTest:=(AFieldControlSetting.hittest=1);
             {$ENDIF FMX}
@@ -5501,6 +5597,13 @@ begin
 
 
                 end
+                else if AControlMap.Component is TSkinRealSkinItemComponent then
+                begin
+                  if AControlParent<>nil then
+                  begin
+                    TSkinVirtualList(AControlParent).Prop.Items.Add(TSkinRealSkinItemComponent(AControlMap.Component).FSkinItem);
+                  end;
+                end
                 else
                 begin
                     //是组件
@@ -5514,6 +5617,8 @@ begin
                 AControlMapList.Add(AControlMap);
 
 
+
+                //设置控件宽、高、显示等
                 if not LoadComponentFromFieldControlSetting(AControlMap,
                                                             AControlMap.Component,
                                                             AFieldControlSetting,
@@ -7393,7 +7498,7 @@ begin
                       +'.json';
   if AIsCanUseCache and FileExists(ACacheFilePath) then
   begin
-      ADataJson:=TSuperObject.ParseFile(ACacheFilePath);
+      ADataJson:=TSuperObject.ParseFile(ACacheFilePath{$IFDEF VCL},True{$ENDIF});
 
       AIsUsedCache:=True;
 
@@ -7405,26 +7510,26 @@ begin
                           'get_page_structure',
                           nil,
                           AInterfaceUrl+'program_framework/',
-                          ['appid',
-                          'user_fid',
-                          'key',
+                          ConvertToStringDynArray(['appid',
+                                                  'user_fid',
+                                                  'key',
 
-                          'program_template_name',
-                          'function_name',
-                          'page_type',
-                          'platform',
-                          'page_name'//可以忽略
-                          ],
-                          [
-                          AAppID,
-                          0,
-                          '',
-                          AProgramTemplateName,
-                          AFunctionName,
-                          APageType,
-                          APlatform,
-                          APageName
-                          ],
+                                                  'program_template_name',
+                                                  'function_name',
+                                                  'page_type',
+                                                  'platform',
+                                                  'page_name'//可以忽略
+                                                  ]),
+                          ConvertToVariantDynArray([
+                                                  AAppID,
+                                                  0,
+                                                  '',
+                                                  AProgramTemplateName,
+                                                  AFunctionName,
+                                                  APageType,
+                                                  APlatform,
+                                                  APageName
+                                                  ]),
                           ACode,
                           ADesc,
                           ADataJson,
@@ -8482,7 +8587,7 @@ begin
     TChildControl(AComponent).Parent:=nil;
   end;
 
-  AFieldControlSettingMap:=Self.FindComponent(AComponent);
+  AFieldControlSettingMap:=Self.FindByComponent(AComponent);
   //同时会释放控件
   Self.Remove(AFieldControlSettingMap);
 end;
@@ -8510,7 +8615,7 @@ begin
 
 end;
 
-function TFieldControlSettingMapList.FindComponent(
+function TFieldControlSettingMapList.FindByComponent(
   AComponent: TObject): TFieldControlSettingMap;
 var
   I: Integer;
@@ -8824,6 +8929,14 @@ begin
     begin
       TComboBox(Self.Items[I].Component).Enabled:=not AReadOnly;
     end
+    else if (Self.Items[I].Component is TCheckBox) then
+    begin
+      TCheckBox(Self.Items[I].Component).Enabled:=not AReadOnly;
+    end
+    else if (Self.Items[I].PageFrameworkControlIntf<>nil) then
+    begin
+      Self.Items[I].PageFrameworkControlIntf.SetProp('ReadOnly',AReadOnly);
+    end;
     ;
   end;
 
@@ -9053,6 +9166,9 @@ begin
 ////            end;
 //          end;
 
+          FSaveDataIntfResult.Clear;
+
+
           AError:='';
           ARecordDataJson:=GetPostDataJson(Self.PageStructure.GetPageDataDir,
                                           Self.FLoadDataSetting.IsAddRecord,
@@ -9062,7 +9178,12 @@ begin
             TTimerTask(ATimerTask).TaskDesc:=AError;
             Exit;
           end;
-
+          //如果需要提交的数据为空,怎么办？
+          if ARecordDataJson.AsJSON='{}' then
+          begin
+            TTimerTask(ATimerTask).TaskTag:=TASK_SUCC;
+            Exit;
+          end;
 
 
 
@@ -9113,12 +9234,14 @@ begin
     //              begin
     //                FPage.DataInterface.fid:=ADataJson.I['fid'];
     //              end;
+                  TTimerTask(ATimerTask).TaskDesc:=FSaveDataIntfResult.Desc;
                   TTimerTask(ATimerTask).TaskTag:=TASK_SUCC;
               end
               else
               begin
             //      ShowMessage(ADesc);
-    //              Exit;
+                  TTimerTask(ATimerTask).TaskDesc:=FSaveDataIntfResult.Desc;
+                  Exit;
               end;
 
           end;
@@ -9131,7 +9254,6 @@ begin
 
 
 
-      TTimerTask(ATimerTask).TaskDesc:=FSaveDataIntfResult.Desc;
 
 //      if FLoadDataIntfResult.Succ then
 //      begin
@@ -9161,6 +9283,17 @@ begin
           ShowHintFrame(nil,Trans('保存成功'));
           {$ENDIF FMX}
 
+
+          //保存记录之后,要刷新界面
+          if Assigned(FOnAfterSaveRecord) then
+          begin
+            FOnAfterSaveRecord(Self);
+          end;
+
+          Self.FLoadDataSetting.IsAddRecord:=False;
+          Self.FLoadDataSetting.IsEditRecord:=False;
+
+
           DoReturnPageAction(Self);
 
 
@@ -9177,6 +9310,10 @@ begin
           //网络异常
           {$IFDEF FMX}
           ShowMessageBoxFrame(nil,TTimerTask(ATimerTask).TaskDesc,'');//,TTimerTask(ATimerTask).TaskDesc,TMsgDlgType.mtInformation,['确定'],nil);
+          {$ENDIF}
+
+          {$IFDEF VCL}
+          ShowMessage(TTimerTask(ATimerTask).TaskDesc);
           {$ENDIF}
 
       end;
@@ -9263,8 +9400,8 @@ begin
 
   FSaveDataIntfResult:=TDataIntfResult.Create;
 
-  FLoadDataSetting.Clear;
-
+  FLoadDataSetting:=TLoadDataSetting.Create;
+  FLoadDataSetting.AppID:=GlobalMainProgramSetting.AppID;
 
 end;
 
@@ -9347,6 +9484,8 @@ begin
 
   FreeAndNil(FSaveDataIntfResult);
 
+  FreeAndNil(FLoadDataSetting);
+
 
 //  FGetDataIntfResultFieldValue:=nil;
 
@@ -9363,6 +9502,7 @@ begin
 
       if Assigned(Self.PageStructure.OnCustomCallLoadDataIntf) then
       begin
+          //自定义调用接口
           Self.PageStructure.OnCustomCallLoadDataIntf(Self,
                                                       Self,
                                                       FLoadDataSetting,
@@ -9635,11 +9775,29 @@ begin
 end;
 
 
+{$IFDEF VCL}
+type
+  TProtectedParentControl=class(TParentControl)
+  end;
+{$ENDIF}
+
+
+
 procedure TPageInstance.DoPageFrameCustomInitFieldControl(AControl: TComponent;
   AFieldControlSetting: TFieldControlSetting);
 begin
   {$IFDEF FMX}
-  AControl.OnClick:=Self.DoFieldControlClick;
+  if AControl is TControl then
+  begin
+    TControl(AControl).OnClick:=Self.DoFieldControlClick;
+  end;
+  {$ENDIF}
+
+  {$IFDEF VCL}
+  if AControl is TParentControl then
+  begin
+    TProtectedParentControl(AControl).OnClick:=Self.DoFieldControlClick;
+  end;
   {$ENDIF}
 
   if Assigned(FOnCustomInitFieldControl) then
@@ -9744,7 +9902,7 @@ procedure TPageInstance.DoRefreshTimer(Sender: TObject);
 begin
   Self.FRefreshTimer.Enabled:=False;
 
-  Self.LoadData(FLoadDataSetting)
+  Self.LoadData();
 end;
 
 procedure TPageInstance.DoReturnFrameFromEditPageFrame(AFrame: TFrame);
@@ -9848,6 +10006,34 @@ begin
 
 end;
 
+
+//获取变量值
+function GetPageFrameworkVariableValue(AVariableName:String):Variant;
+begin
+  {$IFDEF FMX}
+  if AVariableName.Substring(0,1)='$' then
+  {$ENDIF}
+  {$IFDEF VCL}
+  if Copy(AVariableName,1,1)='$' then
+  {$ENDIF}
+  begin
+      //是变量,
+      //比如像网页中的我们用到过的$login_shop.fid
+      //也可以取我们当前登录用户的信息比如$login_user.fid,$login_user.name等
+      //也可以取
+
+      //本地数据源Json的字段
+      Result:=GetGlobalPageFrameworkDataSourceManager.GetParamValue('',AVariableName)
+
+
+  end
+  else
+  begin
+      //是常量
+      Result:=AVariableName;
+  end;
+end;
+
 function GetPageDataIntfResultFieldValue(AFieldName:String;
                                           ADataIntfResult:TDataIntfResult;
                                           ADataIntfResult2:TDataIntfResult;
@@ -9859,7 +10045,12 @@ begin
   AJsonArrayValue:=nil;
   AValueObject:=nil;
 
+  {$IFDEF FMX}
   if AFieldName.Substring(0,1)='$' then
+  {$ENDIF}
+  {$IFDEF VCL}
+  if Copy(AFieldName,1,1)='$' then
+  {$ENDIF}
   begin
       //是变量,
       //比如像网页中的我们用到过的$login_shop.fid
@@ -9884,10 +10075,14 @@ begin
           else if AFieldNameList[0]='$local_data_source' then
           begin
             //本地数据源Json的字段
-            Result:=GlobalLocalDataSource.FDataJson.V[AFieldNameList[AFieldNameList.Count-1]];
+            Result:=TLocalJsonPageFrameworkDataSourceManager(GetGlobalPageFrameworkDataSourceManager).FDataJson.V[AFieldNameList[AFieldNameList.Count-1]];
+          end
+          else
+          begin
+            //本地数据源Json的字段
+            Result:=GetPageFrameworkVariableValue(AFieldName)
           end
           ;
-
 
       finally
         FreeAndNil(AFieldNameList);
@@ -9937,24 +10132,31 @@ begin
   //  AParamJson.V['value']:=1010;//常量值
 
 
-  if AParamJson.S['value_from']='local_data_source' then
-  begin
-    Result:=GlobalLocalDataSource.FDataJson.V[AParamJson.V['value_key']];
-  end
+//  if AParamJson.S['value_from']='local_data_source' then
+//  begin
+////    Result:=GetGlobalLocalDataSource.FDataJson.V[AParamJson.V['value_key']];
+//  end
+//  {$IFDEF FMX}
 //  else if AParamJson.S['value_from']='login_shop' then
 //  begin
-//    Result:=GlobalLocalDataSource.FLoginShopJson.V[AParamJson.V['value_key']];
+//    Result:=GetGlobalLocalDataSource.FLoginShopJson.V[AParamJson.V['value_key']];
 //  end
 //  else if AParamJson.S['value_from']='login_user' then
 //  begin
-//    Result:=GlobalLocalDataSource.GetLoginUserJson.V[AParamJson.V['value_key']];
+//    Result:=GetGlobalLocalDataSource.GetLoginUserJson.V[AParamJson.V['value_key']];
 //  end
-  else
-//  if AParamJson.S['value_from']='const' then
+//  {$ENDIF}
+//  else
+  if AParamJson.S['value_from']='const' then
   begin
     Result:=AParamJson.V['value'];
-  end;
+  end
+  else
+  begin
+//    Result:=GetGlobalLocalDataSource.FDataJson.V[AParamJson.V['value_key']];
+    Result:=GetGlobalPageFrameworkDataSourceManager.GetParamValue(AParamJson.S['value_from'],AParamJson.V['value_key']);
 
+  end;
 
 end;
 
@@ -9963,10 +10165,10 @@ var
   AErrorMessage:String;
 begin
   Result:=GetFieldControlPostValue(Self.MainControlMapList.Find(AFieldName),
-                           Self.PageStructure.GetPageDataDir,
-                           nil,
-                           AErrorMessage
-                          );
+                                   Self.PageStructure.GetPageDataDir,
+                                   nil,
+                                   AErrorMessage
+                                   );
 end;
 
 function TPageInstance.GetPostDataJson(APageDataDir:String;
@@ -10065,14 +10267,13 @@ begin
           Result:=ARecordDataJson;
 end;
 
-function TPageInstance.LoadData(ALoadDataSetting:TLoadDataSetting;AIsNeedStartThread:Boolean): Boolean;
+function TPageInstance.LoadData(AIsNeedStartThread:Boolean): Boolean;
 var
   ALoadDataTimerTask:TTimerTask;
 begin
     Result:=False;
 
 
-    FLoadDataSetting:=ALoadDataSetting;
     FLoadDataSetting.PageDataSkinItems:=Self.PageStructure.DataSkinItems;
 
 
@@ -10081,8 +10282,8 @@ begin
     if SameText(Self.PageStructure.page_type,Const_PageType_ListPage)
       //如果是查看编辑页面,而不是新增,并且没有数据,那么需要调用接口查询
       or not SameText(Self.PageStructure.page_type,Const_PageType_ListPage)
-          and (ALoadDataSetting.RecordDataJson=nil)
-          and not ALoadDataSetting.IsAddRecord then
+          and (FLoadDataSetting.RecordDataJson=nil)
+          and not FLoadDataSetting.IsAddRecord then
     begin
         uBaseLog.HandleException(nil,'TPageInstance.LoadData 1');
 
@@ -10115,19 +10316,19 @@ begin
 //        end;
 
     end
-    else if not ALoadDataSetting.IsAddRecord then
+    else if not FLoadDataSetting.IsAddRecord then
     begin
         uBaseLog.HandleException(nil,'TPageInstance.LoadData 2');
 
 
         //加载编辑页面或者详情页面
-        if ALoadDataSetting.RecordDataJson<>nil then
+        if FLoadDataSetting.RecordDataJson<>nil then
         begin 
             //已经获取好的数据
             FLoadDataIntfResult.Succ:=True;
             FLoadDataIntfResult.DataType:=ldtJson;
             FLoadDataIntfResult.Desc:='获取数据成功';
-            FLoadDataIntfResult.DataJson:=ALoadDataSetting.RecordDataJson;
+            FLoadDataIntfResult.DataJson:=FLoadDataSetting.RecordDataJson;
 
 
 
@@ -10283,10 +10484,10 @@ begin
 //              ALoadDataSetting.LoadDataParamValues[AParamIndex]:=AppID;
 //              Inc(AParamIndex);
 //              ALoadDataSetting.LoadDataParamNames[AParamIndex]:='user_fid';
-//              ALoadDataSetting.LoadDataParamValues[AParamIndex]:=GlobalLocalDataSource.GetLoginUserJson.V['fid'];
+//              ALoadDataSetting.LoadDataParamValues[AParamIndex]:=GetGlobalLocalDataSource.GetLoginUserJson.V['fid'];
 //              Inc(AParamIndex);
 //              ALoadDataSetting.LoadDataParamNames[AParamIndex]:='key';
-//              ALoadDataSetting.LoadDataParamValues[AParamIndex]:=GlobalLocalDataSource.GetLoginUserJson.V['key'];
+//              ALoadDataSetting.LoadDataParamValues[AParamIndex]:=GetGlobalLocalDataSource.GetLoginUserJson.V['key'];
 //              Inc(AParamIndex);
               ALoadDataSetting.LoadDataParamNames[AParamIndex]:='pageindex';
               ALoadDataSetting.LoadDataParamValues[AParamIndex]:=ALoadDataSetting.PageIndex;
@@ -10432,13 +10633,8 @@ begin
   //保存添加/修改
   Self.DoSaveRecordAction(False);
 
-  if Assigned(FOnAfterSaveRecord) then
-  begin
-    FOnAfterSaveRecord(Self);
-  end;
 
-  Self.FLoadDataSetting.IsAddRecord:=False;
-  Self.FLoadDataSetting.IsEditRecord:=False;
+
 
 
 end;
@@ -10507,6 +10703,7 @@ begin
                 AFieldControlSettingMap:=MainControlMapList[I];
                 if (AFieldControlSettingMap.Setting.field_name='') or (AFieldControlSettingMap.Setting.is_no_post=1) then
                 begin
+                  //is_no_post的话不赋值?
                   Continue;
                 end;
 
@@ -10585,6 +10782,7 @@ begin
                               begin
                                 AValue:='';
                               end;
+
                               
 //                              AValueStr:String;
 //                            begin
@@ -10686,6 +10884,11 @@ begin
 
 end;
 
+procedure TPageInstance.Refresh;
+begin
+  Self.LoadData();
+end;
+
 //function TPageInstance.PostToServer(APageDataDir:String;var ACode: Integer; var ADesc: String;
 //  var ADataJson: ISuperObject): Boolean;
 //begin
@@ -10753,6 +10956,7 @@ var
   ASkinItem:TBaseSkinItem;
   ASkinItems:TSkinItems;
 //  J: Integer;
+  ASkinItemList:TList;
 begin
   if AComponent is TSkinVirtualList then
   begin
@@ -10764,17 +10968,24 @@ begin
       try
 
           //第一页要清空
-          if Self.FLoadDataSetting.PageIndex=1 then
+          //TSkinRealSkinItemComponent对应的Item不需要清除
+          if Self.FLoadDataSetting.PageIndex<=1 then
           begin
+//            for I := 0 to Self.PageStructure.MainLayoutControlList.Count-1 do
+//            begin
+//
+//            end;
+
             ASkinVirtualList.Prop.Items.Clear(True);
-          end;
-
-
-          //其他字段名
-          if AFieldControlSettingMap.Setting.other_field_names<>'' then
-          begin
 
           end;
+
+
+//          //其他字段名
+//          if AFieldControlSettingMap.Setting.other_field_names<>'' then
+//          begin
+//
+//          end;
           
 
 
@@ -10851,36 +11062,35 @@ begin
 end;
 
 procedure TPageInstance.DoJumpToNewRecordPageAction;
-var
-  ALoadDataSetting:TLoadDataSetting;
+//var
+//  ALoadDataSetting:TLoadDataSetting;
 begin
   //添加记录
 
-  if Self.PageStructure.EditPage<>nil then
-  begin
-    ALoadDataSetting.Clear;
-    ALoadDataSetting.AppID:=Self.FLoadDataSetting.AppID;
-    ALoadDataSetting.IsAddRecord:=True;
-
-    if Assigned(GlobalMainProgramSetting.OnNeedShowPage) then
-    begin
-      GlobalMainProgramSetting.OnNeedShowPage(Self,
-                                              0,
-                                              Self.PageStructure.EditPage,
-                                              ALoadDataSetting,
-                                              DoReturnFrameFromEditPageFrame
-                                              );
-//      HideFrame;
-//      ShowPageFrame(Self.PageStructure.EditPage,
-//                    ALoadDataSetting,
-//                    DoReturnFrameFromEditPageFrame);
-    end;
-
-//    HideFrame;
-//    ShowPageFrame(Self.PageStructure.EditPage,
-//                  ALoadDataSetting,
-//                  DoReturnFrameFromEditPageFrame);
-  end;
+//  if Self.PageStructure.EditPage<>nil then
+//  begin
+//    ALoadDataSetting.AppID:=Self.FLoadDataSetting.AppID;
+//    ALoadDataSetting.IsAddRecord:=True;
+//
+//    if Assigned(GlobalMainProgramSetting.OnNeedShowPage) then
+//    begin
+//      GlobalMainProgramSetting.OnNeedShowPage(Self,
+//                                              0,
+//                                              Self.PageStructure.EditPage,
+//                                              ALoadDataSetting,
+//                                              DoReturnFrameFromEditPageFrame
+//                                              );
+////      HideFrame;
+////      ShowPageFrame(Self.PageStructure.EditPage,
+////                    ALoadDataSetting,
+////                    DoReturnFrameFromEditPageFrame);
+//    end;
+//
+////    HideFrame;
+////    ShowPageFrame(Self.PageStructure.EditPage,
+////                  ALoadDataSetting,
+////                  DoReturnFrameFromEditPageFrame);
+//  end;
 
 end;
 
@@ -11773,21 +11983,21 @@ begin
                       'get_record',
                       nil,
                       AInterfaceUrl+'tablecommonrest/',
-                      ['appid',
-                      'user_fid',
-                      'key',
+                      ConvertToStringDynArray(['appid',
+                                              'user_fid',
+                                              'key',
 
-                      'rest_name',
-                      'where_key_json'
-                      ],
-                      [
-                      AAppID,
-                      0,
-                      '',
-                      'program_template',
-                      GetWhereConditions(['appid','name'],
-                                        [AAppID,AProgramTemplateName])
-                      ],
+                                              'rest_name',
+                                              'where_key_json'
+                                              ]),
+                      ConvertToVariantDynArray([
+                                              AAppID,
+                                              0,
+                                              '',
+                                              'program_template',
+                                              GetWhereConditions(['appid','name'],
+                                                                [AAppID,AProgramTemplateName])
+                                              ]),
                       ACode,
                       ADesc,
                       ADataJson,
@@ -11812,28 +12022,28 @@ begin
                       'get_record_list',
                       nil,
                       AInterfaceUrl+'tablecommonrest/',
-                      ['appid',
-                      'user_fid',
-                      'key',
-                      'rest_name',
-                      'pageindex',
-                      'pagesize',
-                      'where_key_json',
-//                      'where_sql',
-                      'order_by'
-                      ],
-                      [
-                      AAppID,
-                      0,
-                      '',
-                      'page_no_function',
-                      1,
-                      MaxInt,
-                      GetWhereConditions(['appid','program_template_name'],
-                                        [AAppID,AProgramTemplateName]),
-//                      ' AND (program_template_name='+QuotedStr(AProgramTemplateName)+' OR '+'page_program_template_name='+QuotedStr(AProgramTemplateName)+') ',
-                      'orderno ASC,createtime ASC'
-                      ],
+                      ConvertToStringDynArray(['appid',
+                                              'user_fid',
+                                              'key',
+                                              'rest_name',
+                                              'pageindex',
+                                              'pagesize',
+                                              'where_key_json',
+                        //                      'where_sql',
+                                              'order_by'
+                                              ]),
+                      ConvertToVariantDynArray([
+                                              AAppID,
+                                              0,
+                                              '',
+                                              'page_no_function',
+                                              1,
+                                              MaxInt,
+                                              GetWhereConditions(['appid','program_template_name'],
+                                                                [AAppID,AProgramTemplateName]),
+                        //                      ' AND (program_template_name='+QuotedStr(AProgramTemplateName)+' OR '+'page_program_template_name='+QuotedStr(AProgramTemplateName)+') ',
+                                              'orderno ASC,createtime ASC'
+                                              ]),
                       ACode,
                       ADesc,
                       ADataJson,
@@ -12231,7 +12441,7 @@ begin
   inherited;
 //  AutoCapture := True;
 //  ParentBounds := True;
-  FColor := DefaultColor;
+//  FColor := DefaultColor;
 //  FShowHandles := True;
 //  FMinSize := 15;
 //  FGripSize := 3;
@@ -13650,16 +13860,16 @@ end;
 
 { TEditPageInstance }
 
-function TEditPageInstance.CallDelDataInterface:Boolean;
-begin
-  inherited;
-
-  Result:=Self.PageStructure.DataInterface.DelData(
-                                                  Self.FLoadDataIntfResult,
-                                                  Self.FDelDataIntfResult
-                                                  );
-
-end;
+//function TEditPageInstance.CallDelDataInterface:Boolean;
+//begin
+//  inherited;
+//
+//  Result:=Self.PageStructure.DataInterface.DelData(
+//                                                  Self.FLoadDataIntfResult,
+//                                                  Self.FDelDataIntfResult
+//                                                  );
+//
+//end;
 
 procedure TEditPageInstance.DoDelRecordAction;
 begin
@@ -13674,8 +13884,8 @@ end;
 
 procedure TEditPageInstance.DoPageLayoutControlClick(Sender: TObject;
                                                     APageLayoutControlMap: TFieldControlSettingMap);
-var
-  ALoadDataSetting:TLoadDataSetting;
+//var
+//  ALoadDataSetting:TLoadDataSetting;
 begin
   inherited;
 
@@ -13691,33 +13901,34 @@ begin
   end
   else if APageLayoutControlMap.Setting.options_page_fid>0 then
   begin
-      //跳转到选项选择页面,一般是列表页面进行选择,选择后返回
-      if Assigned(GlobalMainProgramSetting.OnNeedShowPage) then
-      begin
-          //你怎么知道一定是列表页面呢?
-          //只支持Json数据加载
-          ALoadDataSetting.Clear;
-          ALoadDataSetting.PageIndex:=1;
-          ALoadDataSetting.PageSize:=20;
-          ALoadDataSetting.AppID:=GlobalMainProgramSetting.AppID;
-          //以便返回回来给按钮赋值
-          ALoadDataSetting.JumpFromControlMap:=APageLayoutControlMap;
-  //        ALoadDataSetting.RecordDataJson:=TSkinPageStructureJsonItem(AItem).Json;
-  //        ALoadDataSetting.CustomWhereKeyJson:=GetWhereConditions(['appid','fid'],
-  //                                          [GlobalMainProgramSetting.AppID,ALoadDataSetting.RecordDataJson.I['fid']]);
-          GlobalMainProgramSetting.OnNeedShowPage(Self,
-                                                  APageLayoutControlMap.Setting.options_page_fid,
-                                                  nil,
-                                                  ALoadDataSetting,
-                                                  DoReturnFrameFromOptionsListPage
-                                                  );
-      end
-      else
-      begin
-          {$IFDEF FMX}
-          ShowMessage('OnNeedShowPage不能为空');
-          {$ENDIF}
-      end;
+
+//      //跳转到选项选择页面,一般是列表页面进行选择,选择后返回
+//      if Assigned(GlobalMainProgramSetting.OnNeedShowPage) then
+//      begin
+//          //你怎么知道一定是列表页面呢?
+//          //只支持Json数据加载
+//          ALoadDataSetting.Clear;
+//          ALoadDataSetting.PageIndex:=1;
+//          ALoadDataSetting.PageSize:=20;
+//          ALoadDataSetting.AppID:=GlobalMainProgramSetting.AppID;
+//          //以便返回回来给按钮赋值
+//          ALoadDataSetting.JumpFromControlMap:=APageLayoutControlMap;
+//  //        ALoadDataSetting.RecordDataJson:=TSkinPageStructureJsonItem(AItem).Json;
+//  //        ALoadDataSetting.CustomWhereKeyJson:=GetWhereConditions(['appid','fid'],
+//  //                                          [GlobalMainProgramSetting.AppID,ALoadDataSetting.RecordDataJson.I['fid']]);
+//          GlobalMainProgramSetting.OnNeedShowPage(Self,
+//                                                  APageLayoutControlMap.Setting.options_page_fid,
+//                                                  nil,
+//                                                  ALoadDataSetting,
+//                                                  DoReturnFrameFromOptionsListPage
+//                                                  );
+//      end
+//      else
+//      begin
+//          {$IFDEF FMX}
+//          ShowMessage('OnNeedShowPage不能为空');
+//          {$ENDIF}
+//      end;
 
   end;
 //  else
@@ -13735,29 +13946,29 @@ end;
 
 { TListPageInstance }
 
-procedure TListPageInstance.DoJumpToEditRecordPageAction(ALoadDataSetting:TLoadDataSetting);
-begin
-  inherited;
-
-  //跳转到相同功能模块下的编辑页面
-  if Self.PageStructure.EditPage<>nil then
-  begin
-      if Assigned(GlobalMainProgramSetting.OnNeedShowPage) then
-      begin
-        GlobalMainProgramSetting.OnNeedShowPage(Self,
-                                                0,
-                                                Self.PageStructure.EditPage,
-                                                ALoadDataSetting,
-                                                DoReturnFrameFromEditPageFrame
-                                                );
-  //      HideFrame;
-  //      ShowPageFrame(Self.PageStructure.EditPage,
-  //                    ALoadDataSetting,
-  //                    DoReturnFrameFromEditPageFrame);
-      end;
-  end;
-
-end;
+//procedure TListPageInstance.DoJumpToEditRecordPageAction(ALoadDataSetting:TLoadDataSetting);
+//begin
+//  inherited;
+//
+//  //跳转到相同功能模块下的编辑页面
+//  if Self.PageStructure.EditPage<>nil then
+//  begin
+//      if Assigned(GlobalMainProgramSetting.OnNeedShowPage) then
+//      begin
+//        GlobalMainProgramSetting.OnNeedShowPage(Self,
+//                                                0,
+//                                                Self.PageStructure.EditPage,
+////                                                ALoadDataSetting,
+//                                                DoReturnFrameFromEditPageFrame
+//                                                );
+//  //      HideFrame;
+//  //      ShowPageFrame(Self.PageStructure.EditPage,
+//  //                    ALoadDataSetting,
+//  //                    DoReturnFrameFromEditPageFrame);
+//      end;
+//  end;
+//
+//end;
 
 procedure TListPageInstance.DoLoadDataTaskExecuteEnd(ATimerTask: TTimerTask);
 begin
@@ -13798,6 +14009,7 @@ begin
     TSkinVirtualList(AControl).OnPullDownRefresh:=Self.lvDataPullDownRefresh;
     TSkinVirtualList(AControl).OnPullUpLoadMore:=Self.lvDataPullUpLoadMore;
     TSkinVirtualList(AControl).OnClickItemEx:=Self.lvDataClickItemEx;
+//    TSkinVirtualList(AControl).OnClickItemDesignerPanelChild:=Self.lvDataClickItemEx;
   end;
 
 end;
@@ -13840,15 +14052,25 @@ procedure TListPageInstance.lvDataClickItemEx(Sender:TObject;
                                               X:Double;Y:Double);
 var
   ARecordDataJson:ISuperObject;
-  ALoadDataSetting:TLoadDataSetting;
+//  ALoadDataSetting:TLoadDataSetting;
   AFieldControlSettingMap:TFieldControlSettingMap;
 begin
-  AFieldControlSettingMap:=Self.MainControlMapList.FindComponent(Sender);
+
+  //自定义列表项点击事件
+  if Assigned(FOnCustomClickListSkinItem) then
+  begin
+    FOnCustomClickListSkinItem(AItem);
+  end;
+
+
+
+  AFieldControlSettingMap:=Self.MainControlMapList.FindByComponent(Sender);
+
   if (AFieldControlSettingMap<>nil)
     and (AFieldControlSettingMap.Setting<>nil)
     and (AFieldControlSettingMap.Setting.action<>'') then
   begin
-
+      //列表控件的FieldControlSetting中指定了action动作,那么根据动作来执行
 
 
       ARecordDataJson:=nil;
@@ -13887,33 +14109,39 @@ begin
 
           DoReturnPageAction(Self);
       end
-      else if AFieldControlSettingMap.Setting.action=Const_PageAction_JumpToEditRecordPage then
-      begin
-          //跳转到编辑页面,编辑哪条记录呢
-          //只支持Json数据加载
-          ALoadDataSetting.Clear;
-          ALoadDataSetting.AppID:=GlobalMainProgramSetting.AppID;
-          ALoadDataSetting.JumpFromSourceItem:=AItem;
-          ALoadDataSetting.RecordDataJson:=ARecordDataJson;
-          ALoadDataSetting.CustomWhereKeyJson:=GetWhereConditions(['appid','fid'],
-                                                                  [GlobalMainProgramSetting.AppID,
-                                                                    ALoadDataSetting.RecordDataJson.I['fid']]);
-          DoJumpToEditRecordPageAction(ALoadDataSetting);
-
-      end
+//      else if AFieldControlSettingMap.Setting.action=Const_PageAction_JumpToEditRecordPage then
+//      begin
+//          //跳转到编辑页面,编辑哪条记录呢
+//          //只支持Json数据加载
+//          ALoadDataSetting.Clear;
+//          ALoadDataSetting.AppID:=GlobalMainProgramSetting.AppID;
+//          ALoadDataSetting.JumpFromSourceItem:=AItem;
+//          ALoadDataSetting.RecordDataJson:=ARecordDataJson;
+//          ALoadDataSetting.CustomWhereKeyJson:=GetWhereConditions(['appid','fid'],
+//                                                                  [GlobalMainProgramSetting.AppID,
+//                                                                    ALoadDataSetting.RecordDataJson.I['fid']]);
+//          DoJumpToEditRecordPageAction(ALoadDataSetting);
+//
+//      end
       else if Self.PageStructure.ClickItemJumpPage<>nil then
       begin
-          ALoadDataSetting.Clear;
-          ALoadDataSetting.AppID:=GlobalMainProgramSetting.AppID;
+          //点击列表项跳转到某一页面
+//          ALoadDataSetting.Clear;
+//          ALoadDataSetting.AppID:=GlobalMainProgramSetting.AppID;
           if Assigned(GlobalMainProgramSetting.OnNeedShowPage) then
           begin
             GlobalMainProgramSetting.OnNeedShowPage(Self,
                                                     0,
                                                     Self.PageStructure.ClickItemJumpPage,
-                                                    ALoadDataSetting,
+//                                                    ALoadDataSetting,
                                                     nil
                                                     );
           end;
+
+      end
+      else
+      begin
+
 
       end;
 
@@ -13923,17 +14151,30 @@ begin
       //先找到AFieldControlSetting,看他的Action
 
 
-    //  ShowPageFrame(Self.PageStructure.program_template_name,
-    //                //功能的默认页面
-    //                Self.PageStructure.function_name,
-    //                '',
-    //                Const_PageType_ViewPage,
-    //                Self.PageStructure.platform,
-    //                ALoadDataSetting,
-    //                True);
+      //  ShowPageFrame(Self.PageStructure.program_template_name,
+      //                //功能的默认页面
+      //                Self.PageStructure.function_name,
+      //                '',
+      //                Const_PageType_ViewPage,
+      //                Self.PageStructure.platform,
+      //                ALoadDataSetting,
+      //                True);
+
+  end
+  else
+  begin
+      //其他情况
+
 
   end;
 end;
+
+//procedure TListPageInstance.lvDataCustomListClickItemDesignerPanelChild(
+//  Sender: TObject; AItem: TBaseSkinItem; AItemDesignerPanel: TItemDesignerPanel;
+//  AChild: TChildControl);
+//begin
+//
+//end;
 
 procedure TListPageInstance.lvDataPullDownRefresh(Sender: TObject);
 begin
@@ -13949,7 +14190,7 @@ begin
 
   FLoadDataSetting.PageIndex:=1;
 
-  Self.LoadData(FLoadDataSetting);
+  Self.LoadData();
 
 
 end;
@@ -13963,7 +14204,7 @@ begin
 //                 'GetShopOrderList');
   FLoadDataSetting.PageIndex:=FLoadDataSetting.PageIndex+1;
 
-  Self.LoadData(FLoadDataSetting);
+  Self.LoadData();
 
 end;
 
@@ -14006,266 +14247,6 @@ end;
 
 { TBaseSetRecordFieldValue }
 
-function TBaseSetRecordFieldValue.GetImageUploadTemplateUrl(ASetting:TFieldControlSetting): String;
-begin
-    //上传到服务器
-    //例如:ImageHttpServerUrl+'/upload'
-    //                 +'?appid='+IntToStr(AppID)
-    //                 +'&filename='+'%s'//用于替换文件名
-    //                 +'&filedir='+'repair_car_order_pic'
-    //                 +'&fileext='+'.png',
-    //上传宠物头像
-//    if not Self.FPetHeadPicFrame.Upload(
-//        ImageHttpServerUrl+'/upload'
-//                         +'?appid='+IntToStr(AppID)
-//                         +'&filename='+'%s'
-//                         +'&filedir='+'userhead_pic'
-//                         +'&fileext='+'.png',
-//        AServerResponse) then
-//    begin
-//      TTimerTask(ATimerTask).TaskDesc:=AServerResponse;
-//      Exit;
-//    end;
-  Result:='';
-
-  if (ASetting.image_kind='') then
-  begin
-    {$IFDEF FMX}
-    ShowMessage('ASetting.image_type不能为空,不然不知道上传到哪个目录');
-    {$ENDIF}
-    Exit;
-  end;
-
-//  if (ASetting.image_kind<>'') and (ImageHttpServerUrl<>'') and (AppID<>0) then
-//  begin
-//    Result:=ImageHttpServerUrl+'/upload'
-//                           +'?appid='+IntToStr(AppID)
-//                           +'&filename='+'%s'
-//                           +'&filedir='+ASetting.image_kind
-//
-//  //                         +'&filedir='+'userhead_pic'
-//                           +'&fileext='+'.png';
-//  end;
-
-end;
-
-
-{ TTableCommonRestHttpDataInterface }
-
-function TTableCommonRestHttpDataInterface.DelData(
-//  ADelDataSetting:TDelDataSetting;
-//  ALoadDataSetting:TLoadDataSetting;
-  ALoadDataIntfResult:TDataIntfResult;
-  ADataIntfResult: TDataIntfResult): Boolean;
-var
-  ACode:Integer;
-  AWhereKeyJson:String;
-begin
-  Result:=False;
-
-
-  //生成删除记录的条件
-  AWhereKeyJson:=GetWhereConditions(['appid','fid'],
-                                    [AppID,ALoadDataIntfResult.DataJson.I['fid']]);
-
-  if not SimpleCallAPI('del_record',
-                      nil,
-                      FInterfaceUrl,
-                      ['appid',
-                      'user_fid',
-                      'key',
-                      'rest_name',
-                      'where_key_json'
-                      ],
-                      [GlobalMainProgramSetting.AppID,
-                      '',
-                      '',
-                      Name,
-                      AWhereKeyJson
-      //                GetWhereConditions(['appid','user_fid','shield_user_fid'],
-      //                                    [AppID,GlobalManager.User.fid,FUserFID])
-                      ],
-                      ACode,
-                      ADataIntfResult.Desc,
-                      ADataIntfResult.DataJson,
-                      GlobalRestAPISignType,
-                      GlobalRestAPIAppSecret) then
-  begin
-    Exit;
-  end;
-
-
-  ADataIntfResult.DataType:=TDataIntfResultType.ldtJson;
-  ADataIntfResult.Succ:=(ACode=SUCC);
-  Result:=True;
-
-end;
-
-function TTableCommonRestHttpDataInterface.GetDataDetail(
-  ALoadDataSetting: TLoadDataSetting;
-  ADataIntfResult: TDataIntfResult): Boolean;
-var
-  ACode:Integer;
-begin
-  Result:=False;
-  //加载程序模板的所有功能和页面
-  if not SimpleCallAPI(
-                      'get_record',
-                      nil,
-                      FInterfaceUrl+'tablecommonrest/',
-                      ['appid',
-                      'user_fid',
-                      'key',
-
-                      'rest_name',
-                      'where_key_json'
-                      ],
-                      [
-//                      ALoadDataSetting.AppID,
-                      GlobalMainProgramSetting.AppID,
-                      '',
-                      '',
-                      Name,
-                      ALoadDataSetting.WhereKeyJson
-                      ],
-                      ACode,
-                      ADataIntfResult.Desc,
-                      ADataIntfResult.DataJson,
-                                        GlobalRestAPISignType,
-                                        GlobalRestAPIAppSecret) then
-  begin
-    Exit;
-  end;
-
-
-  ADataIntfResult.DataType:=TDataIntfResultType.ldtJson;
-  ADataIntfResult.Succ:=(ACode=SUCC);
-  Result:=True;
-
-end;
-
-function TTableCommonRestHttpDataInterface.GetDataList(
-  ALoadDataSetting: TLoadDataSetting;
-  ADataIntfResult: TDataIntfResult): Boolean;
-var
-  ACode:Integer;
-begin
-  Result:=False;
-  //加载程序模板的所有功能和页面
-  if not SimpleCallAPI(
-                      'get_record_list',
-                      nil,
-                      FInterfaceUrl+'tablecommonrest/',
-                      ['appid',
-                      'user_fid',
-                      'key',
-                      'rest_name',
-                      'pageindex',
-                      'pagesize',
-                      'where_key_json',
-                      'order_by'
-                      ],
-                      [
-//                      ALoadDataSetting.AppID,
-                      GlobalMainProgramSetting.AppID,
-                      '',
-                      '',
-                      Name,
-                      ALoadDataSetting.PageIndex,
-                      ALoadDataSetting.PageSize,
-                      ALoadDataSetting.WhereKeyJson,
-                      ''//ALoadDataSetting.OrderBy
-                      ],
-                      ACode,
-                      ADataIntfResult.Desc,
-                      ADataIntfResult.DataJson,
-                                        GlobalRestAPISignType,
-                                        GlobalRestAPIAppSecret) then
-  begin
-    Exit;
-  end;
-
-  //保存到本地测试
-
-
-
-  ADataIntfResult.DataType:=TDataIntfResultType.ldtJson;
-  ADataIntfResult.Succ:=(ACode=SUCC);
-  Result:=True;
-end;
-
-function TTableCommonRestHttpDataInterface.GetFieldList(var ADesc: String; var ADataJson: ISuperObject): Boolean;
-var
-  ACode:Integer;
-begin
-  Result:=False;
-  //加载程序模板的所有功能和页面
-  if not SimpleCallAPI(
-                      'get_field_list',
-                      nil,
-                      FInterfaceUrl+'tablecommonrest/',
-                      ['appid',
-                      'user_fid',
-                      'key',
-                      'rest_name'
-                      ],
-                      [
-//                      ALoadDataSetting.AppID,
-                      GlobalMainProgramSetting.AppID,
-                      '',
-                      '',
-                      Name
-                      ],
-                      ACode,
-                      ADesc,
-                      ADataJson,
-                      GlobalRestAPISignType,
-                      GlobalRestAPIAppSecret) or (ACode<>SUCC) then
-  begin
-    Exit;
-  end;
-
-  Result:=True;
-
-end;
-
-function TTableCommonRestHttpDataInterface.SaveData(ASaveDataSetting: TSaveDataSetting;ADataIntfResult:TDataIntfResult): Boolean;
-begin
-  Result:=False;
-
-          //将接口保存到数据库
-          if SaveRecordToServer(FInterfaceUrl,//GlobalMainProgramSetting.DataIntfServerUrl,//Self.InterfaceUrl,//
-                                ASaveDataSetting.AppID,
-                                '',
-                                '',
-                                Self.Name,
-                                ASaveDataSetting.EditingRecordFID,//Self.FDataIntfResult.DataJson.I['fid'],
-                                ASaveDataSetting.RecordDataJson,
-                                ASaveDataSetting.IsAddedRecord,
-                                ADataIntfResult.Desc,
-                                ADataIntfResult.DataJson,
-                                GlobalRestAPISignType,
-                                GlobalRestAPIAppSecret,
-                                FHasAppID) then
-          begin
-            ADataIntfResult.Succ:=True;//(ACode=SUCC);
-//              //保存成功,要取出新增记录的fid
-//              if AIsAdd then
-//              begin
-//                FPage.DataInterface.fid:=ADataJson.I['fid'];
-//              end;
-//              TTimerTask(ATimerTask).TaskTag:=TASK_SUCC;
-          end
-          else
-          begin
-        //      ShowMessage(ADesc);
-//              Exit;
-          end;
-
-  ADataIntfResult.DataType:=TDataIntfResultType.ldtJson;
-  Result:=True;
-end;
-
 
 { TSkinPageStructureJsonItem }
 
@@ -14274,12 +14255,17 @@ var
   AValue:String;
 begin
   Result:=Inherited GetValueByBindItemField(AFieldName);
-  if AFieldName.IndexOf('_path')>0 then
+
+  if Pos('_path',AFieldName)>0 then
   begin
       AValue:=Result;
 
-      if (AValue.IndexOf('http://')>=0)
-        or (AValue.IndexOf('https://')>=0) then
+      {$IFDEF FMX}
+      if (AValue.IndexOf('http://')>=0) or (AValue.IndexOf('https://')>=0) then
+      {$ENDIF}
+      {$IFDEF VCL}
+      if (Pos('http://',AValue)=1) or (Pos('https://',AValue)=1) then
+      {$ENDIF}
       begin
 
       end
@@ -14292,108 +14278,104 @@ end;
 
 
 
-{ TRestHttpDataInterface }
 
-function TRestHttpDataInterface.DelData(ALoadDataIntfResult,
-  ADataIntfResult: TDataIntfResult): Boolean;
+{ TSkinRealSkinItemComponent }
+
+constructor TSkinRealSkinItemComponent.Create(AOwner: TComponent);
+begin
+  inherited;
+
+  FSkinItem:=TRealSkinItem.Create;
+
+end;
+
+//针对页面框架的控件接口
+function TSkinRealSkinItemComponent.LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+begin
+  Result:=FSkinItem.LoadFromFieldControlSetting(ASetting);
+end;
+
+//获取与设置自定义属性
+function TSkinRealSkinItemComponent.GetProp(APropName: String): Variant;
+begin
+  Result:='';
+end;
+
+function TSkinRealSkinItemComponent.GetPropJsonStr:String;
+begin
+  Result:=FSkinItem.GetPropJsonStr;
+end;
+
+procedure TSkinRealSkinItemComponent.SetProp(APropName: String;
+  APropValue: Variant);
 begin
 
 end;
 
-function TRestHttpDataInterface.GetDataDetail(
-  ALoadDataSetting: TLoadDataSetting;
-  ADataIntfResult: TDataIntfResult): Boolean;
+procedure TSkinRealSkinItemComponent.SetPropJsonStr(AJsonStr:String);
 begin
-
+  FSkinItem.SetPropJsonStr(AJsonStr);
 end;
 
-function TRestHttpDataInterface.GetDataList(ALoadDataSetting: TLoadDataSetting;
-  ADataIntfResult: TDataIntfResult): Boolean;
-var
-  ACode:Integer;
+
+//获取提交的值
+function TSkinRealSkinItemComponent.GetPostValue(ASetting:TFieldControlSetting;
+                        APageDataDir:String;
+                        //可以获取其他字段的值
+                        ASetRecordFieldValueIntf:ISetRecordFieldValue;
+                        var AErrorMessage:String):Variant;
 begin
-  Result:=False;
-  //加载程序模板的所有功能和页面
-  if not SimpleCallAPI(
-                      Name,
-                      nil,
-                      Self.InterfaceUrl,
-//                      ['appid',
-//                      'user_fid',
-//                      'key',
-//                      'rest_name',
-//                      'pageindex',
-//                      'pagesize',
-//                      'where_key_json',
-//                      'order_by'
-//                      ],
-                      ALoadDataSetting.LoadDataParamNames,
-//                      [
-////                      ALoadDataSetting.AppID,
-//                      GlobalMainProgramSetting.AppID,
-//                      0,
-//                      '',
-//                      Name,
-//                      ALoadDataSetting.PageIndex,
-//                      ALoadDataSetting.PageSize,
-//                      ALoadDataSetting.WhereKeyJson,
-//                      ''//ALoadDataSetting.OrderBy
-//                      ],
-                      ALoadDataSetting.LoadDataParamValues,
-
-                      ACode,
-                      ADataIntfResult.Desc,
-                      ADataIntfResult.DataJson,
-
-                      GlobalRestAPISignType,
-                      GlobalRestAPIAppSecret) then
-  begin
-    Exit;
-  end;
-
-  //保存到本地测试
-
-
-
-  ADataIntfResult.DataType:=TDataIntfResultType.ldtJson;
-  ADataIntfResult.Succ:=(ACode=SUCC);
-  Result:=True;
+  Result:=FSkinItem.GetPostValue(ASetting,APageDataDir,ASetRecordFieldValueIntf,AErrorMessage);
 end;
 
-function TRestHttpDataInterface.SaveData(ASaveDataSetting: TSaveDataSetting;
-  ADataIntfResult: TDataIntfResult): Boolean;
+//设置值
+procedure TSkinRealSkinItemComponent.SetControlValue(ASetting:TFieldControlSetting;
+                        APageDataDir:String;
+                        AImageServerUrl:String;
+                        AValue:Variant;
+                        AValueCaption:String;
+                        //要设置多个值,整个字段的记录
+                        AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
 begin
-
+  FSkinItem.SetControlValue(ASetting,APageDataDir,AImageServerUrl,AValue,AValueCaption,AGetDataIntfResultFieldValueIntf);
 end;
 
 
 
-{ TLocalDataSource }
 
-constructor TLocalDataSource.Create;
+{ TLocalJsonPageFrameworkDataSourceManager }
+
+constructor TLocalJsonPageFrameworkDataSourceManager.Create;
 begin
+  inherited;
   FDataJson:=TSuperObject.Create;
 
 end;
 
-destructor TLocalDataSource.Destroy;
+destructor TLocalJsonPageFrameworkDataSourceManager.Destroy;
 begin
-  FDataJson:=nil;
+
   inherited;
 end;
 
-//function TLocalDataSource.GetLoginUserJson: ISuperObject;
-//begin
-//  Result:=GlobalBaseManager.User.Json;
-//end;
-
-function TLocalDataSource.GetParamValue(AParamName: String): Variant;
+function TLocalJsonPageFrameworkDataSourceManager.GetParamValue(AValueFrom,
+  AParamName: String): Variant;
 begin
-  Result:=FDataJson.V[AParamName];
+  if Self.FDataJson.Contains(AParamName) then
+  begin
+    Result:=FDataJson.V[AParamName];
+  end
+  else
+  begin
+    Result:=Inherited;
+  end;
+  
 end;
 
-procedure TLocalDataSource.Load;
+procedure TLocalJsonPageFrameworkDataSourceManager.Load;
 begin
+  inherited;
+
   if FileExists(GetApplicationPath+'local_data_source.json') then
   begin
     FDataJson:=TSuperObject.Create(GetStringFromTextFile(GetApplicationPath+'local_data_source.json'));
@@ -14402,20 +14384,79 @@ begin
   begin
     FDataJson:=TSuperObject.Create;
   end;
+
 end;
 
-procedure TLocalDataSource.Save;
+procedure TLocalJsonPageFrameworkDataSourceManager.Save;
 begin
+  inherited;
+
   SaveStringToFile(FDataJson.AsJSON,GetApplicationPath+'local_data_source.json',TEncoding.UTF8);
+
 end;
 
-procedure TLocalDataSource.SetParamValue(AParamName: String;AValue: Variant);
+procedure TLocalJsonPageFrameworkDataSourceManager.SetParamValue(AValueFrom,
+  AParamName: String; AValue: Variant);
 begin
-  FDataJson.V[AParamName]:=AValue;
+  inherited;
+
 end;
 
+{ TPageCheckBox }
+
+function TPageCheckBox.GetPostValue(ASetting: TFieldControlSetting;
+  APageDataDir: String; ASetRecordFieldValueIntf: ISetRecordFieldValue;
+  var AErrorMessage: String): Variant;
+begin
+  Result:=Self.{$IFDEF VCL}Checked{$ENDIF}{$IFDEF FMX}IsChecked{$ENDIF};
+end;
+
+function TPageCheckBox.GetProp(APropName: String): Variant;
+begin
+
+end;
+
+function TPageCheckBox.GetPropJsonStr: String;
+begin
+
+end;
+
+function TPageCheckBox.LoadFromFieldControlSetting(
+  ASetting: TFieldControlSetting): Boolean;
+begin
+  if ASetting.has_caption_label=0 then
+  begin
+    Caption:=ASetting.field_caption;
+  end;
+
+  Result:=True;
+end;
+
+procedure TPageCheckBox.SetControlValue(ASetting: TFieldControlSetting;
+  APageDataDir, AImageServerUrl: String; AValue: Variant; AValueCaption: String;
+  AGetDataIntfResultFieldValueIntf: IGetDataIntfResultFieldValue);
+var
+  AValueStr:String;
+begin
+  AValueStr:=AValue;
+  if AValueStr='' then
+  begin
+    AValue:=False;
+  end;
+  Self.{$IFDEF VCL}Checked{$ENDIF}{$IFDEF FMX}IsChecked{$ENDIF}:=AValue;
 
 
+end;
+
+procedure TPageCheckBox.SetProp(APropName: String; APropValue: Variant);
+begin
+
+end;
+
+procedure TPageCheckBox.SetPropJsonStr(AJsonStr: String);
+begin
+
+end;
 
 
 
@@ -14423,10 +14464,7 @@ initialization
   GlobalMainProgramSetting:=TOpenPlatformProgramSetting.Create(nil);
   FInnterGlobalMainProgramSetting:=GlobalMainProgramSetting;
 
-//  GlobalAppID:=1010;
-
-  GlobalLocalDataSource:=TLocalDataSource.Create;
-
+  GlobalPageFrameworkDataSourceManagerClass:=TLocalJsonPageFrameworkDataSourceManager;
 
 
   {$IFDEF FMX}
@@ -14458,7 +14496,7 @@ initialization
   GetGlobalFrameworkComponentTypeClasses.Add('image',TSkinWinImage,'图片');
   GetGlobalFrameworkComponentTypeClasses.Add('item_designer_panel',TSkinWinItemDesignerPanel,'列表项设计面板');
   GetGlobalFrameworkComponentTypeClasses.Add('listview',TSkinWinListView,'列表视图');
-  GetGlobalFrameworkComponentTypeClasses.Add('checkbox',TSkinWinCheckBox,'复选框');
+  GetGlobalFrameworkComponentTypeClasses.Add('checkbox',TPageCheckBox,'复选框');
   GetGlobalFrameworkComponentTypeClasses.Add('radio_button',TSkinWinRadioButton,'单选框');
 
 //  GetGlobalFrameworkComponentTypeClasses.Add('edit',TSkinWinEdit,'编辑框');
@@ -14476,6 +14514,7 @@ initialization
 //  GetGlobalFrameworkComponentTypeClasses.Add('comboedit',TSkinWinComboEdit,'下拉编辑框');
   {$ENDIF}
 
+  GetGlobalFrameworkComponentTypeClasses.Add('listitem',TSkinRealSkinItemComponent,'列表项');
 
 //  GetGlobalFrameworkComponentTypeClasses.Add('list_page',TSkinFMXComboEdit,'下拉编辑框');
 //  GetGlobalFrameworkComponentTypeClasses.Add('button_group',TSkinFMXButtonGroup);
@@ -14507,7 +14546,6 @@ initialization
 
 
 finalization
-  FreeAndNil(GlobalLocalDataSource);
   FreeAndNil(FInnterGlobalMainProgramSetting);
 
 

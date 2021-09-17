@@ -67,3 +67,16 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+
+
+
+
+.svn
+.svn/
+/bin/*.ini
+/bin/*.s3db
+/bin/lib
+
+
+
+

@@ -20,7 +20,8 @@ uses
 
   SysUtils;
 
-
+//type
+//  TLoginButtonsStyle=(lbsButton,lbsListView);
 
 var
   //主窗体MainForm
@@ -28,7 +29,7 @@ var
   //GlobalIsNeedGPSLocation:Boolean;
 
 
-
+//  GlobalLoginButtonsStyle:TLoginButtonsStyle;
 
   //登陆页面LoginFrame
   //默认是外卖的
@@ -72,7 +73,6 @@ var
   GlobalIsNeedRegister:Boolean;
   //登录页面是否需要服务器设置按钮
   GlobalIsNeedServerSetting:Boolean;
-  GlobalIsNeedAPPIDSetting:Boolean;
 
 
   //是否需要平台商城分页

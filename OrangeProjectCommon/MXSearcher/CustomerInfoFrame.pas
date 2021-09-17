@@ -130,6 +130,7 @@ begin
     FCustomerInfoListItemStyleFrame.lvTags.Prop.StopEditingItem;
     FCustomerInfoListItemStyleFrame.btnMemo.Prop.IsPushed:=False;
     FCustomerInfoListItemStyleFrame.btnMemo.Hint:='添加备注';
+    FCustomerInfoListItemStyleFrame.memMemo.Visible:=False;
   end;
 end;
 
@@ -312,11 +313,17 @@ begin
 
   FCustomerInfoListItemStyleFrame:=TFrameListItemStyle_CustomerInfo.Create(Self);
   FCustomerInfoListItemStyleFrame.Parent:=Self;
+//  FCustomerInfoListItemStyleFrame.Align:=alTop;
+//  FCustomerInfoListItemStyleFrame.Height:=300;
   FCustomerInfoListItemStyleFrame.Align:=alTop;
   FCustomerInfoListItemStyleFrame.Height:=300;
 
+//  FCustomerInfoListItemStyleFrame.ItemDesignerPanel.Visible:=True;
+//  FCustomerInfoListItemStyleFrame.ItemDesignerPanel.Align:=alTop;
   FCustomerInfoListItemStyleFrame.ItemDesignerPanel.Visible:=True;
-  FCustomerInfoListItemStyleFrame.ItemDesignerPanel.Align:=alTop;
+  FCustomerInfoListItemStyleFrame.ItemDesignerPanel.Align:=alClient;
+
+  FCustomerInfoListItemStyleFrame.memMemo.Visible:=False;
 
   FCustomerInfoListItemStyleFrame.btnTag.OnClick:=Self.btnTagClick;
   FCustomerInfoListItemStyleFrame.btnMemo.OnClick:=Self.btnMemoClick;
@@ -336,7 +343,7 @@ var
   I: Integer;
   ASizeF:TSizeF;
 //  AColorArray:Array[0..6] of TColor;
-  AItemWidth:Double;
+//  AItemWidth:Double;
 begin
   Clear;
 //  Exit;
@@ -488,9 +495,9 @@ procedure TFrameCustomerInfo.lvTagsStopEditingItem(Sender: TObject;
 var
   ACustSaveParamJson:ISuperObject;
   ACustSaveParam,AErrorLog : String;
-  AJsonCustData : ISuperObject;
+//  AJsonCustData : ISuperObject;
 begin
-  //
+  //自动计算行高
   Self.FCustomerInfoListItemStyleFrame.AutoSize;
   {$IFDEF TEST}
 

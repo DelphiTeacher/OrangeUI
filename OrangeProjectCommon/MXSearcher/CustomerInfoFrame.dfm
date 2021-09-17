@@ -1208,7 +1208,7 @@ object FrameCustomerInfo: TFrameCustomerInfo
     HorzScrollBar.Top = 911
     HorzScrollBar.Width = 323
     HorzScrollBar.Height = 12
-    HorzScrollBar.ParentMouseEvent = False
+    HorzScrollBar.ParentMouseEvent = True
     HorzScrollBar.DirectUIVisible = False
     HorzScrollBar.ComponentTypeUseKind = ctukDefault
     HorzScrollBar.MaterialUseKind = mukSelfOwn

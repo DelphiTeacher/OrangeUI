@@ -39,6 +39,7 @@ type
   end;
 
 
+  {$IFDEF MSWINDOWS}
   //执行命令行的线程
   TExecuteCommandThread=class(TThread)
   public
@@ -67,10 +68,11 @@ function ExecuteCommand(ACommandLine: string;
                         var AGetCommandLineOutputEvent:TGetCommandLineOutputEvent;
                         var PI: TProcessInformation):String;
 
-
 function ExecuteCommandProcess(ACommandLine: string;
                               AWorkDir: string;
                               AParams:String=''):String;
+  {$ENDIF}
+
 
 
 var
@@ -81,6 +83,7 @@ implementation
 
 
 
+  {$IFDEF MSWINDOWS}
 function ExecuteCommand(ACommandLine:String;
                         AWorkDir:String;
                         ATag:String;
@@ -253,6 +256,7 @@ begin
 
 end;
 
+  {$ENDIF}
 
 { TCommandLineOutputHelper }
 
@@ -271,6 +275,7 @@ begin
 end;
 
 
+  {$IFDEF MSWINDOWS}
 
 { TExecuteCommandThread }
 
@@ -302,6 +307,7 @@ begin
   end;
 
 end;
+  {$ENDIF}
 
 
 
@@ -313,6 +319,7 @@ finalization
 
 
 end.
+
 
 
 

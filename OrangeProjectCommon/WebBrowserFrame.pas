@@ -20,6 +20,7 @@ uses
   uUIFunction,
   uComponentType,
   uFrameContext,
+  uBaseList,
 //  uConst,
 //  uManager,
 //  uComponentType,
@@ -55,7 +56,6 @@ type
     btnReturn_Material: TSkinButtonDefaultMaterial;
     procedure btnReturnClick(Sender: TObject);
     procedure btnSyncClick(Sender: TObject);
-    procedure FrameContext1ShowEx(Sender: TObject; AIsReturnShow: Boolean);
     procedure btnEmptyClick(Sender: TObject);
     procedure FrameContext1CanReturn(Sender: TObject;
       var AIsCanReturn: Boolean);
@@ -73,6 +73,7 @@ type
     procedure WebBrowserShouldStartLoadWithRequest(ASender: TObject; const URL: string);
   private
     FNewURL:String;
+//    FHistoryURLList:TStringList;
 
     //创建WebBrowser
     procedure DoShow;
@@ -94,7 +95,7 @@ type
   public
 //    procedure LoadNewsUrl(news_fid:Integer);
   public
-    FUrl:String;
+    FFirstUrl:String;
     procedure DoLoadUrl(AUrl:String);
     procedure LoadUrl(AUrl:String;ACaption:String='网页';AIsFirstLoad:Boolean=True);
     procedure LoadBodyHtml(ABodyHtml:String;ATempFileName:String;AIsFirstLoad:Boolean=True);
@@ -106,7 +107,7 @@ type
 
 var
   GlobalWebBrowserFrame:TFrameWebBrowser;
-  GlobalWebBrowserFrame2:TFrameWebBrowser;
+  GlobalWebBrowserFrameList:TBaseList;
 
 implementation
 
@@ -122,14 +123,17 @@ begin
 end;
 
 procedure TFrameWebBrowser.btnCookieClick(Sender: TObject);
+var
+  AWebBrowserFrame:TFrameWebBrowser;
 begin
 //  DoLoadUrl(Const_OpenWebRoot+'/setcookie.php?user_fid=551');
 //  FWebBrowser.Navigate('http://www.orangeui.cn/open'+'/setcookie.php?user_fid=551');
 
 
   HideFrame;
-  ShowFrame(TFrame(GlobalWebBrowserFrame2),TFrameWebBrowser);//,Application.MainForm,nil,nil,nil,Application,True,True,ufsefNone);
-  GlobalWebBrowserFrame2.LoadUrl('http://www.orangeui.cn/open'+'/setcookie.php?user_fid=551');
+  ShowFrame(TFrame(AWebBrowserFrame),TFrameWebBrowser);//,Application.MainForm,nil,nil,nil,Application,True,True,ufsefNone);
+  AWebBrowserFrame.LoadUrl('http://www.orangeui.cn/open'+'/setcookie.php?user_fid=551');
+  GlobalWebBrowserFrameList.Add(AWebBrowserFrame);
 
 end;
 
@@ -174,6 +178,16 @@ begin
   SetVirtualKeyboardToolBarEnabled(True);
 
 
+  //是否能返回上一页
+  if (FWebBrowser<>nil) and (Self.FWebBrowser.CanGoBack) then
+  begin
+    FMX.Types.Log.d('OrangeUI TFrameWebBrowser.btnReturnClick FWebBrowser.URL:'+Self.FWebBrowser.URL);
+    FMX.Types.Log.d('OrangeUI TFrameWebBrowser.btnReturnClick GoBack');
+    Self.FWebBrowser.GoBack;
+    Exit;
+  end;
+
+
   //清空
 //  Self.FWebBrowser.Navigate('about:blank');
 //  Self.LoadBodyHtml('','blank.html');
@@ -192,7 +206,7 @@ end;
 procedure TFrameWebBrowser.btnSyncClick(Sender: TObject);
 begin
   //刷新
-//  LoadUrl(FUrl);
+//  LoadUrl(FFirstUrl);
   Self.FWebBrowser.Reload;
 end;
 
@@ -210,6 +224,7 @@ begin
 
 //  Self.pnlToolBar.Material.BackColor.FillColor.Color:=SkinThemeColor;
 
+//  FHistoryURLList:=TStringList.Create;
 
 
   RecordSubControlsLang(Self);
@@ -218,13 +233,15 @@ end;
 
 destructor TFrameWebBrowser.Destroy;
 begin
-  FMX.Types.Log.d('TFrameWebBrowser.Destroy');
+  FMX.Types.Log.d('OrangeUI TFrameWebBrowser.Destroy');
 
   {$IF DEFINED(IOS) OR DEFINED(ANDROID)}
   FWebBrowser.DisposeOf;
   {$ELSE}
   FreeAndNil(FWebBrowser);
   {$ENDIF}
+
+//  FreeAndNil(FHistoryURLList);
 
   inherited;
 end;
@@ -298,7 +315,7 @@ var
   AHtmlSource:TStringList;
   AHtmlLocalFileCodePath:String;
 begin
-  FUrl:='';
+  FFirstUrl:='';
 
   //把保存成html,然后用WebBrowser加载
 
@@ -344,13 +361,16 @@ procedure TFrameWebBrowser.LoadUrl(AUrl:String;ACaption:String;AIsFirstLoad:Bool
 begin
   FMX.Types.Log.d('OrangeUI LoadUrl Begin');
 
+  //先释放,点击返回按钮的时候要返回上一页，不释放的话，会一直返回到之前打开过的页面，因为这是一个公共页面
+  FreeAndNil(Self.FWebBrowser);
 
   //隐藏键盘工具栏,WebBrowser弹出的键盘自带
   SetVirtualKeyboardToolBarEnabled(False);
 
 
-  FUrl:=AUrl;
+  FFirstUrl:=AUrl;
   Self.pnlToolBar.Caption:=ACaption;
+
 
 //  if AIsFirstLoad then
 //  begin
@@ -358,8 +378,12 @@ begin
 //  end
 //  else
 //  begin
+
     DoLoadUrl(AUrl);
+
+
 //  end;
+
 
   FMX.Types.Log.d('OrangeUI LoadUrl End');
 
@@ -368,16 +392,17 @@ end;
 procedure TFrameWebBrowser.ShowShareSheetAction1BeforeExecute(Sender: TObject);
 begin
   //下载链接
-  ShowShareSheetAction1.TextMessage:=FUrl;
+  ShowShareSheetAction1.TextMessage:=FFirstUrl;
 
 end;
 
 procedure TFrameWebBrowser.tmrNewURLTimer(Sender: TObject);
 var
   ANewURL:String;
-//  GlobalWebBrowserFrame2:TFrameWebBrowser;
+  AWebBrowserFrame:TFrameWebBrowser;
 begin
-  //tmrNewURL.Enabled:=False;
+  FMX.Types.Log.d('OrangeUI TFrameWebBrowser.tmrNewURLTimer Begin');
+  tmrNewURL.Enabled:=False;
 
   if FNewURL<>'' then
   begin
@@ -386,39 +411,43 @@ begin
 
 
     HideFrame;
-    ShowFrame(TFrame(GlobalWebBrowserFrame2),TFrameWebBrowser);//,Application.MainForm,nil,nil,nil,Application,True,True,ufsefNone);
-    GlobalWebBrowserFrame2.LoadUrl(ANewURL,'');
+    ShowFrame(TFrame(AWebBrowserFrame),TFrameWebBrowser);//,Application.MainForm,nil,nil,nil,Application,True,True,ufsefNone);
+    AWebBrowserFrame.LoadUrl(ANewURL,'');
+    GlobalWebBrowserFrameList.Add(AWebBrowserFrame);
 
   end;
 
+  FMX.Types.Log.d('OrangeUI TFrameWebBrowser.tmrNewURLTimer End');
 end;
 
 procedure TFrameWebBrowser.WebBrowserShouldStartLoadWithRequest(
   ASender: TObject; const URL: string);
 begin
-  FMX.Types.Log.d('OrangeUI WebBrowserShouldStartLoadWithRequest Begin '+URL);
-
-  if (URL<>FUrl) and (URL<>'about:blank') then
-  begin
-    //需要跳转到一个新的页面去了
-
-    FNewURL:=URL;
+  FMX.Types.Log.d('OrangeUI WebBrowserShouldStartLoadWithRequest Begin OldUrl:'+FFirstUrl);
+  FMX.Types.Log.d('OrangeUI WebBrowserShouldStartLoadWithRequest Begin NewURL:'+URL);
 
 
 
-    TThread.Synchronize(nil,procedure
-    begin
-      Self.tmrNewURL.Enabled:=True;
-      Self.FWebBrowser.Stop;
-    end);
+//  //需要跳转到一个新的页面去了
+//  if not SameText(URL,FFirstUrl) and not SameText(URL,'about:blank') then
+//  begin
+//
+//    FNewURL:=URL;
+//
+//    TThread.Synchronize(nil,procedure
+//    begin
+//      Self.tmrNewURL.Enabled:=True;
+//      Self.FWebBrowser.Stop;
+//    end);
+//
+////    TThread.ForceQueue(nil,
+////      procedure
+////      begin
+////        Self.tmrNewURL.Enabled:=True;
+////      end);
+//
+//  end;
 
-//    TThread.ForceQueue(nil,
-//      procedure
-//      begin
-//        Self.tmrNewURL.Enabled:=True;
-//      end);
-
-  end;
 
   FMX.Types.Log.d('OrangeUI WebBrowserShouldStartLoadWithRequest End ');
 end;
@@ -427,13 +456,13 @@ procedure TFrameWebBrowser.DoLoadUrl(AUrl:String);
 begin
   FMX.Types.Log.d('OrangeUI DoLoadUrl Begin');
 
-  FUrl:=AUrl;
+  FFirstUrl:=AUrl;
 
   //创建WebBrowser
   DoShow;
 
   //浏览网页
-  Self.FWebBrowser.Navigate(FUrl);
+  Self.FWebBrowser.Navigate(FFirstUrl);
 
 
 
@@ -462,6 +491,7 @@ end;
 procedure TFrameWebBrowser.FrameContext1CanReturn(Sender: TObject;
   var AIsCanReturn: Boolean);
 begin
+  FMX.Types.Log.d('OrangeUI TFrameWebBrowser.FrameContext1CanReturn Begin');
 
   //返回的时候清空WebBrowser,避免释放不干净,继续播放的问题
   if FWebBrowser<>nil then
@@ -471,6 +501,7 @@ begin
 
 //  DoHide;
 
+  FMX.Types.Log.d('OrangeUI TFrameWebBrowser.FrameContext1CanReturn End');
 end;
 
 procedure TFrameWebBrowser.FrameContext1Hide(Sender: TObject);
@@ -483,19 +514,6 @@ begin
 
 end;
 
-procedure TFrameWebBrowser.FrameContext1ShowEx(Sender: TObject;
-  AIsReturnShow: Boolean);
-begin
-//  if not AIsReturnShow then
-//  begin
-//    //第一次加载显示
-//    if (FWebBrowser=nil) and (FUrl<>'') or (FWebBrowser<>nil) and (FWebBrowser.URL<>FUrl) then
-//    begin
-//      DoLoadUrl(FUrl);
-//    end;
-//  end;
-end;
-
 procedure TFrameWebBrowser.lbFunctionClickItem(AItem: TSkinItem);
 begin
   Self.popScan.IsOpen:=False;
@@ -503,14 +521,14 @@ begin
   if AItem.Name='copy_url' then
   begin
     //拷贝URL
-    MySetClipboard(Self.FUrl);
+    MySetClipboard(Self.FFirstUrl);
     ShowHintFrame(nil,'已复制到剪切板');
   end;
 
   if AItem.Name='open_in_system_browser' then
   begin
     //在浏览器中打开
-    OpenWebBrowserAndNavigateURL(FUrl);
+    OpenWebBrowserAndNavigateURL(FFirstUrl);
   end;
 
   if AItem.Name='share' then
@@ -527,6 +545,12 @@ begin
 
 
 end;
+
+initialization
+  GlobalWebBrowserFrameList:=TBaseList.Create(ooReference);
+
+finalization
+  FreeAndNil(GlobalWebBrowserFrameList);
 
 end.
 

@@ -133,6 +133,7 @@ end;
 procedure TfrmDataBaseConfig.SyncUI;
 begin
   //数据库类型
+  Self.cmbDBType.Text:=FDataBaseConfig.FDBType;
   Self.cmbDBType.ItemIndex:=Self.cmbDBType.Items.IndexOf(FDataBaseConfig.FDBType);
 
   //数据库服务器

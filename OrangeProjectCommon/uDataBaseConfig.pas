@@ -157,8 +157,10 @@ end;
 
 function TDataBaseConfig.IsEmpty: Boolean;
 begin
+  //SQLITE则不需要主机名
   Result:=(FDBHostName='')
-          or (FDBDataBaseName='');
+          or (FDBDataBaseName='')
+          ;
 end;
 
 procedure TDataBaseConfig.Load(AIniFileName:String);

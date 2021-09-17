@@ -264,7 +264,7 @@ procedure ShowException(ADebugString:String);
 ///     Record detail information of exception
 ///   </para>
 /// </summary>
-procedure HandleException(AException: Exception; const AMethodName:String; const AUnitName:String;const APosition: String='');overload;
+procedure HandleException(AException: Exception; const AMethodName:String; const AUnitName:String;const APosition: String='';const APosition2: String='');overload;
 /// <summary>
 ///   <para>
 ///     记录异常的简单信息
@@ -298,9 +298,9 @@ begin
   Result:=GlobalLog;
 end;
 
-procedure HandleException(AException: Exception; const AMethodName:String; const AUnitName:String;const APosition: String='');
+procedure HandleException(AException: Exception; const AMethodName:String; const AUnitName:String;const APosition: String='';const APosition2: String='');
 begin
-  GetGlobalLog.HandleException(AException, AUnitName, AMethodName, APosition);
+  GetGlobalLog.HandleException(AException, AUnitName, AMethodName, APosition+APosition2);
 end;
 
 procedure HandleException(AException: Exception;const AMethodName:String);

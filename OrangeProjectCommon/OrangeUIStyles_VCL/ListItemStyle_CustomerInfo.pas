@@ -70,6 +70,7 @@ var
   I: Integer;
   ASizeF:TSizeF;
   AItemWidth:Double;
+  AlvTagsContentHeight:Integer;
 begin
 //  Self.lvTags.Prop.Items.BeginUpdate;
 //  try
@@ -100,6 +101,8 @@ begin
 //  finally
 //    Self.lvTags.Prop.Items.EndUpdate(True);
 //  end;
+//  AlvTagsContentHeight:=Self.lvTags.Prop.CalcContentHeight;
+//  Self.lvTags.Height:=AlvTagsContentHeight;
   Self.lvTags.Height:=Self.lvTags.Prop.CalcContentHeight;
   if Self.lvTags.Height=0 then
   begin

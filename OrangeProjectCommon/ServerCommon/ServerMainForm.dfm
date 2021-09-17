@@ -111,7 +111,7 @@ object frmServerMain: TfrmServerMain
     Top = 97
     Width = 678
     Height = 356
-    ActivePage = tsPerformance
+    ActivePage = tsLog
     Align = alClient
     TabOrder = 1
     object tsPerformance: TTabSheet
@@ -178,13 +178,15 @@ object frmServerMain: TfrmServerMain
     object tsLog: TTabSheet
       Caption = #26085#24535
       ImageIndex = 1
-      object Memo1: TMemo
+      object memLog: TMemo
         Left = 0
         Top = 0
         Width = 670
         Height = 324
         Align = alClient
+        ScrollBars = ssVertical
         TabOrder = 0
+        OnDblClick = memLogDblClick
       end
     end
     object tsDatabasePool: TTabSheet

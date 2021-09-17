@@ -56,6 +56,7 @@ contains
   ListItemStyle_CompanyInfo in 'ListItemStyle_CompanyInfo.pas',
   ListItemStyle_TreeMainMenu_LabelAndArrow in 'ListItemStyle_TreeMainMenu_LabelAndArrow.pas',
   ListItemStyle_CaptionDetailItem in 'ListItemStyle_CaptionDetailItem.pas',
-  ListItemStyle_VertSelectedGray_CaptionLeft in 'ListItemStyle_VertSelectedGray_CaptionLeft.pas';
+  ListItemStyle_VertSelectedGray_CaptionLeft in 'ListItemStyle_VertSelectedGray_CaptionLeft.pas',
+  ListItemStyle_HorzSelectedSignBottom_CaptionCenter in 'ListItemStyle_HorzSelectedSignBottom_CaptionCenter.pas' {FrameListItemStyle_HorzSelectedSignBottom_CaptionCenter: TFrame};
 
 end.

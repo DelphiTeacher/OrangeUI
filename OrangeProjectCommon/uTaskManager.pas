@@ -126,9 +126,9 @@ type
   //以及任务的配置
   TTaskItem=class
   public
-    fid:Integer;
-    AppID:Integer;
-    UserFID:String;
+//    fid:Integer;
+//    AppID:Integer;
+//    UserFID:String;
   public
     //开始工作了
     State:TTaskState;
@@ -148,6 +148,9 @@ type
 
     //这个任务的最大协作线程数
     MaxWorkThreadCount:Integer;
+
+    ParentTaskGUID:String;
+    RootTaskGUID:String;
 
 //    //账号类型,instagram
 //    AccountType:String;
@@ -181,7 +184,7 @@ type
                                         AWorkThread:TTaskWorkThreadItem;
                                         ATaskItem:TTaskItem);virtual;
   public
-
+    //属于我这个任务的aa
     ThreadItems:TTaskWorkThreadItems;
 
 //    OnExecute:TWorkThreadExecuteEvent;
@@ -252,9 +255,9 @@ type
 
     MaxThreadCount:Integer;
 
-    //数据接口，支持SQL，支持Rest
-    FDataInterface:TDataInterface;
-    function CreateDataInterface:TDataInterface;virtual;
+//    //数据接口，支持SQL，支持Rest
+//    FDataInterface:TDataInterface;
+//    function CreateDataInterface:TDataInterface;virtual;
 
     function GetMaxThreadCount:Integer;virtual;
     function CreateTaskWorkThreadItem:TTaskWorkThreadItem;virtual;
@@ -312,6 +315,9 @@ end;
 constructor TTaskItem.Create(AOwner:TTaskManager);
 begin
   GUID:=CreateGUIDString;
+
+  ParentTaskGUID:='';
+  RootTaskGUID:=GUID;
 
   Owner:=AOwner;
   ThreadItems:=TTaskWorkThreadItems.Create;
@@ -772,21 +778,21 @@ begin
   //任务列表
   TaskList:=TTaskList.Create;
   //已完成的任务列表
-  FinishedTaskList:=TTaskList.Create(ooReference);
+  FinishedTaskList:=TTaskList.Create();
 
   TaskWorkThreadItemClass:=TTaskWorkThreadItem;
 
-  FDataInterface:=Self.CreateDataInterface;
+//  FDataInterface:=Self.CreateDataInterface;
 
   MaxThreadCount:=1;
   //线程池
   ThreadItems:=TTaskWorkThreadItems.Create;
 end;
 
-function TTaskManager.CreateDataInterface: TDataInterface;
-begin
-  Result:=nil;
-end;
+//function TTaskManager.CreateDataInterface: TDataInterface;
+//begin
+//  Result:=nil;
+//end;
 
 function TTaskManager.CreateTaskWorkThreadItem: TTaskWorkThreadItem;
 begin
@@ -809,7 +815,7 @@ begin
 
   FreeAndNil(TaskList);
 
-  FinishedTaskList.Clear(False);
+  FinishedTaskList.Clear(True);
   FreeAndNil(FinishedTaskList);
   inherited;
 end;
@@ -833,7 +839,7 @@ function TTaskManager.StartTask(ATaskItem:TTaskItem
 //                                AParams:ISuperObject=nil
                                 ): TTaskItem;
 var
-  ADesc:String;
+//  ADesc:String;
   ATaskWorkThreadItem:TTaskWorkThreadItem;
 begin
   Result:=ATaskItem;
@@ -911,7 +917,7 @@ begin
 //  end;
 //  FThread:=AThreadClass.Create(ACreateSuspended);
 
-
+  //创建一个线程
   FThread:=CreateThread(ACreateSuspended,ATaskItem);
 
   TaskItem:=ATaskItem;
@@ -976,7 +982,7 @@ begin
           //有几个主题,就开几个账号和几个线程一起获取
 
           //从Params中获取一个待处理的工作
-          uBaseLog.HandleException(nil,'TTaskWorkThreadItem.Executee '+ClassName+' TaskList Count '+IntToStr(TaskManager.TaskList.Count));
+          uBaseLog.HandleException(nil,'TTaskWorkThreadItem.Executee '+ClassName+' TaskList Count 任务数：'+IntToStr(TaskManager.TaskList.Count));
           WorkItem:=GetTaskUnWorkItem;//TaskItem.GetUnWorkItem;
 
 
@@ -1082,7 +1088,7 @@ begin
           begin
               //空闲,休息
               uBaseLog.HandleException(nil,'TTaskWorkThreadItem.Executee '+ClassName+' no WorkItem Sleep');
-              uBaseLog.HandleException(nil,'TTaskWorkThreadItem.Executee '+ClassName+' Thread Count is '+IntToStr(TaskManager.ThreadItems.Count));
+              uBaseLog.HandleException(nil,'TTaskWorkThreadItem.Executee '+ClassName+' Thread Count 工作线程数： '+IntToStr(TaskManager.ThreadItems.Count));
               Sleep(3000);
           end;
 

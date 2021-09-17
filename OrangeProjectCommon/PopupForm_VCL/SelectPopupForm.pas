@@ -18,23 +18,23 @@ uses
   StdCtrls,
   ExtCtrls,
 //  uManager,
-  Buttons;
+  Buttons, uSkinWindowsForm;
 
 type
   //选中一条记录的事件
   TOnSelectRecordEvent=procedure(Sender:TObject;ADataset:TDataset) of object;
+//  TOnSelectRecordJsonEvent=procedure(Sender:TObject;ARecordJson:ISuperObject) of object;
 
   TfrmSelectPopupClass=class of TfrmSelectPopup;
 
   TfrmSelectPopup = class(TForm)
+    fsdForm: TSkinWinForm;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
   protected
-
-
     //用于过滤
     procedure DoFilter(AKeyword:String);virtual;
     //用于清理数据
@@ -42,10 +42,6 @@ type
   protected
     procedure CreateParams(var Params:TCreateParams);override;
 
-    //弹出窗体
-    procedure Popup(APopupPoint:TPoint;
-                    APopupFormWidth:Integer;
-                    APopupFormHeight:Integer);
   public
     //当前传进来的关键字
     FKeyWord:String;
@@ -57,6 +53,13 @@ type
     //隐藏窗体
     procedure HidePopup;
 
+    //弹出窗体
+    procedure Popup(APopupPoint:TPoint;
+                    APopupFormWidth:Integer;
+                    APopupFormHeight:Integer;
+                    //-1表示当前
+                    AParentFormHandle:Integer=0;
+                    AShowFlag:Integer=SWP_NOACTIVATE or SWP_SHOWWINDOW);
     //弹出并过滤
     procedure PopupAndFilter(
                             AKeyWord:String;
@@ -121,13 +124,13 @@ function CreateSelectPopupForm(AOwnerForm:TForm;AfrmSelectPopupClass:TfrmSelectP
 var
   OldWidth,OldHeight:Integer;
 begin
-    Result:=AfrmSelectPopupClass.Create(AOwnerForm);
-    OldWidth:=Result.Width;
-    OldHeight:=Result.Height;
-    Result.SetBounds(0,0,0,0);
-    Result.Show;
-    Result.HidePopup;
-    Result.SetBounds(0,0,OldWidth,0);
+  Result:=AfrmSelectPopupClass.Create(AOwnerForm);
+  OldWidth:=Result.Width;
+  OldHeight:=Result.Height;
+  Result.SetBounds(0,0,0,0);
+  Result.Show;
+  Result.HidePopup;
+  Result.SetBounds(0,0,OldWidth,0);
 end;
 
 procedure HideSelectPopupForm(frmSelectPopup:TfrmSelectPopup);
@@ -143,12 +146,12 @@ begin
   inherited;
   with Params do
   begin
-    if (Owner<>nil) and (Owner is TForm) then
-    begin
-      Params.WndParent:=TForm(Owner).Handle;
-    end;
+//    if (Owner<>nil) and (Owner is TForm) then
+//    begin
+//      Params.WndParent:=TForm(Owner).Handle;
+//    end;
 
-    Style:=WS_POPUP;
+//    Style:=WS_POPUP;
     ExStyle:=ExStyle or WS_EX_TOOLWINDOW;
   end;
 end;
@@ -164,10 +167,21 @@ begin
 end;
 
 procedure TfrmSelectPopup.FormCreate(Sender: TObject);
+var
+  OldWidth,OldHeight:Integer;
 begin
   FKeyWord:='';
 
   Self.ImeMode:=imClose;
+
+  OldWidth:=Self.Width;
+  OldHeight:=Self.Height;
+  Self.SetBounds(0,0,0,0);
+  //不Show的话,里面的控件显示不出来
+  Self.Show;
+  Self.HidePopup;
+  Self.SetBounds(0,0,OldWidth,0);
+
 end;
 
 procedure TfrmSelectPopup.FormDestroy(Sender: TObject);
@@ -220,15 +234,25 @@ end;
 
 procedure TfrmSelectPopup.Popup(APopupPoint:TPoint;
                                   APopupFormWidth:Integer;
-                                  APopupFormHeight:Integer);
+                                  APopupFormHeight:Integer;
+                                  AParentFormHandle:Integer;
+                                  AShowFlag:Integer);
 begin
+
+  if AParentFormHandle=-1 then
+  begin
+    AParentFormHandle:=Application.ActiveFormHandle;
+  end;
 
   //弹出窗体
   SetWindowPos(Self.Handle,
-      0,
-      APopupPoint.X,APopupPoint.Y,
-      APopupFormWidth,APopupFormHeight,
-      SWP_NOACTIVATE or SWP_SHOWWINDOW or SWP_NOZORDER);
+                //HWND_TOPMOST,这个会把输入法挡住的
+                ////AParentForm.Handle,//0,
+                AParentFormHandle,
+                APopupPoint.X,APopupPoint.Y,
+                APopupFormWidth,APopupFormHeight,
+                AShowFlag//SWP_NOACTIVATE or SWP_SHOWWINDOW// or SWP_NOZORDER
+                );
   CurrentPopupSelectPopupForm:=Self;
 
   HookMouse(True);

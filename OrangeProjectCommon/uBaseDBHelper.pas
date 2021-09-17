@@ -83,6 +83,7 @@ type
                       AOperation:TSQLOperation=asoOpen;
                       AParamsCompleted:Boolean=False;
                       ACustomQueryDataSet:TDataSet=nil):Boolean;virtual;abstract;
+
     //查询
     function SelfQuery_Exists(AQueryString:String;
                       AParamNames:TStringDynArray;

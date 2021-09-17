@@ -853,7 +853,8 @@ type
 
   public
     //获取字段列表
-    function GetFieldList(var ADesc:String;
+    function GetFieldList(AppID:Integer;
+                          var ADesc:String;
                           var ADataJson:ISuperObject
                            ):Boolean;overload;override;
     //获取记录列表
@@ -965,7 +966,7 @@ function SaveObjectToDB(ADBModule:TBaseDataBaseModule;
                         ADBHelper:TBaseDBHelper;
                         AAppID:Integer;
                         ABaseQueryItem:TBaseQueryItem;
-                        const AIntefacedObject:TInterfacedObject;
+                        const AObject:TObject;
                         var ACode:Integer;
                         var ADesc:String;
                         var ADataJson:ISuperObject;
@@ -985,7 +986,7 @@ function SaveObjectToDB(ADBModule:TBaseDataBaseModule;
                         ADBHelper:TBaseDBHelper;
                         AAppID:Integer;
                         ABaseQueryItem:TBaseQueryItem;
-                        const AIntefacedObject:TInterfacedObject;
+                        const AObject:TObject;
                         var ACode:Integer;
                         var ADesc:String;
                         var ADataJson:ISuperObject;
@@ -1003,12 +1004,18 @@ begin
 
   Result:=False;
 
-  if not AIntefacedObject.GetInterface(IID_IJsonORMObject,AJsonORMObjectIntf) then
+//  if (AObject is TIntefacedObject) and not TIntefacedObject(AObject).GetInterface(IID_IJsonORMObject,AJsonORMObjectIntf) then
+//  begin
+//    raise Exception.Create('object is not support IJsonORMObject');
+//    Exit;
+//  end;
+//  TProtectedInterfacedObject(AIntefacedObject)._AddRef;
+
+  if (AObject is TComponent) and not TComponent(AObject).GetInterface(IID_IJsonORMObject,AJsonORMObjectIntf) then
   begin
+    raise Exception.Create('object is not support IJsonORMObject');
     Exit;
   end;
-  TProtectedInterfacedObject(AIntefacedObject)._AddRef;
-
 
   ASuperObject:=TSuperObject.Create;
   if not AJsonORMObjectIntf.SaveToJson(ASuperObject) then
@@ -1315,16 +1322,20 @@ begin
                   else
                   //{$ELSE}
                   begin
+
+
                       //高版本的SQLServer,支持ROW_NUMBER
                       AOrderBy:=RemoveOrderByTalbeAlias(AOrderBy);
                       Result:=
-                        ' SELECT TOP '+IntToStr(APageSize)+' * '
-                          +' FROM ( '
-                              +' SELECT '+' ROW_NUMBER() OVER ('+AOrderBy+') AS RowNumber, '+' * '
-                              +' FROM '+'('+ASelect+' '+AWhere+') Z'+' '
-                          +' ) Y '
-                          +' WHERE RowNumber > '+IntToStr(APageSize)+'*('+IntToStr(APageIndex)+'-1) '
-                          +AOrderBy;
+                              ' SELECT TOP '+IntToStr(APageSize)+' * '
+                                +' FROM ( '
+                                    +' SELECT '+' ROW_NUMBER() OVER ('+AOrderBy+') AS RowNumber, '+' * '
+                                    +' FROM '+'('+ASelect+' '+AWhere+') Z'+' '
+                                +' ) Y '
+                                +' WHERE RowNumber > '+IntToStr(APageSize)+'*('+IntToStr(APageIndex)+'-1) '
+                                +AOrderBy;
+
+
                   //{$ENDIF}
                   end;
 
@@ -1935,7 +1946,7 @@ begin
 
 end;
 
-function TCommonRestIntfItem.GetFieldList(var ADesc: String;
+function TCommonRestIntfItem.GetFieldList(AppID:Integer;var ADesc: String;
   var ADataJson: ISuperObject): Boolean;
 var
   ACode:Integer;

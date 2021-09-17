@@ -170,7 +170,7 @@ var
 begin
   if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterface(ScreenService)) then
   begin
-    OrientSet := [TScreenOrientation.soPortrait];
+    OrientSet := [TScreenOrientation.{$IF CompilerVersion >= 35.0}Portrait{$ELSE}soPortrait{$IFEND}];
 //    ScreenService.SetSupportedScreenOrientations(OrientSet);
   end;
 end;

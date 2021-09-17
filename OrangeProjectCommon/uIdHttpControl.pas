@@ -196,6 +196,9 @@ end;
 
 initialization
   IsNetworkConnected:=True;
+  {$IFDEF VCL}
+  GlobalSystemHttpControlClass:=TSystemHttpControl;
+  {$ENDIF}
 
 
 

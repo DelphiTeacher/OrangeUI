@@ -24,6 +24,7 @@ uses
   uPageStructure,
   uBasePageStructure,
   uDataInterface,
+  uRestHttpDataInterface,
 //  uTableCommonRestCenter,
   EasyServiceCommonMaterialDataMoudle_VCL,
 
@@ -52,6 +53,7 @@ type
     pnlInput: TPanel;
     btnNew: TSkinWinButton;
     btnEdit: TSkinWinButton;
+    btnCancel: TSkinWinButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -71,6 +73,7 @@ type
       var ADataJson: ISuperObject);virtual;
     procedure pnlInputResize(Sender: TObject);
     procedure btnEditClick(Sender: TObject);
+    procedure btnCancelClick(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -143,20 +146,28 @@ type
 
 
 
-  //常用诊断数据维护窗体
-  TfrmCommonDiagnoseTableManage=class(TfrmBaseTableManage)
-  protected
-    //初始页面这个数据结构
-    procedure InitPage(APage:uPageStructure.TPage);override;
-    //表格添加记录时初始数据集字段值
-    procedure CustomDatasetAfterInsert(Sender:TObject;ADataset:TDataset);override;
-
-    //自定义调用接口获取数据的查询条件
-    function CustomGetRestDatasetPageCustomWhereKeyJson:String;override;
-  end;
-
-
-
+//<<<<<<< .mine
+//||||||| .r16098
+//  //常用诊断数据维护窗体
+//  TfrmCommonDiagnoseTableManage=class(TfrmBaseTableManage)
+//  protected
+//    //初始页面
+//    procedure InitPage;override;
+//    procedure CustomDatasetAfterInsert(Sender:TObject;ADataset:TDataset);override;
+//  end;
+//=======
+//  //常用诊断数据维护窗体
+//  TfrmCommonDiagnoseTableManage=class(TfrmBaseTableManage)
+//  protected
+//    //初始页面这个数据结构
+//    procedure InitPage(APage:uPageStructure.TPage);override;
+//    //表格添加记录时初始数据集字段值
+//    procedure CustomDatasetAfterInsert(Sender:TObject;ADataset:TDataset);override;
+//
+//    //自定义调用接口获取数据的查询条件
+//    function CustomGetRestDatasetPageCustomWhereKeyJson:String;override;
+//  end;
+//>>>>>>> .r17253
 
 var
   frmBaseTableManage: TfrmBaseTableManage;
@@ -167,6 +178,21 @@ implementation
 {$R *.dfm}
 
 
+procedure TfrmBaseTableManage.btnCancelClick(Sender: TObject);
+begin
+  //取消
+  if Self.FPageInstance.FLoadDataSetting.IsAddRecord then
+  begin
+    Self.FPageInstance.CancelAddRecord;
+  end;
+  if Self.FPageInstance.FLoadDataSetting.IsEditRecord then
+  begin
+    Self.FPageInstance.CancelEditRecord;
+  end;
+
+  SyncButtonState;
+end;
+
 procedure TfrmBaseTableManage.btnDeleteClick(Sender: TObject);
 begin
   //删除
@@ -176,7 +202,8 @@ end;
 procedure TfrmBaseTableManage.btnEditClick(Sender: TObject);
 begin
   //编辑记录
-  Self.FPageInstance.FLoadDataSetting.IsAddRecord:=False;
+//  Self.FPageInstance.FLoadDataSetting.IsAddRecord:=False;
+  Self.FPageInstance.BeginEditRecord;
 
 //  Self.FPageInstance.MainControlMapList.ClearValue;
 
@@ -187,8 +214,9 @@ end;
 procedure TfrmBaseTableManage.btnNewClick(Sender: TObject);
 begin
 
-  Self.FPageInstance.FLoadDataSetting.IsAddRecord:=True;
-  Self.FPageInstance.MainControlMapList.ClearValue;
+//  Self.FPageInstance.FLoadDataSetting.IsAddRecord:=True;
+//  Self.FPageInstance.MainControlMapList.ClearValue;
+  Self.FPageInstance.BeginAddRecord;
 
   SyncButtonState;
 end;
@@ -514,7 +542,7 @@ begin
 //        AColumn.Editing:=(AColumnSettingJson.I['readonly']=0);
 //        AColumn.Width:=AColumnSettingJson.I['Width'];
 //        AColumn.Caption:=AColumnSettingJson.S['caption'];
-        AColumn.Visible:=(AFieldControlSetting.visible=1);
+        AColumn.Visible:=(AFieldControlSetting.col_visible=1);
         AColumn.Editing:=(AFieldControlSetting.readonly=0);
         AColumn.Width:=Ceil(AFieldControlSetting.Width);
         AColumn.Caption:=AFieldControlSetting.field_caption;
@@ -590,13 +618,13 @@ procedure TfrmBaseTableManage.RestMemTable1GetRestDatasetPage(Sender: TObject;
   var ACallAPIResult: Boolean; var ACode: Integer; var ADesc: string;
   var ADataJson: ISuperObject);
 begin
-  FPageInstance.FLoadDataSetting.Clear;
+//  FPageInstance.FLoadDataSetting.Clear;
   FPageInstance.FLoadDataSetting.PageIndex:=Self.RestMemTable1.PageIndex;
   FPageInstance.FLoadDataSetting.PageSize:=Self.RestMemTable1.PageSize;
 
   FPageInstance.FLoadDataSetting.CustomWhereKeyJson:=CustomGetRestDatasetPageCustomWhereKeyJson;//GetWhereKeyJson(['Zgdm','is_deleted'],[GlobalManager.User.fid,0]);
 
-  FPageInstance.LoadData(FPageInstance.FLoadDataSetting,False);
+  FPageInstance.LoadData(False);
 
 //  RestMemTable1.EmptyDataSet;
 //
@@ -637,110 +665,47 @@ end;
 
 procedure TfrmBaseTableManage.SyncButtonState;
 begin
-  Self.btnNew.Enabled:=not Self.FPageInstance.FLoadDataSetting.IsAddRecord;
+  Self.btnNew.Enabled:=not Self.FPageInstance.FLoadDataSetting.IsAddRecord
+                      and not Self.FPageInstance.FLoadDataSetting.IsEditRecord;
+  Self.btnNew.Invalidate;
 
-  Self.pnlInput.Enabled:=Self.FPageInstance.FLoadDataSetting.IsAddRecord;
+  Self.btnEdit.Enabled:=not Self.FPageInstance.FLoadDataSetting.IsAddRecord
+                        and not Self.FPageInstance.FLoadDataSetting.IsEditRecord;
+  Self.btnEdit.Invalidate;
 
-  Self.btnSave.Enabled:=Self.FPageInstance.FLoadDataSetting.IsAddRecord;
+  Self.pnlInput.Enabled:=Self.FPageInstance.FLoadDataSetting.IsAddRecord
+                          or Self.FPageInstance.FLoadDataSetting.IsEditRecord;
+  Self.pnlInput.Invalidate;
+
+  Self.btnSave.Enabled:=Self.FPageInstance.FLoadDataSetting.IsAddRecord
+                      or Self.FPageInstance.FLoadDataSetting.IsEditRecord;
+  Self.btnSave.Invalidate;
+
+  Self.btnCancel.Enabled:=Self.FPageInstance.FLoadDataSetting.IsAddRecord
+                      or Self.FPageInstance.FLoadDataSetting.IsEditRecord;
+  Self.btnCancel.Invalidate;
 end;
 
-{ TfrmCommonDiagnoseTableManage }
 
-procedure TfrmCommonDiagnoseTableManage.CustomDatasetAfterInsert(
-  Sender: TObject; ADataset: TDataset);
-begin
-  inherited;
-//  ADataset.Edit;
-  //哪个医生的常用诊断
-  ADataset.FieldByName('Zgdm').AsInteger:=StrToInt(GlobalManager.User.fid);
-  ADataset.FieldByName('createtime').AsDateTime:=Now;
-  ADataset.FieldByName('is_deleted').AsInteger:=0;
-//  ADataset.Post;
-end;
 
-function TfrmCommonDiagnoseTableManage.CustomGetRestDatasetPageCustomWhereKeyJson: String;
-begin
-  Result:=GetWhereKeyJson(['Zgdm','is_deleted'],[GlobalManager.User.fid,0]);
-end;
-
-procedure TfrmCommonDiagnoseTableManage.InitPage(APage:uPageStructure.TPage);
-var
-  AFieldControlSetting:TFieldControlSetting;
-begin
-  inherited;
-
-  Caption:='常用诊断维护';
-
-//    AColumnsSettingArray:=TSuperArray.Create;
-//    AColumnsSetting:=TSuperObject.Create;
-//    AColumnsSetting.S['field_name']:='Zddm';
-//    AColumnsSetting.S['caption']:='诊断代码';
-//    AColumnsSetting.I['width']:=100;
-//    AColumnsSetting.I['visible']:=1;
-//    AColumnsSetting.I['readonly']:=1;
-//    AColumnsSettingArray.O[AColumnsSettingArray.Length]:=AColumnsSetting;
+//<<<<<<< .mine
+//||||||| .r16098
+//procedure TfrmCommonDiagnoseTableManage.InitPage;
+//var
+//  AFieldControlSetting:TFieldControlSetting;
+//begin
+//  inherited;
+//=======
+//function TfrmCommonDiagnoseTableManage.CustomGetRestDatasetPageCustomWhereKeyJson: String;
+//begin
+//  Result:=GetWhereKeyJson(['Zgdm','is_deleted'],[GlobalManager.User.fid,0]);
+//end;
 //
-//    AColumnsSetting:=TSuperObject.Create;
-//    AColumnsSetting.S['field_name']:='Zdmc';
-//    AColumnsSetting.S['caption']:='诊断名称';
-//    AColumnsSetting.I['width']:=100;
-//    AColumnsSetting.I['visible']:=1;
-//    AColumnsSetting.I['readonly']:=1;
-//    AColumnsSettingArray.O[AColumnsSettingArray.Length]:=AColumnsSetting;
-
-
-  //
-  FPage.MainLayoutSetting.col_width:=200;
-  FPage.MainLayoutSetting.align_type:=Const_PageAlignType_Auto;
-
-
-  FPage.load_data_params:='[{"name":"Zgdm","value_from":"const","value":"'+GlobalManager.User.fid+'"}]';
-
-
-//  //哪个医生的常用诊断
-//  ADataset.FieldByName('Zgdm').AsInteger:=StrToInt(GlobalManager.User.fid);
-//  ADataset.FieldByName('createtime').AsDateTime:=Now;
-//  ADataset.FieldByName('is_deleted').AsInteger:=0;
-  FPageInstance.AddPostInitJson:=TSuperObject.Create();
-  FPageInstance.AddPostInitJson.I['Zgdm']:=StrToInt(GlobalManager.User.fid);
-  FPageInstance.AddPostInitJson.S['createtime']:=StdDateTimeToStr(Now);
-  FPageInstance.AddPostInitJson.I['is_deleted']:=0;
-
-  FPageInstance.FIsNeedLoadDataIntfResultToControls:=False;
-
-
-  TTableCommonRestHttpDataInterface(FPage.DataInterface).Name:='SelectCommonDiagnose';
-  TTableCommonRestHttpDataInterface(FPage.DataInterface).FInterfaceUrl:=InterfaceUrl;
-  TTableCommonRestHttpDataInterface(FPage.DataInterface).FKeyFieldName:='fid';
-  TTableCommonRestHttpDataInterface(FPage.DataInterface).FDeletedFieldName:='is_deleted';
-
-
-  AFieldControlSetting:=FPage.MainLayoutControlList.Add;
-  AFieldControlSetting.field_name:='Zddm';
-  AFieldControlSetting.field_caption:='诊断代码';
-  AFieldControlSetting.width:=300;
-  AFieldControlSetting.visible:=1;
-//  AFieldControlSetting.readonly:=1;
-  AFieldControlSetting.control_type:='MedicalRecordDiagnose';
-  AFieldControlSetting.has_caption_label:=1;
-
-
-  AFieldControlSetting:=FPage.MainLayoutControlList.Add;
-  AFieldControlSetting.field_name:='Zdmc';
-  AFieldControlSetting.field_caption:='诊断名称';
-  AFieldControlSetting.width:=100;
-  AFieldControlSetting.visible:=1;
-
-
-
-//  //通用接口的rest_name
-//  FRestName:='SelectCommonDiagnose';
-
-end;
-
-
-
-
-
+//procedure TfrmCommonDiagnoseTableManage.InitPage(APage:uPageStructure.TPage);
+//var
+//  AFieldControlSetting:TFieldControlSetting;
+//begin
+//  inherited;
+//>>>>>>> .r17253
 
 end.

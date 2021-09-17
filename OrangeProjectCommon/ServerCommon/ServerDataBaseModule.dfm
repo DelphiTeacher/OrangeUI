@@ -26,6 +26,10 @@ object dmServerDataBase: TdmServerDataBase
     Left = 72
     Top = 120
   end
+  object SQLiteUniProvider1: TSQLiteUniProvider
+    Left = 72
+    Top = 120
+  end
   object kbmMWUNIDACConnectionPool1: TkbmMWUNIDACConnectionPool
     MaxConnections = 100
     Database = UniConnection1

@@ -720,7 +720,6 @@ begin
   end;
 end;
 
-
 procedure ConvertArrayToJson(ANameValueArray:TVariantDynArray;
                             AJson:ISuperObject);
 var
@@ -731,7 +730,17 @@ begin
     AJson.V[ANameValueArray[I*2]]:=ANameValueArray[I*2+1];
   end;
 
-
+//procedure ConvertArrayToJson(ANameValueArray:TVariantDynArray;
+//                            AJson:ISuperObject);
+//var
+//  I: Integer;
+//begin
+//  for I := 0 to Length(ANameValueArray) div 2 -1 do
+//  begin
+//    AJson.V[ANameValueArray[I*2]]:=ANameValueArray[I*2+1];
+//  end;
+//
+//<<<<<<< .mine
 end;
 
 procedure ConvertArrayToJson(ANameArray:TStringDynArray;
@@ -745,6 +754,26 @@ begin
     AJson.V[ANameArray[I]]:=AValueArray[I];
   end;
 end;
+
+//||||||| .r16098
+//=======
+//
+//end;
+//
+//procedure ConvertArrayToJson(ANameArray:TStringDynArray;
+//                            AValueArray:TVariantDynArray;
+//                            AJson:ISuperObject);
+//var
+//  I: Integer;
+//begin
+//  for I := 0 to Length(ANameArray)-1 do
+//  begin
+//    AJson.V[ANameArray[I]]:=AValueArray[I];
+//  end;
+//end;
+//
+//>>>>>>> .r17253
+
 
 function ConvertJsonToArray(AJson:ISuperObject;
                             var ANameArray:TStringDynArray;
@@ -1574,7 +1603,7 @@ end;
 function JSonFromDataSetTo(DataSet: TDataSet;tableName: string;sj:ISuperObject;AFieldMapList:TStringList=nil;AIsNeedNullField:Boolean=DEFAULT_IsNeedNullField): ISuperObject;
 var
   aj:ISuperArray;
-  i:Integer;
+//  i:Integer;
   index:Integer;
 begin
 
@@ -1605,7 +1634,7 @@ end;
 
 function JSonArrayFromDataSetTo(DataSet: TDataSet;AFieldMapList:TStringList=nil;AIsNeedNullField:Boolean=DEFAULT_IsNeedNullField): ISuperArray;
 var
-  i:Integer;
+//  i:Integer;
   index:Integer;
 begin
     //创建数据集的数据
@@ -1660,7 +1689,7 @@ function ReturnJson(ACode:Integer;
                     ANameArray:TStringDynArray;
                     AValueArray:TVariantDynArray):ISuperObject;
 var
-  ASign:String;
+//  ASign:String;
   ATimestamp:Integer;
   I: Integer;
 
