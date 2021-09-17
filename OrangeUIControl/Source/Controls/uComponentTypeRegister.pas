@@ -402,7 +402,7 @@ begin
 
   {$IFDEF VCL}
     {$IF CompilerVersion >= 30.0}
-    OrangeUI_ControlArray:=[
+        OrangeUI_ControlArray:=[
                           TSkinWinForm,
                           TSkinWinNormalForm,
   //                        TSkinWinMultiColorLabel,
@@ -447,16 +447,28 @@ begin
                           TSkinWinScrollControlCorner,
 
                           TSkinWinSwitchPageListPanel,
+                          TSkinWinListBox,
+
+
+                          {$IFDEF OPENSOURCE_VERSION}
+                          //开源版没有ListView,TreeView,Grid
+                          {$ELSE}
                           TSkinWinDBGrid,
                           TSkinWinItemGrid,
-                          TSkinWinListBox,
                           TSkinWinListView,
                           TSkinWinTreeView,
+                          {$ENDIF}
+
                           TSkinWinRadioButton
                           ];
     {$ELSE}
-    SetLength(OrangeUI_ControlArray,32);
-    I:=0;OrangeUI_ControlArray[I]:=TSkinWinForm;
+        {$IFDEF OPENSOURCE_VERSION}
+        //开源版没有ListView,TreeView,Grid
+        SetLength(OrangeUI_ControlArray,28);
+        {$ELSE}
+        SetLength(OrangeUI_ControlArray,32);
+        {$ENDIF}
+        I:=0;OrangeUI_ControlArray[I]:=TSkinWinForm;
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinNormalForm;//,
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinEdit;//,
   //                        TSkinWinMultiColorLabel,
@@ -500,10 +512,18 @@ begin
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinScrollControlCorner;//,
 
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinSwitchPageListPanel;//,
+
+                          {$IFDEF OPENSOURCE_VERSION}
+                          //开源版没有ListView,TreeView,Grid
+                          {$ELSE}
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinDBGrid;//,
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinListBox;//,
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinListView;//,
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinTreeView;//,
+                          {$ENDIF}
+
+
+
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinRadioButton;//
 
     {$IFEND}

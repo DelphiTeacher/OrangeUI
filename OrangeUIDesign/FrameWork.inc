@@ -1,6 +1,7 @@
 {$DEFINE FMX}
 
-
+//{$DEFINE VCL}
+//{$DEFINE MSWINDOWS}
 
 
 

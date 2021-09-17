@@ -1,0 +1,7 @@
+{$DEFINE VCL}
+{$DEFINE MSWINDOWS}
+
+
+
+
+
