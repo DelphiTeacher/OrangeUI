@@ -1,0 +1,42 @@
+object frmConfigDrawPictureSearchPath: TfrmConfigDrawPictureSearchPath
+  Left = 0
+  Top = 0
+  Caption = #37197#32622#36164#28304#22270#29255#35774#35745#26102#25628#32034#36335#24452
+  ClientHeight = 282
+  ClientWidth = 439
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object memSearchPaths: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    Position.X = 15.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 409.000000000000000000
+    Size.Height = 217.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 405.000000000000000000
+    Viewport.Height = 213.000000000000000000
+  end
+  object btnOK: TButton
+    Anchors = [akRight, akBottom]
+    ModalResult = 1
+    Position.X = 232.000000000000000000
+    Position.Y = 240.000000000000000000
+    TabOrder = 2
+    Text = #30830#23450
+    OnClick = btnOKClick
+  end
+  object btnCancel: TButton
+    Anchors = [akRight, akBottom]
+    ModalResult = 2
+    Position.X = 336.000000000000000000
+    Position.Y = 240.000000000000000000
+    TabOrder = 1
+    Text = #21462#28040
+  end
+end

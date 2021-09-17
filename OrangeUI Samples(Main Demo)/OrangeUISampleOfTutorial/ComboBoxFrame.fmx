@@ -1,0 +1,166 @@
+object FrameComboBox: TFrameComboBox
+  Size.Width = 321.000000000000000000
+  Size.Height = 401.000000000000000000
+  Size.PlatformDefault = False
+  object cmbComboBox: TSkinFMXComboBox
+    ClipChildren = True
+    Items.Strings = (
+      #19978#28023#24066
+      #21271#20140#24066
+      #27993#27743#30465)
+    Position.X = 16.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 289.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.BorderEadges = [beBottom]
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.RoundWidth = 2.000000000000000000
+    SelfOwnMaterial.BackColor.RoundHeight = 2.000000000000000000
+    SelfOwnMaterial.BackColor.BorderColor.Color = claLightgray
+    SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.ArrowPicture.PNG = {
+      89504E470D0A1A0A0000000D49484452000000150000000B080600000090CBC6
+      7D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      01D449444154384FA5D25F4853511C07F0DFEF5C7737C929BB200886E1BD3DC4
+      A06709DA5B41A0200D9C63B3408205116E13C5E75E43D8C62030107BE88EBA95
+      510F1982A347F129082EF86FF6D09BE05097B2EDEEFCDA1987A1AE14E9F372E1
+      F7FDDD2FDC7B0E264C3D4E48FE4C64E731FC87110B945E479F23429B01423702
+      8B2572C68208E4CEA524DF5E6DEFADEA8B00F808815465F543313F10D41C4498
+      F4D6B4EB7DE1E227FB1D90DCBFD013CBDFC16AF40537F00ED7309619DBCEA2CC
+      206EEAD388F89C13BDF7B93CD16721BB22A37F9AB2AEF5388EB254D93BF4BB35
+      6F3815297C14F366A930611A4F194216883E77B93C23E7154F587A1F39B515A5
+      0C3DE05686D391425E46A74B858469C4EAD339E2FC2B735583A9D15FC7326A4A
+      BEEEBFC9812D23551564CA502ABAB326A306269F4DE9E8F64BE2348E9BEC2EAF
+      A94BE29FC9A8216E1AB7CA9C7DAB9F41858005CE160A2DA54266ACF00A6FF087
+      B88EB755E77879C6D2BBC43C91EB1F2C1DC18ADA06BBDC4581CC839FEB8D17CE
+      68F9FC939239FD7E79EFF08DAA75FE20E2F3D56229DDA6757E270587B2A35BBB
+      72ADC5B9A5423267DC3BF80D8BDE2BD0CE39E41DD53DFC22649764FC57175EF6
+      FA3DDE0A84B57D023AF2A99EE06CC86E39B8D300FE005B64AC6F3D2662070000
+      000049454E44AE426082}
+    SelfOwnMaterial.DrawArrowPictureParam.PictureHorzAlign = phaRight
+    SelfOwnMaterial.DrawArrowPictureParam.PictureVertAlign = pvaCenter
+    SelfOwnMaterial.DrawArrowPictureParam.DrawRectSetting.Right = 10.000000000000000000
+    SelfOwnMaterial.DrawArrowPictureParam.DrawRectSetting.Enabled = True
+    SelfOwnMaterial.DrawArrowPictureParam.DrawRectSetting.SizeType = dpstPixel
+    SelfOwnMaterial.DrawPictureParam.IsStretch = True
+    SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaBottom
+    SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Height = 2.000000000000000000
+    SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Enabled = True
+    SelfOwnMaterial.DrawPictureParam.DrawRectSetting.SizeType = dpstPixel
+    SelfOwnMaterial.DrawPictureParam.DrawRectSetting.PositionVertType = dppvtBottom
+    SelfOwnMaterial.DrawHelpTextParam.FontSize = 18.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.FontColor = xFF8D8D8D
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.Size = 18.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = xFF8D8D8D
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = xFF8D8D8D
+    SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Left = 10.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Enabled = True
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.SizeType = dpstPixel
+    SelfOwnMaterial.DrawTextParam.FontSize = 18.000000000000000000
+    SelfOwnMaterial.DrawTextParam.FontColor = xFF585A59
+    SelfOwnMaterial.DrawTextParam.DrawFont.Size = 18.000000000000000000
+    SelfOwnMaterial.DrawTextParam.DrawFont.Color = xFF585A59
+    SelfOwnMaterial.DrawTextParam.DrawFont.FontColor.Color = xFF585A59
+    SelfOwnMaterial.DrawTextParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.DrawTextParam.DrawRectSetting.Left = 10.000000000000000000
+    SelfOwnMaterial.DrawTextParam.DrawRectSetting.Enabled = True
+    SelfOwnMaterial.DrawTextParam.DrawRectSetting.SizeType = dpstPixel
+    IsUseDefaultStyle = False
+    ComboBoxProperties.HelpText = #35831#36873#25321#23621#20303#22320#22336
+    Properties.HelpText = #35831#36873#25321#23621#20303#22320#22336
+  end
+  object lblComboBoxCanSetHelpText: TLabel
+    Anchors = [akLeft, akTop, akRight]
+    Position.X = 16.000000000000000000
+    Position.Y = 40.000000000000000000
+    Size.Width = 297.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    Text = #21487#20197#35774#32622#25552#31034#25991#23383
+  end
+  object lblComboBoxCanSetBackColorAndBorder: TLabel
+    Anchors = [akLeft, akTop, akRight]
+    Position.X = 16.000000000000000000
+    Position.Y = 14.000000000000000000
+    Size.Width = 297.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    Text = #21487#20197#35774#32622#32972#26223#39068#33394#21644#36793#26694
+  end
+  object lblComboBoxCanSetDropDownIcon: TLabel
+    Anchors = [akLeft, akTop, akRight]
+    Position.X = 16.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 297.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    Text = #21487#20197#35774#32622#19979#25289#31661#22836#22270#26631
+  end
+  object cmbComboBox_Material: TSkinComboBoxDefaultMaterial
+    BackColor.BorderEadges = [beBottom]
+    BackColor.IsFill = True
+    BackColor.RoundWidth = 2.000000000000000000
+    BackColor.RoundHeight = 2.000000000000000000
+    BackColor.BorderColor.Color = claLightgray
+    BackColor.BorderWidth = 1.000000000000000000
+    IsTransparent = False
+    ArrowPicture.PNG = {
+      89504E470D0A1A0A0000000D49484452000000150000000B080600000090CBC6
+      7D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      01D449444154384FA5D25F4853511C07F0DFEF5C7737C929BB200886E1BD3DC4
+      A06709DA5B41A0200D9C63B3408205116E13C5E75E43D8C62030107BE88EBA95
+      510F1982A347F129082EF86FF6D09BE05097B2EDEEFCDA1987A1AE14E9F372E1
+      F7FDDD2FDC7B0E264C3D4E48FE4C64E731FC87110B945E479F23429B01423702
+      8B2572C68208E4CEA524DF5E6DEFADEA8B00F808815465F543313F10D41C4498
+      F4D6B4EB7DE1E227FB1D90DCBFD013CBDFC16AF40537F00ED7309619DBCEA2CC
+      206EEAD388F89C13BDF7B93CD16721BB22A37F9AB2AEF5388EB254D93BF4BB35
+      6F3815297C14F366A930611A4F194216883E77B93C23E7154F587A1F39B515A5
+      0C3DE05686D391425E46A74B858469C4EAD339E2FC2B735583A9D15FC7326A4A
+      BEEEBFC9812D23551564CA502ABAB326A306269F4DE9E8F64BE2348E9BEC2EAF
+      A94BE29FC9A8216E1AB7CA9C7DAB9F41858005CE160A2DA54266ACF00A6FF087
+      B88EB755E77879C6D2BBC43C91EB1F2C1DC18ADA06BBDC4581CC839FEB8D17CE
+      68F9FC939239FD7E79EFF08DAA75FE20E2F3D56229DDA6757E270587B2A35BBB
+      72ADC5B9A5423267DC3BF80D8BDE2BD0CE39E41DD53DFC22649764FC57175EF6
+      FA3DDE0A84B57D023AF2A99EE06CC86E39B8D300FE005B64AC6F3D2662070000
+      000049454E44AE426082}
+    DrawArrowPictureParam.PictureHorzAlign = phaRight
+    DrawArrowPictureParam.PictureVertAlign = pvaCenter
+    DrawArrowPictureParam.DrawRectSetting.Right = 10.000000000000000000
+    DrawArrowPictureParam.DrawRectSetting.Enabled = True
+    DrawArrowPictureParam.DrawRectSetting.SizeType = dpstPixel
+    DrawPictureParam.IsStretch = True
+    DrawPictureParam.PictureVertAlign = pvaBottom
+    DrawPictureParam.DrawRectSetting.Height = 2.000000000000000000
+    DrawPictureParam.DrawRectSetting.Enabled = True
+    DrawPictureParam.DrawRectSetting.SizeType = dpstPixel
+    DrawPictureParam.DrawRectSetting.PositionVertType = dppvtBottom
+    DrawHelpTextParam.FontSize = 18.000000000000000000
+    DrawHelpTextParam.FontColor = xFF8D8D8D
+    DrawHelpTextParam.DrawFont.Size = 18.000000000000000000
+    DrawHelpTextParam.DrawFont.Color = xFF8D8D8D
+    DrawHelpTextParam.DrawFont.FontColor.Color = xFF8D8D8D
+    DrawHelpTextParam.FontVertAlign = fvaCenter
+    DrawHelpTextParam.DrawRectSetting.Left = 10.000000000000000000
+    DrawHelpTextParam.DrawRectSetting.Enabled = True
+    DrawHelpTextParam.DrawRectSetting.SizeType = dpstPixel
+    DrawTextParam.FontSize = 18.000000000000000000
+    DrawTextParam.FontColor = xFF585A59
+    DrawTextParam.DrawFont.Size = 18.000000000000000000
+    DrawTextParam.DrawFont.Color = xFF585A59
+    DrawTextParam.DrawFont.FontColor.Color = xFF585A59
+    DrawTextParam.FontVertAlign = fvaCenter
+    DrawTextParam.DrawRectSetting.Left = 10.000000000000000000
+    DrawTextParam.DrawRectSetting.Enabled = True
+    DrawTextParam.DrawRectSetting.SizeType = dpstPixel
+    Left = 128
+    Top = 176
+  end
+end

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{1AD4F9AD-A29A-4A54-8B29-D51FE48FD2A8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Client\MobilePos_FMX_XE10.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Server\MobilePosServer_VCL_XE10.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="MobilePos_FMX_XE10">
+        <MSBuild Projects="Client\MobilePos_FMX_XE10.dproj"/>
+    </Target>
+    <Target Name="MobilePos_FMX_XE10:Clean">
+        <MSBuild Projects="Client\MobilePos_FMX_XE10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MobilePos_FMX_XE10:Make">
+        <MSBuild Projects="Client\MobilePos_FMX_XE10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MobilePosServer_VCL_XE10">
+        <MSBuild Projects="Server\MobilePosServer_VCL_XE10.dproj"/>
+    </Target>
+    <Target Name="MobilePosServer_VCL_XE10:Clean">
+        <MSBuild Projects="Server\MobilePosServer_VCL_XE10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MobilePosServer_VCL_XE10:Make">
+        <MSBuild Projects="Server\MobilePosServer_VCL_XE10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="MobilePos_FMX_XE10;MobilePosServer_VCL_XE10"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="MobilePos_FMX_XE10:Clean;MobilePosServer_VCL_XE10:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="MobilePos_FMX_XE10:Make;MobilePosServer_VCL_XE10:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

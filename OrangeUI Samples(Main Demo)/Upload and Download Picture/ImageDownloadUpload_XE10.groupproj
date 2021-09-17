@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{85D561D6-27A1-4881-A34D-3D4BCB2D12B8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Client\ImageClient_XE10.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Server\ImageServer_XE10.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ImageClient_XE10">
+        <MSBuild Projects="Client\ImageClient_XE10.dproj"/>
+    </Target>
+    <Target Name="ImageClient_XE10:Clean">
+        <MSBuild Projects="Client\ImageClient_XE10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ImageClient_XE10:Make">
+        <MSBuild Projects="Client\ImageClient_XE10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ImageServer_XE10">
+        <MSBuild Projects="Server\ImageServer_XE10.dproj"/>
+    </Target>
+    <Target Name="ImageServer_XE10:Clean">
+        <MSBuild Projects="Server\ImageServer_XE10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ImageServer_XE10:Make">
+        <MSBuild Projects="Server\ImageServer_XE10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ImageClient_XE10;ImageServer_XE10"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ImageClient_XE10:Clean;ImageServer_XE10:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ImageClient_XE10:Make;ImageServer_XE10:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -1,0 +1,349 @@
+object FrameMemo: TFrameMemo
+  Size.Width = 320.000000000000000000
+  Size.Height = 480.000000000000000000
+  Size.PlatformDefault = False
+  object memBackgroundPictureAndHelpText: TSkinFMXMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    ShowScrollBars = False
+    StyledSettings = [Family, Style, FontColor]
+    TextSettings.WordWrap = True
+    EnableDragHighlight = False
+    Position.X = 15.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 178.000000000000000000
+    Size.Height = 89.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.DrawPictureParam.IsStretch = True
+    SelfOwnMaterial.DrawPictureParam.StretchStyle = issSquare
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Left = 5
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Top = 5
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Right = 5
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Bottom = 5
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
+    SelfOwnMaterial.NormalPicture.PNG = {
+      89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+      F8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      013849444154484BB596BF4A034110C66F67AEB3B3492D68EB33F80A968204B1
+      B1F33D6C45101B0BB1172C53F90422B606AC6DEC2C0EEE6E9D3FBBC714D7787C
+      0E7CB7F992F0FB32B3D94B9AFFAEA497F5F5D3456AD2BE3D03AADCE4EDC3E5F1
+      9D99B39BE7AB0C2E652A9BEC92D2A8EB300C6F0845A60530B991528FD0C43443
+      0D3EA032CDB4D40CBACAE808A1C8F434E2DA018334313D8DF123AA4C334464ED
+      48CD7D9A259A9816203B5EF780118ACC1280EFA0327D5E254D4A3D4213D30CB7
+      6C66AEDD258A4C4F93BB84AE736F5EA2C8F4006EF1018559E6E569E338324291
+      E97B90C80E85A4CF1EFDBF2A32DDB47EEAFABE678422D302E4CE67EDC88B8450
+      64960EBC9DAEEB08A1C8B4BADDBC9EC8ECA0A54C65DB8FFECBFBE7F9C7D7F78F
+      3E46D5C16A77E7E870EFDE02E4AB759A12F85F45CE5B227AFC05C97242BB75BC
+      18E90000000049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
+    SelfOwnMaterial.DrawTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawTextParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Left = 5.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Top = 3.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Enabled = True
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.SizeType = dpstPixel
+    SelfOwnMaterial.DrawCharCountTextParam.FontColor = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCharCountTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCharCountTextParam.FontVertAlign = fvaTop
+    ContentMarginsLeft = 0
+    ContentMarginsTop = 0
+    ContentMarginsRight = 0
+    ContentMarginsBottom = 0
+    IsUseDefaultStyle = False
+    IsInScrollBox = False
+    MemoProperties.IsDrawHelpWhenFocused = True
+    MemoProperties.IsDrawCharCount = False
+    MemoProperties.IsAutoHeight = False
+    MemoProperties.AutoHeightMaxLineCount = 3
+    MemoProperties.HelpText = 'Please input some words...'
+    MemoProperties.HelpIcon.IsClipRound = False
+    Properties.IsDrawHelpWhenFocused = True
+    Properties.IsDrawCharCount = False
+    Properties.IsAutoHeight = False
+    Properties.AutoHeightMaxLineCount = 3
+    Properties.HelpText = 'Please input some words...'
+    Properties.HelpIcon.IsClipRound = False
+    Viewport.Width = 174.000000000000000000
+    Viewport.Height = 85.000000000000000000
+  end
+  object memContent: TSkinFMXMemo
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    DataDetectorTypes = []
+    StyledSettings = [Family, Style, FontColor]
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.WordWrap = True
+    Position.X = 14.000000000000000000
+    Position.Y = 202.000000000000000000
+    Size.Width = 179.000000000000000000
+    Size.Height = 86.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.RoundWidth = 4.000000000000000000
+    SelfOwnMaterial.BackColor.RoundHeight = 4.000000000000000000
+    SelfOwnMaterial.BackColor.BorderColor.Color = claGray
+    SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.DrawPictureParam.IsStretch = True
+    SelfOwnMaterial.DrawPictureParam.StretchStyle = issSquare
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Left = 16
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Top = 16
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Right = 16
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Bottom = 16
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
+    SelfOwnMaterial.DrawTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawTextParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Left = 5.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Top = 3.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Enabled = True
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.SizeType = dpstPixel
+    SelfOwnMaterial.DrawCharCountTextParam.FontColor = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCharCountTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCharCountTextParam.FontVertAlign = fvaTop
+    ContentMarginsLeft = 0
+    ContentMarginsTop = 0
+    ContentMarginsRight = 0
+    ContentMarginsBottom = 0
+    IsUseDefaultStyle = False
+    IsInScrollBox = False
+    MemoProperties.IsDrawHelpWhenFocused = True
+    MemoProperties.IsDrawCharCount = False
+    MemoProperties.IsAutoHeight = False
+    MemoProperties.AutoHeightMaxLineCount = 3
+    MemoProperties.HelpText = 'Please input some words...'
+    MemoProperties.HelpIcon.IsClipRound = False
+    Properties.IsDrawHelpWhenFocused = True
+    Properties.IsDrawCharCount = False
+    Properties.IsAutoHeight = False
+    Properties.AutoHeightMaxLineCount = 3
+    Properties.HelpText = 'Please input some words...'
+    Properties.HelpIcon.IsClipRound = False
+    Viewport.Width = 175.000000000000000000
+    Viewport.Height = 82.000000000000000000
+  end
+  object lblMemoCanSetBackgroundPicture: TLabel
+    Anchors = [akLeft, akTop, akRight]
+    Position.X = 16.000000000000000000
+    Position.Y = 14.000000000000000000
+    Size.Width = 297.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    Text = #21487#20197#35774#32622#32972#26223#22270#29255
+  end
+  object lblMemoCanSetHelpText: TLabel
+    Anchors = [akLeft, akTop, akRight]
+    Position.X = 16.000000000000000000
+    Position.Y = 40.000000000000000000
+    Size.Width = 297.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    Text = #21487#20197#35774#32622#25552#31034#25991#23383
+  end
+  object lblMemoCanSetBackColorAndBorder: TLabel
+    Anchors = [akLeft, akTop, akRight]
+    Position.X = 16.000000000000000000
+    Position.Y = 174.000000000000000000
+    Size.Width = 297.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    Text = #21487#20197#35774#32622#32972#26223#39068#33394#21644#36793#26694
+  end
+  object SkinFMXMemo1: TSkinFMXMemo
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Lines.Strings = (
+      'aaaaa'
+      'bbb')
+    MaxLength = 255
+    StyledSettings = [Family, Style, FontColor]
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.WordWrap = True
+    Position.X = 198.000000000000000000
+    Position.Y = 74.000000000000000000
+    Size.Width = 179.000000000000000000
+    Size.Height = 86.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.RoundWidth = 4.000000000000000000
+    SelfOwnMaterial.BackColor.RoundHeight = 4.000000000000000000
+    SelfOwnMaterial.BackColor.BorderColor.Color = claGray
+    SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.DrawPictureParam.IsStretch = True
+    SelfOwnMaterial.DrawPictureParam.StretchStyle = issSquare
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Left = 16
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Top = 16
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Right = 16
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Bottom = 16
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
+    SelfOwnMaterial.DrawTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawTextParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Left = 5.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Top = 3.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Enabled = True
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.SizeType = dpstPixel
+    SelfOwnMaterial.DrawCharCountTextParam.FontColor = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCharCountTextParam.FontHorzAlign = fhaRight
+    SelfOwnMaterial.DrawCharCountTextParam.FontVertAlign = fvaBottom
+    ContentMarginsLeft = 0
+    ContentMarginsTop = 0
+    ContentMarginsRight = 0
+    ContentMarginsBottom = 0
+    IsUseDefaultStyle = False
+    IsInScrollBox = False
+    MemoProperties.IsDrawHelpWhenFocused = True
+    MemoProperties.IsDrawCharCount = True
+    MemoProperties.IsAutoHeight = True
+    MemoProperties.AutoHeightMaxLineCount = 3
+    MemoProperties.HelpText = 'Please input some words...'
+    MemoProperties.HelpIcon.IsClipRound = False
+    Properties.IsDrawHelpWhenFocused = True
+    Properties.IsDrawCharCount = True
+    Properties.IsAutoHeight = True
+    Properties.AutoHeightMaxLineCount = 3
+    Properties.HelpText = 'Please input some words...'
+    Properties.HelpIcon.IsClipRound = False
+    Viewport.Width = 175.000000000000000000
+    Viewport.Height = 82.000000000000000000
+  end
+  object SkinFMXMemo2: TSkinFMXMemo
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    DataDetectorTypes = []
+    StyledSettings = [Family, Style, FontColor]
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.WordWrap = True
+    Position.X = 14.000000000000000000
+    Position.Y = 306.000000000000000000
+    Size.Width = 179.000000000000000000
+    Size.Height = 86.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.RoundWidth = 4.000000000000000000
+    SelfOwnMaterial.BackColor.RoundHeight = 4.000000000000000000
+    SelfOwnMaterial.BackColor.BorderColor.Color = claGray
+    SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.DrawPictureParam.IsStretch = True
+    SelfOwnMaterial.DrawPictureParam.StretchStyle = issSquare
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Left = 16
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Top = 16
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Right = 16
+    SelfOwnMaterial.DrawPictureParam.StretchMargins.Bottom = 16
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
+    SelfOwnMaterial.DrawTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawTextParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Left = 5.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Top = 3.000000000000000000
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Enabled = True
+    SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.SizeType = dpstPixel
+    SelfOwnMaterial.DrawCharCountTextParam.FontColor = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.DrawCharCountTextParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCharCountTextParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCharCountTextParam.FontVertAlign = fvaTop
+    ContentMarginsLeft = 0
+    ContentMarginsTop = 10
+    ContentMarginsRight = 0
+    ContentMarginsBottom = 0
+    IsUseDefaultStyle = False
+    IsInScrollBox = False
+    MemoProperties.IsDrawHelpWhenFocused = True
+    MemoProperties.IsDrawCharCount = False
+    MemoProperties.IsAutoHeight = False
+    MemoProperties.AutoHeightMaxLineCount = 3
+    MemoProperties.HelpIcon.IsClipRound = False
+    Properties.IsDrawHelpWhenFocused = True
+    Properties.IsDrawCharCount = False
+    Properties.IsAutoHeight = False
+    Properties.AutoHeightMaxLineCount = 3
+    Properties.HelpIcon.IsClipRound = False
+    Viewport.Width = 175.000000000000000000
+    Viewport.Height = 74.000000000000000000
+    object Label1: TLabel
+      Align = Top
+      StyledSettings = [Family, Size, Style]
+      Size.Width = 175.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.FontColor = claGray
+      TextSettings.HorzAlign = Trailing
+      Text = 'Label1'
+      TabOrder = 0
+    end
+  end
+  object Button1: TButton
+    Position.X = 64.000000000000000000
+    Position.Y = 400.000000000000000000
+    TabOrder = 5
+    Text = 'Button1'
+    OnClick = Button1Click
+  end
+end

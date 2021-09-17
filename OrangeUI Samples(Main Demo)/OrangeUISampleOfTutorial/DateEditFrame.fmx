@@ -1,0 +1,26 @@
+object FrameDateEdit: TFrameDateEdit
+  Size.Width = 320.000000000000000000
+  Size.Height = 240.000000000000000000
+  Size.PlatformDefault = False
+  object SkinFMXDateEdit1: TSkinFMXDateEdit
+    Date = 42036.000000000000000000
+    Format = 'MM/DD/YYYY'
+    ClipChildren = True
+    Position.X = 80.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.BorderColor.Color = claGray
+    SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.DrawPictureParam.IsStretch = True
+    SelfOwnMaterial.DrawTextParam.FontVertAlign = fvaCenter
+    IsUseDefaultStyle = False
+  end
+end

@@ -1,0 +1,1 @@
+http://www.orangeui.cn:10020/usercenter/login?appid=1000&user_type=0&login_type=phone_num_password&username=18957901025&password=123456&captcha=&version=&phone_imei=&phone_uuid=&phone_type=Windows%2010&os=Windows&os_version=Windows%2010%20(Version%2010.0,%20Build%2018363,%2064-bit%20Edition)

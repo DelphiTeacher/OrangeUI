@@ -1,0 +1,5 @@
+object FrameVirtualGrid: TFrameVirtualGrid
+  Size.Width = 320.000000000000000000
+  Size.Height = 425.000000000000000000
+  Size.PlatformDefault = False
+end

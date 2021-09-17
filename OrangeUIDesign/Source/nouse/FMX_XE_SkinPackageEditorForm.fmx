@@ -1,0 +1,51 @@
+object frmSkinPackageEditor: TfrmSkinPackageEditor
+  Left = 0
+  Top = 0
+  Caption = 'SkinPackageEditor'
+  ClientHeight = 480
+  ClientWidth = 339
+  Position = ScreenCenter
+  FormStyle = StayOnTop
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object tvPackage: TTreeView
+    Align = Client
+    Size.Width = 339.000000000000000000
+    Size.Height = 436.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    OnChange = tvPackageChange
+    Viewport.Width = 335.000000000000000000
+    Viewport.Height = 432.000000000000000000
+  end
+  object pnlTopToolBar: TPanel
+    Align = Top
+    Size.Width = 339.000000000000000000
+    Size.Height = 44.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object btnAddMaterial: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 1
+      Text = #28155#21152#32032#26448
+      OnClick = btnAddMaterialClick
+    end
+    object btnLoadFromFile: TButton
+      Position.X = 112.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 113.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = #20174#25991#20214#21152#36733#30382#32932
+      OnClick = btnLoadFromFileClick
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 136
+    Top = 72
+  end
+end

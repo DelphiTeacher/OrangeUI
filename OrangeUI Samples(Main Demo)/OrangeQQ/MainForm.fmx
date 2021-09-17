@@ -1,0 +1,16 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'QQ'#30028#38754#23398#20064'Demo'
+  ClientHeight = 480
+  ClientWidth = 316
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnKeyUp = FormKeyUp
+  OnShow = FormShow
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 2
+end

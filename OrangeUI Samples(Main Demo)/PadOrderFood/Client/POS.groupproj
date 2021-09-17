@@ -1,0 +1,84 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{32F0D39E-9716-4991-80A3-25FBA5DE43BC}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\..\..\OrangeUIControl\OrangeUIControl_FMX_XE10.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MobilePos.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\OrangeUIPublish\OrangeUIDesign\OrangeUIDesign_FMX_XE10.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\OrangeUI Samples(示例)\OrangeUISampleOfTutorial\OrangeUIDemo_FMX_XE10.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\芝麻开门\芝麻开门IOSAPP\ZiMaYiPiao.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="OrangeUIControl_FMX_XE10">
+        <MSBuild Projects="..\..\..\OrangeUIControl\OrangeUIControl_FMX_XE10.dproj"/>
+    </Target>
+    <Target Name="OrangeUIControl_FMX_XE10:Clean">
+        <MSBuild Projects="..\..\..\OrangeUIControl\OrangeUIControl_FMX_XE10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeUIControl_FMX_XE10:Make">
+        <MSBuild Projects="..\..\..\OrangeUIControl\OrangeUIControl_FMX_XE10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MobilePos">
+        <MSBuild Projects="MobilePos.dproj"/>
+    </Target>
+    <Target Name="MobilePos:Clean">
+        <MSBuild Projects="MobilePos.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MobilePos:Make">
+        <MSBuild Projects="MobilePos.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangeUIDesign_FMX_XE10">
+        <MSBuild Projects="..\..\..\OrangeUIPublish\OrangeUIDesign\OrangeUIDesign_FMX_XE10.dproj"/>
+    </Target>
+    <Target Name="OrangeUIDesign_FMX_XE10:Clean">
+        <MSBuild Projects="..\..\..\OrangeUIPublish\OrangeUIDesign\OrangeUIDesign_FMX_XE10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeUIDesign_FMX_XE10:Make">
+        <MSBuild Projects="..\..\..\OrangeUIPublish\OrangeUIDesign\OrangeUIDesign_FMX_XE10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangeUIDemo_FMX_XE10">
+        <MSBuild Projects="..\..\..\OrangeUI Samples(示例)\OrangeUISampleOfTutorial\OrangeUIDemo_FMX_XE10.dproj"/>
+    </Target>
+    <Target Name="OrangeUIDemo_FMX_XE10:Clean">
+        <MSBuild Projects="..\..\..\OrangeUI Samples(示例)\OrangeUISampleOfTutorial\OrangeUIDemo_FMX_XE10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeUIDemo_FMX_XE10:Make">
+        <MSBuild Projects="..\..\..\OrangeUI Samples(示例)\OrangeUISampleOfTutorial\OrangeUIDemo_FMX_XE10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ZiMaYiPiao">
+        <MSBuild Projects="..\..\芝麻开门\芝麻开门IOSAPP\ZiMaYiPiao.dproj"/>
+    </Target>
+    <Target Name="ZiMaYiPiao:Clean">
+        <MSBuild Projects="..\..\芝麻开门\芝麻开门IOSAPP\ZiMaYiPiao.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ZiMaYiPiao:Make">
+        <MSBuild Projects="..\..\芝麻开门\芝麻开门IOSAPP\ZiMaYiPiao.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="OrangeUIControl_FMX_XE10;MobilePos;OrangeUIDesign_FMX_XE10;OrangeUIDemo_FMX_XE10;ZiMaYiPiao"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="OrangeUIControl_FMX_XE10:Clean;MobilePos:Clean;OrangeUIDesign_FMX_XE10:Clean;OrangeUIDemo_FMX_XE10:Clean;ZiMaYiPiao:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="OrangeUIControl_FMX_XE10:Make;MobilePos:Make;OrangeUIDesign_FMX_XE10:Make;OrangeUIDemo_FMX_XE10:Make;ZiMaYiPiao:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -1,0 +1,131 @@
+object FrameMobileAuth: TFrameMobileAuth
+  Size.Width = 320.000000000000000000
+  Size.Height = 482.000000000000000000
+  Size.PlatformDefault = False
+  object pnlToolBar: TSkinFMXPanel
+    ParentMouseEvent = True
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.FillColor.Color = xFF18B4ED
+    SelfOwnMaterial.DrawCaptionParam.FontSize = 16.000000000000000000
+    SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 16.000000000000000000
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+    MouseDownFocus = False
+    Align = Top
+    ClipChildren = True
+    Size.Width = 320.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Caption = #24212#29992#25480#26435#39029#38754
+    Text = #24212#29992#25480#26435#39029#38754
+    Properties.IsToolBar = True
+    object imgToolBarDevide: TSkinFMXImage
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsLine = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.DrawPictureParam.IsStretch = True
+      MouseDownFocus = False
+      Align = Bottom
+      ClipChildren = True
+      Position.Y = 49.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 1.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Properties.AutoSize = False
+      Properties.Picture.PNG = {
+        89504E470D0A1A0A0000000D49484452000002020000000208060000002ADAB4
+        E5000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        0026494441545847EDC631010030080330703EA93829CF5C905CE99949010027
+        7592F70F009C52B55494071FB0D7C1960000000049454E44AE426082}
+      Properties.Animated = False
+      Properties.AnimateSpeed = 10.000000000000000000
+      Properties.GIFDelayExp = 12
+      Properties.CurrentRotateAngle = 0
+      Properties.Rotated = False
+      Properties.RotateSpeed = 10.000000000000000000
+      Properties.RotateIncrement = 10
+      Properties.IsToolBar = False
+      Top = 49
+    end
+    object btnReturn: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      RefMaterial = bdmReturnButton
+      MouseDownFocus = False
+      Align = Left
+      ClipChildren = True
+      Size.Width = 80.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      OnClick = btnReturnClick
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.PushedGroupIndex = 0
+      Properties.ButtonIndex = -1
+    end
+  end
+  object pnlClient: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    MouseDownFocus = False
+    Align = Client
+    Size.Width = 320.000000000000000000
+    Size.Height = 432.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Properties.IsToolBar = False
+  end
+  object bdmReturnButton: TSkinButtonDefaultMaterial
+    BackColor.IsFill = True
+    DrawCaptionParam.FontSize = 18.000000000000000000
+    DrawCaptionParam.FontColor = claWhite
+    DrawCaptionParam.DrawFont.Size = 18.000000000000000000
+    DrawCaptionParam.DrawFont.Color = claWhite
+    DrawCaptionParam.DrawFont.FontColor.Color = claWhite
+    DrawCaptionParam.FontVertAlign = fvaCenter
+    DrawCaptionParam.DrawRectSetting.Left = 36.000000000000000000
+    DrawCaptionParam.DrawRectSetting.Enabled = True
+    DrawCaptionParam.DrawRectSetting.SizeType = dpstPixel
+    DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+    DrawCaptionParam.DrawEffectSetting.MouseDownEffect.FontColor.Color = claGray
+    DrawDetailParam.FontVertAlign = fvaBottom
+    DrawIconParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+    DrawPictureParam.IsAutoFit = True
+    DrawPictureParam.PictureVertAlign = pvaCenter
+    DrawPictureParam.DrawRectSetting.Left = 10.000000000000000000
+    DrawPictureParam.DrawRectSetting.Height = 32.000000000000000000
+    DrawPictureParam.DrawRectSetting.Enabled = True
+    DrawPictureParam.DrawRectSetting.SizeType = dpstPixel
+    DrawPictureParam.DrawRectSetting.PositionVertType = dppvtCenter
+    DrawPictureParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+    NormalPicture.ImageIndex = 0
+    NormalPicture.PNG = {
+      89504E470D0A1A0A0000000D494844520000001B0000002D08060000005FF710
+      E5000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      00DD494441545847ED94410AC230104513EB0514443D97E7F0089EC10B1475A5
+      6EBC870BDDE8C25EC37DD3F8D37C448B0B9109689D07C334F9308F2150A32801
+      EF7D5655D51435E1551A82C839B745F745513808878C64791405CAB2DCA37519
+      CB81A14F227040F518CB81A12D17E18D8E68BF2FDAD416A0A2B7C1D03F10E17F
+      D7672C0766B753B48E9A368802183CA3475CD461BF03C7889FC65A7B415D7994
+      079B0CB0D129EE56B342658CE5690AF1864B34157E8E0AC5F906E1022DB9F01C
+      752A144085E2BC10E68CD2D014E23C66948620C4563BD41C3ECB6B4502636EF0
+      4FFAC17B465E090000000049454E44AE426082}
+    DownPicture.ImageIndex = 1
+    Left = 112
+    Top = 112
+  end
+end

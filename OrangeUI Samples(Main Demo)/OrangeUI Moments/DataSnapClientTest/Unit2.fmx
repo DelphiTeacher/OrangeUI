@@ -1,0 +1,242 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 541
+  ClientWidth = 877
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object btnCall: TButton
+    Position.X = 120.000000000000000000
+    Position.Y = 104.000000000000000000
+    Size.Width = 153.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = '1.'#20808#35843#29992#30331#24405#25509#21475
+    OnClick = btnCallClick
+  end
+  object edtLoginUser: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 3
+    Text = '18957901025'
+    Position.X = 80.000000000000000000
+    Position.Y = 72.000000000000000000
+  end
+  object edtLoginPass: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 1
+    Text = '123456'
+    Position.X = 248.000000000000000000
+    Position.Y = 72.000000000000000000
+  end
+  object Label1: TLabel
+    Position.X = 16.000000000000000000
+    Position.Y = 72.000000000000000000
+    Text = #29992#25143#21517
+  end
+  object Label2: TLabel
+    Position.X = 192.000000000000000000
+    Position.Y = 72.000000000000000000
+    Text = #23494#30721
+  end
+  object memResponseJsonStr: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    TextSettings.WordWrap = True
+    Position.X = 16.000000000000000000
+    Position.Y = 168.000000000000000000
+    Size.Width = 417.000000000000000000
+    Size.Height = 121.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Viewport.Width = 413.000000000000000000
+    Viewport.Height = 117.000000000000000000
+  end
+  object Label3: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 16.000000000000000000
+    Text = #26381#21153#22120
+  end
+  object edtServer: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 2
+    Text = 'www.orangeui.cn'
+    Position.X = 80.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object btnSet: TButton
+    Position.X = 288.000000000000000000
+    Position.Y = 16.000000000000000000
+    TabOrder = 8
+    Text = #35774#32622
+    OnClick = btnSetClick
+  end
+  object Label4: TLabel
+    Position.X = 16.000000000000000000
+    Position.Y = 144.000000000000000000
+    Size.Width = 177.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = #36820#22238#30340#25968#25454'(Json)'
+  end
+  object btnParse: TButton
+    Position.X = 120.000000000000000000
+    Position.Y = 304.000000000000000000
+    Size.Width = 161.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+    Text = '2.'#35299#26512#36820#22238#30340#25968#25454
+    OnClick = btnParseClick
+  end
+  object memData: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Position.X = 16.000000000000000000
+    Position.Y = 344.000000000000000000
+    Size.Width = 417.000000000000000000
+    Size.Height = 169.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 11
+    Viewport.Width = 413.000000000000000000
+    Viewport.Height = 165.000000000000000000
+  end
+  object Label5: TLabel
+    Position.X = 488.000000000000000000
+    Position.Y = 80.000000000000000000
+    Text = #29992#25143#21517
+  end
+  object edtUserName: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 14
+    Position.X = 560.000000000000000000
+    Position.Y = 80.000000000000000000
+  end
+  object edtUserID: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 13
+    Position.X = 560.000000000000000000
+    Position.Y = 48.000000000000000000
+    Enabled = False
+  end
+  object Label6: TLabel
+    Position.X = 488.000000000000000000
+    Position.Y = 48.000000000000000000
+    Text = #29992#25143'ID'
+  end
+  object btnUpdateUserInfo: TButton
+    Position.X = 488.000000000000000000
+    Position.Y = 144.000000000000000000
+    Size.Width = 209.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 16
+    Text = #35843#29992#20462#25913#29992#25143#20449#24687#25509#21475
+    OnClick = btnUpdateUserInfoClick
+  end
+  object rbMale: TRadioButton
+    IsChecked = True
+    Position.X = 512.000000000000000000
+    Position.Y = 112.000000000000000000
+    Size.Width = 50.000000000000000000
+    Size.Height = 19.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 17
+    Text = #30007
+  end
+  object rbFemale: TRadioButton
+    Position.X = 568.000000000000000000
+    Position.Y = 112.000000000000000000
+    Size.Width = 50.000000000000000000
+    Size.Height = 19.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 18
+    Text = #22899
+  end
+  object edtPort: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 19
+    Text = '7040'
+    Position.X = 208.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Image1: TImage
+    MultiResBitmap = <
+      item
+      end>
+    Position.X = 528.000000000000000000
+    Position.Y = 192.000000000000000000
+    Size.Width = 105.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Button1: TButton
+    Position.X = 528.000000000000000000
+    Position.Y = 280.000000000000000000
+    Size.Width = 169.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 21
+    Text = '1.'#36873#25321#22270#29255
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Position.X = 528.000000000000000000
+    Position.Y = 312.000000000000000000
+    Size.Width = 169.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 23
+    Text = '2.'#19978#20256#22270#29255#21040#26381#21153#22120
+    OnClick = Button2Click
+  end
+  object Button3: TButton
+    Position.X = 528.000000000000000000
+    Position.Y = 376.000000000000000000
+    Size.Width = 169.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 24
+    Text = '3.'#35774#32622#20026#22836#20687
+    OnClick = Button3Click
+  end
+  object edtHeadPicFileName: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 26
+    Position.X = 528.000000000000000000
+    Position.Y = 344.000000000000000000
+    Size.Width = 313.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 456
+    Top = 232
+  end
+  object IdHTTP1: TIdHTTP
+    AllowCookies = True
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 456
+    Top = 304
+  end
+end

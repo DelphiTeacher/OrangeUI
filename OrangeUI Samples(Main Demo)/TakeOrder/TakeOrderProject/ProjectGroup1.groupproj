@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D450C921-6E21-46BC-990F-B317150DE437}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\..\..\..\OrangeUI Samples(后台示例)\OrangeUI朋友圈\Client\FriendCircleClient_D10_1.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\..\OrangeUIControl\OrangeUIControl_FMX_D10_1.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\EasyServiceClient_D10_1.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\人员定位系统\APP\员工签到\EmpSignIn_D10_1.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="FriendCircleClient_D10_1">
+        <MSBuild Projects="..\..\..\..\OrangeUI Samples(后台示例)\OrangeUI朋友圈\Client\FriendCircleClient_D10_1.dproj"/>
+    </Target>
+    <Target Name="FriendCircleClient_D10_1:Clean">
+        <MSBuild Projects="..\..\..\..\OrangeUI Samples(后台示例)\OrangeUI朋友圈\Client\FriendCircleClient_D10_1.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FriendCircleClient_D10_1:Make">
+        <MSBuild Projects="..\..\..\..\OrangeUI Samples(后台示例)\OrangeUI朋友圈\Client\FriendCircleClient_D10_1.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangeUIControl_FMX_D10_1">
+        <MSBuild Projects="..\..\..\..\OrangeUIControl\OrangeUIControl_FMX_D10_1.dproj"/>
+    </Target>
+    <Target Name="OrangeUIControl_FMX_D10_1:Clean">
+        <MSBuild Projects="..\..\..\..\OrangeUIControl\OrangeUIControl_FMX_D10_1.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeUIControl_FMX_D10_1:Make">
+        <MSBuild Projects="..\..\..\..\OrangeUIControl\OrangeUIControl_FMX_D10_1.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EasyServiceClient_D10_1">
+        <MSBuild Projects="..\EasyServiceClient_D10_1.dproj"/>
+    </Target>
+    <Target Name="EasyServiceClient_D10_1:Clean">
+        <MSBuild Projects="..\EasyServiceClient_D10_1.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EasyServiceClient_D10_1:Make">
+        <MSBuild Projects="..\EasyServiceClient_D10_1.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EmpSignIn_D10_1">
+        <MSBuild Projects="..\..\..\人员定位系统\APP\员工签到\EmpSignIn_D10_1.dproj"/>
+    </Target>
+    <Target Name="EmpSignIn_D10_1:Clean">
+        <MSBuild Projects="..\..\..\人员定位系统\APP\员工签到\EmpSignIn_D10_1.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EmpSignIn_D10_1:Make">
+        <MSBuild Projects="..\..\..\人员定位系统\APP\员工签到\EmpSignIn_D10_1.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="FriendCircleClient_D10_1;OrangeUIControl_FMX_D10_1;EasyServiceClient_D10_1;EmpSignIn_D10_1"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="FriendCircleClient_D10_1:Clean;OrangeUIControl_FMX_D10_1:Clean;EasyServiceClient_D10_1:Clean;EmpSignIn_D10_1:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="FriendCircleClient_D10_1:Make;OrangeUIControl_FMX_D10_1:Make;EasyServiceClient_D10_1:Make;EmpSignIn_D10_1:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

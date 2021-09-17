@@ -1,0 +1,307 @@
+object FrameMultiColorLabel: TFrameMultiColorLabel
+  Size.Width = 320.000000000000000000
+  Size.Height = 480.000000000000000000
+  Size.PlatformDefault = False
+  object SkinFMXMultiColorLabel2: TSkinFMXMultiColorLabel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaBottom
+    MouseDownFocus = False
+    Anchors = [akLeft, akTop, akRight]
+    CanFocus = True
+    ClipChildren = True
+    Position.X = 8.000000000000000000
+    Position.Y = 14.000000000000000000
+    Size.Width = 305.000000000000000000
+    Size.Height = 39.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Caption = '49.9'#20803' '
+    Text = '49.9'#20803' '
+    Properties.AutoSize = False
+    Properties.ColorTextCollection = <
+      item
+        Name = 'ItemDetail1'
+        BindItemFieldName = 'ItemDetail1'
+        Text = '49.9'
+        DrawFont.Size = 16.000000000000000000
+        DrawFont.Color = xFF4BB0A2
+        DrawFont.FontColor.Color = xFF4BB0A2
+        IsUseDefaultDrawFont = False
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end
+      item
+        Name = 'Devide'
+        BindItemFieldName = 'Devide'
+        Text = #20803' '
+        DrawFont.Color = claGray
+        DrawFont.FontColor.Color = claGray
+        IsUseDefaultDrawFont = False
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end>
+    Properties.Name1 = 'ItemDetail1'
+    Properties.Name2 = 'Devide'
+    Properties.Text1 = '49.9'
+    Properties.Text2 = #20803' '
+    Properties.Color1 = xFF4BB0A2
+    Properties.Color2 = claGray
+    Properties.Color3 = claBlack
+    Properties.Color4 = claBlack
+  end
+  object SkinFMXMultiColorLabel3: TSkinFMXMultiColorLabel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaBottom
+    MouseDownFocus = False
+    Anchors = [akLeft, akTop, akRight]
+    CanFocus = True
+    Position.X = 8.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 305.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Caption = '499.00'
+    Text = '499.00'
+    Properties.AutoSize = False
+    Properties.ColorTextCollection = <
+      item
+        Text = '499'
+        DrawFont.Size = 20.000000000000000000
+        DrawFont.Color = claBlue
+        DrawFont.FontColor.Color = claBlue
+        IsUseDefaultDrawFont = False
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end
+      item
+        Text = '.00'
+        DrawFont.Color = claRed
+        DrawFont.FontColor.Color = claRed
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end>
+    Properties.Text1 = '499'
+    Properties.Text2 = '.00'
+    Properties.Color1 = claBlue
+    Properties.Color2 = claRed
+    Properties.Color3 = claBlack
+    Properties.Color4 = claBlack
+  end
+  object SkinFMXMultiColorLabel4: TSkinFMXMultiColorLabel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaBottom
+    MouseDownFocus = False
+    Anchors = [akLeft, akTop, akRight]
+    CanFocus = True
+    ClipChildren = True
+    Position.X = 7.000000000000000000
+    Position.Y = 182.000000000000000000
+    Size.Width = 306.000000000000000000
+    Size.Height = 35.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Caption = 'ILoveyou!'
+    Text = 'ILoveyou!'
+    Properties.AutoSize = False
+    Properties.ColorTextCollection = <
+      item
+        Text = 'I'
+        DrawFont.Color = claRed
+        DrawFont.FontColor.Color = claRed
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end
+      item
+        Text = 'Love'
+        DrawFont.Color = claMediumorchid
+        DrawFont.FontColor.Color = claMediumorchid
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end
+      item
+        Text = 'you'
+        DrawFont.Color = claBlue
+        DrawFont.FontColor.Color = claBlue
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end
+      item
+        Text = '!'
+        DrawFont.Color = claBlue
+        DrawFont.FontColor.Color = claBlue
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end>
+    Properties.Text1 = 'I'
+    Properties.Text2 = 'Love'
+    Properties.Text3 = 'you'
+    Properties.Text4 = '!'
+    Properties.Color1 = claRed
+    Properties.Color2 = claMediumorchid
+    Properties.Color3 = claBlue
+    Properties.Color4 = claBlue
+  end
+  object lblPriceRightAlign: TSkinFMXMultiColorLabel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.DrawCaptionParam.FontName = '15'
+    SelfOwnMaterial.DrawCaptionParam.FontSize = 20.000000000000000000
+    SelfOwnMaterial.DrawCaptionParam.FontColor = xFFFB3437
+    SelfOwnMaterial.DrawCaptionParam.DrawFont.Family = '15'
+    SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 20.000000000000000000
+    SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = xFFFB3437
+    SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = xFFFB3437
+    SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaRight
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaBottom
+    SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.SizeType = dpstPixel
+    MouseDownFocus = False
+    Anchors = [akLeft, akTop, akRight]
+    HitTest = False
+    Position.X = 8.000000000000000000
+    Position.Y = 116.000000000000000000
+    Size.Width = 305.000000000000000000
+    Size.Height = 45.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Caption = #165'109'
+    Text = #165'109'
+    Properties.AutoSize = False
+    Properties.ColorTextCollection = <
+      item
+        Text = #165
+        IsUseDefaultDrawFont = False
+        IsUseDefaultDrawFontColor = True
+        IsBindingItem = False
+      end
+      item
+        Name = 'ItemDetail1'
+        BindItemFieldName = 'ItemDetail1'
+        Text = '109'
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = True
+        IsBindingItem = False
+      end>
+    Properties.Name2 = 'ItemDetail1'
+    Properties.Text1 = #165
+    Properties.Text2 = '109'
+    Properties.Color1 = claBlack
+    Properties.Color2 = claBlack
+    Properties.Color3 = claBlack
+    Properties.Color4 = claBlack
+  end
+  object SkinFMXLabel1: TSkinFMXMultiColorLabel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.DrawCaptionParam.FontColor = xFF0199FF
+    SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = xFF0199FF
+    SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = xFF0199FF
+    SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+    MouseDownFocus = False
+    Margins.Left = 50.000000000000000000
+    Margins.Top = 20.000000000000000000
+    Margins.Right = 50.000000000000000000
+    Position.X = 34.000000000000000000
+    Position.Y = 255.000000000000000000
+    Size.Width = 240.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Caption = #36824#27809#26377#27880#20876'? '#31435#21363#27880#20876
+    Text = #36824#27809#26377#27880#20876'? '#31435#21363#27880#20876
+    Properties.AutoSize = False
+    Properties.ColorTextCollection = <
+      item
+        Text = #36824#27809#26377#27880#20876'? '
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end
+      item
+        Text = #31435#21363#27880#20876
+        DrawFont.Color = xFF8EC43B
+        DrawFont.FontColor.Color = xFF8EC43B
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end
+      item
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end
+      item
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end>
+    Properties.Text1 = #36824#27809#26377#27880#20876'? '
+    Properties.Text2 = #31435#21363#27880#20876
+    Properties.Color1 = claBlack
+    Properties.Color2 = xFF8EC43B
+    Properties.Color3 = claBlack
+    Properties.Color4 = claBlack
+  end
+  object SkinFMXMultiColorLabel1: TSkinFMXMultiColorLabel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+    MouseDownFocus = False
+    Position.X = 24.000000000000000000
+    Position.Y = 447.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 13
+    Caption = #36824#27809#26377#27880#20876'?'
+    Text = #36824#27809#26377#27880#20876'?'
+    Properties.AutoSize = False
+    Properties.ColorTextCollection = <
+      item
+        Text = #36824#27809#26377#27880#20876'?'
+        DrawFont.Color = claWhite
+        DrawFont.FontColor.Color = claWhite
+        IsUseDefaultDrawFont = True
+        IsUseDefaultDrawFontColor = False
+        IsBindingItem = False
+      end>
+    Properties.Text1 = #36824#27809#26377#27880#20876'?'
+    Properties.Color1 = claWhite
+    Properties.Color2 = claBlack
+    Properties.Color3 = claBlack
+    Properties.Color4 = claBlack
+  end
+end

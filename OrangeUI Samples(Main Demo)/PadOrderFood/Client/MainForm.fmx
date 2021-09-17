@@ -1,0 +1,23 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = #31227#21160'POS'
+  ClientHeight = 480
+  ClientWidth = 703
+  Fill.Color = claBlack
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnShow = FormShow
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 0
+  object IdIPWatch1: TIdIPWatch
+    Active = False
+    HistoryFilename = 'iphist.dat'
+    Left = 336
+    Top = 136
+  end
+end

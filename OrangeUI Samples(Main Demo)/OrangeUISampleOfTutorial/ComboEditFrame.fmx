@@ -1,0 +1,202 @@
+object FrameComboEdit: TFrameComboEdit
+  Size.Width = 320.000000000000000000
+  Size.Height = 433.000000000000000000
+  Size.PlatformDefault = False
+  object sbClient: TSkinFMXScrollBox
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.IndicatorColor = claBlack
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.EnableAutoCenterPosition = False
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.EnableLoadingImageBiggerEffect = False
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.EnableLoadingImageRotateEffect = True
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.LoadingCaption = #27491#22312#21047#26032'...'
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.DecidedLoadCaption = #26494#24320#21047#26032
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.UnDecidedLoadCaption = #19979#25289#21047#26032
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.IndicatorColor = claBlack
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.EnableAutoCenterPosition = False
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.EnableLoadingImageBiggerEffect = False
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.EnableLoadingImageRotateEffect = True
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.LoadingCaption = #27491#22312#21047#26032'...'
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.DecidedLoadCaption = #26494#24320#21047#26032
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.UnDecidedLoadCaption = #19979#25289#21047#26032
+    MouseDownFocus = False
+    Align = Client
+    ClipChildren = True
+    Size.Width = 320.000000000000000000
+    Size.Height = 433.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+    VertScrollBar.ParentMouseEvent = False
+    VertScrollBar.ComponentTypeUseKind = ctukDefault
+    VertScrollBar.MaterialUseKind = mukSelfOwn
+    VertScrollBar.KeepSelfOwnMaterial = True
+    VertScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
+    VertScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
+    VertScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    VertScrollBar.MouseDownFocus = False
+    VertScrollBar.Position.X = 312.000000000000000000
+    VertScrollBar.Size.Width = 7.000000000000000000
+    VertScrollBar.Size.Height = 433.000000000000000000
+    VertScrollBar.Size.PlatformDefault = False
+    VertScrollBar.Properties.AutoSize = False
+    VertScrollBar.Properties.Kind = sbVertical
+    VertScrollBar.Properties.SmallChange = 1
+    VertScrollBar.Properties.LargeChange = 10
+    VertScrollBar.Properties.CanOverRangeTypes = [cortMin, cortMax]
+    HorzScrollBar.ParentMouseEvent = False
+    HorzScrollBar.ComponentTypeUseKind = ctukDefault
+    HorzScrollBar.MaterialUseKind = mukSelfOwn
+    HorzScrollBar.KeepSelfOwnMaterial = True
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
+    HorzScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    HorzScrollBar.MouseDownFocus = False
+    HorzScrollBar.Position.Y = 425.000000000000000000
+    HorzScrollBar.Size.Width = 320.000000000000000000
+    HorzScrollBar.Size.Height = 7.000000000000000000
+    HorzScrollBar.Size.PlatformDefault = False
+    HorzScrollBar.Properties.AutoSize = False
+    HorzScrollBar.Properties.Kind = sbHorizontal
+    HorzScrollBar.Properties.SmallChange = 1
+    HorzScrollBar.Properties.LargeChange = 10
+    HorzScrollBar.Properties.CanOverRangeTypes = []
+    ScrollControlCorner.ParentMouseEvent = False
+    ScrollControlCorner.ComponentTypeUseKind = ctukDefault
+    ScrollControlCorner.MaterialUseKind = mukSelfOwn
+    ScrollControlCorner.KeepSelfOwnMaterial = True
+    ScrollControlCorner.MouseDownFocus = False
+    ScrollControlCorner.Position.X = 313.000000000000000000
+    ScrollControlCorner.Position.Y = 426.000000000000000000
+    ScrollControlCorner.Size.Width = 7.000000000000000000
+    ScrollControlCorner.Size.Height = 7.000000000000000000
+    ScrollControlCorner.Size.PlatformDefault = False
+    Properties.ContentHeight = 433.000000000000000000
+    Properties.EnableAutoPullDownRefreshPanel = False
+    Properties.EnableAutoPullUpLoadMorePanel = False
+    Properties.VertCanOverRangeTypes = [cortMin, cortMax]
+    Properties.HorzCanOverRangeTypes = []
+    Properties.VertScrollBarShowType = sbstAutoCoverShow
+    Properties.HorzScrollBarShowType = sbstAutoCoverShow
+    Properties.ScrollBarEmbeddedType = sbetVirtualControl
+    Properties.ScrollBoxType = sbtVert
+    object sbcConent: TSkinFMXScrollBoxContent
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      MouseDownFocus = False
+      Align = Client
+      Size.Width = 320.000000000000000000
+      Size.Height = 433.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object cmbeditComboEdit: TSkinFMXComboEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 5
+        ItemHeight = 19.000000000000000000
+        Items.Strings = (
+          #19978#28023#24066
+          #21271#20140#24066
+          #27993#27743#30465)
+        ItemIndex = -1
+        Position.X = 16.000000000000000000
+        Position.Y = 96.000000000000000000
+        ClipChildren = True
+        Size.Width = 286.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        ParentMouseEvent = True
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.BorderEadges = [beBottom]
+        SelfOwnMaterial.BackColor.IsFill = True
+        SelfOwnMaterial.BackColor.RoundWidth = 2.000000000000000000
+        SelfOwnMaterial.BackColor.RoundHeight = 2.000000000000000000
+        SelfOwnMaterial.BackColor.BorderColor.Color = claLightgray
+        SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+        SelfOwnMaterial.IsTransparent = False
+        SelfOwnMaterial.ArrowPicture.PNG = {
+          89504E470D0A1A0A0000000D49484452000000150000000B080600000090CBC6
+          7D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          01D449444154384FA5D25F4853511C07F0DFEF5C7737C929BB200886E1BD3DC4
+          A06709DA5B41A0200D9C63B3408205116E13C5E75E43D8C62030107BE88EBA95
+          510F1982A347F129082EF86FF6D09BE05097B2EDEEFCDA1987A1AE14E9F372E1
+          F7FDDD2FDC7B0E264C3D4E48FE4C64E731FC87110B945E479F23429B01423702
+          8B2572C68208E4CEA524DF5E6DEFADEA8B00F808815465F543313F10D41C4498
+          F4D6B4EB7DE1E227FB1D90DCBFD013CBDFC16AF40537F00ED7309619DBCEA2CC
+          206EEAD388F89C13BDF7B93CD16721BB22A37F9AB2AEF5388EB254D93BF4BB35
+          6F3815297C14F366A930611A4F194216883E77B93C23E7154F587A1F39B515A5
+          0C3DE05686D391425E46A74B858469C4EAD339E2FC2B735583A9D15FC7326A4A
+          BEEEBFC9812D23551564CA502ABAB326A306269F4DE9E8F64BE2348E9BEC2EAF
+          A94BE29FC9A8216E1AB7CA9C7DAB9F41858005CE160A2DA54266ACF00A6FF087
+          B88EB755E77879C6D2BBC43C91EB1F2C1DC18ADA06BBDC4581CC839FEB8D17CE
+          68F9FC939239FD7E79EFF08DAA75FE20E2F3D56229DDA6757E270587B2A35BBB
+          72ADC5B9A5423267DC3BF80D8BDE2BD0CE39E41DD53DFC22649764FC57175EF6
+          FA3DDE0A84B57D023AF2A99EE06CC86E39B8D300FE005B64AC6F3D2662070000
+          000049454E44AE426082}
+        SelfOwnMaterial.DrawArrowPictureParam.PictureHorzAlign = phaRight
+        SelfOwnMaterial.DrawArrowPictureParam.PictureVertAlign = pvaCenter
+        SelfOwnMaterial.DrawArrowPictureParam.DrawRectSetting.Right = 10.000000000000000000
+        SelfOwnMaterial.DrawArrowPictureParam.DrawRectSetting.Enabled = True
+        SelfOwnMaterial.DrawArrowPictureParam.DrawRectSetting.SizeType = dpstPixel
+        SelfOwnMaterial.DrawPictureParam.IsStretch = True
+        SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaBottom
+        SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Height = 2.000000000000000000
+        SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Enabled = True
+        SelfOwnMaterial.DrawPictureParam.DrawRectSetting.SizeType = dpstPixel
+        SelfOwnMaterial.DrawPictureParam.DrawRectSetting.PositionVertType = dppvtBottom
+        SelfOwnMaterial.DrawHelpTextParam.FontSize = 18.000000000000000000
+        SelfOwnMaterial.DrawHelpTextParam.FontColor = xFF8D8D8D
+        SelfOwnMaterial.DrawHelpTextParam.DrawFont.Size = 18.000000000000000000
+        SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = xFF8D8D8D
+        SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = xFF8D8D8D
+        SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaCenter
+        SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Left = 10.000000000000000000
+        SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.Enabled = True
+        SelfOwnMaterial.DrawHelpTextParam.DrawRectSetting.SizeType = dpstPixel
+        SelfOwnMaterial.DrawTextParam.FontVertAlign = fvaCenter
+        ContentMarginsLeft = 0
+        ContentMarginsTop = 10
+        ContentMarginsRight = 60
+        ContentMarginsBottom = 10
+        IsUseDefaultStyle = False
+        IsInScrollBox = True
+        ComboEditProperties.HelpText = #35831#36873#25321#25110#36755#20837
+        ComboEditProperties.IsDrawHelpWhenFocused = True
+        Properties.HelpText = #35831#36873#25321#25110#36755#20837
+        Properties.IsDrawHelpWhenFocused = True
+        Top = 150
+      end
+      object lblComboEditCanSetBackColorAndBorder: TLabel
+        Anchors = [akLeft, akTop, akRight]
+        Position.X = 16.000000000000000000
+        Position.Y = 14.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        Text = #21487#20197#35774#32622#32972#26223#39068#33394#21644#36793#26694
+      end
+      object lblComboEditCanSetHelpText: TLabel
+        Anchors = [akLeft, akTop, akRight]
+        Position.X = 16.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        Text = #21487#20197#35774#32622#25552#31034#25991#23383
+      end
+      object lblComboEditCanSetHelpIcon: TLabel
+        Anchors = [akLeft, akTop, akRight]
+        Position.X = 16.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        Text = #21487#20197#35774#32622#19979#25289#31661#22836#22270#26631
+      end
+    end
+  end
+end

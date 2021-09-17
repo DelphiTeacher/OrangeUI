@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project Version="1.0">
+  <Title>OrangeUI</Title>
+  <Summary>OrangeUI</Summary>
+  <Author>DelphiTeacher</Author>
+  <Email>ggggcexx@163.com</Email>
+  <Copyright>DelphiTeacher</Copyright>
+  <Comment>OrangeUI Class Struct</Comment>
+  <Language>2052</Language>
+  <Charset>1</Charset>
+  <HeaderHtml>&lt;%TopicTitle%&gt;</HeaderHtml>
+  <FooterHtml/>
+  <CustomDefines/>
+  <ShowImplementationSection>false</ShowImplementationSection>
+  <ShowPrivateMembers>false</ShowPrivateMembers>
+  <ShowInheritedMembers>false</ShowInheritedMembers>
+  <ShowPropertyAccessors>false</ShowPropertyAccessors>
+  <FileNamePolicy>0</FileNamePolicy>
+  <CompilerVersion>21</CompilerVersion>
+  <TargetPlatform>0</TargetPlatform>
+  <Sources>
+    <Source>.\OrangeUIControl_FMX_XE10.dpk</Source>
+  </Sources>
+  <Outputs>
+    <Output Type="HTML">
+      <Active>false</Active>
+      <OutputDirectory>Doc\Html</OutputDirectory>
+    </Output>
+    <Output Type="CHM">
+      <Active>true</Active>
+      <OutputFileName>Doc\CHM\OrangeUI.chm</OutputFileName>
+    </Output>
+    <Output Type="MSHELP2">
+      <Active>false</Active>
+      <OutputFileName>Doc\MSHelp2\OrangeUI.HxS</OutputFileName>
+      <Namespace>OrangeUI</Namespace>
+      <TitleID>library</TitleID>
+    </Output>
+    <Output Type="HelpAndManual">
+      <Active>false</Active>
+      <OutputFileName>Doc\HM\OrangeUI.hmxp</OutputFileName>
+    </Output>
+  </Outputs>
+</Project>

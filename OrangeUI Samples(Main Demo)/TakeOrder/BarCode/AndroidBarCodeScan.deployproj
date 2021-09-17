@@ -1,0 +1,2826 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Condition="Exists('$(BDS)\bin\CodeGear.Deployment.targets')" Project="$(BDS)\bin\CodeGear.Deployment.targets"/>
+    <ProjectExtensions>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <PropertyGroup>
+        <DeviceId Condition="'$(Platform)'=='Android'">e0f651d0</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='iOSDevice32'"/>
+        <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
+        <DeviceId Condition="'$(Platform)'=='iOSSimulator'">iPhone5</DeviceId>
+    </PropertyGroup>
+    <ItemGroup Condition="'$(Platform)'=='iOSDevice64'"/>
+    <ItemGroup Condition="'$(Platform)'=='Win64'">
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='iOSDevice32'">
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='Win32'">
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Win32\Debug\AndroidBarCodeScan.exe" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>AndroidBarCodeScan.exe</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='OSX32'">
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\Redist\osx32\libcgsqlite3.dylib">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\MacOS\</RemoteDir>
+            <RemoteName>libcgsqlite3.dylib</RemoteName>
+            <DeployClass>DependencyModule</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\MacOS\</RemoteDir>
+            <RemoteName>libcgunwind.1.0.dylib</RemoteName>
+            <DeployClass>DependencyModule</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='Android'">
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\layout\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>gdbserver</RemoteName>
+            <DeployClass>AndroidGDBServer</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\values\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable-mdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon48</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\layout\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\values\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable-small\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage426</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\values\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\layout\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\menu\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\xml\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\layout\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\classes.dex" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <DeployClass>AndroidClassesDexFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable-xlarge\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage960</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\layout\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable-hdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon72</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\raw\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\values\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\libAndroidBarCodeScan.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libAndroidBarCodeScan.so</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\layout\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable-xhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon96</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\values\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\layout\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable-normal\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage470</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\layout\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\layout\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\lib\android\debug\x86\libnative-activity.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>libJNSZWS.so</RemoteName>
+            <DeployClass>AndroidLibnativeX86File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\values\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\styles.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\values\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>AndroidSplashStyles</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable-ldpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon36</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\library\lib\armeabi\</RemoteDir>
+            <RemoteName>libJNSZWS.so</RemoteName>
+            <DeployClass>AndroidLibnativeArmeabiFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\layout\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\values\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable-xxhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon144</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable-large\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage640</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\AndroidManifest.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>AndroidManifest.xml</RemoteName>
+            <DeployClass>ProjectAndroidManifest</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\splash_image_def.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\res\drawable\</RemoteDir>
+            <RemoteName>splash_image_def.xml</RemoteName>
+            <DeployClass>AndroidSplashImageDef</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan\library\lib\mips\</RemoteDir>
+            <RemoteName>libJNSZWS.so</RemoteName>
+            <DeployClass>AndroidLibnativeMipsFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='iOSSimulator'">
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>libcgunwind.1.0.dylib</RemoteName>
+            <DeployClass>DependencyModule</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\launcher_icon.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\Redist\iossimulator\libPCRE.dylib">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>libPCRE.dylib</RemoteName>
+            <DeployClass>DependencyModule</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\history_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\share.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\raw\beep.ogg" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\help.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\xml\preferences.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\themes.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\dimens.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\colors.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\arrays.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\history.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\ids.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\menu\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\strings.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\values\styles.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>AndroidBarCodeScan.app\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+</Project>

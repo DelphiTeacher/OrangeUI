@@ -1,0 +1,10 @@
+﻿[btnReturn]
+Coordinates=126,56,71,36
+
+[pnlToolBar]
+Coordinates=149,10,77,36
+
+[]
+Coordinates=10,56,106,36
+Visible=True
+

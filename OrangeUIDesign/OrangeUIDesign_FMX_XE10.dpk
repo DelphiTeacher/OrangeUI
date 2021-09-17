@@ -1,0 +1,61 @@
+package OrangeUIDesign_FMX_XE10;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  DesignIde,
+  fmx,
+  vclie,
+  fmxobj,
+  fmxdesigner,
+  dbrtl;
+
+contains
+  uSkinImageListEditor in 'Source\uSkinImageListEditor.pas',
+  uSkinItemsEditor in 'Source\uSkinItemsEditor.pas',
+  uSkinPageControlEditor in 'Source\uSkinPageControlEditor.pas',
+  uComponentTypeNameEditor in 'Source\uComponentTypeNameEditor.pas',
+  uDrawPictureEditor in 'Source\uDrawPictureEditor.pas',
+  uSkinControlRegister in 'Source\uSkinControlRegister.pas',
+  FMX_XE_SkinItemsPropertyeditorForm in 'Source\FMX_XE_SkinItemsPropertyeditorForm.pas' {frmSkinItemsPropertyEditor},
+  uSkinButtonGroupEditor in 'Source\uSkinButtonGroupEditor.pas',
+  uSkinAnimatorEditor in 'Source\uSkinAnimatorEditor.pas',
+  FMX_XE_SkinPictureListPropertyEditorForm in 'Source\FMX_XE_SkinPictureListPropertyEditorForm.pas' {frmSkinPictureListPropertyEditor},
+  FMX_XE_DrawPicturePropertyEditorForm in 'Source\FMX_XE_DrawPicturePropertyEditorForm.pas' {frmDrawPicturePropertyEditor},
+  uSkinItemDeignerPanelEditor in 'Source\uSkinItemDeignerPanelEditor.pas',
+  FMX_XE_ConfigDrawPictureSearchPathForm in 'Source\FMX_XE_ConfigDrawPictureSearchPathForm.pas' {frmConfigDrawPictureSearchPath},
+  uSkinPullLoadPanelEditor in 'Source\uSkinPullLoadPanelEditor.pas',
+  uLanguage in 'Source\uLanguage.pas',
+  FMX_XE_SkinPackageEditorForm in 'Source\FMX_XE_SkinPackageEditorForm.pas' {frmSkinPackageEditor_1},
+  uSkinScrollBarPullLoadPanelEditor in 'Source\uSkinScrollBarPullLoadPanelEditor.pas',
+  uCollectionEditor in 'Source\uCollectionEditor.pas';
+
+end.
+
+

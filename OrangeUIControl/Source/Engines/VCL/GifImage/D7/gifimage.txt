@@ -1,0 +1,26 @@
+This is a version of Anders Melander's TGIFImage ported to Delphi 7.
+It supports animated GIF files in Delphi 7.
+
+Note: This Delphi 7 version should also work older Delphi versions (not tested much).
+
+WARNING: Use it at your own risk.
+
+I'm posting it with permission from the author Anders Melander.
+
+
+The original TGIFImage can be found at
+http://www.melander.dk/delphi/gifimage/
+Note: His website is offline at the moment.
+
+Another TGIFImage port for Delphi 6 made by Alexey Barkovoy (clootie@reactor.ru)
+can be found here:
+http://clootie.narod.ru/delphi/download_vcl.html
+
+
+Finn Tolderlund
+2003.08.04
+
+e-mail: finn.tolderlund@mobilixnet.dk
+e-mail: finn@mail.tdcadsl.dk
+web:    http://finn.mobilixnet.dk/delphi/
+web:    http://home20.inet.tele.dk/tolderlund/delphi/

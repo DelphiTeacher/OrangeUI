@@ -1,0 +1,720 @@
+object FrameButtonGroup: TFrameButtonGroup
+  Size.Width = 392.000000000000000000
+  Size.Height = 601.000000000000000000
+  Size.PlatformDefault = False
+  object SkinFMXButtonGroup1: TSkinFMXButtonGroup
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.BorderColor.Color = claLightgray
+    SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.IsUseFirstButtonMaterial = True
+    SelfOwnMaterial.IsUseLastButtonMaterial = True
+    SelfOwnMaterial.FirstButtonMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.FirstButtonMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+    SelfOwnMaterial.FirstButtonMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.FirstButtonMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.FirstButtonMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.FirstButtonMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+    SelfOwnMaterial.FirstButtonMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.FirstButtonMaterial.NormalPicture.PNG = {
+      89504E470D0A1A0A0000000D494844520000008A0000002408060000005691A2
+      FA000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      01F649444154785EEDDC498EDA4014C6F1F2C02803C61833833018DB6006A557
+      59A048B90AABBE44A29C0D9040EABE48AFB2630326653F8716525E4EF0FD3696
+      AAB67F3D5150461199F3F9FC553E5EE338FEA6AAEA905601481A8A8CE4572E97
+      FBD1E974846118229FCFA79B0089A407E5743ABDC848DE7CDF17BAAE675B009F
+      0A8582501545794D26092281FF4926CAC762B1682214E0148B45A1ECF7FBDF9B
+      CDA6A6695AB60CF0EC11CA7ABD4628C02A954A14CA6AB54228C02A97CB14CA72
+      B9ACA9AA9A2D033C4BBE32494389A208A100AB52A95028F2D483508055AD5629
+      94300C110AB04CD3A45082204028C0AAD7EB148AEFFB080558966551289EE721
+      1460D9B64DA14CA7538402AC66B349A1B8AE8B5080E5380E85321E8F110AB05A
+      AD1685321A8D100AB0926B28692883C100A100ABD7EB5128FD7E1FA1004BF641
+      A1C8626A8AF2B8670DF064381C5228DD6E17A1004B7E86A550DAED364201963C
+      155328F2F8835080E5BA2E85E2380E4201D66432A1506CDB4628C0F23C8F4269
+      341A080558B3D98C42B12C0BA100EB118A699A080558411050283509A100270C
+      43A11C8FC70FC3309A080538F3F95C68BBDDCE97917CC16F3DC0F97B1FE545D3
+      B4B7F4B5414C15F887288A84BADD6EDFE338FE79B95CC4F57A15F7FB3DDB06F8
+      F4182187C321FD6BAEDBEDF65DD7F51EAD0208393CEEE20F5D1E9B1FB008B9D4
+      0000000049454E44AE426082}
+    SelfOwnMaterial.FirstButtonMaterial.DownPicture.PNG = {
+      89504E470D0A1A0A0000000D494844520000008A0000002408060000005691A2
+      FA000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      018849444154785EEDDC3D6A024118C6F199FD521B23589B2AA4F10E9E246DBA
+      942972865416C14E0CE4068207F00CA649634C635AA32B0CABB8D977591642D4
+      7D7BFF3F181817CB87675E66456B0AA3D1E87EBD5E3F6D369B6BE75C503C0672
+      79500683C1F47BB9EC855164A230347E10186BCB0CE182EDF77BB38D63635F87
+      C3BBF962F176D56A9956B61A8D8609080A0A711692CFF9DCD8977EFF2376EEB6
+      D3E99866B369A2AC553CCF2BBE864BB75AADCCFB6C66BC9FEDF6A6DD6EE721A9
+      D7EB8404FFC8E9E2254962E5B89126018EC983221BDFF7994970521914E01C9B
+      8D230405953C1A051A340A2AA569CA8C021DB9322128A8C48C02156614A8D028
+      50291B855B599CC3300B15820215EE51A0222F8D090A2AD128506146810A4181
+      0A470F546814549236291B4536C029340A549851A042A3408546814A1E946EB7
+      9B169F81A3F2A0F8BEFF25BFB496051C9307250CC367D92449523C06FE927CE4
+      1728E3F178EA9CEBD56A35234B5E2B0342FEF64294376D93C9E461B7DB3D1E0E
+      874EB6187251B2D69A5F5599594010FF2EAA0000000049454E44AE426082}
+    SelfOwnMaterial.FirstButtonMaterial.PushedPicture.PNG = {
+      89504E470D0A1A0A0000000D494844520000008A0000002408060000005691A2
+      FA000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      018849444154785EEDDC3D6A024118C6F199FD521B23589B2AA4F10E9E246DBA
+      942972865416C14E0CE4068207F00CA649634C635AA32B0CABB8D977591642D4
+      7D7BFF3F181817CB87675E66456B0AA3D1E87EBD5E3F6D369B6BE75C503C0672
+      79500683C1F47BB9EC855164A230347E10186BCB0CE182EDF77BB38D63635F87
+      C3BBF962F176D56A9956B61A8D8609080A0A711692CFF9DCD8977EFF2376EEB6
+      D3E99866B369A2AC553CCF2BBE864BB75AADCCFB6C66BC9FEDF6A6DD6EE721A9
+      D7EB8404FFC8E9E2254962E5B89126018EC983221BDFF7994970521914E01C9B
+      8D230405953C1A051A340A2AA569CA8C021DB9322128A8C48C02156614A8D028
+      50291B855B599CC3300B15820215EE51A0222F8D090A2AD128506146810A4181
+      0A470F546814549236291B4536C029340A549851A042A3408546814A1E946EB7
+      9B169F81A3F2A0F8BEFF25BFB496051C9307250CC367D92449523C06FE927CE4
+      1728E3F178EA9CEBD56A35234B5E2B0342FEF64294376D93C9E461B7DB3D1E0E
+      874EB6187251B2D69A5F5599594010FF2EAA0000000049454E44AE426082}
+    SelfOwnMaterial.FirstButtonMaterial.DrawPictureParam.IsStretch = True
+    SelfOwnMaterial.FirstButtonMaterial.DrawPictureParam.StretchStyle = issSquare
+    SelfOwnMaterial.LastButtonMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.LastButtonMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+    SelfOwnMaterial.LastButtonMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.LastButtonMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.LastButtonMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.LastButtonMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+    SelfOwnMaterial.LastButtonMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.LastButtonMaterial.NormalPicture.PNG = {
+      89504E470D0A1A0A0000000D494844520000008A0000002408060000005691A2
+      FA000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      019A49444154785EED9B4D6AC240188667749B03781211C1657B834A854AA5D6
+      8A1EA076D18D05CFE0615C0975E11D44040904172EA42AC49F34DF18D3D62626
+      07781E78701CB37C793F87247A3C1E7B0AE02FB6E7799F994CA69FCFE787B2A1
+      3FBA5DAFF3F6667E051076BB9D5AAFD7CAB66DE5BA6EAF5028BC9BA0BC763AC1
+      25003F1C0E0735994CD466B3B9CD047B00FFC866B32A97CBC9B26582E2CF23C4
+      482DCB52FE7F959BB051A22E42D45A4B3C2C1A051315080AA6D204E5783C22C6
+      2AD028982841C154864189AA1BC4B36150A252847896A0602A0573AFA7D56E87
+      1B00974CA7531A05D3691AE5A5D9345F00A298CD66340A262B9846796E34C263
+      10C025F3F9FC1494A77A9DA0402CF2A41BA30713154CA33CD66A340AC4E2380E
+      8D82E9348DF250ADD22810CB62B1A051305981A060A282193DF7950AA3076259
+      2E97340A262B10144C5430A3E7AE5C36AF0F0244B15AAD68144C2741C1AB0687
+      9C2F828257DDEFF7F239202818ABB489EBBAB2EE9BA000FC4642224DB2DD6E25
+      2CBD52A934D0A3D1E874FE0108F083E268AD87BEFD62B138544AA96FE5F3825C
+      6210F0200000000049454E44AE426082}
+    SelfOwnMaterial.LastButtonMaterial.DownPicture.PNG = {
+      89504E470D0A1A0A0000000D494844520000008A0000002408060000005691A2
+      FA000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      01A849444154785EEDDC4D6AC2501486E173F3538C088A0E6A85CEEAD81D74AE
+      9B700376070EAB1D38904EBA0B5751BA0517D0D04E9C58070AD124BD37065A68
+      939BB9EF03C1BF0C3F3ECE3170D5743A4D05F8C575DDB8DD6E87AD566B311E8F
+      5FCC776AF6F898BA9E279EBE80344D253E9D243A1EE5184572DDEDBE4E26937B
+      359FCDD29B5E4F1A8D467E2B2E9909CA4907E57038C876BB952F7DDDF5FB0FEA
+      693E4FF51BD13593DF8A4B97248944BA4D76BB9D8461684AE4DD11A5F29F8133
+      C771A456AB49B3D9944EA7239BCDE6D6212628E2FBBE04412057BEAF1C45A3A0
+      80C986DE80B25747E99A01CA988C38BA52F28FC0FF4C46681458658DC28C029B
+      6C4631AB1050C66484190556CC28A884AD07959884D028B062EB8155BEF1B0F5
+      C02E0B0A8D029BAC55CC431FA00C8D824A98515049F6871B41810DEB312AC957
+      641A05E5B2A0D028B031654250502A6F138202BBF3D36366145830A3A0126614
+      5442A3A092F57A9D12141432271B986B30187C12141432271A987C0441F04C50
+      F0471CC7B2DFEFB33352EAF5FADB70385CA8D56AA5DB85D3B9F0436F3989E779
+      1FFA5A8E46A3A588C837F0E7625F703B1FD00000000049454E44AE426082}
+    SelfOwnMaterial.LastButtonMaterial.PushedPicture.PNG = {
+      89504E470D0A1A0A0000000D494844520000008A0000002408060000005691A2
+      FA000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      01A849444154785EEDDC4D6AC2501486E173F3538C088A0E6A85CEEAD81D74AE
+      9B700376070EAB1D38904EBA0B5751BA0517D0D04E9C58070AD124BD37065A68
+      939BB9EF03C1BF0C3F3ECE3170D5743A4D05F8C575DDB8DD6E87AD566B311E8F
+      5FCC776AF6F898BA9E279EBE80344D253E9D243A1EE5184572DDEDBE4E26937B
+      359FCDD29B5E4F1A8D467E2B2E9909CA4907E57038C876BB952F7DDDF5FB0FEA
+      693E4FF51BD13593DF8A4B97248944BA4D76BB9D8461684AE4DD11A5F29F8133
+      C771A456AB49B3D9944EA7239BCDE6D6212628E2FBBE04412057BEAF1C45A3A0
+      80C986DE80B25747E99A01CA988C38BA52F28FC0FF4C46681458658DC28C029B
+      6C4631AB1050C66484190556CC28A884AD07959884D028B062EB8155BEF1B0F5
+      C02E0B0A8D029BAC55CC431FA00C8D824A98515049F6871B41810DEB312AC957
+      641A05E5B2A0D028B031654250502A6F138202BBF3D36366145830A3A0126614
+      5442A3A092F57A9D12141432271B986B30187C12141432271A987C0441F04C50
+      F0471CC7B2DFEFB33352EAF5FADB70385CA8D56AA5DB85D3B9F0436F3989E779
+      1FFA5A8E46A3A588C837F0E7625F703B1FD00000000049454E44AE426082}
+    SelfOwnMaterial.LastButtonMaterial.DrawPictureParam.IsStretch = True
+    SelfOwnMaterial.LastButtonMaterial.DrawPictureParam.StretchStyle = issSquare
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.MiddleButtonMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+    SelfOwnMaterial.MiddleButtonMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+    SelfOwnMaterial.MiddleButtonMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.MiddleButtonMaterial.NormalPicture.PNG = {
+      89504E470D0A1A0A0000000D494844520000008A0000002408060000005691A2
+      FA000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      011F49444154785EEDD7416A83501080615F17AE5CB8104104C185E0791A68A0
+      21A1696868A08164D56CD3B3B9F1542FCC54BA71CA7880FF831F32590FF3308C
+      E31813C0117EEEF7F87DBB4D233097A669F2243F628C44FF267451000F1785DC
+      58145A1C8B426E82452137A19FC797EB5507C09265191785FC048B426E429F9E
+      AFF35907C092E7391785FC048B426E429F9ECFD34907C05214051785FC845E94
+      8FE35107C05296251785FC845E94F7C34107C05255D5EFA2BCEDF7D35FC05C5D
+      D73C3DE427F4A26C773B1D004BD3345C14F2137A515E371B1D004BDBB65C14F2
+      132C0AB9097D7A5ED66B1D004BD7755C14F2132C0A2D4A9F9EE7D54AB706B0F4
+      7DCF45213FC1A2901B8B428B625168517F8B0278C2300C3184308DC05C8C3179
+      005BCC93F04CF62B4E0000000049454E44AE426082}
+    SelfOwnMaterial.MiddleButtonMaterial.DownPicture.PNG = {
+      89504E470D0A1A0A0000000D494844520000008A0000002408060000005691A2
+      FA000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      011449444154785EEDDB316E83401046E119A00B0557886BFB86404EC4699CDA
+      B90205EE9036BBCBDA96A28D670EF0BE0EDC3EFDACB1ACE33806010C3AC5503E
+      FA5EBAAE2BB780977DDFE5BE6DA2F33485CFD349FA180BF0D71623F9B9DD44BF
+      E6399C2F171986A17C04BCACEB2ADFD7AB34AA5A6E0175A91142818950E07284
+      D234E512A84B8D347152CA2550971A615160CA8B929E3F21F0721675A98D7C46
+      89CA2DA02E35C2190526CE2870E15B0F5C5814B81C8B4228301C875942812187
+      C26F3DB0E4F7286DDB964BA02E35C2A2C0C49B59B8E4330AA1C09243E1D1030B
+      8F1EB83C178555C17F1E7DB028303D1705788745810B8B0297BC2884020BA1C0
+      8550E04228702114B8A446745996C01FC0F08EAACA2F9981292EA638567C0000
+      000049454E44AE426082}
+    SelfOwnMaterial.MiddleButtonMaterial.PushedPicture.PNG = {
+      89504E470D0A1A0A0000000D494844520000008A0000002408060000005691A2
+      FA000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      011449444154785EEDDB316E83401046E119A00B0557886BFB86404EC4699CDA
+      B90205EE9036BBCBDA96A28D670EF0BE0EDC3EFDACB1ACE33806010C3AC5503E
+      FA5EBAAE2BB780977DDFE5BE6DA2F33485CFD349FA180BF0D71623F9B9DD44BF
+      E6399C2F171986A17C04BCACEB2ADFD7AB34AA5A6E0175A91142818950E07284
+      D234E512A84B8D347152CA2550971A615160CA8B929E3F21F0721675A98D7C46
+      89CA2DA02E35C2190526CE2870E15B0F5C5814B81C8B4228301C875942812187
+      C26F3DB0E4F7286DDB964BA02E35C2A2C0C49B59B8E4330AA1C09243E1D1030B
+      8F1EB83C178555C17F1E7DB028303D1705788745810B8B0297BC2884020BA1C0
+      8550E04228702114B8A446745996C01FC0F08EAACA2F9981292EA638567C0000
+      000049454E44AE426082}
+    SelfOwnMaterial.MiddleButtonMaterial.DrawPictureParam.IsStretch = True
+    SelfOwnMaterial.MiddleButtonMaterial.DrawPictureParam.StretchStyle = issSquare
+    MouseDownFocus = False
+    ClipChildren = True
+    Position.X = 11.000000000000000000
+    Position.Y = 30.000000000000000000
+    Size.Width = 350.000000000000000000
+    Size.Height = 44.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    Properties.AutoSize = False
+    Properties.ButtonSize = 60.000000000000000000
+    Properties.ButtonSizeCalcType = bsctFixed
+    Properties.Orientation = boHorz
+    Left = 12
+    Top = 297
+    object SkinFMXButton5: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      MouseDownFocus = False
+      ClipChildren = True
+      Locked = True
+      Size.Width = 60.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 11
+      Caption = 'Name'
+      Text = 'Name'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.Icon.ImageIndex = 0
+      Properties.PushedIcon.ImageIndex = 0
+      Properties.ButtonGroup = SkinFMXButtonGroup1
+      Properties.ButtonIndex = 0
+      Properties.PushedGroupIndex = 2
+    end
+    object SkinFMXButton34: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      MouseDownFocus = False
+      ClipChildren = True
+      Locked = True
+      Position.X = 60.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 10
+      Caption = 'Date'
+      Text = 'Date'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = True
+      Properties.Icon.ImageIndex = 0
+      Properties.PushedIcon.ImageIndex = 0
+      Properties.ButtonGroup = SkinFMXButtonGroup1
+      Properties.ButtonIndex = 1
+      Properties.PushedGroupIndex = 2
+      Left = 60
+    end
+    object SkinFMXButton35: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      MouseDownFocus = False
+      ClipChildren = True
+      Locked = True
+      Position.X = 120.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+      Caption = 'Size'
+      Text = 'Size'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.Icon.ImageIndex = 0
+      Properties.PushedIcon.ImageIndex = 0
+      Properties.ButtonGroup = SkinFMXButtonGroup1
+      Properties.ButtonIndex = 2
+      Properties.PushedGroupIndex = 2
+      Left = 120
+    end
+    object SkinFMXButton36: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      MouseDownFocus = False
+      ClipChildren = True
+      Locked = True
+      Position.X = 180.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 9
+      Caption = 'Type'
+      Text = 'Type'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.Icon.ImageIndex = 0
+      Properties.PushedIcon.ImageIndex = 0
+      Properties.ButtonGroup = SkinFMXButtonGroup1
+      Properties.ButtonIndex = 3
+      Properties.PushedGroupIndex = 2
+      Left = 180
+    end
+    object TSkinFMXButton1: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      MouseDownFocus = False
+      ClipChildren = True
+      Locked = True
+      Position.X = 240.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 12
+      Caption = 'User'
+      Text = 'User'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup1
+      Properties.ButtonIndex = 4
+      Properties.PushedGroupIndex = 2
+      Left = 240
+    end
+  end
+  object SkinFMXButtonGroup2: TSkinFMXButtonGroup
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.BorderColor.Color = claLightgray
+    SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.IsUseFirstButtonMaterial = True
+    SelfOwnMaterial.IsUseLastButtonMaterial = False
+    SelfOwnMaterial.FirstButtonMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.FirstButtonMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.FirstButtonMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = claLightgray
+    SelfOwnMaterial.FirstButtonMaterial.BackColor.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange]
+    SelfOwnMaterial.FirstButtonMaterial.IsTransparent = False
+    SelfOwnMaterial.FirstButtonMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+    SelfOwnMaterial.FirstButtonMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.FirstButtonMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.FirstButtonMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.FirstButtonMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+    SelfOwnMaterial.FirstButtonMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.LastButtonMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.LastButtonMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+    SelfOwnMaterial.LastButtonMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.LastButtonMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.LastButtonMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.BorderEadges = [beTop, beRight, beBottom]
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = claLightgray
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange]
+    SelfOwnMaterial.MiddleButtonMaterial.IsTransparent = False
+    SelfOwnMaterial.MiddleButtonMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+    SelfOwnMaterial.MiddleButtonMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+    SelfOwnMaterial.MiddleButtonMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+    MouseDownFocus = False
+    ClipChildren = True
+    Position.X = 11.000000000000000000
+    Position.Y = 106.000000000000000000
+    Size.Width = 374.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+    Properties.AutoSize = False
+    Properties.ButtonSize = 70.000000000000000000
+    Properties.ButtonSizeCalcType = bsctFixed
+    Properties.Orientation = boHorz
+    object SkinFMXButton1: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      ClipChildren = True
+      Locked = True
+      Size.Width = 70.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Caption = 'Test1'
+      Text = 'Test1'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup2
+      Properties.ButtonIndex = 0
+      Properties.PushedGroupIndex = 4
+    end
+    object SkinFMXButton2: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      ClipChildren = True
+      Locked = True
+      Position.X = 70.000000000000000000
+      Size.Width = 70.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Caption = 'Test2'
+      Text = 'Test2'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = True
+      Properties.ButtonGroup = SkinFMXButtonGroup2
+      Properties.ButtonIndex = 1
+      Properties.PushedGroupIndex = 4
+    end
+    object SkinFMXButton3: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      Locked = True
+      Position.X = 140.000000000000000000
+      Size.Width = 70.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Caption = 'Test3'
+      Text = 'Test3'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup2
+      Properties.ButtonIndex = 2
+      Properties.PushedGroupIndex = 4
+    end
+    object SkinFMXButton4: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      Locked = True
+      Position.X = 210.000000000000000000
+      Size.Width = 70.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Caption = 'Test4'
+      Text = 'Test4'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup2
+      Properties.ButtonIndex = 3
+      Properties.PushedGroupIndex = 4
+    end
+    object SkinFMXButton6: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      Locked = True
+      Position.X = 280.000000000000000000
+      Size.Width = 70.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Caption = 'Test5'
+      Text = 'Test5'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup2
+      Properties.ButtonIndex = 4
+      Properties.PushedGroupIndex = 4
+    end
+  end
+  object SkinFMXButtonGroup3: TSkinFMXButtonGroup
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.BorderColor.Color = claLightgray
+    SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.IsUseFirstButtonMaterial = True
+    SelfOwnMaterial.IsUseLastButtonMaterial = False
+    SelfOwnMaterial.FirstButtonMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.FirstButtonMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.FirstButtonMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = claLightgray
+    SelfOwnMaterial.FirstButtonMaterial.BackColor.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange]
+    SelfOwnMaterial.FirstButtonMaterial.IsTransparent = False
+    SelfOwnMaterial.FirstButtonMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+    SelfOwnMaterial.FirstButtonMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.FirstButtonMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.FirstButtonMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.FirstButtonMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+    SelfOwnMaterial.FirstButtonMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.LastButtonMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.LastButtonMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+    SelfOwnMaterial.LastButtonMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.LastButtonMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.LastButtonMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.BorderEadges = [beLeft, beRight, beBottom]
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.BorderWidth = 1.000000000000000000
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = claLightgray
+    SelfOwnMaterial.MiddleButtonMaterial.BackColor.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange]
+    SelfOwnMaterial.MiddleButtonMaterial.IsTransparent = False
+    SelfOwnMaterial.MiddleButtonMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+    SelfOwnMaterial.MiddleButtonMaterial.DrawHelpTextParam.FontColor = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.MiddleButtonMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+    SelfOwnMaterial.MiddleButtonMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+    MouseDownFocus = False
+    ClipChildren = True
+    Position.X = 126.000000000000000000
+    Position.Y = 161.000000000000000000
+    Size.Width = 131.000000000000000000
+    Size.Height = 296.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+    Properties.AutoSize = False
+    Properties.ButtonSize = 36.000000000000000000
+    Properties.ButtonSizeCalcType = bsctFixed
+    Properties.Orientation = boVert
+    object SkinFMXButton7: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      ClipChildren = True
+      Locked = True
+      Size.Width = 131.000000000000000000
+      Size.Height = 36.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Caption = 'Test1'
+      Text = 'Test1'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup3
+      Properties.ButtonIndex = 0
+      Properties.PushedGroupIndex = 4
+    end
+    object SkinFMXButton8: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.DrawDetailParam.FontVertAlign = fvaBottom
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      ClipChildren = True
+      Locked = True
+      Position.Y = 36.000000000000000000
+      Size.Width = 131.000000000000000000
+      Size.Height = 36.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Caption = 'Test2'
+      Text = 'Test2'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = True
+      Properties.ButtonGroup = SkinFMXButtonGroup3
+      Properties.ButtonIndex = 1
+      Properties.PushedGroupIndex = 4
+    end
+    object SkinFMXButton9: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      Locked = True
+      Position.Y = 72.000000000000000000
+      Size.Width = 131.000000000000000000
+      Size.Height = 36.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Caption = 'Test3'
+      Text = 'Test3'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup3
+      Properties.ButtonIndex = 2
+      Properties.PushedGroupIndex = 4
+    end
+    object SkinFMXButton10: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      Locked = True
+      Position.Y = 108.000000000000000000
+      Size.Width = 131.000000000000000000
+      Size.Height = 36.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Caption = 'Test4'
+      Text = 'Test4'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup3
+      Properties.ButtonIndex = 3
+      Properties.PushedGroupIndex = 4
+    end
+    object SkinFMXButton11: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      Locked = True
+      Position.Y = 144.000000000000000000
+      Size.Width = 131.000000000000000000
+      Size.Height = 36.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Caption = 'Test5'
+      Text = 'Test5'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = True
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup3
+      Properties.ButtonIndex = 4
+      Properties.PushedGroupIndex = 4
+    end
+    object SkinFMXButton12: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      Locked = True
+      Position.Y = 180.000000000000000000
+      Size.Width = 131.000000000000000000
+      Size.Height = 36.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Caption = 'SkinFMXButton12'
+      Text = 'SkinFMXButton12'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup3
+      Properties.ButtonIndex = 5
+      Properties.PushedGroupIndex = 0
+    end
+    object SkinFMXButton13: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      MouseDownFocus = False
+      Locked = True
+      Position.Y = 216.000000000000000000
+      Size.Width = 131.000000000000000000
+      Size.Height = 36.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Caption = 'SkinFMXButton13'
+      Text = 'SkinFMXButton13'
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.ButtonGroup = SkinFMXButtonGroup3
+      Properties.ButtonIndex = 6
+      Properties.PushedGroupIndex = 0
+    end
+  end
+end

@@ -1,0 +1,1 @@
+http://www.orangeui.cn:10020/tablecommonrest/get_record?appid=1000&user_fid=&key=&rest_name=app&where_key_json=%5B%7B%22logical_operator%22:%22AND%22,%22name%22:%22fid%22,%22operator%22:%22=%22,%22value%22:1000%7D%5D

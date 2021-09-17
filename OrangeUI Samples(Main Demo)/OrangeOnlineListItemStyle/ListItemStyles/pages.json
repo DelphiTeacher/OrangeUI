@@ -1,0 +1,12 @@
+{
+      "pages": [
+            {
+                  "name": "CustomListItemStyle_ProcessTaskOrder",
+                  "caption": "自定义工序任务单列表项样式"
+            },
+            {
+                  "name": "ListItemStyleFrame_ProcessTaskOrder2",
+                  "caption": "自定义工序任务单列表项样式2"
+            }
+      ]
+}

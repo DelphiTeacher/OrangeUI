@@ -1,0 +1,163 @@
+package OrangeUIControl_FMX_XE10_CB;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  fmx,
+  dbrtl;
+
+contains
+  uCopyRight in 'Source\Base\uCopyRight.pas',
+  uSkinPublic in 'Source\Base\uSkinPublic.pas',
+  uLicenseStr in 'Source\Base\uLicenseStr.pas',
+  uVersion in 'Source\Base\uVersion.pas',
+  uFileCommon in 'Source\Base\uFileCommon.pas',
+  uFuncCommon in 'Source\Base\uFuncCommon.pas',
+  uGraphicCommon in 'Source\Base\uGraphicCommon.pas',
+  uTimerTask in 'Source\Base\uTimerTask.pas',
+  uBaseList in 'Source\Base\uBaseList.pas',
+  uBaseLog in 'Source\Base\uBaseLog.pas',
+  uBinaryTreeDoc in 'Source\Base\uBinaryTreeDoc.pas',
+  uBaseHttpControl in 'Source\Base\uBaseHttpControl.pas',
+  uDrawRectParam in 'Source\Base\uDrawRectParam.pas',
+  uDrawTextParam in 'Source\Base\uDrawTextParam.pas',
+  uSkinImageList in 'Source\Base\uSkinImageList.pas',
+  uSkinMaterial in 'Source\Base\uSkinMaterial.pas',
+  uSkinPackage in 'Source\Base\uSkinPackage.pas',
+  uSkinPicture in 'Source\Base\uSkinPicture.pas',
+  uSkinRegManager in 'Source\Base\uSkinRegManager.pas',
+  uBufferBitmap in 'Source\Base\uBufferBitmap.pas',
+  uComponentType in 'Source\Base\uComponentType.pas',
+  uComponentTypeRegister in 'Source\Base\uComponentTypeRegister.pas',
+  uDownloadPictureManager in 'Source\Base\uDownloadPictureManager.pas',
+  uDrawCanvas in 'Source\Base\uDrawCanvas.pas',
+  uDrawEngine in 'Source\Base\uDrawEngine.pas',
+  uDrawLineParam in 'Source\Base\uDrawLineParam.pas',
+  uDrawParam in 'Source\Base\uDrawParam.pas',
+  uDrawPicture in 'Source\Base\uDrawPicture.pas',
+  uDrawPictureParam in 'Source\Base\uDrawPictureParam.pas',
+  uSkinGIFImage in 'Source\GifSupport\uSkinGIFImage.pas',
+  uFireMonkeyDrawCanvas in 'Source\Engines\FMX\uFireMonkeyDrawCanvas.pas',
+  uFireMonkeySkinPictureEngine in 'Source\Engines\FMX\uFireMonkeySkinPictureEngine.pas',
+  uSkinTreeViewType in 'Source\Controls\uSkinTreeViewType.pas',
+  uSkinVirtualGridType in 'Source\Controls\uSkinVirtualGridType.pas',
+  uSkinVirtualListType in 'Source\Controls\uSkinVirtualListType.pas',
+  uSkinAnimator in 'Source\Controls\uSkinAnimator.pas',
+  uSkinButtonType in 'Source\Controls\uSkinButtonType.pas',
+  uSkinCheckBoxType in 'Source\Controls\uSkinCheckBoxType.pas',
+  uSkinComboBoxType in 'Source\Controls\uSkinComboBoxType.pas',
+  uSkinComboEditType in 'Source\Controls\uSkinComboEditType.pas',
+  uSkinControlGestureManager in 'Source\Controls\uSkinControlGestureManager.pas',
+  uSkinDateEditType in 'Source\Controls\uSkinDateEditType.pas',
+  uSkinDBGridType in 'Source\Controls\uSkinDBGridType.pas',
+  uSkinDirectUIParentType in 'Source\Controls\uSkinDirectUIParentType.pas',
+  uSkinDrawPanelType in 'Source\Controls\uSkinDrawPanelType.pas',
+  uSkinEditType in 'Source\Controls\uSkinEditType.pas',
+  uSkinFrameImageType in 'Source\Controls\uSkinFrameImageType.pas',
+  uSkinImageListPlayerType in 'Source\Controls\uSkinImageListPlayerType.pas',
+  uSkinImageListViewerType in 'Source\Controls\uSkinImageListViewerType.pas',
+  uSkinImageType in 'Source\Controls\uSkinImageType.pas',
+  uSkinInertialMovement in 'Source\Controls\uSkinInertialMovement.pas',
+  uSkinItemDesignerPanelType in 'Source\Controls\uSkinItemDesignerPanelType.pas',
+  uSkinItems in 'Source\Controls\uSkinItems.pas',
+  uSkinLabelType in 'Source\Controls\uSkinLabelType.pas',
+  uSkinListBoxType in 'Source\Controls\uSkinListBoxType.pas',
+  uSkinListViewType in 'Source\Controls\uSkinListViewType.pas',
+  uSkinMemoType in 'Source\Controls\uSkinMemoType.pas',
+  uSkinMultiColorLabelType in 'Source\Controls\uSkinMultiColorLabelType.pas',
+  uSkinNotifyNumberIconType in 'Source\Controls\uSkinNotifyNumberIconType.pas',
+  uSkinPageControlType in 'Source\Controls\uSkinPageControlType.pas',
+  uSkinPanelType in 'Source\Controls\uSkinPanelType.pas',
+  uSkinPopupType in 'Source\Controls\uSkinPopupType.pas',
+  uSkinProgressBarType in 'Source\Controls\uSkinProgressBarType.pas',
+  uSkinPullLoadPanelType in 'Source\Controls\uSkinPullLoadPanelType.pas',
+  uSkinRadioButtonType in 'Source\Controls\uSkinRadioButtonType.pas',
+  uSkinRoundRectType in 'Source\Controls\uSkinRoundRectType.pas',
+  uSkinScrollBarType in 'Source\Controls\uSkinScrollBarType.pas',
+  uSkinScrollBoxContentType in 'Source\Controls\uSkinScrollBoxContentType.pas',
+  uSkinScrollBoxType in 'Source\Controls\uSkinScrollBoxType.pas',
+  uSkinScrollControlCornerType in 'Source\Controls\uSkinScrollControlCornerType.pas',
+  uSkinScrollControlType in 'Source\Controls\uSkinScrollControlType.pas',
+  uSkinStringGridType in 'Source\Controls\uSkinStringGridType.pas',
+  uSkinSwitchBarType in 'Source\Controls\uSkinSwitchBarType.pas',
+  uSkinSwitchPageListControlGestureManager in 'Source\Controls\uSkinSwitchPageListControlGestureManager.pas',
+  uSkinSwitchPageListPanelType in 'Source\Controls\uSkinSwitchPageListPanelType.pas',
+  uSkinSwitchType in 'Source\Controls\uSkinSwitchType.pas',
+  uSkinTimeEditType in 'Source\Controls\uSkinTimeEditType.pas',
+  uSkinTrackBarType in 'Source\Controls\uSkinTrackBarType.pas',
+  uSkinFireMonkeyMemo in 'Source\Controls\FireMonkey\uSkinFireMonkeyMemo.pas',
+  uSkinFireMonkeyEdit in 'Source\Controls\FireMonkey\uSkinFireMonkeyEdit.pas',
+  uSkinFireMonkeyControl in 'Source\Controls\FireMonkey\uSkinFireMonkeyControl.pas',
+  uSkinFireMonkeyDateEdit in 'Source\Controls\FireMonkey\uSkinFireMonkeyDateEdit.pas',
+  uSkinFireMonkeyComboBox in 'Source\Controls\FireMonkey\uSkinFireMonkeyComboBox.pas',
+  uSkinFireMonkeyTimeEdit in 'Source\Controls\FireMonkey\uSkinFireMonkeyTimeEdit.pas',
+  uSkinFireMonkeyDBGrid in 'Source\Controls\FireMonkey\uSkinFireMonkeyDBGrid.pas',
+  uSkinFireMonkeyStringGrid in 'Source\Controls\FireMonkey\uSkinFireMonkeyStringGrid.pas',
+  uSkinFireMonkeyVirtualGrid in 'Source\Controls\FireMonkey\uSkinFireMonkeyVirtualGrid.pas',
+  uSkinFireMonkeyMultiColorLabel in 'Source\Controls\FireMonkey\uSkinFireMonkeyMultiColorLabel.pas',
+  uSkinFireMonkeyVirtualList in 'Source\Controls\FireMonkey\uSkinFireMonkeyVirtualList.pas',
+  uSkinFireMonkeyListView in 'Source\Controls\FireMonkey\uSkinFireMonkeyListView.pas',
+  uSkinFireMonkeyListBox in 'Source\Controls\FireMonkey\uSkinFireMonkeyListBox.pas',
+  uSkinFireMonkeyPopup in 'Source\Controls\FireMonkey\uSkinFireMonkeyPopup.pas',
+  uSkinFireMonkeyImageListViewer in 'Source\Controls\FireMonkey\uSkinFireMonkeyImageListViewer.pas',
+  uSkinFireMonkeyScrollBoxContent in 'Source\Controls\FireMonkey\uSkinFireMonkeyScrollBoxContent.pas',
+  uSkinFireMonkeyPageControl in 'Source\Controls\FireMonkey\uSkinFireMonkeyPageControl.pas',
+  uSkinFireMonkeySwitchBar in 'Source\Controls\FireMonkey\uSkinFireMonkeySwitchBar.pas',
+  uSkinFireMonkeySwitch in 'Source\Controls\FireMonkey\uSkinFireMonkeySwitch.pas',
+  uSkinFireMonkeyScrollBox in 'Source\Controls\FireMonkey\uSkinFireMonkeyScrollBox.pas',
+  uSkinFireMonkeyTreeView in 'Source\Controls\FireMonkey\uSkinFireMonkeyTreeView.pas',
+  uSkinFireMonkeySwitchPageListPanel in 'Source\Controls\FireMonkey\uSkinFireMonkeySwitchPageListPanel.pas',
+  uSkinFireMonkeyInputMethodHelper in 'Source\Controls\FireMonkey\uSkinFireMonkeyInputMethodHelper.pas',
+  uSkinFireMonkeyScrollControlCorner in 'Source\Controls\FireMonkey\uSkinFireMonkeyScrollControlCorner.pas',
+  uSkinFireMonkeyDirectUIParent in 'Source\Controls\FireMonkey\uSkinFireMonkeyDirectUIParent.pas',
+  uSkinFireMonkeyProgressBar in 'Source\Controls\FireMonkey\uSkinFireMonkeyProgressBar.pas',
+  uSkinFireMonkeyFrameImage in 'Source\Controls\FireMonkey\uSkinFireMonkeyFrameImage.pas',
+  uSkinFireMonkeyPanel in 'Source\Controls\FireMonkey\uSkinFireMonkeyPanel.pas',
+  uSkinFireMonkeyImageListPlayer in 'Source\Controls\FireMonkey\uSkinFireMonkeyImageListPlayer.pas',
+  uSkinFireMonkeyTrackBar in 'Source\Controls\FireMonkey\uSkinFireMonkeyTrackBar.pas',
+  uSkinFireMonkeyButton in 'Source\Controls\FireMonkey\uSkinFireMonkeyButton.pas',
+  uSkinFireMonkeyDrawPanel in 'Source\Controls\FireMonkey\uSkinFireMonkeyDrawPanel.pas',
+  uSkinFireMonkeyCheckBox in 'Source\Controls\FireMonkey\uSkinFireMonkeyCheckBox.pas',
+  uSkinFireMonkeyPullLoadPanel in 'Source\Controls\FireMonkey\uSkinFireMonkeyPullLoadPanel.pas',
+  uSkinFireMonkeyScrollBar in 'Source\Controls\FireMonkey\uSkinFireMonkeyScrollBar.pas',
+  uSkinFireMonkeyNotifyNumberIcon in 'Source\Controls\FireMonkey\uSkinFireMonkeyNotifyNumberIcon.pas',
+  uSkinFireMonkeyRadioButton in 'Source\Controls\FireMonkey\uSkinFireMonkeyRadioButton.pas',
+  uSkinFireMonkeyItemDesignerPanel in 'Source\Controls\FireMonkey\uSkinFireMonkeyItemDesignerPanel.pas',
+  uSkinFireMonkeyScrollControl in 'Source\Controls\FireMonkey\uSkinFireMonkeyScrollControl.pas',
+  uSkinFireMonkeyLabel in 'Source\Controls\FireMonkey\uSkinFireMonkeyLabel.pas',
+  uSkinFireMonkeyImage in 'Source\Controls\FireMonkey\uSkinFireMonkeyImage.pas',
+  uSkinFireMonkeyRoundRect in 'Source\Controls\FireMonkey\uSkinFireMonkeyRoundRect.pas',
+  uSkinFireMonkeyComboEdit in 'Source\Controls\FireMonkey\uSkinFireMonkeyComboEdit.pas',
+  uSkinFireMonkeyControlRegister in '..\OrangeUIPublish\OrangeUIDesign\Source\uSkinFireMonkeyControlRegister.pas',
+  uSkinFireMonkeyRoundImage in 'Source\Controls\FireMonkey\uSkinFireMonkeyRoundImage.pas',
+  uSkinRoundImageType in 'Source\Controls\uSkinRoundImageType.pas';
+
+end.
+
+

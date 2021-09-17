@@ -1,0 +1,20 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = #35759#23458
+  ClientHeight = 480
+  ClientWidth = 320
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnKeyUp = FormKeyUp
+  OnShow = FormShow
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 0
+  object Timer1: TTimer
+    Left = 152
+    Top = 240
+  end
+end

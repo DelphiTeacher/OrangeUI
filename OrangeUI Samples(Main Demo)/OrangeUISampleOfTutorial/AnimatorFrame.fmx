@@ -1,0 +1,141 @@
+object FrameAnimator: TFrameAnimator
+  Size.Width = 320.000000000000000000
+  Size.Height = 556.000000000000000000
+  Size.PlatformDefault = False
+  object ComboBox1: TComboBox
+    Items.Strings = (
+      '      Linear'#65306#26080#32531#21160#25928#26524#65307
+      '      Quadratic'#65306#20108#27425#26041#30340#32531#21160#65288't^2'#65289#65307
+      '      Cubic'#65306#19977#27425#26041#30340#32531#21160#65288't^3'#65289#65307
+      '      Quarti'#65306#22235#27425#26041#30340#32531#21160#65288't^4'#65289#65307
+      '      Quintic'#65306#20116#27425#26041#30340#32531#21160#65288't^5'#65289#65307
+      '      Sinusoidal'#65306#27491#24358#26354#32447#30340#32531#21160#65288'sin(t)'#65289#65307
+      '      Exponential'#65306#25351#25968#26354#32447#30340#32531#21160#65288'2^t'#65289#65307
+      '      Circular'#65306#22278#24418#26354#32447#30340#32531#21160#65288'sqrt(1-t^2)'#65289#65307
+      '      Elastic'#65306#25351#25968#34928#20943#30340#27491#24358#26354#32447#32531#21160#65307
+      '      Back'#65306#36229#36807#33539#22260#30340#19977#27425#26041#32531#21160#65288'(s+1)*t^3 - s*t^2'#65289#65307
+      '      Bounce'#65306#25351#25968#34928#20943#30340#21453#24377#32531#21160#12290)
+    ItemIndex = 0
+    Position.X = -4.000000000000000000
+    Position.Y = 31.000000000000000000
+    Size.Width = 323.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    OnChange = ComboBox1Change
+  end
+  object ComboBox2: TComboBox
+    Items.Strings = (
+      '      easeIn'#65306#20174'0'#24320#22987#21152#36895#30340#32531#21160#65307
+      '      easeOut'#65306#20943#36895#21040'0'#30340#32531#21160#65307
+      '      easeInOut'#65306#21069#21322#27573#20174'0'#24320#22987#21152#36895#65292#21518#21322#27573#20943#36895#21040'0'#30340#32531#21160#12290)
+    ItemIndex = 0
+    Position.X = -1.000000000000000000
+    Position.Y = 71.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    OnChange = ComboBox2Change
+  end
+  object PaintBox1: TPaintBox
+    Anchors = [akLeft, akTop, akRight]
+    Position.X = 3.000000000000000000
+    Position.Y = 136.000000000000000000
+    Size.Width = 316.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    OnPaint = PaintBox1Paint
+  end
+  object SkinFMXLabel14: TSkinFMXLabel
+    ParentMouseEvent = False
+    DirectUIVisible = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+    MouseDownFocus = False
+    ClipChildren = True
+    Position.X = 8.000000000000000000
+    Position.Y = 204.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    Caption = #21160#24577#25928#26524#25511#20214#27979#35797
+    Text = #21160#24577#25928#26524#25511#20214#27979#35797
+    Properties.AutoSize = False
+    Left = 8
+    Top = 204
+  end
+  object Button1: TButton
+    Position.X = 8.000000000000000000
+    Position.Y = 242.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Text = #21069#36827
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Position.X = 72.000000000000000000
+    Position.Y = 242.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = #21518#36864
+    OnClick = Button2Click
+  end
+  object Button3: TButton
+    Position.X = 133.000000000000000000
+    Position.Y = 242.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = #26242#20572
+    OnClick = Button3Click
+  end
+  object Button4: TButton
+    Position.X = 196.000000000000000000
+    Position.Y = 243.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = #32487#32493
+    OnClick = Button4Click
+  end
+  object Button5: TButton
+    Position.X = 256.000000000000000000
+    Position.Y = 243.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = #20572#27490
+    OnClick = Button5Click
+  end
+  object ControlMoveAnimator: TSkinControlMoveAnimator
+    Max = 300.000000000000000000
+    Speed = 4.000000000000000000
+    TweenType = Quadratic
+    EaseType = easeIn
+    EndTimesCount = 40.000000000000000000
+    DirectionType = adtBackward
+    OnAnimate = ControlMoveAnimatorAnimate
+    MoveAnimateType = scmatAnimateLeft
+    Left = 137
+    Top = 144
+  end
+end

@@ -1,0 +1,186 @@
+object frmDrawPicturePropertyEditor: TfrmDrawPicturePropertyEditor
+  Left = 497
+  Top = 171
+  Caption = #22270#29255#32534#36753#22120
+  ClientHeight = 531
+  ClientWidth = 657
+  Position = ScreenCenter
+  FormFactor.Width = 2020
+  FormFactor.Height = 1273
+  FormFactor.Devices = [Desktop]
+  FormFamily = 'TForm'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  OnHide = FormHide
+  Left = 497
+  Top = 171
+  DesignerMasterStyle = 0
+  object pnlClient: TPanel
+    Align = Client
+    Size.Width = 657.000000000000000000
+    Size.Height = 531.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    object ScrollBox1: TScrollBox
+      Anchors = [akLeft, akTop, akRight]
+      Margins.Left = 4.000000000000000000
+      Margins.Top = 4.000000000000000000
+      Margins.Right = 4.000000000000000000
+      Margins.Bottom = 4.000000000000000000
+      Position.X = 4.000000000000000000
+      Position.Y = 3.000000000000000000
+      Size.Width = 515.000000000000000000
+      Size.Height = 526.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'framedscrollboxstyle'
+      TabOrder = 0
+      Viewport.Width = 511.000000000000000000
+      Viewport.Height = 522.000000000000000000
+      object Preview: TPaintBox
+        Size.Width = 10.000000000000000000
+        Size.Height = 10.000000000000000000
+        Size.PlatformDefault = False
+        OnPaint = PreviewPaint
+      end
+    end
+    object SaveDialog1: TSaveDialog
+      Left = 264
+      Top = 356
+    end
+    object btnOpen: TButton
+      Anchors = [akTop, akRight]
+      Margins.Bottom = 9.000000000000000000
+      Position.X = 546.000000000000000000
+      Position.Y = 26.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = #25171#24320'...'
+      OnClick = btnOpenClick
+    end
+    object btnSaveAs: TButton
+      Anchors = [akTop, akRight]
+      Margins.Bottom = 9.000000000000000000
+      Position.X = 546.000000000000000000
+      Position.Y = 60.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = #21478#23384#20026'...'
+      OnClick = btnSaveAsClick
+    end
+    object btnOk: TButton
+      Anchors = [akTop, akRight]
+      Margins.Bottom = 9.000000000000000000
+      Position.X = 546.000000000000000000
+      Position.Y = 94.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = #30830#23450
+      OnClick = btnOkClick
+    end
+    object btnCancel: TButton
+      Anchors = [akTop, akRight]
+      Margins.Bottom = 9.000000000000000000
+      Position.X = 546.000000000000000000
+      Position.Y = 128.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = #21462#28040
+      OnClick = btnCancelClick
+    end
+    object btnClear: TButton
+      Anchors = [akTop, akRight]
+      Margins.Bottom = 9.000000000000000000
+      Position.X = 546.000000000000000000
+      Position.Y = 199.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Text = #28165#38500
+      OnClick = btnClearClick
+    end
+    object Button1: TButton
+      Anchors = [akTop, akRight]
+      Position.X = 544.000000000000000000
+      Position.Y = 302.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 62.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 12
+      Text = #29983#25104#21508#31181#23610#23544#30340'APP'#22270#26631'('#20445#23384#22312'C'#30424')'
+      TextSettings.WordWrap = True
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Anchors = [akTop, akRight]
+      Position.X = 544.000000000000000000
+      Position.Y = 367.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 58.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 11
+      Text = #29983#25104#21508#31181#23610#23544#30340'APP'#21551#21160#30028#38754'('#20445#23384#22312'C'#30424')'
+      TextSettings.WordWrap = True
+      OnClick = Button2Click
+    end
+    object btnPaste: TButton
+      Anchors = [akTop, akRight]
+      Margins.Bottom = 9.000000000000000000
+      Position.X = 546.000000000000000000
+      Position.Y = 464.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Text = #31896#36148
+      OnClick = btnPasteClick
+    end
+    object btnCopy: TButton
+      Anchors = [akTop, akRight]
+      Margins.Bottom = 9.000000000000000000
+      Position.X = 546.000000000000000000
+      Position.Y = 432.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = #22797#21046
+      OnClick = btnCopyClick
+    end
+    object btnGenerateGIFImageList: TButton
+      Anchors = [akTop, akRight]
+      Position.X = 544.000000000000000000
+      Position.Y = 495.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 10
+      Text = 'GIF'#29983#25104#32553#30053#22270
+      TextSettings.WordWrap = True
+      OnClick = btnGenerateGIFImageListClick
+    end
+    object OpenDialog: TOpenDialog
+      Left = 104
+      Top = 360
+    end
+    object edtDevide: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 13
+      Text = 'x'
+      Position.X = 520.000000000000000000
+      Position.Y = 328.000000000000000000
+      Size.Width = 27.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+end

@@ -1,0 +1,139 @@
+package OrangeUIControl_VCL_D10_4;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  vclimg,
+  dbrtl,
+  IndySystem,
+  IndyProtocols,
+  IndyCore;
+
+contains
+  uSkinWindowsControl in 'Source\Controls\Windows\uSkinWindowsControl.pas',
+  uSkinScrollBarType in 'Source\Controls\uSkinScrollBarType.pas',
+  uSkinScrollControlType in 'Source\Controls\uSkinScrollControlType.pas',
+  uSkinTrackBarType in 'Source\Controls\uSkinTrackBarType.pas',
+  uSkinButtonType in 'Source\Controls\uSkinButtonType.pas',
+  uSkinCheckBoxType in 'Source\Controls\uSkinCheckBoxType.pas',
+  uSkinFrameImageType in 'Source\Controls\uSkinFrameImageType.pas',
+  uSkinImageType in 'Source\Controls\uSkinImageType.pas',
+  uSkinItemDesignerPanelType in 'Source\Controls\uSkinItemDesignerPanelType.pas',
+  uSkinItems in 'Source\Controls\uSkinItems.pas',
+  uSkinLabelType in 'Source\Controls\uSkinLabelType.pas',
+  uSkinListBoxType in 'Source\Controls\uSkinListBoxType.pas',
+  uSkinPanelType in 'Source\Controls\uSkinPanelType.pas',
+  uSkinRadioButtonType in 'Source\Controls\uSkinRadioButtonType.pas',
+  uSkinImageListPlayerType in 'Source\Controls\uSkinImageListPlayerType.pas',
+  uSkinListViewType in 'Source\Controls\uSkinListViewType.pas',
+  uSkinPublic in 'Source\Base\uSkinPublic.pas',
+  uSkinPicture in 'Source\Base\uSkinPicture.pas',
+  uSkinMaterial in 'Source\Base\uSkinMaterial.pas',
+  uSkinImageList in 'Source\Base\uSkinImageList.pas',
+  uGraphicCommon in 'Source\Base\uGraphicCommon.pas',
+  uDrawTextParam in 'Source\Base\uDrawTextParam.pas',
+  uDrawRectParam in 'Source\Base\uDrawRectParam.pas',
+  uDrawPictureParam in 'Source\Base\uDrawPictureParam.pas',
+  uDrawPicture in 'Source\Base\uDrawPicture.pas',
+  uDrawParam in 'Source\Base\uDrawParam.pas',
+  uDrawLineParam in 'Source\Base\uDrawLineParam.pas',
+  uDrawEngine in 'Source\Base\uDrawEngine.pas',
+  uDrawCanvas in 'Source\Base\uDrawCanvas.pas',
+  uDownloadPictureManager in 'Source\Base\uDownloadPictureManager.pas',
+  uBinaryTreeDoc in 'Source\Base\uBinaryTreeDoc.pas',
+  uGDIPlusSkinPictureEngine in 'Source\Engines\VCL\GDIPlus\uGDIPlusSkinPictureEngine.pas',
+  uGDIPlusDrawCanvas in 'Source\Engines\VCL\GDIPlus\uGDIPlusDrawCanvas.pas',
+  uSkinGDIPlus in 'Source\Engines\VCL\GDIPlus\GDIPlus\uSkinGDIPlus.pas',
+  uSkinAnimator in 'Source\Controls\uSkinAnimator.pas',
+  uSkinControlGestureManager in 'Source\Controls\uSkinControlGestureManager.pas',
+  uSkinDBGridType in 'Source\Controls\uSkinDBGridType.pas',
+  uSkinImageListViewerType in 'Source\Controls\uSkinImageListViewerType.pas',
+  uSkinMultiColorLabelType in 'Source\Controls\uSkinMultiColorLabelType.pas',
+  uSkinNotifyNumberIconType in 'Source\Controls\uSkinNotifyNumberIconType.pas',
+  uSkinPageControlType in 'Source\Controls\uSkinPageControlType.pas',
+  uSkinProgressBarType in 'Source\Controls\uSkinProgressBarType.pas',
+  uSkinPullLoadPanelType in 'Source\Controls\uSkinPullLoadPanelType.pas',
+  uSkinRoundImageType in 'Source\Controls\uSkinRoundImageType.pas',
+  uSkinScrollBoxContentType in 'Source\Controls\uSkinScrollBoxContentType.pas',
+  uSkinScrollBoxType in 'Source\Controls\uSkinScrollBoxType.pas',
+  uSkinScrollControlCornerType in 'Source\Controls\uSkinScrollControlCornerType.pas',
+  uSkinSwitchBarType in 'Source\Controls\uSkinSwitchBarType.pas',
+  uSkinSwitchPageListControlGestureManager in 'Source\Controls\uSkinSwitchPageListControlGestureManager.pas',
+  uSkinSwitchPageListPanelType in 'Source\Controls\uSkinSwitchPageListPanelType.pas',
+  uSkinSwitchType in 'Source\Controls\uSkinSwitchType.pas',
+  uSkinTreeViewType in 'Source\Controls\uSkinTreeViewType.pas',
+  uSkinVirtualGridType in 'Source\Controls\uSkinVirtualGridType.pas',
+  uSkinVirtualListType in 'Source\Controls\uSkinVirtualListType.pas',
+  uSkinDrawPanelType in 'Source\Controls\uSkinDrawPanelType.pas',
+  uBinaryObjectList in 'Source\Base\uBinaryObjectList.pas',
+  uUrlPicture in 'Source\Base\uUrlPicture.pas',
+  uSkinListLayouts in 'Source\Controls\uSkinListLayouts.pas',
+  uSkinRegManager in 'Source\Controls\uSkinRegManager.pas',
+  uComponentTypeRegister in 'Source\Controls\uComponentTypeRegister.pas',
+  uSkinControlPanDragGestureManager in 'Source\Controls\uSkinControlPanDragGestureManager.pas',
+  uSkinFormType in 'Source\Controls\Windows\uSkinFormType.pas',
+  uSkinWindowsForm in 'Source\Controls\Windows\uSkinWindowsForm.pas',
+  uBasePathData in 'Source\Base\uBasePathData.pas',
+  uDrawPathParam in 'Source\Base\uDrawPathParam.pas',
+  uBaseSkinControl in 'Source\Controls\Windows\uBaseSkinControl.pas',
+  uTimerTaskEvent in 'Source\Base\uTimerTaskEvent.pas',
+  uSkinCustomListType in 'Source\Controls\uSkinCustomListType.pas',
+  uSkinItemGridType in 'Source\Controls\uSkinItemGridType.pas',
+  uSkinGIFImage in 'Source\Base\uSkinGIFImage.pas',
+  uComponentType in 'Source\Base\uComponentType.pas',
+  uVersion in 'Source\Base\uVersion.pas',
+  uSkinDateEditType in 'Source\Controls\uSkinDateEditType.pas',
+  uSkinEditType in 'Source\Controls\uSkinEditType.pas',
+  uSkinComboBoxType in 'Source\Controls\uSkinComboBoxType.pas',
+  uSkinComboEditType in 'Source\Controls\uSkinComboEditType.pas',
+  uSkinTimeEditType in 'Source\Controls\uSkinTimeEditType.pas',
+  uSkinPopupType in 'Source\Controls\uSkinPopupType.pas',
+  uSkinMemoType in 'Source\Controls\uSkinMemoType.pas',
+  uSkinWindowsEdit in 'Source\Controls\Windows\uSkinWindowsEdit.pas',
+  uBasePageStructure in 'Source\Common\uBasePageStructure.pas',
+  uSkinSuperJSON in '..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperJSON.pas',
+  uSkinSuperObject in '..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperObject.pas',
+  uBaseList in '..\OrangeProjectCommon\OrangeUI\uBaseList.pas',
+  uBaseLog in '..\OrangeProjectCommon\OrangeUI\uBaseLog.pas',
+  uFileCommon in '..\OrangeProjectCommon\OrangeUI\uFileCommon.pas',
+  uFuncCommon in '..\OrangeProjectCommon\OrangeUI\uFuncCommon.pas',
+  uLang in '..\OrangeProjectCommon\OrangeUI\uLang.pas',
+  uTimerTask in '..\OrangeProjectCommon\OrangeUI\uTimerTask.pas',
+  uBaseHttpControl in '..\OrangeProjectCommon\OrangeUI\uBaseHttpControl.pas',
+  uSkinWindowsMemo in 'Source\Controls\Windows\uSkinWindowsMemo.pas',
+  uSkinBufferBitmap in 'Source\Base\uSkinBufferBitmap.pas',
+  uBitmapOperation in 'Source\uBitmapOperation.pas',
+  MD5_OrangeUI in '..\OrangeProjectCommon\MD5\MD5_OrangeUI.pas',
+  XSuperJSON in '..\OrangeProjectCommon\XSuperObject\XSuperJSON.pas',
+  XSuperObject in '..\OrangeProjectCommon\XSuperObject\XSuperObject.pas',
+  uFrameContext in 'Source\Base\uFrameContext.pas';
+
+end.

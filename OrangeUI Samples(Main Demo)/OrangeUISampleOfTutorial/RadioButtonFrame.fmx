@@ -1,0 +1,759 @@
+object FrameRadioButton: TFrameRadioButton
+  Size.Width = 320.000000000000000000
+  Size.Height = 440.000000000000000000
+  Size.PlatformDefault = False
+  object SkinFMXPanel1: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    MouseDownFocus = False
+    Align = Top
+    Position.Y = 206.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    Properties.IsToolBar = False
+    object rbColor5: TSkinFMXRadioButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'Color'
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.IsAutoPosition = True
+      SelfOwnMaterial.DrawCheckStateParam.FillColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckStateParam.IsRound = True
+      SelfOwnMaterial.DrawCheckStateParam.RoundWidth = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.RoundHeight = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Width = 60.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Height = 60.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionHorzType = dpphtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetIsFillChange]
+      SelfOwnMaterial.DrawCheckRectParam.IsRound = True
+      SelfOwnMaterial.DrawCheckRectParam.RoundWidth = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.RoundHeight = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.BorderColor.Color = claLightgray
+      SelfOwnMaterial.DrawCheckRectParam.BorderWidth = 2.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.BorderColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetBorderColorChange]
+      MouseDownFocus = False
+      ClipChildren = True
+      Position.X = 10.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 88.234375000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Caption = #39068#33394#21333#36873#26694
+      Text = #39068#33394#21333#36873#26694
+      Properties.AutoSize = True
+      Properties.Checked = True
+      Properties.IsAutoChecked = True
+      Left = 88
+      Top = 40
+    end
+    object rbColor6: TSkinFMXRadioButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'Color'
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.IsAutoPosition = True
+      SelfOwnMaterial.DrawCheckStateParam.FillColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckStateParam.IsRound = True
+      SelfOwnMaterial.DrawCheckStateParam.RoundWidth = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.RoundHeight = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Width = 60.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Height = 60.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionHorzType = dpphtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetIsFillChange]
+      SelfOwnMaterial.DrawCheckRectParam.IsRound = True
+      SelfOwnMaterial.DrawCheckRectParam.RoundWidth = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.RoundHeight = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.BorderColor.Color = claLightgray
+      SelfOwnMaterial.DrawCheckRectParam.BorderWidth = 2.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.BorderColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetBorderColorChange]
+      MouseDownFocus = False
+      ClipChildren = True
+      Position.X = 178.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 88.234375000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Caption = #39068#33394#21333#36873#26694
+      Text = #39068#33394#21333#36873#26694
+      Properties.AutoSize = True
+      Properties.Checked = False
+      Properties.IsAutoChecked = True
+      Left = 88
+      Top = 40
+    end
+  end
+  object SkinFMXPanel2: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    MouseDownFocus = False
+    Align = Top
+    Position.Y = 246.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Properties.IsToolBar = False
+    object rbColor7: TSkinFMXRadioButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'Color'
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.IsAutoPosition = True
+      SelfOwnMaterial.DrawCheckStateParam.IsRound = True
+      SelfOwnMaterial.DrawCheckStateParam.RoundWidth = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.RoundHeight = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Width = 30.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Height = 30.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionHorzType = dpphtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetIsFillChange]
+      SelfOwnMaterial.DrawCheckRectParam.IsRound = True
+      SelfOwnMaterial.DrawCheckRectParam.RoundWidth = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.RoundHeight = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.BorderColor.Color = claLightgray
+      SelfOwnMaterial.DrawCheckRectParam.BorderWidth = 2.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.FillColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.BorderColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange, drpetBorderColorChange]
+      MouseDownFocus = False
+      ClipChildren = True
+      Position.X = 10.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 88.234375000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Caption = #39068#33394#21333#36873#26694
+      Text = #39068#33394#21333#36873#26694
+      Properties.AutoSize = True
+      Properties.Checked = True
+      Properties.IsAutoChecked = True
+      Left = 88
+      Top = 40
+    end
+    object rbColor8: TSkinFMXRadioButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'Color'
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.IsAutoPosition = True
+      SelfOwnMaterial.DrawCheckStateParam.IsRound = True
+      SelfOwnMaterial.DrawCheckStateParam.RoundWidth = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.RoundHeight = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Width = 30.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Height = 30.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionHorzType = dpphtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetIsFillChange]
+      SelfOwnMaterial.DrawCheckRectParam.IsRound = True
+      SelfOwnMaterial.DrawCheckRectParam.RoundWidth = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.RoundHeight = -1.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.BorderColor.Color = claLightgray
+      SelfOwnMaterial.DrawCheckRectParam.BorderWidth = 2.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.FillColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.BorderColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange, drpetBorderColorChange]
+      MouseDownFocus = False
+      ClipChildren = True
+      Position.X = 178.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 88.234375000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Caption = #39068#33394#21333#36873#26694
+      Text = #39068#33394#21333#36873#26694
+      Properties.AutoSize = True
+      Properties.Checked = False
+      Properties.IsAutoChecked = True
+      Left = 88
+      Top = 40
+    end
+  end
+  object SkinFMXPanel3: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    MouseDownFocus = False
+    Align = Top
+    Position.Y = 126.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Properties.IsToolBar = False
+    object rbColor3: TSkinFMXRadioButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'Color'
+      SelfOwnMaterial.BackColor.FillColor.Color = claSeashell
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.IsAutoPosition = True
+      SelfOwnMaterial.DrawCheckStateParam.FillColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckStateParam.IsRound = True
+      SelfOwnMaterial.DrawCheckStateParam.RoundWidth = 3.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.RoundHeight = 3.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Width = 30.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Height = 30.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionHorzType = dpphtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.FillColor.Color = claWhite
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange]
+      SelfOwnMaterial.DrawCheckRectParam.IsRound = True
+      SelfOwnMaterial.DrawCheckRectParam.RoundWidth = 3.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.RoundHeight = 3.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.BorderColor.Color = claLightgray
+      SelfOwnMaterial.DrawCheckRectParam.BorderWidth = 2.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.FillColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.BorderColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange, drpetBorderWidthChange]
+      MouseDownFocus = False
+      ClipChildren = True
+      Position.X = 10.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 88.234375000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Caption = #39068#33394#21333#36873#26694
+      Text = #39068#33394#21333#36873#26694
+      Properties.AutoSize = True
+      Properties.Checked = True
+      Properties.IsAutoChecked = True
+      Left = 88
+      Top = 40
+    end
+    object rbColor4: TSkinFMXRadioButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'Color'
+      SelfOwnMaterial.BackColor.FillColor.Color = claWheat
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.IsAutoPosition = True
+      SelfOwnMaterial.DrawCheckStateParam.FillColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckStateParam.IsRound = True
+      SelfOwnMaterial.DrawCheckStateParam.RoundWidth = 3.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.RoundHeight = 3.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Width = 30.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Height = 30.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionHorzType = dpphtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.FillColor.Color = claWhite
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange]
+      SelfOwnMaterial.DrawCheckRectParam.IsRound = True
+      SelfOwnMaterial.DrawCheckRectParam.RoundWidth = 3.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.RoundHeight = 3.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.BorderColor.Color = claLightgray
+      SelfOwnMaterial.DrawCheckRectParam.BorderWidth = 2.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.FillColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.BorderColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange, drpetBorderWidthChange]
+      MouseDownFocus = False
+      ClipChildren = True
+      Position.X = 178.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 88.234375000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Caption = #39068#33394#21333#36873#26694
+      Text = #39068#33394#21333#36873#26694
+      Properties.AutoSize = True
+      Properties.Checked = False
+      Properties.IsAutoChecked = True
+      Left = 88
+      Top = 40
+    end
+  end
+  object SkinFMXPanel4: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    MouseDownFocus = False
+    Align = Top
+    Position.Y = 166.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Properties.IsToolBar = False
+    object rbColor2: TSkinFMXRadioButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'Color'
+      SelfOwnMaterial.BackColor.FillColor.Color = claPapayawhip
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.IsAutoPosition = True
+      SelfOwnMaterial.DrawCheckStateParam.FillColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Width = 60.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Height = 60.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionHorzType = dpphtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetIsFillChange]
+      SelfOwnMaterial.DrawCheckRectParam.BorderColor.Color = claLightgray
+      SelfOwnMaterial.DrawCheckRectParam.BorderWidth = 2.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.BorderColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetBorderColorChange]
+      MouseDownFocus = False
+      Anchors = [akLeft]
+      ClipChildren = True
+      Position.X = 178.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 88.234375000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Caption = #39068#33394#21333#36873#26694
+      Text = #39068#33394#21333#36873#26694
+      Properties.AutoSize = True
+      Properties.Checked = False
+      Properties.IsAutoChecked = True
+      Left = 88
+      Top = 40
+    end
+    object rbColor1: TSkinFMXRadioButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'Color'
+      SelfOwnMaterial.BackColor.FillColor.Color = claThistle
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.IsAutoPosition = True
+      SelfOwnMaterial.DrawCheckStateParam.FillColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Width = 60.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Height = 60.000000000000000000
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionHorzType = dpphtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetIsFillChange]
+      SelfOwnMaterial.DrawCheckRectParam.BorderColor.Color = claLightgray
+      SelfOwnMaterial.DrawCheckRectParam.BorderWidth = 2.000000000000000000
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.BorderColor.Color = claOrange
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetBorderColorChange]
+      MouseDownFocus = False
+      ClipChildren = True
+      Position.X = 10.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 88.234375000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Caption = #39068#33394#21333#36873#26694
+      Text = #39068#33394#21333#36873#26694
+      Properties.AutoSize = True
+      Properties.Checked = True
+      Properties.IsAutoChecked = True
+      Left = 88
+      Top = 40
+    end
+  end
+  object SkinFMXRadioButton1: TSkinFMXRadioButton
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukName
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    ComponentTypeName = 'Color'
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+    SelfOwnMaterial.IsAutoPosition = True
+    SelfOwnMaterial.DrawCheckStateParam.BorderColor.Color = claLightgray
+    SelfOwnMaterial.DrawCheckStateParam.BorderWidth = 2.000000000000000000
+    SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.BorderColor.Color = claOrangered
+    SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetBorderColorChange]
+    SelfOwnMaterial.DrawCheckRectParam.DrawRectSetting.Left = 4.000000000000000000
+    SelfOwnMaterial.DrawCheckRectParam.DrawRectSetting.Top = 4.000000000000000000
+    SelfOwnMaterial.DrawCheckRectParam.DrawRectSetting.Right = 4.000000000000000000
+    SelfOwnMaterial.DrawCheckRectParam.DrawRectSetting.Bottom = 4.000000000000000000
+    SelfOwnMaterial.DrawCheckRectParam.DrawRectSetting.Enabled = True
+    SelfOwnMaterial.DrawCheckRectParam.DrawRectSetting.SizeType = dpstPixel
+    SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.IsFill = True
+    SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.FillColor.Color = claOrangered
+    SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange]
+    MouseDownFocus = False
+    Position.X = 8.000000000000000000
+    Position.Y = 312.000000000000000000
+    Size.Width = 177.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Caption = #39068#33394#21333#36873#26694#35774#32622
+    Text = #39068#33394#21333#36873#26694#35774#32622
+    Properties.AutoSize = False
+    Properties.Checked = False
+    Properties.IsAutoChecked = True
+  end
+  object SkinFMXPanel5: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    MouseDownFocus = False
+    Align = Top
+    Size.Width = 320.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Properties.IsToolBar = False
+  end
+  object lblCanSetCheckStateColor: TLabel
+    Align = Top
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 90.000000000000000000
+    Size.Width = 310.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    Text = #21487#20197#35774#32622#21246#36873#29366#24577#30340#39068#33394
+  end
+  object lblCanSetCheckStatePicture: TLabel
+    Anchors = [akLeft, akTop, akRight]
+    Locked = True
+    Position.X = 8.000000000000000000
+    Position.Y = 10.000000000000000000
+    Size.Width = 281.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    Text = #21487#20197#35774#32622#21246#36873#29366#24577#30340#22270#26631
+  end
+  object SkinFMXPanel6: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    MouseDownFocus = False
+    Align = Top
+    Position.Y = 40.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Properties.IsToolBar = False
+    object rbPicture1: TSkinFMXRadioButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.IsAutoPosition = True
+      SelfOwnMaterial.NormalUnCheckedPicture.PNG = {
+        89504E470D0A1A0A0000000D4948445200000080000000800806000000C33E61
+        CB000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        05CF49444154785EED9DBFAF3D4318872F92AF881F1114A84484422412126A3A
+        A1A323A2D4AB50FA1744A3A096F80FA81142A222F24581C28F46424282CF73EF
+        9E64EFF19E9D3967CFCE999DF93CC993937B8BDD79DFFD3DFBCEEC9931C61863
+        8C31C618638C31C618638C31C618638C31C618638C31C6186356CB35C36FABDC
+        2D1F910FC9FBE53DF22E79BBBC595E91F097FC5DFE2A7F92DFC9AFE597F233F9
+        A3342BE026F9AC7C5B5E95FF1E4996C5325936EB3015719D7C5ABE27FF90D106
+        3CA6AC8375B14ED66D4EC42DF215F9BD8C365409B954D006DA620A71A37C4DFE
+        26A38D720A690B6DA26D6621B8617D5EFE20A38D5083B48D36B67E735D9C7BE5
+        07324A7A8DD256DA6C8EC04B9247B428D1354B9B697BD5D47CAABA41BE255F3C
+        FFEB707E911FCB2FE457F21BC9359B677E3612D02740DFC06DF23EF9807C583E
+        26EF90737857BE2CFF3CFFCB644167CD27323AB272FC5CBE2AD9887361192C8B
+        6546EBCA915888C964408FDDB7324AE4941CCD6F4A7AFD968265B38E432E49C4
+        446C668207255DB1510277C9C6784372FA2E05EB629DFBEE08C4468C2680A363
+        DF8DFF8EBC539E0AD64D1BA2B6ED92187D26D882EBE33EA77D7AE09E94B5405B
+        6853D4D64862F53DC10077FBFBDCF0BD2F6F95B5419B685BD4E6486226F6EEC9
+        3D85FE235F97B5431B696B14C3B6C4DE3574944489D9F66FF9825C0BB4953647
+        B16C5B7D67D152D0559A73174D22790FBF366873CE4E400EBAEB36A60732A76F
+        9F53E99A8EFC6D687BCEE5805C74F5028937665122B65DC3353F053144B16D4B
+        4EBA8077E639AF74B9A36E859CA70372D2453D0185135102C6F24C5DE3A3DEA1
+        104B4E3F01B9691A4AA7722A796AEAE43916C414C53A96DC345D5E46FD5C14F8
+        D8969F8D73FA3CC8519350419B2AE0E491E8947DFB4B436CA9475F72D464B531
+        65D451C06379C3D63AC418C53E965C3507B5F451B01B39324ABED23D15C4983A
+        0B90ABA660344D6AD0068516BD40AC510E3692ABA64620D12D1A053A76C94A9E
+        DA20D6280763D7D8FDBD13C6D545416EA4DEAE37523586E46C71AE1D7E97E689
+        E17717CD5DF33248C59CCAD96A608876B4878F3D46F5EEDA20E6281763C9DDEA
+        794646C16DFC59F60AB14739D948EE16A5C425207573C7A08D5E49C5BEF88D71
+        891D205501CB889D5E49C5BE78F570891D806959A660B856AFA4624FE56E3625
+        768054F93363F57A2515FBE2A5E3257600065D4EC12BD05E49C59ECADD6C4AEC
+        008CBC9D8251BABD928A3D95BB55103DDE8CBD5EF60AB1473919BB2825CE00A6
+        624AEC004CC2384513A7B90349C59ECADD6C4AEC00BCFB9E62F11B9D8A49C59E
+        CADD6C4AEC00A91B9D1E8A4076918A7DF11BE4123B00E3E1A7604E9E5E49C59E
+        CADD6C4AEC00D4C34FC1844CBD928A3D95BBD994D80198757B8A1E5F056F48C5
+        9ECADD6C4AEC004CB93E0553B1F5CAE3C3EF2E52B95B052E0889A9A220A4C419
+        808F2D3027CE144F0DBF3D918A999C2DFEA18A123B007C38FCEEE2B9E1B72752
+        31A772B62A5C167E99EECAC23D30E432DD0D0C010F0DBBA0CBA161E0C1A11774
+        3B38D4C3C3F38687D3FBD7ECC7A83C41441CF3D8662788004F11336DF353C480
+        2789DA6DF3934481A7898BED669A38F04491FFB79B8922C153C55EB6BBA962C1
+        93455F480EBAFDC6A0A78BEF78BAF80D39CFC6C8A9740DF704B431E7B48F2DF7
+        7964E34FC6187F34CAF8B37146F8C391E6FCE8D8E772B0918D41A1C59295452C
+        9B75ECBBE191987CE467C2F5719F1BC36DFDF1E84C7AF87C3CE3EB3E92877C3E
+        9EBAFDB98357FDF9F899D05172C829F7D4D2E6EE3B798E055DA539EF0E6A91B6
+        76DBBDBB145CAE786396F32AF954D236DAD8DD8B9D92F0CE9CC2899CCAA252D2
+        16DAD4CDFBFC1AA0748AFAB97D7AE08E2DEBA60DCD9771D50C15B49451534B9F
+        1A7C720C5907EB629DCD56EFAE1546D3F01E9E8F2D5C95D1063C4496C5325976
+        5323765ABF59A1F3E551490F1EBD70CCBDCBFF78B6E7D9FF8A0466E3E2B18DBE
+        01BA6B39B5333903E3F33F1DFE678C31C618638C31C618638C31C618638C31C6
+        18638C31C618638C31C61853116767FF012201E53B3B39D7200000000049454E
+        44AE426082}
+      SelfOwnMaterial.NormalCheckedPicture.PNG = {
+        89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+        38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        079F49444154785EED9C5BA8755318867FE7432149218708E5502489E446212E
+        5CBA1629F7EEDC4B29F2DF50DC4AE19E72C18550722C8792C8A1284AC8F9F83E
+        FFBFDEFA8CC69CEBB0C79A63EEBDBFA7DEF65C6BCE39C6FB7DE31B63CDB5D6DC
+        EB4092244992244992244992244992244992247B9E23167FE70AFEECF1DF8556
+        61D3F32667AE03709474A4F4E7A147FF877DDE1F93FC8FF4F74225C748DE3F2B
+        E636004EAA13759C74BE7481748574D9E2F119D2A9D2F112FC267D2F7D237D26
+        7D20BD277DBA78FCBB040C9C076B16CC6100F0806252AE966E96AE97AE9348F6
+        263028AF4BAF4A2F4A6F4A86C19EF5F2340554A461FB76E905E93BC9C9412C45
+        7F49CC0C06CAF2FEF81CC7702CE7C4366893B6E9A3EC775FE2C0A9FE5B25AA34
+        268C04A298E875C5B96E273E4F5FF4E915605F0D82971C604D7F468AC9A18291
+        1FBBAAE373CBE4E3E3E0D5DAA06F3C40F4B56761DD35F7485F4B43C9E1F11FC5
+        73C855CD0BEFAF0BB13D345B68A3D6B69FC3035E4CF4B875A61C710223412749
+        0F4B0E9AF5FAE8C39B877082FC1CC9FD44FA507A43FA48FA5CFA56FA458213A5
+        D3A5F3A44BA46BA44BA50B255F29D10F4B4D8C39F6FDA4749FF49364AF7B06AF
+        B167492F492499006365F2385630497F48BA453A415A17CEE15CDAA0ADA17EF0
+        E0C778C323EC99D7054FE973A5B72402A5F29C80F231D7EDF74AE748112A95A4
+        D05EB95EFB31FB3826CE28A02DDAA4ED5A9FF1311EF10AF6BE6B71002C0F2C1F
+        0458AEEB0EFC07E901E914C990481493BD2A9CE3F30D6DD3077DC5BE2D7BC32B
+        9E61D70E822BF264E96589C0CACB414F7DDE20DD2019CE6B1978D91E7DD167F4
+        60D9239EF1CE799B144077BC863E211150596D5EFF9F924E9360D36A5F15CF0A
+        A04FFA8E5E2C7BC53BECBAD70357DBDD520C085171AEB24724273C2E15DBC67D
+        D1371EF0525EC6DA333140CB19B9555C2D174BBCFD27A85861DE7E540292B04A
+        8595CBC810AB1E479F1E7CBC446FDEC63B31100BCC7E261010C163F459894062
+        F57BFB69C909701286A0BD7276F0DCB112979A88ED32E99CB36C20DC3F5EF034
+        E497583886F696F9ED8A03E6FADB01785ABBBADE91B8C2209065098A1577B6C4
+        076907A557A4AFA49F17629BE7D8C7311C6B621B359C543CE12D7AC5BB078198
+        6099E7EE60F035A90C84ED1FA56B25185BF35D99C0353C978E1F4BB4B58A3896
+        73FC5E22B657C35EF086472F3FB4E5188869D6C9B7392A3026033998072518AB
+        CA98A8BBA4F8E689174A27C76DBA7DC4BE78A9CBB9B461C606C19EF0E836DD8E
+        456C30CB81C014E2337727C3812092C11BA1B16AF4F37CB6F3B8E4C09D783F5E
+        A67220688B3661AC6F8447BCDAB7DB639BD81CE7AC70F55C25F12D944DC7BF7C
+        14006309203012F59CC439041D5F14D7557C0DA24DDAA68F310F8057CE296320
+        36628465AF2D93C297DE70BF8451579F13C09A7CA6E424D7F0F38F496EC3C9DB
+        8968C37E681BC63CE011AF788E05E03688111C73775C357CECFBBC14CDFA2F9F
+        48C250D53821774A1CBF93AA1F92DBA40F181A047BC433C797B110A33FE21E9A
+        499362C317495E7EA81C4F5B3EB3BF4982DA950FE71308572C5F4A9CE3735BCA
+        6DD2077DD167AD20EC11CF78F7B99E8DC448AC30545093E24ABA4DC2A02BCD7F
+        DF97FC797EAD621C04978D1CEF4ADB86DC367D412D81F68867BC737C1913B1C2
+        D02C5A991D37203004DCB7E36D702004C1D7865456DC0FF44F75B1E6DE21B1BF
+        3648ADA06DFAA02FFAA4EF3207ECC72B9EF10ED113FB8915CA78D6A6E500F0E5
+        36466DD66DFB5E1CA670898FE52B44BE3EE4986D4E6BDAA60FFAA24F88C935F6
+        6AEF8EC5F1F98BFC590C00D00E77AC410C0883DCA536041508374A1C5B4B466B
+        E883BEE813ECA106DE6392ED8F589BE4AED5005059DC2E5842705F1CDE1CAC16
+        3C706D3D45F20D7DD1E750FCF68AF7DA00116B9399DA72006AB70F629EBB17C6
+        60BDADCD9E6D11ABB8765516C17B6D00887556034050B56B632AC9B78E0CCD80
+        3878530EC05812EDD597A1C6E7126B13AFAD0620D990560340957003159415B3
+        EC4330A6386F6E606896B4C47DD0676D79017BC57BF4ED7389B589D756031093
+        18618AFBF68E217873C3A78F30E500D0277D8F81F7DA323536786BD17200F8E7
+        8812CCFB26A7A119C035F7DBD214C937F4459FB5F72660AF78AF0D00B1CE6A00
+        08A456C504E2372D351C1CB70472EC543380BEE8136A09367E7369ECCFDF17EC
+        98160360837ED3629336C87FBB40AD2F1FCB9D68DCBFC9314D2A6B00DAA60FFA
+        A24FB08788BDDABB63717C7E73190767235A0E00FF9355AB96CB253ED862BD2D
+        0D131815C82DE2DC79C0FE5A425A41DBF4415FF449DF6525B31FAF78C63B444F
+        EC275628E3E982A7707E1CDD0957417E21D391FC4AB233AE9AFC52BE230486F6
+        F26D292C3F8E7376D854DE98D519CCE5AD899DB0C1BC39B7134E2A41E7EDE99D
+        70C5E53F6874C409C87F51EA88AB25FF49AF13044BD5E4BFA976C441738591FF
+        A8DD0907903F55D011AFA1FC1046FE58472056D1B6A19A08347FAEA623714AE7
+        0F3675C2EB35F0A577FE645927BCC61274FE685F2762E06CF341DABEFAD9CA39
+        4C394F7D9267F6CD0FB7CE61002224054F5431F8A78BD19512EB35DBABFC74F1
+        BB8B6D943F5DBC26248AC1601929619FF7DBBF93EA17DA92FCF1EE0DC19F4502
+        575D2E383E2E31AB9E972449922449922449922449922449922449D2980307FE
+        03BCFC09CB32D06B210000000049454E44AE426082}
+      SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+      MouseDownFocus = False
+      Position.X = 10.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 88.234375000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+      Caption = #22270#29255#21333#36873#26694
+      Text = #22270#29255#21333#36873#26694
+      Properties.AutoSize = True
+      Properties.Checked = True
+      Properties.IsAutoChecked = True
+    end
+    object rbPicture2: TSkinFMXRadioButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.IsAutoPosition = True
+      SelfOwnMaterial.NormalUnCheckedPicture.PNG = {
+        89504E470D0A1A0A0000000D4948445200000080000000800806000000C33E61
+        CB000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        05CF49444154785EED9DBFAF3D4318872F92AF881F1114A84484422412126A3A
+        A1A323A2D4AB50FA1744A3A096F80FA81142A222F24581C28F46424282CF73EF
+        9E64EFF19E9D3967CFCE999DF93CC993937B8BDD79DFFD3DFBCEEC9931C61863
+        8C31C618638C31C618638C31C618638C31C618638C31C6186356CB35C36FABDC
+        2D1F910FC9FBE53DF22E79BBBC595E91F097FC5DFE2A7F92DFC9AFE597F233F9
+        A3342BE026F9AC7C5B5E95FF1E4996C5325936EB3015719D7C5ABE27FF90D106
+        3CA6AC8375B14ED66D4EC42DF215F9BD8C365409B954D006DA620A71A37C4DFE
+        26A38D720A690B6DA26D6621B8617D5EFE20A38D5083B48D36B67E735D9C7BE5
+        07324A7A8DD256DA6C8EC04B9247B428D1354B9B697BD5D47CAABA41BE255F3C
+        FFEB707E911FCB2FE457F21BC9359B677E3612D02740DFC06DF23EF9807C583E
+        26EF90737857BE2CFF3CFFCB644167CD27323AB272FC5CBE2AD9887361192C8B
+        6546EBCA915888C964408FDDB7324AE4941CCD6F4A7AFD968265B38E432E49C4
+        446C668207255DB1510277C9C6784372FA2E05EB629DFBEE08C4468C2680A363
+        DF8DFF8EBC539E0AD64D1BA2B6ED92187D26D882EBE33EA77D7AE09E94B5405B
+        6853D4D64862F53DC10077FBFBDCF0BD2F6F95B5419B685BD4E6486226F6EEC9
+        3D85FE235F97B5431B696B14C3B6C4DE3574944489D9F66FF9825C0BB4953647
+        B16C5B7D67D152D0559A73174D22790FBF366873CE4E400EBAEB36A60732A76F
+        9F53E99A8EFC6D687BCEE5805C74F5028937665122B65DC3353F053144B16D4B
+        4EBA8077E639AF74B9A36E859CA70372D2453D0185135102C6F24C5DE3A3DEA1
+        104B4E3F01B9691A4AA7722A796AEAE43916C414C53A96DC345D5E46FD5C14F8
+        D8969F8D73FA3CC8519350419B2AE0E491E8947DFB4B436CA9475F72D464B531
+        65D451C06379C3D63AC418C53E965C3507B5F451B01B39324ABED23D15C4983A
+        0B90ABA660344D6AD0068516BD40AC510E3692ABA64620D12D1A053A76C94A9E
+        DA20D6280763D7D8FDBD13C6D545416EA4DEAE37523586E46C71AE1D7E97E689
+        E17717CD5DF33248C59CCAD96A608876B4878F3D46F5EEDA20E6281763C9DDEA
+        794646C16DFC59F60AB14739D948EE16A5C425207573C7A08D5E49C5BEF88D71
+        891D205501CB889D5E49C5BE78F570891D806959A660B856AFA4624FE56E3625
+        768054F93363F57A2515FBE2A5E3257600065D4EC12BD05E49C59ECADD6C4AEC
+        008CBC9D8251BABD928A3D95BB55103DDE8CBD5EF60AB1473919BB2825CE00A6
+        624AEC004CC2384513A7B90349C59ECADD6C4AEC00BCFB9E62F11B9D8A49C59E
+        CADD6C4AEC00A91B9D1E8A4076918A7DF11BE4123B00E3E1A7604E9E5E49C59E
+        CADD6C4AEC00D4C34FC1844CBD928A3D95BBD994D80198757B8A1E5F056F48C5
+        9ECADD6C4AEC004CB93E0553B1F5CAE3C3EF2E52B95B052E0889A9A220A4C419
+        808F2D3027CE144F0DBF3D918A999C2DFEA18A123B007C38FCEEE2B9E1B72752
+        31A772B62A5C167E99EECAC23D30E432DD0D0C010F0DBBA0CBA161E0C1A11774
+        3B38D4C3C3F38687D3FBD7ECC7A83C41441CF3D8662788004F11336DF353C480
+        2789DA6DF3934481A7898BED669A38F04491FFB79B8922C153C55EB6BBA962C1
+        93455F480EBAFDC6A0A78BEF78BAF80D39CFC6C8A9740DF704B431E7B48F2DF7
+        7964E34FC6187F34CAF8B37146F8C391E6FCE8D8E772B0918D41A1C59295452C
+        9B75ECBBE191987CE467C2F5719F1BC36DFDF1E84C7AF87C3CE3EB3E92877C3E
+        9EBAFDB98357FDF9F899D05172C829F7D4D2E6EE3B798E055DA539EF0E6A91B6
+        76DBBDBB145CAE786396F32AF954D236DAD8DD8B9D92F0CE9CC2899CCAA252D2
+        16DAD4CDFBFC1AA0748AFAB97D7AE08E2DEBA60DCD9771D50C15B49451534B9F
+        1A7C720C5907EB629DCD56EFAE1546D3F01E9E8F2D5C95D1063C4496C5325976
+        5323765ABF59A1F3E551490F1EBD70CCBDCBFF78B6E7D9FF8A0466E3E2B18DBE
+        01BA6B39B5333903E3F33F1DFE678C31C618638C31C618638C31C618638C31C6
+        18638C31C618638C31C61853116767FF012201E53B3B39D7200000000049454E
+        44AE426082}
+      SelfOwnMaterial.NormalCheckedPicture.PNG = {
+        89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
+        38000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        079F49444154785EED9C5BA8755318867FE7432149218708E5502489E446212E
+        5CBA1629F7EEDC4B29F2DF50DC4AE19E72C18550722C8792C8A1284AC8F9F83E
+        FFBFDEFA8CC69CEBB0C79A63EEBDBFA7DEF65C6BCE39C6FB7DE31B63CDB5D6DC
+        EB4092244992244992244992244992244992247B9E23167FE70AFEECF1DF8556
+        61D3F32667AE03709474A4F4E7A147FF877DDE1F93FC8FF4F74225C748DE3F2B
+        E636004EAA13759C74BE7481748574D9E2F119D2A9D2F112FC267D2F7D237D26
+        7D20BD277DBA78FCBB040C9C076B16CC6100F0806252AE966E96AE97AE9348F6
+        263028AF4BAF4A2F4A6F4A86C19EF5F2340554A461FB76E905E93BC9C9412C45
+        7F49CC0C06CAF2FEF81CC7702CE7C4366893B6E9A3EC775FE2C0A9FE5B25AA34
+        268C04A298E875C5B96E273E4F5FF4E915605F0D82971C604D7F468AC9A18291
+        1FBBAAE373CBE4E3E3E0D5DAA06F3C40F4B56761DD35F7485F4B43C9E1F11FC5
+        73C855CD0BEFAF0BB13D345B68A3D6B69FC3035E4CF4B875A61C710223412749
+        0F4B0E9AF5FAE8C39B877082FC1CC9FD44FA507A43FA48FA5CFA56FA458213A5
+        D3A5F3A44BA46BA44BA50B255F29D10F4B4D8C39F6FDA4749FF49364AF7B06AF
+        B167492F492499006365F2385630497F48BA453A415A17CEE15CDAA0ADA17EF0
+        E0C778C323EC99D7054FE973A5B72402A5F29C80F231D7EDF74AE748112A95A4
+        D05EB95EFB31FB3826CE28A02DDAA4ED5A9FF1311EF10AF6BE6B71002C0F2C1F
+        0458AEEB0EFC07E901E914C990481493BD2A9CE3F30D6DD3077DC5BE2D7BC32B
+        9E61D70E822BF264E96589C0CACB414F7DDE20DD2019CE6B1978D91E7DD167F4
+        60D9239EF1CE799B144077BC863E211150596D5EFF9F924E9360D36A5F15CF0A
+        A04FFA8E5E2C7BC53BECBAD70357DBDD520C085171AEB24724273C2E15DBC67D
+        D1371EF0525EC6DA333140CB19B9555C2D174BBCFD27A85861DE7E540292B04A
+        8595CBC810AB1E479F1E7CBC446FDEC63B31100BCC7E261010C163F459894062
+        F57BFB69C909701286A0BD7276F0DCB112979A88ED32E99CB36C20DC3F5EF034
+        E497583886F696F9ED8A03E6FADB01785ABBBADE91B8C2209065098A1577B6C4
+        076907A557A4AFA49F17629BE7D8C7311C6B621B359C543CE12D7AC5BB078198
+        6099E7EE60F035A90C84ED1FA56B25185BF35D99C0353C978E1F4BB4B58A3896
+        73FC5E22B657C35EF086472F3FB4E5188869D6C9B7392A3026033998072518AB
+        CA98A8BBA4F8E689174A27C76DBA7DC4BE78A9CBB9B461C606C19EF0E836DD8E
+        456C30CB81C014E2337727C3812092C11BA1B16AF4F37CB6F3B8E4C09D783F5E
+        A67220688B3661AC6F8447BCDAB7DB639BD81CE7AC70F55C25F12D944DC7BF7C
+        14006309203012F59CC439041D5F14D7557C0DA24DDAA68F310F8057CE296320
+        36628465AF2D93C297DE70BF8451579F13C09A7CA6E424D7F0F38F496EC3C9DB
+        8968C37E681BC63CE011AF788E05E03688111C73775C357CECFBBC14CDFA2F9F
+        48C250D53821774A1CBF93AA1F92DBA40F181A047BC433C797B110A33FE21E9A
+        499362C317495E7EA81C4F5B3EB3BF4982DA950FE71308572C5F4A9CE3735BCA
+        6DD2077DD167AD20EC11CF78F7B99E8DC448AC30545093E24ABA4DC2A02BCD7F
+        DF97FC797EAD621C04978D1CEF4ADB86DC367D412D81F68867BC737C1913B1C2
+        D02C5A991D37203004DCB7E36D702004C1D7865456DC0FF44F75B1E6DE21B1BF
+        3648ADA06DFAA02FFAA4EF3207ECC72B9EF10ED113FB8915CA78D6A6E500F0E5
+        36466DD66DFB5E1CA670898FE52B44BE3EE4986D4E6BDAA60FFAA24F88C935F6
+        6AEF8EC5F1F98BFC590C00D00E77AC410C0883DCA536041508374A1C5B4B466B
+        E883BEE813ECA106DE6392ED8F589BE4AED5005059DC2E5842705F1CDE1CAC16
+        3C706D3D45F20D7DD1E750FCF68AF7DA00116B9399DA72006AB70F629EBB17C6
+        60BDADCD9E6D11ABB8765516C17B6D00887556034050B56B632AC9B78E0CCD80
+        3878530EC05812EDD597A1C6E7126B13AFAD0620D990560340957003159415B3
+        EC4330A6386F6E606896B4C47DD0676D79017BC57BF4ED7389B589D756031093
+        18618AFBF68E217873C3A78F30E500D0277D8F81F7DA323536786BD17200F8E7
+        8812CCFB26A7A119C035F7DBD214C937F4459FB5F72660AF78AF0D00B1CE6A00
+        08A456C504E2372D351C1CB70472EC543380BEE8136A09367E7369ECCFDF17EC
+        98160360837ED3629336C87FBB40AD2F1FCB9D68DCBFC9314D2A6B00DAA60FFA
+        A24FB08788BDDABB63717C7E73190767235A0E00FF9355AB96CB253ED862BD2D
+        0D131815C82DE2DC79C0FE5A425A41DBF4415FF449DF6525B31FAF78C63B444F
+        EC275628E3E982A7707E1CDD0957417E21D391FC4AB233AE9AFC52BE230486F6
+        F26D292C3F8E7376D854DE98D519CCE5AD899DB0C1BC39B7134E2A41E7EDE99D
+        70C5E53F6874C409C87F51EA88AB25FF49AF13044BD5E4BFA976C441738591FF
+        A8DD0907903F55D011AFA1FC1046FE58472056D1B6A19A08347FAEA623714AE7
+        0F3675C2EB35F0A577FE645927BCC61274FE685F2762E06CF341DABEFAD9CA39
+        4C394F7D9267F6CD0FB7CE61002224054F5431F8A78BD19512EB35DBABFC74F1
+        BB8B6D943F5DBC26248AC1601929619FF7DBBF93EA17DA92FCF1EE0DC19F4502
+        575D2E383E2E31AB9E972449922449922449922449922449922449D2980307FE
+        03BCFC09CB32D06B210000000049454E44AE426082}
+      SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+      MouseDownFocus = False
+      Position.X = 176.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 88.234375000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Caption = #22270#29255#21333#36873#26694
+      Text = #22270#29255#21333#36873#26694
+      Properties.AutoSize = True
+      Properties.Checked = False
+      Properties.IsAutoChecked = True
+    end
+  end
+end

@@ -1,0 +1,66 @@
+object Form5: TForm5
+  Left = 0
+  Top = 0
+  Caption = #22270#29255#19978#20256#19979#36733#26381#21153#31471
+  ClientHeight = 190
+  ClientWidth = 310
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -14
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 17
+  object Label1: TLabel
+    Left = 60
+    Top = 40
+    Width = 28
+    Height = 17
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = #31471#21475
+  end
+  object ButtonStart: TButton
+    Left = 60
+    Top = 109
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = #21551#21160
+    TabOrder = 0
+    OnClick = ButtonStartClick
+  end
+  object ButtonStop: TButton
+    Left = 161
+    Top = 109
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = #20572#27490
+    TabOrder = 1
+    OnClick = ButtonStopClick
+  end
+  object EditPort: TEdit
+    Left = 60
+    Top = 64
+    Width = 195
+    Height = 25
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    TabOrder = 2
+    Text = '7030'
+  end
+end

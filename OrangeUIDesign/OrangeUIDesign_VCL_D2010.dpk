@@ -1,0 +1,52 @@
+package OrangeUIDesign_VCL_D2010;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  DesignIde,
+  vclie,
+  dbrtl,
+  VclSmp,
+  vclimg,
+  IndyCore,
+  IndySystem,
+  IndyProtocols;
+
+contains
+  uSkinPageControlEditor in 'Source\uSkinPageControlEditor.pas',
+  uSkinButtonGroupEditor in 'Source\uSkinButtonGroupEditor.pas',
+  uSkinAnimatorEditor in 'Source\uSkinAnimatorEditor.pas',
+  uLanguage in 'Source\uLanguage.pas',
+  uComponentTypeNameEditor in 'Source\uComponentTypeNameEditor.pas',
+  uSkinControlRegister in 'Source\uSkinControlRegister.pas',
+  uDrawPictureEditor in 'Source\uDrawPictureEditor.pas',
+  uSkinImageListEditor in 'Source\uSkinImageListEditor.pas',
+  uSkinItemsEditor in 'Source\uSkinItemsEditor.pas',
+  VCL_DrawPicturePropertyEditorForm in 'Source\VCL_DrawPicturePropertyEditorForm.pas' {frmDrawPicturePropertyEditor},
+  VCL_SkinPictureListPropertyEditorForm in 'Source\VCL_SkinPictureListPropertyEditorForm.pas' {frmSkinPictureListPropertyEditor},
+  VCL_SkinItemsPropertyeditorForm in 'Source\VCL_SkinItemsPropertyeditorForm.pas';
+
+end.

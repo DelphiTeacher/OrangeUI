@@ -1,0 +1,531 @@
+object FrameAddMyBankCard: TFrameAddMyBankCard
+  Size.Width = 320.000000000000000000
+  Size.Height = 561.000000000000000000
+  Size.PlatformDefault = False
+  object pnlToolBar: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukRef
+    KeepSelfOwnMaterial = False
+    RefMaterial = dmEasyServiceCommonMaterial.pnlToolBarMaterial
+    MouseDownFocus = False
+    Align = Top
+    Size.Width = 320.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Caption = #32465#23450#38134#34892#21345
+    Text = #32465#23450#38134#34892#21345
+    Properties.IsToolBar = False
+    object btnReturn: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      RefMaterial = dmEasyServiceCommonMaterial.bdmReturnButton
+      MouseDownFocus = False
+      Align = Left
+      Size.Width = 81.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      OnClick = btnReturnClick
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.Icon.IsClipRound = False
+      Properties.PushedIcon.IsClipRound = False
+      Properties.ButtonIndex = -1
+      Properties.PushedGroupIndex = 0
+    end
+    object btnDel: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      RefMaterial = dmEasyServiceCommonMaterial.btnIconButtonMaterial
+      MouseDownFocus = False
+      Align = Right
+      Position.X = 260.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      OnClick = btnDelClick
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.Icon.IsClipRound = False
+      Properties.Icon.PNG = {
+        89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+        DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        02A549444154785EED9BEF71DA3018C6C1FC393E760436281B24D92099A07483
+        6ED011DA6ED04C9076829009926E904E50FA09CE58D0E735CF71A5D66B8B185C
+        07BDBF3BDD2359B2909FB325194B9DA6D86C3613E7DC1DB4149699F0B4F30017
+        345E2C16BFF22B0C8065C73CFDA424D453331D8D466F18AF8465A7DBD46969CA
+        804B6A30EBF5BA91C7A029030E264992E03BA60EAD35A029BA542FE88826086F
+        11ADD521A1679FF6FBFD83EAC8B2ECB9D7EB7D65F2A53C75BBDD1F08CF4C8783
+        467F921EF91C407FF2919755C07B07E09C6BC8DD367536DCE04EF8C6F80E6F1F
+        00C70EEEB5DB8E764D5E03D0039FD74C0C68D714FD2860C320750F748272BB34
+        32116990393AC127C60D8394CE04053C0E6384774CBE2A70CBDF56CD02430C90
+        F1F37E9B7A755CC18019E35E6C18A4468B19408D1633805A87DF08EF11AE106E
+        101E1042B845907324483C04A95B7E43CE91DF94DF3E2D320C2268CC110AFFF4
+        E0D82CCF55C0ABE90716DD21C798AD5118CE704CE628D2068DFAAFF552C9B6AE
+        22CEB9CF2CB607B2D473D23455272692C7623EBCAFB3D206E6FBA834A0D62380
+        776CEF24A36CF231180C5403CAF2B41719AD0DA1D4ED03E6D4FF49AD36D82840
+        8D1633801A2D6600355ACC006AB49801D4683103A8D1620650A3C50CA0468B19
+        408D1633801A2D6600355ACC006AB49801D468A965C046F96089E3475F64A9D5
+        A9B52194BA065C30FA2FB2DC5EE3C277313CA6D52778EB2C69C371C00F94AD0F
+        286C46C0A1CBAA2D72CEB97BC8CE04896759F698672AB0CEBDCFDD019B3A2A3F
+        8F1F659DA06C6F499224FFB40D0D5A94B05C2EE7C3E130FFE49DA6E924745B1D
+        0CCF3F8743C701DB702AD709DA42496AB49801D432DAB00AE4A554B6BDD200AE
+        CD095DFAD61AD0497ED7D615FD4DE823708D0ABFAC56AB9F4CB71669A3B415A3
+        51C0E6EB4EE70F53216152CE56C7150000000049454E44AE426082}
+      Properties.PushedIcon.IsClipRound = False
+      Properties.ButtonIndex = -1
+      Properties.PushedGroupIndex = 0
+    end
+  end
+  object sbClient: TSkinFMXScrollBox
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukRef
+    KeepSelfOwnMaterial = False
+    RefMaterial = dmEasyServiceCommonMaterial.sbDefaultColorBackgroundScrollBoxMaterial
+    MouseDownFocus = False
+    Align = Client
+    ClipChildren = True
+    Size.Width = 320.000000000000000000
+    Size.Height = 511.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    VertScrollBar.ParentMouseEvent = False
+    VertScrollBar.ComponentTypeUseKind = ctukDefault
+    VertScrollBar.MaterialUseKind = mukSelfOwn
+    VertScrollBar.KeepSelfOwnMaterial = True
+    VertScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
+    VertScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
+    VertScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.IsFill = True
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Color = x64000000
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.IsRound = True
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.RoundWidth = 2.000000000000000000
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.RoundHeight = 2.000000000000000000
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawRectSetting.Width = 4.000000000000000000
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawRectSetting.Enabled = True
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawRectSetting.SizeType = dpstPixel
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawRectSetting.PositionHorzType = dpphtCenter
+    VertScrollBar.MouseDownFocus = False
+    VertScrollBar.Position.X = 312.000000000000000000
+    VertScrollBar.Size.Width = 7.000000000000000000
+    VertScrollBar.Size.Height = 511.000000000000000000
+    VertScrollBar.Size.PlatformDefault = False
+    VertScrollBar.Properties.AutoSize = False
+    VertScrollBar.Properties.Kind = sbVertical
+    VertScrollBar.Properties.SmallChange = 1
+    VertScrollBar.Properties.LargeChange = 10
+    VertScrollBar.Properties.CanOverRangeTypes = [cortMin, cortMax]
+    HorzScrollBar.ParentMouseEvent = False
+    HorzScrollBar.ComponentTypeUseKind = ctukDefault
+    HorzScrollBar.MaterialUseKind = mukSelfOwn
+    HorzScrollBar.KeepSelfOwnMaterial = True
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
+    HorzScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    HorzScrollBar.MouseDownFocus = False
+    HorzScrollBar.Position.Y = 503.000000000000000000
+    HorzScrollBar.Size.Width = 320.000000000000000000
+    HorzScrollBar.Size.Height = 7.000000000000000000
+    HorzScrollBar.Size.PlatformDefault = False
+    HorzScrollBar.Properties.AutoSize = False
+    HorzScrollBar.Properties.Kind = sbHorizontal
+    HorzScrollBar.Properties.SmallChange = 1
+    HorzScrollBar.Properties.LargeChange = 10
+    HorzScrollBar.Properties.CanOverRangeTypes = []
+    ScrollControlCorner.ParentMouseEvent = False
+    ScrollControlCorner.ComponentTypeUseKind = ctukDefault
+    ScrollControlCorner.MaterialUseKind = mukSelfOwn
+    ScrollControlCorner.KeepSelfOwnMaterial = True
+    ScrollControlCorner.MouseDownFocus = False
+    ScrollControlCorner.Position.X = 313.000000000000000000
+    ScrollControlCorner.Position.Y = 504.000000000000000000
+    ScrollControlCorner.Size.Width = 7.000000000000000000
+    ScrollControlCorner.Size.Height = 7.000000000000000000
+    ScrollControlCorner.Size.PlatformDefault = False
+    Properties.ContentHeight = 329.000000000000000000
+    Properties.EnableAutoPullDownRefreshPanel = False
+    Properties.EnableAutoPullUpLoadMorePanel = False
+    Properties.VertCanOverRangeTypes = [cortMin, cortMax]
+    Properties.HorzCanOverRangeTypes = []
+    Properties.VertScrollBarShowType = sbstAutoCoverShow
+    Properties.HorzScrollBarShowType = sbstAutoCoverShow
+    Properties.ScrollBarEmbeddedType = sbetVirtualControl
+    Properties.ScrollBoxType = sbtVert
+    object sbcClient: TSkinFMXScrollBoxContent
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      MouseDownFocus = False
+      Align = Top
+      CanFocus = True
+      Size.Width = 320.000000000000000000
+      Size.Height = 329.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object pnlName: TSkinFMXPanel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = dmEasyServiceCommonMaterial.pnlInputBlackCaptionPanelMaterial
+        MouseDownFocus = False
+        Align = Top
+        Position.Y = 10.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Caption = #38134#34892#25143#21517
+        Text = #38134#34892#25143#21517
+        Properties.IsToolBar = False
+        object edtName: TSkinFMXEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Client
+          TabOrder = 0
+          Margins.Left = 80.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          ParentMouseEvent = False
+          ComponentTypeUseKind = ctukDefault
+          MaterialUseKind = mukRef
+          KeepSelfOwnMaterial = False
+          RefMaterial = dmEasyServiceCommonMaterial.edtHelpTextMaterial
+          ContentMarginsLeft = 0
+          ContentMarginsTop = 0
+          ContentMarginsRight = 0
+          ContentMarginsBottom = 0
+          IsUseDefaultStyle = False
+          EditProperties.HelpText = #35831#36755#20837#25345#21345#20154#22995#21517
+          EditProperties.HelpIcon.IsClipRound = False
+          EditProperties.IsDrawHelpWhenFocused = False
+          EditProperties.IsAlwaysDrawHelp = False
+          Properties.HelpText = #35831#36755#20837#25345#21345#20154#22995#21517
+          Properties.HelpIcon.IsClipRound = False
+          Properties.IsDrawHelpWhenFocused = False
+          Properties.IsAlwaysDrawHelp = False
+          IsInScrollBox = False
+          IsAutoEditInItem = False
+        end
+      end
+      object pnlEmpty: TSkinFMXPanel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Align = Top
+        Size.Width = 320.000000000000000000
+        Size.Height = 10.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Properties.IsToolBar = False
+      end
+      object pnlAccount: TSkinFMXPanel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = dmEasyServiceCommonMaterial.pnlInputBlackCaptionPanelMaterial
+        MouseDownFocus = False
+        Align = Top
+        Position.Y = 60.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Caption = #38134#34892#21345#21495
+        Text = #38134#34892#21345#21495
+        Properties.IsToolBar = False
+        object edtAccountNumber: TSkinFMXEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Client
+          TabOrder = 0
+          Margins.Left = 80.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          ParentMouseEvent = False
+          ComponentTypeUseKind = ctukDefault
+          MaterialUseKind = mukRef
+          KeepSelfOwnMaterial = False
+          RefMaterial = dmEasyServiceCommonMaterial.edtHelpTextMaterial
+          ContentMarginsLeft = 0
+          ContentMarginsTop = 0
+          ContentMarginsRight = 0
+          ContentMarginsBottom = 0
+          IsUseDefaultStyle = False
+          EditProperties.HelpText = #35831#36755#20837#38134#34892#21345#21495
+          EditProperties.HelpIcon.IsClipRound = False
+          EditProperties.IsDrawHelpWhenFocused = False
+          EditProperties.IsAlwaysDrawHelp = False
+          Properties.HelpText = #35831#36755#20837#38134#34892#21345#21495
+          Properties.HelpIcon.IsClipRound = False
+          Properties.IsDrawHelpWhenFocused = False
+          Properties.IsAlwaysDrawHelp = False
+          IsInScrollBox = False
+          IsAutoEditInItem = False
+        end
+      end
+      object pnlEmpty3: TSkinFMXPanel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Align = Top
+        Position.Y = 100.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 10.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Properties.IsToolBar = False
+      end
+      object pnlEmpty4: TSkinFMXPanel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Align = Top
+        Position.Y = 50.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 10.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Properties.IsToolBar = False
+      end
+      object pnlBankName: TSkinFMXPanel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = dmEasyServiceCommonMaterial.pnlInputBlackCaptionPanelMaterial
+        MouseDownFocus = False
+        Align = Top
+        Position.Y = 110.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Caption = #38134#34892#21517#31216
+        Text = #38134#34892#21517#31216
+        Properties.IsToolBar = False
+        object btnBankNAme: TSkinFMXButton
+          ParentMouseEvent = False
+          ComponentTypeUseKind = ctukDefault
+          MaterialUseKind = mukRef
+          KeepSelfOwnMaterial = False
+          RefMaterial = dmEasyServiceCommonMaterial.btnSelectButtonMaterial
+          MouseDownFocus = False
+          Align = Right
+          Anchors = [akLeft, akTop, akRight, akBottom]
+          Position.X = 80.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 6
+          OnClick = btnBankNAmeClick
+          Properties.AutoSize = False
+          Properties.IsAutoPush = False
+          Properties.IsPushed = False
+          Properties.Icon.IsClipRound = False
+          Properties.PushedIcon.IsClipRound = False
+          Properties.ButtonIndex = -1
+          Properties.PushedGroupIndex = 0
+          Properties.HelpText = #35831#36873#25321#38134#34892#21517#31216
+        end
+      end
+      object pnlPhoneNumber: TSkinFMXPanel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = dmEasyServiceCommonMaterial.pnlInputBlackCaptionPanelMaterial
+        MouseDownFocus = False
+        Align = Top
+        Position.Y = 150.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 11
+        Caption = #32852#31995#26041#24335
+        Text = #32852#31995#26041#24335
+        Properties.IsToolBar = False
+        object edtPhone: TSkinFMXEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Client
+          TabOrder = 0
+          Margins.Left = 80.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          ParentMouseEvent = False
+          ComponentTypeUseKind = ctukDefault
+          MaterialUseKind = mukRef
+          KeepSelfOwnMaterial = False
+          RefMaterial = dmEasyServiceCommonMaterial.edtHelpTextMaterial
+          ContentMarginsLeft = 0
+          ContentMarginsTop = 0
+          ContentMarginsRight = 0
+          ContentMarginsBottom = 0
+          IsUseDefaultStyle = False
+          EditProperties.HelpText = #35831#36755#20837'11'#20301#25163#26426#21495#30721
+          EditProperties.HelpIcon.IsClipRound = False
+          EditProperties.IsDrawHelpWhenFocused = False
+          EditProperties.IsAlwaysDrawHelp = False
+          Properties.HelpText = #35831#36755#20837'11'#20301#25163#26426#21495#30721
+          Properties.HelpIcon.IsClipRound = False
+          Properties.IsDrawHelpWhenFocused = False
+          Properties.IsAlwaysDrawHelp = False
+          IsInScrollBox = False
+          IsAutoEditInItem = False
+        end
+      end
+      object pnlRadiobutton: TSkinFMXPanel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = dmEasyServiceCommonMaterial.pnlInputBlackCaptionPanelMaterial
+        MouseDownFocus = False
+        Align = Top
+        Position.Y = 200.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 15
+        Properties.IsToolBar = False
+        object chkIsDefault: TSkinFMXCheckBox
+          ParentMouseEvent = False
+          ComponentTypeUseKind = ctukName
+          MaterialUseKind = mukRef
+          KeepSelfOwnMaterial = False
+          ComponentTypeName = 'Color'
+          RefMaterial = dmEasyServiceCommonMaterial.chkDefaultCheckBoxMaterial
+          MouseDownFocus = False
+          Align = Client
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 310.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          OnClick = chkIsDefaultClick
+          Caption = #40664#35748
+          Text = #40664#35748
+          Properties.AutoSize = False
+          Properties.Checked = False
+          Properties.IsAutoChecked = False
+          Properties.IsAutoCaption = False
+        end
+      end
+      object SkinFMXPanel1: TSkinFMXPanel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Align = Top
+        Position.Y = 190.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 10.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Properties.IsToolBar = False
+      end
+      object btnOk: TSkinFMXButton
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.IsAutoCenterIconAndCaption = False
+        SelfOwnMaterial.DrawDetailParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawDetailParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawDetailParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawDetail1Param.FontTrimming = fttNone
+        SelfOwnMaterial.DrawDetail1Param.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawDetail1Param.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+        SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawIconParam.IsAutoFit = True
+        SelfOwnMaterial.DrawIconParam.PictureHorzAlign = phaCenter
+        SelfOwnMaterial.DrawIconParam.PictureVertAlign = pvaCenter
+        SelfOwnMaterial.DrawIconParam.DrawRectSetting.Height = 50.000000000000000000
+        SelfOwnMaterial.DrawIconParam.DrawRectSetting.Enabled = True
+        SelfOwnMaterial.DrawIconParam.DrawRectSetting.PositionHorzType = dpphtCenter
+        SelfOwnMaterial.DrawIconParam.DrawRectSetting.PositionVertType = dppvtCenter
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 15.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claWhite
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 15.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claWhite
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claWhite
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        SelfOwnMaterial.NormalPicture.IsClipRound = False
+        SelfOwnMaterial.HoverPicture.IsClipRound = False
+        SelfOwnMaterial.DownPicture.IsClipRound = False
+        SelfOwnMaterial.DisabledPicture.IsClipRound = False
+        SelfOwnMaterial.FocusedPicture.IsClipRound = False
+        SelfOwnMaterial.PushedPicture.IsClipRound = False
+        SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+        SelfOwnMaterial.DrawPictureParam.PictureHorzAlign = phaCenter
+        SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaCenter
+        RefMaterial = dmEasyServiceCommonMaterial.btnRedColorButtonMaterial
+        MouseDownFocus = False
+        Align = Top
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 260.000000000000000000
+        Size.Width = 280.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        OnClick = btnOkClick
+        Caption = #32465#23450
+        Text = #32465#23450
+        Properties.AutoSize = False
+        Properties.IsAutoPush = False
+        Properties.IsPushed = False
+        Properties.Icon.IsClipRound = False
+        Properties.PushedIcon.IsClipRound = False
+        Properties.ButtonIndex = -1
+        Properties.PushedGroupIndex = 0
+      end
+    end
+  end
+end

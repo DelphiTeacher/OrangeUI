@@ -1,0 +1,69 @@
+package OrangeUIDesign_FMX_D10_1;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  DesignIde,
+  fmx,
+  vclie,
+  IndySystem,
+  IndyCore,
+  IndyProtocols,
+  fmxobj,
+  fmxdesigner,
+  dbrtl;
+
+contains
+  FMX_XE_SkinItemsPropertyeditorForm in 'Source\FMX_XE_SkinItemsPropertyeditorForm.pas' {frmSkinItemsPropertyEditor},
+  FMX_XE_SkinPictureListPropertyEditorForm in 'Source\FMX_XE_SkinPictureListPropertyEditorForm.pas' {frmSkinPictureListPropertyEditor},
+  FMX_XE_DrawPicturePropertyEditorForm in 'Source\FMX_XE_DrawPicturePropertyEditorForm.pas' {frmDrawPicturePropertyEditor},
+  FMX_XE_ConfigDrawPictureSearchPathForm in 'Source\FMX_XE_ConfigDrawPictureSearchPathForm.pas' {frmConfigDrawPictureSearchPath},
+  uCollectionEditor in 'Source\uCollectionEditor.pas',
+  uComponentTypeNameEditor in 'Source\uComponentTypeNameEditor.pas',
+  uDrawPictureEditor in 'Source\uDrawPictureEditor.pas',
+  uLanguage in 'Source\uLanguage.pas',
+  uSkinAnimatorEditor in 'Source\uSkinAnimatorEditor.pas',
+  uSkinButtonGroupEditor in 'Source\uSkinButtonGroupEditor.pas',
+  uSkinControlRegister in 'Source\uSkinControlRegister.pas',
+  uSkinImageListEditor in 'Source\uSkinImageListEditor.pas',
+  uSkinItemDeignerPanelEditor in 'Source\uSkinItemDeignerPanelEditor.pas',
+  uSkinItemsEditor in 'Source\uSkinItemsEditor.pas',
+  uSkinPageControlEditor in 'Source\uSkinPageControlEditor.pas',
+  uSkinPullLoadPanelEditor in 'Source\uSkinPullLoadPanelEditor.pas',
+  uSkinScrollBarPullLoadPanelEditor in 'Source\uSkinScrollBarPullLoadPanelEditor.pas',
+  uSkinItemJsonHelper in '..\OrangeProjectCommon\uSkinItemJsonHelper.pas',
+  XSuperJSON in '..\OrangeProjectCommon\XSuperObject\XSuperJSON.pas',
+  XSuperObject in '..\OrangeProjectCommon\XSuperObject\XSuperObject.pas',
+  uDataSetToJson in '..\OrangeProjectCommon\uDataSetToJson.pas';
+
+end.
+
+
+
+

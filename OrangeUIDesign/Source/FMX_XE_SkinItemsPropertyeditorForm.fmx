@@ -1,0 +1,207 @@
+object frmSkinItemsPropertyEditor: TfrmSkinItemsPropertyEditor
+  Left = 0
+  Top = 0
+  Caption = #39033#30446#32534#36753#22120
+  ClientHeight = 367
+  ClientWidth = 461
+  Position = ScreenCenter
+  FormFactor.Width = 2199
+  FormFactor.Height = 1276
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object ItemsTree: TTreeView
+    Align = Client
+    Margins.Left = 8.000000000000000000
+    Margins.Top = 8.000000000000000000
+    Margins.Right = 8.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Size.Width = 280.000000000000000000
+    Size.Height = 351.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    AllowDrag = True
+    OnChange = ItemsTreeChange
+    OnDragChange = ItemsTreeDragChange
+    Viewport.Width = 276.000000000000000000
+    Viewport.Height = 347.000000000000000000
+    object TreeViewItem1: TTreeViewItem
+      IsChecked = False
+      IsExpanded = False
+      IsSelected = False
+      TabOrder = 0
+      Text = 'TreeViewItem1'
+    end
+  end
+  object ControlsLayout: TLayout
+    Align = Right
+    Padding.Top = 9.000000000000000000
+    Padding.Right = 9.000000000000000000
+    Padding.Bottom = 9.000000000000000000
+    Position.X = 296.000000000000000000
+    Size.Width = 165.000000000000000000
+    Size.Height = 367.000000000000000000
+    Size.PlatformDefault = False
+    object ItemsClasses: TComboBox
+      Align = Top
+      ListBoxResource = 'transparentlistboxstyle'
+      Margins.Bottom = 9.000000000000000000
+      Position.Y = 9.000000000000000000
+      Size.Width = 156.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+    object btnAdd: TButton
+      Align = Top
+      Margins.Bottom = 9.000000000000000000
+      Position.Y = 40.000000000000000000
+      Size.Width = 156.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = #28155#21152#39033#30446
+      OnClick = btnAddClick
+    end
+    object btnAddChild: TButton
+      Align = Top
+      Margins.Bottom = 9.000000000000000000
+      Position.Y = 102.000000000000000000
+      Size.Width = 156.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Text = #28155#21152#23376#39033#30446
+      OnClick = btnAddChildClick
+    end
+    object Layout2: TLayout
+      Align = Top
+      Position.Y = 133.000000000000000000
+      Size.Width = 156.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      object btnUp: TButton
+        Align = Left
+        Margins.Right = 8.000000000000000000
+        Size.Width = 38.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        OnClick = btnUpClick
+        object Path1: TPath
+          Align = Center
+          Data.Path = {
+            08000000000000007DFF9F4373888843010000006AECAA430AE79A4301000000
+            6ABCA2430AE79A43010000006ABCA2438D47B043010000004E429D438D47B043
+            010000004E429D430AE79A43010000004E1295430AE79A43030000007DFF9F43
+            73888843}
+          Fill.Kind = None
+          HitTest = False
+          Size.Width = 13.000000000000000000
+          Size.Height = 13.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+      object btnDown: TButton
+        Align = Left
+        Margins.Right = 8.000000000000000000
+        Position.X = 46.000000000000000000
+        Size.Width = 38.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        OnClick = btnDownClick
+        object Path2: TPath
+          Align = Center
+          Data.Path = {
+            08000000000000007DFF9F438D47B043010000004E129543F6E89D4301000000
+            4E429D43F6E89D43010000004E429D4373888843010000006ABCA24373888843
+            010000006ABCA243F6E89D43010000006AECAA43F6E89D43030000007DFF9F43
+            8D47B043}
+          Fill.Kind = None
+          HitTest = False
+          Size.Width = 13.000000000000000000
+          Size.Height = 13.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+      object btnDelete: TButton
+        Align = Client
+        Size.Width = 64.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = #21024#38500
+        OnClick = btnDeleteClick
+      end
+    end
+    object btnInsert: TButton
+      Align = Top
+      Margins.Bottom = 9.000000000000000000
+      Position.Y = 71.000000000000000000
+      Size.Width = 156.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = #25554#20837#39033#30446
+      OnClick = btnInsertClick
+    end
+    object btnClear: TButton
+      Align = Bottom
+      Margins.Bottom = 9.000000000000000000
+      Position.Y = 265.000000000000000000
+      Size.Width = 156.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = #28165#38500#25152#26377#39033#30446
+      OnClick = btnClearClick
+    end
+    object chkCopy: TCheckBox
+      Position.X = 8.000000000000000000
+      Position.Y = 200.000000000000000000
+      Size.Width = 137.000000000000000000
+      Size.Height = 19.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Text = #25335#36125#21069#36873#20013#39033
+    end
+    object btnSaveToFile: TButton
+      Align = Bottom
+      Margins.Bottom = 9.000000000000000000
+      Position.Y = 296.000000000000000000
+      Size.Width = 156.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = #20445#23384#25152#26377#39033#30446#21040#25991#20214
+      OnClick = btnSaveToFileClick
+    end
+    object btnAddFromFile: TButton
+      Align = Bottom
+      Margins.Bottom = 9.000000000000000000
+      Position.Y = 327.000000000000000000
+      Size.Width = 156.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = #20174#25991#20214#20013#28155#21152
+      OnClick = btnAddFromFileClick
+    end
+  end
+  object tmrBringToFront: TTimer
+    Interval = 100
+    OnTimer = tmrBringToFrontTimer
+    Left = 128
+    Top = 168
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 192
+    Top = 96
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 192
+    Top = 160
+  end
+end
