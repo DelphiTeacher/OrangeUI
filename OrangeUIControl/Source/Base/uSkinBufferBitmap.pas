@@ -465,7 +465,7 @@ begin
           if GetGlobalAutoSizeBufferBitmap.DrawCanvas.CalcTextDrawSize(
                                                               ADrawTextParam,
                                                               AStr,
-                                                              RectF(ADrawRect.Left,ADrawRect.Top,MaxInt,ADrawRect.Bottom),
+                                                              RectF(ADrawRect.Left,ADrawRect.Top,$FFFF,ADrawRect.Bottom),
                                                               AWidth,
                                                               AHeight,cdstBoth) then
           begin
