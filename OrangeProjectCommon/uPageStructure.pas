@@ -53,6 +53,10 @@ uses
   uUIFunction,
   uSkinCommonFrames,
   System.IOUtils,
+  System.Math.Vectors,
+  System.UIConsts,
+  UITypes,
+  System.Net.URLClient,
   {$ENDIF FMX}
 
   {$IFDEF VCL}
@@ -110,10 +114,6 @@ uses
   uFrameContext,
 
 
-//  System.Math.Vectors,
-//  System.UIConsts,
-//  UITypes,
-//  System.Net.URLClient,
 
 
 //  uSkinCommonFrames,
@@ -1337,7 +1337,9 @@ type
 //    FHotHandle: TGrabHandle;
 //    FDownPos: TPointF;
 //    FShowHandles: Boolean;
-//    FColor: TAlphaColor;
+  {$IFDEF FMX}
+    FColor: TAlphaColor;
+  {$ENDIF FMX}
 //    procedure SetHideSelection(const Value: Boolean);
 //    procedure SetMinSize(const Value: Integer);
 //    procedure SetGripSize(const Value: Single);
@@ -12412,7 +12414,7 @@ begin
   inherited;
 
 
-{$IFDEF FMX}
+  {$IFDEF FMX}
   //绘制组件列表
   for I := 0 to Self.ComponentCount-1 do
   begin
@@ -12432,7 +12434,7 @@ begin
       Canvas.FillText(AComponentRect,Self.Components[I].Name,True,1,[],TTextAlign.Center);
     end;
   end;
-{$ENDIF}
+  {$ENDIF}
 
 end;
 
@@ -12441,7 +12443,7 @@ begin
   inherited;
 //  AutoCapture := True;
 //  ParentBounds := True;
-//  FColor := DefaultColor;
+  FColor := DefaultColor;
 //  FShowHandles := True;
 //  FMinSize := 15;
 //  FGripSize := 3;
@@ -14426,7 +14428,12 @@ function TPageCheckBox.LoadFromFieldControlSetting(
 begin
   if ASetting.has_caption_label=0 then
   begin
+    {$IFDEF FMX}
+    Text:=ASetting.field_caption;
+    {$ENDIF}
+    {$IFDEF VCL}
     Caption:=ASetting.field_caption;
+    {$ENDIF}
   end;
 
   Result:=True;

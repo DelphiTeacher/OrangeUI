@@ -19,7 +19,7 @@ uses
   uGraphicCommon,
   uSkinListLayouts,
   uSkinVirtualListType,
-  uSkinListViewType,
+//  uSkinListViewType,
 
   {$IF CompilerVersion <= 21.0} // XE or older
   SuperObject,

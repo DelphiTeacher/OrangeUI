@@ -1147,9 +1147,10 @@ function SignParam(
                   AUrlParamValues:TVariantDynArray;
                   ASignType:String;
                   ASignSecret:String):String;
-//var
-//  AStrValue:String;
-//  sl:TStringList;
+var
+  I:Integer;
+  AStrValue:String;
+  sl:TStringList;
 begin
   Result:='';
   if ASignType='' then
