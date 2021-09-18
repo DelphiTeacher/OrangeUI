@@ -1,0 +1,210 @@
+inherited FrameCommentDetailListItemStyle: TFrameCommentDetailListItemStyle
+  Size.Width = 475.000000000000000000
+  Size.Height = 88.000000000000000000
+  inherited ItemDesignerPanel: TSkinFMXItemDesignerPanel
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.IsTransparent = False
+    Size.Width = 475.000000000000000000
+    Size.Height = 88.000000000000000000
+    OnResize = ItemDesignerPanelResize
+    Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+    Properties.ItemDetailBindingControl = lblComment
+    Properties.ItemDetail1BindingControl = lblComment
+    Properties.ItemDetail2BindingControl = lblComment
+    Properties.ItemDetail3BindingControl = lblItemDetail3
+    Properties.ItemDetail4BindingControl = lblComment
+    Properties.ItemIconBindingControl = imgItemIcon
+    inherited lblItemCaption: TSkinFMXLabel
+      Align = Top
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 86.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 384.000000000000000000
+      Size.Height = 24.000000000000000000
+      TabOrder = 1
+      Caption = #26631#39064
+      Text = #26631#39064
+      object lblItemDetail3: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claDarkgray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claDarkgray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claDarkgray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaRight
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        MouseDownFocus = False
+        Align = Right
+        HitTest = False
+        Position.X = 304.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Caption = #26126#32454'3'
+        Text = #26126#32454'3'
+        Properties.AutoSize = False
+      end
+    end
+    object lblComment: TSkinFMXMultiColorLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.FillColor.Color = claLightgray
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.IsFill = True
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttCharacter
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      MouseDownFocus = False
+      Align = Client
+      Margins.Left = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 384.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Caption = #22238#22797'HappyFyw: '#20320#22909
+      Text = #22238#22797'HappyFyw: '#20320#22909
+      Properties.AutoSize = False
+      Properties.ColorTextCollection = <
+        item
+          Name = 'ItemDetail1'
+          BindItemFieldName = 'ItemDetail1'
+          Text = #22238#22797
+          DrawFont.Color = claGray
+          DrawFont.FontColor.Color = claGray
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end
+        item
+          Name = 'ItemDetail2'
+          BindItemFieldName = 'ItemDetail2'
+          Text = 'HappyFyw'
+          DrawFont.Color = claCornflowerblue
+          DrawFont.FontColor.Color = claCornflowerblue
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end
+        item
+          Name = 'ItemDetail4'
+          BindItemFieldName = 'ItemDetail4'
+          Text = ': '
+          DrawFont.Color = claGray
+          DrawFont.FontColor.Color = claGray
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end
+        item
+          Name = 'ItemDetail'
+          BindItemFieldName = 'ItemDetail'
+          Text = #20320#22909
+          DrawFont.Color = claGray
+          DrawFont.FontColor.Color = claGray
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end>
+    end
+    object imgItemIcon: TSkinFMXImage
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+      SelfOwnMaterial.DrawPictureParam.PictureHorzAlign = phaCenter
+      SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaCenter
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      MouseDownFocus = False
+      Align = MostLeft
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 76.000000000000000000
+      Size.Height = 78.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Properties.AutoSize = False
+      Properties.Picture.IsClipRound = False
+      Properties.Picture.PNG = {
+        89504E470D0A1A0A0000000D494844520000003C0000003C08060000003AFCD9
+        72000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        06C6494441546843ED9B5D681C5514C7CF9999CD6E9266B769A9AD24A12A9AF4
+        458422B60F1A4185C6A41F2AF52369F5C55AF5411114A541113F50AC3E08BE68
+        AD4F36895A41FB9150C5206A1F5A9182886053A92D31D80FDA6637DD6437BB33
+        D77B6E4E641337997B6767B728F9419873EECE9D39FFB977EED7DCC0020BFCBF
+        403E968DF6CF2EAFC05C7EB3405C0B025680709BB2597B19FD168DBAE701ED61
+        19C51914E28888389F0F3CB0E88CCA5826CA2278FB4F2232723CF9B84078508A
+        BC9593F540388C023E6D68497CB0EB66CC716A68842EB8BD37B915F2E20DB0A1
+        899382E1C23038D83DD095D8C329A1109AE07BFA92CD590FFA10C46A4E0A0501
+        782C6A41E7979D89214E2A89500477F4A56ECB8C8B7DD198A8E7A450C966F052
+        AC0637F577C67FE0A4C0942C585561213E66B7BC203E5C6A152F49F0C6DE6447
+        5E8883EC56040771FDFEAE443FBBC604164CEFECD8381C2957359E0BAADE7535
+        B036E83B6DF1D1884D5F88C593AE7BA0D26209BA27DD9B62E024230209CE4FA4
+        9E03B49AD9D5258D887B65957A0AD1BA4FFD291BF7D26F53A76822EFAD620880
+        7195A69113E4F2BF4BB3762A458B9D919AC49BFBEEC551F66740A5951B4FEE90
+        E6F353295AA421E25C6F3A32332E619C74BBE5414B2CBD6F6859AD035B16BF30
+        9758827EA373E85CCAC3C97ED4722C4618953097846E40B2E659ADA67D27F5E9
+        C2F3BE67D7175973EAE77B98B3312AE1DC446A3D9BBEC8F17077908102E5A1BC
+        ECFA621213615AA5DBF8383F721CDCB02AF10E7BC6A8BC3496D6432F26465B30
+        CD80B213D0CEEEFCD8D057CA4C47E595D760775E28268A8D5D5FB4059F3B91BA
+        56B7DF95EF6EC9A32FDD6B504C141BBBBE680BCE012E67D317615B27D80C8CC9
+        354C62D3162C8458C9A62F8DD7D55E60333026D730894D5BB0ECBFB49FE29F27
+        D34BD90C8CC9354C62D3160C9EA862CB1774BD1BD80C8CD1350C62D3178C30C6
+        963F42AC632B3826D73088CD40B035C2962F222F1E31E92A664379E91AECFA63
+        109BBE60CB3AC9963F36348D0CA59E66CF1895D760113082E257367D311A4BDF
+        F951F2A2C91C585E7C4DFF96C53FB2AB4547CFE82D02E028BBBED06463F0D1C4
+        12767DD12F6149B45A1C66538B4C060FD164805D5FD462A0CCC3AE16B16AF886
+        4D2D8C04CB41FDD76C6A41B581663E1DBDC9D7B77EE5CD39A5A4DFE81C3AD7A4
+        062984D09E591146559A27FF7FB16B0455BD68350C20E07720F00F9588E25A01
+        E2761A0F1B0B9D26E25C6DB20860249868EF1DDD0F0236B07B6541EC19E84A6C
+        654F0BA32A4D205A6FB379C5A94278954D6D8C05AB493D8251E3550E68F12FC8
+        52ADB16042365ECFB279C58820BCC8A611810453DF8A02DF63B7F220ECAEE842
+        3C51BFAC6E87C1324C78086F68C9D2F833EC191358F09E7556DA71F049762B06
+        DACE36BA37BBC604164CD047AD0A57ED9DA57E322D4930D1B02A2E1B301C64B7
+        8CE060634B2250435588F1C0A3186A813E7DE9A89CA6997E6FD243BEB791DAFA
+        35260BEE73517209131448956D6F30F84CA28D97F3CE46ECD85D61882542114C
+        5037118B89B63045D3B5EC58D5BA7D9D35A1F506A154E9423A3EB97C5326ED7E
+        1B7832C050C992D8FE8716FDCC49A110BA60A254D1243616B55BC3DAB9534868
+        55BA102A15DA96408D0D27E923F3944B2C5196129E46B5DE13C903FABBF17030
+        5213DF1C5603558CB294F03414786373E20E1AFB72D2DCC8731A5BE27797532C
+        115A09D3D2EAD9E1A99D01C582E6FD5CEF4B73F6524F5ACEF59E28B6FF6A7AE3
+        CAF2264887B5EF524BF0A6BEF1A6BCE7B6D0928C7CC9560A806B6867AC3CD6A3
+        7017D1EED8E9064AB5AE51E7FE6243C0D9DB13E7DB56480B7A6E36BFD78A58EA
+        338A5A228ABAE705DA9765D09764E467E4F19494709A968C1CCB3EAED37D1515
+        4C4BA5F2A96F1402D66633B03A486B8B686DEFEF8A7FC8EE3F504D18194ABD4C
+        764373FC956225D7D19B7A4C086F17BBDAA887128363887044D6A6FDC5968867
+        0856FB2BDCFCEED08688F2BDA4A99CEEEC86562F2F5E48BD2B8B7E1B2795866C
+        F169765558DB66345A22E7F5843A1E96815F3C3F7A4CD5181FE81C3A3734B184
+        D4A2341530B39576B03BF4F130DD14E0687BCFE85BC5D6A6298D7E535F1BC27C
+        D812A5456A6257F1AF7778AAEF543B63DA202F5A4BDEE85D880BC3E858AF39E8
+        A8AF0B79916F1379EFA5B0EF2145D2E2FCA14875FCE0EC1EA368A355083D807C
+        66EC46FACA2E4F5EA55A68D95283E75D55D83A578AE9D61A2CEB9C0CFFB48CE9
+        948CE937443CEDC4EA7EF1EBC77D05FB41AD2E7DADAF72DD78CEA37ED38ECBEE
+        AB4E80A845C06AD9704465931DA58FD602417D4295C1A90FD8F2214E2A5F400E
+        2C9C94095959ADB332EF84CC9B96DDCD982CB254C4C2D149DB4ED1368872FC1F
+        C4020BFC6701F81BED5AD6827F2AB7350000000049454E44AE426082}
+      Properties.Animated = False
+      Properties.AnimateSpeed = 10.000000000000000000
+      Properties.GIFDelayExp = 12
+      Properties.CurrentRotateAngle = 0
+      Properties.Rotated = False
+      Properties.RotateSpeed = 5.000000000000000000
+      Properties.RotateIncrement = 20
+      Properties.IsToolBar = False
+    end
+  end
+end

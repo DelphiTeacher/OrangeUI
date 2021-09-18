@@ -1,0 +1,262 @@
+object FrameListItemStyle_SaleManageOrder: TFrameListItemStyle_SaleManageOrder
+  Size.Width = 374.000000000000000000
+  Size.Height = 77.000000000000000000
+  Size.PlatformDefault = False
+  object ItemDesignerPanel: TSkinFMXItemDesignerPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    MouseDownFocus = False
+    Align = Client
+    Size.Width = 374.000000000000000000
+    Size.Height = 77.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Properties.IsPreview = False
+    Properties.PreviewItem.Selected = False
+    Properties.PreviewItem.Height = -1.000000000000000000
+    Properties.PreviewItem.Visible = True
+    Properties.PreviewItem.Color = claNull
+    Properties.PreviewItem.Checked = False
+    Properties.PreviewItem.Width = -1.000000000000000000
+    Properties.PreviewItem.Icon.IsClipRound = False
+    Properties.PreviewItem.Pic.IsClipRound = False
+    Properties.PreviewItem.Tag = 0
+    Properties.PreviewItem.Tag1 = 0
+    Properties.PreviewItem.ItemType = sitDefault
+    Properties.PreviewItem.IsParent = False
+    Properties.PreviewItem.Expanded = True
+    Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+    Properties.PreviewItem.Accessory = satNone
+    Properties.PreviewItem.JsonStr = 
+      '{"fid":1478,"appid":1000,"user_fid":2,"shop_fid":85,"delivery_ce' +
+      'nter_order_fid":0,"bill_code":"DH-20200319-0001","order_state":"' +
+      'payed","order_state_for_display":"payed","want_arrive_time":"202' +
+      '0-03-19 03:30:03","is_book":0,"book_time":"2020-03-19 03:27:46",' +
+      '"goods_money":1,"shop_order_index":1,"is_need_invoice":0,"invoic' +
+      'e_type":0,"invoice_title":"","invoice_tax_no":"","recv_name":"\u' +
+      '738B\u80FD","recv_sex":0,"recv_phone":"18957901025","recv_provin' +
+      'ce":"\u6D59\u6C5F\u7701","recv_city":"\u91D1\u534E\u5E02","recv_' +
+      'area":"\u5A7A\u57CE\u533A","recv_addr":"\u6D59\u6C5F\u7701 \u91D' +
+      '1\u534E\u5E02 \u5A7A\u57CE\u533A\u9F99\u817E\u521B\u4E1A\u5927\u' +
+      '53A6826\u5BA4","recv_door_no":"","recv_latitude":29.076368683476' +
+      ',"recv_longitude":119.64916923926,"origin_money":1,"dec_money":0' +
+      ',"sum_money":1,"pay_type":"alipay","pay_state":"payed","pay_time' +
+      '":"2020-03-19 03:10:11","deliver_type":"express","deliver_time":' +
+      '"","deliver_fee":0,"deliver_state":"","shop_take_time":"","shop_' +
+      'order_state":"","tableware_quantity":0,"taste_tags":"","memo":""' +
+      ',"pay_fee":0,"client_bear_pay_fee":0,"shop_bear_pay_fee":0,"ride' +
+      'r_bear_pay_fee":0,"in_come":1,"is_hide":0,"is_deleted":"","creat' +
+      'etime":"2020-03-19 03:07:54","cancel_code":"","cancel_reason":""' +
+      ',"reject_code":"","reject_reason":"","settlement_state":"","is_u' +
+      'ser_evaluated":0,"is_shoper_evaluated_rider":0,"rider_user_fid":' +
+      '0,"rider_name":"","is_need_customer_service":0,"shop_order_num":' +
+      '1,"orderno":0,"subsidy_money":0,"name":"DelphiTeacher"}'
+    Properties.ItemStringsBindingControlCollection = <>
+    object lblItemCaption: TSkinFMXLabel
+      ParentMouseEvent = False
+      BindItemFieldName = 'name'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      HitTest = False
+      Margins.Left = 2.000000000000000000
+      Position.X = 50.000000000000000000
+      Size.Width = 87.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Caption = #29579#33021
+      Text = #29579#33021
+      Properties.AutoSize = False
+    end
+    object SkinFMXLabel1: TSkinFMXLabel
+      ParentMouseEvent = False
+      BindItemFieldName = 'pay_time'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      HitTest = False
+      Margins.Left = 2.000000000000000000
+      Position.X = 202.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 135.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Caption = '2020-03-19 03:24:00'
+      Text = '2020-03-19 03:24:00'
+      Properties.AutoSize = False
+    end
+    object SkinFMXLabel2: TSkinFMXLabel
+      ParentMouseEvent = False
+      BindItemFieldName = 'goods_money'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      HitTest = False
+      Margins.Left = 2.000000000000000000
+      Position.X = 50.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 87.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Caption = '1999.00'
+      Text = '1999.00'
+      Properties.AutoSize = False
+    end
+    object SkinFMXLabel3: TSkinFMXLabel
+      ParentMouseEvent = False
+      BindItemFieldName = 'order_state'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      HitTest = False
+      Margins.Left = 2.000000000000000000
+      Position.X = 202.000000000000000000
+      Size.Width = 135.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Caption = #24050#23436#25104
+      Text = #24050#23436#25104
+      Properties.AutoSize = False
+    end
+    object SkinFMXLabel4: TSkinFMXLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      HitTest = False
+      Margins.Left = 2.000000000000000000
+      Position.X = 10.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Caption = #29992#25143':'
+      Text = #29992#25143':'
+      Properties.AutoSize = False
+    end
+    object SkinFMXLabel5: TSkinFMXLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      HitTest = False
+      Margins.Left = 2.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Caption = #37329#39069':'
+      Text = #37329#39069':'
+      Properties.AutoSize = False
+    end
+    object SkinFMXLabel6: TSkinFMXLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      HitTest = False
+      Margins.Left = 2.000000000000000000
+      Position.X = 138.000000000000000000
+      Size.Width = 71.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Caption = #35746#21333#29366#24577':'
+      Text = #35746#21333#29366#24577':'
+      Properties.AutoSize = False
+    end
+    object SkinFMXLabel7: TSkinFMXLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      HitTest = False
+      Margins.Left = 2.000000000000000000
+      Position.X = 138.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 71.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Caption = #20184#27454#26102#38388':'
+      Text = #20184#27454#26102#38388':'
+      Properties.AutoSize = False
+    end
+  end
+end

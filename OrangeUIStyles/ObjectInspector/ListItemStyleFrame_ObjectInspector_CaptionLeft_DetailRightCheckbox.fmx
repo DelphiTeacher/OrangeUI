@@ -1,0 +1,159 @@
+object FrameListItemStyle_ObjectInspector_CaptionLeft_DetailRightCheckbox: TFrameListItemStyle_ObjectInspector_CaptionLeft_DetailRightCheckbox
+  Size.Width = 395.000000000000000000
+  Size.Height = 230.000000000000000000
+  Size.PlatformDefault = False
+  object ItemDesignerPanel: TSkinFMXItemDesignerPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange]
+    SelfOwnMaterial.IsTransparent = False
+    MouseDownFocus = False
+    Position.X = 24.000000000000000000
+    Position.Y = 60.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    OnResize = ItemDesignerPanelResize
+    Properties.IsPreview = True
+    Properties.PreviewItem.Selected = False
+    Properties.PreviewItem.Height = -1.000000000000000000
+    Properties.PreviewItem.Visible = True
+    Properties.PreviewItem.Color = claNull
+    Properties.PreviewItem.Checked = False
+    Properties.PreviewItem.Width = -1.000000000000000000
+    Properties.PreviewItem.Icon.IsClipRound = False
+    Properties.PreviewItem.Pic.IsClipRound = False
+    Properties.PreviewItem.Tag = 0
+    Properties.PreviewItem.Tag1 = 0
+    Properties.PreviewItem.ItemType = sitDefault
+    Properties.PreviewItem.IsParent = False
+    Properties.PreviewItem.Expanded = True
+    Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+    Properties.PreviewItem.Caption = 'Caption'
+    Properties.PreviewItem.Detail = 'True'
+    Properties.PreviewItem.Accessory = satNone
+    Properties.ItemStringsBindingControlCollection = <>
+    object lblItemCaption: TSkinFMXLabel
+      ParentMouseEvent = False
+      BindItemFieldName = 'ItemCaption'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.BorderEadges = [beRight]
+      SelfOwnMaterial.BackColor.BorderColor.Color = xFFEDEDED
+      SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      Align = Left
+      HitTest = False
+      Margins.Left = 24.000000000000000000
+      Position.X = 24.000000000000000000
+      Size.Width = 140.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Caption = 'Caption'
+      Text = 'Caption'
+      Properties.AutoSize = False
+    end
+    object chkDetail: TSkinFMXCheckBox
+      ParentMouseEvent = False
+      BindItemFieldName = 'ItemDetail'
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'Color'
+      SelfOwnMaterial.IsAutoPosition = False
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawCheckStateParam.PathActions = <
+        item
+          X = 25.000000000000000000
+          Y = 50.000000000000000000
+          SizeType = dpstPercent
+          ActionType = patMoveTo
+        end
+        item
+          X = 40.000000000000000000
+          Y = 70.000000000000000000
+          SizeType = dpstPercent
+          ActionType = patLineTo
+        end
+        item
+          X = 75.000000000000000000
+          Y = 35.000000000000000000
+          SizeType = dpstPercent
+          ActionType = patLineTo
+        end
+        item
+          SizeType = dpstPixel
+          ActionType = patDrawPath
+        end>
+      SelfOwnMaterial.IsSimpleDrawCheckState = True
+      RefMaterial = dmEasyServiceCommonMaterial.chkDefaultRectCheckBoxMaterial
+      MouseDownFocus = False
+      Align = Left
+      Margins.Left = 2.000000000000000000
+      Position.X = 166.000000000000000000
+      Size.Width = 24.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      BindItemFieldTrueValue = 'True'
+      Properties.AutoSize = False
+      Properties.Checked = True
+      Properties.IsAutoChecked = True
+      Properties.IsAutoCaption = False
+    end
+    object cmbDetail: TSkinFMXComboEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Client
+      TabOrder = 2
+      ItemHeight = 19.000000000000000000
+      ItemIndex = -1
+      Size.Width = 130.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      ParentMouseEvent = False
+      BindItemFieldName = 'ItemDetail'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.ArrowPicture.IsClipRound = False
+      SelfOwnMaterial.NormalPicture.IsClipRound = False
+      SelfOwnMaterial.HoverPicture.IsClipRound = False
+      SelfOwnMaterial.FocusedPicture.IsClipRound = False
+      SelfOwnMaterial.DisabledPicture.IsClipRound = False
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawTextParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawTextParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawTextParam.FontVertAlign = fvaTop
+      RefMaterial = dmEasyServiceCommonMaterial.cmbComboEdit_Material
+      ContentMarginsLeft = 0
+      ContentMarginsTop = 0
+      ContentMarginsRight = 24
+      ContentMarginsBottom = 0
+      IsUseDefaultStyle = False
+      IsInScrollBox = False
+      IsAutoEditInItem = True
+      ComboEditProperties.HelpIcon.IsClipRound = False
+      ComboEditProperties.IsDrawHelpWhenFocused = False
+      Properties.HelpIcon.IsClipRound = False
+      Properties.IsDrawHelpWhenFocused = False
+    end
+  end
+end

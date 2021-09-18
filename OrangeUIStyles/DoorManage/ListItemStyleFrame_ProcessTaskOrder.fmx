@@ -1,0 +1,856 @@
+object FrameListItemStyle_ProcessTaskOrder: TFrameListItemStyle_ProcessTaskOrder
+  Size.Width = 983.000000000000000000
+  Size.Height = 460.000000000000000000
+  Size.PlatformDefault = False
+  object ItemDesignerPanel: TSkinFMXItemDesignerPanel
+    ParentMouseEvent = False
+    DirectUIVisible = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.IsTransparent = False
+    MouseDownFocus = False
+    Position.X = 104.000000000000000000
+    Position.Y = 47.000000000000000000
+    Size.Width = 361.000000000000000000
+    Size.Height = 98.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Properties.IsPreview = False
+    Properties.PreviewItem.Selected = False
+    Properties.PreviewItem.Checked = False
+    Properties.PreviewItem.Height = -1.000000000000000000
+    Properties.PreviewItem.Visible = True
+    Properties.PreviewItem.Color = claNull
+    Properties.PreviewItem.Width = -1.000000000000000000
+    Properties.PreviewItem.Icon.IsClipRound = False
+    Properties.PreviewItem.Pic.IsClipRound = False
+    Properties.PreviewItem.Tag = 0
+    Properties.PreviewItem.Tag1 = 0
+    Properties.PreviewItem.ItemType = sitDefault
+    Properties.PreviewItem.IsParent = False
+    Properties.PreviewItem.Expanded = True
+    Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+    Properties.PreviewItem.Accessory = satNone
+    Properties.PreviewItem.JsonStr = 
+      '{"'#36873#20013'":false,"'#26085#26399'":"2021-02-24","'#21333#25454#32534#30721'":"1RW-21-2-01","'#35745#21010#32534#30721'":"1JH-2' +
+      '10224-001","'#35746#21333#32534#30721'":"1FD-2016-05-11-0001","'#23458#25143'":"'#24352#19977'","'#38376#31867#21035'":"85#","'#29289 +
+      #21697#32534#30721'":"'#23545#24320#38376'(101)","'#25968#37327'":1,"'#21333#20215'":2100,"'#37329#39069'":2100,"'#25209#27425'":"","'#38376#32467#26500'":"'#21452#24320'","'#27454 +
+      #24335'":"'#21916#24198#24180#21326'","'#39068#33394'":"'#20223#32418#38108'","'#39640'":2800,"'#23485'":1760,"'#38376#25159#39640'":2450,"'#24320#21551#26041#21521'":"'#20869#21491'","'#38376 +
+      #26694#21253#36793'":"'#20869#21253'","'#29483#30524'":"'#26377'","'#38376#38083'":"'#26377'","'#38128#38142'":"'#26032'4'#26126'","'#38145#20855'":"'#22278#22836#38145'","'#38145#33455'":"'#20840#38108'","'#25289#25163'"' +
+      ':"12'#21495#21452#27963'","'#27668#31383'":"'#38081#26629#26639'Y'#22411#25972#20307'","'#19979#26723'":"'#19981#38152#38081'","'#20391#38145'":"'#21542'","'#26495#21402'":"'#21069':0.8'#21518':0.8'#38376#26550':1' +
+      '.2","'#36793#38376#27454#24335'":"","'#20854#23427#35201#27714'":"","'#22791#27880'":"","'#27668#31383#35201#27714'":"","'#27668#31383#31435#26609'":"","'#27668#31383#23621#20013'":"","'#21830 +
+      #26631'":"'#39034#24070'","'#19971#23383#36793'":"114","'#27597#21069#26495#23485'":0,"'#22823#22270#26696#23485#24230'":520,"'#23567#22270#26696#23485#24230'":0,"'#22797#21512#38376#23485'":114,"'#19979 +
+      #26723#39640'":45,"'#33457#36793#23485'":150,"'#21069#26495#21402'":0.8,"'#21518#26495#21402'":0.8,"'#38376#26550#21402'":1.2,"'#38376#26694'":"'#26222#26694'","'#23485#20013#26723'":"' +
+      '114","'#20869#37096#27668#31383'":"'#38081#26629#26639'Y'#22411#25972#20307'","'#26609#23376'":"","'#38376#22836#35013#39280#29289'":"","'#35746#21333#31181#31867'":"","'#25910#36135#21333#20301'":"","'#20844#21496 +
+      #21517#31216'":"'#24352#19977'","'#21517#31216#36755#20837#30721'":"ZS","'#24050#23457#26680#21542'":false,"'#23457#26680#26085#26399'":"2021-02-24","'#20179#24211'":"'#25104#21697#20179 +
+      #24211'","'#25805#20316#21592'":"'#31995#32479#31649#29702#21592'","'#22320#21306'":"'#23433#24509'","'#31867#22411'":"'#26032#23458#25143'","'#22320#21306#32534#30721'":"001001001","'#31867#22411#32534#30721'":' +
+      '"001001","'#20135#29983#25968#25454'":false,"'#38376#38754#25968'":2,"'#38376#22411'":"'#38750#26631#38376'","'#26448#36136'":"'#20919#36711'","'#32456#27490#21542'":false,"' +
+      #23376#38376#23485'":0,"'#38128#23485'":55,"'#38145#23485'":40,"'#26609#23485'":55,"'#19978#39640'":40,"'#20013#39640'":60,"'#20248#24800#21333#20215'":0,"'#21253#35013#25968'":0,' +
+      '"'#21069#26495#27133#28145'":0,"'#21518#26495#27133#28145'":0,"'#33457#22411#39640'":0,"'#21442#25968'10":0,"'#21442#25968'11":0,"'#21442#25968'12":0,"'#21442#25968'13":0,"'#23383 +
+      #27573'1":"","'#23383#27573'2":"","'#23383#27573'3":"","'#23383#27573'4":"","'#24037#24207'":"","'#23436#25104#21542'":false,"'#23436#25104#21592#24037#32534#30721'":"' +
+      '","'#23436#25104#21592#24037'":"","'#23436#25104#26102#38388'":"","'#23436#25104#25968#37327'":0}'
+    Properties.ItemStringsBindingControlCollection = <>
+    object pnlClient: TSkinFMXPanel
+      ParentMouseEvent = False
+      DirectUIVisible = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      MouseDownFocus = False
+      Align = Client
+      HitTest = False
+      Margins.Right = 10.000000000000000000
+      Size.Width = 321.000000000000000000
+      Size.Height = 98.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Properties.IsToolBar = False
+      object btnComplete: TSkinFMXButton
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.IsFill = True
+        SelfOwnMaterial.BackColor.FillColor.Color = xFF438DF5
+        SelfOwnMaterial.BackColor.IsRound = True
+        SelfOwnMaterial.BackColor.RoundWidth = 3.000000000000000000
+        SelfOwnMaterial.BackColor.RoundHeight = 3.000000000000000000
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetAlphaChange]
+        SelfOwnMaterial.IsTransparent = False
+        SelfOwnMaterial.IsAutoCenterIconAndCaption = False
+        SelfOwnMaterial.DrawDetailParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawDetailParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawDetailParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawDetail1Param.FontTrimming = fttNone
+        SelfOwnMaterial.DrawDetail1Param.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawDetail1Param.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+        SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 15.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claWhite
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 15.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claWhite
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claWhite
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        SelfOwnMaterial.NormalPicture.IsClipRound = False
+        SelfOwnMaterial.HoverPicture.IsClipRound = False
+        SelfOwnMaterial.DownPicture.IsClipRound = False
+        SelfOwnMaterial.DisabledPicture.IsClipRound = False
+        SelfOwnMaterial.FocusedPicture.IsClipRound = False
+        SelfOwnMaterial.PushedPicture.IsClipRound = False
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        Position.X = 235.000000000000000000
+        Position.Y = 32.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 23
+        Caption = #23436#25104
+        Text = #23436#25104
+        Properties.AutoSize = False
+        Properties.IsAutoPush = False
+        Properties.IsPushed = False
+        Properties.Icon.IsClipRound = False
+        Properties.PushedIcon.IsClipRound = False
+        Properties.ButtonIndex = -1
+        Properties.PushedGroupIndex = 0
+      end
+      object lblStyle: TSkinFMXLabel
+        ParentMouseEvent = False
+        BindItemFieldName = #27454#24335
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        MouseDownFocus = False
+        Anchors = [akLeft, akTop, akRight]
+        HitTest = False
+        Position.X = 65.000000000000000000
+        Position.Y = 35.000000000000000000
+        Size.Width = 167.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 20
+        Caption = #21916#24198#24180#21326
+        Text = #21916#24198#24180#21326
+        Properties.AutoSize = False
+      end
+      object SkinFMXButton2: TSkinFMXButton
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = dmCarRepairCommonMaterial.btnRedColorButtonMaterial
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        Position.X = 140.000000000000000000
+        Position.Y = 54.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 22
+        Visible = False
+        Caption = #26597#30475
+        Text = #26597#30475
+        Properties.AutoSize = False
+        Properties.IsAutoPush = False
+        Properties.IsPushed = False
+        Properties.Icon.IsClipRound = False
+        Properties.PushedIcon.IsClipRound = False
+        Properties.ButtonIndex = -1
+        Properties.PushedGroupIndex = 0
+      end
+      object SkinFMXLabel10: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        MouseDownFocus = False
+        HitTest = False
+        Position.X = 8.000000000000000000
+        Position.Y = 35.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 16
+        Caption = #27454'    '#24335':'
+        Text = #27454'    '#24335':'
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel11: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        HitTest = False
+        Position.X = 8.000000000000000000
+        Position.Y = 33.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Visible = False
+        Caption = #36710#20027':'
+        Text = #36710#20027':'
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel12: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 16.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 16.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        HitTest = False
+        Position.X = 51.000000000000000000
+        Position.Y = 32.000000000000000000
+        Size.Width = 118.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 21
+        Visible = False
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel13: TSkinFMXLabel
+        ParentMouseEvent = False
+        BindItemFieldName = #23458#25143
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Anchors = [akLeft, akTop, akRight]
+        HitTest = False
+        Position.X = 136.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 179.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 19
+        Caption = #24352#19977
+        Text = #24352#19977
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel15: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        HitTest = False
+        Position.X = 8.000000000000000000
+        Position.Y = 59.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        Visible = False
+        Caption = #36710#22411':'
+        Text = #36710#22411':'
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel16: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        HitTest = False
+        Position.X = 113.000000000000000000
+        Position.Y = 33.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Visible = False
+        Caption = #25163#26426':'
+        Text = #25163#26426':'
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel17: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        HitTest = False
+        Position.X = 158.000000000000000000
+        Position.Y = 33.000000000000000000
+        Size.Width = 160.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 10
+        Visible = False
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel18: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        HitTest = False
+        Position.X = 8.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 11
+        Visible = False
+        Caption = #37329#39069':'
+        Text = #37329#39069':'
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel19: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        HitTest = False
+        Position.X = 113.000000000000000000
+        Position.Y = 59.000000000000000000
+        Size.Width = 58.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Visible = False
+        Caption = #26102#38388':'
+        Text = #26102#38388':'
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel20: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        HitTest = False
+        Position.X = 159.000000000000000000
+        Position.Y = 59.000000000000000000
+        Size.Width = 159.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Visible = False
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel21: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        HitTest = False
+        Position.X = 111.000000000000000000
+        Position.Y = 38.000000000000000000
+        Size.Width = 93.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Visible = False
+        Caption = #32500#20462#36827#24230':'
+        Text = #32500#20462#36827#24230':'
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel22: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        HitTest = False
+        Position.X = 8.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 161.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Visible = False
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel23: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        HitTest = False
+        Position.X = -40.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Visible = False
+        Caption = #21333#21495':'
+        Text = #21333#21495':'
+        Properties.AutoSize = False
+      end
+      object lblBillNO: TSkinFMXLabel
+        ParentMouseEvent = False
+        BindItemFieldName = #20219#21153#21333#21495#32553#20889
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontStyle = [fsBold]
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 16.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 16.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.StyleExt = {00070000000000000004000000}
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        HitTest = False
+        Position.X = 8.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 129.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Caption = '210416-0001'
+        Text = '210416-0001'
+        Properties.AutoSize = False
+      end
+      object SkinFMXMultiColorLabel1: TSkinFMXMultiColorLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 16.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = xFFFB3437
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 16.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = xFFFB3437
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = xFFFB3437
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.SizeType = dpstPixel
+        MouseDownFocus = False
+        HitTest = False
+        Position.X = 56.000000000000000000
+        Position.Y = 63.000000000000000000
+        Size.Width = 113.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        Visible = False
+        Caption = #165
+        Text = #165
+        Properties.AutoSize = False
+        Properties.ColorTextCollection = <
+          item
+            Text = #165
+            DrawFont.Size = 14.000000000000000000
+            IsUseDefaultDrawFont = False
+            IsUseDefaultDrawFontColor = True
+            IsBindingItem = False
+          end
+          item
+            Name = 'ItemDetail3'
+            BindItemFieldName = 'ItemDetail3'
+            IsUseDefaultDrawFont = True
+            IsUseDefaultDrawFontColor = True
+            IsBindingItem = True
+          end>
+        Properties.Name2 = 'ItemDetail3'
+        Properties.Text1 = #165
+        Properties.Color1 = claBlack
+        Properties.Color2 = claBlack
+        Properties.Color3 = claBlack
+        Properties.Color4 = claBlack
+      end
+      object SkinFMXLabel1: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        HitTest = False
+        Position.X = 176.000000000000000000
+        Position.Y = 63.000000000000000000
+        Size.Width = 73.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 13
+        Caption = #19978#36947#24037#24207':'
+        Text = #19978#36947#24037#24207':'
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel2: TSkinFMXLabel
+        ParentMouseEvent = False
+        BindItemFieldName = #19978#27425#23436#25104#24037#24207
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        HitTest = False
+        Position.X = 240.000000000000000000
+        Position.Y = 63.000000000000000000
+        Size.Width = 81.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 17
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel3: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        MouseDownFocus = False
+        HitTest = False
+        Position.X = 8.000000000000000000
+        Position.Y = 63.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 14
+        Caption = #38376#32467#26500':'
+        Text = #38376#32467#26500':'
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel4: TSkinFMXLabel
+        ParentMouseEvent = False
+        BindItemFieldName = #38376#32467#26500
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        MouseDownFocus = False
+        Anchors = [akLeft, akTop, akRight]
+        HitTest = False
+        Position.X = 65.000000000000000000
+        Position.Y = 63.000000000000000000
+        Size.Width = 160.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 18
+        Caption = #21452#24320
+        Text = #21452#24320
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel5: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claWheat
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claWheat
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claWheat
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        HitTest = False
+        Position.X = 162.000000000000000000
+        Position.Y = 49.000000000000000000
+        Size.Width = 73.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 12
+        Visible = False
+        Caption = #38382#39064#19978#25253
+        Text = #38382#39064#19978#25253
+        Properties.AutoSize = False
+      end
+      object imgError: TSkinFMXImage
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawPictureParam.IsStretch = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        Position.X = 270.000000000000000000
+        Position.Y = 7.000000000000000000
+        Size.Width = 22.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 24
+        Properties.AutoSize = False
+        Properties.Picture.IsClipRound = False
+        Properties.Picture.PNG = {
+          89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+          F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          01F5494441545847ED96BF4A034110C63F0D5154FC93C2420BB1B0B24A656165
+          25884D8A14790A41D4F436822208361288F8160AE9040505DFC04A0BCB143121
+          A831F11B9D8DC7DEE6729E49AAFBC1C7646FE76666E76EF78298A834818D77E0
+          B901DCB58045BD3C1898305507CAB42D118BB8D6A9C1F0099C9AE41E6574BABF
+          B0F54B65A06117C0C7F1449B54B7FEC1D597ECE4462C2EAF6EFD8109365D898D
+          6A40853EB3EADE5B9820F1013C9A64D272269BE7EF19EAC15C67878A7A4B6F61
+          B26D93C44EC4B92D739DEF479336AD535D19561B0803CAB6DBD7A16142AD30A9
+          16296088C51574D8955005708507E39E24CAB45A29B0FD5B48002BBC27ABC3FF
+          C140CBDAD676FB453C7C6ED4457646C19ED77764545D3AD2B5030C72266DD5A1
+          17EFAAA7D4B6E181B040B3F3338A085792B1576624DF0175930E5CBA7C2A408D
+          0B88B62D1920A9A79B2FB0A80ABCAA2BF8386E5D3E221677A16E7F8395E75D01
+          BDA2CF2E95652555D7BC47A1B7E537D236699F235024B143F71A3A1C72C8B802
+          D9A2DF3975E4FA38D9E2A2721A3E183AA75DDBCE16135FE92D52F0A1CBC7AB37
+          E08545F8B6A56F1B3258A1C3B6B3E179139E11608E26F86BC94AD7ECCA83C462
+          8BD4719847209297955D18D3747E38B91AA6FD51255B9796CDF8C5D76A16B14E
+          A73D3E9B9EFEBB61DC3A939D306E492FC5C4C4C410E00BC022DA724D9FD35500
+          00000049454E44AE426082}
+        Properties.Animated = False
+        Properties.AnimateSpeed = 10.000000000000000000
+        Properties.GIFDelayExp = 12
+        Properties.CurrentRotateAngle = 0
+        Properties.Rotated = False
+        Properties.RotateSpeed = 5.000000000000000000
+        Properties.RotateIncrement = 20
+        Properties.IsToolBar = False
+      end
+      object labErrorHint: TSkinFMXLabel
+        ParentMouseEvent = False
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claRed
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claRed
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claRed
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        Position.X = 294.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 38.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 25
+        Caption = #24322#24120
+        Text = #24322#24120
+        Properties.AutoSize = False
+      end
+      object lblCompleteTime: TSkinFMXLabel
+        ParentMouseEvent = False
+        BindItemFieldName = #23436#25104#26102#20998
+        DirectUIVisible = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 16.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 16.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaRight
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Anchors = [akTop, akRight]
+        HitTest = False
+        Position.X = 160.000000000000000000
+        Position.Y = 35.000000000000000000
+        Size.Width = 161.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 15
+        Visible = False
+        Properties.AutoSize = False
+      end
+    end
+    object chkItemSelected: TSkinFMXCheckBox
+      ParentMouseEvent = False
+      BindItemFieldName = 'ItemSelected'
+      DirectUIVisible = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      ComponentTypeName = 'Color'
+      RefMaterial = dmEasyServiceCommonMaterial.chkDefaultCheckBoxMaterial
+      MouseDownFocus = False
+      Align = Left
+      ClipChildren = True
+      Margins.Left = 6.000000000000000000
+      Position.X = 6.000000000000000000
+      Size.Width = 24.000000000000000000
+      Size.Height = 98.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Properties.AutoSize = False
+      Properties.Checked = False
+      Properties.IsAutoChecked = True
+      Properties.IsAutoCaption = False
+      Left = 280
+      Top = 14
+    end
+  end
+end

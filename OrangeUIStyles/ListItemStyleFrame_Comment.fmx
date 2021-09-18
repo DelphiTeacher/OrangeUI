@@ -1,0 +1,99 @@
+inherited FrameCommentListItemStyle: TFrameCommentListItemStyle
+  Size.Height = 42.000000000000000000
+  inherited ItemDesignerPanel: TSkinFMXItemDesignerPanel
+    Size.Height = 42.000000000000000000
+    Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+    Properties.ItemCaptionBindingControl = lblComment
+    Properties.ItemDetailBindingControl = lblComment
+    Properties.ItemDetail1BindingControl = lblComment
+    Properties.ItemDetail2BindingControl = lblComment
+    inherited lblItemCaption: TSkinFMXLabel
+      Align = None
+      Position.X = 168.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 129.000000000000000000
+      Size.Height = 33.000000000000000000
+      TabOrder = 1
+      Visible = False
+      Caption = ''
+      Text = ''
+    end
+    object lblComment: TSkinFMXMultiColorLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.FillColor.Color = claLightgray
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.IsFill = True
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttCharacter
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      Align = Client
+      Size.Width = 320.000000000000000000
+      Size.Height = 42.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Caption = 'DelphiTeacher'#22238#22797'HappyFyw: '#20320#22909
+      Text = 'DelphiTeacher'#22238#22797'HappyFyw: '#20320#22909
+      Properties.AutoSize = False
+      Properties.ColorTextCollection = <
+        item
+          Name = 'ItemCaption'
+          BindItemFieldName = 'ItemCaption'
+          Text = 'DelphiTeacher'
+          DrawFont.Color = claCornflowerblue
+          DrawFont.FontColor.Color = claCornflowerblue
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end
+        item
+          Name = 'ItemDetail1'
+          BindItemFieldName = 'ItemDetail1'
+          Text = #22238#22797
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end
+        item
+          Name = 'ItemDetail2'
+          BindItemFieldName = 'ItemDetail2'
+          Text = 'HappyFyw'
+          DrawFont.Color = claCornflowerblue
+          DrawFont.FontColor.Color = claCornflowerblue
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end
+        item
+          Name = #20882#21495
+          BindItemFieldName = #20882#21495
+          Text = ': '
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end
+        item
+          Name = 'ItemDetail'
+          BindItemFieldName = 'ItemDetail'
+          Text = #20320#22909
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end>
+      Properties.Name1 = 'ItemCaption'
+      Properties.Name2 = 'ItemDetail1'
+      Properties.Name3 = 'ItemDetail2'
+      Properties.Name4 = #20882#21495
+      Properties.Text1 = 'DelphiTeacher'
+      Properties.Text2 = #22238#22797
+      Properties.Text3 = 'HappyFyw'
+      Properties.Text4 = ': '
+      Properties.Color1 = claCornflowerblue
+      Properties.Color2 = claBlack
+      Properties.Color3 = claCornflowerblue
+      Properties.Color4 = claBlack
+    end
+  end
+end

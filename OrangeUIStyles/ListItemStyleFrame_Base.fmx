@@ -1,0 +1,9 @@
+inherited FrameBaseListItemStyleBase: TFrameBaseListItemStyleBase
+  inherited ItemDesignerPanel: TSkinFMXItemDesignerPanel
+    Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+    inherited lblItemCaption: TSkinFMXLabel
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+    end
+  end
+end

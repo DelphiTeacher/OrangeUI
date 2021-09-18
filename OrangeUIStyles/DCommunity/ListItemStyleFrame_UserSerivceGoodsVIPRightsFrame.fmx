@@ -1,0 +1,415 @@
+object FrameListItemStyle_UserSerivceGoodsVIPRights: TFrameListItemStyle_UserSerivceGoodsVIPRights
+  Size.Width = 558.000000000000000000
+  Size.Height = 355.000000000000000000
+  Size.PlatformDefault = False
+  object ItemDesignerPanel: TSkinFMXItemDesignerPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.IsTransparent = False
+    MouseDownFocus = False
+    HitTest = False
+    Position.X = 72.000000000000000000
+    Position.Y = 81.000000000000000000
+    Size.Width = 353.000000000000000000
+    Size.Height = 120.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Properties.IsPreview = False
+    Properties.PreviewItem.Selected = False
+    Properties.PreviewItem.Checked = False
+    Properties.PreviewItem.Height = -1.000000000000000000
+    Properties.PreviewItem.Visible = True
+    Properties.PreviewItem.Color = claNull
+    Properties.PreviewItem.Width = -1.000000000000000000
+    Properties.PreviewItem.Icon.IsClipRound = False
+    Properties.PreviewItem.Pic.IsClipRound = False
+    Properties.PreviewItem.Tag = 0
+    Properties.PreviewItem.Tag1 = 0
+    Properties.PreviewItem.ItemType = sitDefault
+    Properties.PreviewItem.IsParent = False
+    Properties.PreviewItem.Expanded = True
+    Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+    Properties.PreviewItem.Accessory = satNone
+    Properties.PreviewItem.JsonStr = 
+      '{"fid":453,"appid":1000,"shop_fid":85,"shop_goods_category_fid":' +
+      '161,"name":"'#19977#26041'SDK'#25511#20214'","name_s":"SFSDKKJ","name_s_f":"SAN FANG S D' +
+      ' K KONG JIAN","goods_desc":"'#20010#25512#25512#36865#12289#24494#20449#25903#20184#12289#25903#20184#23453#25903#20184#12289#30334#24230#22320#22270#12289#35270#39057#25773#25918#22120#31561'","speica' +
+      'l_desc":"","pic1_path":"Upload\\1000\\Goods_Pic\\2020\\2020-03-1' +
+      '2\\0CF9DD4FD92C421F9621614712DEA2AB.jpg","is_deleted":0,"orderno' +
+      '":0,"createtime":"2020-03-12 18:34:17","month_sales":0,"month_ra' +
+      'ting":5,"all_sold_num":0,"all_rating":5,"all_rating_count":0,"sa' +
+      'tisfy_rating":1,"satisfy_rating_count":0,"is_featured":0,"is_gum' +
+      '":0,"is_new":0,"is_spicy":0,"is_not_for_minor":0,"length":0,"wid' +
+      'th":0,"height":0,"weight":0,"is_home_page_recommend":0,"pic2_pat' +
+      'h":"","pic3_path":"","pic4_path":"","pic5_path":"","pic6_path":"' +
+      '","pic7_path":"","pic8_path":"","pic9_path":"","desc_pic1_path":' +
+      '"","desc_pic2_path":"","desc_pic3_path":"","desc_pic4_path":"","' +
+      'desc_pic5_path":"","desc_pic6_path":"","desc_pic7_path":"","desc' +
+      '_pic8_path":"","desc_pic9_path":"","desc_pic10_path":"","code":"' +
+      '","order_type":"","factory":"","immunity_days":0,"is_vaccinum":0' +
+      ',"shop_goods_category_name":"'#25511#20214#21253'"}'
+    Properties.ItemStringsBindingControlCollection = <>
+    object lblGoodsName: TSkinFMXLabel
+      ParentMouseEvent = False
+      BindItemFieldName = 'service_name'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 16.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 16.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      Anchors = [akLeft, akTop, akRight]
+      HitTest = False
+      Position.X = 78.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 267.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Caption = 'OrangeUI'#20184#36153#29256
+      Text = 'OrangeUI'#20184#36153#29256
+      Properties.AutoSize = False
+    end
+    object imgGoodsIcon: TSkinFMXImage
+      ParentMouseEvent = False
+      BindItemFieldName = 'goods_pic1_path'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawPictureParam.IsStretch = True
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      MouseDownFocus = False
+      HitTest = False
+      Position.X = 11.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Properties.AutoSize = False
+      Properties.Picture.IsClipRound = False
+      Properties.Picture.PNG = {
+        89504E470D0A1A0A0000000D4948445200000080000000800806000000C33E61
+        CB000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        102C49444154785EED9D09AC1D5519C7FF74952ED20D8C946A0A11A30802B64D
+        016905495131620085045003062B9B226BCB560D206045A8AC2DF264A9B80512
+        1523D1041B08226BA1805817102834D2D2DA15BA80E73B73E676DE7D73FEDF99
+        3977FADEBB777EC9BD6FCEFDBFEF9CEF7CDF3773EF2C77EE0EEF1A50D3B10C70
+        7F6B3A94BA003A9CBA003A9CBA003A9CBA003A9CBA003A9CDEDF0D7CF34D60C9
+        33C01BFF05FEB706D8B001D8B409183CD8FD43135BB60003071ACF5DBB992D9B
+        814131B6835CA389CD4EDBC163BCC5F8EC1B376BFB9E1D8191238131E3802953
+        80D163DD3FF50EDBB700D6AE05EEBA13F8C7DF818D1B81DCA1893B56D2DC65F6
+        11B69A46BBD6FA351BE21D4D617C746FE084AF01234624D276A0FA02D8BA15E8
+        EA02163F99AC816A303C58497395D947D86A1AED9A8856CAD1654BB2F7BEC0A9
+        67FAB7382DA2BA0290C4CFBB0E586AD6F6C6106C28A259497393D947D86A1AED
+        9A885652FA16C6EF06CCFE1E307468D26E31D514C0825B80279E708D9480C9E6
+        6125CD45661F611BE597A231B95994E6E4A9C0CC3392760B696D01BCFC1270D5
+        D566ED974D7D163604D1ACA4B9C7EC236C358D764D442B297DFB18603EC0CE9A
+        034CDCDDBD104FEB0AE0EEBB81450FB846969293B592E61AB38FB08DF2AB22DB
+        2C071C0C9C3CD335E2684D015C719959FB5F768D2C25276B25CD2D661F611BE5
+        97A231998B3DD96D0230E74AD7284F7C01CCBE20D997EF81120C1F56D25C62F6
+        11B6517E5564CB18B913F0A31B5DA31C71470267CFAA936FD1B4B2B60A6B5603
+        679DE61AE5285F00979BCDFE9B2B5D234BC9C95A490B06B38FB08DF24BB165A6
+        5CE4A4F35DB30AB8E4BC64B904E50A60E142E095FA3D5FD7CADA2A34CF77D9AB
+        C09D5DAE518CE205F09F17810717B946969293B592160C661F611BE597A23199
+        8B1CDF7CFFFC47E0B925AE114EF10F81A79FEA0EE966615D10CD4ADAF0CC3EC2
+        36CAAF8A6C35D87C4593134EF3EF742F84516C0B70EB823AF9AA56D65681CED7
+        6872CA400EC0FDF89AE4A540C20B4012FFF863AE915272B25662B602B38FB08D
+        F24BD198CC458EB6E66779CAE4A8C74AEA27BC00E65EED1652D88498C38D2702
+        B38FB08DF24BD198CC454EC89A9F45DA57CE499603082B0039B3F7D24BAE2128
+        4EF9B012B315987D846D945F8AC6642E728AACF9595EFC17F0CE3BAEC1092B80
+        AE9FB805814D8839DC782230FB08DB28BF148DC95CE4145DF3B388EDAD614708
+        C30A60F162B7A038E5C34ACC5660F611B6517E291A93B9C861F3D56291EA4FFC
+        35F9ABA017805CC6D58E57F258A9A4AD684CE62287CED768DA9A9F22D7376E30
+        B953D00BE0AE3BCC93E2940F2B315B81D947D846F9A5684CE62287CD578B45B3
+        2ECDBB6E4F96097A012C5DEA16F2600E379E08CC3EC236CA2F456332173974BE
+        460B5DF3B32C49DFBAFDE805F0D65B6EA119E2B095D88404661F611BE597A231
+        998B1C365F2D164C5FBFCE2DF8D10BE0DDBCDD09E670E389C0EC236CA3FC5234
+        26739143E76BB4326BBE4534DD2F5E0045CFF55B491B94D947D846F9A5684CE6
+        2287CD578B859A7CC7CABC53F6DBE00520DFD8E90673B8F14460F611B6517E29
+        1A93B9C8D11218B5E66778BAF9EAECEEF0025891AD1E32A895985302B38FB08D
+        F24BD198CC450E9BAF168B22C91756BCE116F2E105B07A955B600E379E08CC3E
+        C236CA2F45633217395A025BB5E6A7AC8A790BD8BCC93C9141ADC49C12987D84
+        6D9E265FFCFCF04780E99F068E3C0A38FC73C0B0E14ECCA2F49BCAC386019F39
+        02F8E231C02187257D0FE021A3B0F96AB128937CC1E6D00FBF2064DEB5C0F3CF
+        BA4613D64A719AE9AD4CFEE831C0115F00264DE99970F9D6F1DCEF67AE5F54FA
+        4DE5316381732F0476DEC5BDE0D8B01E78F411E0BE7BCDDA956E2103D092DFEA
+        353FE563FB02DF99E51A3DE1E53CC4F375673BA63230D35B997C59CB2FBB0A98
+        7648FEDA2E093CC7044012AAF59BCABEE40B32C6A7CC16E6F26B801966EC107A
+        2BF9A20FF67CDDDD517C7B66C70C18D847AB922F9BFB93BE011C7DAC99E410F7
+        A2876E459087E937ED9A253FCB1033E6978F373ECC345134BEF8E8CDE40750AC
+        006C9F1103B72AF9C2712700530F748D0024A1E75D048CDBD9BD9062FA4DBBB6
+        C99FAD273FCB810703C79A42C8A38F275F082F00DB67C4C0AD4CFED483CC07BD
+        435D23C3DA35C0AF7F0E5C7201D035BFE79863C799F743A335B604464FFFA5B1
+        E6BFCFBDE0903E7E6AFABAE85CE0573F4BC668E6D38703539A8A91CD57B43E90
+        7C21AC006C9F1103D309094C6FD264737FD4975C23C3D34F02179F0FDCFF7BE0
+        F5D780871F32895BD0736CFB7660D6F231E683632AF936FB627BBBE9E3A145C0
+        72D3E7FDF701179E032CCE39B872CC71C9DB82C0E62B5A1F49BEA01780ED3362
+        603A2181E939DA4166933B6AB46B385E781EB8F97A60BDF984DEC0D83EFC2029
+        029370497C48F2B3C85EC0CDF380BF3DE75E70483FF276C0E62B5A1F4ABEC00B
+        406E6E1433309D90C0748FB6FF24B7E090EB15EFB8ADE94AD88CAD14C1821B7B
+        5E2327099F752970C1C5F9C95FD8D533F92932961447F3D5B7FB4F760B39F456
+        F2DF31F121F0E3003799B56AF153AE910719B88AE4CB9DC3E6DD92EC01A4AC5C
+        013C66F6CB35E49E3B72BB95105E7BD5BCA5B0793BE4AE1DD90F95528CA79E94
+        5C8DD30D251655255FA47DF607CE329F7B3CF002B8F906E029F3DE9A0B1B38C2
+        69A649B0AF98EB1A7D94F3BFD5FDF8BBC4A237D67C2B99A7FDA600679A0FB01E
+        8AED063660034738AD4D68C4C864B92FF3DE9DDC82A1B7931F40890260034738
+        9D6AC347249BEAEC6357F93B3EF9EEDB5B1B93F7DEB20FD94CB3479E4DE863E3
+        86E4ED69FC84C46FB98B875D768FECFDFFFA40F285826F016C606D50A63B6DC6
+        6781830F315EB1D52682E1C3930743F624BAED4DB41089D1A23F017FF8AD7B21
+        8F88385AA9496FDD5B001B38C2E95493FDF269875697FCBE80CC6DFA61C9C9AB
+        5C22E26825CDBE278105C0068E703AABED34CA2DB4395204B9051011472B69F6
+        F9F002D8A41C076855F23B9E88385A89E8CAF500BC008690538975F25B44441C
+        ADA4C45939535A622FC05027BF4544C4D14AF1712E5E0055253FCCDF3622228E
+        5662F6E1C12C560075F25B44441CADC4EC8B0533BC002A4D7E31A7FB3FF4F0A0
+        FB9B831AABE2710C2B80ED91FCE5AF27E7F1E5685AFA90A36B7216AF550F9947
+        C823CFB6EC43E6203F83933EE444D3F265C99C7B60C6F66125A253CD0F3F1228
+        779C7A7689D27749A7ACA4D81E79747218B855C8C9A41E978435212772942F53
+        1462D92BC0BDBF300B6CAE4264AC7C7C7C12F06DFFD940BE05183858F1BBA453
+        562A69DB2FD1E65351AC4422EBB7C00B801E968D70AAAC6D5B5251AC52DB81AD
+        BE2CDC12E99417A6B52315C54AB5DD468902A8CAA93087DB878A62A5DA76A760
+        0154E554B8C3ED4145B1526D7B52A000AA72AA98C3FD9F8A62A5DAE613580055
+        395556EBAF54142BD5D60F2F804D7283A8AA9C523426F74BC884ACA4C4C307B5
+        35AF6FF6DDE42B8117C060F66B95659D12148DC9FD1232212B29F1F0416DDDEB
+        3487853F04A694754A503426F74BC884ACA4C4C307B5657D76A7440194754A50
+        3426B71B31B1A2B6ACCF9E142C80B24E098AC6E476232656D496F5994F810228
+        EB94A0684C6E376262456D599F7E020BA0AC5382A231B9DD888915B5657D7278
+        0168DF0EA64E098AC6642EF63FEC749478F8A0B6AC4F83F2ED605E00F2552C1F
+        D42941D1A8DF54EC87C87C9478F8B0924F677D0A46CFBDD7F3360A7E087450A7
+        0445633217FB2765E76B259FAEC5C9E92D3F1D4C9D12148DC95C6C43C87CADE4
+        D3B53885C7B1580150A70445A37E51B10D21F3B5924FD7E2542C8EE105409D12
+        148DFA45C53684CCD74A3E5D8B53F138861500754A5034EA1715DB10325F2BF9
+        742D4EE5E2A81700754A5034EA1715DB10325F2BF9742D4EE5E3C80B40BB5BB8
+        A651BFCA3BDD76D850F8E2A1C549D137BFED16F2E1052077E5F2C206361AF54B
+        9B54BB21F3F5CCD9BEEC8B871627A61B4DE44ABE1D1C32B0172A76163614BE78
+        687162BAD1DE954BFAB53E4A158036B05BCC4577A863B0A1F0C5438B13D38D16
+        987CA160016803BBC55CC21CEA086C287CF1D0E2C474A31548BE50A000B481DD
+        622EE10E7543B9BD49BFA0790E3614BE78687162BAD10A265F082C006D60B798
+        4B3187BAB17CB95BE8C7C85DC6536C287CF1D0E2C474A39548BEC00B20643790
+        8E59DCA106F2A5C6E79E496E0CD95F91AFB82F71F71CB6A1F0C5438B13D38DC6
+        921F773A58D90DA47E5391937EA35502F8BB7B8075FA6FE0F639D6AD017EF3CB
+        A480ED7C7CF1D0E2C474A3D1355F74DE3FBF3FC00DD7E6FF3882EDD82DE6C207
+        A5E4B92385B8FB1EC0E8B1A66465C21E349F761D0FBCDF3C18AF2F035ECBBB81
+        43E09CC47FB983F9BF97C2DE35DC9AF96CB53E996E342DF9C227A60267FA7F35
+        8C17C0FC1B81C7FEE21A2932B05BCC858A1C56ADA291DCF34AD77C62E3369E3C
+        94B5657DA6B0BE357BA71F300D987976B29C037F0B1899B9F3B5C5744AC7D59C
+        22D4C9CF203AB1A5E64DB6E39A7E0CA3095E0063B3B7340D19B82475F2332863
+        866CF6B38C8D298049E94FA0C8C06E31172A72EAE46750C62C9A7C417E3184C0
+        0B60CC38D3AF0CECDAB9509153273F83326699E4CBCB63F94DB1780108F4C792
+        99D30A75F2C3A17D13C80F9AA6E8053074985B6826625275F233884E6CA939B3
+        350CF1E56E1B7A01ECB5975BC842BDE2D4C9CFA08C5966B39F22B1623F63E7D0
+        0BE0C493DC428A3230A34E7E38B46F853456C79F92FC25E80520BFB1D338241C
+        31A93AF9194427B6D49CD91AD2580D1AD2FD47AA3CE80520ECB39F79A25E71EA
+        E46750C68CDDECA74CFDA45BE0F043C159BEEEF989748D3AF94DB0BE35FB02B6
+        5DF7263F61A710B605103E38D12D14A04E7E06D1892D3567B686E658EDB16750
+        F285F02D80DCF67CE6575D23803AF94DB0BE35FB82B6B7DDC3BFD99D217C0B20
+        1D1E34CD3514EAE467109DD85273666BC88BD5E40383932F846F01524EF90ABF
+        CAA44E7E13AC6FCDBEA0AD245ED6FE02846F0152E65CEE1672A8939F4174624B
+        CD99ADC117AB8BAF720BE1142F805D2700D30F758D0C75F2332863B66A572FCB
+        8CCF03133FE41AE1142F00E1C493BBEF15D4C9CFA08C5945F27737893F413FEA
+        9747F1CF0059CE3E0D58BDCA3572A8939FC16855245FAE93BCAECB358A536E0B
+        90F2C31B926B06F2A8939FC1687D30F9425C01083F98074C68FA65AF8E4BBE02
+        ED5BC117AB897B46275F887B0BC8B2F076E081FBCD2EA2E9AE5EF31D46AB62CD
+        9F3E0338F974D788A37505202C7D01986B7613B76E712F34D176C91758DF9A7D
+        415BD9CFBFC8ECEAC987BE16D1DA0248B9E93AE0F1475CC35127BF8982B6074C
+        07BEE9BFBEBF2CD5148020E70EAEFC2EF0E23F9560C404AAF1E4A1AC2DEB5350
+        C66CD966DFF4B3DB07804BE70243F90F3F94A5BA02C832FFFA648B206F0DDD46
+        D38626BA95987D595BD6A7A08C199D7C633F68607239F719B382CFEA9565FB14
+        40CAC6F5C01DB701CF3E03AC5F6B5E604313CD4A55D8B23E5358DF9A7D8E2E2F
+        498EE502CEFD2627077402AEE46915DBB700F258BDD26C1D1E055698BF6B569B
+        C25867DE3E3699B5C0F3CDE4AD7222CAB8EC5B33E40EE7833D67C3ACAD59C37C
+        97BA6F79DB8CEBD9D4A6E30EF08C6B6D3D3764925F1197300F34E3CA2576A3C6
+        003BEF927C717394D997EF457ABF006A7A95F8034135FD9ABA003A9CBA003A9C
+        BA003A9CBA003A9CBA003A1AE0FFEFD20FB3FCB6EAC90000000049454E44AE42
+        6082}
+      Properties.Animated = False
+      Properties.AnimateSpeed = 10.000000000000000000
+      Properties.GIFDelayExp = 12
+      Properties.CurrentRotateAngle = 0
+      Properties.Rotated = False
+      Properties.RotateSpeed = 5.000000000000000000
+      Properties.RotateIncrement = 20
+      Properties.IsToolBar = False
+    end
+    object lblGoodsPriceArea: TSkinFMXLabel
+      ParentMouseEvent = False
+      BindItemFieldName = 'content'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontColor = claDarkorange
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claDarkorange
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claDarkorange
+      SelfOwnMaterial.DrawCaptionParam.IsWordWrap = True
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      MouseDownFocus = False
+      Anchors = [akLeft, akTop, akRight]
+      HitTest = False
+      Position.X = 78.000000000000000000
+      Position.Y = 79.000000000000000000
+      Size.Width = 267.000000000000000000
+      Size.Height = 42.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Caption = 'OrangeUI 1.78.3 VIP'#35299#21387#23494#30721#20026'orangeui123456,'#35831#22823#23478#26377#21450#26102#19979#36733#26356#26032
+      Text = 'OrangeUI 1.78.3 VIP'#35299#21387#23494#30721#20026'orangeui123456,'#35831#22823#23478#26377#21450#26102#19979#36733#26356#26032
+      Properties.AutoSize = False
+    end
+    object btnEditGoods: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.IsAutoCenterIconAndCaption = False
+      SelfOwnMaterial.DrawDetailParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawDetailParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawDetailParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawDetail1Param.FontTrimming = fttNone
+      SelfOwnMaterial.DrawDetail1Param.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawDetail1Param.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.NormalPicture.IsClipRound = False
+      SelfOwnMaterial.HoverPicture.IsClipRound = False
+      SelfOwnMaterial.DownPicture.IsClipRound = False
+      SelfOwnMaterial.DisabledPicture.IsClipRound = False
+      SelfOwnMaterial.FocusedPicture.IsClipRound = False
+      SelfOwnMaterial.PushedPicture.IsClipRound = False
+      RefMaterial = dmEasyServiceCommonMaterial.btnGrayBorderSmallTextButtonMaterial
+      MouseDownFocus = False
+      Anchors = [akTop, akRight]
+      HitTest = False
+      Position.X = 209.000000000000000000
+      Position.Y = 93.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Visible = False
+      Caption = #32534#36753
+      Text = #32534#36753
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.Icon.IsClipRound = False
+      Properties.PushedIcon.IsClipRound = False
+      Properties.ButtonIndex = -1
+      Properties.PushedGroupIndex = 0
+    end
+    object btnGoodsInfo: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.IsAutoCenterIconAndCaption = False
+      SelfOwnMaterial.DrawDetailParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawDetailParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawDetailParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawDetail1Param.FontTrimming = fttNone
+      SelfOwnMaterial.DrawDetail1Param.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawDetail1Param.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.NormalPicture.IsClipRound = False
+      SelfOwnMaterial.HoverPicture.IsClipRound = False
+      SelfOwnMaterial.DownPicture.IsClipRound = False
+      SelfOwnMaterial.DisabledPicture.IsClipRound = False
+      SelfOwnMaterial.FocusedPicture.IsClipRound = False
+      SelfOwnMaterial.PushedPicture.IsClipRound = False
+      RefMaterial = dmEasyServiceCommonMaterial.btnGrayBorderSmallTextButtonMaterial
+      MouseDownFocus = False
+      Anchors = [akTop, akRight]
+      HitTest = False
+      Position.X = 281.000000000000000000
+      Position.Y = 93.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Visible = False
+      Caption = #35814#24773
+      Text = #35814#24773
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.Icon.IsClipRound = False
+      Properties.PushedIcon.IsClipRound = False
+      Properties.ButtonIndex = -1
+      Properties.PushedGroupIndex = 0
+    end
+    object lblSumStorage: TSkinFMXLabel
+      ParentMouseEvent = False
+      BindItemFieldName = 'caption'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      Anchors = [akLeft, akTop, akRight]
+      HitTest = False
+      Position.X = 78.000000000000000000
+      Position.Y = 54.000000000000000000
+      Size.Width = 267.000000000000000000
+      Size.Height = 27.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Caption = 'OrangeUI 1.78.3'
+      Text = 'OrangeUI 1.78.3'
+      Properties.AutoSize = False
+    end
+    object SkinFMXLabel2: TSkinFMXLabel
+      ParentMouseEvent = False
+      BindItemFieldName = 'createtime'
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      HitTest = False
+      Position.X = 78.000000000000000000
+      Position.Y = 31.000000000000000000
+      Size.Width = 267.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Caption = '2020-04-10 09:43:00'
+      Text = '2020-04-10 09:43:00'
+      Properties.AutoSize = False
+    end
+  end
+end

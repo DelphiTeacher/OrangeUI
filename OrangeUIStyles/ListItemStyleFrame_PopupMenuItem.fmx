@@ -1,0 +1,154 @@
+object FrameListItemStyle_PopupMenuItem: TFrameListItemStyle_PopupMenuItem
+  Size.Width = 541.000000000000000000
+  Size.Height = 266.000000000000000000
+  Size.PlatformDefault = False
+  object ItemDesignerPanel: TSkinFMXItemDesignerPanel
+    ParentMouseEvent = False
+    DirectUIVisible = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetAlphaChange]
+    SelfOwnMaterial.IsTransparent = False
+    MouseDownFocus = False
+    HitTest = False
+    Position.X = 320.000000000000000000
+    Position.Y = 111.000000000000000000
+    Size.Width = 133.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Properties.IsPreview = False
+    Properties.PreviewItem.Selected = False
+    Properties.PreviewItem.Checked = False
+    Properties.PreviewItem.Height = -1.000000000000000000
+    Properties.PreviewItem.Visible = True
+    Properties.PreviewItem.Color = claNull
+    Properties.PreviewItem.Width = -1.000000000000000000
+    Properties.PreviewItem.Icon.IsClipRound = False
+    Properties.PreviewItem.Pic.IsClipRound = False
+    Properties.PreviewItem.Tag = 0
+    Properties.PreviewItem.Tag1 = 0
+    Properties.PreviewItem.ItemType = sitDefault
+    Properties.PreviewItem.IsParent = False
+    Properties.PreviewItem.Expanded = True
+    Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+    Properties.PreviewItem.Accessory = satNone
+    Properties.ItemCaptionBindingControl = lblAddContent
+    Properties.ItemIconBindingControl = imgPic
+    Properties.ItemStringsBindingControlCollection = <>
+    object imgPic: TSkinFMXImage
+      ParentMouseEvent = False
+      DirectUIVisible = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+      SelfOwnMaterial.DrawPictureParam.PictureHorzAlign = phaCenter
+      SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaCenter
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Left = 2.000000000000000000
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Top = 2.000000000000000000
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Right = 2.000000000000000000
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Bottom = 2.000000000000000000
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Height = 60.000000000000000000
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.PositionHorzType = dpphtCenter
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      MouseDownFocus = False
+      Align = Left
+      HitTest = False
+      Margins.Left = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Size.Width = 40.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Properties.AutoSize = False
+      Properties.Picture.IsClipRound = False
+      Properties.Picture.PNG = {
+        89504E470D0A1A0A0000000D494844520000002C0000002C08060000001E845A
+        01000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        0585494441545847CDD847882C5514C6F1368767CE39470C88A8981515111154
+        0C88B811170A8AB87908661151C18DE04250D4859850540C3B157C2ABA306302
+        73C29C73FE7EDD73869AB17AA6BBA7E78D1FFCE9AAEEEA5BE79E7BCEB9A76AB9
+        CEF865CC55C20ADDB34EE7EF89CFB1689C062F1B360D9B8513C37EE1D7B072F8
+        2EFC13FE3762ECE6E1CAC0B026CF846DC37CACE64862EC36E1955046BE155E68
+        9C7F11760AFF0BA385C15DA18C5B1CB60E26717C606C4DC2F726B86092580784
+        32F6A2B071582690F83D29D4EFB7858DC28289175F0C8C793F6C15CAD89224BC
+        3B94D15B8605F1F28AE19050869C1E94B3E912B7E2B7AE3B27AC1196BA360CB7
+        0446BC11C4673F0993DB836B3F09566224CD6569FCF7D4DE61E7D1A0D6F6D337
+        E191DE61D77865CE0A0DAD510D76B33D263EE9BEF063EFB055369025E1B3EE59
+        A7B35B58BE77389C463578F5706CB8221C1A5E0FBF8799F473B8B577D83932AC
+        DF3B1C4ED3337A50AD19168595C24FBE88560D355E7D8A59C77F05DE3D2554DC
+        0B8DF2F8C01AD4604BAFA6AE15DC8C8765FF0E61C7B05D50AED46594F1BC2AB6
+        CF0C1F877DC29381F60DCF873FBA6763907059276C112CBB9B3E14BE0A8C1E84
+        AB43D55D13B02BD66F6705131F4A6D1E36B862CFAB47854B425BBC7D1BDE0C1F
+        85A7263E85077E0BBF04D77C18AAC564FC0DC1B8D786CB43BF649594EC9BB202
+        D30D6624AFDE188EF1454376B4EBC2ABE1CB6020D74B364632B0E95DFC197471
+        7573B1FC6C50C38DB167A8BEF99D894F32EEEEC1FFECA09F06E34D91443A3C54
+        B30271A73FB053D986C5B11B0C535D6C128F85E742DDB860B4EFDD9791643555
+        91B2E3826065A638D7C52EB2842EE23131EBC20DC25CDA4293D3F0341DD1E4FC
+        60554BAA876A2294EA9A0B033B2665D96A409F0C6D0E32572981178732A060D4
+        7FBC175949DF6B495D2707F60FDDF0D1B0C8D81A649730EE469B4142EAE550F7
+        C1C981716DB232FA937A8AB92C2CF265FD40F7047553728C536EA8E9B1339694
+        488F4FB6ED36F1AA8D459C9331BAE261F15AB31E799F1F406A3A43558F034355
+        883671A4BA5DA12A8E6D485DF1B07EC00F2ED82BA8C56D3290495A620C53FC19
+        B877B829CCD44BD8F2255F19AB186C1F2643954779B62E7820484472D1DA8171
+        BEB30D6BD63D748EF2B8A3CC19C7C49B721FE34936AF09CA16F5FEB4A0EC4E91
+        D9F3AC6C36E07AC12C770DE70605FFEB60107493208C2249C84956CA3D38435F
+        726968D66A469F10FAAE06A3CDD280065A1CBE0F354093F3821BF198C9698C84
+        0723643E1CFB8E779449DEF31FE16645CF087784E62B01D83DAF096C111E939A
+        5EFF9AF29B1B697CEE0C53FE3821658A171E0F3F043D849B419633DAA6E4BF12
+        E6A06003105626385DFA91AB8207025225867ED5B56E10B3CA4FD30B7345D3F3
+        41B837781560FBB7026D1399D44C1E6E8AD1B6CBEBBB67BD7AFA60100A96DAEF
+        8EDD94377956529924AFBF1D3CD7BD173E0F0CD52C896335BF9AA959EBFFA006
+        9378B233E9D894A69702A38CE1D3A33B03EADCA7E5044318AEA12749E4DA77BB
+        67F32889A87BDB24284392CA6630BD44B5C9F56AA912757F30E999368EB188D7
+        180DCB2FCB8586CC9F4DBC6AC310BF4BC24CEF31C62EF557D9A90452432777A1
+        3E52FEF413AEB7CD8EF4F66790A56C9364F2F45BF24265B5DE61AB24A227082B
+        43AF05313DB44635581249A087BB679DCEC1C1F6DD4FEAF971BDC3EEC3C1D361
+        2483E7225EB36D565878EDDA96449CA2EB522D5C2769679ADCBC4A85B01B31E4
+        89D0964876B69B434D4CB2CE16EFF32665EDEC50C64C7FE5CAE35E9E9477BD27
+        EED7B62E352969F5525B5F7144905C76BF66CBEAD3F7A3E6CDD8C4005E2BC360
+        EBF6782EB19CDB968F0E6D0DD48288D17A68DB75195D98C861612C6FDD87E925
+        6613A36D0E5E56EF1CD4656F73B49E3C3CDBEBD881344E834BFA5F8D0D49B67E
+        4FC523A8D3F917D08D6A2AF567ABF70000000049454E44AE426082}
+      Properties.Animated = False
+      Properties.AnimateSpeed = 10.000000000000000000
+      Properties.GIFDelayExp = 12
+      Properties.CurrentRotateAngle = 0
+      Properties.Rotated = False
+      Properties.RotateSpeed = 5.000000000000000000
+      Properties.RotateIncrement = 20
+      Properties.IsToolBar = False
+    end
+    object lblAddContent: TSkinFMXLabel
+      ParentMouseEvent = False
+      DirectUIVisible = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontColor = claWhite
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claWhite
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claWhite
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      Align = Client
+      HitTest = False
+      Size.Width = 88.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Caption = #36164#35759
+      Text = #36164#35759
+      Properties.AutoSize = False
+    end
+  end
+end

@@ -1,0 +1,54 @@
+inherited FrameCarglSelectRepairMaterialListItemStyle: TFrameCarglSelectRepairMaterialListItemStyle
+  Size.Width = 502.000000000000000000
+  Size.Height = 47.000000000000000000
+  inherited ItemDesignerPanel: TSkinFMXItemDesignerPanel
+    Size.Width = 502.000000000000000000
+    Size.Height = 47.000000000000000000
+    Properties.IsPreview = True
+    Properties.PreviewItem.Caption = #27927#36710
+    Properties.PreviewItem.Detail = '001'
+    Properties.PreviewItem.Detail1 = '150.00'
+    Properties.PreviewItem.Detail2 = '200.00'
+    Properties.PreviewItem.Detail3 = #23567#22411#36710
+    Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+    Properties.ItemDetailBindingControl = lblItemDetail
+    inherited lblItemCaption: TSkinFMXLabel
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 388.000000000000000000
+      Size.Height = 37.000000000000000000
+      TabOrder = 1
+      Caption = #27927#36710
+      Text = #27927#36710
+    end
+    object lblItemDetail: TSkinFMXLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      Align = Right
+      HitTest = False
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 403.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 94.000000000000000000
+      Size.Height = 37.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Caption = '001'
+      Text = '001'
+      Properties.AutoSize = False
+    end
+  end
+end
