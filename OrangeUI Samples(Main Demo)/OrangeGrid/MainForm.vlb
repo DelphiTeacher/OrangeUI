@@ -1,0 +1,13 @@
+﻿[FDGUIxWaitCursor1]
+Coordinates=198,1,113,33
+
+[FDConnection1]
+Coordinates=198,56,90,33
+
+[DataSource1]
+Coordinates=90,1,77,33
+
+[]
+Coordinates=70,10,60,33
+Visible=True
+

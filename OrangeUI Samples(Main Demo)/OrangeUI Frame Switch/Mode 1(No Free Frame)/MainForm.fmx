@@ -1,0 +1,21 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'Frame'#26694#26550#20027#31383#20307'('#19981#37322#25918'Frame)'
+  ClientHeight = 480
+  ClientWidth = 320
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnKeyUp = FormKeyUp
+  DesignerMasterStyle = 0
+  object btnShowMainFrame: TButton
+    Align = Center
+    Size.Width = 120.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = #26174#31034#20027#39029
+    OnClick = btnShowMainFrameClick
+  end
+end

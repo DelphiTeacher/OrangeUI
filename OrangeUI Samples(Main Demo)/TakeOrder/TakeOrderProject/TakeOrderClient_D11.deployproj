@@ -1,0 +1,489 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Condition="Exists('$(BDS)\bin\CodeGear.Deployment.targets')" Project="$(BDS)\bin\CodeGear.Deployment.targets"/>
+    <ProjectExtensions>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <PropertyGroup>
+        <DeviceId Condition="'$(Platform)'=='Android'">b559c25e02ef</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android64'"/>
+        <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
+    </PropertyGroup>
+    <ItemGroup Condition="'$(Platform)'=='OSX64'"/>
+    <ItemGroup Condition="'$(Platform)'=='Win32'"/>
+    <ItemGroup Condition="'$(Platform)'=='OSXARM64'"/>
+    <ItemGroup Condition="'$(Platform)'=='Android64'"/>
+    <ItemGroup Condition="'$(Platform)'=='Android'">
+        <DeployFile Include="..\BarCode\res\values\themes.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values\</RemoteDir>
+            <RemoteName>themes.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\layout\bookmark_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\layout\</RemoteDir>
+            <RemoteName>bookmark_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\values\dimens.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values\</RemoteDir>
+            <RemoteName>dimens.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\strings.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>Android_Strings</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\styles-v21.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values-v21\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>AndroidSplashStylesV21</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="72x72.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-hdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon72</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\libTakeOrderClient_D11.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libTakeOrderClient_D11.so</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\menu\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\menu\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\layout\help.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\layout\</RemoteDir>
+            <RemoteName>help.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\network_security_config.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\xml\</RemoteDir>
+            <RemoteName>network_security_config.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="36x36.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-ldpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon36</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\splash_image_def.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable\</RemoteDir>
+            <RemoteName>splash_image_def.xml</RemoteName>
+            <DeployClass>AndroidSplashImageDef</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\layout\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\layout\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\layout\share.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\layout\</RemoteDir>
+            <RemoteName>share.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\layout\search_book_contents_header.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\layout\</RemoteDir>
+            <RemoteName>search_book_contents_header.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>gdbserver</RemoteName>
+            <DeployClass>AndroidGDBServer</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-normal\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage470</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_72x72.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-xxhdpi\</RemoteDir>
+            <RemoteName>ic_notification.png</RemoteName>
+            <DeployClass>Android_NotificationIcon72</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_192x192.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-xxxhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon192</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="144x144.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-xxhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon144</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\values\colors.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\drawable\launcher_icon.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable\</RemoteDir>
+            <RemoteName>launcher_icon.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\layout\capture.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\layout\</RemoteDir>
+            <RemoteName>capture.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\values\strings.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values\</RemoteDir>
+            <RemoteName>strings.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_24x24.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-mdpi\</RemoteDir>
+            <RemoteName>ic_notification.png</RemoteName>
+            <DeployClass>Android_NotificationIcon24</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\library\lib\mips\</RemoteDir>
+            <RemoteName>libTakeOrderClient_D11.so</RemoteName>
+            <DeployClass>AndroidLibnativeMipsFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-small\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage426</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\menu\history.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\menu\</RemoteDir>
+            <RemoteName>history.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="96x96.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-xhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon96</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-large\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage640</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\styles.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\styles.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values\</RemoteDir>
+            <RemoteName>styles.xml</RemoteName>
+            <DeployClass>AndroidSplashStyles</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\layout\app_picker_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\layout\</RemoteDir>
+            <RemoteName>app_picker_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-xlarge\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage960</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\values\ids.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values\</RemoteDir>
+            <RemoteName>ids.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_48x48.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-xhdpi\</RemoteDir>
+            <RemoteName>ic_notification.png</RemoteName>
+            <DeployClass>Android_NotificationIcon48</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\library\lib\armeabi\</RemoteDir>
+            <RemoteName>libTakeOrderClient_D11.so</RemoteName>
+            <DeployClass>AndroidLibnativeArmeabiFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_36x36.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-hdpi\</RemoteDir>
+            <RemoteName>ic_notification.png</RemoteName>
+            <DeployClass>Android_NotificationIcon36</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\layout\search_book_contents.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\layout\</RemoteDir>
+            <RemoteName>search_book_contents.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\colors.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values\</RemoteDir>
+            <RemoteName>colors.xml</RemoteName>
+            <DeployClass>Android_Colors</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_96x96.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-xxxhdpi\</RemoteDir>
+            <RemoteName>ic_notification.png</RemoteName>
+            <DeployClass>Android_NotificationIcon96</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\drawable\share_via_barcode.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable\</RemoteDir>
+            <RemoteName>share_via_barcode.png</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\values\arrays.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\values\</RemoteDir>
+            <RemoteName>arrays.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="48x48.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\drawable-mdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon48</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\menu\encode.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\menu\</RemoteDir>
+            <RemoteName>encode.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\raw\beep.ogg" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\raw\</RemoteDir>
+            <RemoteName>beep.ogg</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\layout\history_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\layout\</RemoteDir>
+            <RemoteName>history_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\AndroidManifest.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\</RemoteDir>
+            <RemoteName>AndroidManifest.xml</RemoteName>
+            <DeployClass>ProjectAndroidManifest</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\layout\search_book_contents_list_item.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\layout\</RemoteDir>
+            <RemoteName>search_book_contents_list_item.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\TakeOrderClient_D11.classes" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\classes\</RemoteDir>
+            <RemoteName>TakeOrderClient_D11.classes</RemoteName>
+            <DeployClass>AndroidClasses</DeployClass>
+            <Operation>64</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\BarCode\res\xml\preferences.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\xml\</RemoteDir>
+            <RemoteName>preferences.xml</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Release\provider_paths.xml" Condition="'$(Config)'=='Release'">
+            <RemoteDir>TakeOrderClient_D11\res\xml\</RemoteDir>
+            <RemoteName>provider_paths.xml</RemoteName>
+            <DeployClass>AndroidFileProvider</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='Win64'"/>
+    <ItemGroup Condition="'$(Platform)'=='Linux64'"/>
+    <ItemGroup Condition="'$(Platform)'=='iOSDevice64'"/>
+</Project>

@@ -1,0 +1,60 @@
+object FrameFirst: TFrameFirst
+  Size.Width = 320.000000000000000000
+  Size.Height = 480.000000000000000000
+  Size.PlatformDefault = False
+  object Panel1: TPanel
+    Align = Top
+    Position.Y = 20.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 44.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object btnReturn: TButton
+      Align = Left
+      Size.Width = 120.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = #36820#22238#19978#19968#39029
+      OnClick = btnReturnClick
+    end
+    object Label1: TLabel
+      Align = Client
+      Size.Width = 200.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      Text = #25105#26159#31532#19968#39029'FirstFrame'
+    end
+  end
+  object Edit1: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 3
+    Position.X = 120.000000000000000000
+    Position.Y = 144.000000000000000000
+    Size.Width = 129.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Label2: TLabel
+    Position.X = 16.000000000000000000
+    Position.Y = 144.000000000000000000
+    Text = #35831#36755#20837
+  end
+  object Panel2: TPanel
+    Align = Top
+    Size.Width = 320.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+  end
+  object btnShowSecondFrame: TButton
+    Position.X = 88.000000000000000000
+    Position.Y = 200.000000000000000000
+    Size.Width = 128.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = #26174#31034#32534#36753#36164#26009#39029
+    OnClick = btnShowSecondFrameClick
+  end
+end

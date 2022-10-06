@@ -1,0 +1,77 @@
+object FrameSecond: TFrameSecond
+  Size.Width = 320.000000000000000000
+  Size.Height = 414.000000000000000000
+  Size.PlatformDefault = False
+  object Label1: TLabel
+    Position.X = 48.000000000000000000
+    Position.Y = 96.000000000000000000
+    Text = #22995#21517
+  end
+  object Edit1: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 3
+    Position.X = 120.000000000000000000
+    Position.Y = 96.000000000000000000
+  end
+  object Label2: TLabel
+    Position.X = 48.000000000000000000
+    Position.Y = 136.000000000000000000
+    Text = #22320#21306
+  end
+  object Edit2: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 2
+    Position.X = 120.000000000000000000
+    Position.Y = 136.000000000000000000
+  end
+  object Button1: TButton
+    Position.X = 80.000000000000000000
+    Position.Y = 184.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    Text = #26174#31034#31532#19968#39029
+    OnClick = Button1Click
+  end
+  object Panel2: TPanel
+    Align = MostTop
+    Size.Width = 320.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+  end
+  object Panel1: TPanel
+    Align = Top
+    Position.Y = 20.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 53.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    object btnReturn: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 16.000000000000000000
+      TabOrder = 5
+      Text = #36820#22238
+      OnClick = btnReturnClick
+    end
+    object Text1: TText
+      Position.X = 96.000000000000000000
+      Position.Y = 1.000000000000000000
+      Size.Width = 121.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Text = #36164#26009#32534#36753
+    end
+    object btnReturnMainFrame: TButton
+      Position.X = 200.000000000000000000
+      Position.Y = 16.000000000000000000
+      Size.Width = 112.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = #36820#22238#21069#20004#39029
+      OnClick = btnReturnMainFrameClick
+    end
+  end
+end

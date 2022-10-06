@@ -1,0 +1,59 @@
+object FrameMain: TFrameMain
+  Size.Width = 320.000000000000000000
+  Size.Height = 480.000000000000000000
+  Size.PlatformDefault = False
+  object Panel1: TPanel
+    Align = Top
+    Position.Y = 20.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 44.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object btnShowFirstFrame: TButton
+      Align = Right
+      Position.X = 120.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = #26174#31034#31532#19968#39029
+      OnClick = btnShowFirstFrameClick
+    end
+    object Label1: TLabel
+      Align = Client
+      AutoSize = True
+      Size.Width = 120.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      Text = #25105#26159#31532#20027#39029'MainPage'
+    end
+    object Button1: TButton
+      Align = Right
+      Position.X = 220.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = #26174#31034#20004#39029
+      OnClick = Button1Click
+    end
+  end
+  object Panel2: TPanel
+    Align = Top
+    Size.Width = 320.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+  end
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Align = Client
+    Size.Width = 320.000000000000000000
+    Size.Height = 416.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Viewport.Width = 316.000000000000000000
+    Viewport.Height = 412.000000000000000000
+  end
+end

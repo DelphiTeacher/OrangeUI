@@ -1,0 +1,68 @@
+object FrameSecond: TFrameSecond
+  Size.Width = 320.000000000000000000
+  Size.Height = 547.000000000000000000
+  Size.PlatformDefault = False
+  object Panel1: TPanel
+    Align = Top
+    Position.Y = 20.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 44.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object btnReturn: TButton
+      Align = Left
+      Size.Width = 120.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = #36820#22238#19978#19968#39029
+      OnClick = btnReturnClick
+    end
+    object Label1: TLabel
+      Align = Client
+      Size.Width = 100.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      Text = #25105#26159#31532#20108#39029'SecondFrame'
+    end
+    object btnShowThirdFrame: TButton
+      Align = Right
+      Position.X = 220.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = #26174#31034#31532#19977#39029
+      OnClick = btnShowThirdFrameClick
+    end
+  end
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Align = Top
+    Position.Y = 64.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 197.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Viewport.Width = 316.000000000000000000
+    Viewport.Height = 193.000000000000000000
+  end
+  object Panel2: TPanel
+    Align = Top
+    Size.Width = 320.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+  end
+  object FrameContext1: TFrameContext
+    OnReturnFrom = FrameContext1ReturnFrom
+    OnCanReturn = FrameContext1CanReturn
+    OnCreate = FrameContext1Create
+    OnDestroy = FrameContext1Destroy
+    OnShow = FrameContext1Show
+    OnHide = FrameContext1Hide
+    Left = 168
+    Top = 288
+  end
+end

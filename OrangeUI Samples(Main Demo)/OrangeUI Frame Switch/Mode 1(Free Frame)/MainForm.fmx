@@ -1,0 +1,46 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'Frame'#26694#26550#20027#31383#20307
+  ClientHeight = 480
+  ClientWidth = 320
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnKeyUp = FormKeyUp
+  DesignerMasterStyle = 0
+  object Panel1: TPanel
+    Size.Width = 320.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+    TabOrder = 0
+    object btnShowMainFrame: TButton
+      Size.Width = 73.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = #26174#31034#20027#39029
+      OnClick = btnShowMainFrameClick
+    end
+    object btnShowFirstFrame: TButton
+      Position.X = 144.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = #26174#31034#31532#19968#39029
+      OnClick = btnShowFirstFrameClick
+    end
+    object Button1: TButton
+      Position.X = 72.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = #38544#34255#20027#39029
+      OnClick = Button1Click
+    end
+  end
+end
