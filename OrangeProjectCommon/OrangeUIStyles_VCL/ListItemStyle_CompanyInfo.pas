@@ -25,14 +25,25 @@ type
     { Private declarations }
   public
     function GetItemDesignerPanel:TSkinItemDesignerPanel;
+    constructor Create(AOwner: TComponent); override;
     { Public declarations }
   end;
 
 implementation
 
+uses
+  uLangRes;
+
 {$R *.dfm}
 
 { TFrameListItemStyle_CompanyInfo }
+
+constructor TFrameListItemStyle_CompanyInfo.Create(AOwner: TComponent);
+begin
+  inherited;
+  lblEmailHint.Caption := SCAPTION_CustNum;
+  lblPhoneHint.Caption := Scaption_CustTitle;
+end;
 
 function TFrameListItemStyle_CompanyInfo.GetItemDesignerPanel: TSkinItemDesignerPanel;
 begin

@@ -29,6 +29,8 @@ type
     btnGoodsInfo: TSkinFMXButton;
     lblSumStorage: TSkinFMXLabel;
     SkinFMXLabel2: TSkinFMXLabel;
+    SkinFMXLabel1: TSkinFMXLabel;
+    SkinFMXLabel3: TSkinFMXLabel;
   private
     { Private declarations }
   public

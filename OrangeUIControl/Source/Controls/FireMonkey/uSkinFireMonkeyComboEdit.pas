@@ -127,7 +127,7 @@ Type
     procedure TranslateControlLang(APrefix:String;ALang:TLang;ACurLang:String);virtual;
   public
     //针对页面框架的控件接口
-    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;virtual;
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;virtual;
 //    //获取合适的高度
 //    function GetSuitDefaultItemHeight:Double;
     //获取与设置自定义属性
@@ -141,9 +141,10 @@ Type
     procedure SetControlValue(ASetting:TFieldControlSetting;APageDataDir:String;AImageServerUrl:String;AValue:Variant;AValueCaption:String;
                             //要设置多个值,整个字段的记录
                             AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
-    //设置属性
-    function GetProp(APropName:String):Variant;
-    procedure SetProp(APropName:String;APropValue:Variant);
+//    //设置属性
+//    function GetProp(APropName:String):Variant;
+//    procedure SetProp(APropName:String;APropValue:Variant);
+    procedure DoReturnFrame(AFromFrame:TFrame);virtual;
   public
     constructor Create(AOwner:TComponent);override;
     destructor Destroy;override;
@@ -363,7 +364,7 @@ begin
   Self.FProperties.Assign(Value);
 end;
 
-function TSkinFMXCustomComboEdit.LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+function TSkinFMXCustomComboEdit.LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;
 begin
   Self.Values.CommaText:=ASetting.options_value;
   Self.Items.CommaText:=ASetting.options_caption;
@@ -455,13 +456,18 @@ begin
 //  end;
 end;
 
-//设置属性
-function TSkinFMXCustomComboEdit.GetProp(APropName:String):Variant;
-begin
+////设置属性
+//function TSkinFMXCustomComboEdit.GetProp(APropName:String):Variant;
+//begin
+//
+//end;
+//
+//procedure TSkinFMXCustomComboEdit.SetProp(APropName:String;APropValue:Variant);
+//begin
+//
+//end;
 
-end;
-
-procedure TSkinFMXCustomComboEdit.SetProp(APropName:String;APropValue:Variant);
+procedure TSkinFMXCustomComboEdit.DoReturnFrame(AFromFrame:TFrame);
 begin
 
 end;
@@ -600,6 +606,7 @@ finalization
 
 
 end.
+
 
 
 

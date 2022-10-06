@@ -16,7 +16,6 @@ interface
 uses
   Classes,
   SysUtils,
-  Types,
   {$IFDEF VCL}
   Messages,
   Windows,
@@ -30,6 +29,7 @@ uses
   FMX.Controls,
   uSkinFireMonkeyControl,
   {$ENDIF}
+  Types,
 
   DB,
   uFuncCommon,
@@ -67,6 +67,10 @@ type
                                       AItemDrawRect:TRectF) of object;
 
 
+  TOnSetControlsValueEndEvent=procedure(Sender:TObject;
+                                      AItem:TSkinItem) of object;
+
+
 
   /// <summary>
   ///   <para>
@@ -79,12 +83,13 @@ type
   ISkinItemDesignerPanel=interface//(ISkinControl)
   ['{C3B7ECD3-960E-4BF7-8AF8-19AE695DD3E7}']
     function GetOnPrepareDrawItem: TOnPrepareDrawItemEvent;
+    function GetOnSetControlsValueEnd: TOnSetControlsValueEndEvent;
 
     function GetItemDesignerPanelProperties:TItemDesignerPanelProperties;
 
     //每次绘制列表项之前准备
     property OnPrepareDrawItem:TOnPrepareDrawItemEvent read GetOnPrepareDrawItem;
-
+    property OnSetControlsValueEnd:TOnSetControlsValueEndEvent read GetOnSetControlsValueEnd;
     property Properties:TItemDesignerPanelProperties read GetItemDesignerPanelProperties;
     property Prop:TItemDesignerPanelProperties read GetItemDesignerPanelProperties;
   end;
@@ -172,7 +177,7 @@ type
   TItemBindingControlItem=class
   public
     FChildControl:TControl;
-    FFieldName:String;
+//    FFieldName:String;
     FSkinItemBindingControlIntf:ISkinItemBindingControl;
     FBindSkinItemValueControlIntf:IBindSkinItemValueControl;
     FBindSkinItemObjectControlIntf:IBindSkinItemObjectControl;
@@ -240,9 +245,6 @@ type
     FItemSubItemsBindingControls: TItemBindingStringsControls;
 
   protected
-    FIsSyncedSkinItemBindingControls:Boolean;
-    FItemBindingControlList:TItemBindingControlList;
-  protected
     //处理颜色
     FItemCaptionColorIntf: IProcessItemColor;
     FItemDetailColorIntf: IProcessItemColor;
@@ -289,6 +291,9 @@ type
   public
     //获取分类名称
     function GetComponentClassify:String;override;
+  public
+    FIsSyncedSkinItemBindingControls:Boolean;
+    FItemBindingControlList:TItemBindingControlList;
   public
     //更改的时候通知ListBox进行刷新
     property BindControlInvalidateChange:TSkinObjectChangeManager read FBindControlInvalidateChange;
@@ -601,7 +606,9 @@ type
                               IDirectUIParent)
   private
     FOnPrepareDrawItem: TOnPrepareDrawItemEvent;
+    FOnSetControlsValueEnd: TOnSetControlsValueEndEvent;
     function GetOnPrepareDrawItem: TOnPrepareDrawItemEvent;
+    function GetOnSetControlsValueEnd: TOnSetControlsValueEndEvent;
 
     function GetItemDesignerPanelProperties:TItemDesignerPanelProperties;
     procedure SetItemDesignerPanelProperties(Value:TItemDesignerPanelProperties);
@@ -614,7 +621,6 @@ type
 
     procedure Loaded;override;
     {$IFDEF FMX}
-    //绘制滚动条
     procedure AfterPaint; override;
     {$ENDIF}
 
@@ -628,6 +634,7 @@ type
     property Prop:TItemDesignerPanelProperties read GetItemDesignerPanelProperties write SetItemDesignerPanelProperties;
   published
     property OnPrepareDrawItem: TOnPrepareDrawItemEvent read GetOnPrepareDrawItem write FOnPrepareDrawItem;
+    property OnSetControlsValueEnd: TOnSetControlsValueEndEvent read GetOnSetControlsValueEnd write FOnSetControlsValueEnd;
     //属性
     property Properties:TItemDesignerPanelProperties read GetItemDesignerPanelProperties write SetItemDesignerPanelProperties;
   end;
@@ -1657,6 +1664,13 @@ begin
 
 //  uBaseLog.HandleException(nil,'TItemDesignerPanelProperties.SetControlsValueByItem end');
 
+  if Assigned(Self.FSkinItemDesignerPanelIntf.OnSetControlsValueEnd) then
+  begin
+    FSkinItemDesignerPanelIntf.OnSetControlsValueEnd(
+                                        Self.FSkinControl,
+                                        TSkinItem(AItem)
+                                        );
+  end;
 end;
 
 procedure TItemDesignerPanelProperties.Clear;
@@ -2078,7 +2092,7 @@ var
   I: Integer;
   AItemBindingControl:TItemBindingControlItem;
 //  AChildControl:TControl;
-//  AFieldName:String;
+  ABindItemFieldName:String;
 //  ASkinItemBindingControlIntf:ISkinItemBindingControl;
 //  ABindSkinItemValueControlIntf:IBindSkinItemValueControl;
 //  ABindSkinItemObjectControlIntf:IBindSkinItemObjectControl;
@@ -2096,14 +2110,16 @@ begin
 
       //if AItemBindingControl.FChildControl.Visible then//去掉这段代码,因为虽然隐藏了,但是会在OnPrepareDrawItem事件中显示出来,如果不赋值,那么值就不对了
 //      begin
+
+          ABindItemFieldName:=AItemBindingControl.FSkinItemBindingControlIntf.GetBindItemFieldName;
           //判断字段值的类型
-          if AItem.GetValueTypeByBindItemField(AItemBindingControl.FFieldName)<>varObject then
+          if AItem.GetValueTypeByBindItemField(ABindItemFieldName)<>varObject then
           begin
               //普通的值,String,Variant,Boolean
               AItemBindingControl.FBindSkinItemValueControlIntf.SetControlValueByBindItemField(
-                                                            AItemBindingControl.FFieldName,
+                                                            ABindItemFieldName,
                                                             //取值,如果是远程图片文件路径,要加上图片服务器地址,页面框架中使用时
-                                                            AItem.GetValueByBindItemField(AItemBindingControl.FFieldName),
+                                                            AItem.GetValueByBindItemField(ABindItemFieldName),
                                                             AItem,
                                                             AIsDrawItemInteractiveState
                                                             );
@@ -2115,8 +2131,8 @@ begin
               if AItemBindingControl.FBindSkinItemObjectControlIntf<>nil then
               begin
                 AItemBindingControl.FBindSkinItemObjectControlIntf.SetControlObjectByBindItemField(
-                                                            AItemBindingControl.FFieldName,
-                                                            AItem.GetObjectByBindItemField(AItemBindingControl.FFieldName),
+                                                            ABindItemFieldName,
+                                                            AItem.GetObjectByBindItemField(ABindItemFieldName),
                                                             AItem,
                                                             AIsDrawItemInteractiveState
                                                             );
@@ -2247,7 +2263,7 @@ begin
             if AFieldName<>'' then
             begin
                 AItemBindingControl:=TItemBindingControlItem.Create;
-                AItemBindingControl.FFieldName:=AFieldName;
+//                AItemBindingControl.FFieldName:=AFieldName;
 
                 AItemBindingControl.FChildControl:=AChildControl;
 
@@ -2454,6 +2470,11 @@ end;
 function TSkinItemDesignerPanel.GetOnPrepareDrawItem: TOnPrepareDrawItemEvent;
 begin
   Result := FOnPrepareDrawItem;
+end;
+
+function TSkinItemDesignerPanel.GetOnSetControlsValueEnd: TOnSetControlsValueEndEvent;
+begin
+  Result := FOnSetControlsValueEnd;
 end;
 
 procedure TSkinItemDesignerPanel.SetItemDesignerPanelProperties(Value: TItemDesignerPanelProperties);

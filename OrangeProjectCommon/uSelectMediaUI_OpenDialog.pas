@@ -10,7 +10,7 @@ uses
   FMX.Forms,
   FMX.Graphics,
   FMX.Types,
-  FMX.UITypes,
+  UITypes,
   FMX.Dialogs,
   {$ENDIF}
 
@@ -19,6 +19,18 @@ uses
   Forms,
   Dialogs,
   ExtDlgs,
+  {$ENDIF}
+
+
+
+    {$IFDEF USE_PASLIBVLC_MEDIAPLAYER}
+    {$IF CompilerVersion > 21.0}
+    PasListVlcMediaPlayerFrame,
+    {$IFEND}
+    {$ENDIF}
+
+  {$IFDEF USE_PASLIBVLC_MEDIAPLAYER}
+  PasLibVlcUnit, PasLibVlcClassUnit, PasLibVlcPlayerUnit,
   {$ENDIF}
 
 //  StdCtrls,
@@ -219,8 +231,13 @@ end;
 procedure TSelectMediaUI_OpenDialog.DoStartSelect;
 var
 //  Image:TSkinPicture;
-  OpenDialog: TOpenPictureDialog;
+//  OpenDialog: TOpenPictureDialog;
+  OpenDialog: TOpenDialog;
   I: Integer;
+  ACoverFilePath:String;
+  ATimeLong:Integer;
+  AWidth:Integer;
+  AHeight:Integer;
 begin
 //  HideFrame;
 //  //多选照片
@@ -257,9 +274,40 @@ begin
 
 
 
-  OpenDialog := TOpenPictureDialog.Create(nil);
+//  OpenDialog := TOpenPictureDialog.Create(nil);
+  OpenDialog := TOpenDialog.Create(nil);
   try
 //    OpenDialog.Filter := TBitmapCodecManager.GetFilterString;
+//  TSelectMediaType=(smtImage,
+//                    smtImageVideo,
+//                    smtVideo);
+//'All (*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf;*.tif;*.tiff)|*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf;*.tif;*.tiff
+//|Portable Network Graphics (*.png)|*.png
+//|GIF Image (*.gif)|*.gif
+//|JPEG Image File (*.jpg)|*.jpg
+//|JPEG Image File (*.jpeg)|*.jpeg
+//|Bitmaps (*.bmp)|*.bmp
+//|Icons (*.ico)|*.ico
+//|Enhanced Metafiles (*.emf)|*.emf
+//|Metafiles (*.wmf)|*.wmf
+//|TIFF Images (*.tif)|*.tif
+//|TIFF Images (*.tiff)|*.tiff'
+
+    OpenDialog.Filter := '';
+
+    if ([smtImage,smtVideo] = Self.FSelectMediaDialog.SelectMediaType) then
+    begin
+      OpenDialog.Filter := 'All (*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf;*.tif;*.tiff;*.mp4)|*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf;*.tif;*.tiff;*.mp4';
+    end
+    else if ([smtImage] = Self.FSelectMediaDialog.SelectMediaType) then
+    begin
+      OpenDialog.Filter := 'All (*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf;*.tif;*.tiff)|*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf;*.tif;*.tiff';
+    end
+    else if ([smtVideo] = Self.FSelectMediaDialog.SelectMediaType) then
+    begin
+      OpenDialog.Filter := 'All (*.mp4)|*.mp4';
+    end;
+
 
 
     if Self.FSelectMediaDialog.MaxSelectCount>1 then
@@ -275,9 +323,36 @@ begin
 //        Image.LoadFromFile(OpenDialog.Files[I]);
 //        TakePhotoFromLibraryAction1DidFinishTaking(Image);
 
+        if IsVideoFile(OpenDialog.Files[I]) then
+        begin
+          //取视频第一帧
+          //取时长
 
-        FSelectMediaDialog.AddSelectedMedia(OpenDialog.Files[I],
-                                            OpenDialog.Files[I]);
+          ATimeLong:=0;
+          AWidth:=0;
+          AHeight:=0;
+          ACoverFilePath:='';
+          {$IFDEF USE_PASLIBVLC_MEDIAPLAYER}
+          //PasLibVlcUnit, PasLibVlcClassUnit, PasLibVlcPlayerUnit,
+          //截图只支持png
+          ACoverFilePath:=GetApplicationPath+CreateGUIDString+'.png';
+          GetVideoInfo(OpenDialog.Files[I],ACoverFilePath,ATimeLong,AWidth,AHeight);
+          {$ENDIF}
+
+
+          FSelectMediaDialog.AddSelectedMedia(ACoverFilePath,
+                                              OpenDialog.Files[I],
+                                              True,
+                                              AWidth,
+                                              AHeight,
+                                              ATimeLong
+                                              );
+        end
+        else
+        begin
+          FSelectMediaDialog.AddSelectedMedia(OpenDialog.Files[I],
+                                              OpenDialog.Files[I]);
+        end;
 
 
 //        FreeAndNil(Image);

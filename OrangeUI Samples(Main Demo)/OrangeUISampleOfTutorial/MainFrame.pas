@@ -4,6 +4,8 @@ unit MainFrame;
 
 interface
 
+{$I Version.inc}
+
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls, DateUtils,
@@ -26,6 +28,7 @@ uses
   AddressBookListFrame,
   SingleSelectFrame,
   MultiSelectFrame,
+  uMultiSelectFrame,
   {$ENDIF}
 
 
@@ -37,6 +40,7 @@ uses
   uUIFunction,
   uSkinItems,
   uFrameContext,
+  uSkinAnimator,
 
   uSkinFireMonkeyPanel,
   uSkinFireMonkeyControl,
@@ -100,6 +104,7 @@ var
 implementation
 
 uses
+  Unit4,
   MainForm;
 
 {$R *.fmx}
@@ -190,6 +195,15 @@ end;
 constructor TFrameMain.Create(AOwner: TComponent);
 begin
   inherited;
+
+  //  //最小的速度(每毫秒像素)
+  //  DefaultMinVelocity = 5.00;//20;//10
+  //
+  //  DefaultVelocityPower = 1.3;//5;//原本是1.5;
+  //  //取大的速度(每毫秒像素)
+  //  DefaultMaxVelocity = 2500;//3000;//4000;//5000.00;//5000;
+  Self.lbDemos.Prop.VertControlGestureManager.MinVelocity:=uSkinAnimator.DefaultMinVelocity;
+  Self.lbDemos.Prop.VertControlGestureManager.MaxVelocity:=uSkinAnimator.DefaultMaxVelocity;
 
 
 //  Self.lvOrangeUIControlDemo.Prop.HorzScrollBarShowType:=sbstNone;
@@ -707,10 +721,15 @@ begin
       //月份选择页面
       if Pos('(SelectMonthFrame)',Sender.Caption)>0 then
       begin
-          //OK
-          //选择月份
-          ShowFrame(TFrame(GlobalSelectMonthFrame),TFrameSelectMonth,frmMain,nil,nil,DoReturnFromSelectMonthFrame,Application,True,True,ufsefNone);
-          GlobalSelectMonthFrame.Init(2010,YearOf(Now),Now);
+//          //OK
+//          //选择月份
+//          ShowFrame(TFrame(GlobalSelectMonthFrame),TFrameSelectMonth,frmMain,nil,nil,DoReturnFromSelectMonthFrame,Application,True,True,ufsefNone);
+//          GlobalSelectMonthFrame.Init(2010,YearOf(Now),Now);
+          if Form4=nil then
+          begin
+            Form4:=TForm4.Create(Application);
+          end;
+          Form4.Show;
       end;
 
       //拍照弹出框

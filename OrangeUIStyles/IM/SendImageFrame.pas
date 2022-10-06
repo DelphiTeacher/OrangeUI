@@ -12,7 +12,7 @@ uses
 
 //  CommonImageDataMoudle,
 
-  FastMsg.Client,
+//  FastMsg.Client,
   System.IOUtils,
 
   uSkinFireMonkeyImage, uSkinFireMonkeyControl, uSkinFireMonkeyItemDesignerPanel,

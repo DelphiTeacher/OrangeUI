@@ -686,7 +686,7 @@ begin
   end;
 
 
-  Self.ContentStream:=nil;
+//  Self.ContentStream:=nil;
 
 
   //验证码检验成功
@@ -1263,8 +1263,8 @@ begin
 
       //资料修改
       if ASQLDBHelper.SelfQuery('UPDATE tblUser SET '+AUpdateSQL+' WHERE FID=:FID',
-                          AParamNames,
-                          AParamValues,
+                          ConvertToStringDynArray(AParamNames),
+                          ConvertToVariantDynArray(AParamValues),
                           asoExec) then
       begin
         //资料修改成功

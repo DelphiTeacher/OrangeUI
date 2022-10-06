@@ -4,6 +4,7 @@ unit uCollectionEditor;
 
 interface
 {$I FrameWork.inc}
+{$I Version.inc}
 
 uses
   Classes,
@@ -25,8 +26,11 @@ uses
   DesignIntf,
 
   uLanguage,
+  {$IFDEF OPENSOURCE_VERSION}
+  {$ELSE}
   uSkinDBGridType,
   uSkinVirtualGridType,
+  {$ENDIF}
   uSkinItemDesignerPanelType,
   uSkinMultiColorLabelType,
   uComponentTypeNameEditor,
@@ -78,11 +82,22 @@ type
     function GetAttributes: TPropertyAttributes; override;
   end;
 
+
   //多彩文本
   TSkinMultiColorLabelEditor = class(TSkinControlComponentEditor)
   public
     procedure Edit; override;
   end;
+
+
+
+  //图表序列,用于VirtualChart
+  TVirtualChartSeriesListProperty = class(TCollectionProperty)
+  public
+    procedure Edit; override;
+    function GetAttributes: TPropertyAttributes; override;
+  end;
+
 
 
 
@@ -94,19 +109,25 @@ implementation
 uses
   TypInfo,
   {$IFDEF FMX}
-//  uSkinFireMonkeyItemGrid,
-  uSkinFireMonkeyDBGrid,
-  uSkinFireMonkeyMultiColorLabel,
+    {$IFDEF OPENSOURCE_VERSION}
+    {$ELSE}
+      uSkinFireMonkeyDBGrid,
+    {$ENDIF}
+    uSkinFireMonkeyMultiColorLabel,
   {$ENDIF}
+
   {$IFDEF VCL}
-//  uSkinWindowsDBGrid,
   {$ENDIF}
+
+  uSkinVirtualChartType,
   SysUtils
   ;
 
 
 procedure Register;
 begin
+  {$IFDEF OPENSOURCE_VERSION}
+  {$ELSE}
   RegisterPropertyEditor(TypeInfo(TSkinVirtualGridColumns),
                           TVirtualGridProperties,
                           'Columns',
@@ -116,6 +137,7 @@ begin
                           TSkinDBGridColumn,
                           'FieldName',
                           TSkinDBGridFieldNameProperty);
+  {$ENDIF}
 
 
   RegisterPropertyEditor(TypeInfo(TPathActionCollection),
@@ -128,12 +150,22 @@ begin
                           'ColorTextCollection',
                           TColorTextsProperty);
 
-  {$IFDEF FMX}
-  RegisterComponentEditor(TSkinFMXDBGrid,TSkinDBGridEditor);
-  RegisterComponentEditor(TSkinFMXMultiColorLabel,TSkinMultiColorLabelEditor);
-  {$ENDIF}
-  {$IFDEF VCL}
-  RegisterComponentEditor(TSkinWinDBGrid,TSkinDBGridEditor);
+  RegisterPropertyEditor(TypeInfo(TVirtualChartSeriesList),
+                          //父属性
+                          TVirtualChartProperties,
+                          //属性名称
+                          'SeriesList',
+                          TVirtualChartSeriesListProperty);
+
+  {$IFDEF OPENSOURCE_VERSION}
+  {$ELSE}
+    {$IFDEF FMX}
+    RegisterComponentEditor(TSkinFMXDBGrid,TSkinDBGridEditor);
+    RegisterComponentEditor(TSkinFMXMultiColorLabel,TSkinMultiColorLabelEditor);
+    {$ENDIF}
+    {$IFDEF VCL}
+    RegisterComponentEditor(TSkinWinDBGrid,TSkinDBGridEditor);
+    {$ENDIF}
   {$ENDIF}
 end;
 
@@ -143,10 +175,13 @@ end;
 
 procedure TSkinVirtualGridColumnsProperty.Edit;
 begin
+  {$IFDEF OPENSOURCE_VERSION}
+  {$ELSE}
   ShowCollectionEditor(Designer,
                       TComponent(TSkinVirtualGridColumns(GetOrdValue).FVirtualGridProperties.SkinControl),
                       TSkinVirtualGridColumns(GetOrdValue),
                       GetName);
+  {$ENDIF}
 end;
 
 function TSkinVirtualGridColumnsProperty.GetAttributes: TPropertyAttributes;
@@ -189,18 +224,21 @@ end;
 
 procedure TSkinDBGridEditor.Edit;
 begin
-  {$IFDEF FMX}
-  ShowCollectionEditor(Designer,
-                      Self.Component,
-                      TSkinFMXDBGrid(Component).Properties.Columns,
-                      'Columns');
-  {$ENDIF}
+  {$IFDEF OPENSOURCE_VERSION}
+  {$ELSE}
+    {$IFDEF FMX}
+    ShowCollectionEditor(Designer,
+                        Self.Component,
+                        TSkinFMXDBGrid(Component).Properties.Columns,
+                        'Columns');
+    {$ENDIF}
 
-  {$IFDEF VCL}
-  ShowCollectionEditor(Designer,
-                      Self.Component,
-                      TSkinWinDBGrid(Component).Properties.Columns,
-                      'Columns');
+    {$IFDEF VCL}
+    ShowCollectionEditor(Designer,
+                        Self.Component,
+                        TSkinWinDBGrid(Component).Properties.Columns,
+                        'Columns');
+    {$ENDIF}
   {$ENDIF}
 end;
 
@@ -234,10 +272,13 @@ end;
 
 procedure TSkinDBGridFieldNameProperty.GetValues(Proc: TGetStrProc);
 var
-  AColumn:TSkinDBGridColumn;
-  AProperties:TDBGridProperties;
   List: IDesignerSelections;
   I: Integer;
+  {$IFDEF OPENSOURCE_VERSION}
+  {$ELSE}
+  AColumn:TSkinDBGridColumn;
+  AProperties:TDBGridProperties;
+  {$ENDIF}
 begin
   //把每个控件类型的可以ComponentType列出来
   //皮肤组件接口
@@ -259,7 +300,9 @@ begin
   end;
 
 
-
+  {$IFDEF OPENSOURCE_VERSION}
+    inherited GetValues(Proc);
+  {$ELSE}
   if List[0] is TSkinDBGridColumn then
   begin
     AColumn:=TSkinDBGridColumn(List[0]);
@@ -281,7 +324,24 @@ begin
   begin
     inherited GetValues(Proc);
   end;
+  {$ENDIF}
 
+
+end;
+
+{ TVirtualChartSeriesListProperty }
+
+procedure TVirtualChartSeriesListProperty.Edit;
+begin
+  ShowCollectionEditor(Designer,
+                        TComponent(TVirtualChartSeriesList(GetOrdValue).FSkinVirtualChartIntf.Properties.SkinControl),
+                        TVirtualChartSeriesList(GetOrdValue),
+                        GetName);
+end;
+
+function TVirtualChartSeriesListProperty.GetAttributes: TPropertyAttributes;
+begin
+  Result := [paDialog, paReadOnly{$IFDEF LINUX}, paVCL{$ENDIF}];
 end;
 
 end.

@@ -18,6 +18,7 @@ uses
   Androidapi.Helpers,
   {$ENDIF}
   Math,
+  uFrameContext,
   uDrawTextParam,
   uSkinPageControlType, uSkinFireMonkeyNotifyNumberIcon, uSkinFireMonkeyLabel,
   uSkinFireMonkeySwitchPageListPanel, uSkinPanelType;
@@ -75,7 +76,7 @@ begin
        and (CurrentFrameHistroy.ToFrame<>GlobalLoginFrame)
        then
     begin
-      if CanReturnFrame(CurrentFrameHistroy) then
+      if CanReturnFrame(CurrentFrameHistroy)=TFrameReturnActionType.fratDefault then
       begin
         HideFrame;////(CurrentFrameHistroy.ToFrame,hfcttBeforeReturnFrame);
         ReturnFrame;//(CurrentFrameHistroy);

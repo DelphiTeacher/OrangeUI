@@ -28,18 +28,32 @@ type
     { Private declarations }
   public
     function GetItemDesignerPanel:TSkinItemDesignerPanel;
+    constructor Create(AOwner: TComponent); override;
     { Public declarations }
+
   end;
 
 implementation
+
+uses
+  uLangRes;
 
 {$R *.dfm}
 
 { TFrameListItemStyle_ContactInfo }
 
+constructor TFrameListItemStyle_ContactInfo.Create(AOwner: TComponent);
+begin
+  inherited;
+  lblItemDetail.Caption := STITLE_OwnerItem;
+  lblEmailHint.Caption := SCAPTION_CustMail;
+  lblPhoneHint.Caption := Scaption_CustPhone;
+end;
+
 function TFrameListItemStyle_ContactInfo.GetItemDesignerPanel: TSkinItemDesignerPanel;
 begin
   Result:=ItemDesignerPanel;
+
 end;
 
 

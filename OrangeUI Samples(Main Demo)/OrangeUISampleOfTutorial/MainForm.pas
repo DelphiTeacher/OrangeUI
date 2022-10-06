@@ -20,7 +20,10 @@ uses
   uMobileUtils,
   uGraphicCommon,
   uUIFunction,
+  uFrameContext,
+//  FMX.Effects,
 //  uSkinListViewType,
+  uSkinImageListViewerType,
 
 
 
@@ -38,6 +41,7 @@ uses
   {$ENDIF}
 
 
+//  uSkinImageListViewerType,
 
   uSkinFireMonkeyControl,
   uSkinFireMonkeyPanel, uSkinControlGestureManager,
@@ -48,7 +52,7 @@ uses
   uSkinFireMonkeyScrollControl, uSkinFireMonkeyCustomList, FMX.DateTimeCtrls,
   uSkinFireMonkeyTimeEdit, uSkinFireMonkeyDateEdit, uBaseSkinControl,
   uSkinPanelType, FMX.Edit, uSkinFireMonkeyEdit, uDrawPicture, uSkinImageList,
-  uSkinImageType;
+  uSkinImageType, FMX.ComboEdit, FMX.Effects;
 
 
 
@@ -69,6 +73,10 @@ type
       Shift: TShiftState);
     procedure gesturemanagerLeftMainMenuPositionChange(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure FormTouch(Sender: TObject; const Touches: TTouches;
+      const Action: TTouchAction);
+    procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
+      var Handled: Boolean);
     { Private declarations }
   protected
 //      procedure DoGlobalMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
@@ -95,6 +103,8 @@ uses
 //  ItemGridFrame,
   RoundImageFrame,
   ScrollBoxFrame,
+  ChartFrame,
+  ImageListViewerFrame,
 //  ItemGridFrame_Simple,
 //  ListViewFrame_UseItemDesignerPanel,
   ListBoxFrame_UseAutoDownloadIcon,
@@ -105,7 +115,6 @@ uses
 //  HideVKboardFrame,
 //  PullLoadPanelFrame,
 //  ControlGestureManagerFrame,
-//  ImageListViewerFrame,
 //  ListViewFrame_TestComplexLayout,
 //  ListViewFrame_TestWaterfall
   ;
@@ -162,6 +171,72 @@ begin
 
 end;
 
+procedure TfrmMain.FormGesture(Sender: TObject;
+  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+var
+  LObj: IControl;
+  LImage: TSkinImageListViewer;
+  LImageCenter: TPointF;
+begin
+//  FMX.Types.Log.d('TfrmMain.FormGesture Begin');
+
+  if EventInfo.GestureID = igiZoom then
+  begin
+    LObj := Self.ObjectAtPoint(ClientToScreen(EventInfo.Location));
+//    FMX.Types.Log.d('TfrmMain.FormGesture igiZoom LObj:'+LObj.GetObject.ClassName);
+    if LObj.GetObject is TSkinImageListViewer then
+    begin
+//      if (not(TInteractiveGestureFlag.gfBegin in EventInfo.Flags)) and
+//        (not(TInteractiveGestureFlag.gfEnd in EventInfo.Flags)) then
+//      begin
+//        { zoom the image }
+//        LImage := TImage(LObj.GetObject);
+//        LImageCenter := LImage.Position.Point + PointF(LImage.Width / 2,
+//          LImage.Height / 2);
+//        LImage.Width := Max(LImage.Width + (EventInfo.Distance - FLastDistance), 10);
+//        LImage.Height := Max(LImage.Height + (EventInfo.Distance - FLastDistance), 10);
+//        LImage.Position.X := LImageCenter.X - LImage.Width / 2;
+//        LImage.Position.Y := LImageCenter.Y - LImage.Height / 2;
+//      end;
+//      FLastDistance := EventInfo.Distance;
+
+        //缩放
+        TSkinImageListViewer(LObj.GetObject).Prop.Gesture(EventInfo,Handled);
+
+    end;
+  end;
+
+
+  if EventInfo.GestureID = igiDoubleTap then
+  begin
+    LObj := Self.ObjectAtPoint(ClientToScreen(EventInfo.Location));
+//    FMX.Types.Log.d('TfrmMain.FormGesture igiDoubleTap LObj:'+LObj.GetObject.ClassName);
+    if LObj.GetObject is TSkinImageListViewer then
+    begin
+//      if (not(TInteractiveGestureFlag.gfBegin in EventInfo.Flags)) and
+//        (not(TInteractiveGestureFlag.gfEnd in EventInfo.Flags)) then
+//      begin
+//        { zoom the image }
+//        LImage := TImage(LObj.GetObject);
+//        LImageCenter := LImage.Position.Point + PointF(LImage.Width / 2,
+//          LImage.Height / 2);
+//        LImage.Width := Max(LImage.Width + (EventInfo.Distance - FLastDistance), 10);
+//        LImage.Height := Max(LImage.Height + (EventInfo.Distance - FLastDistance), 10);
+//        LImage.Position.X := LImageCenter.X - LImage.Width / 2;
+//        LImage.Position.Y := LImageCenter.Y - LImage.Height / 2;
+//      end;
+//      FLastDistance := EventInfo.Distance;
+
+        //恢复初始
+        TSkinImageListViewer(LObj.GetObject).Prop.CancelZoom;
+
+    end;
+  end;
+
+//  FMX.Types.Log.d('TfrmMain.FormGesture End');
+
+end;
+
 procedure TfrmMain.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
   Shift: TShiftState);
 begin
@@ -174,7 +249,7 @@ begin
        and (CurrentFrameHistroy.ToFrame<>GlobalMainFrame)
        then
     begin
-      if CanReturnFrame(CurrentFrameHistroy) then
+      if (CanReturnFrame(CurrentFrameHistroy)=TFrameReturnActionType.fratDefault) then
       begin
         HideFrame;//(CurrentFrameHistroy.ToFrame,hfcttBeforeReturnFrame);
         ReturnFrame;//(CurrentFrameHistroy);
@@ -227,7 +302,12 @@ begin
 
 
 //  GetGlobalVirtualKeyboardFixer.StartSync(Self);
+//  ShowFrame(TFrame(AFrame),TFrameImageListViewer,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
+//  Exit;
 
+//  AFrame:=nil;
+//  ShowFrame(TFrame(AFrame),TFrameImageListViewer,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
+//  Exit;
 
   if DirectoryExists('C:\MyFiles') then
   begin
@@ -238,6 +318,8 @@ begin
 
       //如果是我的电脑,测试用
       AFrame:=nil;
+//  ShowFrame(TFrame(AFrame),TFrameImageListViewer,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
+//      ShowFrame(TFrame(AFrame),TFrameChart,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
 ////      ShowFrame(TFrame(AFrame),TFrameCustomList,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
 //      ShowFrame(TFrame(AFrame),TFrameItemGrid,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
 //      ShowFrame(TFrame(AFrame),TFrameRoundImage,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
@@ -260,7 +342,6 @@ begin
 //  ShowFrame(TFrame(AFrame),TFrameListView_TestComplexLayout,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
 //  ShowFrame(TFrame(AFrame),TFrameControlGestureManager,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
 //  ShowFrame(TFrame(AFrame),TFramePullLoadPanel,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
-//  ShowFrame(TFrame(AFrame),TFrameImageListViewer,frmMain,nil,nil,nil,frmMain,True,True,ufsefNone);
 
 
 
@@ -288,6 +369,22 @@ begin
 //  FGPSLocation.StartLocation;
 
 
+
+end;
+
+procedure TfrmMain.FormTouch(Sender: TObject; const Touches: TTouches;
+  const Action: TTouchAction);
+begin
+
+  //引用uSkinImageListViewerType单元
+  //可能是放大缩小的手势
+  if (Length(Touches)=2) then
+  begin
+    gFormTouch1:=Touches[0].Location;
+    gFormTouch2:=Touches[1].Location;
+  end;
+  gFormTouchCount:=Length(Touches);
+  ProcessFormTouch(Sender,Touches,Action);
 
 end;
 

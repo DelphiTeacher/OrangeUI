@@ -21,6 +21,7 @@ uses
 
   FMX.Platform,
   HintFrame,
+  uFrameContext,
 
   {$IFDEF ANDROID}
   Androidapi.JNI.Net,
@@ -174,7 +175,7 @@ begin
         //如果当前是主页面,不返回上一页
        and (CurrentFrameHistroy.ToFrame<>GlobalMainFrame) then
     begin
-      if CanReturnFrame(CurrentFrameHistroy) then
+      if CanReturnFrame(CurrentFrameHistroy)=TFrameReturnActionType.fratDefault then
       begin
         HideFrame;////(CurrentFrameHistroy.ToFrame,hfcttBeforeReturnFrame);
         ReturnFrame;//(CurrentFrameHistroy);

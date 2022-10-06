@@ -27,6 +27,7 @@ uses
 //  uUIFunction,
   EasyServiceCommonMaterialDataMoudle,
 //  uInterfaceClass,
+  WebbrowserControlUtils,
 
   FMX.WebBrowser, uSkinFireMonkeyButton, uSkinFireMonkeyControl,
   uSkinFireMonkeyPanel, uSkinButtonType, uSkinPanelType, uDrawCanvas,
@@ -36,6 +37,8 @@ uses
   FMX.Controls.Presentation;
 
 type
+  TWebBrowserLoadEndEvent=procedure(Sender:TObject;AUrl:String) of object;
+
   TFrameWebBrowser = class(TFrame,IFrameVirtualKeyboardEvent,IFrameHistroyCanReturnEvent)
     pnlToolBar: TSkinFMXPanel;
     pnlClient: TSkinFMXPanel;
@@ -58,7 +61,7 @@ type
     procedure btnSyncClick(Sender: TObject);
     procedure btnEmptyClick(Sender: TObject);
     procedure FrameContext1CanReturn(Sender: TObject;
-      var AIsCanReturn: Boolean);
+      var AIsCanReturn: TFrameReturnActionType);
     procedure btnPopClick(Sender: TObject);
     procedure lbFunctionClickItem(AItem: TSkinItem);
     procedure ShowShareSheetAction1BeforeExecute(Sender: TObject);
@@ -68,21 +71,18 @@ type
     procedure FrameContext1Hide(Sender: TObject);
     procedure tmrNewURLTimer(Sender: TObject);
   private
-    FWebBrowser: TWebBrowser;
+    procedure DoWebBrowserDidStartLoad(Sender:TObject);
     procedure DoWebBrowserDidFinishLoad(Sender:TObject);
-    procedure WebBrowserShouldStartLoadWithRequest(ASender: TObject; const URL: string);
+    procedure DoWebBrowserShouldStartLoadWithRequest(ASender: TObject; const URL: string);
   private
     FNewURL:String;
 //    FHistoryURLList:TStringList;
 
-    //创建WebBrowser
-    procedure DoShow;
-//    //停止并隐藏WebBrowser
-//    procedure DoHide;
 
   public
+    FWebBrowser: TWebBrowser;
     //是否可以返回上一个Frame
-    function CanReturn:Integer;
+    function CanReturn:TFrameReturnActionType;
   public
     //显示虚拟键盘
     procedure DoVirtualKeyboardShow(KeyboardVisible: Boolean; const Bounds: TRect);
@@ -96,8 +96,15 @@ type
 //    procedure LoadNewsUrl(news_fid:Integer);
   public
     FFirstUrl:String;
+    FOnWebBrowserDidStartLoad:TWebBrowserDidStartLoad;
+    FOnWebBrowserShouldStartLoadWithRequest:TWebBrowsershouldStartLoadWithRequest;
+    FOnLoadEnd:TWebBrowserLoadEndEvent;
+    //创建WebBrowser
+    procedure DoShow;
+//    //停止并隐藏WebBrowser
+//    procedure DoHide;
     procedure DoLoadUrl(AUrl:String);
-    procedure LoadUrl(AUrl:String;ACaption:String='网页';AIsFirstLoad:Boolean=True);
+    procedure LoadUrl(AUrl:String;ACaption:String='网页';AIsFirstLoad:Boolean=True;AISNeedFreeWebBrowser:Boolean=True);
     procedure LoadBodyHtml(ABodyHtml:String;ATempFileName:String;AIsFirstLoad:Boolean=True);
     { Public declarations }
   end;
@@ -210,11 +217,11 @@ begin
   Self.FWebBrowser.Reload;
 end;
 
-function TFrameWebBrowser.CanReturn: Integer;
+function TFrameWebBrowser.CanReturn: TFrameReturnActionType;
 begin
   //显示键盘工具栏
   SetVirtualKeyboardToolBarEnabled(True);
-
+  Result:=TFrameReturnActionType.fratDefault;
 end;
 
 constructor TFrameWebBrowser.Create(AOwner: TComponent);
@@ -226,6 +233,10 @@ begin
 
 //  FHistoryURLList:=TStringList.Create;
 
+
+  {$IFDEF MSWINDOWS}
+  WebbrowserControlUtils.SetIEFeatureModeCorrespond;
+  {$ENDIF}
 
   RecordSubControlsLang(Self);
   TranslateSubControlsLang(Self);
@@ -258,13 +269,16 @@ begin
   //创建WebBrowser
   if FWebBrowser=nil then
   begin
+    FMX.Types.Log.d('OrangeUI TFrameWebBrowser.DoShow TWebBrowser.Create');
+
     FWebBrowser:=TWebBrowser.Create(Self);
-    FWebBrowser.Align:=TAlignLayout.alClient;
+    FWebBrowser.Align:=TAlignLayout.{$IF CompilerVersion >= 34.0}{$ELSE}al{$ENDIF}Client;
     FWebBrowser.Parent:=Self.pnlClient;
     FWebBrowser.EnableCaching:=False;
 
+    FWebBrowser.OnDidStartLoad:=DoWebBrowserDidStartLoad;
     FWebBrowser.OnDidFinishLoad:=DoWebBrowserDidFinishLoad;
-    FWebBrowser.OnShouldStartLoadWithRequest:=WebBrowserShouldStartLoadWithRequest;
+    FWebBrowser.OnShouldStartLoadWithRequest:=DoWebBrowserShouldStartLoadWithRequest;
 
 //    {$IFDEF ANDROID}
 //      //Android下用了透明任务栏的模式
@@ -357,12 +371,19 @@ end;
 //  DoLoadUrl(Const_News_Url+IntToStr(news_fid));
 //end;
 
-procedure TFrameWebBrowser.LoadUrl(AUrl:String;ACaption:String;AIsFirstLoad:Boolean);
+procedure TFrameWebBrowser.LoadUrl(AUrl:String;ACaption:String;AIsFirstLoad:Boolean;AISNeedFreeWebBrowser:Boolean);
 begin
   FMX.Types.Log.d('OrangeUI LoadUrl Begin');
 
-  //先释放,点击返回按钮的时候要返回上一页，不释放的话，会一直返回到之前打开过的页面，因为这是一个公共页面
-  FreeAndNil(Self.FWebBrowser);
+
+  if AISNeedFreeWebBrowser then
+  begin
+    //先释放,点击返回按钮的时候要返回上一页，不释放的话，会一直返回到之前打开过的页面，因为这是一个公共页面
+    FreeAndNil(Self.FWebBrowser);
+  end;
+
+
+
 
   //隐藏键盘工具栏,WebBrowser弹出的键盘自带
   SetVirtualKeyboardToolBarEnabled(False);
@@ -401,7 +422,7 @@ var
   ANewURL:String;
   AWebBrowserFrame:TFrameWebBrowser;
 begin
-  FMX.Types.Log.d('OrangeUI TFrameWebBrowser.tmrNewURLTimer Begin');
+  FMX.Types.Log.d('OrangeUI TFrameWebBrowser.tmrNewURLTimer Begin '+FNewURL);
   tmrNewURL.Enabled:=False;
 
   if FNewURL<>'' then
@@ -420,13 +441,16 @@ begin
   FMX.Types.Log.d('OrangeUI TFrameWebBrowser.tmrNewURLTimer End');
 end;
 
-procedure TFrameWebBrowser.WebBrowserShouldStartLoadWithRequest(
+procedure TFrameWebBrowser.DoWebBrowserShouldStartLoadWithRequest(
   ASender: TObject; const URL: string);
 begin
-  FMX.Types.Log.d('OrangeUI WebBrowserShouldStartLoadWithRequest Begin OldUrl:'+FFirstUrl);
-  FMX.Types.Log.d('OrangeUI WebBrowserShouldStartLoadWithRequest Begin NewURL:'+URL);
+  FMX.Types.Log.d('OrangeUI DoWebBrowserShouldStartLoadWithRequest Begin OldUrl:'+FFirstUrl);
+  FMX.Types.Log.d('OrangeUI DoWebBrowserShouldStartLoadWithRequest Begin NewURL:'+URL);
 
-
+  if Assigned(FOnWebBrowserShouldStartLoadWithRequest) then
+  begin
+    FOnWebBrowserShouldStartLoadWithRequest(ASender,URL);
+  end;
 
 //  //需要跳转到一个新的页面去了
 //  if not SameText(URL,FFirstUrl) and not SameText(URL,'about:blank') then
@@ -449,12 +473,12 @@ begin
 //  end;
 
 
-  FMX.Types.Log.d('OrangeUI WebBrowserShouldStartLoadWithRequest End ');
+  FMX.Types.Log.d('OrangeUI DoWebBrowserShouldStartLoadWithRequest End ');
 end;
 
 procedure TFrameWebBrowser.DoLoadUrl(AUrl:String);
 begin
-  FMX.Types.Log.d('OrangeUI DoLoadUrl Begin');
+  FMX.Types.Log.d('OrangeUI DoLoadUrl Begin '+AUrl);
 
   FFirstUrl:=AUrl;
 
@@ -462,7 +486,9 @@ begin
   DoShow;
 
   //浏览网页
-  Self.FWebBrowser.Navigate(FFirstUrl);
+  Self.FWebBrowser.URL:=AUrl;
+  //Navigate有问题。
+//  Self.FWebBrowser.Navigate(FFirstUrl);
 
 
 
@@ -482,14 +508,30 @@ end;
 
 procedure TFrameWebBrowser.DoWebBrowserDidFinishLoad(Sender: TObject);
 begin
+  FMX.Types.Log.d('OrangeUI TFrameWebBrowser.DoWebBrowserDidFinishLoad Begin URL:'+Self.FWebBrowser.URL);
+
   //网页加载结束,隐藏滚动框
+  if Assigned(FOnLoadEnd) then
+  begin
+    FOnLoadEnd(Self,Self.FWebBrowser.URL);
+  end;
 
+  FMX.Types.Log.d('OrangeUI TFrameWebBrowser.DoWebBrowserDidFinishLoad End');
+end;
 
+procedure TFrameWebBrowser.DoWebBrowserDidStartLoad(Sender: TObject);
+begin
+  FMX.Types.Log.d('OrangeUI TFrameWebBrowser.DoWebBrowserDidStartLoad Begin URL:'+Self.FWebBrowser.URL);
+
+  if Assigned(FOnWebBrowserDidStartLoad) then
+  begin
+    FOnWebBrowserDidStartLoad(Self);
+  end;
 
 end;
 
 procedure TFrameWebBrowser.FrameContext1CanReturn(Sender: TObject;
-  var AIsCanReturn: Boolean);
+  var AIsCanReturn: TFrameReturnActionType);
 begin
   FMX.Types.Log.d('OrangeUI TFrameWebBrowser.FrameContext1CanReturn Begin');
 

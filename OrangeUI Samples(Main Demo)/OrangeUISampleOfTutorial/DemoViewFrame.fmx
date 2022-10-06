@@ -8,6 +8,7 @@ object FrameDemoView: TFrameDemoView
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claOrange
     SelfOwnMaterial.BackColor.IsFill = True
     SelfOwnMaterial.BackColor.FillColor.Color = claOrange
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderWidth = 1.000000000000000000
@@ -46,6 +47,7 @@ object FrameDemoView: TFrameDemoView
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
       ComponentTypeName = 'NormalPushed'
+      SelfOwnMaterial.BackColor.Color = claWhite
       SelfOwnMaterial.BackColor.DrawRectSetting.Width = 100.000000000000000000
       SelfOwnMaterial.BackColor.DrawRectSetting.Height = 100.000000000000000000
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderWidth = 1.000000000000000000
@@ -138,6 +140,7 @@ object FrameDemoView: TFrameDemoView
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = claWhite
       SelfOwnMaterial.BackColor.IsFill = True
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderWidth = 1.000000000000000000
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
@@ -174,6 +177,7 @@ object FrameDemoView: TFrameDemoView
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
     SelfOwnMaterial.BackColor.IsFill = True
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderWidth = 1.000000000000000000
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone

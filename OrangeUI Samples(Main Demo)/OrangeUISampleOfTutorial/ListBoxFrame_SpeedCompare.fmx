@@ -28,7 +28,7 @@ object FrameListBox_SpeedCompare: TFrameListBox_SpeedCompare
       Text = 'OrangeUI ListView'
       ExplicitSize.cx = 50.000000000000000000
       ExplicitSize.cy = 5.000000000000000000
-      object lbProductList: TSkinFMXListView
+      object lbProductList: TSkinFMXListBox
         ParentMouseEvent = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn

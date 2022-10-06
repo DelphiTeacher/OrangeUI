@@ -4,9 +4,16 @@ object FrameListItemStyle_CaptionTopDetailBottom: TFrameListItemStyle_CaptionTop
   Size.PlatformDefault = False
   object ItemDesignerPanel: TSkinFMXItemDesignerPanel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     MouseDownFocus = False
     Position.X = 24.000000000000000000
     Position.Y = 24.000000000000000000
@@ -17,10 +24,10 @@ object FrameListItemStyle_CaptionTopDetailBottom: TFrameListItemStyle_CaptionTop
     OnResize = ItemDesignerPanelResize
     Properties.IsPreview = False
     Properties.PreviewItem.Selected = False
+    Properties.PreviewItem.Checked = False
     Properties.PreviewItem.Height = -1.000000000000000000
     Properties.PreviewItem.Visible = True
     Properties.PreviewItem.Color = claNull
-    Properties.PreviewItem.Checked = False
     Properties.PreviewItem.Width = -1.000000000000000000
     Properties.PreviewItem.Icon.IsClipRound = False
     Properties.PreviewItem.Pic.IsClipRound = False
@@ -35,9 +42,16 @@ object FrameListItemStyle_CaptionTopDetailBottom: TFrameListItemStyle_CaptionTop
     object lblItemCaption: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = 'ItemCaption'
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = claWhite
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 26.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 26.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -57,9 +71,16 @@ object FrameListItemStyle_CaptionTopDetailBottom: TFrameListItemStyle_CaptionTop
     object lblItemDetail: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = 'ItemDetail'
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = claWhite
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
@@ -76,8 +97,8 @@ object FrameListItemStyle_CaptionTopDetailBottom: TFrameListItemStyle_CaptionTop
       Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
-      Caption = #21015#34920#39033#26631#39064
-      Text = #21015#34920#39033#26631#39064
+      Caption = #21015#34920#39033#26126#32454
+      Text = #21015#34920#39033#26126#32454
       Properties.AutoSize = False
     end
   end

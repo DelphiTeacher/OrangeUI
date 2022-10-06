@@ -26,10 +26,13 @@ type
     lblComboEditCanSetBackColorAndBorder: TLabel;
     lblComboEditCanSetHelpText: TLabel;
     lblComboEditCanSetHelpIcon: TLabel;
+    ComboEdit1: TComboEdit;
   private
     //当前需要处理的控件
     function GetCurrentPorcessControl(AFocusedControl:TControl):TControl;
     function GetVirtualKeyboardControlParent:TControl;
+    //获取虚拟键盘的高度校正
+    function GetVirtualKeyboardHeightAdjustHeight:Double;
     { Private declarations }
   private
     procedure ChangeLanguage(ALangKind:TLangKind);
@@ -77,6 +80,11 @@ end;
 function TFrameComboEdit.GetVirtualKeyboardControlParent: TControl;
 begin
   Result:=Self;
+end;
+
+function TFrameComboEdit.GetVirtualKeyboardHeightAdjustHeight: Double;
+begin
+  Result:=0;
 end;
 
 procedure TFrameComboEdit.ChangeLanguage(ALangKind: TLangKind);

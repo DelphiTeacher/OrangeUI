@@ -1,4 +1,4 @@
-﻿//convert pas to utf8 by ¥
+﻿  //convert pas to utf8 by ¥
 
 /// <summary>
 ///   <para>
@@ -21,6 +21,10 @@ uses
   SysUtils,
   Math,
 
+  {$IF CompilerVersion>=30.0}
+  Types,//定义了TRectF
+  {$IFEND}
+
   {$IFDEF VCL}
   Windows,
   Messages,
@@ -28,7 +32,6 @@ uses
   Graphics,
   {$ENDIF}
   {$IFDEF FMX}
-  Types,
   UITypes,
   FMX.Styles.Objects,
   FMX.Graphics,
@@ -257,8 +260,17 @@ const
 const
   //默认颜色
   Const_DefaultColor=BlackColor;
+
+  {$IFDEF FMX}
   //默认边框颜色
   Const_DefaultBorderColor = $FFEDEDED;
+  {$ENDIF}
+  {$IFDEF VCL}
+  //默认边框颜色
+  Const_DefaultBorderColor = $00EDEDED;
+  {$ENDIF}
+
+
   //默认填充颜色
   Const_DefaultFillColor = WhiteColor;
 
@@ -395,7 +407,7 @@ type
 
 
   //获取控件尺寸的事件,在ListLayout中使用
-  TOnGetControlSizeEvent=function(Sender:TObject):TControlSize of object;
+  TOnGetControlSizeEvent=function(Sender:TObject):Double of object;
 
 
 
@@ -417,42 +429,47 @@ type
   TAlignLayout=TAlign;
 
 
-  TSizeF = record
-    cx: Single;
-    cy: Single;
-  end;
+    {$IF CompilerVersion<30.0}
+    //没有定义TRectF
+    TSizeF = record
+      cx: Single;
+      cy: Single;
+    end;
 
 
-  TPointFType = array [0..1] of Single;
+    TPointFType = array [0..1] of Single;
 
-  TPointF = record
-    case Integer of
-      0: (V: TPointFType;);
-      1: (X: Single;
-          Y: Single;);
-  end;
-
-  TRectF = record
-   private
-    function GetWidth: Single;
-    procedure SetWidth(const Value: Single);
-    function GetHeight: Single;
-    procedure SetHeight(const Value: Single);
-   public
-    //returns true if left = right or top = bottom
-    function IsEmpty: Boolean;
-
-    // changing the width is always relative to Left;
-    property Width: Single read GetWidth write SetWidth;
-    // changing the Height is always relative to Top
-    property Height: Single read GetHeight write SetHeight;
+    TPointF = record
+      case Integer of
+        0: (V: TPointFType;);
+        1: (X: Single;
+            Y: Single;);
+    end;
 
 
-    case Integer of
-      0: (Left, Top, Right, Bottom: Single);
-      1: (TopLeft, BottomRight: TPointF);
-  end;
-  PRectF=^TRectF;
+    TRectF = record
+     private
+      function GetWidth: Single;
+      procedure SetWidth(const Value: Single);
+      function GetHeight: Single;
+      procedure SetHeight(const Value: Single);
+     public
+      //returns true if left = right or top = bottom
+      function IsEmpty: Boolean;
+
+      // changing the width is always relative to Left;
+      property Width: Single read GetWidth write SetWidth;
+      // changing the Height is always relative to Top
+      property Height: Single read GetHeight write SetHeight;
+
+
+      case Integer of
+        0: (Left, Top, Right, Bottom: Single);
+        1: (TopLeft, BottomRight: TPointF);
+    end;
+    PRectF=^TRectF;
+    {$IFEND}
+
   {$ENDIF}
 
 
@@ -562,6 +579,7 @@ type
     FSkinThemeColor3:TDelphiColor;
     FNavigationBarColor: TDelphiColor;
     FNavigationBarFontColor:TDelphiColor;
+    FFilePictureSearchPaths:TStringList;
     function GetSkinThemeColor: TDelphiColor;
     function GetSkinThemeColor1: TDelphiColor;
     function GetSkinThemeColor2: TDelphiColor;
@@ -576,8 +594,12 @@ type
     procedure SetNavigationBarFontColor(const Value: TDelphiColor);
     function GetSkinPictureThemeColor: TDelphiColor;
     procedure SetSkinPictureThemeColor(const Value: TDelphiColor);
+    function GetFilePictureSearchPaths: TStringList;
+    procedure SetFilePictureSearchPaths(const Value: TStringList);
   public
     constructor Create(AOwner:TComponent);override;
+    destructor Destroy;override;
+    procedure Loaded;override;
   published
     //主题色
     property SkinPictureThemeColor:TDelphiColor read GetSkinPictureThemeColor write SetSkinPictureThemeColor;
@@ -592,6 +614,8 @@ type
     property SkinThemeColor1:TDelphiColor read GetSkinThemeColor1 write SetSkinThemeColor1;
     property SkinThemeColor2:TDelphiColor read GetSkinThemeColor2 write SetSkinThemeColor2;
     property SkinThemeColor3:TDelphiColor read GetSkinThemeColor3 write SetSkinThemeColor3;
+    //图片搜索路径
+    property FilePictureSearchPaths:TStringList read GetFilePictureSearchPaths write SetFilePictureSearchPaths;
   end;
 
 
@@ -637,15 +661,18 @@ function Rect2RectF(const Rect: TRect): TRectF;
 
 
 {$IFDEF VCL}
+  {$IF CompilerVersion<30.0}
 function PointF(X, Y: Single): TPointF;
 function RectF(Left, Top, Right, Bottom: Single): TRectF;
 
+procedure InflateRect(var R: TRectF; const DX, DY: Single);
 
 function IntersectRectF(out Rect: TRectF; const R1, R2: TRectF): Boolean;
 function UnionRectF(out Rect: TRectF; const R1, R2: TRectF): Boolean;
 
 function PtInRect(const Rect: TRectF; const P: TPointF): Boolean;
 function OffsetRect(var R: TRectF; DX, DY: Single): Boolean;
+  {$IFEND}
 {$ENDIF}
 
 
@@ -676,14 +703,12 @@ function BrightnessColor(AColor:TDelphiColor;ValueChange:Integer):TDelphiColor;
 //让颜色变深
 function DarknessColor(AColor:TDelphiColor;ValueChange:Integer):TDelphiColor;
 
-{$IFDEF VCL}
 function ScreenScaleSize(ASize:Single):Single;
 function ScreenScaleRectF(ARect:TRectF):TRectF;
 function ScreenScaleSizeInt(ASize:Single):Integer;
 function GetScreenScaleRate:Double;
-{$ENDIF VCL}
 
-
+function ColorNameToColor(AColorName:String):TDelphiColor;
 
 
 
@@ -734,6 +759,9 @@ var
 
   ScreenLogPixels:Integer;
 
+  GlobalFilePictureSearchPaths:TStringList;
+
+
 
 function GetAlignStr(AAlign:TAlignLayout):String;
 function GetAlign(AAlignStr:String):TAlignLayout;
@@ -743,7 +771,11 @@ function GetAnchorsStr(AAnchors:TAnchors):String;
 {$IFDEF FMX}
 function GetMarginsStr(AMargins:TBounds): String;
 procedure SetMargins(AMargins:TBounds;AMarginsStr:String);
-{$ENDIF FMX}
+{$ENDIF}
+{$IFDEF VCL}
+function GetMarginsStr(AMargins:TMargins): String;
+procedure SetMargins(AMargins:TMargins;AMarginsStr:String);
+{$ENDIF}
 
 
 
@@ -754,11 +786,14 @@ uses
   uSkinPicture;
 
 
-{$IFDEF VCL}
 function GetScreenLogPixels:Integer;
+{$IFDEF VCL}
 var
   DC: HDC;
+{$ENDIF VCL}
 begin
+  Result:=1;
+{$IFDEF VCL}
   if ScreenLogPixels=0 then
   begin
     DC := GetDC(0);
@@ -770,13 +805,18 @@ begin
     uBaseLog.HandleException(nil,'GetScreenLogPixels ScreenLogPixels:'+IntToStr(ScreenLogPixels));
   end;
   Result:=ScreenLogPixels;
+{$ENDIF VCL}
 end;
 
 
 function GetScreenScaleRate:Double;
 begin
+  {$IFDEF VCL}
   Result:=GetScreenLogPixels/96;
-//  Result:=1;
+  {$ENDIF}
+  {$IFDEF FMX}
+  Result:=1;
+  {$ENDIF}
 end;
 
 function ScreenScaleSize(ASize:Single):Single;
@@ -797,7 +837,6 @@ begin
                 ScreenScaleSize(ARect.Bottom)
                 );
 end;
-{$ENDIF VCL}
 
 {$IFDEF FMX}
 function GetMarginsStr(AMargins:TBounds): String;
@@ -824,7 +863,34 @@ begin
   FreeAndNil(AMarginsList);
 
 end;
-{$ENDIF FMX}
+{$ENDIF}
+
+{$IFDEF VCL}
+function GetMarginsStr(AMargins:TMargins): String;
+begin
+  Result:=IntToStr(Ceil(AMargins.Left))+','
+          +IntToStr(Ceil(AMargins.Top))+','
+          +IntToStr(Ceil(AMargins.Right))+','
+          +IntToStr(Ceil(AMargins.Bottom));
+end;
+
+procedure SetMargins(AMargins:TMargins;AMarginsStr:String);
+var
+  AMarginsList:TStringList;
+begin
+  AMarginsList:=TStringList.Create;
+  AMarginsList.CommaText:=AMarginsStr;
+  if AMarginsList.Count>=4 then
+  begin
+    AMargins.Left:=StrToInt(AMarginsList[0]);
+    AMargins.Top:=StrToInt(AMarginsList[1]);
+    AMargins.Right:=StrToInt(AMarginsList[2]);
+    AMargins.Bottom:=StrToInt(AMarginsList[3]);
+  end;
+  FreeAndNil(AMarginsList);
+
+end;
+{$ENDIF}
 
 function VCLColorToTAlphaColor(AVCLColor:Integer):TDelphiColor;
 begin
@@ -838,6 +904,11 @@ begin
 end;
 
 
+{$IFDEF FMX}
+function GetAValue(color : integer) : byte;
+begin
+  result := byte(color shr 24);
+end;
 function GetRValue(color : integer) : byte;
 begin
   result := byte(color shr 16);
@@ -851,24 +922,51 @@ begin
   result := byte(color);
 end;
 
+function argb(a,r,g,b:byte):integer;
+begin
+  result := (integer(a) shl 24) + (integer(r) shl 16) + (integer(g) shl 8) + integer(b);
+end;
+{$ENDIF}
+
+
+{$IFDEF VCL}
+function GetBValue(color : integer) : byte;
+begin
+  result := byte(color shr 16);
+end;
+function GetGValue(color : integer) : byte;
+begin
+  result := byte(color shr 8);
+end;
+function GetRValue(color : integer): byte;
+begin
+  result := byte(color);
+end;
+
 function rgb(r,g,b:byte):integer;
 begin
-  result := (integer(r) shl 16) + (integer(g) shl 8) + integer(b);
+  result := (integer(b) shl 16) + (integer(g) shl 8) + integer(r);
 end;
+{$ENDIF}
 
 //让颜色变亮
 function BrightnessColor(AColor:TDelphiColor;ValueChange:Integer):TDelphiColor;
 var
-  R,G,B:Byte;
+  A,R,G,B:Byte;
 begin
 
 
   {$IFDEF FMX}
-  Result:=AColor;
+//  Result:=AColor;
 //        $FF000000
 //        or (Byte(AVCLColor) shl 16)
 //        or (AVCLColor and $0000FF00)
 //        or ((AVCLColor and $00FF0000) shr 16);
+  A:=GetAValue(AColor);//Min(GetAValue(AColor)+ValueChange,255);
+  R:=Min(GetRValue(AColor)+ValueChange,255);
+  G:=Min(GetGValue(AColor)+ValueChange,255);
+  B:=Min(GetBValue(AColor)+ValueChange,255);
+  Result:=argb(A,R,G,B);
   {$ENDIF}
   {$IFDEF VCL}
   //(+ValueChangeMin,255)
@@ -888,13 +986,18 @@ end;
 //让颜色变深
 function DarknessColor(AColor:TDelphiColor;ValueChange:Integer):TDelphiColor;
 var
-  R,G,B:Byte;
+  A,R,G,B:Byte;
 begin
   {$IFDEF FMX}
-  Result:=AColor;//$FF000000
+//  Result:=AColor;//$FF000000
 //        or (Byte(AVCLColor) shl 16)
 //        or (AVCLColor and $0000FF00)
 //        or ((AVCLColor and $00FF0000) shr 16);
+  A:=GetAValue(AColor);//Max(GetAValue(AColor)-ValueChange,0);
+  R:=Max(GetRValue(AColor)-ValueChange,0);
+  G:=Max(GetGValue(AColor)-ValueChange,0);
+  B:=Max(GetBValue(AColor)-ValueChange,0);
+  Result:=argb(A,R,G,B);
   {$ENDIF}
   {$IFDEF VCL}
 //  Result:=
@@ -902,15 +1005,174 @@ begin
 //        or Min((Byte(AColor) shl 16)-ValueChange,255)
 //        or Min((AColor and $0000FF00)-ValueChange,255)
 //        or Min(((AColor and $00FF0000) shr 16)-ValueChange,255);
-  R:=Min(GetRValue(AColor)-ValueChange,255);
-  G:=Min(GetGValue(AColor)-ValueChange,255);
-  B:=Min(GetBValue(AColor)-ValueChange,255);
+  R:=Max(GetRValue(AColor)-ValueChange,0);
+  G:=Max(GetGValue(AColor)-ValueChange,0);
+  B:=Max(GetBValue(AColor)-ValueChange,0);
   Result:=rgb(R,G,B);
   {$ENDIF}
 
 end;
 
+function ColorNameToColor(AColorName:String):TDelphiColor;
+begin
+  //颜色常量
+  Result:=NullColor;// = {$IFDEF VCL}0{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Null{$ENDIF};
+  if AColorName='Aliceblue' then Result:=AliceblueColor;// = AliceblueColor = {$IFDEF VCL}clWebAliceblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Aliceblue{$ENDIF};
+  if AColorName='Antiquewhite' then Result:=AntiquewhiteColor;//={$IFDEF_VCL}clWebAntiquewhite{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Antiquewhite{$ENDIF};
+  if AColorName='Aqua' then Result:=AquaColor;//={$IFDEF_VCL}clAqua{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Aqua{$ENDIF};
+  if AColorName='Aquamarine' then Result:=AquamarineColor;//={$IFDEF_VCL}clWebAquamarine{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Aquamarine{$ENDIF};
+  if AColorName='Azure' then Result:=AzureColor;//={$IFDEF_VCL}clWebAzure{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Azure{$ENDIF};
+  if AColorName='Beige' then Result:=BeigeColor;//={$IFDEF_VCL}clWebBeige{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Beige{$ENDIF};
+  if AColorName='Bisque' then Result:=BisqueColor;//={$IFDEF_VCL}clWebBisque{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Bisque{$ENDIF};
+  if AColorName='Black' then Result:=BlackColor;//={$IFDEF_VCL}clBlack{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Black{$ENDIF};
+  if AColorName='Blanchedalmond' then Result:=BlanchedalmondColor;//={$IFDEF_VCL}clWebBlanchedalmond{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Blanchedalmond{$ENDIF};
+  if AColorName='Blue' then Result:=BlueColor;//={$IFDEF_VCL}clBlue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Blue{$ENDIF};
+  if AColorName='Blueviolet' then Result:=BluevioletColor;//={$IFDEF_VCL}clWebBlueviolet{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Blueviolet{$ENDIF};
+  if AColorName='Brown' then Result:=BrownColor;//={$IFDEF_VCL}clWebBrown{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Brown{$ENDIF};
+  if AColorName='Burlywood' then Result:=BurlywoodColor;//={$IFDEF_VCL}clWebBurlywood{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Burlywood{$ENDIF};
+  if AColorName='Cadetblue' then Result:=CadetblueColor;//={$IFDEF_VCL}clWebCadetblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Cadetblue{$ENDIF};
+  if AColorName='Chartreuse' then Result:=ChartreuseColor;//={$IFDEF_VCL}clWebChartreuse{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Chartreuse{$ENDIF};
+  if AColorName='Chocolate' then Result:=ChocolateColor;//={$IFDEF_VCL}clWebChocolate{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Chocolate{$ENDIF};
+  if AColorName='Coral' then Result:=CoralColor;//={$IFDEF_VCL}clWebCoral{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Coral{$ENDIF};
+  if AColorName='Cornflowerblue' then Result:=CornflowerblueColor;//={$IFDEF_VCL}clWebCornflowerblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Cornflowerblue{$ENDIF};
+  if AColorName='Cornsilk' then Result:=CornsilkColor;//={$IFDEF_VCL}clWebCornsilk{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Cornsilk{$ENDIF};
+  if AColorName='Crimson' then Result:=CrimsonColor;//={$IFDEF_VCL}clWebCrimson{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Crimson{$ENDIF};
+  if AColorName='Cyan' then Result:=CyanColor;//={$IFDEF_VCL}clWebCyan{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Cyan{$ENDIF};
+  if AColorName='Darkblue' then Result:=DarkblueColor;//={$IFDEF_VCL}clWebDarkblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkblue{$ENDIF};
+  if AColorName='Darkcyan' then Result:=DarkcyanColor;//={$IFDEF_VCL}clWebDarkcyan{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkcyan{$ENDIF};
+  if AColorName='Darkgoldenrod' then Result:=DarkgoldenrodColor;//={$IFDEF_VCL}clWebDarkgoldenrod{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkgoldenrod{$ENDIF};
+  if AColorName='Darkgray' then Result:=DarkgrayColor;//={$IFDEF_VCL}clWebDarkgray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkgray{$ENDIF};
+  if AColorName='Darkgreen' then Result:=DarkgreenColor;//={$IFDEF_VCL}clWebDarkgreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkgreen{$ENDIF};
+//  if AColorName='Aliceblue' then Result:=DarkgreyColor={$IFDEF_VCL}clWebDarkgrey{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkgrey{$ENDIF};
+  if AColorName='Darkkhaki' then Result:=DarkkhakiColor;//={$IFDEF_VCL}clWebDarkkhaki{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkkhaki{$ENDIF};
+  if AColorName='Darkmagenta' then Result:=DarkmagentaColor;//={$IFDEF_VCL}clWebDarkmagenta{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkmagenta{$ENDIF};
+  if AColorName='Darkolivegreen' then Result:=DarkolivegreenColor;//={$IFDEF_VCL}clWebDarkolivegreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkolivegreen{$ENDIF};
+  if AColorName='Darkorange' then Result:=DarkorangeColor;//={$IFDEF_VCL}clWebDarkorange{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkorange{$ENDIF};
+  if AColorName='Darkorchid' then Result:=DarkorchidColor;//={$IFDEF_VCL}clWebDarkorchid{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkorchid{$ENDIF};
+  if AColorName='Darkred' then Result:=DarkredColor;//={$IFDEF_VCL}clWebDarkred{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkred{$ENDIF};
+  if AColorName='Darksalmon' then Result:=DarksalmonColor;//{$IFDEF_VCL}clWebDarksalmon{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darksalmon{$ENDIF};
+  if AColorName='Darkseagreen' then Result:=DarkseagreenColor;//{$IFDEF_VCL}clWebDarkseagreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkseagreen{$ENDIF};
+  if AColorName='Darkslateblue' then Result:=DarkslateblueColor;//{$IFDEF_VCL}clWebDarkslateblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkslateblue{$ENDIF};
+  if AColorName='Darkslategray' then Result:=DarkslategrayColor;//{$IFDEF_VCL}clWebDarkslategray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkslategray{$ENDIF};
+//  if AColorName='Aliceblue' then Result:=DarkslategreyColor;//{$IFDEF_VCL}clWebDarkslategrey{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkslategrey{$ENDIF};
+  if AColorName='Darkturquoise' then Result:=DarkturquoiseColor;//{$IFDEF_VCL}clWebDarkturquoise{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkturquoise{$ENDIF};
+  if AColorName='Darkviolet' then Result:=DarkvioletColor;//{$IFDEF_VCL}clWebDarkviolet{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Darkviolet{$ENDIF};
+  if AColorName='Deeppink' then Result:=DeeppinkColor;//{$IFDEF_VCL}clWebDeeppink{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Deeppink{$ENDIF};
+  if AColorName='Deepskyblue' then Result:=DeepskyblueColor;//{$IFDEF_VCL}clWebDeepskyblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Deepskyblue{$ENDIF};
+  if AColorName='Dimgray' then Result:=DimgrayColor;//{$IFDEF_VCL}clWebDimgray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Dimgray{$ENDIF};
+//  if AColorName='Aliceblue' then Result:=DimgreyColor;//{$IFDEF_VCL}clWebDimgrey{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Dimgrey{$ENDIF};
+  if AColorName='Dodgerblue' then Result:=DodgerblueColor;//{$IFDEF_VCL}clWebDodgerblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Dodgerblue{$ENDIF};
+  if AColorName='Firebrick' then Result:=FirebrickColor;//{$IFDEF_VCL}clWebFirebrick{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Firebrick{$ENDIF};
+  if AColorName='Floralwhite' then Result:=FloralwhiteColor;//{$IFDEF_VCL}clWebFloralwhite{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Floralwhite{$ENDIF};
+  if AColorName='Forestgreen' then Result:=ForestgreenColor;//{$IFDEF_VCL}clWebForestgreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Forestgreen{$ENDIF};
+  if AColorName='Fuchsia' then Result:=FuchsiaColor;//{$IFDEF_VCL}clWebFuchsia{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Fuchsia{$ENDIF};
+  if AColorName='Gainsboro' then Result:=GainsboroColor;//{$IFDEF_VCL}clWebGainsboro{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Gainsboro{$ENDIF};
+  if AColorName='Ghostwhite' then Result:=GhostwhiteColor;//{$IFDEF_VCL}clWebGhostwhite{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Ghostwhite{$ENDIF};
+  if AColorName='Gold' then Result:=GoldColor;//{$IFDEF_VCL}clWebGold{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Gold{$ENDIF};
+  if AColorName='Goldenrod' then Result:=GoldenrodColor;//{$IFDEF_VCL}clWebGoldenrod{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Goldenrod{$ENDIF};
+  if AColorName='Gray' then Result:=GrayColor;//{$IFDEF_VCL}clGray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Gray{$ENDIF};
+  if AColorName='Green' then Result:=GreenColor;//{$IFDEF_VCL}clGreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Green{$ENDIF};
+  if AColorName='Greenyellow' then Result:=GreenyellowColor;//{$IFDEF_VCL}clWebGreenyellow{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Greenyellow{$ENDIF};
+//  if AColorName='Aliceblue' then Result:=GreyColor;//{$IFDEF_VCL}clWebGrey{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Grey{$ENDIF};
+  if AColorName='Honeydew' then Result:=HoneydewColor;//{$IFDEF_VCL}clWebHoneydew{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Honeydew{$ENDIF};
+  if AColorName='Hotpink' then Result:=HotpinkColor;//{$IFDEF_VCL}clWebHotpink{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Hotpink{$ENDIF};
+  if AColorName='Indianred' then Result:=IndianredColor;//{$IFDEF_VCL}clWebIndianred{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Indianred{$ENDIF};
+  if AColorName='Indigo' then Result:=IndigoColor;//{$IFDEF_VCL}clWebIndigo{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Indigo{$ENDIF};
+  if AColorName='Ivory' then Result:=IvoryColor;//{$IFDEF_VCL}clWebIvory{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Ivory{$ENDIF};
+  if AColorName='Khaki' then Result:=KhakiColor;//{$IFDEF_VCL}clWebKhaki{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Khaki{$ENDIF};
+  if AColorName='Lavender' then Result:=LavenderColor;//{$IFDEF_VCL}clWebLavender{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lavender{$ENDIF};
+  if AColorName='Lavenderblush' then Result:=LavenderblushColor;//{$IFDEF_VCL}clWebLavenderblush{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lavenderblush{$ENDIF};
+  if AColorName='Lawngreen' then Result:=LawngreenColor;//{$IFDEF_VCL}clWebLawngreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lawngreen{$ENDIF};
+  if AColorName='Lemonchiffon' then Result:=LemonchiffonColor;//{$IFDEF_VCL}clWebLemonchiffon{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lemonchiffon{$ENDIF};
+  if AColorName='Lightblue' then Result:=LightblueColor;//{$IFDEF_VCL}clWebLightblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightblue{$ENDIF};
+  if AColorName='Lightcoral' then Result:=LightcoralColor;//{$IFDEF_VCL}clWebLightcoral{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightcoral{$ENDIF};
+  if AColorName='Lightcyan' then Result:=LightcyanColor;//{$IFDEF_VCL}clWebLightcyan{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightcyan{$ENDIF};
+  if AColorName='Lightgoldenrodyellow' then Result:=LightgoldenrodyellowColor;//{$IFDEF_VCL}clWebLightgoldenrodyellow{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightgoldenrodyellow{$ENDIF};
+  if AColorName='Lightgray' then Result:=LightgrayColor;//{$IFDEF_VCL}clgray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightgray{$ENDIF};
+//  if AColorName='Aliceblue' then Result:=LightgrayColor;//{$IFDEF_VCL}clWebLightgray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightgray{$ENDIF};
+  if AColorName='Lightgreen' then Result:=LightgreenColor;//{$IFDEF_VCL}clWebLightgreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightgreen{$ENDIF};
+  if AColorName='Lightgrey' then Result:=LightgreyColor;//{$IFDEF_VCL}clWebLightgrey{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightgrey{$ENDIF};
+  if AColorName='Lightpink' then Result:=LightpinkColor;//{$IFDEF_VCL}clWebLightpink{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightpink{$ENDIF};
+  if AColorName='Lightsalmon' then Result:=LightsalmonColor;//{$IFDEF_VCL}clWebLightsalmon{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightsalmon{$ENDIF};
+  if AColorName='Lightseagreen' then Result:=LightseagreenColor;//{$IFDEF_VCL}clWebLightseagreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightseagreen{$ENDIF};
+  if AColorName='Lightskyblue' then Result:=LightskyblueColor;//{$IFDEF_VCL}clWebLightskyblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightskyblue{$ENDIF};
+  if AColorName='Lightslategray' then Result:=LightslategrayColor;//{$IFDEF_VCL}clWebLightslategray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightslategray{$ENDIF};
+//  if AColorName='Aliceblue' then Result:=LightslategreyColor;//{$IFDEF_VCL}clWebLightslategrey{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightslategrey{$ENDIF};
+  if AColorName='Lightsteelblue' then Result:=LightsteelblueColor;//{$IFDEF_VCL}clWebLightsteelblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightsteelblue{$ENDIF};
+  if AColorName='Lightyellow' then Result:=LightyellowColor;//{$IFDEF_VCL}clWebLightyellow{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lightyellow{$ENDIF};
+  if AColorName='LtGray' then Result:=LtGrayColor;//{$IFDEF_VCL}clLtGray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.LtGray{$ENDIF};
+  if AColorName='MedGray' then Result:=MedGrayColor;//{$IFDEF_VCL}clMedGray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.MedGray{$ENDIF};
+  if AColorName='DkGray' then Result:=DkGrayColor;//{$IFDEF_VCL}clDkGray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.DkGray{$ENDIF};
+  if AColorName='MoneyGreen' then Result:=MoneyGreenColor;//{$IFDEF_VCL}clMoneyGreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.MoneyGreen{$ENDIF};
+//  if AColorName='Aliceblue' then Result:=LegacySkyBlueColor;//{$IFDEF_VCL}clWebLegacySkyBlue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.LegacySkyBlue{$ENDIF};
+  if AColorName='Cream' then Result:=CreamColor;//{$IFDEF_VCL}clCream{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Cream{$ENDIF};
+  if AColorName='Lime' then Result:=LimeColor;//{$IFDEF_VCL}clLime{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Lime{$ENDIF};
+  if AColorName='Limegreen' then Result:=LimegreenColor;//{$IFDEF_VCL}clWebLimegreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Limegreen{$ENDIF};
+  if AColorName='Linen' then Result:=LinenColor;//{$IFDEF_VCL}clWebLinen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Linen{$ENDIF};
+  if AColorName='Magenta' then Result:=MagentaColor;//{$IFDEF_VCL}clWebMagenta{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Magenta{$ENDIF};
+  if AColorName='Maroon' then Result:=MaroonColor;//{$IFDEF_VCL}clMaroon{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Maroon{$ENDIF};
+  if AColorName='Mediumaquamarine' then Result:=MediumaquamarineColor;//{$IFDEF_VCL}clWebMediumaquamarine{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mediumaquamarine{$ENDIF};
+  if AColorName='Mediumblue' then Result:=MediumblueColor;//{$IFDEF_VCL}clWebMediumblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mediumblue{$ENDIF};
+  if AColorName='Mediumorchid' then Result:=MediumorchidColor;//{$IFDEF_VCL}clWebMediumorchid{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mediumorchid{$ENDIF};
+  if AColorName='Mediumpurple' then Result:=MediumpurpleColor;//{$IFDEF_VCL}clWebMediumpurple{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mediumpurple{$ENDIF};
+  if AColorName='Mediumseagreen' then Result:=MediumseagreenColor;//{$IFDEF_VCL}clWebMediumseagreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mediumseagreen{$ENDIF};
+  if AColorName='Mediumslateblue' then Result:=MediumslateblueColor;//{$IFDEF_VCL}clWebMediumslateblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mediumslateblue{$ENDIF};
+  if AColorName='Mediumspringgreen' then Result:=MediumspringgreenColor;//{$IFDEF_VCL}clWebMediumspringgreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mediumspringgreen{$ENDIF};
+  if AColorName='Mediumturquoise' then Result:=MediumturquoiseColor;//{$IFDEF_VCL}clWebMediumturquoise{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mediumturquoise{$ENDIF};
+  if AColorName='Mediumvioletred' then Result:=MediumvioletredColor;//{$IFDEF_VCL}clWebMediumvioletred{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mediumvioletred{$ENDIF};
+  if AColorName='Midnightblue' then Result:=MidnightblueColor;//{$IFDEF_VCL}clWebMidnightblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Midnightblue{$ENDIF};
+  if AColorName='Mintcream' then Result:=MintcreamColor;//{$IFDEF_VCL}clWebMintcream{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mintcream{$ENDIF};
+  if AColorName='Mistyrose' then Result:=MistyroseColor;//{$IFDEF_VCL}clWebMistyrose{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Mistyrose{$ENDIF};
+  if AColorName='Moccasin' then Result:=MoccasinColor;//{$IFDEF_VCL}clWebMoccasin{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Moccasin{$ENDIF};
+  if AColorName='Navajowhite' then Result:=NavajowhiteColor;//{$IFDEF_VCL}clWebNavajowhite{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Navajowhite{$ENDIF};
+  if AColorName='Navy' then Result:=NavyColor;//{$IFDEF_VCL}clNavy{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Navy{$ENDIF};
+  if AColorName='Oldlace' then Result:=OldlaceColor;//{$IFDEF_VCL}clWebOldlace{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Oldlace{$ENDIF};
+  if AColorName='Olive' then Result:=OliveColor;//{$IFDEF_VCL}clOlive{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Olive{$ENDIF};
+  if AColorName='Olivedrab' then Result:=OlivedrabColor;//{$IFDEF_VCL}clWebOlivedrab{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Olivedrab{$ENDIF};
+  if AColorName='Orange' then Result:=OrangeColor;//{$IFDEF_VCL}clWebOrange{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Orange{$ENDIF};
+  if AColorName='Orangered' then Result:=OrangeredColor;//{$IFDEF_VCL}clWebOrangered{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Orangered{$ENDIF};
+  if AColorName='Orchid' then Result:=OrchidColor;//{$IFDEF_VCL}clWebOrchid{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Orchid{$ENDIF};
+  if AColorName='Palegoldenrod' then Result:=PalegoldenrodColor;//{$IFDEF_VCL}clWebPalegoldenrod{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Palegoldenrod{$ENDIF};
+  if AColorName='Palegreen' then Result:=PalegreenColor;//{$IFDEF_VCL}clWebPalegreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Palegreen{$ENDIF};
+  if AColorName='Paleturquoise' then Result:=PaleturquoiseColor;//{$IFDEF_VCL}clWebPaleturquoise{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Paleturquoise{$ENDIF};
+  if AColorName='Palevioletred' then Result:=PalevioletredColor;//{$IFDEF_VCL}clWebPalevioletred{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Palevioletred{$ENDIF};
+  if AColorName='Papayawhip' then Result:=PapayawhipColor;//{$IFDEF_VCL}clWebPapayawhip{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Papayawhip{$ENDIF};
+  if AColorName='Peachpuff' then Result:=PeachpuffColor;//{$IFDEF_VCL}clWebPeachpuff{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Peachpuff{$ENDIF};
+  if AColorName='Peru' then Result:=PeruColor;//{$IFDEF_VCL}clWebPeru{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Peru{$ENDIF};
+  if AColorName='Pink' then Result:=PinkColor;//{$IFDEF_VCL}clWebPink{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Pink{$ENDIF};
+  if AColorName='Plum' then Result:=PlumColor;//{$IFDEF_VCL}clWebPlum{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Plum{$ENDIF};
+  if AColorName='Powderblue' then Result:=PowderblueColor;//{$IFDEF_VCL}clWebPowderblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Powderblue{$ENDIF};
+  if AColorName='Purple' then Result:=PurpleColor;//{$IFDEF_VCL}clPurple{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Purple{$ENDIF};
+  if AColorName='Red' then Result:=RedColor;//{$IFDEF_VCL}clRed{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Red{$ENDIF};
+  if AColorName='Rosybrown' then Result:=RosybrownColor;//{$IFDEF_VCL}clWebRosybrown{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Rosybrown{$ENDIF};
+  if AColorName='Royalblue' then Result:=RoyalblueColor;//{$IFDEF_VCL}clWebRoyalblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Royalblue{$ENDIF};
+  if AColorName='Saddlebrown' then Result:=SaddlebrownColor;//{$IFDEF_VCL}clWebSaddlebrown{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Saddlebrown{$ENDIF};
+  if AColorName='Salmon' then Result:=SalmonColor;//{$IFDEF_VCL}clWebSalmon{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Salmon{$ENDIF};
+  if AColorName='Sandybrown' then Result:=SandybrownColor;//{$IFDEF_VCL}clWebSandybrown{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Sandybrown{$ENDIF};
+  if AColorName='Seagreen' then Result:=SeagreenColor;//{$IFDEF_VCL}clWebSeagreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Seagreen{$ENDIF};
+  if AColorName='Seashell' then Result:=SeashellColor;//{$IFDEF_VCL}clWebSeashell{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Seashell{$ENDIF};
+  if AColorName='Sienna' then Result:=SiennaColor;//{$IFDEF_VCL}clWebSienna{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Sienna{$ENDIF};
+  if AColorName='Silver' then Result:=SilverColor;//{$IFDEF_VCL}clSilver{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Silver{$ENDIF};
+  if AColorName='Skyblue' then Result:=SkyblueColor;//{$IFDEF_VCL}clSkyblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Skyblue{$ENDIF};
+  if AColorName='Slateblue' then Result:=SlateblueColor;//{$IFDEF_VCL}clWebSlateblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Slateblue{$ENDIF};
+  if AColorName='Slategray' then Result:=SlategrayColor;//{$IFDEF_VCL}clWebSlategray{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Slategray{$ENDIF};
+//  if AColorName='Aliceblue' then Result:=SlategreyColor;//{$IFDEF_VCL}clWebSlategrey{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Slategrey{$ENDIF};
+  if AColorName='Snow' then Result:=SnowColor;//{$IFDEF_VCL}clWebSnow{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Snow{$ENDIF};
+  if AColorName='Springgreen' then Result:=SpringgreenColor;//{$IFDEF_VCL}clWebSpringgreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Springgreen{$ENDIF};
+  if AColorName='Steelblue' then Result:=SteelblueColor;//{$IFDEF_VCL}clWebSteelblue{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Steelblue{$ENDIF};
+  if AColorName='Tan' then Result:=TanColor;//{$IFDEF_VCL}clWebTan{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Tan{$ENDIF};
+  if AColorName='Teal' then Result:=TealColor;//{$IFDEF_VCL}clTeal{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Teal{$ENDIF};
+  if AColorName='Thistle' then Result:=ThistleColor;//{$IFDEF_VCL}clWebThistle{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Thistle{$ENDIF};
+  if AColorName='Tomato' then Result:=TomatoColor;//{$IFDEF_VCL}clWebTomato{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Tomato{$ENDIF};
+  if AColorName='Turquoise' then Result:=TurquoiseColor;//{$IFDEF_VCL}clWebTurquoise{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Turquoise{$ENDIF};
+  if AColorName='Violet' then Result:=VioletColor;//{$IFDEF_VCL}clWebViolet{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Violet{$ENDIF};
+  if AColorName='Wheat' then Result:=WheatColor;//{$IFDEF_VCL}clWebWheat{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Wheat{$ENDIF};
+  if AColorName='White' then Result:=WhiteColor;//{$IFDEF_VCL}clWhite{$ENDIF}{$IFDEF FMX}TAlphaColorRec.White{$ENDIF};
+  if AColorName='Whitesmoke' then Result:=WhitesmokeColor;//{$IFDEF_VCL}clWebWhitesmoke{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Whitesmoke{$ENDIF};
+  if AColorName='Yellow' then Result:=YellowColor;//{$IFDEF_VCL}clYellow{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Yellow{$ENDIF};
+  if AColorName='Yellowgreen' then Result:=YellowgreenColor;//{$IFDEF_VCL}clWebYellowgreen{$ENDIF}{$IFDEF FMX}TAlphaColorRec.Yellowgreen{$ENDIF};
 
+end;
 
 procedure CopyBitmap(ASrcBitmap:TBitmap;ADestBitmap:TBitmap);
 begin
@@ -985,9 +1247,12 @@ begin
 //        or (Byte(AVCLColor) shl 16)
 //        or (AVCLColor and $0000FF00)
 //        or ((AVCLColor and $00FF0000) shr 16);
-  Result:=StrToInt('$'+Copy(AColorStr,1+2,2))
-              +StrToInt('$'+Copy(AColorStr,1+4,2)) shl 8
-              +StrToInt('$'+Copy(AColorStr,1+6,2)) shl 16;
+//  Result:=StrToInt('$'+Copy(AColorStr,1+2,2))
+//              +StrToInt('$'+Copy(AColorStr,1+4,2)) shl 8
+//              +StrToInt('$'+Copy(AColorStr,1+6,2)) shl 16;
+  Result:=StrToInt('$'+Copy(AColorStr,2+2,2))
+              +StrToInt('$'+Copy(AColorStr,2+4,2)) shl 8
+              +StrToInt('$'+Copy(AColorStr,2+6,2)) shl 16;
   {$ENDIF}
 end;
 
@@ -1083,28 +1348,28 @@ begin
   //Client, Contents, Center, VertCenter,HorzCenter,
   //Horizontal, Vertical, Scale,
   //Fit, FitLeft, FitRight);
-  if SameText(AAlignStr,'Top') then Result:=TAlignLayout.Top;
-  if SameText(AAlignStr,'Left') then Result:=TAlignLayout.Left;
-  if SameText(AAlignStr,'Right') then Result:=TAlignLayout.Right;
-  if SameText(AAlignStr,'Bottom') then Result:=TAlignLayout.Bottom;
+  if SameText(AAlignStr,'Top') or SameText(AAlignStr,'alTop') then Result:=TAlignLayout.Top;
+  if SameText(AAlignStr,'Left') or SameText(AAlignStr,'alLeft') then Result:=TAlignLayout.Left;
+  if SameText(AAlignStr,'Right') or SameText(AAlignStr,'alRight') then Result:=TAlignLayout.Right;
+  if SameText(AAlignStr,'Bottom') or SameText(AAlignStr,'alBottom') then Result:=TAlignLayout.Bottom;
 
-  if SameText(AAlignStr,'MostTop') then Result:=TAlignLayout.MostTop;
-  if SameText(AAlignStr,'MostBottom') then Result:=TAlignLayout.MostBottom;
-  if SameText(AAlignStr,'MostLeft') then Result:=TAlignLayout.MostLeft;
-  if SameText(AAlignStr,'MostRight') then Result:=TAlignLayout.MostRight;
+  if SameText(AAlignStr,'MostTop') or SameText(AAlignStr,'alMostTop') then Result:=TAlignLayout.MostTop;
+  if SameText(AAlignStr,'MostBottom') or SameText(AAlignStr,'alMostBottom') then Result:=TAlignLayout.MostBottom;
+  if SameText(AAlignStr,'MostLeft') or SameText(AAlignStr,'alMostLeft') then Result:=TAlignLayout.MostLeft;
+  if SameText(AAlignStr,'MostRight') or SameText(AAlignStr,'alMostRight') then Result:=TAlignLayout.MostRight;
 
-  if SameText(AAlignStr,'Client') then Result:=TAlignLayout.Client;
-  if SameText(AAlignStr,'Contents') then Result:=TAlignLayout.Contents;
-  if SameText(AAlignStr,'Center') then Result:=TAlignLayout.Center;
-  if SameText(AAlignStr,'VertCenter') then Result:=TAlignLayout.VertCenter;
+  if SameText(AAlignStr,'Client') or SameText(AAlignStr,'alClient') then Result:=TAlignLayout.Client;
+  if SameText(AAlignStr,'Contents') or SameText(AAlignStr,'alContents') then Result:=TAlignLayout.Contents;
+  if SameText(AAlignStr,'Center') or SameText(AAlignStr,'alCenter') then Result:=TAlignLayout.Center;
+  if SameText(AAlignStr,'VertCenter') or SameText(AAlignStr,'alVertCenter') then Result:=TAlignLayout.VertCenter;
 
-  if SameText(AAlignStr,'Horizontal') then Result:=TAlignLayout.Horizontal;
-  if SameText(AAlignStr,'Vertical') then Result:=TAlignLayout.Vertical;
-  if SameText(AAlignStr,'Scale') then Result:=TAlignLayout.Scale;
+  if SameText(AAlignStr,'Horizontal') or SameText(AAlignStr,'alHorizontal') then Result:=TAlignLayout.Horizontal;
+  if SameText(AAlignStr,'Vertical') or SameText(AAlignStr,'alVertical') then Result:=TAlignLayout.Vertical;
+  if SameText(AAlignStr,'Scale') or SameText(AAlignStr,'alScale') then Result:=TAlignLayout.Scale;
 
-  if SameText(AAlignStr,'Fit') then Result:=TAlignLayout.Fit;
-  if SameText(AAlignStr,'FitLeft') then Result:=TAlignLayout.FitLeft;
-  if SameText(AAlignStr,'FitRight') then Result:=TAlignLayout.FitRight;
+  if SameText(AAlignStr,'Fit') or SameText(AAlignStr,'alFit') then Result:=TAlignLayout.Fit;
+  if SameText(AAlignStr,'FitLeft') or SameText(AAlignStr,'alFitLeft') then Result:=TAlignLayout.FitLeft;
+  if SameText(AAlignStr,'FitRight') or SameText(AAlignStr,'alFitRight') then Result:=TAlignLayout.FitRight;
   {$ELSE}
   Result:=TAlign.alNone;
   //  TAlign = (None, Top, Left, Right, Bottom,
@@ -1112,17 +1377,17 @@ begin
   //Client, Contents, Center, VertCenter,HorzCenter,
   //Horizontal, Vertical, Scale,
   //Fit, FitLeft, FitRight);
-  if SameText(AAlignStr,'Top') then Result:=TAlign.alTop;
-  if SameText(AAlignStr,'Left') then Result:=TAlign.alLeft;
-  if SameText(AAlignStr,'Right') then Result:=TAlign.alRight;
-  if SameText(AAlignStr,'Bottom') then Result:=TAlign.alBottom;
+  if SameText(AAlignStr,'Top') or SameText(AAlignStr,'alTop') then Result:=TAlign.alTop;
+  if SameText(AAlignStr,'Left') or SameText(AAlignStr,'alLeft') then Result:=TAlign.alLeft;
+  if SameText(AAlignStr,'Right') or SameText(AAlignStr,'alRight') then Result:=TAlign.alRight;
+  if SameText(AAlignStr,'Bottom') or SameText(AAlignStr,'alBottom') then Result:=TAlign.alBottom;
 
 //  if SameText(AAlignStr,'MostTop') then Result:=TAlign.alMostTop;
 //  if SameText(AAlignStr,'MostBottom') then Result:=TAlign.alMostBottom;
 //  if SameText(AAlignStr,'MostLeft') then Result:=TAlign.alMostLeft;
 //  if SameText(AAlignStr,'MostRight') then Result:=TAlign.alMostRight;
 
-  if SameText(AAlignStr,'Client') then Result:=TAlign.alClient;
+  if SameText(AAlignStr,'Client') or SameText(AAlignStr,'alClient') then Result:=TAlign.alClient;
 //  if SameText(AAlignStr,'Contents') then Result:=TAlign.alContents;
 //  if SameText(AAlignStr,'Center') then Result:=TAlign.alCenter;
 //  if SameText(AAlignStr,'VertCenter') then Result:=TAlign.alVertCenter;
@@ -1233,6 +1498,10 @@ begin
   Result:=Sqrt(Power(APoint.X-BPoint.X,2)+Power(APoint.Y-BPoint.Y,2));
 end;
 
+
+{$IFDEF VCL}
+  {$IF CompilerVersion<30.0}
+
 function OffsetRect(var R: TRectF; DX, DY: Single): Boolean;
 begin
 //{$EXCESSPRECISION OFF}
@@ -1308,11 +1577,21 @@ begin
 end;
 
 
+procedure InflateRect(var R: TRectF; const DX, DY: Single);
+begin
+  R.Left := R.Left - DX;
+  R.Right := R.Right + DX;
+  R.Top := R.Top - DY;
+  R.Bottom := R.Bottom + DY;
+end;
+
 function PointF(X, Y: Single): TPointF;
 begin
   Result.X := X;
   Result.Y := Y;
 end;
+  {$IFEND}
+{$ENDIF}
 
 
 function GetAngle(X1:Double;Y1:Double;X2:Double;Y2:Double):Double;
@@ -1412,6 +1691,8 @@ var
   ATempObject:TFmxObject;
   ANullBitmapLinks:TBitmapLinks;
 begin
+//  uBaseLog.HandleException(nil,'ClearStyleObjectVisiualElement AStyleObject.Class is '+AStyleObject.ClassName);
+
   if AStyleObject is TStyleObject then
   begin
     ANullBitmapLinks:=TBitmapLinks.Create();
@@ -1444,6 +1725,7 @@ begin
 
   for I := AStyleObject.ChildrenCount-1 downto 0 do
   begin
+//    uBaseLog.HandleException(nil,'ClearStyleObjectVisiualElement AStyleObject.Children['+IntToStr(I)+'].Class is '+AStyleObject.Children[I].ClassName);
     //ComboBox
     if (AStyleObject.Children[I].ClassName='TLayout')
       and (AStyleObject.Children[I].ChildrenCount>0)
@@ -1477,6 +1759,10 @@ begin
 
 
       Continue;
+    end;
+    if (AControlClassify='ComboEdit') then
+    begin
+      ClearStyleObjectVisiualElement(AStyleObject.Children[I],'ComboEdit');
     end;
   end;
 
@@ -1563,6 +1849,8 @@ end;
 
 
 {$IFDEF VCL}
+    {$IF CompilerVersion<30.0}
+    //没有定义TRectF
 
 function TRectF.GetHeight: Single;
 begin
@@ -1596,8 +1884,9 @@ function TRectF.IsEmpty: Boolean;
 begin
   Result := (Right <= Left) or (Bottom <= Top);
 end;
-{$ENDIF}
+    {$IFEND}
 
+{$ENDIF}
 
 
 
@@ -1898,6 +2187,19 @@ begin
   FNavigationBarColor:=uGraphicCommon.SkinNavigationBarColor;
   FNavigationBarFontColor:=uGraphicCommon.SkinNavigationBarFontColor;
 
+  FFilePictureSearchPaths:=TStringList.Create;
+end;
+
+destructor TSkinTheme.Destroy;
+begin
+  FreeAndNil(FFilePictureSearchPaths);
+
+  inherited;
+end;
+
+function TSkinTheme.GetFilePictureSearchPaths: TStringList;
+begin
+  Result:=FFilePictureSearchPaths;
 end;
 
 function TSkinTheme.GetNavigationBarColor: TDelphiColor;
@@ -1940,6 +2242,19 @@ end;
 function TSkinTheme.GetSkinThemeColor3: TDelphiColor;
 begin
   Result:=FSkinThemeColor3;//uGraphicCommon.SkinThemeColor1;
+end;
+
+procedure TSkinTheme.Loaded;
+begin
+  inherited;
+  GlobalFilePictureSearchPaths.Assign(FFilePictureSearchPaths);
+
+end;
+
+procedure TSkinTheme.SetFilePictureSearchPaths(const Value: TStringList);
+begin
+  FFilePictureSearchPaths.Assign(Value);
+  GlobalFilePictureSearchPaths.Assign(Value);
 end;
 
 procedure TSkinTheme.SetNavigationBarColor(const Value: TDelphiColor);
@@ -2049,11 +2364,13 @@ initialization
   //
   SkinNavigationBarFontColor:=WhiteColor;
 
+  GlobalFilePictureSearchPaths:=TStringList.Create;
 
 //  uBaseLog.HandleException(nil,'GetScreenScaleRate:'+FloatToStr(GetScreenScaleRate));
 
 
-
+finalization
+  FreeAndNil(GlobalFilePictureSearchPaths);
 
 end.
 

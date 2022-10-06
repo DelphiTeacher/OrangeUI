@@ -14,6 +14,11 @@ uses
   Messages,
   StdCtrls,
   Forms,
+
+  {$IF CompilerVersion>=30.0}
+  Types,//定义了TRectF
+  {$IFEND}
+
   ExtCtrls,
   Graphics,
   uVersion,
@@ -29,6 +34,7 @@ uses
   uDrawCanvas,
   uSkinMaterial,
   uComponentType,
+  uBasePageStructure,
   uSkinEditType,
   uDrawEngine,
   uDrawPicture,
@@ -39,14 +45,15 @@ uses
 type
   //皮肤文本框TSkinEdit
   TSkinWinEdit=class(TCustomEdit,
-  ISkinEdit,
-      ISkinControlMaterial,
-      IDirectUIControl,
-//  ISkinComponent,
-  ISkinControl,
-  IBindSkinItemTextControl,
-  IBindSkinItemValueControl,
-  ISkinItemBindingControl
+      ISkinEdit,
+          ISkinControlMaterial,
+          IDirectUIControl,
+    //  ISkinComponent,
+      ISkinControl,
+      IBindSkinItemTextControl,
+      IBindSkinItemValueControl,
+      ISkinItemBindingControl,
+      IControlForPageFramework
   )
   private
     {$I Source\Controls\INC\Common\ISkinControl_Declare.inc}
@@ -142,6 +149,26 @@ type
     procedure SetBorderMargins(const Value: TBorderMargins);
     procedure SetNCBorderMargins(const Value: TBorderMargins);
     procedure OnBorderMarginsChangeNotify(Sender:TObject);
+  public
+    //针对页面框架的控件接口
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;virtual;
+//    //获取合适的高度
+//    function GetSuitDefaultItemHeight:Double;
+    //获取与设置自定义属性
+    function GetPropJsonStr:String;virtual;
+    procedure SetPropJsonStr(AJsonStr:String);virtual;
+
+    //获取提交的值
+    function GetPostValue(ASetting:TFieldControlSetting;APageDataDir:String;ASetRecordFieldValueIntf:ISetRecordFieldValue;
+                            var AErrorMessage:String):Variant;virtual;
+    //设置值
+    procedure SetControlValue(ASetting:TFieldControlSetting;APageDataDir:String;AImageServerUrl:String;AValue:Variant;AValueCaption:String;
+                            //要设置多个值,整个字段的记录
+                            AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);virtual;
+//    //设置属性
+//    function GetProp(APropName:String):Variant;virtual;
+//    procedure SetProp(APropName:String;APropValue:Variant);virtual;
+    procedure DoReturnFrame(AFromFrame:TFrame);
   published
     //边框扩展边距(在VCL下才有用,FMX下此属性无用)
     property BorderMargins:TBorderMargins read FBorderMargins write SetBorderMargins;
@@ -337,6 +364,64 @@ end;
 procedure TSkinWinEdit.OnBorderMarginsChangeNotify(Sender: TObject);
 begin
 end;
+
+
+
+function TSkinWinEdit.LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;
+begin
+//  SetMaterialUseKind(TMaterialUseKind.mukRefByStyleName);
+//  SetMaterialName(ASetting.ControlStyle);
+//
+//  if ASetting.HasHintLabel=0 then
+//  begin
+//    Caption:=ASetting.Caption;
+//  end;
+  Self.EditProperties.HelpText:=ASetting.input_prompt;
+  Self.MaxLength:=ASetting.input_max_length;
+
+  Result:=True;
+end;
+
+function TSkinWinEdit.GetPropJsonStr:String;
+begin
+  Result:=Self.EditProperties.GetPropJsonStr;
+end;
+
+procedure TSkinWinEdit.SetPropJsonStr(AJsonStr:String);
+begin
+  Self.EditProperties.SetPropJsonStr(AJsonStr);
+end;
+
+////设置属性
+//function TSkinWinEdit.GetProp(APropName:String):Variant;
+//begin
+//  Result:='';
+//end;
+//
+//procedure TSkinWinEdit.SetProp(APropName:String;APropValue:Variant);
+//begin
+//end;
+
+
+
+function TSkinWinEdit.GetPostValue(ASetting:TFieldControlSetting;APageDataDir:String;ASetRecordFieldValueIntf:ISetRecordFieldValue;
+                                          var AErrorMessage:String):Variant;
+begin
+  Result:=Text;
+end;
+
+procedure TSkinWinEdit.SetControlValue(ASetting:TFieldControlSetting;APageDataDir:String;AImageServerUrl:String;AValue:Variant;AValueCaption:String;
+                                              //要设置多个值,整个字段的记录
+                                              AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
+begin
+  Text:=AValue;
+end;
+
+procedure TSkinWinEdit.DoReturnFrame(AFromFrame:TFrame);
+begin
+
+end;
+
 
 function TSkinWinEdit.GetBufferBitmap: TBufferBitmap;
 begin

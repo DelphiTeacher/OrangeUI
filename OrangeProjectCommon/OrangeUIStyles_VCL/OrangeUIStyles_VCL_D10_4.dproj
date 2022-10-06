@@ -172,17 +172,12 @@
         <DCCReference Include="ListItemStyle_VertSelectedSignLeft_CaptionRight.pas"/>
         <DCCReference Include="ListItemStyle_CaptionDetailItem.pas"/>
         <DCCReference Include="ListItemStyle_ClassifyHasSelectedEffect.pas"/>
-        <DCCReference Include="ListItemStyle_CompanyInfo.pas"/>
-        <DCCReference Include="ListItemStyle_ContactInfo.pas"/>
-        <DCCReference Include="ListItemStyle_CustomerInfo.pas"/>
-        <DCCReference Include="ListItemStyle_CustomerTag.pas"/>
         <DCCReference Include="ListItemStyle_Edit.pas"/>
         <DCCReference Include="ListItemStyle_HistoryMadical.pas"/>
         <DCCReference Include="ListItemStyle_HospitalDoctorForRegisterNumber.pas"/>
         <DCCReference Include="ListItemStyle_IconButton.pas"/>
         <DCCReference Include="ListItemStyle_MailList.pas"/>
         <DCCReference Include="ListItemStyle_MailList2.pas"/>
-        <DCCReference Include="ListItemStyle_MailListWithTag.pas"/>
         <DCCReference Include="ListItemStyle_TreeMainMenu_LabelAndArrow.pas"/>
         <DCCReference Include="..\EasyServiceCommonMaterialDataMoudle_VCL.pas">
             <FormType>dfm</FormType>

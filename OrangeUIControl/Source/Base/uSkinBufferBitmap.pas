@@ -22,6 +22,9 @@ uses
   SysUtils,
   Math,
 
+  {$IF CompilerVersion>=30.0}
+  Types,//定义了TRectF
+  {$IFEND}
 
   {$IFDEF VCL}
   Windows,
@@ -29,7 +32,6 @@ uses
   {$ENDIF}
 
   {$IFDEF FMX}
-  Types,
   FMX.Types,
   FMX.Objects,
   FMX.Graphics,
@@ -46,7 +48,9 @@ uses
 
 
 
-
+const
+  CALC_STRING_MAX_WIDTH = 2000;
+  CALC_STRING_MAX_HEIGHT = 2000;
 
 
 
@@ -226,6 +230,7 @@ function GetGlobalAutoSizeBufferBitmap:TBufferBitmap;
 function GetStringWidth(const AStr:String;ADrawRect:TRectF;ADrawTextParam:TDrawTextParam=nil):Double;overload;
 function CalcStringWidth(const AStr:String;ADrawHeight:Double;ADrawTextParam:TDrawTextParam=nil):Double;overload;
 function GetStringWidth(const AStr:String;AFontSize:TControlSize):Double;overload;
+function GetStringSpace(const AStr:String;AFontSize:TControlSize):String;overload;
 
 /// <summary>
 ///   <para>
@@ -237,6 +242,7 @@ function GetStringWidth(const AStr:String;AFontSize:TControlSize):Double;overloa
 /// </summary>
 function GetStringHeight(const AStr:String;ADrawRect:TRectF;ADrawTextParam:TDrawTextParam=nil):Double;overload;
 function CalcStringHeight(const AStr:String;ADrawWidth:Double;ADrawTextParam:TDrawTextParam=nil):Double;
+function GetStringHeight(const AStr:String;AFontSize:TControlSize):Double;overload;
 
 /// <summary>
 ///   <para>
@@ -390,14 +396,52 @@ end;
 
 function CalcStringHeight(const AStr:String;ADrawWidth:Double;ADrawTextParam:TDrawTextParam=nil):Double;
 begin
-  Result:=GetStringSize(AStr,RectF(0,0,ADrawWidth,MaxInt),ADrawTextParam).cy;
+  Result:=GetStringSize(AStr,RectF(0,0,ADrawWidth,CALC_STRING_MAX_HEIGHT),ADrawTextParam).cy;
 end;
 
 function GetStringWidth(const AStr:String;AFontSize:TControlSize):Double;overload;
 begin
   GetGlobalDrawTextParam.FontSize:=AFontSize;
   GetGlobalDrawTextParam.IsWordWrap:=False;
-  Result:=GetStringSize(AStr,RectF(0,0,MaxInt,50),GetGlobalDrawTextParam).cx;
+  Result:=GetStringSize(AStr,RectF(0,0,CALC_STRING_MAX_WIDTH,50),GetGlobalDrawTextParam).cx;
+//  Result:=GetStringSize(AStr,RectF(0,0,CALC_STRING_MAX_WIDTH,100),GetGlobalDrawTextParam).cx;
+end;
+
+function GetStringSpace(const AStr:String;AFontSize:TControlSize):String;
+var
+//  AOneSpaceWidth:Double;
+  AStrWidth:Double;
+//  ASpaceCount:Integer;
+  I: Integer;
+  ASpaceWidth:Double;
+begin
+  Result:='';
+//  AOneSpaceWidth:=GetStringWidth(' ',AFontSize);
+  AStrWidth:=GetStringWidth(AStr,AFontSize);
+//  ASpaceCount:=Ceil(AStrWidth/AOneSpaceWidth);
+//  SetLength(Result,ASpaceCount);
+//  for I := 1 to ASpaceCount do
+//  begin
+//    Result[I]:=' ';
+//  end;
+  for I := 0 to 100 do
+  begin
+    Result:=Result+' ';
+    ASpaceWidth:=GetStringWidth(Result,AFontSize);
+    if ASpaceWidth>AStrWidth then
+    begin
+      Break;
+    end;
+
+  end;
+end;
+
+function GetStringHeight(const AStr:String;AFontSize:TControlSize):Double;overload;
+begin
+  GetGlobalDrawTextParam.FontSize:=AFontSize;
+  GetGlobalDrawTextParam.IsWordWrap:=False;
+  Result:=GetStringSize(AStr,RectF(0,0,CALC_STRING_MAX_WIDTH,CALC_STRING_MAX_WIDTH),GetGlobalDrawTextParam).cy;
+//  Result:=GetStringSize(AStr,RectF(0,0,CALC_STRING_MAX_WIDTH,100),GetGlobalDrawTextParam).cx;
 end;
 
 function GetStringWidth(const AStr:String;ADrawRect:TRectF;ADrawTextParam:TDrawTextParam=nil):Double;
@@ -407,7 +451,7 @@ end;
 
 function CalcStringWidth(const AStr:String;ADrawHeight:Double;ADrawTextParam:TDrawTextParam=nil):Double;
 begin
-  Result:=GetStringSize(AStr,RectF(0,0,MaxInt,ADrawHeight),ADrawTextParam).cx;
+  Result:=GetStringSize(AStr,RectF(0,0,CALC_STRING_MAX_WIDTH,ADrawHeight),ADrawTextParam).cx;
 end;
 
 function GetStringSize(const AStr:String;ADrawRect:TRectF;ADrawTextParam:TDrawTextParam=nil):TSizeF;
@@ -451,7 +495,7 @@ begin
                                                                       ADrawTextParam,
                                                                       AStr,
                                                                       //ADrawRect,
-                                                                      RectF(ADrawRect.Left,ADrawRect.Top,ADrawRect.Right,MaxInt),
+                                                                      RectF(ADrawRect.Left,ADrawRect.Top,ADrawRect.Right,CALC_STRING_MAX_HEIGHT),
                                                                       AWidth,
                                                                       AHeight,cdstBoth) then
           begin
@@ -465,7 +509,7 @@ begin
           if GetGlobalAutoSizeBufferBitmap.DrawCanvas.CalcTextDrawSize(
                                                               ADrawTextParam,
                                                               AStr,
-                                                              RectF(ADrawRect.Left,ADrawRect.Top,MaxInt,ADrawRect.Bottom),
+                                                              RectF(ADrawRect.Left,ADrawRect.Top,CALC_STRING_MAX_WIDTH,ADrawRect.Bottom),
                                                               AWidth,
                                                               AHeight,cdstBoth) then
           begin
@@ -474,6 +518,10 @@ begin
           end;
 
       end;
+      Result.cx:=Result.cx
+                  +ADrawTextParam.AutoSizeWidthAdjust;
+      Result.cy:=Result.cy
+                  +ADrawTextParam.AutoSizeHeightAdjust;
   except
     on E:Exception do
     begin
@@ -499,7 +547,7 @@ begin
                         );
   Result.cx:=Result.cx
               +ADrawTextParam.AutoSizeWidthAdjust;
-  Result.cy:=Result.cx
+  Result.cy:=Result.cy
               +ADrawTextParam.AutoSizeHeightAdjust;
 
   if ADrawTextParam.DrawRectSetting.Enabled then

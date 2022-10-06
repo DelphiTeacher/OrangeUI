@@ -52,10 +52,12 @@ uses
 const
   IID_ISkinLabel:TGUID='{507F6B92-24C0-4546-8A59-01C8849AF54B}';
   IID_ISkinRollLabel:TGUID='{D716F594-3D0C-4150-AE85-BC1A871D599F}';
+  IID_ISkinHintLabel:TGUID='{2E7C6A47-91D8-41D0-8BA3-926B35287FA2}';
 
 type
   TLabelProperties=class;
   TRollLabelProperties=class;
+  THintLabelProperties=class;
 
 
 
@@ -86,6 +88,16 @@ type
     function GetRollLabelProperties:TRollLabelProperties;
     property Properties:TRollLabelProperties read GetRollLabelProperties;
     property Prop:TRollLabelProperties read GetRollLabelProperties;
+  end;
+
+
+
+
+  ISkinHintLabel=interface//(ISkinControl)
+    ['{2E7C6A47-91D8-41D0-8BA3-926B35287FA2}']
+    function GetHintLabelProperties:THintLabelProperties;
+    property Properties:THintLabelProperties read GetHintLabelProperties;
+    property Prop:THintLabelProperties read GetHintLabelProperties;
   end;
 
 
@@ -150,6 +162,25 @@ type
 
 
 
+  THintLabelProperties=class(TLabelProperties)
+  private
+    FHint: String;
+    procedure SetHint(const Value: String);
+  protected
+    FSkinHintLabelIntf:ISkinHintLabel;
+  public
+    constructor Create(ASkinControl:TControl);override;
+    destructor Destroy;override;
+  public
+    //获取分类名称
+    function GetComponentClassify:String;override;
+  published
+    property Hint:String read FHint write SetHint;
+  end;
+
+
+
+
   /// <summary>
   ///   <para>
   ///     标签素材基类
@@ -183,11 +214,38 @@ type
     property DrawCaptionParam:TDrawTextParam read FDrawCaptionParam write SetDrawCaptionParam;
   end;
 
+  TSkinHintLabelMaterial=class(TSkinLabelMaterial)
+  private
+    //标题绘制参数
+    FDrawHintParam:TDrawTextParam;
+    procedure SetDrawHintParam(const Value: TDrawTextParam);
+//  protected
+//    //从文档节点中加载
+//    function LoadFromDocNode(ADocNode:TBTNode20_Class):Boolean;override;
+//    //保存到文档节点
+//    function SaveToDocNode(ADocNode:TBTNode20_Class):Boolean;override;
+  public
+    constructor Create(AOwner:TComponent);override;
+    destructor Destroy;override;
+  published
+    /// <summary>
+    ///   <para>
+    ///     标题绘制参数
+    ///   </para>
+    ///   <para>
+    ///     Draw parameters of caption
+    ///   </para>
+    /// </summary>
+    property DrawHintParam:TDrawTextParam read FDrawHintParam write SetDrawHintParam;
+  end;
+
+
   TSkinLabelType=class(TSkinControlType)
   private
     FSkinLabelIntf:ISkinLabel;
     function GetSkinMaterial:TSkinLabelMaterial;
   protected
+    function GetDrawCaption:String;virtual;
     function GetProcessedDrawRect(ADrawRect:TRectF):TRectF;virtual;
     //自定义绘制方法
     function CustomPaint(ACanvas:TDrawCanvas;ASkinMaterial:TSkinControlMaterial;const ADrawRect:TRectF;APaintData:TPaintData):Boolean;override;
@@ -210,6 +268,23 @@ type
     function CustomBind(ASkinControl:TControl):Boolean;override;
     //解除绑定
     procedure CustomUnBind;override;
+  end;
+
+
+  TSkinHintLabelType=class(TSkinLabelType)
+  private
+    FHintSpace:String;
+    FLastCalcHintSpaceFontSize:Double;
+    FLastCalcHintSpaceHint:String;
+    FSkinHintLabelIntf:ISkinHintLabel;
+  protected
+    function GetDrawCaption:String;override;
+    //绑定对象
+    function CustomBind(ASkinControl:TControl):Boolean;override;
+    //解除绑定
+    procedure CustomUnBind;override;
+    //自定义绘制方法
+    function CustomPaint(ACanvas:TDrawCanvas;ASkinMaterial:TSkinControlMaterial;const ADrawRect:TRectF;APaintData:TPaintData):Boolean;override;
   end;
 
 
@@ -315,6 +390,35 @@ type
 
 
 
+  TSkinHintLabel=class(TSkinLabel,ISkinHintLabel)
+  private
+    function GetHintLabelProperties:THintLabelProperties;
+    procedure SetHintLabelProperties(Value:THintLabelProperties);
+  protected
+    //获取控件属性类
+    function GetPropertiesClassType:TPropertiesClassType;override;
+  public
+    //针对页面框架的控件接口
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;override;
+  public
+    property Prop:THintLabelProperties read GetHintLabelProperties write SetHintLabelProperties;
+  published
+    //属性
+    property Properties:THintLabelProperties read GetHintLabelProperties write SetHintLabelProperties;
+  end;
+
+  {$IFDEF VCL}
+  TSkinWinHintLabel=class(TSkinHintLabel)
+  end;
+  {$ENDIF VCL}
+  {$IFDEF FMX}
+  {$I Source\Controls\ComponentPlatformsAttribute.inc}
+  TSkinFMXHintLabel=class(TSkinHintLabel)
+  end;
+  {$ENDIF FMX}
+
+
+
 
 
 
@@ -353,6 +457,11 @@ begin
   Self.FSkinLabelIntf:=nil;
 end;
 
+function TSkinLabelType.GetDrawCaption: String;
+begin
+  Result:=Self.FSkinControlIntf.Caption;
+end;
+
 function TSkinLabelType.GetProcessedDrawRect(ADrawRect: TRectF): TRectF;
 begin
   Result:=ADrawRect;
@@ -385,7 +494,7 @@ begin
     begin
       ACanvas.DrawText(Self.GetSkinMaterial.FDrawCaptionParam,
 //                        Self.FSkinLabelIntf.Prop.FPrefix+
-                        Self.FSkinControlIntf.Caption,
+                        GetDrawCaption,
                         GetProcessedDrawRect(ADrawRect));
     end;
   end;
@@ -400,7 +509,7 @@ begin
   if GetSkinMaterial<>nil then
   begin
     ASize:=GetSuitControlStringContentSize(
-            Self.FSkinControlIntf.Caption,
+            GetDrawCaption,
             RectF(0,0,Self.FSkinControlIntf.Width,Self.FSkinControlIntf.Height),
             Self.GetSkinMaterial.FDrawCaptionParam
             );
@@ -469,6 +578,59 @@ begin
   FDrawCaptionParam.Assign(Value);
 end;
 
+{ TSkinHintLabelMaterial }
+
+constructor TSkinHintLabelMaterial.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FDrawHintParam:=CreateDrawTextParam('DrawHintParam','标题绘制参数');
+end;
+
+//function TSkinHintLabelMaterial.LoadFromDocNode(ADocNode: TBTNode20_Class): Boolean;
+////var
+////  I: Integer;
+////  ABTNode:TBTNode20;
+//begin
+//  Result:=False;
+//
+//  Inherited LoadFromDocNode(ADocNode);
+//
+////  for I := 0 to ADocNode.ChildNodes.Count - 1 do
+////  begin
+////    ABTNode:=ADocNode.ChildNodes[I];
+////    if ABTNode.NodeName='DrawHintParam' then
+////    begin
+////      FDrawHintParam.LoadFromDocNode(ABTNode.ConvertNode_Class);
+////    end;
+////  end;
+//
+//  Result:=True;
+//end;
+//
+//function TSkinHintLabelMaterial.SaveToDocNode(ADocNode: TBTNode20_Class): Boolean;
+////var
+////  ABTNode:TBTNode20;
+//begin
+//  Result:=False;
+//
+//  Inherited SaveToDocNode(ADocNode);
+//
+////  ABTNode:=ADocNode.AddChildNode_Class('DrawHintParam',FDrawHintParam.Name);
+////  Self.FDrawHintParam.SaveToDocNode(ABTNode.ConvertNode_Class);
+//
+//  Result:=True;
+//end;
+
+destructor TSkinHintLabelMaterial.Destroy;
+begin
+  FreeAndNil(FDrawHintParam);
+  inherited;
+end;
+
+procedure TSkinHintLabelMaterial.SetDrawHintParam(const Value: TDrawTextParam);
+begin
+  FDrawHintParam.Assign(Value);
+end;
 
 { TLabelProperties }
 
@@ -788,6 +950,45 @@ begin
   Result:=FTween.Speed;
 end;
 
+
+
+{ THintLabelProperties }
+
+constructor THintLabelProperties.Create(ASkinControl: TControl);
+begin
+  inherited Create(ASkinControl);
+
+  if Not ASkinControl.GetInterface(IID_ISkinHintLabel,Self.FSkinHintLabelIntf) then
+  begin
+    ShowException('This Component Do not Support ISkinHintLabel Interface');
+  end
+  else
+  begin
+    Self.FSkinControlIntf.Width:=120;
+    Self.FSkinControlIntf.Height:=22;
+  end;
+end;
+
+destructor THintLabelProperties.Destroy;
+begin
+  inherited;
+end;
+
+
+function THintLabelProperties.GetComponentClassify: String;
+begin
+  Result:='SkinHintLabel';
+end;
+
+procedure THintLabelProperties.SetHint(const Value: String);
+begin
+  if FHint<>Value then
+  begin
+    FHint := Value;
+    Self.Invalidate;
+  end;
+end;
+
 { TSkinRollLabelType }
 
 function TSkinRollLabelType.CustomBind(ASkinControl: TControl): Boolean;
@@ -819,6 +1020,61 @@ begin
   Result:=Self.FSkinRollLabelIntf.Prop.GetProcessedDrawRect(ADrawRect);
 end;
 
+{ TSkinHintLabelType }
+
+function TSkinHintLabelType.CustomBind(ASkinControl: TControl): Boolean;
+begin
+  if Inherited CustomBind(ASkinControl) then
+  begin
+    if ASkinControl.GetInterface(IID_ISkinHintLabel,Self.FSkinHintLabelIntf) then
+    begin
+      Result:=True;
+    end
+    else
+    begin
+      ShowException('This Component Do not Support ISkinHintLabel Interface');
+    end;
+  end;
+
+end;
+
+function TSkinHintLabelType.CustomPaint(ACanvas: TDrawCanvas;
+  ASkinMaterial: TSkinControlMaterial; const ADrawRect: TRectF;
+  APaintData: TPaintData): Boolean;
+begin
+  //绘制提示
+    if Self.FSkinHintLabelIntf.Properties.FHint <> '' then
+    begin
+      if (FLastCalcHintSpaceFontSize<>TSkinHintLabelMaterial(ASkinMaterial).FDrawHintParam.FontSize)
+        or (FLastCalcHintSpaceHint<>Self.FSkinHintLabelIntf.Properties.FHint) then
+      begin
+        FHintSpace:=GetStringSpace(Self.FSkinHintLabelIntf.Properties.FHint,TSkinHintLabelMaterial(ASkinMaterial).FDrawHintParam.FontSize);
+        FLastCalcHintSpaceFontSize:=TSkinHintLabelMaterial(ASkinMaterial).FDrawHintParam.FontSize;
+        FLastCalcHintSpaceHint:=Self.FSkinHintLabelIntf.Properties.FHint;
+      end;
+
+      ACanvas.DrawText(TSkinHintLabelMaterial(ASkinMaterial).FDrawHintParam,
+//                        Self.FSkinLabelIntf.Prop.FPrefix+
+                        Self.FSkinHintLabelIntf.Properties.FHint,
+                        ADrawRect);
+    end;
+
+  Result:=Inherited;
+
+end;
+
+procedure TSkinHintLabelType.CustomUnBind;
+begin
+  Inherited CustomUnBind;
+  Self.FSkinHintLabelIntf:=nil;
+
+end;
+
+function TSkinHintLabelType.GetDrawCaption: String;
+begin
+  Result:=FHintSpace+Inherited;
+end;
+
 { TSkinRollLabel }
 
 function TSkinRollLabel.GetPropertiesClassType: TPropertiesClassType;
@@ -836,6 +1092,31 @@ begin
   Self.FProperties.Assign(Value);
 end;
 
+{ TSkinHintLabel }
+
+function TSkinHintLabel.GetPropertiesClassType: TPropertiesClassType;
+begin
+  Result:=THintLabelProperties;
+end;
+
+function TSkinHintLabel.LoadFromFieldControlSetting(
+  ASetting: TFieldControlSetting; AFieldControlSettingMap: TObject): Boolean;
+begin
+  Result:=Inherited;
+  Self.Prop.Hint:=ASetting.field_caption+':';
+end;
+
+function TSkinHintLabel.GetHintLabelProperties: THintLabelProperties;
+begin
+  Result:=THintLabelProperties(Self.FProperties);
+end;
+
+procedure TSkinHintLabel.SetHintLabelProperties(Value: THintLabelProperties);
+begin
+  Self.FProperties.Assign(Value);
+end;
+
 end.
+
 
 

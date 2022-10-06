@@ -209,7 +209,7 @@ begin
     uBaseLog.OutputDebugString('TFrameBaiduWebMap.DoShow 2');
 
 
-    FWebBrowser.Align:=TAlignLayout.alClient;
+    FWebBrowser.Align:=TAlignLayout.Client;
     FWebBrowser.Visible:=True;
 
 

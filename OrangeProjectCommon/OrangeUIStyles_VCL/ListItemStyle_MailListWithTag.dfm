@@ -15,6 +15,7 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = True
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -25,20 +26,25 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
     SelfOwnMaterial.BackColor.DrawRectSetting.Enabled = True
     SelfOwnMaterial.BackColor.DrawRectSetting.SizeType = dpstPixel
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.IsFill = True
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Color = 16381943
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange]
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = 15987441
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange]
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     HitTest = False
@@ -48,10 +54,10 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
     Properties.IsPreview = False
     Properties.PreviewItem.Selected = False
     Properties.PreviewItem.Checked = False
-    Properties.PreviewItem.Height = -1
+    Properties.PreviewItem.Height = -1.000000000000000000
     Properties.PreviewItem.Visible = True
     Properties.PreviewItem.Color = clBlack
-    Properties.PreviewItem.Width = -1
+    Properties.PreviewItem.Width = -1.000000000000000000
     Properties.PreviewItem.Icon.IsClipRound = False
     Properties.PreviewItem.Pic.IsClipRound = False
     Properties.PreviewItem.Tag = 0
@@ -78,18 +84,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = clWhite
       SelfOwnMaterial.BackColor.IsFill = False
       SelfOwnMaterial.BackColor.FillColor.Alpha = 255
       SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.IsTransparent = True
       SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
@@ -118,6 +130,7 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
       MouseDownFocus = False
       Align = alLeft
       TabOrder = 0
+      Caption = ''
       Properties.AutoSize = False
       Properties.Picture.IsClipRound = False
       Properties.Animated = False
@@ -139,18 +152,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = clWhite
       SelfOwnMaterial.BackColor.IsFill = False
       SelfOwnMaterial.BackColor.FillColor.Alpha = 255
       SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.IsTransparent = True
       SelfOwnMaterial.DrawCaptionParam.FontName = 'Tahoma'
@@ -177,6 +196,8 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
       MouseDownFocus = False
       Align = alClient
       TabOrder = 1
+      Caption = ''
+      Text = ''
       object pnlUserInfo: TSkinWinPanel
         AlignWithMargins = True
         Left = 0
@@ -192,18 +213,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = clWhite
         SelfOwnMaterial.BackColor.IsFill = False
         SelfOwnMaterial.BackColor.FillColor.Alpha = 255
         SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.IsTransparent = True
         SelfOwnMaterial.DrawCaptionParam.FontName = 'Tahoma'
@@ -230,6 +257,8 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         MouseDownFocus = False
         Align = alTop
         TabOrder = 0
+        Caption = ''
+        Text = ''
         object lblUserName: TSkinWinLabel
           Left = 0
           Top = 0
@@ -241,18 +270,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukSelfOwn
           KeepSelfOwnMaterial = True
+          SelfOwnMaterial.BackColor.Color = clWhite
           SelfOwnMaterial.BackColor.IsFill = False
           SelfOwnMaterial.BackColor.FillColor.Alpha = 255
           SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.IsTransparent = True
           SelfOwnMaterial.DrawCaptionParam.FontName = 'Tahoma'
@@ -287,7 +322,7 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           AlignWithMargins = True
           Left = 46
           Top = 0
-          Width = 145
+          Width = 226
           Height = 30
           Margins.Left = 1
           Margins.Top = 0
@@ -299,18 +334,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukSelfOwn
           KeepSelfOwnMaterial = True
+          SelfOwnMaterial.BackColor.Color = clWhite
           SelfOwnMaterial.BackColor.IsFill = False
           SelfOwnMaterial.BackColor.FillColor.Alpha = 255
           SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.IsTransparent = True
           SelfOwnMaterial.DrawCaptionParam.FontName = 'Tahoma'
@@ -360,18 +401,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukSelfOwn
           KeepSelfOwnMaterial = True
+          SelfOwnMaterial.BackColor.Color = clWhite
           SelfOwnMaterial.BackColor.IsFill = False
           SelfOwnMaterial.BackColor.FillColor.Alpha = 255
           SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.IsTransparent = True
           SelfOwnMaterial.DrawCaptionParam.FontName = 'Tahoma'
@@ -421,18 +468,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = clWhite
         SelfOwnMaterial.BackColor.IsFill = False
         SelfOwnMaterial.BackColor.FillColor.Alpha = 255
         SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.IsTransparent = True
         SelfOwnMaterial.DrawCaptionParam.FontName = 'Tahoma'
@@ -459,6 +512,8 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         MouseDownFocus = False
         Align = alTop
         TabOrder = 1
+        Caption = ''
+        Text = ''
         object lblMessage: TSkinWinLabel
           AlignWithMargins = True
           Left = 0
@@ -475,18 +530,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukSelfOwn
           KeepSelfOwnMaterial = True
+          SelfOwnMaterial.BackColor.Color = clWhite
           SelfOwnMaterial.BackColor.IsFill = False
           SelfOwnMaterial.BackColor.FillColor.Alpha = 255
           SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.IsTransparent = True
           SelfOwnMaterial.DrawCaptionParam.FontName = 'Tahoma'
@@ -537,18 +598,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukSelfOwn
           KeepSelfOwnMaterial = True
+          SelfOwnMaterial.BackColor.Color = clWhite
           SelfOwnMaterial.BackColor.IsFill = False
           SelfOwnMaterial.BackColor.FillColor.Alpha = 255
           SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.IsTransparent = True
           SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -647,6 +714,8 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           MouseDownFocus = False
           Align = alRight
           TabOrder = 1
+          Caption = ''
+          Text = ''
           Properties.AutoSize = False
           Properties.IsAutoPush = False
           Properties.IsPushed = False
@@ -699,18 +768,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukSelfOwn
           KeepSelfOwnMaterial = True
+          SelfOwnMaterial.BackColor.Color = clWhite
           SelfOwnMaterial.BackColor.IsFill = False
           SelfOwnMaterial.BackColor.FillColor.Alpha = 255
           SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+          SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
           SelfOwnMaterial.IsTransparent = True
           SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -809,6 +884,8 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           MouseDownFocus = False
           Align = alRight
           TabOrder = 2
+          Caption = ''
+          Text = ''
           Properties.AutoSize = False
           Properties.IsAutoPush = False
           Properties.IsPushed = False
@@ -913,32 +990,44 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = clWhite
         SelfOwnMaterial.BackColor.IsFill = False
         SelfOwnMaterial.BackColor.FillColor.Alpha = 255
         SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.IsTransparent = True
+        SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.Color = clWhite
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.IsFill = True
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.FillColor.Alpha = 255
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.BorderColor.Alpha = 255
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.PullDownRefreshPanelMaterial.IsTransparent = False
         SelfOwnMaterial.PullDownRefreshPanelMaterial.IndicatorColor = clBlack
@@ -969,18 +1058,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         SelfOwnMaterial.PullDownRefreshPanelMaterial.LoadingCaption = #27491#22312#21047#26032'...'
         SelfOwnMaterial.PullDownRefreshPanelMaterial.DecidedLoadCaption = #26494#24320#21047#26032
         SelfOwnMaterial.PullDownRefreshPanelMaterial.UnDecidedLoadCaption = #19979#25289#21047#26032
+        SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.Color = clWhite
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.IsFill = True
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.FillColor.Alpha = 255
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.BorderColor.Alpha = 255
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.IsTransparent = False
         SelfOwnMaterial.PullUpLoadMorePanelMaterial.IndicatorColor = clBlack
@@ -1055,47 +1150,65 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         SelfOwnMaterial.ItemBackHoverPicture.IsClipRound = False
         SelfOwnMaterial.ItemBackDownPicture.IsClipRound = False
         SelfOwnMaterial.ItemBackPushedPicture.IsClipRound = False
+        SelfOwnMaterial.DrawItemBackColorParam.Color = clWhite
         SelfOwnMaterial.DrawItemBackColorParam.IsFill = False
         SelfOwnMaterial.DrawItemBackColorParam.FillColor.Alpha = 255
         SelfOwnMaterial.DrawItemBackColorParam.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.ItemAccessoryPicture.IsClipRound = False
         SelfOwnMaterial.IsDrawCenterItemRect = False
+        SelfOwnMaterial.DrawCenterItemRectParam.Color = 15592941
         SelfOwnMaterial.DrawCenterItemRectParam.IsFill = False
         SelfOwnMaterial.DrawCenterItemRectParam.FillColor.Alpha = 255
         SelfOwnMaterial.DrawCenterItemRectParam.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.IsSimpleDrawItemDevide = True
+        SelfOwnMaterial.DrawItemDevideParam.Color = 15592941
         SelfOwnMaterial.DrawItemDevideParam.IsFill = False
         SelfOwnMaterial.DrawItemDevideParam.FillColor.Alpha = 255
         SelfOwnMaterial.DrawItemDevideParam.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawItemCaptionParam.FontName = 'Tahoma'
         SelfOwnMaterial.DrawItemCaptionParam.FontSize = 10
@@ -1263,18 +1376,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackHoverPicture.IsClipRound = False
         SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackDownPicture.IsClipRound = False
         SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackPushedPicture.IsClipRound = False
+        SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.Color = clWhite
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.IsFill = False
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.FillColor.Alpha = 255
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.BorderColor.Alpha = 255
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontName = 'Tahoma'
         SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontSize = 10
@@ -1442,18 +1561,24 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         SelfOwnMaterial.Item1TypeItemMaterial.ItemBackHoverPicture.IsClipRound = False
         SelfOwnMaterial.Item1TypeItemMaterial.ItemBackDownPicture.IsClipRound = False
         SelfOwnMaterial.Item1TypeItemMaterial.ItemBackPushedPicture.IsClipRound = False
+        SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.Color = clWhite
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.IsFill = False
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.FillColor.Alpha = 255
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.BorderColor.Alpha = 255
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontName = 'Tahoma'
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontSize = 8
@@ -1615,47 +1740,65 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.DrawEffectSetting.DisabledEffect.FontSize = 12
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
         SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.DrawEffectSetting.FocusedEffect.FontSize = 12
+        SelfOwnMaterial.DrawSpaceParam.Color = clWhite
         SelfOwnMaterial.DrawSpaceParam.IsFill = False
         SelfOwnMaterial.DrawSpaceParam.FillColor.Alpha = 255
         SelfOwnMaterial.DrawSpaceParam.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.IsSimpleDrawGroupRoundRect = False
         SelfOwnMaterial.IsSimpleDrawGroupBeginDevide = True
         SelfOwnMaterial.IsSimpleDrawGroupEndDevide = True
+        SelfOwnMaterial.DrawGroupBeginDevideParam.Color = 15592941
         SelfOwnMaterial.DrawGroupBeginDevideParam.IsFill = False
         SelfOwnMaterial.DrawGroupBeginDevideParam.FillColor.Alpha = 255
         SelfOwnMaterial.DrawGroupBeginDevideParam.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupEndDevideParam.Color = 15592941
         SelfOwnMaterial.DrawGroupEndDevideParam.IsFill = False
         SelfOwnMaterial.DrawGroupEndDevideParam.FillColor.Alpha = 255
         SelfOwnMaterial.DrawGroupEndDevideParam.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         SelfOwnMaterial.IsAutoAdjustItemDesignerPanelSize = True
         SelfOwnMaterial.IsDrawRowLine = False
@@ -1674,45 +1817,57 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         MouseDownFocus = False
         Align = alTop
         TabOrder = 2
-        VertScrollBar.Left = 228
+        VertScrollBar.Left = 0
         VertScrollBar.Top = 0
         VertScrollBar.Width = 12
-        VertScrollBar.Height = 105
+        VertScrollBar.Height = 120
         VertScrollBar.ParentMouseEvent = True
         VertScrollBar.DirectUIVisible = False
         VertScrollBar.ComponentTypeUseKind = ctukDefault
         VertScrollBar.MaterialUseKind = mukSelfOwn
         VertScrollBar.KeepSelfOwnMaterial = True
+        VertScrollBar.SelfOwnMaterial.BackColor.Color = clWhite
         VertScrollBar.SelfOwnMaterial.BackColor.IsFill = True
         VertScrollBar.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.IsTransparent = False
         VertScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 40
         VertScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
         VertScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+        VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.Color = 11513775
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.IsFill = False
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Alpha = 255
-        VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Color = clGray
+        VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Color = 11513775
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         VertScrollBar.HitTest = False
         VertScrollBar.MouseDownFocus = False
@@ -1730,36 +1885,48 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         HorzScrollBar.ComponentTypeUseKind = ctukDefault
         HorzScrollBar.MaterialUseKind = mukSelfOwn
         HorzScrollBar.KeepSelfOwnMaterial = True
+        HorzScrollBar.SelfOwnMaterial.BackColor.Color = clWhite
         HorzScrollBar.SelfOwnMaterial.BackColor.IsFill = True
         HorzScrollBar.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.IsTransparent = False
         HorzScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 40
         HorzScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
         HorzScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+        HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.Color = clGray
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.IsFill = False
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Color = clGray
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         HorzScrollBar.HitTest = False
         HorzScrollBar.MouseDownFocus = False
@@ -1777,24 +1944,30 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         ScrollControlCorner.ComponentTypeUseKind = ctukDefault
         ScrollControlCorner.MaterialUseKind = mukSelfOwn
         ScrollControlCorner.KeepSelfOwnMaterial = True
+        ScrollControlCorner.SelfOwnMaterial.BackColor.Color = clWhite
         ScrollControlCorner.SelfOwnMaterial.BackColor.IsFill = True
         ScrollControlCorner.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
         ScrollControlCorner.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
         ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+        ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
         ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
         ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+        ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
         ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+        ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
         ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
         ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+        ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
         ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
         ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+        ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
         ScrollControlCorner.SelfOwnMaterial.IsTransparent = False
         ScrollControlCorner.HitTest = False
         ScrollControlCorner.MouseDownFocus = False
-        Properties.ContentWidth = -1
-        Properties.ContentHeight = -1
+        Properties.ContentWidth = -1.000000000000000000
+        Properties.ContentHeight = -1.000000000000000000
         Properties.EnableAutoPullDownRefreshPanel = False
         Properties.EnableAutoPullUpLoadMorePanel = False
         Properties.VertCanOverRangeTypes = [cortMin, cortMax]
@@ -1803,17 +1976,16 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
         Properties.HorzScrollBarShowType = sbstNone
         Properties.MultiSelect = False
         Properties.IsAutoSelected = True
-        Properties.ItemHeight = 24
-        Properties.ItemSpace = 0
+        Properties.ItemHeight = 24.000000000000000000
         Properties.ItemSpaceType = sistDefault
-        Properties.SelectedItemHeight = -1
+        Properties.SelectedItemHeight = -1.000000000000000000
         Properties.ItemHeightCalcType = isctSeparate
         Properties.ItemPanDragGestureDirection = ipdgdtLeft
         Properties.IsEmptyContent = False
         Properties.EmptyContentPicture.IsClipRound = False
         Properties.IsEnabledCenterItemSelectMode = False
-        Properties.ItemWidth = 60
-        Properties.SelectedItemWidth = -1
+        Properties.ItemWidth = 60.000000000000000000
+        Properties.SelectedItemWidth = -1.000000000000000000
         Properties.ItemWidthCalcType = isctSeparate
         Properties.ItemLayoutType = iltVertical
         Properties.DefaultItemStyle = 'CustomerTag'
@@ -1874,7 +2046,7 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           4900730043006C006900700052006F0075006E00640000002F6626546A52C188
           10620657625F00000000000007000000001200040000004900740065006D0054
           0079007000650000000000000019000000000C000500000043006F006C006F00
-          72000000F27F0C00720400000000100008000000430061007000740069006F00
+          72000000F27F0C00610400000000100008000000430061007000740069006F00
           6E000000B065A25B3762000004000000000E0000000000440065007400610069
           006C0000000400000000100000000000440065007400610069006C0031000000
           0400000000100000000000440065007400610069006C00320000000400000000
@@ -1936,7 +2108,7 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           006900700052006F0075006E00640000002F6626546A52C18810620657625F00
           000000000007000000001200040000004900740065006D005400790070006500
           00000000000019000000000C000500000043006F006C006F0072000000F27F0C
-          006A0400000000100008000000430061007000740069006F006E000000B065A2
+          00650400000000100008000000430061007000740069006F006E000000B065A2
           5B3762000004000000000E0000000000440065007400610069006C0000000400
           000000100000000000440065007400610069006C003100000004000000001000
           00000000440065007400610069006C0032000000040000000010000000000044
@@ -1997,7 +2169,7 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           72FE94A563000015000000001810040000004900730043006C00690070005200
           6F0075006E00640000002F6626546A52C18810620657625F0000000000000700
           0000001200040000004900740065006D00540079007000650000000000000019
-          000000000C000500000043006F006C006F0072000000F27F0C008D0400000000
+          000000000C000500000043006F006C006F0072000000F27F0C00740400000000
           100008000000430061007000740069006F006E000000B065A25B376200000400
           0000000E0000000000440065007400610069006C000000040000000010000000
           0000440065007400610069006C00310000000400000000100000000000440065
@@ -2059,7 +2231,7 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           15000000001810040000004900730043006C006900700052006F0075006E0064
           0000002F6626546A52C18810620657625F000000000000070000000012000400
           00004900740065006D00540079007000650000000000000019000000000C0005
-          00000043006F006C006F0072000000F27F0C0000040000000010000800000043
+          00000043006F006C006F0072000000F27F0C0053040000000010000800000043
           0061007000740069006F006E000000B065A25B3762000004000000000E000000
           0000440065007400610069006C00000004000000001000000000004400650074
           00610069006C0031000000040000000010000000000044006500740061006900
@@ -2121,7 +2293,7 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           040000004900730043006C006900700052006F0075006E00640000002F662654
           6A52C18810620657625F00000000000007000000001200040000004900740065
           006D00540079007000650000000000000019000000000C000500000043006F00
-          6C006F0072000000F27F0C000004000000001000080000004300610070007400
+          6C006F0072000000F27F0C006504000000001000080000004300610070007400
           69006F006E000000B065A25B3762000004000000000E00000000004400650074
           00610069006C0000000400000000100000000000440065007400610069006C00
           310000000400000000100000000000440065007400610069006C003200000004
@@ -2183,7 +2355,7 @@ object FrameListItemStyle_MailListWithTag: TFrameListItemStyle_MailListWithTag
           0043006C006900700052006F0075006E00640000002F6626546A52C188106206
           57625F00000000000007000000001200040000004900740065006D0054007900
           7000650000000000000019000000000C000500000043006F006C006F00720000
-          00F27F0C00000400000000100008000000430061007000740069006F006E0000
+          00F27F0C00060400000000100008000000430061007000740069006F006E0000
           00B065A25B3762000004000000000E0000000000440065007400610069006C00
           00000400000000100000000000440065007400610069006C0031000000040000
           0000100000000000440065007400610069006C00320000000400000000100000

@@ -33,9 +33,7 @@ type
     btnNextPage: TSkinWinButton;
     btnPriorPage: TSkinWinButton;
     Button1: TButton;
-    btnLogin: TSkinWinButton;
     SkinWinButton1: TSkinWinButton;
-    Button2: TButton;
     SkinWinTreeView1: TSkinWinListBox;
     Button3: TButton;
     SkinWinTreeView2: TSkinWinTreeView;
@@ -61,13 +59,13 @@ implementation
 
 procedure TForm9.btnLoginClick(Sender: TObject);
 begin
-  ShowMessage('Hello');
+//  ShowMessage('Hello');
 
 end;
 
 procedure TForm9.Button1Click(Sender: TObject);
 begin
-  ShowMessage('Hello');
+//  ShowMessage('Hello');
 end;
 
 procedure TForm9.FormCreate(Sender: TObject);
@@ -103,7 +101,7 @@ begin
 
     lbDoctors.Prop.Item1ItemStyle:='TreeMainMenuItem';
     ASkinItem:=Self.lbDoctors.Prop.Items.Add;
-    ASkinItem.ItemType:=sitItem1;
+//    ASkinItem.ItemType:=sitItem1;
 
     ASkinItem.SubItems.Values['医生姓名']:='王百强'+IntToStr(-1);
     ASkinItem.SubItems.Values['职称']:='专家';

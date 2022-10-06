@@ -53,14 +53,17 @@ uses
 type
   TOnRecordCanBeAppendEvent=procedure(ARecordDataJson:ISuperObject;var AIsCanBeAppend:Boolean) of object;
 
-
+//将一个Json转到数据集
 function JsonToDataset(ADataJson:ISuperObject):TFDMemTable;
+//将一个Json数组转到数据集
 function JsonArrayToDataset(ADataJsonArray:ISuperArray):TFDMemTable;
+//自动根据Json创建一个数据集，并建好字段
 function JsonCreateDatasetStructure(ADataJson:ISuperObject):TFDMemTable;
 procedure DoJsonCreateDatasetStructure(ADataJson:ISuperObject;var AFDMemTable:TFDMemTable);
 
 
 procedure LoadJsonToDataset(ADataJson:ISuperObject;ADataset:TDataset);
+//ADataJson中得包含RecordList+'_'+'FieldDefs'
 function LoadDataJsonTokbmMemTable(AMemTable:TFDMemTable;
                                   ADataJson:ISuperObject;
                                   ARecordListKey:String=RECORDLIST_KEY
@@ -80,7 +83,7 @@ function LoadDataFromJsonArray(ADataset:TDataset;
                               //主键,判断是否存在
                               APrivateKeyFieldName:String=''
                               ):Boolean;
-function LoadRecordFromJson(ADataset:TDataset;ASuperObject:ISuperObject):Boolean;
+function LoadRecordFromJson(ADataset:TDataset;ASuperObject:ISuperObject;AIsMustExistsKey:Boolean=False):Boolean;
 function AppendRecordFromJson(ADataset:TDataset;ASuperObject:ISuperObject):Boolean;
 function LoadDataFromCompressedJsonArray(ADataset:TDataset;ASuperArray:ISuperArray):Boolean;
 //比较记录和Json是否相等
@@ -155,7 +158,7 @@ begin
   end;
 end;
 
-function LoadRecordFromJson(ADataset:TDataset;ASuperObject:ISuperObject):Boolean;
+function LoadRecordFromJson(ADataset:TDataset;ASuperObject:ISuperObject;AIsMustExistsKey:Boolean=False):Boolean;
 var
   J: Integer;
   AFieldDef:TFieldDef;
@@ -165,6 +168,13 @@ begin
   for J := 0 to ADataset.FieldDefs.Count-1 do
   begin
       AFieldDef:=ADataset.FieldDefs[J];
+
+      if AIsMustExistsKey and not ASuperObject.Contains(AFieldDef.Name) then
+      begin
+        Continue;
+      end;
+      
+
 
       try
 
@@ -288,6 +298,7 @@ begin
         else
         begin
           uBaseLog.HandleException(nil,'JsonToDataset 不能将'+ANameArray[I]+'转换为字段');
+          AFDMemTable.FieldDefs.Add(ANameArray[I],TFieldType.ftWideString,50);
         end;
       end;
   end;

@@ -117,39 +117,39 @@ begin
 //      Self:=TFrameDelphiContentListItemStyle(AItemDesignerPanel.Parent);
 
 
-      Self.btnFocus.Visible:=False;
-      Self.btnFocused.Visible:=False;
-
-      //if AItemDataJson.V['user_fid']=GlobalManager.User.fid then
-      if AItemDataJson.I['is_self']=1 then
-      begin
-          //自己发布的内容,不需要关注状态
-          Self.btnFocus.Visible:=False;
-          Self.btnFocused.Visible:=False;
-      end
-      else
-      begin
-          //当前用户关注发布者的状态
-          if AItemDataJson.I['is_user_focused']=1 then
-          begin
-            Self.btnFocus.Visible:=False;
-
-            Self.btnFocused.Visible:=True;
-            Self.btnFocused.Caption:='已关注';
-          end
-          else if AItemDataJson.I['is_user_focused']=0 then
-          begin
-            Self.btnFocused.Visible:=False;
-
-            Self.btnFocus.Visible:=True;
-            Self.btnFocus.Caption:='关注';
-          end
-          else
-          begin
-            Self.btnFocus.Visible:=False;
-            Self.btnFocused.Visible:=False;
-          end;
-      end;
+//      Self.btnFocus.Visible:=False;
+//      Self.btnFocused.Visible:=False;
+//
+//      //if AItemDataJson.V['user_fid']=GlobalManager.User.fid then
+//      if AItemDataJson.I['is_self']=1 then
+//      begin
+//          //自己发布的内容,不需要关注状态
+//          Self.btnFocus.Visible:=False;
+//          Self.btnFocused.Visible:=False;
+//      end
+//      else
+//      begin
+//          //当前用户关注发布者的状态
+//          if AItemDataJson.I['is_user_focused']=1 then
+//          begin
+//            Self.btnFocus.Visible:=False;
+//
+//            Self.btnFocused.Visible:=True;
+//            Self.btnFocused.Caption:='已关注';
+//          end
+//          else if AItemDataJson.I['is_user_focused']=0 then
+//          begin
+//            Self.btnFocused.Visible:=False;
+//
+//            Self.btnFocus.Visible:=True;
+//            Self.btnFocus.Caption:='关注';
+//          end
+//          else
+//          begin
+//            Self.btnFocus.Visible:=False;
+//            Self.btnFocused.Visible:=False;
+//          end;
+//      end;
 
 
 

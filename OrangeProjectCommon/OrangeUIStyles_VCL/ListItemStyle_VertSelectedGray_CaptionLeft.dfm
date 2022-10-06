@@ -91,7 +91,7 @@ object FrameListItemStyle_VertSelectedGray_CaptionLeft: TFrameListItemStyle_Vert
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange]
       SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
       SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
-      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = 16185078
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = 15789290
       SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
       SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange]

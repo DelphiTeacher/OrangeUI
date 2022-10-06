@@ -139,7 +139,7 @@ type
     destructor Destroy; override;
   published
     property Action;
-    property Align default TAlignLayout.alNone;
+    property Align default TAlignLayout.{$IF CompilerVersion >= 35.0}None{$ELSE}alNone{$IFEND};
     property Anchors;
 //    property AutoTranslate default True;
 //    property Cancel: Boolean read FCancel write FCancel default False;

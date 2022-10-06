@@ -71,6 +71,8 @@ var
   GlobalIsNeedServiceTel:Boolean;
   //登录页面是否需要注册按钮
   GlobalIsNeedRegister:Boolean;
+  //登录页面是否需要忘记密码按钮
+  GlobalIsNeedForgetPassword:Boolean;
   //登录页面是否需要服务器设置按钮
   GlobalIsNeedServerSetting:Boolean;
 
@@ -184,6 +186,8 @@ initialization
 
 
   GlobalIsNeedRegister:=True;
+  GlobalIsNeedForgetPassword:=True;
+
   //登录页面是否需要服务器设置按钮
   GlobalIsNeedServerSetting:=False;
 

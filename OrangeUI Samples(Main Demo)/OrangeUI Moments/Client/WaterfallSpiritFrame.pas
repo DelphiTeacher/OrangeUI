@@ -112,6 +112,7 @@ uses
   ,
   MainFrame,
   ViewPictureListFrame,
+  uViewPictureListFrame,
   AddSpiritFrame
   {$ENDIF}
   ;

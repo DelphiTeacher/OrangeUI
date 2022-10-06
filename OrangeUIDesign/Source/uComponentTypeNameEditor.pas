@@ -4,6 +4,7 @@ unit uComponentTypeNameEditor;
 
 interface
  {$I FrameWork.inc}
+ {$I Version.inc}
 
 uses
   Classes,
@@ -38,9 +39,10 @@ uses
   uSkinWindowsMemo,
   uSkinWindowsForm,
   {$ENDIF}
+  uBasePageStructure,
+  uBasePageStructureControls,
 
   {$IFDEF MY_PROGRAM_DESIGNER}
-  uBasePageStructure,
   uPageStructure,
   {$ENDIF MY_PROGRAM_DESIGNER}
 
@@ -267,19 +269,20 @@ begin
   {$ENDIF}
 
   {$IFDEF VCL}
-  {$IF CompilerVersion >= 30.0}
-  ComponentClasses:=[TSkinWindowsControl,
-                      TSkinWinEdit,
-                      TSkinWinMemo,
-                      TSkinWinForm,
-                      nil];
-  {$ELSE}
-  SetLength(ComponentClasses,4);
-  ComponentClasses[0]:=TSkinWindowsControl;
-  ComponentClasses[1]:=TSkinWinEdit;
-  ComponentClasses[2]:=TSkinWinMemo;
-  ComponentClasses[3]:=TSkinWinForm;
-  {$IFEND}
+    {$IF CompilerVersion >= 30.0}
+    ComponentClasses:=[TSkinWindowsControl,
+                        TSkinWinEdit,
+                        TSkinWinMemo,
+                        TSkinWinForm,
+                        nil];
+    {$ELSE}
+    SetLength(ComponentClasses,4);
+    ComponentClasses[0]:=TSkinWindowsControl;
+    ComponentClasses[1]:=TSkinWinEdit;
+    ComponentClasses[2]:=TSkinWinMemo;
+    ComponentClasses[3]:=TSkinWinForm;
+    {$IFEND}
+    RegisterComponents('OrangeUIConrol',[TPageCheckBox,TPageComboBox,TPageEdit,TPageMemo]);
   {$ENDIF}
 
 

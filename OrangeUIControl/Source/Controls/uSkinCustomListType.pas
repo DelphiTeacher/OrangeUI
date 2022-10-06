@@ -18,6 +18,7 @@ uses
   Types,
   DateUtils,
   Math,
+  StrUtils,
 
   {$IFDEF VCL}
   Messages,
@@ -25,6 +26,8 @@ uses
   Controls,
   Forms,
   StdCtrls,
+  Graphics,
+  Dialogs,
   {$ENDIF}
   {$IFDEF FMX}
   UITypes,
@@ -64,13 +67,15 @@ uses
   uDrawLineParam,
   uDrawRectParam,
   uSkinImageList,
+  uSkinImageType,
+  uBasePageStructure,
 
-  {$IFDEF SKIN_SUPEROBJECT}
+//  {$IFDEF SKIN_SUPEROBJECT}
   uSkinSuperObject,
-  {$ELSE}
-  XSuperObject,
-  XSuperJson,
-  {$ENDIF}
+//  {$ELSE}
+//  XSuperObject,
+//  XSuperJson,
+//  {$ENDIF}
 
 
 
@@ -205,6 +210,8 @@ type
     function GetOnClickItemDesignerPanelChild:TCustomListClickItemDesignerPanelChildEvent;
 //    function GetOnItemDesignerPanelChildCanStartEdit:TCustomListItemDesignerPanelChildCanStartEditEvent;
 
+    function GetOnMouseOverItemChange:TNotifyEvent;
+    property OnMouseOverItemChange:TNotifyEvent read GetOnMouseOverItemChange;
 
     //居中列表项更改事件
     property OnCenterItemChange:TCustomListDoItemEvent read GetOnCenterItemChange;
@@ -270,6 +277,7 @@ type
   IFrameBaseListItemStyle_Init=interface
     ['{BE00E25C-17BF-42D6-A703-F25F84F86F6D}']
     procedure Init(AListItemStyleReg:TListItemStyleReg);
+    procedure SetPage(APage:TObject);
   end;
 
 
@@ -320,7 +328,8 @@ type
     property Items[Index:Integer]:TListItemStyleFrameCache read GetItem;default;
   end;
 
-
+  TListItemTypeStyleSetting=class;
+  TNewListItemStyleFrameCacheInitEvent=procedure(Sender:TObject;AListItemTypeStyleSetting:TListItemTypeStyleSetting;ANewListItemStyleFrameCache:TListItemStyleFrameCache) of object;
   //列表项类型的风格设置,每个类型一个,Default,Item1,Item2,Header,Footer等
   TListItemTypeStyleSetting=class
   private
@@ -338,6 +347,8 @@ type
     FIsUseCache: Boolean;
     //缓存列表
     FFrameCacheList:TListItemStyleFrameCacheList;
+//    //自定义绑定,格式：
+//    FCustomBinding: String;
 
 
 
@@ -347,6 +358,8 @@ type
     procedure SetStyleRootUrl(const Value: String);
     procedure DoDownloadListItemStyleStateChange(Sender:TObject;AUrlCacheItem:TUrlCacheItem);
     procedure SetListItemStyleReg(AListItemStyleReg:TListItemStyleReg);
+    procedure SetConfig(const Value: TStringList);
+    procedure ReConfig;
   public
     procedure Clear;
     constructor Create(AProp:TCustomListProperties;AItemType:TSkinItemType);
@@ -377,6 +390,9 @@ type
     //风格注册项,省的创建的时候每次找
     FListItemStyleReg:TListItemStyleReg;
     FCustomListProperties:TCustomListProperties;
+
+    //列表项样式Frame初始事件
+    FOnInit:TNewListItemStyleFrameCacheInitEvent;
     procedure ResetStyle;
 
     //是否使用缓存,默认是使用的
@@ -392,6 +408,11 @@ type
     property IsUseUrlStyle:Boolean read FIsUseUrlStyle write SetIsUseUrlStyle;
     //来源链接
     property StyleRootUrl:String read FStyleRootUrl write SetStyleRootUrl;
+
+//    //自定义绑定
+//    property CustomBinding:String read FCustomBinding write FCustomBinding;
+    property Config:TStringList read FConfig write SetConfig;
+
   end;
   TListItemTypeStyleSettingList=class(TBaseList)
   private
@@ -601,8 +622,6 @@ type
     /// </summary>
     property EditingItem:TBaseSkinItem read FEditingItem;
   protected
-    //列表项列表
-    FItems:TBaseSkinItems;
     //列表项布局管理者
     FListLayoutsManager:TSkinCustomListLayoutsManager;
 
@@ -614,33 +633,33 @@ type
     //FListLayoutsManager的属性//
 
     //获取列表项高度
-    function GetItemHeight: TControlSize;
+    function GetItemHeight: Double;
     //获取列表项宽度
-    function GetItemWidth: TControlSize;
+    function GetItemWidth: Double;
     //获取列表项间隔
-    function GetItemSpace: TControlSize;
+    function GetItemSpace: Double;
     //获取列表项间隔类型
     function GetItemSpaceType: TSkinItemSpaceType;
 
     //获取列表项选中时的高度
-    function GetSelectedItemHeight: TControlSize;
+    function GetSelectedItemHeight: Double;
     //获取列表项选中时的宽度
-    function GetSelectedItemWidth: TControlSize;
+    function GetSelectedItemWidth: Double;
 
 
     //设置列表项高度
-    procedure SetItemHeight(const Value: TControlSize);
+    procedure SetItemHeight(const Value: Double);
     //设置列表项宽度
-    procedure SetItemWidth(const Value: TControlSize);
+    procedure SetItemWidth(const Value: Double);
     //设置列表项间隔
-    procedure SetItemSpace(const Value: TControlSize);
+    procedure SetItemSpace(const Value: Double);
     //设置列表项间隔类型
     procedure SetItemSpaceType(const Value: TSkinItemSpaceType);
 
     //设置列表项选中时的高度
-    procedure SetSelectedItemHeight(const Value: TControlSize);
+    procedure SetSelectedItemHeight(const Value: Double);
     //设置列表项选中时的宽度
-    procedure SetSelectedItemWidth(const Value: TControlSize);
+    procedure SetSelectedItemWidth(const Value: Double);
 
 
 
@@ -659,9 +678,9 @@ type
 
 
     //把控件高度传递给ListLayoutsManager
-    function DoGetListLayoutsManagerControlHeight(Sender:TObject):TControlSize;
+    function DoGetListLayoutsManagerControlHeight(Sender:TObject):Double;
     //把控件宽度传递给ListLayoutsManager
-    function DoGetListLayoutsManagerControlWidth(Sender:TObject):TControlSize;
+    function DoGetListLayoutsManagerControlWidth(Sender:TObject):Double;
 
 
     //ListLayoutsManager把选中Item的列表项传递给ListBox
@@ -677,11 +696,11 @@ type
 
   public
     //
-    function GetItemTopDrawOffset:TControlSize;virtual;
+    function GetItemTopDrawOffset:Double;virtual;
 
     //计算内容尺寸(用于处理滚动条的Max)
-    function CalcContentWidth:TControlSize;override;
-    function CalcContentHeight:TControlSize;override;
+    function CalcContentWidth:Double;override;
+    function CalcContentHeight:Double;override;
   protected
 
     //给列表项赋值
@@ -733,6 +752,9 @@ type
     Procedure StopCallOnClickItemTimer;
     procedure DoCallOnClickItemTimer(Sender:TObject);
   public
+    //列表项列表
+    FItems:TBaseSkinItems;
+
     //是否正在停止列表项平拖
     FIsStopingItemPanDrag:Boolean;
 
@@ -865,8 +887,8 @@ type
     function GetCenterItem:TBaseSkinItem;
 
     //居中选择模式的绘制偏移
-    function GetCenterItemSelectModeTopDrawOffset:TControlSize;
-    function GetCenterItemSelectModeLeftDrawOffset:TControlSize;
+    function GetCenterItemSelectModeTopDrawOffset:Double;
+    function GetCenterItemSelectModeLeftDrawOffset:Double;
 
     //是否启用居中选择模式
     procedure SetIsEnabledCenterItemSelectMode(const Value: Boolean);
@@ -1086,7 +1108,7 @@ type
     ///     Selected ListItem's width
     ///   </para>
     /// </summary>
-    property SelectedItemWidth:TControlSize read GetSelectedItemWidth write SetSelectedItemWidth;
+    property SelectedItemWidth:Double read GetSelectedItemWidth write SetSelectedItemWidth;
     /// <summary>
     ///   <para>
     ///     列表项宽度计算方式
@@ -1133,7 +1155,7 @@ type
     ///     ListItem's width
     ///   </para>
     /// </summary>
-    property ItemWidth:TControlSize read GetItemWidth write SetItemWidth;
+    property ItemWidth:Double read GetItemWidth write SetItemWidth;
   published
     /// <summary>
     ///   <para>
@@ -1183,7 +1205,7 @@ type
     ///     ListItem's height
     ///   </para>
     /// </summary>
-    property ItemHeight:TControlSize read GetItemHeight write SetItemHeight;
+    property ItemHeight:Double read GetItemHeight write SetItemHeight;
 
     /// <summary>
     ///   <para>
@@ -1193,7 +1215,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property ItemSpace:TControlSize read GetItemSpace write SetItemSpace;
+    property ItemSpace:Double read GetItemSpace write SetItemSpace;
     /// <summary>
     ///   <para>
     ///     列表项间隔类型
@@ -1211,7 +1233,7 @@ type
     ///     Selected ListItem's height
     ///   </para>
     /// </summary>
-    property SelectedItemHeight:TControlSize read GetSelectedItemHeight write SetSelectedItemHeight;
+    property SelectedItemHeight:Double read GetSelectedItemHeight write SetSelectedItemHeight;
     /// <summary>
     ///   <para>
     ///     列表项高度计算方式
@@ -1825,6 +1847,8 @@ type
     FOnClickItemDesignerPanelChild:TCustomListClickItemDesignerPanelChildEvent;
 //    FOnItemDesignerPanelChildCanStartEdit:TCustomListItemDesignerPanelChildCanStartEditEvent;
 
+    FOnMouseOverItemChange:TNotifyEvent;
+
 
     function GetOnPrepareItemPanDrag:TCustomListPrepareItemPanDragEvent;
 
@@ -1842,6 +1866,7 @@ type
 
     function GetOnClickItemDesignerPanelChild:TCustomListClickItemDesignerPanelChildEvent;
 //    function GetOnItemDesignerPanelChildCanStartEdit:TCustomListItemDesignerPanelChildCanStartEditEvent;
+    function GetOnMouseOverItemChange:TNotifyEvent;
 
     function GetCustomListProperties:TCustomListProperties;
     procedure SetCustomListProperties(Value:TCustomListProperties);
@@ -1859,6 +1884,25 @@ type
     //ISkinItems接口的实现
     function GetItems:TBaseSkinItems;
     property Items:TBaseSkinItems read GetItems;
+  public
+    //针对页面框架的控件接口
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;override;
+//    //获取合适的高度
+//    function GetSuitDefaultItemHeight:Double;
+//    //获取与设置自定义属性
+//    function GetPropJsonStr:String;override;
+//    procedure SetPropJsonStr(AJsonStr:String);override;
+
+    //获取提交的值
+    function GetPostValue(ASetting:TFieldControlSetting;APageDataDir:String;ASetRecordFieldValueIntf:ISetRecordFieldValue;
+                            var AErrorMessage:String):Variant;override;
+    //设置值
+    procedure SetControlValue(ASetting:TFieldControlSetting;APageDataDir:String;AImageServerUrl:String;AValue:Variant;AValueCaption:String;
+                            //要设置多个值,整个字段的记录
+                            AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);override;
+//    //设置属性
+//    function GetProp(APropName:String):Variant;override;
+//    procedure SetProp(APropName:String;APropValue:Variant);override;
   public
     function SelfOwnMaterialToDefault:TSkinCustomListDefaultMaterial;
     function CurrentUseMaterialToDefault:TSkinCustomListDefaultMaterial;
@@ -1895,6 +1939,7 @@ type
     //准备平拖事件(可以根据Item设置ItemPanDragDesignerPanel)
     property OnPrepareItemPanDrag:TCustomListPrepareItemPanDragEvent read GetOnPrepareItemPanDrag write FOnPrepareItemPanDrag;
 
+    property OnMouseOverItemChange:TNotifyEvent read GetOnMouseOverItemChange write FOnMouseOverItemChange;
 
     property OnStartEditingItem:TCustomListEditingItemEvent read GetOnStartEditingItem write FOnStartEditingItem;
     property OnStopEditingItem:TCustomListEditingItemEvent read GetOnStopEditingItem write FOnStopEditingItem;
@@ -1956,9 +2001,10 @@ function GetItemSizeCalcTypeByStr(AItemSizeCalcTypeStr:String):TItemSizeCalcType
 function GetItemLayoutTypeByStr(AItemLayoutTypeStr:String):TItemLayoutType;
 function GetItemSpaceTypeByStr(AItemSpaceTypeStr:String):TSkinItemSpaceType;
 function GetScrollBarShowTypeByStr(AScrollBarShowTypeStr:String):TScrollBarShowType;
+function GetScrollBarOverRangeTypeByStr(AScrollBarOverRangeTypeStr:String):TCanOverRangeTypes;
 
 
-
+//加载ListItemStyleFrame的自定义设置
 procedure LoadListItemStyleFrameConfig(AFrame:TFrame;AConfig:TStringList);
 
 
@@ -1974,35 +2020,68 @@ uses
 
 
 
+function GetStringValue(AValueStr:String):String;
+begin
+  Result:=ReplaceStr(AValueStr,'''','');
+end;
 
 
-
-
-procedure LoadListItemStyleFrameConfigItem(AFrame:TFrame;AConfigItem:String);
+procedure LoadListItemStyleFrameConfigCodeLine(AFrame:TFrame;AConfigCodeLine:String);
 var
   APosIndex:Integer;
   AName:String;
   AValueStr:String;
   {$IFDEF FMX}
   AColorValue:TAlphaColor;
-  {$ENDIF FMX}
+  {$ENDIF}
+  {$IFDEF VCL}
+  AColorValue:TColor;
+  {$ENDIF}
   AComponent:TComponent;
   ASkinControlIntf:ISkinControl;
   ASkinMaterial:TSkinControlMaterial;
   ADrawParam:TDrawParam;
   ADrawTextParam:TDrawTextParam;
   ADrawRectParam:TDrawRectParam;
+
+  AVariableName:String;
+  ASkinItemBindingControlIntf:ISkinItemBindingControl;
 begin
-{$IFDEF FMX}
+//{$IFDEF FMX}
   //lblItemCaption.SelfOwnMaterial.DrawCaptionParam.FontColor:=$FFFFFFFF
   //lblItemCaption.SelfOwnMaterial.DrawCaptionParam.FontSize:=16
   //ItemDesignerPanel.SelfOwnMaterial.DrawCaptionParam.FontSize:=16
+  //ItemDesignerPanel.SelfOwnMaterial.DrawBackColorParam.IsFill:=True
+  //lblItemCaption.BindItemFieldName:='username';
 
+
+  {$IF CompilerVersion>31.0}
   //先找到控件lblItemCaption
-  APosIndex:=AConfigItem.IndexOf('.');
-  if APosIndex=0 then Exit;
-  AName:=AConfigItem.Substring(0,APosIndex);
-  AConfigItem:=AConfigItem.Substring(APosIndex+1);
+  //先找到变量名
+
+
+  //找到属性串FontColor:=$FFFFFFFF
+  APosIndex:=AConfigCodeLine.IndexOf(':=');//不存在是返回-1
+  if APosIndex=-1 then Exit;
+  //取出变量名,比如lblItemCaption.SelfOwnMaterial.DrawCaptionParam.FontColor
+  //比如lblItemCaption.BindItemFieldName
+  //取出值
+  AVariableName:=AConfigCodeLine.Substring(0,APosIndex);
+  AValueStr:=AConfigCodeLine.Substring(APosIndex+2);
+  if AValueStr.Substring(AValueStr.Length-1)=';' then
+  begin
+    AValueStr:=AValueStr.Substring(0,AValueStr.Length-1);
+  end;
+
+
+
+  //找到控件名
+//  APosIndex:=AVariableName.IndexOf('.');
+  APosIndex:=AVariableName.IndexOf('.');//不存在是返回-1
+  if APosIndex=-1 then Exit;
+  AName:=AVariableName.Substring(0,APosIndex);
+  //剩下的
+  AVariableName:=AVariableName.Substring(APosIndex+1);
   
   AComponent:=AFrame.FindComponent(AName);
   if AComponent=nil then Exit;
@@ -2012,66 +2091,161 @@ begin
 
 
 
-  //找到素材SelfOwnMaterail
-  APosIndex:=AConfigItem.IndexOf('.');
-  if APosIndex=0 then Exit;
-  AName:=AConfigItem.Substring(0,APosIndex);
-  AConfigItem:=AConfigItem.Substring(APosIndex+1);
-  if AName<>'SelfOwnMaterial' then Exit;
-
-
-  ASkinMaterial:=ASkinControlIntf.GetCurrentUseMaterial;
-  if ASkinMaterial=nil then Exit;
-
-
-  //找到绘制参数DrawTextParam
-  APosIndex:=AConfigItem.IndexOf('.');
-  if APosIndex=0 then Exit;
-  AName:=AConfigItem.Substring(0,APosIndex);
-  AConfigItem:=AConfigItem.Substring(APosIndex+1);
-  ADrawParam:=ASkinMaterial.FindParamByName(AName);
-
-
-
-
-  //找到属性串FontColor:=$FFFFFFFF
-  APosIndex:=AConfigItem.IndexOf(':=');
-  if APosIndex=0 then Exit;
-  AName:=AConfigItem.Substring(0,APosIndex);
-  AValueStr:=AConfigItem.Substring(APosIndex+2);
-  if AValueStr.Substring(AValueStr.Length-1)=';' then
+  //找到属性名,比如素材SelfOwnMaterail,比如BindItemFieldName,比如Properties
+  APosIndex:=AVariableName.IndexOf('.');//不存在是返回-1
+  if APosIndex=-1 then
   begin
-    AValueStr:=AValueStr.Substring(0,AValueStr.Length-1);
+    APosIndex:=AVariableName.Length;
+  end;
+  AName:=AVariableName.Substring(0,APosIndex);
+  //剩下的
+  AVariableName:=AVariableName.Substring(APosIndex+1);
+
+
+  //设置控件的绑定字段
+  if (AName='BindItemFieldName') then
+  begin
+    if AComponent.GetInterface(IID_ISkinItemBindingControl,ASkinItemBindingControlIntf) then
+    begin
+      ASkinItemBindingControlIntf.SetBindItemFieldName(GetStringValue(AValueStr));
+    end;
+    Exit;
+  end;
+  if (AName='Visible') then
+  begin
+    TControl(AComponent).Visible:=StrToBool(AValueStr);
+    Exit;
+  end;
+  if (AName='Height') then
+  begin
+    TControl(AComponent).Height:=ControlSize(StrToFloat(AValueStr));
+    Exit;
+  end;
+  if (AName='Align') then
+  begin
+    TControl(AComponent).Align:=GetAlign(AValueStr);
+    Exit;
+  end;
+  if (AName='Width') then
+  begin
+    TControl(AComponent).Width:=ControlSize(StrToFloat(AValueStr));
+    Exit;
+  end;
+  if (AName='Margins') then
+  begin
+
+    if AVariableName='Left' then
+    begin
+      TControl(AComponent).Margins.Left:=ControlSize(StrToFloat(AValueStr));
+    end;
+    if AVariableName='Top' then
+    begin
+      TControl(AComponent).Margins.Top:=ControlSize(StrToFloat(AValueStr));
+    end;
+    if AVariableName='Right' then
+    begin
+      TControl(AComponent).Margins.Right:=ControlSize(StrToFloat(AValueStr));
+    end;
+    if AVariableName='Bottom' then
+    begin
+      TControl(AComponent).Margins.Bottom:=ControlSize(StrToFloat(AValueStr));
+    end;
+
+    {$IFDEF VCL}
+    TControl(AComponent).AlignWithMargins:=True;
+    {$ENDIF}
+
+    Exit;
   end;
 
-
-  if ADrawParam=nil then
+  if (AName='Properties') then
   begin
 
-    if AName='IsTransparent' then
+    if AVariableName='Picture.SkinImageListName' then
     begin
-      ASkinMaterial.IsTransparent:=StrToBool(AValueStr);
-    end
-    ;
+      TSkinImage(AComponent).Prop.Picture.SkinImageListName:=GetStringValue(AValueStr);
+    end;
+    if AVariableName='Picture.DefaultImageIndex' then
+    begin
+      TSkinImage(AComponent).Prop.Picture.DefaultImageIndex:=StrToInt(AValueStr);
+    end;
+    if AVariableName='Picture.IsClipRound' then
+    begin
+      TSkinImage(AComponent).Prop.Picture.IsClipRound:=StrToBool(AValueStr);
+    end;
+
+
 
     Exit;
   end;
 
 
 
+  if (AName<>'SelfOwnMaterial') and (AName<>'Material') then Exit;
+
+
+  ASkinMaterial:=ASkinControlIntf.GetCurrentUseMaterial;
+  if ASkinMaterial=nil then Exit;
+
+
+  if AVariableName='IsTransparent' then
+  begin
+    ASkinMaterial.IsTransparent:=StrToBool(AValueStr);
+  end
+  ;
+
+  //找到绘制参数DrawTextParam
+  APosIndex:=AVariableName.IndexOf('.');
+  if APosIndex=-1 then Exit;
+  AName:=AVariableName.Substring(0,APosIndex);
+  AVariableName:=AVariableName.Substring(APosIndex+1);
+  ADrawParam:=ASkinMaterial.FindParamByName(AName);
+  if AName='BackColor' then
+  begin
+    ADrawParam:=ASkinMaterial.BackColor;
+  end;
+
+
+
+
+
+  if ADrawParam=nil then
+  begin
+
+
+    Exit;
+  end;
+
+  if AVariableName='Alpha' then
+  begin
+    ADrawParam.Alpha:=StrToInt(AValueStr);
+  end;
+
+
   if ADrawParam is TDrawRectParam then
   begin
       ADrawRectParam:=TDrawRectParam(ADrawParam);
-      if AName='FillColor' then
+      if AVariableName='FillColor' then
       begin
         {$IFDEF FMX}
         AColorValue:=StrToInt(AValueStr);
         ADrawRectParam.FillColor.Color:=AColorValue;
         {$ENDIF FMX}
       end
-      else if AName='IsFill' then
+      else if AVariableName='IsFill' then
       begin
         ADrawRectParam.IsFill:=StrToBool(AValueStr);
+      end
+      else if AVariableName='IsRound' then
+      begin
+        ADrawRectParam.IsRound:=StrToBool(AValueStr);
+      end
+      //
+      //背景透明,并且不需要选中的白底效果
+      //+'ItemDesignerPanel.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill:=False;'
+      else if AVariableName='DrawEffectSetting.PushedEffect.IsFill' then
+      begin
+        ADrawRectParam.DrawEffectSetting.PushedEffect.IsFill:=StrToBool(AValueStr);
       end
       ;
   end;
@@ -2081,22 +2255,41 @@ begin
   begin
 
       ADrawTextParam:=TDrawTextParam(ADrawParam);
-      if AName='FontColor' then
+      if AVariableName='FontColor' then
       begin
+
         {$IFDEF FMX}
         AColorValue:=StrToInt(AValueStr);
         ADrawTextParam.FontColor:=AColorValue;
         {$ENDIF FMX}
+        {$IFDEF VCL}
+        if Pos('$',AValueStr)>0 then
+        begin
+          //VCL中是BGR,转成RGB
+          //$FF FF FF FF
+          //012 34 56 78
+          AValueStr:='$'+AValueStr.Substring(7,2)
+                    +AValueStr.Substring(5,2)
+                    +AValueStr.Substring(3,2);
+          AColorValue:=StrToInt(AValueStr);
+        end
+        else
+        begin
+          AColorValue:=ColorNameToColor(AValueStr);
+        end;
+        ADrawTextParam.FontColor:=AColorValue;
+        {$ENDIF VCL}
+
       end
-      else if AName='FontSize' then
+      else if AVariableName='FontSize' then
       begin
         ADrawTextParam.FontSize:=Ceil(StrToFloat(AValueStr));
       end
-      else if AName='FontHorzAlign' then
+      else if AVariableName='FontHorzAlign' then
       begin
         ADrawTextParam.FontHorzAlign:=GetFontHorzAlign(AValueStr);
       end
-      else if AName='FontVertAlign' then
+      else if AVariableName='FontVertAlign' then
       begin
         ADrawTextParam.FontVertAlign:=GetFontVertAlign(AValueStr);
       end
@@ -2104,10 +2297,10 @@ begin
 
 
   end;
+  {$IFEND}
 
 
-
-{$ENDIF FMX}
+//{$ENDIF FMX}
 
 end;
 
@@ -2117,7 +2310,7 @@ var
 begin
   for I := 0 to AConfig.Count-1 do
   begin
-    LoadListItemStyleFrameConfigItem(AFrame,AConfig[I]);
+    LoadListItemStyleFrameConfigCodeLine(AFrame,AConfig[I]);
   end;
 end;
 
@@ -2177,11 +2370,11 @@ begin
 
   if SameText(AItemLayoutTypeStr,'Horizontal') then
   begin
-    Result:=iltVertical;
+    Result:=iltHorizontal;
   end
   else
   begin
-    Result:=iltHorizontal;
+    Result:=iltVertical;
   end;
 
 end;
@@ -2195,6 +2388,20 @@ begin
   else
   begin
     Result:=sistDefault;
+  end;
+
+end;
+
+function GetScrollBarOverRangeTypeByStr(AScrollBarOverRangeTypeStr:String):TCanOverRangeTypes;
+begin
+  Result:=[];
+  if Pos('Min',AScrollBarOverRangeTypeStr)>0 then
+  begin
+    Result:=Result+[TCanOverRangeType.cortMin];
+  end;
+  if Pos('Max',AScrollBarOverRangeTypeStr)>0 then
+  begin
+    Result:=Result+[TCanOverRangeType.cortMax];
   end;
 
 end;
@@ -2362,7 +2569,7 @@ end;
 { TCustomListProperties }
 
 
-function TCustomListProperties.CalcContentHeight:TControlSize;
+function TCustomListProperties.CalcContentHeight:Double;
 begin
   Result:=Self.FListLayoutsManager.ContentHeight;
 
@@ -2373,7 +2580,7 @@ begin
       begin
         //垂直居中选择模式
         Result:=Result
-                +ControlSize(Self.GetClientRect.Height)
+                +Self.GetClientRect.Height
                 -Self.FListLayoutsManager.ItemHeight;
       end;
       iltHorizontal:
@@ -2383,7 +2590,7 @@ begin
   end;
 end;
 
-function TCustomListProperties.CalcContentWidth:TControlSize;
+function TCustomListProperties.CalcContentWidth:Double;
 begin
   Result:=Self.FListLayoutsManager.ContentWidth;
 
@@ -2397,7 +2604,7 @@ begin
       begin
         //水平居中选择模式
         Result:=Result
-                +ControlSize(Self.GetClientRect.Width)
+                +Self.GetClientRect.Width
                 -Self.FListLayoutsManager.ItemWidth;
       end;
     end;
@@ -2920,10 +3127,12 @@ begin
       FListLayoutsManager.OnSetSelectedItem:=nil;
       FreeAndNil(FListLayoutsManager);
 
-
-      FItems.OnChange:=nil;
-      FItems.OnItemDelete:=nil;
-      FreeAndNil(FItems);
+      if FItems<>nil then
+      begin
+        FItems.OnChange:=nil;
+        FItems.OnItemDelete:=nil;
+        FreeAndNil(FItems);
+      end;
 
 
       FreeAndNil(FItemPanDragGestureManager);
@@ -3047,7 +3256,9 @@ begin
       end
       else
       begin
+//        Self.SetSelectedItem(nil);
         AItem.Selected:=False;
+        CallOnSelectedItemEvent(Self,nil);
       end;
       
     end;
@@ -3063,12 +3274,12 @@ begin
 
 end;
 
-function TCustomListProperties.DoGetListLayoutsManagerControlHeight(Sender: TObject): TControlSize;
+function TCustomListProperties.DoGetListLayoutsManagerControlHeight(Sender: TObject): Double;
 begin
   Result:=Self.FSkinControlIntf.Height;
 end;
 
-function TCustomListProperties.DoGetListLayoutsManagerControlWidth(Sender: TObject): TControlSize;
+function TCustomListProperties.DoGetListLayoutsManagerControlWidth(Sender: TObject): Double;
 begin
   Result:=Self.FSkinControlIntf.Width;
 end;
@@ -3298,6 +3509,10 @@ end;
 
 procedure TCustomListProperties.DoMouseOverItemChange(ANewItem,AOldItem: TBaseSkinItem);
 begin
+  if Assigned(Self.FSkinCustomListIntf.OnMouseOverItemChange) then
+  begin
+    Self.FSkinCustomListIntf.OnMouseOverItemChange(Self);
+  end;
 
 end;
 
@@ -3306,6 +3521,7 @@ begin
   //设置选中的列表项
   SelectedItem:=TBaseSkinItem(Sender);
 end;
+
 
 procedure TCustomListProperties.DoVert_InnerPositionChange(Sender: TObject);
 begin
@@ -3704,12 +3920,12 @@ begin
 
 end;
 
-function TCustomListProperties.GetItemHeight: TControlSize;
+function TCustomListProperties.GetItemHeight: Double;
 begin
   Result:=Self.FListLayoutsManager.ItemHeight;
 end;
 
-function TCustomListProperties.GetItemSpace: TControlSize;
+function TCustomListProperties.GetItemSpace: Double;
 begin
   Result:=Self.FListLayoutsManager.ItemSpace;
 end;
@@ -3719,22 +3935,22 @@ begin
   Result:=Self.FListLayoutsManager.ItemSpaceType;
 end;
 
-function TCustomListProperties.GetItemTopDrawOffset: TControlSize;
+function TCustomListProperties.GetItemTopDrawOffset: Double;
 begin
   Result:=0;
 end;
 
-function TCustomListProperties.GetSelectedItemHeight: TControlSize;
+function TCustomListProperties.GetSelectedItemHeight: Double;
 begin
   Result:=Self.FListLayoutsManager.SelectedItemHeight;
 end;
 
-function TCustomListProperties.GetSelectedItemWidth: TControlSize;
+function TCustomListProperties.GetSelectedItemWidth: Double;
 begin
   Result:=Self.FListLayoutsManager.SelectedItemWidth;
 end;
 
-function TCustomListProperties.GetCenterItemSelectModeTopDrawOffset: TControlSize;
+function TCustomListProperties.GetCenterItemSelectModeTopDrawOffset: Double;
 begin
   Result:=0;
   if Self.FIsEnabledCenterItemSelectMode then
@@ -3742,7 +3958,7 @@ begin
     case Self.FListLayoutsManager.ItemLayoutType of
       iltVertical:
       begin
-        Result:=Result+ControlSize((Self.GetClientRect.Height-FListLayoutsManager.ItemHeight)/2);
+        Result:=Result+(Self.GetClientRect.Height-FListLayoutsManager.ItemHeight)/2;
       end;
       iltHorizontal:
       begin
@@ -3767,7 +3983,7 @@ begin
   Result:=Self.FListLayoutsManager.ItemSizeCalcType;
 end;
 
-function TCustomListProperties.GetCenterItemSelectModeLeftDrawOffset: TControlSize;
+function TCustomListProperties.GetCenterItemSelectModeLeftDrawOffset: Double;
 begin
   Result:=0;
   if Self.FIsEnabledCenterItemSelectMode then
@@ -3779,7 +3995,7 @@ begin
       end;
       iltHorizontal:
       begin
-        Result:=Result+ControlSize((Self.GetClientRect.Width-FListLayoutsManager.ItemWidth)/2);
+        Result:=Result+(Self.GetClientRect.Width-FListLayoutsManager.ItemWidth)/2;
       end;
     end;
   end;
@@ -3795,7 +4011,7 @@ begin
   Result:=TSkinCustomListLayoutsManager;
 end;
 
-function TCustomListProperties.GetItemWidth: TControlSize;
+function TCustomListProperties.GetItemWidth: Double;
 begin
   Result:=Self.FListLayoutsManager.ItemWidth;
 end;
@@ -4296,7 +4512,7 @@ begin
   end;
 end;
 
-procedure TCustomListProperties.SetItemHeight(const Value: TControlSize);
+procedure TCustomListProperties.SetItemHeight(const Value: Double);
 begin
   FListLayoutsManager.ItemHeight:=Value;
 end;
@@ -4316,22 +4532,22 @@ begin
   end;
 end;
 
-procedure TCustomListProperties.SetSelectedItemHeight(const Value: TControlSize);
+procedure TCustomListProperties.SetSelectedItemHeight(const Value: Double);
 begin
   FListLayoutsManager.SelectedItemHeight:=Value;
 end;
 
-procedure TCustomListProperties.SetSelectedItemWidth(const Value: TControlSize);
+procedure TCustomListProperties.SetSelectedItemWidth(const Value: Double);
 begin
   FListLayoutsManager.SelectedItemWidth:=Value;
 end;
 
-procedure TCustomListProperties.SetItemWidth(const Value: TControlSize);
+procedure TCustomListProperties.SetItemWidth(const Value: Double);
 begin
   FListLayoutsManager.ItemWidth:=Value;
 end;
 
-procedure TCustomListProperties.SetItemSpace(const Value: TControlSize);
+procedure TCustomListProperties.SetItemSpace(const Value: Double);
 begin
   FListLayoutsManager.ItemSpace:=Value;
 end;
@@ -4442,23 +4658,33 @@ begin
 
 
 
-  {$IFDEF FMX}
+//  {$IFDEF FMX}
+  {$IF CompilerVersion >= 30.0}
   if ASuperObject.Contains('ItemSizeCalcType') then ItemWidthCalcType:=GetItemSizeCalcTypeByStr(ASuperObject.S['ItemSizeCalcType']);
   if ASuperObject.Contains('ItemLayoutType') then ItemLayoutType:=GetItemLayoutTypeByStr(ASuperObject.S['ItemLayoutType']);
 
-  if ASuperObject.Contains('ItemWidth') then ItemWidth:=ASuperObject.{$IFDEF FMX}F{$ELSE}I{$ENDIF}['ItemWidth'];
-  if ASuperObject.Contains('ItemHeight') then ItemHeight:=ASuperObject.{$IFDEF FMX}F{$ELSE}I{$ENDIF}['ItemHeight'];
-  if ASuperObject.Contains('SelectedItemWidth') then SelectedItemWidth:=ASuperObject.{$IFDEF FMX}F{$ELSE}I{$ENDIF}['SelectedItemWidth'];
-  if ASuperObject.Contains('SelectedItemHeight') then SelectedItemHeight:=ASuperObject.{$IFDEF FMX}F{$ELSE}I{$ENDIF}['SelectedItemHeight'];
+  if ASuperObject.Contains('ItemWidth') then ItemWidth:=ASuperObject.{$IFDEF FMX}F{$ELSE}F{$ENDIF}['ItemWidth'];
+  if ASuperObject.Contains('ItemHeight') then ItemHeight:=ASuperObject.{$IFDEF FMX}F{$ELSE}F{$ENDIF}['ItemHeight'];
+  if ASuperObject.Contains('SelectedItemWidth') then SelectedItemWidth:=ASuperObject.{$IFDEF FMX}F{$ELSE}F{$ENDIF}['SelectedItemWidth'];
+  if ASuperObject.Contains('SelectedItemHeight') then SelectedItemHeight:=ASuperObject.{$IFDEF FMX}F{$ELSE}F{$ENDIF}['SelectedItemHeight'];
   if ASuperObject.Contains('ItemSpace') then ItemSpace:=ASuperObject.{$IFDEF FMX}F{$ELSE}I{$ENDIF}['ItemSpace'];
   if ASuperObject.Contains('ItemSpaceType') then ItemSpaceType:=GetItemSpaceTypeByStr(ASuperObject.S['ItemSpaceType']);
 
   if ASuperObject.Contains('VertScrollBarShowType') then VertScrollBarShowType:=GetScrollBarShowTypeByStr(ASuperObject.S['VertScrollBarShowType']);
   if ASuperObject.Contains('HorzScrollBarShowType') then HorzScrollBarShowType:=GetScrollBarShowTypeByStr(ASuperObject.S['HorzScrollBarShowType']);
 
+  if ASuperObject.Contains('VertCanOverRangeTypes') then Self.VertCanOverRangeTypes:=GetScrollBarOverRangeTypeByStr(ASuperObject.S['VertCanOverRangeTypes']);
+  if ASuperObject.Contains('HorzCanOverRangeTypes') then HorzCanOverRangeTypes:=GetScrollBarOverRangeTypeByStr(ASuperObject.S['HorzCanOverRangeTypes']);
+
+//  AFieldControlSetting.PropJson.B['EnableAutoPullDownRefreshPanel']:=False;
+//  AFieldControlSetting.PropJson.B['EnableAutoPullUpLoadMorePanel']:=False;
+  if ASuperObject.Contains('EnableAutoPullDownRefreshPanel') then EnableAutoPullDownRefreshPanel:=ASuperObject.B['EnableAutoPullDownRefreshPanel'];
+  if ASuperObject.Contains('EnableAutoPullUpLoadMorePanel') then EnableAutoPullUpLoadMorePanel:=ASuperObject.B['EnableAutoPullUpLoadMorePanel'];
+
   if ASuperObject.Contains('MultiSelect') then MultiSelect:=ASuperObject.B['MultiSelect'];
   if ASuperObject.Contains('IsAutoSelected') then IsAutoSelected:=ASuperObject.B['IsAutoSelected'];
-  {$ENDIF FMX}
+  {$IFEND}
+//  {$ENDIF FMX}
 
 
 end;
@@ -4475,6 +4701,10 @@ begin
     DoMouseOverItemChange(Value,FMouseOverItem);
 
     FMouseOverItem := Value;
+
+    //因为FMouseOverItem改过来之后,要再执行一下
+    DoMouseOverItemChange(FMouseOverItem,nil);
+
 
     if FMouseOverItem<>nil then
     begin
@@ -4499,6 +4729,7 @@ begin
             FSelectedItem.StaticSelected:=False;
           end;
           FSelectedItem.DoPropChange;
+
       end
       else
       begin
@@ -5868,6 +6099,7 @@ begin
   begin
     Self.FSkinCustomListIntf.Prop.FListLayoutsManager.DoItemSizeChange(nil);
   end;
+
 end;
 
 
@@ -6317,20 +6549,110 @@ begin
   Result:=TSkinCustomListDefaultMaterial(CurrentUseMaterial);
 end;
 
+function TSkinCustomList.GetPostValue(ASetting: TFieldControlSetting;
+  APageDataDir: String; ASetRecordFieldValueIntf: ISetRecordFieldValue;
+  var AErrorMessage: String): Variant;
+var
+  I: Integer;
+  AItem:TSkinItem;
+  AStringList:TStringList;
+begin
+  Result:=Inherited;
+
+
+  //给控件设置值
+  //判断AValue是否是字符串列表,
+  //应用在建群的时候返回群成员ID列表
+  AStringList:=TStringList.Create;
+  Self.Prop.Items.BeginUpdate;
+  try
+
+    for I := 0 to Self.Prop.Items.Count - 1 do
+    begin
+      AItem:=TSkinItem(Self.Prop.Items[I]);
+      AStringList.Add(AItem.Caption);
+
+    end;
+
+    Result:=AStringList.CommaText;
+
+  finally
+    Self.Prop.Items.EndUpdate;
+    FreeAndNil(AStringList);
+  end;
+
+end;
+
+//function TSkinCustomList.GetProp(APropName: String): Variant;
+//begin
+//  Result:=Inherited;
+//
+//
+//end;
+
 function TSkinCustomList.GetPropertiesClassType: TPropertiesClassType;
 begin
   Result:=TCustomListProperties;
 end;
+
+//function TSkinCustomList.GetPropJsonStr: String;
+//begin
+//  Result:=Inherited;
+//
+//
+//end;
 
 function TSkinCustomList.GetCustomListProperties: TCustomListProperties;
 begin
   Result:=TCustomListProperties(Self.FProperties);
 end;
 
+procedure TSkinCustomList.SetControlValue(ASetting: TFieldControlSetting;
+  APageDataDir, AImageServerUrl: String; AValue: Variant; AValueCaption: String;
+  AGetDataIntfResultFieldValueIntf: IGetDataIntfResultFieldValue);
+var
+  AStringList:TStringList;
+  I: Integer;
+  AItem:TSkinItem;
+begin
+  inherited;
+
+  //给控件设置值
+  //判断AValue是否是字符串列表
+  AStringList:=TStringList.Create;
+  Self.Prop.Items.BeginUpdate;
+  try
+    Self.Prop.Items.Clear;
+    AStringList.CommaText:=AValue;
+
+    for I := 0 to AStringList.Count - 1 do
+    begin
+      AItem:=TSkinItem(Self.Prop.Items.Add);
+      AItem.Caption:=AStringList[I];
+    end;
+
+  finally
+    Self.Prop.Items.EndUpdate;
+    FreeAndNil(AStringList);
+  end;
+end;
+
 procedure TSkinCustomList.SetCustomListProperties(Value: TCustomListProperties);
 begin
   Self.FProperties.Assign(Value);
 end;
+
+//procedure TSkinCustomList.SetProp(APropName: String; APropValue: Variant);
+//begin
+//  inherited;
+//
+//end;
+
+//procedure TSkinCustomList.SetPropJsonStr(AJsonStr: String);
+//begin
+//  inherited;
+//
+//end;
 
 function TSkinCustomList.GetItems:TBaseSkinItems;
 begin
@@ -6350,6 +6672,21 @@ begin
   begin
     Properties.DoAdjustCenterItemPositionAnimateEnd(Self);
   end;
+end;
+
+function TSkinCustomList.LoadFromFieldControlSetting(ASetting: TFieldControlSetting;AFieldControlSettingMap:TObject): Boolean;
+begin
+  Result:=Inherited;
+
+  Self.Prop.MultiSelect:=(ASetting.options_is_multi_select=1);
+
+
+//  if (ASetting.options_value<>'')
+//    or (ASetting.options_page_name<>'') then
+//  begin
+//
+//  end;
+
 end;
 
 procedure TSkinCustomList.ReadState(Reader: TReader);
@@ -6415,6 +6752,11 @@ end;
 function TSkinCustomList.GetOnLongTapItem: TCustomListDoItemEvent;
 begin
   Result:=FOnLongTapItem;
+end;
+
+function TSkinCustomList.GetOnMouseOverItemChange: TNotifyEvent;
+begin
+  Result:=FOnMouseOverItemChange;
 end;
 
 function TSkinCustomList.GetOnClickItemEx: TCustomListClickItemExEvent;
@@ -6723,6 +7065,13 @@ begin
                     //标记为已使用
                     FFrameCacheList[I].FSkinItem:=ASkinItem;
                     FFrameCacheList[I].FIsUsed:=True;
+
+                    //加载设置
+                    if ASkinItem<>nil then
+                    begin
+                      LoadListItemStyleFrameConfig(FFrameCacheList[I].FItemStyleFrame,ASkinItem.FItemStyleConfig);
+                    end;
+
                     Exit;
                 end;
               end;
@@ -6745,7 +7094,12 @@ begin
 
               Result.FIsUsed:=True;
 
-
+              //加载设置
+              //加载设置
+              if ASkinItem<>nil then
+              begin
+                LoadListItemStyleFrameConfig(Result.FItemStyleFrame,ASkinItem.FItemStyleConfig);
+              end;
 
           end;
 
@@ -6847,10 +7201,14 @@ begin
           Self.FFrameCacheList.Add(Result);
           try
 
+              //创建一个Frame
               Result.FItemStyleFrame:=FListItemStyleReg.FrameClass.Create(nil);
               SetFrameName(Result.FItemStyleFrame);
 
+              //加载用户对ListItemStyleFrame所做的自定义设置
               LoadListItemStyleFrameConfig(Result.FItemStyleFrame,Self.FConfig);
+
+
               Result.FItemStyleFrame.GetInterface(IID_IFrameBaseListItemStyle,Result.FItemStyleFrameIntf);
 
 
@@ -6864,12 +7222,20 @@ begin
                 Result.FItemStyleFrame.Visible:=False;
               end;
               {$ELSE}
-              Result.FItemStyleFrame.Parent:=TParentControl(FCustomListProperties.FSkinControl);
-              Result.FItemStyleFrame.Left:=-1000;
-              Result.FItemStyleFrame.Top:=-1000;
-              Result.FItemStyleFrame.Width:=0;
-              Result.FItemStyleFrame.Height:=0;
+//              //设置Parent,这会导致ListBox刷新,导致后调用FOnInit和Init
+//              Result.FItemStyleFrame.Parent:=TParentControl(FCustomListProperties.FSkinControl);
+//              Result.FItemStyleFrame.Left:=-1000;
+//              Result.FItemStyleFrame.Top:=-1000;
+//              Result.FItemStyleFrame.Width:=0;
+//              Result.FItemStyleFrame.Height:=0;
               {$ENDIF}
+
+
+
+              if Assigned(FOnInit) then
+              begin
+                FOnInit(Self,Self,Result);
+              end;
 
 
               //初始
@@ -6879,8 +7245,6 @@ begin
               begin
                 Result.FItemStyleFrameInitIntf.Init(FListItemStyleReg);
               end;
-
-
 
 
 //              //因为拉伸有问题
@@ -6902,6 +7266,14 @@ begin
               end;
 
 
+              {$IFDEF VCL}
+              //这会导致ListBox刷新
+              Result.FItemStyleFrame.Parent:=TParentControl(FCustomListProperties.FSkinControl);
+              Result.FItemStyleFrame.Left:=-1000;
+              Result.FItemStyleFrame.Top:=-1000;
+              Result.FItemStyleFrame.Width:=0;
+              Result.FItemStyleFrame.Height:=0;
+              {$ENDIF}
 
 
 
@@ -6917,9 +7289,22 @@ begin
 
 end;
 
+procedure TListItemTypeStyleSetting.ReConfig;
+var
+  I: Integer;
+begin
+  for I := 0 to Self.FFrameCacheList.Count-1 do
+  begin
+    //加载用户对ListItemStyleFrame所做的自定义设置
+    LoadListItemStyleFrameConfig(FFrameCacheList[I].FItemStyleFrame,Self.FConfig);
+  end;
+
+end;
+
 procedure TListItemTypeStyleSetting.ResetStyle;
 var
   AUrlCacheItem:TUrlCacheItem;
+  AListItemStyleReg: TListItemStyleReg;
 begin
   if FIsUseUrlStyle then
   begin
@@ -6956,10 +7341,22 @@ begin
       //使用本地样式
 
       //根据名称找到列表项风格注册项
-      SetListItemStyleReg(GetGlobalListItemStyleRegList.FindItemByName(FStyle));
+      AListItemStyleReg:=GetGlobalListItemStyleRegList.FindItemByName(FStyle);
+//      if (FStyle<>'') and (AListItemStyleReg=nil) then
+//      begin
+//        ShowMessage('未注册列表项样式'+FStyle+',请安装OrangeUIStyles包并引用对应的样式单元');
+//      end;
+      uBaseLog.HandleException(nil,'TListItemTypeStyleSetting.ResetStyle 未注册列表项样式'+FStyle+',请安装OrangeUIStyles包并引用对应的样式单元');
+      SetListItemStyleReg(AListItemStyleReg);
 
 
   end;
+end;
+
+procedure TListItemTypeStyleSetting.SetConfig(const Value: TStringList);
+begin
+  FConfig.Assign(Value);
+  ReConfig;
 end;
 
 procedure TListItemTypeStyleSetting.SetIsUseUrlStyle(const Value: Boolean);

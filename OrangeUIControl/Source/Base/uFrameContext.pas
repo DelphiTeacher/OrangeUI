@@ -9,6 +9,11 @@ uses
   SysUtils,
   StrUtils,
 
+  {$IF CompilerVersion>=30.0}
+  Types,//定义了TRectF
+  {$ENDIF}
+
+
   {$IFDEF VCL}
   Controls,
   StdCtrls,
@@ -26,7 +31,6 @@ uses
   FMX.Graphics,
   //不能有FMX.WebBrowser,因为有些人要改FMX.WebBrowser
   //FMX.WebBrowser,
-  System.Types,
   System.UITypes,
   uSkinFireMonkeyImage,
   {$ENDIF}
@@ -57,7 +61,17 @@ const
 type
   //用在FrameContext的事件中
   TFrameReturnFromEvent=procedure(Sender:TObject;AFromFrame:TFrame) of object;
-  TFrameCanReturnEvent=procedure(Sender:TObject;var AIsCanReturn:Boolean) of object;
+
+  //判断是否可以返回上一个页面
+  TFrameReturnActionType=(fratDefault,//0表示可以返回
+                          fratCanNotReturn,//1表示不能返回，直接到后台
+                          fratReturnAndFree,//2表示能返回，并且释放
+                          fratCanNotReturnAndToBack,//3表示不能返回，直接到后台
+                          fratCustom//4自定义
+                          );
+
+
+  TFrameCanReturnEvent=procedure(Sender:TObject;var AIsCanReturn:TFrameReturnActionType) of object;
 
 
 
@@ -139,7 +153,7 @@ type
   IFrameHistroyReturnEvent=interface
     ['{05CC1EBF-5B6A-4E14-8EC0-EE570A457AC5}']
     //是否可以返回上一个Frame
-    function CanReturn:Boolean;
+    function CanReturn:TFrameReturnActionType;
   end;
 
 
@@ -168,6 +182,7 @@ type
     PopupHeight:Double;
     //点击空白的地方的处理
     ClickSpaceType:TFramePopupStyleClickSpaceType;
+    procedure Clear;
   end;
   PFramePopupStyle=^TFramePopupStyle;
 
@@ -252,7 +267,7 @@ type
     procedure DoHideEvent;
     procedure DoBeginHideEvent;
     procedure DoReturnFromEvent(AFromFrame:TFrame);
-    procedure DoCanReturnEvent(var AIsCanReturn:Boolean);
+    procedure DoCanReturnEvent(var AIsCanReturn:TFrameReturnActionType);
   protected
     //通知
     procedure Notification(AComponent:TComponent;Operation:TOperation);override;
@@ -354,7 +369,7 @@ type
     procedure DoAnimateShowFrame(AFrameOperItem:TFrameOperItem;ToFrame:TFrame;ToFrameParent:TObject);
     procedure DoAnimateReturnShowFrame(AFrameOperItem:TFrameOperItem;ToFrame:TFrame;ToFrameParent:TObject);
     procedure DoAnimateHideFrame(AFrameOperItem:TFrameOperItem;Frame:TFrame;const HideFrameType:THideFrameType);
-
+  public
   public
     constructor Create;
     destructor Destroy;override;
@@ -373,8 +388,32 @@ type
 
 
 
+  TFrameFormMap=class
+  public
+    FFrame:TFrame;
+    FForm:TForm;
+    FOnClose:TNotifyEvent;
+    //正常关闭窗体的事件
+    procedure DoFormClose(Sender: TObject; var Action: TCloseAction);
+    //调用ReturnFrame而关闭窗体的事件
+    procedure DoFormCloseInReturnFrame(Sender: TObject; var Action: TCloseAction);
+  end;
+  TFrameFormMapList=class(TBaseList)
+  private
+    function GetItem(Index: Integer): TFrameFormMap;
+  published
+  public
+    function Add(AFrame:TFrame;AForm:TForm):TFrameFormMap;
+    function FindByForm(AForm:TForm):TFrameFormMap;
+    function FindByFrame(AFrame:TFrame):TFrameFormMap;
+    property Items[Index:Integer]:TFrameFormMap read GetItem;default;
+  end;
+
 
   TOnWebBrowserRealignEvent=procedure;
+
+
+
 
 
 
@@ -412,7 +451,21 @@ var
 
   //有时候会弹出多个对话框,用于管理
   GlobalTopMostFrameList:TBaseList;
+  GlobalFrameFormMapList:TFrameFormMapList;
 
+
+
+{$IFDEF VCL}
+var
+  GlobalFrameParentFormClass:TFormClass;
+{$ENDIF}
+
+
+var
+  //已经释放掉的FrameList
+  //比如GlobalLoginFrame已经被释放了,但是没有置nil,再次ShowFrame会报错
+  FreedFrameList:TList;
+  GlobalClickButtonTime:TDateTime;
 
 //上一页
 function LastFrame(AFrame:TFrame):TFrame;
@@ -431,7 +484,7 @@ procedure DoShowFrame(
                     //目标页面类(如果ToFrame为nil,那么使用ToFrameClass来创建)
                     const ToFrameClass:TFrameClass;
                     //目标页面的父控件
-                    const ToFrameParent:TObject;
+                    ToFrameParent:TObject;
 
                     //其他(不使用,为nil即可)
                     const NoUse:TObject;
@@ -464,7 +517,7 @@ procedure DoFinishShowFrame(ToFrame:TFrame);
 procedure DoHideFrame(
                       //要隐藏的页面,如果为nil,表示隐藏CurrentFrame
                       AFrame:TFrame;
-                      //调用的时机
+                      //调用的时机,是显示之前隐藏,还是返回之前隐藏
                       const AHideFrameType:THideFrameType=hftAuto;
                       //是否使用页面切换效果
                       const AFrameSwitchType:TFrameSwitchType=fstDefault
@@ -499,7 +552,7 @@ procedure DoFinishReturnShowFrame(AFrameHistory:TFrameHistory;
                                   ALastFrameHistory:TFrameHistory;
                                   AIsNeedFreeFrame:Boolean);
 //判断是否可以返回上一个页面
-function DoCanReturnFrame(const AFrameHistory:TFrameHistory):Boolean;
+function DoCanReturnFrame(const AFrameHistory:TFrameHistory):TFrameReturnActionType;
 
 function GetFramePopupStyle(AFrame:TFrame):PFramePopupStyle;
 
@@ -527,12 +580,6 @@ function IsRepeatClickReturnButton(AFrame:TFrame):Boolean;
 
 implementation
 
-
-var
-  //已经释放掉的FrameList
-  //比如GlobalLoginFrame已经被释放了,但是没有置nil,再次ShowFrame会报错
-  FreedFrameList:TList;
-  GlobalClickButtonTime:TDateTime;
 
 
 function IsRepeatClickReturnButton(AFrame:TFrame):Boolean;
@@ -590,6 +637,8 @@ var
   FrameChangeLanguageEvent:IFrameChangeLanguageEvent;
 begin
   LangKind:=ALangKind;
+
+  {$IFDEF FMX}
   if (CurrentFrame<>nil) and CurrentFrame.GetInterface(IID_IFrameChangeLanguageEvent,FrameChangeLanguageEvent) then
   begin
     FrameChangeLanguageEvent.ChangeLanguage(LangKind);
@@ -603,6 +652,8 @@ begin
                                 GlobalCurLang
                                 );
   end;
+  {$ENDIF}
+
 end;
 
 
@@ -706,15 +757,15 @@ procedure CallFrameShowEvent(ToFrame:TFrame;AIsReturnShow:Boolean);
 var
   FramePaintSetting:IFramePaintSetting;
   FrameHistoryVisibleEvent:IFrameHistroyVisibleEvent;
-  FrameChangeLanguageEvent:IFrameChangeLanguageEvent;
+//  FrameChangeLanguageEvent:IFrameChangeLanguageEvent;
 begin
 
 
-    //先调用翻译事件
-    if ToFrame.GetInterface(IID_IFrameChangeLanguageEvent,FrameChangeLanguageEvent) then
-    begin
-      FrameChangeLanguageEvent.ChangeLanguage(LangKind);
-    end;
+//    //先调用翻译事件
+//    if ToFrame.GetInterface(IID_IFrameChangeLanguageEvent,FrameChangeLanguageEvent) then
+//    begin
+//      FrameChangeLanguageEvent.ChangeLanguage(LangKind);
+//    end;
 
 
     //再调用Show事件
@@ -751,11 +802,11 @@ begin
 end;
 
 
-function DoCanReturnFrame(const AFrameHistory:TFrameHistory):Boolean;
+function DoCanReturnFrame(const AFrameHistory:TFrameHistory):TFrameReturnActionType;
 var
   FrameHistoryReturnEvent:IFrameHistroyReturnEvent;
 begin
-  Result:=True;
+  Result:=TFrameReturnActionType.fratDefault;
   if (AFrameHistory.ToFrame<>nil)
     and AFrameHistory.ToFrame.GetInterface(IID_IFrameHistroyReturnEvent,FrameHistoryReturnEvent) then
   begin
@@ -795,8 +846,12 @@ begin
 
   if ToFrame.ClassName<>'TFrameMessageBox' then
   begin
+    {$IFDEF FMX}
     //有些盖住的Frame不需要Client,不然会被其他client的控件挡住
     ToFrame.Align:=TAlignLayout.{$IF CompilerVersion >= 35.0}Client{$ELSE}alClient{$IFEND};
+    {$ELSE}
+    ToFrame.Align:=alClient;
+    {$ENDIF}
   end;
 
 
@@ -805,7 +860,7 @@ begin
   begin
     ToFrame.Opacity:=1;
   end;
-  {$ENDIF FMX}
+  {$ENDIF}
 
 
   ToFrame.BringToFront;
@@ -835,18 +890,18 @@ begin
 end;
 
 procedure DoShowFrame(var ToFrame:TFrame;
-                    const ToFrameClass:TFrameClass;
-                    const ToFrameParent:TObject;
-                    const NoUse:TObject;
-                    const NoUse1:TFrame;
-                    const OnReturnFrame:TReturnFromFrameEvent;
-                    const Owner:TComponent;
-                    const IsLogInHistory:Boolean;
-                    const IsUseGlobalPaintSetting:Boolean;
-                    const FrameSwitchType:TFrameSwitchType;
-                    const IsUsePopupStyle:Boolean;
-                    const APFramePopupStyle:PFramePopupStyle
-                    );
+                      const ToFrameClass:TFrameClass;
+                      ToFrameParent:TObject;
+                      const NoUse:TObject;
+                      const NoUse1:TFrame;
+                      const OnReturnFrame:TReturnFromFrameEvent;
+                      const Owner:TComponent;
+                      const IsLogInHistory:Boolean;
+                      const IsUseGlobalPaintSetting:Boolean;
+                      const FrameSwitchType:TFrameSwitchType;
+                      const IsUsePopupStyle:Boolean;
+                      const APFramePopupStyle:PFramePopupStyle
+                      );
 var
   AIsNew:Boolean;
   AFrameOperItem:TFrameOperItem;
@@ -854,6 +909,8 @@ var
   AFrameHistoryLog:TFrameHistoryLog;
   AFrameSettingLog:TFrameHistoryLog;
 //  AFramePopupStyleSettingIntf:IFramePopupStyleSetting;
+  AFrameFormMap:TFrameFormMap;
+  FrameChangeLanguageEvent:IFrameChangeLanguageEvent;
 begin
 //    uBaseLog.OutputDebugString('DoShowFrame');
 
@@ -864,13 +921,13 @@ begin
            //没有创建过
            (ToFrame=nil)
 
+//        {$IFDEF FMX}
+//           //已经释放了
+//        or (ToFrame<>nil) and ToFrame.Released//没有效果
+//        {$ENDIF FMX}
            //已经释放过了,避免Frame被释放了,但了变量Global***Frame还引用着,导致不创建而访问报错的问题
         or (FreedFrameList.IndexOf(ToFrame)<>-1)
 
-        {$IFDEF FMX}
-           //已经释放了
-        or (ToFrame<>nil) and ToFrame.Released
-        {$ENDIF FMX}
 
         )
       and (ToFrameClass<>nil) then
@@ -903,12 +960,53 @@ begin
     end;
 
 
+        {$IFDEF VCL}
+        if ToFrameParent=nil then
+        begin
+          ToFrameParent:=GlobalFrameParentFormClass.Create(Application);
+
+//          AForm.WindowState:=wsMaximized;
+
+          if (APFramePopupStyle<>nil) and (APFramePopupStyle.PopupWidth>0) then
+          begin
+            TForm(ToFrameParent).ClientWidth:=ScreenScaleSizeInt(APFramePopupStyle.PopupWidth);
+            TForm(ToFrameParent).ClientHeight:=ScreenScaleSizeInt(APFramePopupStyle.PopupHeight);
+          end
+          else
+          begin
+            TForm(ToFrameParent).ClientWidth:=ScreenScaleSizeInt(ToFrame.Width);
+            TForm(ToFrameParent).ClientHeight:=ScreenScaleSizeInt(ToFrame.Height);
+          end;
+
+
+          TForm(ToFrameParent).Position:=Forms.TPosition.poMainFormCenter;
+
+
+//          TForm(ToFrameParent).Caption:='图片查看';
+          TForm(ToFrameParent).Show;
+
+
+          AFrameFormMap:=GlobalFrameFormMapList.Add(ToFrame,TForm(ToFrameParent));
+          TForm(ToFrameParent).OnClose:=AFrameFormMap.DoFormClose;
+
+
+          ToFrame.Width:=GetControlParentWidth(TParentControl(ToFrameParent));
+          ToFrame.Height:=GetControlParentHeight(TParentControl(ToFrameParent));
+        end;
+        {$ENDIF}
+
+
 
     if NoUse1<>nil then
     begin
       DoHideFrame(NoUse1);
     end;
 
+    //先调用翻译事件
+    if ToFrame.GetInterface(IID_IFrameChangeLanguageEvent,FrameChangeLanguageEvent) then
+    begin
+      FrameChangeLanguageEvent.ChangeLanguage(LangKind);
+    end;
 
 
     if
@@ -1167,7 +1265,11 @@ begin
 
 
   AFrame.Visible:=False;
+  {$IFDEF FMX}
   AFrame.Align:=TAlignLayout.{$IF CompilerVersion >= 35.0}None{$ELSE}alNone{$IFEND};
+  {$ELSE}
+  AFrame.Align:=alNone;
+  {$ENDIF}
 
 end;
 
@@ -1213,7 +1315,7 @@ begin
       begin
         TFrameContext(AFrame.TagObject).DoBeginHideEvent;
       end;
-      {$ENDIF FMX}
+      {$ENDIF}
 
       uBaseLog.OutputDebugString('--HideFrame '+AFrame.Name);
 
@@ -1226,7 +1328,7 @@ begin
 
 
 
-
+      {$IFDEF FMX}
       AFrameOperItem:=TFrameOperItem.Create;
       AFrameOperItem.Frame:=AFrame;
       AFrameOperItem.FrameHistory.FrameSwitchType:=AFrameSwitchType;
@@ -1249,15 +1351,25 @@ begin
         end;
         hftAuto:
         begin
-
           AFrameOperItem.FrameOperType:=fotHideAuto;
-
         end;
       end;
 
       GetGlobalFrameOperManager.FFrameOperItems.Add(AFrameOperItem);
       GetGlobalFrameOperManager.Run;
+      {$ENDIF}
 
+
+//      {$IFDEF VCL}
+//      if AFrame<>nil then
+//      begin
+//        AFrameFormMap:=GlobalFrameFormMapList.FindByFrame(AFrame);
+//        if AFrameFormMap<>nil then
+//        begin
+//          AFrameFormMap.FForm.Close;
+//        end;
+//      end;
+//      {$ENDIF}
 
 
       //wn这里面不能影响CurrentFrame
@@ -1274,12 +1386,14 @@ end;
 procedure DoFinishReturnShowFrame(AFrameHistory:TFrameHistory;
                                   ALastFrameHistory:TFrameHistory;
                                   AIsNeedFreeFrame:Boolean);
+var
+  AFrameFormMap:TFrameFormMap;
 begin
 //  uBaseLog.OutputDebugString('DoFinishReturnShowFrame '+AFrameHistory.ToFrame.Name);
 
 
   //调用Show
-  CallFrameShowEvent(AFrameHistory.ToFrame,True);
+  if AFrameHistory.ToFrame<>nil then CallFrameShowEvent(AFrameHistory.ToFrame,True);
 
 
 
@@ -1297,12 +1411,26 @@ begin
   {$ENDIF FMX}
 
 
+  {$IFDEF VCL}
+  //关闭窗体
+  if ALastFrameHistory.ToFrame<>nil then
+  begin
+    AFrameFormMap:=GlobalFrameFormMapList.FindByFrame(ALastFrameHistory.ToFrame);
+    if (AFrameFormMap<>nil) and (AFrameFormMap.FForm<>nil) then
+    begin
+      AFrameFormMap.FForm.OnClose:=AFrameFormMap.DoFormCloseInReturnFrame;
+      AFrameFormMap.FForm.Close;
+    end;
+  end;
+  {$ENDIF}
+
+
 
   //调用完DoReturn再释放FrameHistory.ToFrame,不然会报错
   //释放
   if AIsNeedFreeFrame then
   begin
-//      uBaseLog.OutputDebugString('Return Direct Free '+ALastFrameHistory.ToFrame.ClassName);
+      uBaseLog.HandleException(nil,'DoFinishReturnShowFrame Return Direct Free '+ALastFrameHistory.ToFrame.ClassName);
 
       //去掉引用
       ALastFrameHistory.ToFrame.Parent:=nil;
@@ -1315,11 +1443,13 @@ begin
         ALastFrameHistory.ToFrame.Free;
         {$ENDIF}
       except
-
+        on E:Exception do
+        begin
+          uBaseLog.HandleException(E,'DoFinishReturnShowFrame Return Direct Free '+ALastFrameHistory.ToFrame.ClassName);
+        end;
       end;
 
   end;
-
 
   WebBrowserRealign;
 
@@ -1385,7 +1515,7 @@ procedure DoReturnFrame(
                         );
 var
   I,AStep:Integer;
-  AIsCanReturn:Boolean;
+  AIsCanReturn:TFrameReturnActionType;
   AIsFirstFrame:Boolean;
   AReturnLog:TFrameHistoryLog;
   ALastFrameHistory:TFrameHistory;
@@ -1393,7 +1523,9 @@ var
   AFrameOperItem:TFrameOperItem;
 begin
 
+  {$IFDEF FMX}
   AFromFrame:=nil;
+  {$ENDIF}
 
   if AFromFrame<>nil then
   begin
@@ -1449,6 +1581,9 @@ begin
         if AReturnLog=nil then//说明这个页面,没有加入到HistoryLog
         begin
             //AFromFrame为nil
+
+
+            {$IFDEF FMX}
             //自动返回上一页
             if GlobalFrameHistoryLogList.Count>1 then
             begin
@@ -1467,13 +1602,23 @@ begin
                     AIsFirstFrame:=True;
                 end;
             end;
+            {$ENDIF}
+            {$IFDEF VCL}
+            if GlobalFrameHistoryLogList.Count>0 then
+            begin
+              //自动返回上一页
+              ALastFrameHistory:=GlobalFrameHistoryLogList[GlobalFrameHistoryLogList.Count-1].FrameHistory;
+              AFromFrame:=ALastFrameHistory.ToFrame;
+            end;
+            {$ENDIF}
+
         end;
 
 
 
 
 
-
+        {$IFDEF FMX}
         //因为FrameHistory每个Frame只有一个,多次显示Frame后FrameHistory会变,造成循环切换
         //所以使用AReturnLog.FrameHistory,为那时的FrameHistory
         if (AReturnLog<>nil) and (AReturnLog.FrameHistory.ToFrame<>nil) then
@@ -1493,13 +1638,14 @@ begin
 
 
 
-            //判断这个FrameHistory是否可以跳转
+            //判断这个FrameHistory是否可以跳转，但是它已经Hide了就会有问题
             AIsCanReturn:=DoCanReturnFrame(ALastFrameHistory);
-            if not AIsCanReturn then
-            begin
-              //有不能跳转的Frame
-              Exit;
-            end;
+//            if (AIsCanReturn=TFrameReturnActionType.fratCanNotReturn)
+//              or (AIsCanReturn=TFrameReturnActionType.fratCanNotReturnAndToBack) then
+//            begin
+//              //有不能跳转的Frame
+//              Exit;
+//            end;
 
 
 
@@ -1524,7 +1670,7 @@ begin
             AFrameOperItem.FrameOperType:=fotReturnShow;
             AFrameOperItem.FrameHistory:=AReturnLog.FrameHistory;
             AFrameOperItem.LastFrameHistory:=ALastFrameHistory;
-            AFrameOperItem.IsNeedFreeFrame:=IsNeedFree;
+            AFrameOperItem.IsNeedFreeFrame:=IsNeedFree or (AIsCanReturn=fratReturnAndFree);
 
 
             GetGlobalFrameOperManager.FFrameOperItems.Add(AFrameOperItem);
@@ -1572,31 +1718,56 @@ begin
             if AIsFirstFrame then
             begin
                 //回到初始状态
-//                uBaseLog.OutputDebugString('ReturnFrame Is First Frame');
+                uBaseLog.OutputDebugString('ReturnFrame Is First Frame');
                 //首个Frame不返回
+                //2022-09-13改为可返回,有人在单独的窗体中使用了一个Frame,这个Frame需要返回调用事件
 
 
 //                //判断这个FrameHistory是否可以跳转
 //                AIsCanReturn:=DoCanReturnFrame(ALastFrameHistory);
 //                if AIsCanReturn then
 //                begin
-//
-//                    //调用返回事件
-//                    if Assigned(ALastFrameHistory.OnReturnFrame) then
-//                    begin
-//                      ALastFrameHistory.OnReturnFrame(ALastFrameHistory.ToFrame);
-//                    end;
-//
+
+                    //调用返回事件
+                    if Assigned(GlobalFrameHistoryLogList[0].FrameHistory.OnReturnFrame) then
+                    begin
+                      GlobalFrameHistoryLogList[0].FrameHistory.OnReturnFrame(nil);
+                    end;
+
 //                end;
-//
-//              GlobalFrameHistoryLogList.Clear(True);
-//
-//              CurrentFrame:=nil;
+
+              GlobalFrameHistoryLogList.Clear(True);
+
+              CurrentFrame:=nil;
+
+
             end;
 
 
 
         end;
+        {$ENDIF FMX}
+
+
+
+        {$IFDEF VCL}
+        if GlobalFrameHistoryLogList.Count=1 then
+        begin
+          GlobalFrameHistoryLogList.Clear(True);
+        end;
+        
+        AFrameOperItem:=TFrameOperItem.Create;
+        if AReturnLog<>nil then AFrameOperItem.Frame:=AReturnLog.FrameHistory.ToFrame;
+        AFrameOperItem.FrameOperType:=fotReturnShow;
+        if AReturnLog<>nil then AFrameOperItem.FrameHistory:=AReturnLog.FrameHistory;
+        AFrameOperItem.LastFrameHistory:=ALastFrameHistory;
+        AFrameOperItem.IsNeedFreeFrame:=IsNeedFree;
+
+
+        GetGlobalFrameOperManager.FFrameOperItems.Add(AFrameOperItem);
+        GetGlobalFrameOperManager.Run;
+
+        {$ENDIF VCL}
 
 
   end;
@@ -1746,7 +1917,7 @@ begin
   inherited;
 end;
 
-procedure TFrameContext.DoCanReturnEvent(var AIsCanReturn: Boolean);
+procedure TFrameContext.DoCanReturnEvent(var AIsCanReturn: TFrameReturnActionType);
 begin
   if Assigned(FOnCanReturn) then
   begin
@@ -2764,7 +2935,7 @@ begin
       //begin
       //  //这个Frame在显示的时候没有Hide,那么不需要动画效果
       //end;
-      if ToFrame.Align={$IFDEF FMX}TAlignLayout.Client{$ELSE}alClient{$ENDIF} then
+      if (ToFrame=nil) or (ToFrame.Align={$IFDEF FMX}TAlignLayout.Client{$ELSE}alClient{$ENDIF}) then
       begin
         //已经显示了,就不再搞什么效果了
         //DoShowFrameAnimateEnd(nil);
@@ -2791,6 +2962,7 @@ begin
       end;
 
       Self.ReturnShowFrameEffect.Control:=ToFrame;
+
 //  end
 //  else
 //  begin
@@ -2920,8 +3092,12 @@ procedure TFrameOperManager.DoAnimateHideFrame(AFrameOperItem:TFrameOperItem;Fra
 begin
 //  uBaseLog.OutputDebugString('DoAnimateHideFrame '+Frame.Name);
 
-
+  {$IFDEF FMX}
   Frame.Align:=TAlignLayout.{$IF CompilerVersion >= 35.0}None{$ELSE}alNone{$IFEND};
+  {$ELSE}
+  Frame.Align:=alNone;
+  {$ENDIF}
+
 
 //  if Not AFrameOperItem.IsUseCacheImage then
 //  begin
@@ -3112,6 +3288,98 @@ end;
 
 
 
+{ TFrameFormMapList }
+
+function TFrameFormMapList.Add(AFrame: TFrame; AForm: TForm): TFrameFormMap;
+begin
+  Result:=TFrameFormMap.Create;
+  Result.FFrame:=AFrame;
+  Result.FForm:=AForm;
+  Inherited Add(Result);
+end;
+
+function TFrameFormMapList.FindByFrame(AFrame: TFrame): TFrameFormMap;
+var
+  I: Integer;
+begin
+  Result:=nil;
+  for I := 0 to Self.Count - 1 do
+  begin
+    if Items[I].FFrame=AFrame then
+    begin
+      Result:=Items[I];
+      Exit;
+    end;
+  end;
+end;
+
+function TFrameFormMapList.FindByForm(AForm: TForm): TFrameFormMap;
+var
+  I: Integer;
+begin
+  Result:=nil;
+  for I := 0 to Self.Count - 1 do
+  begin
+    if Items[I].FForm=AForm then
+    begin
+      Result:=Items[I];
+      Exit;
+    end;
+  end;
+end;
+
+function TFrameFormMapList.GetItem(Index: Integer): TFrameFormMap;
+begin
+  Result:=TFrameFormMap(Inherited Items[Index]);
+end;
+
+
+
+
+{ TFrameFormMap }
+
+procedure TFrameFormMap.DoFormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  //中断了
+  if GetFrameHistory(Self.FFrame)<>nil then GetFrameHistory(Self.FFrame).OnReturnFrame:=nil;
+
+  if Assigned(FOnClose) then
+  begin
+    FOnClose(Self);
+  end;
+
+
+
+  DoHideFrame(Self.FFrame);
+  DoReturnFrame(Self.FFrame);
+
+end;
+
+
+procedure TFrameFormMap.DoFormCloseInReturnFrame(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  FFrame.Parent:=nil;//不能释放Frame，下次还要用
+
+  GlobalFrameFormMapList.Remove(Self,False);
+
+  Action:={$IFDEF FMX}TCloseAction.caFree{$ENDIF}{$IFDEF VCL}caFree{$ENDIF};
+
+  Self.FForm:=nil;
+  Self.Free;
+end;
+
+{ TFramePopupStyle }
+
+procedure TFramePopupStyle.Clear;
+begin
+  PopupWidth:=0;
+  PopupHeight:=0;
+  //点击空白的地方的处理
+  ClickSpaceType:=TFramePopupStyleClickSpaceType.cstNone;
+
+end;
+
 initialization
   GlobalFrameHistoryLogList:=TFrameHistoryLogList.Create;
   GlobalFrameSettingLogList:=TFrameHistoryLogList.Create;
@@ -3120,7 +3388,7 @@ initialization
 //  GlobalIsPaintSetting:=False;
 //  GlobalFrameFillColor:=NullColor;
   //弹出样式的背景色
-  GlobalPopupStyleFrameFillColor:=$30000000;
+  GlobalPopupStyleFrameFillColor:=$80000000;
   //弹出样式的宽度
   GlobalPopupStyleFrameWidth:=320;
   GlobalFramePaintSettingEvent:=TFramePaintSettingEvent.Create;
@@ -3131,7 +3399,11 @@ initialization
 
   GlobalFrameOperManager:=TFrameOperManager.Create;
 
+  GlobalFrameFormMapList:=TFrameFormMapList.Create;
 
+  {$IFDEF VCL}
+  GlobalFrameParentFormClass:=TForm;
+  {$ENDIF}
 
 finalization
   FreeAndNil(GlobalFrameHistoryLogList);
@@ -3144,5 +3416,9 @@ finalization
   FreeAndNil(FreedFrameList);
 
   FreeAndNil(GlobalTopMostFrameList);
+
+  FreeAndNil(GlobalFrameFormMapList);
+
+
 
 end.

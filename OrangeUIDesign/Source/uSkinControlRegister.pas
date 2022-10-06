@@ -37,14 +37,6 @@ begin
 
 
   RegisterComponents('OrangeUI_Component',[TTestBinaryObjectListStore]);
-  //独立出来
-//  RegisterComponents('NewOUI_Control',NewOrangeUI_ControlArray);
-
-//  {$IFDEF VCL}
-//  RegisterComponents('Standard',[TClearEditButton]);
-//  {$ENDIF}
-//
-//  {$IFDEF FMX}
 
 
   {$IF CompilerVersion >= 30.0}
@@ -59,6 +51,16 @@ begin
                                 ]);
   {$IFEND}
 
+
+
+  //独立出来
+//  RegisterComponents('NewOUI_Control',NewOrangeUI_ControlArray);
+
+//  {$IFDEF VCL}
+//  RegisterComponents('Standard',[TClearEditButton]);
+//  {$ENDIF}
+//
+//  {$IFDEF FMX}
 
 //  {$ENDIF}
 

@@ -149,13 +149,11 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     0000000000000000000000000000000000000000000000000000000000008000
     0000800000008000000080000000800000008000000080000000C0000001C000
     0001E0000003E0000007F000000FF800001FFE00003FFF0000FFFFC003FF}
-  OldCreateOrder = False
   Position = poScreenCenter
   OnResize = FormResize
   DesignSize = (
     649
     450)
-  PixelsPerInch = 96
   TextHeight = 13
   object btnFoot: TSkinWinButton
     Left = 8
@@ -168,18 +166,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -266,6 +270,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -458,6 +463,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       94A0AB42170CBE3EF2597174466A70DC1552FF76541841AE9CC1C2542A456DCC
       041E541D2803AF868E66A017D3EEF4B656FC8A1AAAD21D51B0DEC1ED5664F0FF
       0126DA642E4BE64C3F0000000049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -511,6 +517,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       50D0D92C35D68031DA026CC461B0037D7D4C497921EFB9FCA11C988204DA4702
       F467CA1F03107B5BB61AFD9A4CE210F007A47DF2F02F358540B188B899380000
       000049454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -564,6 +571,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       E31FE2BB2623A787C9616BF1469CC91A60930D0EDFDFDBEB5C5D9CCBEF6EBFDA
       0EB020D1FE0D11FA33E58B0308C59AA5461BFAB80D02FE86866F5CFD07154940
       6608E437B40000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -594,6 +602,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       8F1E3E7AD2DF33E1F6CF3B3BEE92620C79F5B1920B3FB0C8E40316DCAC0C1C7F
       3E31F07EF9486CA2A2CC622A80518B472D1EB5986A000020EBFF1F5885EA3400
       00000049454E44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akLeft, akBottom]
@@ -603,8 +613,11 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitTop = 416
   end
   object btnStop: TSkinWinButton
     Left = 179
@@ -617,18 +630,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -715,6 +734,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -866,6 +886,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       977FBAE234C9DD7FB24FEC82A70253513B1CEAD552955EE79387B635BBA5C697
       CE1C257F20C0E7A2170463FDC2C4BB0E6782C98064F213B231F030D47215F927
       2A5701F2CF5CF67291BF0113C63A01BAF8E6B10000000049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -906,6 +927,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       D1F46804B225EA6D59057B347BCAEB427C816412B240940918E15F9850E8CF75
       839D8E55DF8D0C5D85B18B2BA40F6D5D46F0C18428E23239EA6584C2096C7873
       69FAC6377F03064F77CE70E4E7670000000049454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -946,6 +968,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       883D1E8FF654C3734B9027233617965729AB0C2DBE64916C1A7240840D18E15F
       189FEF8FAC1B0E5BD2F7A3036330FA7055CA339BC2083ECD8D203E9BA30E2314
       E0F2E0BDD0ECDD6FFE062FC579779DAF10CC0000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -964,6 +987,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       1F50C7623957C52DDB56B812A3D4C72B6237C3A3DDF7A963B19ABD08C30F163E
       A2D472FCF9C470EBE01BEA584C03306AF1A8C5A3168F5A4C360000CB2D521FBC
       7490A80000000049454E44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akLeft, akBottom]
@@ -973,8 +998,11 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitTop = 416
   end
   object btnPrior: TSkinWinButton
     Left = 209
@@ -987,18 +1015,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -1085,6 +1119,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -1250,6 +1285,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       6AA685CC4C088D4B5DD32D9529D0B722FD76921A66BA7D33E0FD32ADFB85B3C7
       CE42ED2C862E047CE1C79FF28743B480112064F48064020C573B4BA1FFA2F215
       987C5E4C5D31F06FD2FEC110CB2799180000000049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -1295,6 +1331,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       68852CE0720718479F30131363C1DD4DFA353F0CDCF80212C555A267A29670B8
       C9C385FBB873D54B38EEF4F0847717ED77BEFF1BA3E1EDCE7F0B7FA500000000
       49454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -1340,6 +1377,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       60D11B6084FFC2389D0F627BDBB5A13F0D5DFB1212C515FCF51B16105CC75844
       41DEDCEA0584DC0C7F786BDE76F3FB7F0029ACEF778C96F5E10000000049454E
       44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -1362,6 +1400,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       EE64A09AB992BC9D33C0FB8716DD74F981C3F6350334D463120FD55FE0F2E8A1
       EF4D2F3F50F887460ECB6139FCFFC35F1152AF1F7078CF900000000049454E44
       AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akLeft, akBottom]
@@ -1371,8 +1411,11 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitTop = 416
   end
   object btnNext: TSkinWinButton
     Left = 299
@@ -1385,18 +1428,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -1483,6 +1532,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -1646,6 +1696,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       88C43957A46E72F41B910E1B59F56869BEECF35981C6E5D8E17D8761EE28862F
       003E76EF47FEFB120D302A808C1E903C0E576F1B5BA13F79F919423E2AA6AF18
       F537FA71A910C71E0B800000000049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -1691,6 +1742,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       00E3C42FCCC4C4584077B36ECD9D81EBDF4232B88AFF4AC4120E5FF470E07477
       8E7A09C7ED1E9EF0FEA2F5EECFFF00CA7DE1CE1CAFED6F0000000049454E44AE
       426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -1735,6 +1787,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       2C96B4B70E6D9F86DE7CE2F9B8E474697A6E993D88CD1F865E60D11D6284FFC2
       D8EDA3E1AD8DBAC0DB5D37BE8164B846F0CCA605049F642C223F776EF502420E
       8637BC3B3FD6F3D3BF2CA2E377CA108E3F0000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -1757,6 +1810,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       79181EAA438EA92AF1DE4D99BFC6172F6E4CC1A77E0CCD03CD57C89D5455B9DA
       4D5FE21F284DAC8935F1FF177F01E431B51F9657FECE0000000049454E44AE42
       6082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akLeft, akBottom]
@@ -1766,8 +1821,11 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitTop = 416
   end
   object btnPlayPause: TSkinWinButton
     Left = 241
@@ -1780,18 +1838,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -1878,6 +1942,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -2051,6 +2116,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       BBF36DDA9E7FFA759F0ED526A0ECCB7EDCC31AB7CD578E403E35027B9FBD8331
       4E053B4E764632E7E80BAFC7FE591FF7803CDC9ED4F6FFCFF8C9DEA604E3FF01
       CD2508C528A081EC0000000049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -2138,6 +2204,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       26E0FCD1A6B7C9D4250F9F9CFEA5F5B7C69238CDD247E0FF65D1AD0414B20370
       E9B51DA7B02697AD278CDDFFDF1ED407B530428EFF1366EC8A2BA126FC130000
       000049454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -2205,6 +2272,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       D879DB1A3A067CB7209957B90897AE90802CC3B4C1530EE74C9A33C4EF0FC3FD
       D624C908674A171C916B72F25C24A4E0FF5ED09D6A0471EDBFB33F150DC6B761
       490000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -2270,6 +2338,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       BF36B5A0AB72C7D9B9ABDD950A24DBD88DB6B5A4077CA720B9A55CCC90AE9084
       3C87D995DBFF28DAB667A52C47E05EDB1C0E2B741E3B7096D664FD5E24A4F6FF
       9ED0EDDA08E2897F017B34210DB949BE760000000049454E44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akLeft, akBottom]
@@ -2280,11 +2350,14 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = True
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitTop = 414
   end
   object SkinButton6: TSkinWinButton
-    Left = 590
+    Left = 586
     Top = 419
     Width = 25
     Height = 25
@@ -2294,18 +2367,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -2392,6 +2471,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -2570,6 +2650,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       B7ED6CE7BCEE5E91180F06954254BFC3CD9D8F37A3E4668E3DDEAE10C0B05987
       C7E67FAFFF6C21365F5F5BF6BFFE21FE5EFF5ABF01295BE49A016D6B97000000
       0049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -2608,6 +2689,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       699ABBCC7DFDF13B8D2CE1045AA2E97B54D5CC75F6874FDF6952C70BF071B232
       2A5AC56EB776F0DCFEF5E7EF3FB4B0849B9D95859141C43C951686230346F3FC
       1DE1B4B604006ECE694EC905F2930000000049454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -2646,6 +2728,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       425A7EC734CD5DE6BEFEF89D469670022DD1F43DAA6AE63AFBC3A7EF34A9E305
       F838591915AD62B75B3B786EFFFAF3F71F5A58C2CDCECAC2C820629E4A0BC391
       01A379FE8E705A5B02009093694E9455D8F70000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -2684,6 +2767,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       48A424CA3749CCA51F1CF5B2615192E8B50A292A2869B854E5A8BD14999A9E16
       0321E5127C8C6A6D7BC568FEEF42B64357EBC446FE063B646134ED8A1E630000
       000049454E44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akRight, akBottom]
@@ -2693,11 +2778,15 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitLeft = 582
+    ExplicitTop = 418
   end
   object SkinButton7: TSkinWinButton
-    Left = 565
+    Left = 561
     Top = 419
     Width = 25
     Height = 25
@@ -2707,18 +2796,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -2805,6 +2900,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -2962,6 +3058,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       C0CB7F7BC386B098068DDEC4CC3F072020ABB3A5213960DDE6769DC13CC70403
       85D98E57656D9B98660C5C690D62DA15E0E0E447EB7BC6CBFAEF14E097D511FF
       BFBE8897F5BCFE09AD18698B5ED3F08F0000000049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -2993,6 +3090,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       DF69640927D0124DDFA3AA66AEB33F7CFA4E933A5E808F939551D12A76BBB583
       E7F6AF3F7FFFA18525DCECAC2C8C0C22E6A9B4301C19309AE7EF08A7B52500D7
       CC0A4EC1AD6A060000000049454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -3024,6 +3122,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       DF69640927D0124DDFA3AA66AEB33F7CFA4E933A5E808F939551D12A76BBB583
       E7F6AF3F7FFFA18525DCECAC2C8C0C22E6A9B4301C19309AE7EF08A7B52500ED
       720A4E9E84B56A0000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -3055,6 +3154,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       3ED1C8277C109F685BBBF7BD78F399263E9110E1656354B08C59E7E613B4EECB
       B7DFBF6961090F172B2B238388792A2D0C47068CE6F93BC2696D0900FD4A0934
       1D89557C0000000049454E44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akRight, akBottom]
@@ -3064,11 +3165,15 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitLeft = 557
+    ExplicitTop = 418
   end
   object btnSetting: TSkinWinButton
-    Left = 540
+    Left = 536
     Top = 419
     Width = 25
     Height = 25
@@ -3078,18 +3183,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -3176,6 +3287,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -3343,6 +3455,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       CD23FA97F10D772FBCABA8BE45EBED7EFE8795E10A8FE0C41B6F18430B1A6EF2
       F4F5E7C781EDD1E003BDEA09078BEB69F372DF308616FF071FFC449A29BD436E
       0000000049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -3377,6 +3490,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       BC202F1727A39C6B5D29DFEF373F752C2C997EFEF9FF9BE1FF7FAA5AC2C5C9C6
       CA6891BD4BF7D1A55DC62F6E9D66FCF7F7070B2D828C114458E6EDD46160FCAF
       F28F81819D5203B101005E992DCDA5457ABB0000000049454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -3411,6 +3525,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       BC202F1727A39C6B5D29DFEF373F752C2C997EFEF9FF9BE1FF7FAA5AC2C5C9C6
       CA6891BD4BF7D1A55DC62F6E9D66FCF7F7070B2D828C114458E6EDD46160FCAF
       F20F984068610900AB572DCD612B23FF0000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -3445,6 +3560,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       10E165639473AD2BE5FDF3EA8B85BDE3B76F7F187F32FEFF4F554B78B8585919
       2DB277E93EBAB4CBF8C5ADD38CFFFEA2564CD4028C20C2326FA70E03E37F1560
       63889D1696000063073534100C59160000000049454E44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     SelfOwnMaterial.PushedPicture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000000190000
       00190806000000C4E98563000000017352474200AECE1CE90000000467414D41
@@ -3484,11 +3601,15 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitLeft = 532
+    ExplicitTop = 418
   end
   object SkinButton9: TSkinWinButton
-    Left = 615
+    Left = 611
     Top = 419
     Width = 25
     Height = 25
@@ -3498,18 +3619,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -3596,6 +3723,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -3765,6 +3893,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       F7C5A3D282F4FFEBBCBB0E96F29BDB0B064B0800BEC47DFBE860E6339FE89CDF
       FE2C65D1A61F8F4E69C1B3FF009B93C5C223B15D3F0000000049454E44AE4260
       82}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -3803,6 +3932,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       786EFFFAF3F71FAAFA868599919D8981EDECD183FFBEB34BFE616410314FA576
       90C1002B33C71F714D2B26697DC7638CE6F93BC26965D1FF7FFF7FFC6766B873
       7A82E7550098D280C8CAFBD0430000000049454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -3841,6 +3971,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       07CFED5F7FFEFE4355DFB03033B23331B09D3D7AF0DF7776C93F8C0C22E6A994
       1B8B1DB03273FC11D7B46292D6773CC6689EBF239C5616FDFFF7FFC77F66863B
       A727785E05004F1F80C87A2D69B90000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -3878,6 +4009,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       9646FBB4BD570F328BEB5A379BAA5A9940342A2408B024421C235E77BD244384
       4E0444F38A0E097D65BCE224C4748ABE449CBAACAC1F141D7E66992BD0ECCC6C
       685622FA3468AD78FF0B59FC78C8EC5466610000000049454E44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akRight, akBottom]
@@ -3887,13 +4020,17 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitLeft = 607
+    ExplicitTop = 418
   end
   object tbProgress: TSkinWinTrackBar
     Left = 21
     Top = 398
-    Width = 607
+    Width = 603
     Height = 13
     ParentMouseEvent = True
     DirectUIVisible = False
@@ -3901,21 +4038,28 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'ProgressBar'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.TrackBtnDrawSize = 0
+    SelfOwnMaterial.HorzTrackBtnNormalPicture.IsClipRound = False
     SelfOwnMaterial.HorzTrackBtnNormalPicture.Data = {
       07544269746D617042030000424D420300000000000036000000280000001300
       00000D00000001001800000000000C030000120B0000120B0000000000000000
@@ -3944,6 +4088,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       100F0C0908060000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000}
+    SelfOwnMaterial.HorzTrackBtnHoverPicture.IsClipRound = False
     SelfOwnMaterial.HorzTrackBtnHoverPicture.Data = {
       07544269746D617042030000424D420300000000000036000000280000001300
       00000D00000001001800000000000C030000120B0000120B0000000000000000
@@ -3972,6 +4117,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       100F0C0908060000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000}
+    SelfOwnMaterial.HorzTrackBtnDisabledPicture.IsClipRound = False
     SelfOwnMaterial.HorzTrackBtnDisabledPicture.Data = {
       07544269746D617042030000424D420300000000000036000000280000001400
       00000D00000001001800000000000C030000120B0000120B0000000000000000
@@ -4000,6 +4146,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000}
+    SelfOwnMaterial.HorzTrackBtnDownPicture.IsClipRound = False
     SelfOwnMaterial.HorzTrackBtnDownPicture.Data = {
       07544269746D617042030000424D420300000000000036000000280000001300
       00000D00000001001800000000000C030000120B0000120B0000000000000000
@@ -4028,6 +4175,12 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       100F0C0908060000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000}
+    SelfOwnMaterial.VertTrackBtnNormalPicture.IsClipRound = False
+    SelfOwnMaterial.VertTrackBtnHoverPicture.IsClipRound = False
+    SelfOwnMaterial.VertTrackBtnDisabledPicture.IsClipRound = False
+    SelfOwnMaterial.VertTrackBtnDownPicture.IsClipRound = False
+    SelfOwnMaterial.VertBackGndPicture.IsClipRound = False
+    SelfOwnMaterial.HorzBackGndPicture.IsClipRound = False
     SelfOwnMaterial.HorzBackGndPicture.Data = {
       07544269746D61705A090000424D5A0900000000000036000000280000003C00
       00000D000000010018000000000024090000120B0000120B0000000000000000
@@ -4105,6 +4258,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+    SelfOwnMaterial.VertForeGndPicture.IsClipRound = False
+    SelfOwnMaterial.HorzForeGndPicture.IsClipRound = False
     SelfOwnMaterial.HorzForeGndPicture.Data = {
       07544269746D61705A090000424D5A0900000000000036000000280000003C00
       00000D000000010018000000000024090000120B0000120B0000000000000000
@@ -4193,6 +4348,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.ForeGndDrawPictureParam.StretchMargins.Top = 5
     SelfOwnMaterial.ForeGndDrawPictureParam.StretchMargins.Right = 5
     SelfOwnMaterial.ForeGndDrawPictureParam.StretchMargins.Bottom = 5
+    SelfOwnMaterial.VertProgressNormalPicture.IsClipRound = False
+    SelfOwnMaterial.HorzProgressNormalPicture.IsClipRound = False
     SelfOwnMaterial.HorzProgressNormalPicture.Data = {
       07544269746D617042030000424D420300000000000036000000280000001400
       00000D00000001001800000000000C030000120B0000120B0000000000000000
@@ -4228,6 +4385,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.Max = 200.000000000000000000
     Properties.Position = 100.000000000000000000
     Properties.Orientation = trHorizontal
+    ExplicitTop = 397
+    ExplicitWidth = 599
   end
   object SkinTrackBar2: TSkinWinTrackBar
     Left = 361
@@ -4240,21 +4399,28 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.TrackBtnDrawSize = 0
+    SelfOwnMaterial.HorzTrackBtnNormalPicture.IsClipRound = False
     SelfOwnMaterial.HorzTrackBtnNormalPicture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D494844520000000D0000
       00100806000000CDA3F539000000097048597300000B1300000B1301009A9C18
@@ -4356,6 +4522,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       092C2CCCF37DDC6D194C4D741964652418EE3F78CA70FACC25866DBB8F813444
       00D5AC7C7D782A03A388753AB24BF8A129221C880D80F814482134457C072978
       7D640699698F6E9A009228A6E19402B3DB0000000049454E44AE426082}
+    SelfOwnMaterial.HorzTrackBtnHoverPicture.IsClipRound = False
     SelfOwnMaterial.HorzTrackBtnHoverPicture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D494844520000000F0000
       00100806000000C9562504000000097048597300000B1300000B1301009A9C18
@@ -4459,6 +4626,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       349EAD335152183F1F775D44B0078381BE16031730B1FC00DA76F6FC5586B51B
       F630BC7DFF119CC25E1F990649612256E924A7EDD7476740345394AB28D10C00
       77CEBFB6472CD0FD0000000049454E44AE426082}
+    SelfOwnMaterial.HorzTrackBtnDisabledPicture.IsClipRound = False
     SelfOwnMaterial.HorzTrackBtnDisabledPicture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D494844520000000D0000
       00100806000000CDA3F539000000097048597300000B1300000B1301009A9C18
@@ -4560,6 +4728,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       092C2CCCF37DDC6D194C4D741964652418EE3F78CA70FACC25866DBB8F813444
       00D5AC7C7D782A03A388753AB24BF8A129221C880D80F814482134457C072978
       7D640699698F6E9A009228A6E19402B3DB0000000049454E44AE426082}
+    SelfOwnMaterial.HorzTrackBtnDownPicture.IsClipRound = False
     SelfOwnMaterial.HorzTrackBtnDownPicture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D494844520000000F0000
       00100806000000C9562504000000097048597300000B1300000B1301009A9C18
@@ -4663,6 +4832,12 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       349EAD335152183F1F775D44B0078381BE16031730B1FC00DA76F6FC5586B51B
       F630BC7DFF119CC25E1F990649612256E924A7EDD7476740345394AB28D10C00
       77CEBFB6472CD0FD0000000049454E44AE426082}
+    SelfOwnMaterial.VertTrackBtnNormalPicture.IsClipRound = False
+    SelfOwnMaterial.VertTrackBtnHoverPicture.IsClipRound = False
+    SelfOwnMaterial.VertTrackBtnDisabledPicture.IsClipRound = False
+    SelfOwnMaterial.VertTrackBtnDownPicture.IsClipRound = False
+    SelfOwnMaterial.VertBackGndPicture.IsClipRound = False
+    SelfOwnMaterial.HorzBackGndPicture.IsClipRound = False
     SelfOwnMaterial.HorzBackGndPicture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000000350000
       00100806000000B68737F5000000097048597300000B1300000B1301009A9C18
@@ -4759,6 +4934,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       07DA91A40026262686889CEAE7FAD6AE37CA1C19DEC14BBFB63D0C8A404A0288
       1907DA91640090275E54B930DC0771866F913EDCC0A8A7860A18969E02009DC4
       77E17E9A51210000000049454E44AE426082}
+    SelfOwnMaterial.VertForeGndPicture.IsClipRound = False
+    SelfOwnMaterial.HorzForeGndPicture.IsClipRound = False
     SelfOwnMaterial.HorzForeGndPicture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000000350000
       00100806000000B68737F5000000097048597300000B1300000B1301009A9C18
@@ -4869,6 +5046,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.Max = 100.000000000000000000
     Properties.Position = 40.000000000000000000
     Properties.Orientation = trHorizontal
+    ExplicitTop = 424
   end
   object btnVoice: TSkinWinButton
     Left = 331
@@ -4881,18 +5059,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -4979,6 +5163,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -5153,6 +5338,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       4F5F866D0D3A7241B052B7570355740A46039A389980E14F330C62A1C75BD0B3
       647D5FEBA93437A3E6D68D10AB414E9253BF02932AA81042DAEF9D0000000049
       454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -5201,6 +5387,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       23E881A2D54E3975350A76FC3278ED1B880D1ADB3EEFB386C0BD381D6266C856
       AF21C8020E0FEFACAA6EFFF80FF17AE6CEEBF3E47C0000000049454E44AE4260
       82}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -5249,6 +5436,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       1830C25E6154AA474E5D4D5556BF5CB9F43DC4273730B66C5D42D093A843E6C6
       6CF512421AA209BCB3A8B87DEB5F1980ED77E8A7674A0000000049454E44AE42
       6082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -5273,6 +5461,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       C277C17DA7662FC2F0975D8081F9E707865B07DF50CF62B0E13E220C3F7EF26E
       D9B6C215C4F5F18AD84DACEF28B318E6B37F9CFC6036D3F78FC4FA8E728BA908
       462D1EB578D4E2A16F31005A91A71F56FCFAFC0000000049454E44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akLeft, akBottom]
@@ -5282,8 +5472,11 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitTop = 416
   end
   object btnSpeedLeft: TSkinWinButton
     Left = 3
@@ -5296,18 +5489,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -5394,6 +5593,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -5525,6 +5725,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
       00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
       00FF000000FF000000FF000000FF000000FF}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -5538,6 +5739,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       82864DDA7C154C7FF9FE1B459C87931545AC2ACC80389795CFDA8FC2EF4C73C4
       2A46749865F5AC87B3A79504E21423CA3010886B5808A61735C4E31523CA3052
       C0E0350C00F417460103E792BE0000000049454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -5551,6 +5753,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       1841C3266DBE0AA6BF7CFF8D22CEC3C98A22561566409CCBCA67ED47E177A639
       6215233ACCB27AD6C3D9D34A02718A11651808C4352C04D38B1AE2F18A0DDE44
       0B00EA094601CFC296930000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -5564,6 +5767,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       1AA663E509A67F4235C1003B2B338AD8EDD3BB88739992A1230AFFDEF9FD58C5
       880E33793D1B38FBE1A52338C588320C0464B52CC0F4E36B27F08A1165182960
       F01A0600F79C46015EB55D950000000049454E44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akLeft, akBottom]
@@ -5573,11 +5778,14 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitTop = 397
   end
   object btnSpeedRight: TSkinWinButton
-    Left = 627
+    Left = 623
     Top = 398
     Width = 18
     Height = 13
@@ -5587,18 +5795,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -5685,6 +5899,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -5816,6 +6031,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
       00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
       00FF000000FF000000FF000000FF000000FF}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -5830,6 +6046,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       CE344786F259FB513481C4887259E58CED0C1FBF40027C5A49204E31A20CCBEB
       5DCDF0E1F33786450DF178C588328C1230780D0300709C5501080632E2000000
       0049454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -5844,6 +6061,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       679A2343F9ACFD286A406244B9AC72C676868F5F20013EAD2410A7185186E5F5
       AE66F8F0F91BC3A28678BC624419462EA0AA6100A74355012520DA1600000000
       49454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -5858,6 +6076,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       193AA268028911E532356347A061BFC1EC87978EE01423CA3015035B869FBF7E
       333CBE7602AF185186510206AF6100733555014CC75DB40000000049454E44AE
       426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akRight, akBottom]
@@ -5867,8 +6087,12 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitLeft = 619
+    ExplicitTop = 397
   end
   object SkinImage1: TSkinWinImage
     Left = 155
@@ -5881,18 +6105,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.DrawPictureParam.IsStretch = True
@@ -5921,6 +6151,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     TabOrder = 14
     Caption = ''
     Properties.AutoSize = False
+    Properties.Picture.IsClipRound = False
     Properties.Picture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000000D60000
       004C0806000000111E490B000000097048597300000B1300000B1301009A9C18
@@ -7055,18 +7286,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -7153,6 +7390,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -7353,6 +7591,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       38BE8CE64B8FD7A32242027C00473C5FC632D21E0BF2C4B4ACE273F5A75632D2
       1E1B507BCAF9B8900A0A5F1A783D2E818B2869D0D08D3DF7EFBCE5F540889043
       DAE385B4C78BC4B59FFE5FFFC7D166A62E3DD50000000049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -7397,6 +7636,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       651D4C3E8548C9FFA377A31849035B0B6D1DC27B3EF9517D40EF5631924284FC
       2C5859C9A6DEAD622485F06FF8187401B778933135F3E95F28CA1FAE430A5ADE
       0000000049454E44AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -7441,6 +7681,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       5192F2E1E9CF65E4BB7DCEC686BCDBAFAA6DE8E1F2194449FE2FDA95E2E40D6C
       ABB1F748D77CF29BEA28ED5A71F2428AFC52D8D9C821ED5A71F242F2377C1CB6
       8025DE622ED8FAE01F096D20AE6994B8570000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -7484,6 +7725,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       5B2D954F20543EC1C4C9FF37E7E31FD5FF91BB6194ECC395AF468B1270FA5FB1
       51FE7F62BFE1A39005BECF57E4A9EBFE023A97226F5D311AD00000000049454E
       44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akLeft, akBottom]
@@ -7493,8 +7736,11 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitTop = 247
   end
   object btnOpenFileDropDown: TSkinWinButton
     Left = 304
@@ -7507,18 +7753,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -7605,6 +7857,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    SelfOwnMaterial.NormalPicture.IsClipRound = False
     SelfOwnMaterial.NormalPicture.RowCount = 1
     SelfOwnMaterial.NormalPicture.ColCount = 4
     SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -7742,6 +7995,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       C3DF38C63D045518C1ECBFDBF86460A012C2C842F89ECA00147E15DE3AF43366
       E27EC60030FCCCF4EFCA948141E89ECA00316859A0106F31BA25839762D00B83
       A15A32B4FA17610683D83600659A0000000049454E44AE426082}
+    SelfOwnMaterial.HoverPicture.IsClipRound = False
     SelfOwnMaterial.HoverPicture.RowCount = 0
     SelfOwnMaterial.HoverPicture.ColCount = 0
     SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -7768,6 +8022,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       0129E9A7DAF22BBF1D377C20A01C7D02DD9F24DDD4083D8C2EB53199F698FF10
       128C3B4054B1273A20252F04888F7803A4A56C3B5EDE89360000000049454E44
       AE426082}
+    SelfOwnMaterial.DownPicture.IsClipRound = False
     SelfOwnMaterial.DownPicture.RowCount = 0
     SelfOwnMaterial.DownPicture.ColCount = 0
     SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -7794,6 +8049,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       10508E412A84F0518E1B3E10909201AA4F7EF5DD71CB0702CAD12FD0FD49D24D
       8DD04374698DC9FC8DF9CF4382B80744057BA20352F24A80F81CEF92F36C3B33
       F5E22E0000000049454E44AE426082}
+    SelfOwnMaterial.DisabledPicture.IsClipRound = False
     SelfOwnMaterial.DisabledPicture.RowCount = 0
     SelfOwnMaterial.DisabledPicture.ColCount = 0
     SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -7818,6 +8074,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       16E6AD3488052A84FB0476878879AAF304EB2FDBF22006DB3309026AA2210702
       96EC20D5B20D4381C3713F46C8809860FDA7F286F019F31F02FF427C04440733
       A110AE134E7C0013D76B3B86D1D5B60000000049454E44AE426082}
+    SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    SelfOwnMaterial.PushedPicture.IsClipRound = False
     HitTest = False
     MouseDownFocus = False
     Anchors = [akLeft, akBottom]
@@ -7828,8 +8086,11 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Properties.AutoSize = False
     Properties.IsAutoPush = False
     Properties.IsPushed = False
+    Properties.Icon.IsClipRound = False
+    Properties.PushedIcon.IsClipRound = False
     Properties.ButtonIndex = -1
     Properties.PushedGroupIndex = 0
+    ExplicitTop = 247
   end
   object SkinLabel1: TSkinWinLabel
     Left = 41
@@ -7842,18 +8103,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.DrawCaptionParam.FontName = 'Tahoma'
@@ -7883,24 +8150,31 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     Caption = '00:00:01 / 00:00:07'
     Text = '00:00:01 / 00:00:07'
     Properties.AutoSize = False
+    ExplicitTop = 420
   end
   object fsdQQPlayer: TSkinWinForm
     ComponentTypeUseKind = ctukName
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = True
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     SelfOwnMaterial.IsTransparent = True
     SelfOwnMaterial.IsRoundForm = True
@@ -7910,6 +8184,9 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.AlignSysBtnTopMargin = 0
     SelfOwnMaterial.AlignSysBtnSpace = 0
     SelfOwnMaterial.EnableAutoAlignSysBtn = True
+    SelfOwnMaterial.SysBtnWidth = 24
+    SelfOwnMaterial.SysBtnHeight = 24
+    SelfOwnMaterial.BackGndDrawPicture.IsClipRound = False
     SelfOwnMaterial.BackGndDrawPicture.Data = {
       07544269746D6170761E0100424D761E01000000000036000000280000003101
       0000500000000100180000000000401E0100120B0000120B0000000000000000
@@ -10210,10 +10487,10 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     SelfOwnMaterial.BackGndDrawPictureParam.StretchMargins.Top = 27
     SelfOwnMaterial.BackGndDrawPictureParam.StretchMargins.Right = 2
     SelfOwnMaterial.BackGndDrawPictureParam.StretchMargins.Bottom = 40
-    DesignWidth = 649
-    DesignHeight = 450
+    DesignWidth = 661
+    DesignHeight = 488
     Caption = 'QQPlayerWin'
-    CloseSysBtn.Left = 617
+    CloseSysBtn.Left = 629
     CloseSysBtn.Top = 0
     CloseSysBtn.Width = 24
     CloseSysBtn.Height = 24
@@ -10223,18 +10500,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     CloseSysBtn.MaterialUseKind = mukSelfOwn
     CloseSysBtn.KeepSelfOwnMaterial = True
     CloseSysBtn.ComponentTypeName = 'Default'
+    CloseSysBtn.SelfOwnMaterial.BackColor.Color = clWhite
     CloseSysBtn.SelfOwnMaterial.BackColor.IsFill = True
     CloseSysBtn.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     CloseSysBtn.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     CloseSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     CloseSysBtn.SelfOwnMaterial.IsTransparent = True
     CloseSysBtn.SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -10321,6 +10604,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     CloseSysBtn.SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     CloseSysBtn.SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     CloseSysBtn.SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    CloseSysBtn.SelfOwnMaterial.NormalPicture.IsClipRound = False
     CloseSysBtn.SelfOwnMaterial.NormalPicture.RowCount = 1
     CloseSysBtn.SelfOwnMaterial.NormalPicture.ColCount = 4
     CloseSysBtn.SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -10388,6 +10672,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       A75901C1B69360AAF2A8A217F3CFBE81F793A5EF62BB118F0F16044884AEDBF0
       166B80AFD805C1B344DF03C388178C8711CF2BC999CAF2A8A2D7DF936566BC02
       9B23B90000000049454E44AE426082}
+    CloseSysBtn.SelfOwnMaterial.HoverPicture.IsClipRound = False
     CloseSysBtn.SelfOwnMaterial.HoverPicture.RowCount = 0
     CloseSysBtn.SelfOwnMaterial.HoverPicture.ColCount = 0
     CloseSysBtn.SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -10422,6 +10707,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       4A2AA84B05E514D7522932814621C9A0542BBA5550F6DA1A2A4781E3863E88B2
       9C54D00315B4A8A89A8E2A3A34FC07A0872A28AF74270D4A51D4EBFBA028D1A4
       803494DE80471385F80137C983689A7B095E0000000049454E44AE426082}
+    CloseSysBtn.SelfOwnMaterial.DownPicture.IsClipRound = False
     CloseSysBtn.SelfOwnMaterial.DownPicture.RowCount = 0
     CloseSysBtn.SelfOwnMaterial.DownPicture.ColCount = 0
     CloseSysBtn.SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -10457,6 +10743,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       27847038AFA07B3268CABC3A1A953834FE07A0FB32A8BC7A130D8A71ECD57442
       92E27901A5511A2D1EA466E30BC800845DF5A876600000000049454E44AE4260
       82}
+    CloseSysBtn.SelfOwnMaterial.DisabledPicture.IsClipRound = False
     CloseSysBtn.SelfOwnMaterial.DisabledPicture.RowCount = 0
     CloseSysBtn.SelfOwnMaterial.DisabledPicture.ColCount = 0
     CloseSysBtn.SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -10491,6 +10778,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       3375B88023EA17280EA74F414F3968797C3A1D714BC85D00A0671C14BE3987CA
       7617F249135CAE319F807818D87FF5431287BF85425E5FD1F142B70000000049
       454E44AE426082}
+    CloseSysBtn.SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    CloseSysBtn.SelfOwnMaterial.PushedPicture.IsClipRound = False
     CloseSysBtn.HitTest = True
     CloseSysBtn.MouseDownFocus = False
     CloseSysBtn.Visible = False
@@ -10499,30 +10788,38 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     CloseSysBtn.Properties.AutoSize = True
     CloseSysBtn.Properties.IsAutoPush = False
     CloseSysBtn.Properties.IsPushed = False
+    CloseSysBtn.Properties.Icon.IsClipRound = False
+    CloseSysBtn.Properties.PushedIcon.IsClipRound = False
     CloseSysBtn.Properties.ButtonIndex = -1
     CloseSysBtn.Properties.PushedGroupIndex = 0
-    MaxRestoreSysBtn.Left = 596
+    MaxRestoreSysBtn.Left = 605
     MaxRestoreSysBtn.Top = 0
-    MaxRestoreSysBtn.Width = 21
-    MaxRestoreSysBtn.Height = 21
+    MaxRestoreSysBtn.Width = 24
+    MaxRestoreSysBtn.Height = 24
     MaxRestoreSysBtn.ParentMouseEvent = True
     MaxRestoreSysBtn.DirectUIVisible = True
     MaxRestoreSysBtn.ComponentTypeUseKind = ctukName
     MaxRestoreSysBtn.MaterialUseKind = mukSelfOwn
     MaxRestoreSysBtn.KeepSelfOwnMaterial = True
     MaxRestoreSysBtn.ComponentTypeName = 'Default'
+    MaxRestoreSysBtn.SelfOwnMaterial.BackColor.Color = clWhite
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.IsFill = False
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     MaxRestoreSysBtn.SelfOwnMaterial.IsTransparent = True
     MaxRestoreSysBtn.SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -10609,6 +10906,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaxRestoreSysBtn.SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     MaxRestoreSysBtn.SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     MaxRestoreSysBtn.SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    MaxRestoreSysBtn.SelfOwnMaterial.NormalPicture.IsClipRound = False
     MaxRestoreSysBtn.SelfOwnMaterial.NormalPicture.RowCount = 1
     MaxRestoreSysBtn.SelfOwnMaterial.NormalPicture.ColCount = 4
     MaxRestoreSysBtn.SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -10667,6 +10965,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       E21E3A3A39B7B359ACEEFE74E1A3E3B43637098E64EC1C5F577313FFB21EC444
       17806FD1096B1C2681F111C2E50E97CD00F3AFE1BA0308370DF7A2B5AB2EBC71
       337C1633FF27F73F44B80A13D1D3C9FC0000000049454E44AE426082}
+    MaxRestoreSysBtn.SelfOwnMaterial.HoverPicture.IsClipRound = False
     MaxRestoreSysBtn.SelfOwnMaterial.HoverPicture.RowCount = 0
     MaxRestoreSysBtn.SelfOwnMaterial.HoverPicture.ColCount = 0
     MaxRestoreSysBtn.SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -10701,6 +11000,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       8224195984B54DD50D6C34A3B2AB1F0A4B88BF63FACBF08F1C83FF313330BD7C
       F44C64C9E43AB90757CE5E640409B2F2EB1AFF65FCA7C5C0C8C4415100FFFFFF
       8DF93FE3F5DF1F2F9F0300E986551BDD5D191E0000000049454E44AE426082}
+    MaxRestoreSysBtn.SelfOwnMaterial.DownPicture.IsClipRound = False
     MaxRestoreSysBtn.SelfOwnMaterial.DownPicture.RowCount = 0
     MaxRestoreSysBtn.SelfOwnMaterial.DownPicture.ColCount = 0
     MaxRestoreSysBtn.SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -10735,6 +11035,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       A319955DFD505842FC1DD35F867FE418FC8F9981E9E5A367224B26D7C93DB872
       F622234890955FD7F82FE33F2D0646260E4A8282E1FFFF6FCCFF19AFFFFE78F9
       1C00ACFA54E85186583D0000000049454E44AE426082}
+    MaxRestoreSysBtn.SelfOwnMaterial.DisabledPicture.IsClipRound = False
     MaxRestoreSysBtn.SelfOwnMaterial.DisabledPicture.RowCount = 0
     MaxRestoreSysBtn.SelfOwnMaterial.DisabledPicture.ColCount = 0
     MaxRestoreSysBtn.SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -10752,6 +11053,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       E0F2F7F63C22DE60797785D97326B9311000A92979BB181EEE7C40BCC16AF622
       0C3FD8780919CCC0F1EB33C3AD836F88379842306A30ED0D060000E46F16930E
       D8D90000000049454E44AE426082}
+    MaxRestoreSysBtn.SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    MaxRestoreSysBtn.SelfOwnMaterial.PushedPicture.IsClipRound = False
     MaxRestoreSysBtn.HitTest = True
     MaxRestoreSysBtn.MouseDownFocus = False
     MaxRestoreSysBtn.Visible = False
@@ -10760,30 +11063,38 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MaxRestoreSysBtn.Properties.AutoSize = True
     MaxRestoreSysBtn.Properties.IsAutoPush = False
     MaxRestoreSysBtn.Properties.IsPushed = False
+    MaxRestoreSysBtn.Properties.Icon.IsClipRound = False
+    MaxRestoreSysBtn.Properties.PushedIcon.IsClipRound = False
     MaxRestoreSysBtn.Properties.ButtonIndex = -1
     MaxRestoreSysBtn.Properties.PushedGroupIndex = 0
-    MinSysBtn.Left = 575
+    MinSysBtn.Left = 581
     MinSysBtn.Top = 0
-    MinSysBtn.Width = 21
-    MinSysBtn.Height = 21
+    MinSysBtn.Width = 24
+    MinSysBtn.Height = 24
     MinSysBtn.ParentMouseEvent = True
     MinSysBtn.DirectUIVisible = True
     MinSysBtn.ComponentTypeUseKind = ctukName
     MinSysBtn.MaterialUseKind = mukSelfOwn
     MinSysBtn.KeepSelfOwnMaterial = True
     MinSysBtn.ComponentTypeName = 'Default'
+    MinSysBtn.SelfOwnMaterial.BackColor.Color = clWhite
     MinSysBtn.SelfOwnMaterial.BackColor.IsFill = False
     MinSysBtn.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     MinSysBtn.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     MinSysBtn.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     MinSysBtn.SelfOwnMaterial.IsTransparent = True
     MinSysBtn.SelfOwnMaterial.IsAutoCenterIconAndCaption = False
@@ -10870,6 +11181,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MinSysBtn.SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
     MinSysBtn.SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
     MinSysBtn.SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+    MinSysBtn.SelfOwnMaterial.NormalPicture.IsClipRound = False
     MinSysBtn.SelfOwnMaterial.NormalPicture.RowCount = 1
     MinSysBtn.SelfOwnMaterial.NormalPicture.ColCount = 4
     MinSysBtn.SelfOwnMaterial.NormalPicture.RowIndex = 0
@@ -10913,6 +11225,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       5B4BB3EC4CFEAE41D6BA9A5A78A81F892E003FC64BFB7B48DE32E25E05033FD5
       B0850498FF06DB7340A871AE15998CB57BB4ACBA86D43DB95F9B908DF58D4263
       710000000049454E44AE426082}
+    MinSysBtn.SelfOwnMaterial.HoverPicture.IsClipRound = False
     MinSysBtn.SelfOwnMaterial.HoverPicture.RowCount = 0
     MinSysBtn.SelfOwnMaterial.HoverPicture.ColCount = 0
     MinSysBtn.SelfOwnMaterial.HoverPicture.RowIndex = 0
@@ -10943,6 +11256,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       BF63FACBF08F1C83FF313330BD7CF44C64C9E43AB90757CE5E640409B2F2EB1A
       FF65FCA7C5C0C8C4415100FFFFFF8DF93FE3F5DF1F2F9F03004E03F50C44417C
       BA0000000049454E44AE426082}
+    MinSysBtn.SelfOwnMaterial.DownPicture.IsClipRound = False
     MinSysBtn.SelfOwnMaterial.DownPicture.RowCount = 0
     MinSysBtn.SelfOwnMaterial.DownPicture.ColCount = 0
     MinSysBtn.SelfOwnMaterial.DownPicture.RowIndex = 0
@@ -10973,6 +11287,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       8EE92FC33F720CFEC7CCC0F4F2D133912593EBE41E5C397B911124C8CAAF6BFC
       97F19F16032313074501FCFFFF37E6FF8CD77F7FBC7C0E00F65DF4D9B2124DE3
       0000000049454E44AE426082}
+    MinSysBtn.SelfOwnMaterial.DisabledPicture.IsClipRound = False
     MinSysBtn.SelfOwnMaterial.DisabledPicture.RowCount = 0
     MinSysBtn.SelfOwnMaterial.DisabledPicture.ColCount = 0
     MinSysBtn.SelfOwnMaterial.DisabledPicture.RowIndex = 0
@@ -10985,6 +11300,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
       FCFB3BC39D1D9F883758D645EAF09EE53E84CCB57589DCC2F078CF33525C2CB3
       68CE142F4206C7A5E46C03BAF809F106CBB80931B0FDE3211814BF98BE303CD9
       F58E78832904A3060F6183017BF51A1660934E560000000049454E44AE426082}
+    MinSysBtn.SelfOwnMaterial.FocusedPicture.IsClipRound = False
+    MinSysBtn.SelfOwnMaterial.PushedPicture.IsClipRound = False
     MinSysBtn.HitTest = True
     MinSysBtn.MouseDownFocus = False
     MinSysBtn.Visible = False
@@ -10993,6 +11310,8 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     MinSysBtn.Properties.AutoSize = True
     MinSysBtn.Properties.IsAutoPush = False
     MinSysBtn.Properties.IsPushed = False
+    MinSysBtn.Properties.Icon.IsClipRound = False
+    MinSysBtn.Properties.PushedIcon.IsClipRound = False
     MinSysBtn.Properties.ButtonIndex = -1
     MinSysBtn.Properties.PushedGroupIndex = 0
     FormSysIcon.Left = 6
@@ -11005,18 +11324,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     FormSysIcon.MaterialUseKind = mukSelfOwn
     FormSysIcon.KeepSelfOwnMaterial = True
     FormSysIcon.ComponentTypeName = 'Default'
+    FormSysIcon.SelfOwnMaterial.BackColor.Color = clWhite
     FormSysIcon.SelfOwnMaterial.BackColor.IsFill = False
     FormSysIcon.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     FormSysIcon.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     FormSysIcon.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     FormSysIcon.SelfOwnMaterial.IsTransparent = True
     FormSysIcon.SelfOwnMaterial.DrawPictureParam.IsStretch = True
@@ -11045,6 +11370,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     FormSysIcon.Visible = False
     FormSysIcon.Caption = ''
     FormSysIcon.Properties.AutoSize = False
+    FormSysIcon.Properties.Picture.IsClipRound = False
     FormSysIcon.Properties.Picture.Data = {
       055449636F6E0000010001002020000001002000A81000001600000028000000
       2000000040000000010020000000000080100000000000000000000000000000
@@ -11190,7 +11516,7 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     FormSysIcon.Properties.RotateIncrement = 10
     FormSysCaption.Left = 24
     FormSysCaption.Top = 4
-    FormSysCaption.Width = 123
+    FormSysCaption.Width = 125
     FormSysCaption.Height = 23
     FormSysCaption.ParentMouseEvent = True
     FormSysCaption.DirectUIVisible = True
@@ -11198,18 +11524,24 @@ object frmQQPlayerWin: TfrmQQPlayerWin
     FormSysCaption.MaterialUseKind = mukSelfOwn
     FormSysCaption.KeepSelfOwnMaterial = True
     FormSysCaption.ComponentTypeName = 'Default'
+    FormSysCaption.SelfOwnMaterial.BackColor.Color = clWhite
     FormSysCaption.SelfOwnMaterial.BackColor.IsFill = False
     FormSysCaption.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     FormSysCaption.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+    FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
     FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+    FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
     FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+    FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
     FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+    FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
     FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+    FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     FormSysCaption.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
     FormSysCaption.SelfOwnMaterial.IsTransparent = True
     FormSysCaption.SelfOwnMaterial.DrawCaptionParam.FontName = 'Tahoma'

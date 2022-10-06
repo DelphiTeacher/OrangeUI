@@ -75,3 +75,4 @@ finalization
   UnRegisterListItemStyle(TFrameListItemStyle_SangNaTech_RunClockGridRow);
 
 end.
+

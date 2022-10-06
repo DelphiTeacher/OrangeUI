@@ -23,16 +23,16 @@ uses
   System.IOUtils,
   uTimerTask,
   uPhotoManager,
-  uPageStructure,
+//  uPageStructure,
 
 
   uSelectMediaDialog,
-  //使用原生的选择媒体窗体
-  {$IFDEF USE_NATIVE_SELECTMEDIA}
-  uCommonSelectMediaUI,
-  uAndroidDVSelectMedia,
-  uAndroidDmcBigSelectMedia,
-  {$ENDIF}
+//  //使用原生的选择媒体窗体
+//  {$IFDEF USE_NATIVE_SELECTMEDIA}
+//  uCommonSelectMediaUI,
+//  uAndroidDVSelectMedia,
+//  uAndroidDmcBigSelectMedia,
+//  {$ENDIF}
 
 
   {$IFDEF SKIN_SUPEROBJECT}
@@ -50,7 +50,7 @@ uses
   uBasePageStructure,
   ViewPictureListFrame,
   TakePictureMenuFrame,
-  AllImageFrame,
+//  AllImageFrame,
   uBaseHttpControl,
 
   uSkinButtonType, uSkinFireMonkeyButton, uSkinImageType, uSkinFireMonkeyImage,
@@ -101,6 +101,7 @@ type
     procedure lvPicturesPrepareDrawItem(Sender: TObject; ACanvas: TDrawCanvas;
       AItemDesignerPanel: TSkinFMXItemDesignerPanel; AItem: TSkinItem;
       AItemDrawRect: TRect);virtual;
+//    procedure FrameResized(Sender: TObject);virtual;
 //  private
 //    FEditPictureItem:TSkinItem;
 //    procedure DoAddPictureFromMenu(Sender: TObject;ABitmap:TBitmap);
@@ -387,6 +388,11 @@ begin
 //  HideFrame;//(CurrentFrame,hfcttBeforeReturnFrame);
 //  ReturnFrame;//(CurrentFrame);
 end;
+
+//procedure TFrameBaseAddPictureListSub.FrameResized(Sender: TObject);
+//begin
+//  //
+//end;
 
 //procedure TFrameAddPictureListSub.Clear;
 //begin

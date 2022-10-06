@@ -239,10 +239,10 @@ type
   TScrollControlProperties=class(TSkinControlProperties)
   protected
 
-    //内容宽度
-    FContentWidth:TControlSize;
-    //内容高度
-    FContentHeight:TControlSize;
+    //内容宽度,如果为-1,表示使用控制的宽度
+    FContentWidth:Double;
+    //内容高度,如果为-1,表示使用控制的高度
+    FContentHeight:Double;
 
 
     //滚动条嵌入类型
@@ -281,8 +281,8 @@ type
     procedure DoContentHeightChange;virtual;
 
     //设置内容尽寸
-    procedure SetContentWidth(const Value: TControlSize);
-    procedure SetContentHeight(const Value: TControlSize);
+    procedure SetContentWidth(const Value: Double);
+    procedure SetContentHeight(const Value: Double);
 
 
     procedure SetHorzScrollBarShowType(const Value: TScrollBarShowType);
@@ -290,12 +290,12 @@ type
     procedure SetScrollBarEmbeddedType(const Value: TScrollBarEmbeddedType);
   public
     //自动计算内容尺寸
-    function CalcContentHeight:TControlSize;virtual;
-    function CalcContentWidth:TControlSize;virtual;
+    function CalcContentHeight:Double;virtual;
+    function CalcContentWidth:Double;virtual;
 
     //获取内容尺寸,UpdateScrollBars中调用
-    function GetContentHeight: TControlSize;virtual;
-    function GetContentWidth: TControlSize;virtual;
+    function GetContentHeight: Double;virtual;
+    function GetContentWidth: Double;virtual;
 
 
     //更新滚动条
@@ -325,10 +325,10 @@ type
 
 
     //绘制偏移
-    function GetTopDrawOffset:TControlSize;virtual;
-    function GetLeftDrawOffset:TControlSize;virtual;
-    function GetRightDrawOffset:TControlSize;virtual;
-    function GetBottomDrawOffset:TControlSize;virtual;
+    function GetTopDrawOffset:Double;virtual;
+    function GetLeftDrawOffset:Double;virtual;
+    function GetRightDrawOffset:Double;virtual;
+    function GetBottomDrawOffset:Double;virtual;
   private
     {$IFDEF FMX}
     function IsSelfBottomNotShowed: Boolean;
@@ -460,9 +460,12 @@ type
                                                 var AMaxOverRangePosValue_Min:Double);virtual;
 
   public
+    //底部空间,留给全选/全不选的CheckBox
+    FClientMarginBottom:TControlSize;
     constructor Create(ASkinControl:TControl);override;
     destructor Destroy;override;
   public
+
     property SkinScrollControlIntf:ISkinScrollControl read FSkinScrollControlIntf;
   public
     procedure StartPullDownRefresh;
@@ -496,7 +499,7 @@ type
     ///     Content width(-1 means calculate automaticly)
     ///   </para>
     /// </summary>
-    property ContentWidth:TControlSize read FContentWidth write SetContentWidth;
+    property ContentWidth:Double read FContentWidth write SetContentWidth;
 
     /// <summary>
     ///   <para>
@@ -506,7 +509,7 @@ type
     ///     Content height(-1 means calculate automaticly)
     ///   </para>
     /// </summary>
-    property ContentHeight:TControlSize read FContentHeight write SetContentHeight;
+    property ContentHeight:Double read FContentHeight write SetContentHeight;
 
 
 
@@ -618,7 +621,7 @@ type
     FDrawRectTopOffset,
     FDrawRectLeftOffset,
     FDrawRectRightOffset,
-    FDrawRectBottomOffset:TControlSize;
+    FDrawRectBottomOffset:Double;
 
     FSkinScrollControlIntf:ISkinScrollControl;
 
@@ -949,12 +952,12 @@ end;
 { TScrollControlProperties }
 
 
-function TScrollControlProperties.CalcContentHeight: TControlSize;
+function TScrollControlProperties.CalcContentHeight: Double;
 begin
   Result:=Self.FSkinControlIntf.Height;
 end;
 
-function TScrollControlProperties.CalcContentWidth: TControlSize;
+function TScrollControlProperties.CalcContentWidth: Double;
 begin
   Result:=Self.FSkinControlIntf.Width;
 end;
@@ -1813,7 +1816,7 @@ begin
   Result:='SkinScrollControl';
 end;
 
-function TScrollControlProperties.GetContentHeight: TControlSize;
+function TScrollControlProperties.GetContentHeight: Double;
 begin
   case Ceil(FContentHeight) of
     -1:
@@ -1827,7 +1830,7 @@ begin
   end;
 end;
 
-function TScrollControlProperties.GetContentWidth: TControlSize;
+function TScrollControlProperties.GetContentWidth: Double;
 begin
   case Ceil(FContentWidth) of
     -1:
@@ -1952,41 +1955,47 @@ begin
   Result:=Self.FAutoPullUpLoadMorePanel;
 end;
 
-function TScrollControlProperties.GetBottomDrawOffset: TControlSize;
+function TScrollControlProperties.GetBottomDrawOffset: Double;
 begin
-  Result:=ControlSize(
+  Result:=
           Self.FVertControlGestureManager.Position
           -Self.FVertControlGestureManager.CalcMinOverRangePosValue
-          +Self.FVertControlGestureManager.CalcMaxOverRangePosValue);
+          +Self.FVertControlGestureManager.CalcMaxOverRangePosValue
+
+          ;
 end;
 
-function TScrollControlProperties.GetLeftDrawOffset: TControlSize;
+function TScrollControlProperties.GetLeftDrawOffset: Double;
 begin
-  Result:=ControlSize(
+  Result:=
           Self.FHorzControlGestureManager.Position
           -Self.FHorzControlGestureManager.CalcMinOverRangePosValue
-          +Self.FHorzControlGestureManager.CalcMaxOverRangePosValue);
+          +Self.FHorzControlGestureManager.CalcMaxOverRangePosValue;
 end;
 
-function TScrollControlProperties.GetRightDrawOffset: TControlSize;
+function TScrollControlProperties.GetRightDrawOffset: Double;
 begin
-  Result:=ControlSize(
+  Result:=
           Self.FHorzControlGestureManager.Position
           -Self.FHorzControlGestureManager.CalcMinOverRangePosValue
-          +Self.FHorzControlGestureManager.CalcMaxOverRangePosValue);
+          +Self.FHorzControlGestureManager.CalcMaxOverRangePosValue;
 end;
 
-function TScrollControlProperties.GetTopDrawOffset: TControlSize;
+function TScrollControlProperties.GetTopDrawOffset: Double;
 begin
-  Result:=ControlSize(
+  Result:=
           Self.FVertControlGestureManager.Position
           -Self.FVertControlGestureManager.CalcMinOverRangePosValue
-          +Self.FVertControlGestureManager.CalcMaxOverRangePosValue);
+          +Self.FVertControlGestureManager.CalcMaxOverRangePosValue;
 end;
 
 function TScrollControlProperties.GetClientRect: TRectF;
 begin
-  Result:=RectF(0,0,Self.FSkinControlIntf.Width,Self.FSkinControlIntf.Height);
+  Result:=RectF(0,
+                0,
+                Self.FSkinControlIntf.Width,
+                Self.FSkinControlIntf.Height-ScreenScaleSize(FClientMarginBottom)
+                );
 
 //  //去除滚动条
 //  if (Self.FVertScrollBarShowType=sbstAlwaysClipShow)
@@ -2005,7 +2014,7 @@ begin
 
 end;
 
-procedure TScrollControlProperties.SetContentHeight(const Value: TControlSize);
+procedure TScrollControlProperties.SetContentHeight(const Value: Double);
 begin
   if FContentHeight<>Value then
   begin
@@ -2016,7 +2025,7 @@ begin
   end;
 end;
 
-procedure TScrollControlProperties.SetContentWidth(const Value: TControlSize);
+procedure TScrollControlProperties.SetContentWidth(const Value: Double);
 begin
   if FContentWidth<>Value then
   begin
@@ -2285,10 +2294,15 @@ end;
 function TSkinScrollControlType.CustomPaint(ACanvas: TDrawCanvas;ASkinMaterial:TSkinControlMaterial;const ADrawRect: TRectF;APaintData:TPaintData): Boolean;
 var
   AScrollBarRect:TRectF;
-//var
-//  ASkinMaterial:TSkinControlMaterial;
+  ACustomDrawRect: TRectF;
+var
+  AChildSkinMaterial:TSkinControlMaterial;
 begin
+
   CustomPaintContent(ACanvas,ASkinMaterial,ADrawRect,APaintData);
+//  ACustomDrawRect:=ADrawRect;
+//  ACustomDrawRect.Bottom:=ACustomDrawRect.Bottom-40;
+//  CustomPaintContent(ACanvas,ASkinMaterial,ACustomDrawRect,APaintData);
 
 
   {$IFDEF VCL}
@@ -2301,8 +2315,11 @@ begin
       if TScrollControlProperties(Self.FSkinScrollControlIntf.Prop).GetVertScrollBarVisible then
       begin
         AScrollBarRect:=TScrollControlProperties(Self.FSkinScrollControlIntf.Prop).GetVertScrollBarRect;
-        //ASkinMaterial:=Self.FVertScrollBarControlIntf.GetSkinControlType.GetPaintCurrentUseMaterial;
-        Self.FSkinScrollControlIntf.GetVertScrollBarControlIntf.GetSkinControlType.Paint(ACanvas,ASkinMaterial,AScrollBarRect,APaintData);
+        AChildSkinMaterial:=Self.FSkinScrollControlIntf.GetVertScrollBarControlIntf.GetSkinControlType.GetPaintCurrentUseMaterial;
+        Self.FSkinScrollControlIntf.GetVertScrollBarControlIntf.GetSkinControlType.Paint(ACanvas,
+                                                                                          AChildSkinMaterial,
+                                                                                          AScrollBarRect,
+                                                                                          APaintData);
       end;
 
 
@@ -2310,8 +2327,11 @@ begin
       if TScrollControlProperties(Self.FSkinScrollControlIntf.Prop).GetHorzScrollBarVisible then
       begin
         AScrollBarRect:=TScrollControlProperties(Self.FSkinScrollControlIntf.Prop).GetHorzScrollBarRect;
-        //ASkinMaterial:=Self.FHorzScrollBarControlIntf.GetSkinControlType.GetPaintCurrentUseMaterial;
-        Self.FSkinScrollControlIntf.GetHorzScrollBarControlIntf.GetSkinControlType.Paint(ACanvas,ASkinMaterial,AScrollBarRect,APaintData);
+        AChildSkinMaterial:=Self.FSkinScrollControlIntf.GetHorzScrollBarControlIntf.GetSkinControlType.GetPaintCurrentUseMaterial;
+        Self.FSkinScrollControlIntf.GetHorzScrollBarControlIntf.GetSkinControlType.Paint(ACanvas,
+                                                                                          AChildSkinMaterial,
+                                                                                          AScrollBarRect,
+                                                                                          APaintData);
       end;
 
 
@@ -2319,13 +2339,13 @@ begin
       if TScrollControlProperties(Self.FSkinScrollControlIntf.Prop).GetScrollControlCornerVisible then
       begin
         AScrollBarRect:=TScrollControlProperties(Self.FSkinScrollControlIntf.Prop).GetScrollControlCornerRect;
-        //ASkinMaterial:=Self.FScrollControlCornerControlIntf.GetSkinControlType.GetPaintCurrentUseMaterial;
-        Self.FSkinScrollControlIntf.GetScrollControlCornerControlIntf.GetSkinControlType.Paint(ACanvas,ASkinMaterial,AScrollBarRect,APaintData);
+        AChildSkinMaterial:=Self.FSkinScrollControlIntf.GetScrollControlCornerControlIntf.GetSkinControlType.GetPaintCurrentUseMaterial;
+        Self.FSkinScrollControlIntf.GetScrollControlCornerControlIntf.GetSkinControlType.Paint(ACanvas,AChildSkinMaterial,AScrollBarRect,APaintData);
       end;
 
   end;
 
-  {$ENDIF FMX}
+  {$ENDIF VCL}
 
 end;
 

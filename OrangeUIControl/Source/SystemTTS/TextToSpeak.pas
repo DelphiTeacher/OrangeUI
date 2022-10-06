@@ -55,7 +55,7 @@ implementation
 uses
 {$IFDEF ANDROID}
   Android.SpeechTTS,
-{$ENDIF ANDROID}
+{$ENDIF}
 
 {$IF DEFINED(IOS) or DEFINED(MACOS)}
   {$IFDEF IOS}
@@ -63,12 +63,22 @@ uses
   {$ELSE}
     Macapi.SpeechSynthesis,
   {$ENDIF IOS}
-{$ENDIF IOS or MACOS}
+{$ENDIF}
 
 {$IFDEF MSWINDOWS}
   Winapi.SpVoice,
-{$ENDIF MSWINDOWS}
+{$ENDIF}
  FMX.Platform;
+
+
+
+{$IFDEF LINUX}
+procedure RegisterSpeakVoiceService;
+begin
+end;
+
+{$ENDIF}
+
 
 { TSpeakVoiceServer }
 

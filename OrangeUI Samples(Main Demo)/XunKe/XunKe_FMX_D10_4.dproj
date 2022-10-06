@@ -736,12 +736,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\XunKe_FMX_D10_4.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>XunKe_FMX_D10_4.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="iOSDevice64\Release\XunKe_FMX_D10_3.info.plist" Configuration="Release" Class="ProjectiOSInfoPList"/>
                 <DeployFile LocalName="Android\Release\colors.xml" Configuration="Release" Class="Android_Colors">
                     <Platform Name="Android">
@@ -820,6 +814,12 @@
                 <DeployFile LocalName="iOSSimulator\Debug\XunKe_FMX_D10_3" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="750_1334.png" Configuration="Release" Class="iPhone_Launch750"/>
                 <DeployFile LocalName="57_57.png" Configuration="Release" Class="iPhone_AppIcon57"/>
+                <DeployFile LocalName="Win32\Debug\XunKe_FMX_D10_4.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>XunKe_FMX_D10_4.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Android\Release\libXunKe_FMX_D10_3.so" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="iOSDevice64\Release\XunKe_FMX_D10_3.dSYM" Configuration="Release" Class="ProjectiOSDeviceDebug">
                     <Platform Name="iOSDevice64">
@@ -1029,15 +1029,15 @@
                 </DeployFile>
                 <DeployFile LocalName="640_480.png" Configuration="Release" Class="Android_SplashImage640"/>
                 <DeployFile LocalName="60_60.png" Configuration="Release" Class="iPhone_AppIcon60"/>
-                <DeployFile LocalName="iOSDevice64\Release\XunKe_FMX_D10_4" Configuration="Release" Class="ProjectOutput">
-                    <Platform Name="iOSDevice64">
-                        <RemoteName>XunKe_FMX_D10_4</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_1125x2436.png" Configuration="Release" Class="iPhone_Launch1125">
                     <Platform Name="iOSDevice64">
                         <RemoteName>Default-1125w-2436h@3x.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="iOSDevice64\Release\XunKe_FMX_D10_4" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="iOSDevice64">
+                        <RemoteName>XunKe_FMX_D10_4</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

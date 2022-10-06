@@ -92,6 +92,7 @@ type
     FSelectedTagIDsJsonStr:String;
 
     OEMLogoName:string;
+    procedure SetItemCaptions;
     procedure Clear;
     procedure Load;
     procedure SyncParentItem(AExpanded:Boolean);
@@ -112,7 +113,7 @@ implementation
 {$R *.dfm}
 
 uses
-  TagLabelManageFrame;
+  TagLabelManageFrame, uLangRes;
 
 { TFrameCustomerInfo }
 
@@ -229,6 +230,7 @@ begin
   Self.tvData.Prop.Items.BeginUpdate;
   try
 
+    SetItemCaptions;
 
     Self.tvData.Prop.Items.FindItemByName('row_devide_line').Visible:=False;
 
@@ -239,7 +241,7 @@ begin
       //拥有人名称
       FCustomerOwnerItem.Caption:='-';
       //联系人公司
-      FCustomerOwnerItem.Detail:='所属：';
+      FCustomerOwnerItem.Detail:=STITLE_OwnerItem;
 
       FCustomerOwnerItem.Detail1:='-';
       FCustomerOwnerItem.Detail2:='-';
@@ -254,7 +256,7 @@ begin
     if FCompanyInfoItem<>nil then
     begin
       //客户编号
-      FCompanyInfoItem.Caption:='公司信息';
+      FCompanyInfoItem.Caption:=STITLE_FirmInfo;
       //客户
       FCompanyInfoItem.Detail1:='';
       FCompanyInfoItem.Detail2:='';
@@ -438,9 +440,9 @@ begin
     if FCustomerOwnerItem<>nil then
     begin
       //拥有人名称
-      FCustomerOwnerItem.Caption:='王能 开发部';
+      FCustomerOwnerItem.Caption := '王能 开发部';
       //联系人公司
-      FCustomerOwnerItem.Detail:='所属：';
+      FCustomerOwnerItem.Detail:= STITLE_OwnerItem;
 
       FCustomerOwnerItem.Detail1:='ggggcexx@163.com';
       FCustomerOwnerItem.Detail2:='18957901025';
@@ -456,7 +458,7 @@ begin
     if FCompanyInfoItem<>nil then
     begin
       //客户编号
-      FCompanyInfoItem.Caption:='公司信息';
+      FCompanyInfoItem.Caption:=STITLE_FirmInfo;
       //客户
       FCompanyInfoItem.Detail1:='王能0020';
       FCompanyInfoItem.Detail2:='上海孚盟软件有限公司';
@@ -542,15 +544,34 @@ end;
 //    +FCustomerInfoListItemStyleFrame.lvTags.Height+10;
 //end;
 
+procedure TFrameCustomerInfo.SetItemCaptions;
+  procedure UpdateCaption(const AName, ACaption: string);
+  var cItem: TSkinItem;
+  begin
+    cItem := Self.tvData.Prop.Items.FindItemByName(AName);
+    if assigned(cItem) then
+      cItem.Caption := ACaption;
+  end;
+begin
+  UpdateCaption('company_info', STITLE_FirmInfo);
+  UpdateCaption('company_state', SCAPTION_CustState);
+  UpdateCaption('company_seas_flag', SCAPTION_CustType);
+  UpdateCaption('company_country', SCAPTION_CustCountry);
+  UpdateCaption('company_creator', SCAPTION_CustCreation);
+  UpdateCaption('company_editor', SCAPTION_CustModified);
+  UpdateCaption('company_last_tracker', SCAPTION_CustTracker);
+//  UpdateCaption('company_info', STITLE_FirmInfo);
+end;
+
 procedure TFrameCustomerInfo.SyncParentItem(AExpanded:Boolean);
 begin
   if not AExpanded then
   begin
-    FParentItem.Caption:='展开联系人('+IntToStr(FParentItem.Childs.Count)+')';
+    FParentItem.Caption:=SHINT_EXPContentInfo+'('+IntToStr(FParentItem.Childs.Count)+')';
   end
   else
   begin
-    FParentItem.Caption:='收拢联系人('+IntToStr(FParentItem.Childs.Count)+')';
+    FParentItem.Caption:=SHINT_CollapseContentInfo+'('+IntToStr(FParentItem.Childs.Count)+')';
   end;
   FParentItem.Visible:=(FParentItem.Childs.Count>0);
 

@@ -58,7 +58,7 @@
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <SanitizedProjectName>HospitalRegisterNumber_VCL_D10_3</SanitizedProjectName>
-        <DCC_UnitSearchPath>..\..\OrangeUIDesign\DCU\VCL\D10_3\$(Config);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>..\..\OrangeUIDesign\DCU\VCL\D10_3\$(Platform)\$(Config);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>2052</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
@@ -122,10 +122,10 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="C:\医生工作站项目程序\服务端\三方控件\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_TreeMainMenu.pas">
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="C:\医生工作站项目程序\服务端\三方控件\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_TreeMainMenuItem.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_CarLocation.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_TreeMainMenu_LabelAndArrow.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_TreeMainMenuItem.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_TreeMainMenu.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -147,10 +147,14 @@
                     <Source Name="MainSource">HospitalRegisterNumber_VCL_D10_3.dpr</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\FMDHTMLEditD2010.bpl">ProfDHTMLEdit for Delphi 2010</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k260.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp260.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi26.win32\Bin\DclTeePro926.bpl">TeeChart Pro 2020 VCL Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi26.win32\Bin\DclTeeMaker126.bpl">TeeMaker </Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\TeeTree\Compiled\Delphi26.win32\Bin\DclTree2D26Tee9.bpl">TeeTree 2 Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">

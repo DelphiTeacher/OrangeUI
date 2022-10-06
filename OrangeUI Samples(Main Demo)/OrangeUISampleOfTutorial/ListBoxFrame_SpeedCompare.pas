@@ -17,10 +17,10 @@ uses
   uLang,
   uFrameContext,
 
-  uSkinListViewType,
+  uSkinListBoxType,
   uSkinFireMonkeyLabel, uSkinFireMonkeyImage, uSkinFireMonkeyItemDesignerPanel,
   uSkinFireMonkeyControl, uSkinFireMonkeyScrollControl,
-  uSkinFireMonkeyVirtualList, uSkinFireMonkeyListView, FMX.TabControl,
+  uSkinFireMonkeyVirtualList, uSkinFireMonkeyListBox, FMX.TabControl,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, uDrawPicture,
   uSkinImageList, uSkinFireMonkeyCustomList, uSkinButtonType, uSkinPanelType,
   uSkinLabelType, uSkinImageType, uSkinItemDesignerPanelType, uBaseSkinControl,
@@ -31,7 +31,7 @@ type
   TFrameListBox_SpeedCompare = class(TFrame,IFrameChangeLanguageEvent)
     tcTestListBoxSpeed: TTabControl;
     tabTSkinFMXListView: TTabItem;
-    lbProductList: TSkinFMXListView;
+    lbProductList: TSkinFMXListBox;
     ListItemDefault: TSkinFMXItemDesignerPanel;
     imgListItemDefaultIcon: TSkinFMXImage;
     lblListItemDefaultCaption: TSkinFMXLabel;
@@ -45,9 +45,9 @@ type
     ListView1: TListView;
     SkinFMXPanel1: TSkinFMXPanel;
     btnLoad2WTListViewItem: TSkinFMXButton;
-    btnLoad2WTSkinListViewItem: TSkinFMXButton;
+    btnLoad2WTSkinListBoxItem: TSkinFMXButton;
     imglistIcon: TSkinImageList;
-    procedure btnLoad2WTSkinListViewItemClick(Sender: TObject);
+    procedure btnLoad2WTSkinListBoxItemClick(Sender: TObject);
     procedure btnLoad2WTListViewItemClick(Sender: TObject);
   private
     { Private declarations }
@@ -103,11 +103,11 @@ begin
 
 end;
 
-procedure TFrameListBox_SpeedCompare.btnLoad2WTSkinListViewItemClick(Sender: TObject);
+procedure TFrameListBox_SpeedCompare.btnLoad2WTSkinListBoxItemClick(Sender: TObject);
 var
   I: Integer;
   ANow:TDateTime;
-  AItem:TSkinListViewItem;
+  AItem:TSkinListBoxItem;
 begin
 
   ANow:=Now;
@@ -155,7 +155,7 @@ end;
 procedure TFrameListBox_SpeedCompare.ChangeLanguage(ALangKind: TLangKind);
 begin
   //翻译
-  Self.btnLoad2WTSkinListViewItem.Text:=GetLangString(Self.btnLoad2WTSkinListViewItem.Name,ALangKind);
+  Self.btnLoad2WTSkinListBoxItem.Text:=GetLangString(Self.btnLoad2WTSkinListBoxItem.Name,ALangKind);
 
   Self.btnLoad2WTListViewItem.Text:=GetLangString(Self.btnLoad2WTListViewItem.Name,ALangKind);
 end;
@@ -170,7 +170,7 @@ begin
   end;
 
   //初始多语言
-  RegLangString(Self.btnLoad2WTSkinListViewItem.Name,[Self.btnLoad2WTSkinListViewItem.Text,'TSKinFMXListView load 2w items']);
+  RegLangString(Self.btnLoad2WTSkinListBoxItem.Name,[Self.btnLoad2WTSkinListBoxItem.Text,'TSKinFMXListView load 2w items']);
 
 
   RegLangString(Self.btnLoad2WTListViewItem.Name,[Self.btnLoad2WTListViewItem.Text,'TListView load 2w items']);

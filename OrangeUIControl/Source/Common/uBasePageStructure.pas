@@ -4,20 +4,20 @@ unit uBasePageStructure;
 
 
 interface
-//{$IF DEFINED(ANDROID) OR DEFINED(IOS) OR DEFINED(MACOS) }
-//  {$DEFINE FMX}
-//{$IFEND}
-//
-//
-//
-////请在工程下放置FrameWork.inc
-////或者在工程设置中配置FMX编译指令
-////才可以正常编译此单元
-//{$IFNDEF FMX}
-//  {$IFNDEF VCL}
-//    {$I FrameWork.inc}
-//  {$ENDIF}
-//{$ENDIF}
+{$IF DEFINED(ANDROID) OR DEFINED(IOS) OR DEFINED(MACOS) }
+  {$DEFINE FMX}
+{$IFEND}
+
+
+
+//请在工程下放置FrameWork.inc
+//或者在工程设置中配置FMX编译指令
+//才可以正常编译此单元
+{$IFNDEF FMX}
+  {$IFNDEF VCL}
+    {$I FrameWork.inc}
+  {$ENDIF}
+{$ENDIF}
 
 
 
@@ -30,7 +30,19 @@ uses
   {$IFDEF FMX}
   FMX.Types,
   FMX.Controls,
+  FMX.StdCtrls,
+  FMX.Forms,
   {$ENDIF FMX}
+  {$IFDEF VCL}
+  StdCtrls,
+  ExtCtrls,
+  Messages,
+  Menus,
+  Windows,
+  Graphics,
+  Forms,
+  Controls,
+  {$ENDIF}
 //  FMX.Dialogs,
 //  FMX.Edit,
 //  FMX.ComboEdit,
@@ -72,7 +84,7 @@ uses
   System.UIConsts,
   System.Net.URLClient,
   {$IFEND}
-
+  uSkinSuperObject,
 
 //  uTimerTask,
 //  uTimerTaskEvent,
@@ -81,6 +93,11 @@ uses
   DateUtils,
   uDrawPicture,
   uFuncCommon,
+
+//  uSkinItems,
+  uSkinListLayouts,
+  uGraphicCommon,
+
 
 
 //  {$IFDEF SKIN_SUPEROBJECT}
@@ -93,6 +110,7 @@ uses
 
 //  uFuncCommon,
   uFileCommon,
+//  uSkinFireMonkeyComboBox,
 //  uBaseHttpControl,
 //  uRestInterfaceCall,
 //  uPageFrameworkCommon,
@@ -119,7 +137,8 @@ type
     Faction: String;
     Fcontrol_style: String;
     Fname: String;
-    Fvalue: String;
+    Fvalue: Variant;
+    Fvalue_from:String;//值从哪里来
     Fcontrol_type: String;
     Finput_format: String;
     Foptions_caption: String;
@@ -135,6 +154,8 @@ type
     Fx: double;
     Fy: double;
     Fheight: double;
+    Fhas_caption_label_caption: Integer;
+    Fcaption_label_caption: String;
   public
     fid:Integer;
     appid:Integer;
@@ -161,7 +182,7 @@ type
     visible:Integer;
     readonly:Integer;
 
-    //不提交给接口
+    //该字段不需要提交给接口,该字段不需要保存
     is_no_post:Integer;
     //图标名称
     icon_image_name:String;
@@ -221,6 +242,7 @@ type
     options_page_name:String;//	仅仅是为了好记
     options_page_value_field_name:String;//	nvarchar(45)	选择选项列表页面的值字段
     options_page_caption_field_name:String;//	nvarchar(45)	选择选项列表页面的标题字段
+    options_page_custom_where_key_json:String;//	nvarchar(255)	选择选项列表页面的加载条件
 
     options_has_empty:Integer;//	int	是否拥有空的选项
     options_empty_value:String;//	nvarchar(45)
@@ -244,14 +266,19 @@ type
     //子页面类型的控件结构
 //    FControlPageStructure:TObject;
 
-
+    //作为过滤区的查询条件,如果该控件在搜索区，那么搜索字段的条件运算符,一般为'=',可以用LIKE,>,=等SQL比较运算符
+    search_operator:String;
   public
-    jump_to_page_program:String;//	nvarchar(255)	跳转到指定的页面的程序模板name,比如ycliving
-    jump_to_page_function:String;//	nvarchar(255)	跳转到指定的页面的功能name,比如shop_goods_manage
+//    jump_to_page_program:String;//	nvarchar(255)	跳转到指定的页面的程序模板name,比如ycliving
+//    jump_to_page_function:String;//	nvarchar(255)	跳转到指定的页面的功能name,比如shop_goods_manage
+//    jump_to_page_type:String;//	nvarchar(255)	跳转到指定的页面的页面类型,list_page
     jump_to_page_name:String;//	nvarchar(255)	跳转到指定的页面的页面name,比如goods_list_page
-    jump_to_page_type:String;//	nvarchar(255)	跳转到指定的页面的页面类型,list_page
 
-    jump_to_page_fid:Integer;//	int	跳转到指定的页面的页面fid,比较直接
+//    jump_to_page_fid:Integer;//	int	跳转到指定的页面的页面fid,比较直接
+    jump_to_page_action:String;//跳转到指定的页面的页面之后，让它干什么
+    jump_to_page_where_key_json:String;//跳转到指定的页面的页面之后，加载数据的查询条件
+    jump_to_page_custom_caption:String;//跳转到指定的页面的页面之后，自定义页面标题
+    jump_to_page_load_data_json:String;//跳转到指定的页面的页面之后，加载到控件的数据
 
 
   public
@@ -260,7 +287,21 @@ type
 
     is_deleted:Integer;
 
+    //自己控件的提示文本的宽度
+    hint_label_width:Integer;
 
+    //输入不能为空
+    input_not_empty:Integer;
+
+
+    //值更改之后的动作
+    value_change_action:String;
+
+
+    //是否自动尺寸
+    is_autosize:Integer;
+    //输入块的样式
+    input_panel_style:string;
 
 //    //布局的FID
 //    layout_fid:Integer;
@@ -284,6 +325,9 @@ type
 
     //保存时所根据的控件
     SavedComponent:TComponent;
+
+    FOptionValues:TStringList;
+    FOptionCaptions:TStringList;
   public
     procedure ClearFid;
     constructor Create(ACollection: TCollection);override;
@@ -311,7 +355,8 @@ type
     //标题,控件的标题
 //    caption:string;
     //值,Label的Caption,
-    property value:String read Fvalue write Fvalue;
+    property value:Variant read Fvalue write Fvalue;
+    property value_from:String read Fvalue_from write Fvalue_from;
   published
     //选项值列表,比如0,1,2
     property options_value:String read Foptions_value write Foptions_value;
@@ -330,6 +375,8 @@ type
   published
     //是否需要提示Label
     property has_caption_label:Integer read Fhas_caption_label write Fhas_caption_label;
+    property has_caption_label_caption:Integer read Fhas_caption_label_caption write Fhas_caption_label_caption;
+    property caption_label_caption:String read Fcaption_label_caption write Fcaption_label_caption;
   published
     //控件属性,位置尺寸,自定义排列控件时使用
     property x:double read Fx write Fx;
@@ -361,8 +408,8 @@ type
     function FindByFieldName(AFieldName: String):TFieldControlSetting;
     function Add:TFieldControlSetting;overload;
     procedure Clear(AIsNeedFree:Boolean);overload;
-  public
-    constructor Create;
+//  public
+//    constructor Create();
   end;
 
 
@@ -406,7 +453,7 @@ type
   IControlForPageFramework=interface
     ['{6B39D8E8-ED7B-46D7-9CA6-FA480AEBB7C8}']
     //针对页面框架的控件接口
-    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;
     //获取与设置自定义属性
     function GetPropJsonStr:String;
     procedure SetPropJsonStr(AJsonStr:String);
@@ -424,12 +471,15 @@ type
                             AValueCaption:String;
                             //要设置多个值,整个字段的记录
                             AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
-    //设置属性
-    function GetProp(APropName:String):Variant;
-    procedure SetProp(APropName:String;APropValue:Variant);
+//    //设置单个属性
+//    function GetProp(APropName:String):Variant;
+//    procedure SetProp(APropName:String;APropValue:Variant);
+    //页面跳转过去之后的返回事件,比如选择日期,跳转到日期选择页面,选择好日期之后用于给控件赋值
+    procedure DoReturnFrame(AFromFrame:TFrame);
   end;
 //    //获取合适的高度
 //    function GetSuitDefaultItemHeight:Double;
+
 
 
 
@@ -470,7 +520,7 @@ type
   end;
 
 
-
+  //开放平台统一根据变量名获取数据设置数据的地方
   TPageFrameworkDataSourceManager=class
   public
     FOnGetParamValue:TOnGetParamValueEvent;
@@ -493,6 +543,8 @@ type
 
 
 
+
+
 var
 
   GlobalPageFrameworkDataSourceManagerClass:TPageFrameworkDataSourceManagerClass;
@@ -503,6 +555,10 @@ var
 function GetGlobalPageFrameworkDataSourceManager:TPageFrameworkDataSourceManager;
 
 
+//{$IFDEF VCL}
+//procedure Register;
+//{$ENDIF VCL}
+
 implementation
 
 var
@@ -511,6 +567,13 @@ var
   //初始本地数据源,调用接口的有些参数从这里取出来的
   GlobalPlatformDataSourceManager:TPageFrameworkDataSourceManager;
 
+
+//{$IFDEF VCL}
+//procedure Register;
+//begin
+//  RegisterComponents('OrangeUIConrol',[TPageCheckBox,TPageComboBox,TPageEdit,TPageMemo]);
+//end;
+//{$ENDIF VCL}
 
 function GetGlobalPageFrameworkDataSourceManager:TPageFrameworkDataSourceManager;
 begin
@@ -553,10 +616,10 @@ begin
   end;
 end;
 
-constructor TFieldControlSettingList.Create;
-begin
-  Inherited Create(TFieldControlSetting);
-end;
+//constructor TFieldControlSettingList.Create;
+//begin
+//  Inherited Create(TFieldControlSetting);
+//end;
 
 function TFieldControlSettingList.FindByControlType(
   AControlType: String): TFieldControlSetting;
@@ -851,14 +914,16 @@ begin
 
 
 
-    ADest.jump_to_page_program:=jump_to_page_program;//	nvarchar(255)	跳转到指定的页面的程序模板name,比如ycliving
-    ADest.jump_to_page_function:=jump_to_page_function;//	nvarchar(255)	跳转到指定的页面的功能name,比如shop_goods_manage
+//    ADest.jump_to_page_program:=jump_to_page_program;//	nvarchar(255)	跳转到指定的页面的程序模板name,比如ycliving
+//    ADest.jump_to_page_function:=jump_to_page_function;//	nvarchar(255)	跳转到指定的页面的功能name,比如shop_goods_manage
+//    ADest.jump_to_page_type:=jump_to_page_type;//	nvarchar(255)	跳转到指定的页面的页面类型,list_page
+//
+//    ADest.jump_to_page_fid:=jump_to_page_fid;//	int	跳转到指定的页面的页面fid,比较直接
+
     ADest.jump_to_page_name:=jump_to_page_name;//	nvarchar(255)	跳转到指定的页面的页面name,比如goods_list_page
-    ADest.jump_to_page_type:=jump_to_page_type;//	nvarchar(255)	跳转到指定的页面的页面类型,list_page
-
-    ADest.jump_to_page_fid:=jump_to_page_fid;//	int	跳转到指定的页面的页面fid,比较直接
 
 
+    ADest.search_operator:=search_operator;
   end;
 end;
 
@@ -883,8 +948,15 @@ begin
   //控件属性
   x:=0;
   y:=0;
+
+  {$IFDEF FMX}
   width:=100;
   height:=40;
+  {$ENDIF}
+  {$IFDEF VCL}
+  width:=90;
+  height:=32;
+  {$ENDIF}
 
 
 
@@ -900,12 +972,17 @@ begin
   col_width:=100;
   col_visible:=1;
 
+  FOptionValues:=TStringList.Create;
+  FOptionCaptions:=TStringList.Create;
 
 end;
 
 destructor TFieldControlSetting.Destroy;
 begin
 //  FreeAndNil(FControlPageStructure);
+
+  FreeAndNil(FOptionValues);
+  FreeAndNil(FOptionCaptions);
 
   inherited;
 end;
@@ -964,11 +1041,11 @@ begin
   end;
 
 
-  if Result=nil then
-  begin
-    //没有取到值就要弹出报错
-    raise Exception.Create('The Image named '+AImageName+' is not geted');
-  end;
+//  if Result=nil then
+//  begin
+//    //没有取到值就要弹出报错
+//    raise Exception.Create('The Image named '+AImageName+' is not geted');
+//  end;
 
 end;
 
@@ -997,7 +1074,9 @@ begin
   end;
 
   //没有取到值就要弹出报错
-  raise Exception.Create('The Value of '+AParamName+' is not geted');
+//  raise Exception.Create('The Value of '+AParamName+' is not geted');
+  uBaseLog.HandleException(nil,'TPageFrameworkDataSourceManager.GetParamValue The Value of '+AParamName+' is not geted');
+  Result:='';
 
 //  if not FDataJson.Contains(AParamName) then
 //  begin

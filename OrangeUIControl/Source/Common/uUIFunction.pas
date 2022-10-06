@@ -4,20 +4,24 @@ unit uUIFunction;
 
 interface
 
-{$DEFINE FMX}
+//{$DEFINE FMX}
+
+{$I FrameWork.inc}
+
 
 
 uses
-  System.SysUtils,
-  System.Types,
-  System.UITypes,
-  System.Classes,
-  System.Variants,
-  System.SyncObjs,
+  SysUtils,
+  Types,
+  Classes,
+  Variants,
+  SyncObjs,
   StrUtils,
   Math,
 
   uSkinMaterial,
+
+  {$IFDEF FMX}
   FMX.Types,
   FMX.Controls,
   FMX.Forms,
@@ -25,10 +29,24 @@ uses
   FMX.Dialogs,
   FMX.VirtualKeyboard,
 
+  UITypes,
+  System.Messaging,
 //  FMX.WebBrowser,
   FMX.Platform,
   FMX.StdCtrls,
-  System.Messaging,
+  uSkinFireMonkeyControl,
+  uSkinFireMonkeyScrollBox,
+  {$ENDIF}
+
+
+  {$IFDEF VCL}
+  Controls,
+  Forms,
+  StdCtrls,
+  ExtCtrls,
+  {$ENDIF VCL}
+
+
 
 
   {$IFDEF ANDROID}
@@ -38,7 +56,7 @@ uses
 //  System.Messaging,
     {$IF RTLVersion>=33}// 10.3+
     FMX.Platform.UI.Android,
-    {$ENDIF}
+    {$IFEND}
 
   {$ENDIF}
 
@@ -60,8 +78,7 @@ uses
   uSkinPanelType,
   uDrawTextParam,
   uSkinPageControlType,
-  uSkinFireMonkeyControl,
-  uSkinFireMonkeyScrollBox,
+
   uSkinControlGestureManager,
   uSkinScrollControlType;
 
@@ -75,8 +92,6 @@ const
 
 type
   TControlClass=class of TControl;
-
-
 
   //页面的使用类型
   TFrameUseType=(futManage,     //用于管理
@@ -103,6 +118,8 @@ type
     function GetCurrentPorcessControl(AFocusedControl:TControl):TControl;
     //虚拟键盘放在哪里
     function GetVirtualKeyboardControlParent:TControl;
+    //获取虚拟键盘的高度校正
+    function GetVirtualKeyboardHeightAdjustHeight:Double;
   end;
 
 
@@ -111,7 +128,7 @@ type
   IFrameHistroyCanReturnEvent=interface
     ['{F7691EDC-4E9D-4295-85C5-950EF297C55D}']
     //是否可以返回上一个Frame
-    function CanReturn:Integer;
+    function CanReturn:TFrameReturnActionType;
   end;
 
 
@@ -152,9 +169,8 @@ type
                             );
 
 
-
-
   {$REGION 'TVirtualKeyboardFixer 虚拟键盘修复'}
+  {$IFDEF FMX}
   //虚拟键盘修复
   TVirtualKeyboardFixer=class
   private
@@ -218,14 +234,11 @@ type
     //因为虚拟键盘事件在Android平台不太准确
     procedure StartSync;//(AMainForm:TForm);
   end;
+  {$ENDIF}
   {$ENDREGION 'TVirtualKeyboardFixer 虚拟键盘修复'}
 
 
-
-
-
-
-
+{$IFDEF FMX}
 var
   GlobalVirtualKeyboardFixer:TVirtualKeyboardFixer;
 
@@ -234,7 +247,7 @@ var
   GlobalAutoProcessVirtualKeyboardControl:TBaseSkinPanel;
   //不再使用,虚拟键盘控件类,如果GlobalAutoProcessVirtualKeyboardControl为空,则会自动创建
   GlobalAutoProcessVirtualKeyboardControlClass:TControlClass;
-
+{$ENDIF}
 
 
 //设置Frame唯一的名字
@@ -269,7 +282,7 @@ procedure ShowFrame(
                     //弹出时的宽度
                     const APFramePopupStyle:PFramePopupStyle=nil
                     );
-                    {$IF CompilerVersion > 30.0}overload;{$ENDIF}
+                    {$IF CompilerVersion > 30.0}overload;{$IFEND}
 
 {$IF CompilerVersion>30.0}
 procedure ShowFrame(
@@ -278,14 +291,16 @@ procedure ShowFrame(
                     //目标页面类
                     const ToFrameClass:TFrameClass;
                     const OnReturnFrame:TReturnFromFrameEvent=nil);overload;
-{$ENDIF}
+{$IFEND}
+
+
 
 
 //隐藏一个页面
 procedure HideFrame(
                     //要隐藏的页面,如果为nil,表示隐藏CurrentFrame
                     AFrame:TFrame=nil;
-                    //调用的时机
+                    //调用的时机,是显示之前隐藏,还是返回之前隐藏
                     const AHideFrameCalledTimeType:THideFrameCalledTimeType=hfcttAuto;
                     //是否使用页面切换效果
                     const AUseFrameSwitchEffectType:TUseFrameSwitchEffectType=ufsefDefault
@@ -326,8 +341,8 @@ procedure ReturnFrame(
 //0表示不能返回，直接到后台
 //1表示可以返回
 //2表示不能返回，不到后台
-function CanReturnFramePro(const AFrameHistroy:TFrameHistroy):Integer;
-function CanReturnFrame(const AFrameHistroy:TFrameHistroy):Boolean;
+function CanReturnFramePro(const AFrameHistroy:TFrameHistroy):TFrameReturnActionType;
+function CanReturnFrame(const AFrameHistroy:TFrameHistroy):TFrameReturnActionType;
 
 //当前页的上下文
 function CurrentFrameHistroy:TFrameHistroy;
@@ -343,9 +358,10 @@ procedure ClearOnReturnFrameEvent(AFrame:TFrame);
 
 
 
-
+{$IFDEF FMX}
 //获取Android平台虚拟键盘的高度,用于判断虚拟键盘是隐藏还是显示
 function GetCurrentVirtualKeyboardRectInAndroid:TRect;
+
 //键盘隐藏显示修复器
 function GetGlobalVirtualKeyboardFixer:TVirtualKeyboardFixer;
 
@@ -355,17 +371,21 @@ function GetGlobalVirtualKeyboardFixer:TVirtualKeyboardFixer;
 //procedure CallSubFrameVirtualKeyboardHidden(Sender: TObject;Parent:TFmxObject;KeyboardVisible: Boolean;const Bounds: TRect);
 
 procedure RealCallSubFrameVirtualKeyboardHidden_InTimer(Sender: TObject;
-                                                        Parent:TFmxObject;
+                                                        Parent:TChildControl;
                                                         KeyboardVisible: Boolean;
                                                         const Bounds: TRect);
 //处理虚拟键盘弹起(需要独立出来,可以给别的地方调用)
 function ProcessVirtualKeyboardShow(
             AForm:TForm;
-            const AKeyboardBounds: TRect;
+            const AKeyboardBounds_Height: Double;
             AFocusedControl:TControl;
             AVirtualKeyboardPanel:TControl;
-            AKeyboardHeightOffset:Double=0
+            AKeyboardHeightOffset:Double=0;
+            AVirtualKeyboardHeightAdjustHeight:Double=0
             ):Boolean;
+{$ENDIF FMX}
+
+
 
 
 //获取子控件相关的滚动控件
@@ -387,21 +407,21 @@ function GetSuitContentHeight(AControlWidth:Double;
 
 
 //获取控件相对于父控件的高度
-function GetReleatedTop(AChild:TControl;AParent:TFmxObject):Double;
+function GetReleatedTop(AChild:TControl;AParent:TChildControl):TControlSize;
 //自动计算ScrollBoxContent的合适内容高度
-function GetSuitScrollContentHeight(AScrollBoxContent:TControl;
-                                    const ABottomSpace:Double=20):Double;
+function GetSuitScrollContentHeight(AScrollBoxContent:TParentControl;
+                                    const ABottomSpace:TControlSize=20):TControlSize;
 //自动计算Content的合适内容高度
-function GetSuitControlContentHeight(AControl:TControl;
-                                    const ABottomSpace:Double=20):Double;
+function GetSuitControlContentHeight(AControl:TParentControl;
+                                    const ABottomSpace:TControlSize=20):TControlSize;
 //自动设置ScrollBoxContent的高度
-procedure SetSuitScrollContentHeight(AScrollBoxContent:TControl;
-                                    const ABottomSpace:Double=20);
+procedure SetSuitScrollContentHeight(AScrollBoxContent:TParentControl;
+                                    const ABottomSpace:TControlSize=20);
 
 
 
 
-
+{$IFDEF FMX}
 //隐藏虚拟键盘
 procedure HideVirtualKeyboard;
 //显示虚拟键盘
@@ -410,6 +430,8 @@ procedure ShowVirtualKeyboard(const AControl: TFmxObject);
 function IsVirtualKeyboardVisible:Boolean;
 //procedure SetVirtualKeyboardHideButtonVisible(const Value: Boolean);
 procedure SetVirtualKeyboardToolBarEnabled(const Value: Boolean);
+{$ENDIF}
+
 
 
 //procedure DoWebBrowserRealign;
@@ -418,13 +440,13 @@ procedure SetVirtualKeyboardToolBarEnabled(const Value: Boolean);
 //记录子控件的翻译索引
 procedure RecordSubControlsLang(
                             //父控件,Frame或Form
-                            AParent:TFmxObject;
+                            AParent:TChildControl;
                             //当前的语言
                             ACurLang:String='cn');
 //翻译子控件
 procedure TranslateSubControlsLang(
                             //父控件,Frame或Form
-                            AParent:TFmxObject);
+                            AParent:TChildControl);
 
 
 //主题色
@@ -453,9 +475,13 @@ procedure AlignControls(ATopControl:TControl;
 
 function IsRepeatClickReturnButton(AFrame:TFrame):Boolean;
 
+
+{$IFDEF FMX}
 var
   //当前应用程序的状态
   GlobalApplicationState:TApplicationEvent;
+{$ENDIF}
+
 
 
 implementation
@@ -485,7 +511,7 @@ end;
 
 procedure RecordSubControlsLang(
                             //父控件,Frame或Form
-                            AParent:TFmxObject;
+                            AParent:TChildControl;
                             //当前的语言
                             ACurLang:String);
 begin
@@ -499,7 +525,7 @@ end;
 
 procedure TranslateSubControlsLang(
                             //父控件,Frame或Form
-                            AParent:TFmxObject);
+                            AParent:TChildControl);
 begin
   uLang.DoTranslateSubControlsLang(AParent,
                             GlobalLang,
@@ -553,11 +579,11 @@ begin
   Result:=uFrameContext.CurrentFrameHistory;
 end;
 
-function CanReturnFramePro(const AFrameHistroy:TFrameHistroy):Integer;
+function CanReturnFramePro(const AFrameHistroy:TFrameHistroy):TFrameReturnActionType;
 var
   AFrameHistoryCanReturnEvent:IFrameHistroyCanReturnEvent;
 begin
-  Result:=1;
+  Result:=TFrameReturnActionType.fratDefault;
   if (AFrameHistroy.ToFrame<>nil)
     and AFrameHistroy.ToFrame.GetInterface(IID_IFrameHistroyCanReturnEvent,AFrameHistoryCanReturnEvent) then
   begin
@@ -565,11 +591,11 @@ begin
   end
   else
   begin
-    Result:=Ord(uFrameContext.DoCanReturnFrame(AFrameHistroy));
+    Result:=uFrameContext.DoCanReturnFrame(AFrameHistroy);
   end;
 end;
 
-function CanReturnFrame(const AFrameHistroy:TFrameHistroy):Boolean;
+function CanReturnFrame(const AFrameHistroy:TFrameHistroy):TFrameReturnActionType;
 begin
   Result:=uFrameContext.DoCanReturnFrame(AFrameHistroy);
 end;
@@ -583,8 +609,12 @@ procedure ReturnFrame(
                       const AIsNeedFree:Boolean=False
                       );
 begin
+
+  {$IFDEF FMX}
   //隐藏虚拟键盘
   HideVirtualKeyboard;
+  {$ENDIF}
+
 
   //不再使用FrameHistroy
 //  uFrameContext.DoReturnFrame(AFrameHistroy.ToFrame,AReturnStep,AIsNeedFree);
@@ -601,8 +631,11 @@ procedure ReturnFrame(
                       const AIsNeedFree:Boolean=False
                       );
 begin
+  {$IFDEF FMX}
   //隐藏虚拟键盘
   HideVirtualKeyboard;
+  {$ENDIF}
+
   //
   uFrameContext.DoReturnFrame(AFrame,AReturnStep,AIsNeedFree);
 end;
@@ -617,14 +650,16 @@ procedure ShowFrame(
 begin
   uFrameContext.DoShowFrame(ToFrame,
                             ToFrameClass,
-                            Application.MainForm,
+                            {$IFDEF FMX}Application.MainForm{$ENDIF}{$IFDEF VCL}nil{$ENDIF},
                             nil,//NoUse,
                             nil,//NoUse1,
                             OnReturnFrame,//OnReturnFrame,
+
                             Application.MainForm//Owner,
+
                             );
 end;
-{$ENDIF}
+{$IFEND}
 
 procedure ShowFrame(var ToFrame:TFrame;
                     const ToFrameClass:TFrameClass;
@@ -665,9 +700,9 @@ begin
     AFrame:=CurrentFrame;
   end;
   uFrameContext.DoHideFrame(AFrame,
-                          THideFrameType(Ord(AHideFrameCalledTimeType)),
-                          TFrameSwitchType(Ord(AUseFrameSwitchEffectType))
-                          );
+                            THideFrameType(Ord(AHideFrameCalledTimeType)),
+                            TFrameSwitchType(Ord(AUseFrameSwitchEffectType))
+                            );
 end;
 
 procedure HideFrameBeforeShow(
@@ -732,7 +767,7 @@ var
 
 {$IF RTLVersion>=33}// 10.3+
   _AndroidVKBounds: TRectF;
-{$ENDIF}
+{$IFEND}
 
 function JRectToRectF(R: JRect): TRectF;
 begin
@@ -775,7 +810,7 @@ begin
     ARect := TRectF.Empty;
     Result := false;
   end;
-  {$ENDIF}
+  {$IFEND}
 end;
 
 function GetVKBounds: TRectF; overload;
@@ -837,10 +872,10 @@ begin
   {$IFDEF ANDROID}
   {$IF RTLVersion>=33}// 10.3+
     _AndroidVKBounds := TRectF.Create(AVKMsg.KeyboardBounds);
-  {$ENDIF}
+  {$IFEND}
   {$ENDIF}
 end;
-{$ENDIF RTLVersion}
+{$IFEND RTLVersion}
 {$ENDIF ANDROID}
 {$ENDREGION '摘自qdac_fmx_vkhelper.pas'}
 
@@ -864,7 +899,7 @@ procedure AlignControls(ATopControl:TControl;
                         );
 var
   ALastControl:TControl;
-  ATop:Double;
+  ATop:TControlSize;
 begin
   ALastControl:=nil;
   ATop:=0;
@@ -878,8 +913,8 @@ begin
 
   if (AControl1<>nil) and AControl1.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl1.Position.Y:=AControl1.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl1,AControl1.Margins.Top+ATop+1);
     ALastControl:=AControl1;
   end;
 
@@ -887,8 +922,8 @@ begin
 
   if (AControl2<>nil) and AControl2.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl2.Position.Y:=AControl2.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl2,AControl2.Margins.Top+ATop+1);
     ALastControl:=AControl2;
   end;
 
@@ -896,8 +931,8 @@ begin
 
   if (AControl3<>nil) and AControl3.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl3.Position.Y:=AControl3.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl3,AControl3.Margins.Top+ATop+1);
     ALastControl:=AControl3;
   end;
 
@@ -905,8 +940,8 @@ begin
 
   if (AControl4<>nil) and AControl4.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl4.Position.Y:=AControl4.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl4,AControl4.Margins.Top+ATop+1);
     ALastControl:=AControl4;
   end;
 
@@ -914,8 +949,8 @@ begin
 
   if (AControl5<>nil) and AControl5.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl5.Position.Y:=AControl5.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl5,AControl5.Margins.Top+ATop+1);
     ALastControl:=AControl5;
   end;
 
@@ -923,8 +958,8 @@ begin
 
   if (AControl6<>nil) and AControl6.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl6.Position.Y:=AControl6.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl6,AControl6.Margins.Top+ATop+1);
     ALastControl:=AControl6;
   end;
 
@@ -932,8 +967,8 @@ begin
 
   if (AControl7<>nil) and AControl7.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl7.Position.Y:=AControl7.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl7,AControl7.Margins.Top+ATop+1);
     ALastControl:=AControl7;
   end;
 
@@ -941,8 +976,8 @@ begin
 
   if (AControl8<>nil) and AControl8.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl8.Position.Y:=AControl8.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl8,AControl8.Margins.Top+ATop+1);
     ALastControl:=AControl8;
   end;
 
@@ -950,8 +985,8 @@ begin
 
   if (AControl9<>nil) and AControl9.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl9.Position.Y:=AControl9.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl9,AControl9.Margins.Top+ATop+1);
     ALastControl:=AControl9;
   end;
 
@@ -959,8 +994,8 @@ begin
 
   if (AControl10<>nil) and AControl10.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl10.Position.Y:=AControl10.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl10,AControl10.Margins.Top+ATop+1);
     ALastControl:=AControl10;
   end;
 
@@ -968,8 +1003,8 @@ begin
 
   if (AControl11<>nil) and AControl11.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl11.Position.Y:=AControl11.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl11,AControl11.Margins.Top+ATop+1);
     ALastControl:=AControl11;
   end;
 
@@ -977,8 +1012,8 @@ begin
 
   if (AControl12<>nil) and AControl12.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl12.Position.Y:=AControl12.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl12,AControl12.Margins.Top+ATop+1);
     ALastControl:=AControl12;
   end;
 
@@ -986,8 +1021,8 @@ begin
 
   if (AControl13<>nil) and AControl13.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl13.Position.Y:=AControl13.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl13,AControl13.Margins.Top+ATop+1);
     ALastControl:=AControl13;
   end;
 
@@ -995,61 +1030,67 @@ begin
 
   if (AControl14<>nil) and AControl14.Visible then
   begin
-    if ALastControl<>nil then ATop:=ALastControl.Position.Y+ALastControl.Height;
-    AControl14.Position.Y:=AControl14.Margins.Top+ATop+1;
+    if ALastControl<>nil then ATop:=GetControlTop(ALastControl)+ALastControl.Height;
+    SetControlTop(AControl14,AControl14.Margins.Top+ATop+1);
     ALastControl:=AControl14;
   end;
 
 
 end;
 
-function GetReleatedTop(AChild:TControl;AParent:TFmxObject):Double;
+function GetReleatedTop(AChild:TControl;AParent:TChildControl):TControlSize;
 var
   BParent:TControl;
 begin
-  Result:=AChild.Position.Y;
+  Result:=GetControlTop(AChild);
   BParent:=TControl(AChild.Parent);
   while (BParent<>nil) and (BParent<>AParent) do
   begin
     if BParent<>nil then
     begin
-      Result:=Result+BParent.Position.Y;
+      Result:=Result+GetControlTop(BParent);
     end;
     BParent:=TControl(BParent.Parent);
   end;
 end;
 
-procedure SetSuitScrollContentHeight(AScrollBoxContent:TControl;
-                                    const ABottomSpace:Double=20);
+procedure SetSuitScrollContentHeight(AScrollBoxContent:TParentControl;
+                                    const ABottomSpace:TControlSize=20);
 begin
   AScrollBoxContent.Height:=
     GetSuitScrollContentHeight(AScrollBoxContent,ABottomSpace);
 end;
 
-function GetSuitScrollContentHeight(AScrollBoxContent:TControl;const ABottomSpace:Double):Double;
+function GetSuitScrollContentHeight(AScrollBoxContent:TParentControl;const ABottomSpace:TControlSize):TControlSize;
 begin
   Result:=GetSuitControlContentHeight(AScrollBoxContent,ABottomSpace);
 end;
 
-function GetSuitControlContentHeight(AControl:TControl;const ABottomSpace:Double):Double;
+function GetSuitControlContentHeight(AControl:TParentControl;const ABottomSpace:TControlSize):TControlSize;
 var
   I: Integer;
+  AChildControl:TChildControl;
 begin
   Result:=0;
-  for I := 0 to AControl.ControlsCount-1 do
+  AChildControl:=nil;
+  for I := 0 to GetParentChildControlCount(AControl)-1 do
   begin
+    AChildControl:=GetParentChildControl(AControl,I);
     if  //必须要统计显示的控件
-        AControl.Controls[I].Visible
-      and (AControl.Controls[I].Position.Y
-            +AControl.Controls[I].Height>Result) then
+        TControl(AChildControl).Visible
+      and (GetControlTop(TControl(AChildControl))
+            +TControl(AChildControl).Height>Result) then
     begin
-      Result:=AControl.Controls[I].Position.Y
-              +AControl.Controls[I].Height;
+      Result:=GetControlTop(TControl(AChildControl))
+              +TControl(AChildControl).Height;
     end;
   end;
   Result:=Result+ABottomSpace;
 end;
 
+
+
+{$IFDEF FMX}
 procedure HideVirtualKeyboard;
 {$IFDEF MSWINDOWS}
 {$ELSE}
@@ -1141,10 +1182,11 @@ begin
 end;
 
 function ProcessVirtualKeyboardShow(AForm:TForm;
-                                    const AKeyboardBounds: TRect;
+                                    const AKeyboardBounds_Height:Double;
                                     AFocusedControl:TControl;
                                     AVirtualKeyboardPanel:TControl;
-                                    AKeyboardHeightOffset:Double
+                                    AKeyboardHeightOffset:Double;
+                                    AVirtualKeyboardHeightAdjustHeight:Double
                                     ):Boolean;
 begin
     Result:=False;
@@ -1153,7 +1195,7 @@ begin
     //设置虚拟键盘控件的高度
     if AVirtualKeyboardPanel<>nil then
     begin
-      AVirtualKeyboardPanel.Height:=AKeyboardBounds.Height
+      AVirtualKeyboardPanel.Height:=AKeyboardBounds_Height
                                     -GetGlobalVirtualKeyboardFixer.VirtualKeyboardHideHeight
                                     -1
                                     +AKeyboardHeightOffset;
@@ -1188,7 +1230,7 @@ begin
         //因为ScrollBox鼠标按下弹起,Edit会获得焦点,弹出虚拟键盘,ScrollBox还会惯性滚动
         //并且虚拟键盘弹起,鼠标弹起,会引起剧烈的惯性滚动,故先不设置Position,
         //在Timer中停止惯性滚动,然后再设置Position
-        GetGlobalVirtualKeyboardFixer.ProcessVKShowFocusedControl(AFocusedControl,AKeyboardBounds.Height);
+        GetGlobalVirtualKeyboardFixer.ProcessVKShowFocusedControl(AFocusedControl,AKeyboardBounds_Height+AVirtualKeyboardHeightAdjustHeight);
 
         Result:=True;
 
@@ -1200,7 +1242,7 @@ begin
 
 
 end;
-
+{$ENDIF}
 
 function GetReleatedScrollControl(AChild:TChildControl):TSkinScrollControl;
 var
@@ -1259,6 +1301,7 @@ begin
 end;
 
 
+{$IFDEF FMX}
 function GetGlobalVirtualKeyboardFixer:TVirtualKeyboardFixer;
 begin
   if GlobalVirtualKeyboardFixer=nil then
@@ -1285,6 +1328,7 @@ var
   AParentIsScrollBoxContent:Boolean;
   AParentScrollBox:TControl;
   AParent:TFmxObject;
+  AVirtualKeyboardHeightAdjustHeight:Double;
 begin
   if AIsFirst then
   begin
@@ -1300,6 +1344,7 @@ begin
   end;
 
 
+  AVirtualKeyboardHeightAdjustHeight:=0;
 
 
   {$IFDEF ANDROID}
@@ -1441,6 +1486,19 @@ begin
             begin
                 //有ScrollBox,那么取ScrollBox.Parent,一般为Frame
                 AVirtualKeyboardPanelParent:=AParentScrollBox.Parent;
+
+                  if AParentScrollBox.Parent is TFrame then
+                  begin
+                      //有时候需要同时支持IFrameVirtualKeyboardEvent和IFrameVirtualKeyboardAutoProcessEvent
+                      if AParentScrollBox.Parent.GetInterface(IID_IFrameVirtualKeyboardAutoProcessEvent,AFrameVirtualKeyboardAutoProcessEvent) then
+                      begin
+
+                        uBaseLog.OutputDebugString('IFrameVirtualKeyboardAutoProcessEvent '+AParentScrollBox.Parent.Name+'');
+
+                        AVirtualKeyboardHeightAdjustHeight:=AFrameVirtualKeyboardAutoProcessEvent.GetVirtualKeyboardHeightAdjustHeight;
+                      end;
+                  end;
+
             end
             else
             begin
@@ -1458,6 +1516,7 @@ begin
 
                         //手动处理虚拟键盘
                         AVirtualKeyboardPanelParent:=AFrameVirtualKeyboardAutoProcessEvent.GetVirtualKeyboardControlParent;
+                        AVirtualKeyboardHeightAdjustHeight:=AFrameVirtualKeyboardAutoProcessEvent.GetVirtualKeyboardHeightAdjustHeight;
                         Break;
                       end;
 
@@ -1542,7 +1601,7 @@ begin
                 //设置ScrollBox的位置
                 if (AFocusedControl<>nil) and (AParentScrollBox<>nil) then
                 begin
-                  ProcessVirtualKeyboardShow(TForm(Sender),Bounds,AFocusedControl,nil);
+                  ProcessVirtualKeyboardShow(TForm(Sender),Bounds.Height,AFocusedControl,nil,0,AVirtualKeyboardHeightAdjustHeight);
                 end;
 
 
@@ -1630,7 +1689,7 @@ begin
   {$IF RTLVersion>=33}// 10.3+
   Result:=GetVKBounds.Truncate;
 //  ATotalHeight:=RectHeight(Result);
-  {$ENDIF}
+  {$IFEND}
 
 //  uBaseLog.OutputDebugString('OrangeUI GetCurrentVirtualKeyboardRectInAndroid getWindowVisibleDisplayFrame '
 //                              +FloatToStr(ContentRect.left)+','
@@ -2019,12 +2078,12 @@ begin
 end;
 
 procedure RealCallSubFrameVirtualKeyboardHidden_InTimer(Sender: TObject;
-                                                        Parent:TFmxObject;
+                                                        Parent:TChildControl;
                                                         KeyboardVisible: Boolean;
                                                         const Bounds: TRect);
 var
   I: Integer;
-  AChild:TFmxObject;
+  AChild:TChildControl;
   AOldFrameVirtualKeyboardEvent:IFrameVirtualKeyboardEvent;
 begin
       for I := Parent.ChildrenCount-1 downto 0 do
@@ -2044,6 +2103,8 @@ begin
       end;
 
 end;
+
+{$ENDIF}
 
 //function ParentHasScrollBox(AParent:TControl):Boolean;
 //var
@@ -2111,9 +2172,11 @@ initialization
 
 
 
-  //在Windows平台下的模拟虚拟键盘控件
-  SimulateWindowsVirtualKeyboardHeight:=160;
-  IsSimulateVirtualKeyboardOnWindows:=True;
+//  {$IFDEF FMX}
+//  //在Windows平台下的模拟虚拟键盘控件
+//  SimulateWindowsVirtualKeyboardHeight:=160;
+//  IsSimulateVirtualKeyboardOnWindows:=True;
+//  {$ENDIF}
 
 
 
@@ -2121,25 +2184,29 @@ initialization
   {$IFDEF ANDROID}
   {$IF RTLVersion>=33}// 10.3+
   VKHandler := TVKStateHandler.Create(nil);
-  {$ENDIF RTLVersion}
+  {$IFEND RTLVersion}
   {$ENDIF ANDROID}
 
 
 
+  {$IFDEF FMX}
   //主要是虚拟键盘处理和修复Android下的虚拟键盘隐藏和显示
   GetGlobalVirtualKeyboardFixer.StartSync;//(Self);
+  {$ENDIF}
 
 
 
 finalization
+  {$IFDEF FMX}
   FreeAndNil(GlobalVirtualKeyboardFixer);
+  {$ENDIF}
 
 
   {$IFDEF ANDROID}
   {$IF RTLVersion>=33}// 10.3+
   VKHandler.DisposeOf;
   VKHandler := nil;
-  {$ENDIF RTLVersion}
+  {$IFEND RTLVersion}
   {$ENDIF ANDROID}
 
 

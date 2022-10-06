@@ -10,17 +10,18 @@ uses
   SyncObjs,
   FMX.Types,
   FMX.Dialogs,
+  FMX.Forms,
 
   TextToSpeak,
 
 
 
-  {$IFDEF SKIN_SUPEROBJECT}
+//  {$IFDEF SKIN_SUPEROBJECT}
   uSkinSuperObject,
-  {$ELSE}
-  XSuperObject,
-  XSuperJson,
-  {$ENDIF}
+//  {$ELSE}
+//  XSuperObject,
+//  XSuperJson,
+//  {$ENDIF}
 
 
   uComponentType,
@@ -103,22 +104,9 @@ type
 
     FText: String;
     procedure SetText(const Value: String);
-  private
-    {$IFDEF ANDROID}
-    FTtsListener: TttsOnInitListener;//倾听者私有对象
-    FTTS: JTextToSpeech;//文字TO言语
-    {$ENDIF}
-  private
-    {$IFDEF MSWINDOWS}
-    FSpeechVoice:ISpeechVoice;
-    {$ENDIF}
-  private
-    {$IFDEF IOS}
-    FSpeechVoice:TSpeakVoice;
-    {$ENDIF}
   protected
     //针对页面框架的控件接口
-    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;
     //获取与设置自定义属性
     function GetPropJsonStr:String;
     procedure SetPropJsonStr(AJsonStr:String);
@@ -129,14 +117,28 @@ type
     procedure SetControlValue(ASetting:TFieldControlSetting;APageDataDir:String;AImageServerUrl:String;AValue:Variant;AValueCaption:String;
                             //要设置多个值,整个字段的记录
                             AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
-    //设置属性
-    function GetProp(APropName:String):Variant;
-    procedure SetProp(APropName:String;APropValue:Variant);
+//    //设置属性
+//    function GetProp(APropName:String):Variant;
+//    procedure SetProp(APropName:String;APropValue:Variant);
+    procedure DoReturnFrame(AFromFrame:TFrame);virtual;
 
   protected
     FBindItemFieldName:String;
     function GetBindItemFieldName:String;
     procedure SetBindItemFieldName(AValue:String);
+  public
+    {$IFDEF ANDROID}
+    FTtsListener: TttsOnInitListener;//倾听者私有对象
+    FTTS: JTextToSpeech;//文字TO言语
+    {$ENDIF}
+  public
+    {$IFDEF MSWINDOWS}
+    FSpeechVoice:ISpeechVoice;
+    {$ENDIF}
+  public
+    {$IFDEF IOS}
+    FSpeechVoice:TSpeakVoice;
+    {$ENDIF}
 
   public
     function Init:Boolean;
@@ -149,7 +151,7 @@ type
                   ADelay:Integer=0;
                   ATimes:Integer=1):Boolean;
     function DirectPlay(AText:String):Boolean;
-
+    procedure Stop;
   published
     property Text:String read FText write SetText;
     property RepeatTimes:Integer read FRepeatTimes write FRepeatTimes;
@@ -444,7 +446,7 @@ begin
   {$ENDIF}
 end;
 
-function TSystemTTS.LoadFromFieldControlSetting(ASetting: TFieldControlSetting): Boolean;
+function TSystemTTS.LoadFromFieldControlSetting(ASetting: TFieldControlSetting;AFieldControlSettingMap:TObject): Boolean;
 begin
 
 end;
@@ -497,13 +499,18 @@ begin
   Text:=AValue;
 end;
 
-//设置属性
-function TSystemTTS.GetProp(APropName:String):Variant;
-begin
+////设置属性
+//function TSystemTTS.GetProp(APropName:String):Variant;
+//begin
+//
+//end;
+//
+//procedure TSystemTTS.SetProp(APropName:String;APropValue:Variant);
+//begin
+//
+//end;
 
-end;
-
-procedure TSystemTTS.SetProp(APropName:String;APropValue:Variant);
+procedure TSystemTTS.DoReturnFrame(AFromFrame:TFrame);
 begin
 
 end;
@@ -516,6 +523,49 @@ begin
 
     Self.Play(FText);
   end;
+end;
+
+procedure TSystemTTS.Stop;
+begin
+//  {$IFDEF FREE_VERSION}
+//  ShowMessage('三方SDK免费版限制');
+//  {$ENDIF}
+
+
+
+
+  if not Init then Exit;
+
+
+  {$IFDEF ANDROID}
+  if FTTS<>nil then
+  begin
+    uBaseLog.HandleException(nil,'SpeakOut FTTS.Stop ');
+    Self.FTTS.stop;
+  end;
+  {$ENDIF}
+
+
+  {$IFDEF MSWINDOWS}
+  if FSpeechVoice<>nil then
+  begin
+//    FSpeechVoice.Volume
+    try
+      FSpeechVoice.Pause;
+    except
+
+    end;
+  end;
+  {$ENDIF}
+
+
+
+  {$IFDEF IOS}
+  FSpeechVoice.StopSpeakText;
+  {$ENDIF}
+
+
+
 end;
 
 { TPlayerThread }

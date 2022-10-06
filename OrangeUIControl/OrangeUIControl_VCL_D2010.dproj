@@ -70,6 +70,10 @@
 			<DCCReference Include="vcl.dcp"/>
 			<DCCReference Include="vclimg.dcp"/>
 			<DCCReference Include="dbrtl.dcp"/>
+			<DCCReference Include="xmlrtl.dcp"/>
+			<DCCReference Include="IndyCore.dcp"/>
+			<DCCReference Include="IndySystem.dcp"/>
+			<DCCReference Include="IndyProtocols.dcp"/>
 			<DCCReference Include="Source\Controls\Windows\uSkinWindowsControl.pas"/>
 			<DCCReference Include="Source\Controls\uSkinScrollBarType.pas"/>
 			<DCCReference Include="Source\Controls\uSkinScrollControlType.pas"/>
@@ -166,6 +170,11 @@
 			<DCCReference Include="Source\Base\uFrameContext.pas"/>
 			<DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.pas"/>
 			<DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.Windows.pas"/>
+			<DCCReference Include="Source\Common\uUIFunction.pas"/>
+			<DCCReference Include="Source\Controls\uSkinRegExTagLabelViewType.pas"/>
+			<DCCReference Include="..\OrangeProjectCommon\TPerlRegEx\PerlRegEx.pas"/>
+			<DCCReference Include="..\OrangeProjectCommon\TPerlRegEx\pcre.pas"/>
+			<DCCReference Include="Source\Controls\uSkinVirtualChartType.pas"/>
 			<None Include="Source\Controls\Windows\WinControl.inc"/>
 			<None Include="Source\Controls\INC\VCL\ISkinControl_Control_Impl_Mouse_Code_VCL.inc"/>
 			<None Include="Source\Controls\INC\VCL\ISkinControl_Control_Impl_Mouse_Declare_VCL.inc"/>

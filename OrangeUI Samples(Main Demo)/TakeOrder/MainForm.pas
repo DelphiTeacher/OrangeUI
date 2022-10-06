@@ -28,6 +28,7 @@ uses
   uInterfaceClass,
   FMX.DeviceInfo,
   uGetDeviceInfo,
+//  uFrameContext,
   EasyServiceCommonMaterialDataMoudle,
 
 
@@ -221,7 +222,7 @@ begin
        and (CurrentFrameHistroy.ToFrame<>GlobalMainFrame)
        then
     begin
-      if CanReturnFrame(CurrentFrameHistroy) then
+      if CanReturnFrame(CurrentFrameHistroy)=TFrameReturnActionType.fratDefault then
       begin
         HideFrame;////(CurrentFrameHistroy.ToFrame,hfcttBeforeReturnFrame);
         ReturnFrame;//(CurrentFrameHistroy);

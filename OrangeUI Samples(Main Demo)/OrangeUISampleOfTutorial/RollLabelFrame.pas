@@ -14,6 +14,7 @@ type
   TFrameRollLabel = class(TFrame)
     lblAbout: TSkinFMXRollLabel;
     lblLink: TSkinFMXRollLabel;
+    SkinFMXHintLabel1: TSkinFMXHintLabel;
   private
     { Private declarations }
   public

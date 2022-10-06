@@ -425,7 +425,7 @@ begin
             end
             else
             begin
-              AError:='XML中不存在code_url结点';
+              //AError:='XML中不存在code_url结点';
             end;
 
 

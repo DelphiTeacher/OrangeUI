@@ -8,10 +8,11 @@ uses
   uSkinItems,
   uSkinVirtualListType,
   uSkinCustomListType,
+  EasyServiceCommonMaterialDataMoudle_VCL,
 
   Graphics, Controls, Forms, Dialogs, uSkinLabelType,
   uSkinImageType, uSkinWindowsControl, uSkinItemDesignerPanelType,
-  ImgList, uDrawPicture, uSkinImageList, uSkinButtonType;
+  ImgList, uDrawPicture, uSkinImageList, uSkinButtonType, uSkinCheckBoxType;
 
 type
   TFrameListItemStyle_IconCaptionLeft_DetailRight = class(TFrame,IFrameBaseListItemStyle)
@@ -22,6 +23,7 @@ type
     imglistDelete: TSkinImageList;
     btnDelete: TSkinWinButton;
     lblDetail: TSkinWinLabel;
+    chkSelected: TSkinWinCheckBox;
   private
     { Private declarations }
   public

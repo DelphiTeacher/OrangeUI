@@ -4,11 +4,24 @@ object FrameScrollBox: TFrameScrollBox
   Size.PlatformDefault = False
   object sbClient: TSkinFMXScrollBox
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
     SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.Color = claWhite
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.PullDownRefreshPanelMaterial.IndicatorColor = claBlack
     SelfOwnMaterial.PullDownRefreshPanelMaterial.LoadingPicture.IsClipRound = False
     SelfOwnMaterial.PullDownRefreshPanelMaterial.DrawLoadingCaptionParam.FontTrimming = fttNone
@@ -20,6 +33,12 @@ object FrameScrollBox: TFrameScrollBox
     SelfOwnMaterial.PullDownRefreshPanelMaterial.LoadingCaption = #27491#22312#21047#26032'...'
     SelfOwnMaterial.PullDownRefreshPanelMaterial.DecidedLoadCaption = #26494#24320#21047#26032
     SelfOwnMaterial.PullDownRefreshPanelMaterial.UnDecidedLoadCaption = #19979#25289#21047#26032
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.Color = claWhite
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.PullUpLoadMorePanelMaterial.IndicatorColor = claBlack
     SelfOwnMaterial.PullUpLoadMorePanelMaterial.LoadingPicture.IsClipRound = False
     SelfOwnMaterial.PullUpLoadMorePanelMaterial.DrawLoadingCaptionParam.FontTrimming = fttNone
@@ -40,13 +59,27 @@ object FrameScrollBox: TFrameScrollBox
     Size.PlatformDefault = False
     TabOrder = 0
     VertScrollBar.ParentMouseEvent = False
+    VertScrollBar.DirectUIVisible = False
     VertScrollBar.ComponentTypeUseKind = ctukDefault
     VertScrollBar.MaterialUseKind = mukSelfOwn
     VertScrollBar.KeepSelfOwnMaterial = True
+    VertScrollBar.SelfOwnMaterial.BackColor.Color = claWhite
     VertScrollBar.SelfOwnMaterial.BackColor.IsFill = True
+    VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     VertScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
     VertScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
     VertScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.Color = x64000000
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Color = x64000000
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     VertScrollBar.MouseDownFocus = False
     VertScrollBar.CanFocus = True
     VertScrollBar.ClipChildren = True
@@ -61,12 +94,26 @@ object FrameScrollBox: TFrameScrollBox
     VertScrollBar.Properties.CanOverRangeTypes = [cortMin, cortMax]
     VertScrollBar.Left = 302
     HorzScrollBar.ParentMouseEvent = False
+    HorzScrollBar.DirectUIVisible = False
     HorzScrollBar.ComponentTypeUseKind = ctukDefault
     HorzScrollBar.MaterialUseKind = mukSelfOwn
     HorzScrollBar.KeepSelfOwnMaterial = True
+    HorzScrollBar.SelfOwnMaterial.BackColor.Color = claWhite
+    HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     HorzScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
     HorzScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
     HorzScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.Color = x64000000
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Color = x64000000
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     HorzScrollBar.MouseDownFocus = False
     HorzScrollBar.Position.Y = 984.000000000000000000
     HorzScrollBar.Size.Width = 320.000000000000000000
@@ -78,10 +125,17 @@ object FrameScrollBox: TFrameScrollBox
     HorzScrollBar.Properties.LargeChange = 10
     HorzScrollBar.Properties.CanOverRangeTypes = []
     ScrollControlCorner.ParentMouseEvent = False
+    ScrollControlCorner.DirectUIVisible = False
     ScrollControlCorner.ComponentTypeUseKind = ctukDefault
     ScrollControlCorner.MaterialUseKind = mukSelfOwn
     ScrollControlCorner.KeepSelfOwnMaterial = True
+    ScrollControlCorner.SelfOwnMaterial.BackColor.Color = claWhite
     ScrollControlCorner.SelfOwnMaterial.BackColor.IsFill = True
+    ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     ScrollControlCorner.MouseDownFocus = False
     ScrollControlCorner.CanFocus = True
     ScrollControlCorner.ClipChildren = True
@@ -103,10 +157,17 @@ object FrameScrollBox: TFrameScrollBox
     Properties.ScrollBoxType = sbtVert
     object sbcClient: TSkinFMXScrollBoxContent
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = claWhite
       SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       MouseDownFocus = False
       Anchors = [akLeft, akTop, akRight]
       CanFocus = True
@@ -117,6 +178,7 @@ object FrameScrollBox: TFrameScrollBox
       TabOrder = 0
       object SkinFMXPanel2: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -134,6 +196,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object lblGoodsName: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -169,6 +232,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -192,6 +256,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object SkinFMXPanel7: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -209,6 +274,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object lblSenderAddr: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -244,6 +310,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -267,6 +334,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object SkinFMXPanel8: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -284,6 +352,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object lblReceiverAddr: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -319,6 +388,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -342,6 +412,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object SkinFMXPanel12: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -359,6 +430,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object lblSenderMobile: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -394,6 +466,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -417,6 +490,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object SkinFMXPanel13: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -434,6 +508,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object lblSender: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -469,6 +544,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -492,6 +568,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object SkinFMXPanel14: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -509,6 +586,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object lblReceiver: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -544,6 +622,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -567,6 +646,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object SkinFMXPanel15: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -584,6 +664,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object lblReceiverMobile: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -620,6 +701,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -643,13 +725,20 @@ object FrameScrollBox: TFrameScrollBox
       end
       object btnPublish: TSkinFMXButton
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = xFF3DB8F1
         SelfOwnMaterial.BackColor.IsFill = True
         SelfOwnMaterial.BackColor.FillColor.Color = xFF3DB8F1
         SelfOwnMaterial.BackColor.IsRound = True
         SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.IsTransparent = False
         SelfOwnMaterial.IsAutoCenterIconAndCaption = False
         SelfOwnMaterial.DrawDetailParam.FontTrimming = fttNone
@@ -706,6 +795,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object pnlPickTime: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -722,6 +812,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object lblFetchTime: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -759,13 +850,20 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           TabOrder = 5
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukSelfOwn
           KeepSelfOwnMaterial = True
+          SelfOwnMaterial.BackColor.Color = claWhite
           SelfOwnMaterial.BackColor.IsFill = True
           SelfOwnMaterial.BackColor.RoundWidth = 2.000000000000000000
           SelfOwnMaterial.BackColor.RoundHeight = 2.000000000000000000
           SelfOwnMaterial.BackColor.BorderColor.Color = claLightgray
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.IsTransparent = False
           SelfOwnMaterial.ArrowPicture.IsClipRound = False
           SelfOwnMaterial.ArrowPicture.PNG = {
@@ -822,6 +920,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object SkinFMXPanel1: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -839,6 +938,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object SkinFMXLabel1: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -874,6 +974,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -897,6 +998,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object SkinFMXPanel3: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -914,6 +1016,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object SkinFMXLabel2: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -949,6 +1052,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -972,6 +1076,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object SkinFMXPanel4: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -989,6 +1094,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object SkinFMXLabel3: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -1024,6 +1130,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -1047,6 +1154,7 @@ object FrameScrollBox: TFrameScrollBox
       end
       object SkinFMXPanel5: TSkinFMXPanel
         ParentMouseEvent = True
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -1064,6 +1172,7 @@ object FrameScrollBox: TFrameScrollBox
         Top = 1569
         object SkinFMXLabel4: TSkinFMXLabel
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -1099,6 +1208,7 @@ object FrameScrollBox: TFrameScrollBox
           Size.PlatformDefault = False
           StyledSettings = [Family, Style]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -1124,10 +1234,17 @@ object FrameScrollBox: TFrameScrollBox
   end
   object pnlVirtualKeyboard: TSkinFMXPanel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
     SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
     SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
     SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
@@ -1144,7 +1261,13 @@ object FrameScrollBox: TFrameScrollBox
     Top = 610
   end
   object lblInputPanelCaptionMaterial: TSkinLabelDefaultMaterial
+    BackColor.Color = claWhite
     BackColor.IsFill = True
+    BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     DrawCaptionParam.FontSize = 14.000000000000000000
     DrawCaptionParam.DrawFont.Size = 14.000000000000000000
     DrawCaptionParam.FontTrimming = fttNone
@@ -1155,6 +1278,7 @@ object FrameScrollBox: TFrameScrollBox
   end
   object pnlInputPanelMaterial: TSkinPanelDefaultMaterial
     BackColor.BorderEadges = [beBottom]
+    BackColor.Color = claWhite
     BackColor.BorderColor.Color = xFFEDEDED
     BackColor.BorderWidth = 1.000000000000000000
     BackColor.DrawRectSetting.Left = 10.000000000000000000
@@ -1162,6 +1286,11 @@ object FrameScrollBox: TFrameScrollBox
     BackColor.DrawRectSetting.Bottom = -2.000000000000000000
     BackColor.DrawRectSetting.SizeType = dpstPixel
     BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Color = xFFE5E5E5
+    BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     IsTransparent = False
     DrawCaptionParam.FontTrimming = fttNone
     DrawCaptionParam.FontHorzAlign = fhaLeft
@@ -1170,7 +1299,13 @@ object FrameScrollBox: TFrameScrollBox
     Top = 831
   end
   object edtInputValueMaterial: TSkinEditDefaultMaterial
+    BackColor.Color = claWhite
     BackColor.IsFill = True
+    BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     NormalPicture.IsClipRound = False
     HoverPicture.IsClipRound = False
     FocusedPicture.IsClipRound = False

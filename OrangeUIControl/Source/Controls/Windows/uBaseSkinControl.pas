@@ -233,7 +233,7 @@ implementation
 //
 //end;
 //
-//function TBaseFMXControl.LoadFromFieldControlSetting(ASetting:TBaseFieldControlSetting):Boolean;
+//function TBaseFMXControl.LoadFromFieldControlSetting(ASetting:TBaseFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;
 //begin
 //  Result:=True;
 //end;

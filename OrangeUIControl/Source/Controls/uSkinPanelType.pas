@@ -186,7 +186,8 @@ type
 
   {$I Source\Controls\ComponentPlatformsAttribute.inc}
   TBaseSkinPanel=class(TBaseSkinControl,
-                  ISkinPanel)
+                      IBindSkinItemValueControl,
+                      ISkinPanel)
   private
     function GetPanelProperties:TPanelProperties;
     procedure SetPanelProperties(Value:TPanelProperties);
@@ -196,6 +197,12 @@ type
 
     //获取控件属性类
     function GetPropertiesClassType:TPropertiesClassType;override;
+  protected
+    //绑定列表项
+    procedure SetControlValueByBindItemField(const AFieldName:String;
+                                              const AFieldValue:Variant;
+                                              ASkinItem:TObject;
+                                              AIsDrawItemInteractiveState:Boolean);
   public
     function SelfOwnMaterialToDefault:TSkinPanelDefaultMaterial;
     function CurrentUseMaterialToDefault:TSkinPanelDefaultMaterial;
@@ -213,6 +220,8 @@ type
 
   {$IFDEF VCL}
   TSkinWinPanel=class(TBaseSkinPanel)
+  end;
+  TSkinPanel=class(TBaseSkinPanel)
   end;
   {$ENDIF VCL}
 
@@ -459,6 +468,17 @@ end;
 function TBaseSkinPanel.GetPanelProperties: TPanelProperties;
 begin
   Result:=TPanelProperties(Self.FProperties);
+end;
+
+procedure TBaseSkinPanel.SetControlValueByBindItemField(
+  const AFieldName: String; const AFieldValue: Variant; ASkinItem: TObject;
+  AIsDrawItemInteractiveState: Boolean);
+begin
+  if AFieldName='ItemColor' then
+  begin
+    //是整形
+    Self.SelfOwnMaterialToDefault.BackColor.FillColor.FColor:=AFieldValue;
+  end;
 end;
 
 procedure TBaseSkinPanel.SetPanelProperties(Value: TPanelProperties);

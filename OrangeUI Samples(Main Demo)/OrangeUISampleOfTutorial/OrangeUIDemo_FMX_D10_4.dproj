@@ -439,11 +439,6 @@
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="DrawPanelFrame.pas">
-            <Form>FrameDrawPanel</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="EditFrame.pas">
             <Form>FrameEdit</Form>
             <FormType>fmx</FormType>
@@ -574,86 +569,6 @@
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="ListViewFrame_AutoColCountFit.pas">
-            <Form>FrameListView_AutoColCountFit</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_AutoColCountNotFit.pas">
-            <Form>FrameListView_AutoColCountNotFit</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_FixColCountFit.pas">
-            <Form>FrameListView_FixColCountFit</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_FixColCountNotFit.pas">
-            <Form>FrameListView_FixColCountNotFit</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_HorzAutoColCountFit.pas">
-            <Form>FrameListView_HorzAutoColCountFit</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_HorzAutoColCountNotFit.pas">
-            <Form>FrameListView_HorzAutoColCountNotFit</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_HorzFixColCountFit.pas">
-            <Form>FrameListView_HorzFixColCountFit</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_HorzFixColCountNotFit.pas">
-            <Form>FrameListView_HorzFixColCountNotFit</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_HuaBanWaterfall.pas">
-            <Form>FrameListView_HuaBanWaterfall</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_Main.pas">
-            <Form>FrameListView_Main</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_TestComplexLayout.pas">
-            <Form>FrameListView_TestComplexLayout</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_TestListView.pas">
-            <Form>FrameListView_TestListView</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_TestWaterfall.pas">
-            <Form>FrameListView_TestWaterfall</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_UseHorzListView.pas">
-            <Form>FrameListView_UseHorzListView</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_UseSelfOwnMaterial.pas">
-            <Form>FrameListView_UseSelfOwnMaterial</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_UseSelfOwnMaterial_9BoxMenu.pas">
-            <Form>FrameListView_UseSelfOwnMaterial_9BoxMenu</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="MainForm.pas">
             <Form>frmMain</Form>
             <FormType>fmx</FormType>
@@ -738,54 +653,14 @@
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="TreeViewFrame_Common.pas">
-            <Form>FrameTreeView_Common</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="TreeViewFrame_Main.pas">
-            <Form>FrameTreeView_Main</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="..\..\OrangeProjectCommon\FlyFilesUtils\FlyFmxUtils.pas"/>
         <DCCReference Include="RadioButtonFrame.pas">
             <Form>FrameRadioButton</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="ItemGridFrame.pas">
-            <Form>FrameItemGrid</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="ItemGridFrame_Simple.pas">
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="ItemGridFrame_Main.pas">
-            <Form>FrameItemGrid_Main</Form>
-        </DCCReference>
-        <DCCReference Include="ItemGridFrame_IndicatorCol.pas">
-            <Form>FrameItemGrid_IndicatorCol</Form>
-        </DCCReference>
-        <DCCReference Include="ItemGridFrame_FixedCol.pas"/>
-        <DCCReference Include="ItemGridFrame_Footer.pas"/>
-        <DCCReference Include="ItemGridFrame_UseItemDesignerPanel.pas"/>
-        <DCCReference Include="TestFreeVersionFrame.pas"/>
         <DCCReference Include="RollLabelFrame.pas"/>
         <DCCReference Include="..\..\OrangeProjectCommon\uVirtualListDataController.pas"/>
-        <DCCReference Include="ItemGridFrame_WhiteBackColor.pas"/>
-        <DCCReference Include="ItemGridFrame_CustomRowColor.pas">
-            <Form>FrameItemGrid_CustomRowColor</Form>
-        </DCCReference>
-        <DCCReference Include="ItemGridFrame_DiffOddAndEvenRowColor.pas">
-            <Form>FrameItemGrid_DiffOddAndEvenRowColor</Form>
-        </DCCReference>
-        <DCCReference Include="ItemGridFrame_GridDevideLine.pas">
-            <Form>FrameItemGrid_GridDevideLine</Form>
-        </DCCReference>
-        <DCCReference Include="ListViewFrame_ItemDesignTimeColor.pas"/>
-        <DCCReference Include="ListViewFrame_UseItemDesignerPanel.pas"/>
         <DCCReference Include="..\..\OrangeProjectCommon\uOpenCommon.pas"/>
         <DCCReference Include="..\..\OrangeProjectCommon\uModule_InterfaceSign.pas"/>
         <DCCReference Include="..\..\OrangeProjectCommon\EasyServiceCommonMaterialDataMoudle.pas">
@@ -797,6 +672,37 @@
         <DCCReference Include="..\..\OrangeProjectCommon\OrangeUI_Copy\uFileCommon_Copy.pas"/>
         <DCCReference Include="..\..\OrangeProjectCommon\OrangeUI_Copy\uFuncCommon_Copy.pas"/>
         <DCCReference Include="..\..\OrangeProjectCommon\OrangeUI_Copy\uBaseLog_Copy.pas"/>
+        <DCCReference Include="..\..\OrangeUIStyles\ListItemStyleFrame_IconCaption.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\OrangeUIStyles\ListItemStyleFrame_IconTopCenter_CaptionBottomCenterWhite.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\OrangeUIStyles\BaseListItemStyleFrame.pas">
+            <Form>FrameBaseListItemStyle</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\OrangeUIStyles\ListItemStyleFrame_IconTopCenter_CaptionBottomCenterBlack.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\OrangeUIStyles\ListItemStyleFrame_Base.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListBoxFrame_UseListItemStyleFrame.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ChartFrame.pas">
+            <Form>FrameChart</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\OrangeProjectCommon\MultiSelectPhotos\uPhotoManager.Windows.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\MultiSelectPhotos\uPhotoManager.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\MultiSelectPhotos\iOSapi.Photos.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\MultiSelectPhotos\uPhotoManager.Android.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\MultiSelectPhotos\uPhotoManager.iOS.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\MultiSelectPhotos\iOSapi.Photos.Manager.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -834,17 +740,17 @@
             </Platforms>
             <Deployment Version="3">
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2388x1668.png" Configuration="Release" Class="iPad_Launch2388x1668"/>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_80x80.png" Configuration="Release" Class="iPhone_Spotlight80"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x768.png" Configuration="Release" Class="iPad_Launch1024x768"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_80x80.png" Configuration="Release" Class="iPhone_Spotlight80"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Configuration="Release" Class="Android_LauncherIcon144"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_180x180.png" Configuration="Release" Class="iPhone_AppIcon180">
                     <Platform Name="iOSDevice64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="Win32\Debug\OrangeUIDemo_FMX_D10_4.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="iOSSimulator\Release\OrangeUIDemo_FMX_D10_3.info.plist" Configuration="Release" Class="ProjectiOSInfoPList"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_828x1792.png" Configuration="Release" Class="iPhone_Launch828"/>
-                <DeployFile LocalName="Win32\Debug\OrangeUIDemo_FMX_D10_4.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="Android\Release\provider_paths.xml" Configuration="Release" Class="AndroidFileProvider">
                     <Platform Name="Android">
                         <RemoteName>provider_paths.xml</RemoteName>
@@ -868,10 +774,10 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_40x40.png" Configuration="Debug" Class="iPhone_Spotlight40"/>
+                <DeployFile LocalName="Android\Release\strings.xml" Configuration="Release" Class="Android_Strings"/>
                 <DeployFile LocalName="Android\Release\styles-v21.xml" Configuration="Release" Class="AndroidSplashStylesV21"/>
                 <DeployFile LocalName="iOSDevice32\Debug\OrangeUIDemo_FMX_D10_3" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName="Android\Release\strings.xml" Configuration="Release" Class="Android_Strings"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_40x40.png" Configuration="Debug" Class="iPhone_Spotlight40"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2048x1536.png" Configuration="Release" Class="iPad_Launch2048x1536"/>
                 <DeployFile LocalName="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeArmeabiFile"/>
                 <DeployFile LocalName="iOSDevice32\Release\OrangeUIDemo_FMX_XE10.dSYM" Configuration="Release" Class="ProjectiOSDeviceDebug"/>
@@ -925,8 +831,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="iOSDevice64\Release\OrangeUIDemo_FMX_D10_4.launchscreen" Configuration="Release" Class="ProjectiOSLaunchScreen">
+                    <Platform Name="iOSDevice64">
+                        <Operation>64</Operation>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Release" Class="Android_LauncherIcon48"/>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2732x2048.png" Configuration="Release" Class="iPad_Launch2732x2048"/>
                 <DeployFile LocalName="Android\Release\provider_paths.xml" Configuration="Release" Class="AndroidFileProvider"/>
                 <DeployFile LocalName="Android\Release\libOrangeUIDemo_FMX_D10_4.so" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="iOSSimulator\Debug\OrangeUIDemo_FMX_D10_1.info.plist" Configuration="Debug" Class="ProjectiOSInfoPList"/>
@@ -935,12 +846,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iOSDevice64\Release\OrangeUIDemo_FMX_D10_4.launchscreen" Configuration="Release" Class="ProjectiOSLaunchScreen">
-                    <Platform Name="iOSDevice64">
-                        <Operation>64</Operation>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2732x2048.png" Configuration="Release" Class="iPad_Launch2732x2048"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Configuration="Release" Class="Android_SplashImage426"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_1668x2224.png" Configuration="Release" Class="iPad_Launch1668"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Configuration="Release" Class="Android_LauncherIcon36">
@@ -1024,20 +930,19 @@
                 </DeployFile>
                 <DeployFile LocalName="iOSDevice64\Release\OrangeUIDemo_FMX_D10_3.info.plist" Configuration="Release" Class="ProjectiOSInfoPList"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x768.png" Configuration="Debug" Class="iPad_Launch1024x768"/>
-                <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeMipsFile"/>
-                <DeployFile LocalName="$(BDS)\Redist\osx64\libcgsqlite3.dylib" Class="DependencyModule"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_60x60.png" Configuration="Debug" Class="iPhone_AppIcon60"/>
+                <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeMipsFile"/>
+                <DeployFile LocalName="iOSDevice32\Release\OrangeUIDemo_FMX_D10_3.dSYM" Configuration="Release" Class="ProjectiOSDeviceDebug"/>
+                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\osx64\libcgsqlite3.dylib" Class="DependencyModule"/>
                 <DeployFile LocalName="network_security_config.xml" Configuration="Release" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\xml\</RemoteDir>
                         <RemoteName>network_security_config.xml</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_768x1024.png" Configuration="Debug" Class="iPad_Launch768x1024"/>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImageDark_2x.png" Configuration="Release" Class="iPhone_LaunchDark2x">
-                    <Platform Name="iOSDevice64">
-                        <RemoteName>FM_LaunchScreenImage_iPhoneDark@2x.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -1068,9 +973,10 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\lib\android\debug\x86\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeX86File"/>
-                <DeployFile LocalName="iOSDevice32\Release\OrangeUIDemo_FMX_D10_3.dSYM" Configuration="Release" Class="ProjectiOSDeviceDebug"/>
-                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
-                    <Platform Name="Android">
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_768x1024.png" Configuration="Debug" Class="iPad_Launch768x1024"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImageDark_2x.png" Configuration="Release" Class="iPhone_LaunchDark2x">
+                    <Platform Name="iOSDevice64">
+                        <RemoteName>FM_LaunchScreenImage_iPhoneDark@2x.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

@@ -19,6 +19,7 @@ uses
   UITypes,
   FMX.Graphics,
   FMX.Types,
+  FMX.Effects,
   {$ENDIF}
 
 //  XSuperObject,
@@ -524,7 +525,7 @@ type
     procedure SetGradient(const Value: TGradient);
     function IsGradientStored: Boolean;
     procedure SetBrushKind(const Value: TDRPBrushKind);
-    {$ENDIF FMX}
+    {$ENDIF}
 
 
     procedure SetBorderDrawColor(const Value: TDrawColor);
@@ -548,6 +549,8 @@ type
 //    function GetSetting: TDrawRectParamSetting;
 //    procedure SetSetting(const Value: TDrawRectParamSetting);
   private
+
+
     function IsBorderEadgesStored: Boolean;
     function IsRectParamBorderWidthStored: Boolean;
     function IsIsLineStored: Boolean;
@@ -557,6 +560,8 @@ type
     function IsRoundHeightStored: Boolean;
     function IsRoundWidthStored: Boolean;
     function IsIsFillStored: Boolean;virtual;
+    function GetColor: TDelphiColor;
+    procedure SetColor(const Value: TDelphiColor);
 
 
     {$IFDEF FMX}
@@ -694,6 +699,7 @@ type
     property StaticIsFill:Boolean read FIsFill write FIsFill;
   public
     {$IFDEF FMX}
+
     property Gradient: TGradient read FGradient write SetGradient stored IsGradientStored;
 //    property GradientColor: TDelphiColor read GetGradientColor write SetGradientColor stored IsGradientStored;
     property GradientColor1: TDelphiColor read GetGradientColor1 write SetGradientColor1 stored IsGradientStored;
@@ -714,6 +720,7 @@ type
     ///   </para>
     /// </summary>
     property BorderEadges:TDRPBorderEadges read FBorderEadges write SetBorderEadges stored IsBorderEadgesStored;
+    property Color:TDelphiColor read GetColor write SetColor;
 
     //
     /// <summary>
@@ -889,6 +896,7 @@ type
     {$ENDIF}
 
     property BorderEadges;
+    property Color;
     {$IFDEF FMX}
     property IsLine;
     property LinePosition;
@@ -1532,7 +1540,7 @@ destructor TBaseDrawRectParam.Destroy;
 begin
   {$IFDEF FMX}
   FreeAndNil(FGradient);
-  {$ENDIF FMX}
+  {$ENDIF}
 
 
   FreeAndNil(FFillDrawColor);
@@ -1540,6 +1548,11 @@ begin
   FreeAndNil(FBorderDrawColor);
   FreeAndNil(FClipRoundRectSetting);
   inherited;
+end;
+
+function TBaseDrawRectParam.GetColor: TDelphiColor;
+begin
+  Result:=Self.FFillDrawColor.Color;
 end;
 
 function TBaseDrawRectParam.GetDrawEffectSetting: TDrawRectEffectSetting;
@@ -1686,6 +1699,12 @@ begin
     FClipRoundWidth:=Value;
     DoChange;
   end;
+end;
+
+procedure TBaseDrawRectParam.SetColor(const Value: TDelphiColor);
+begin
+  Self.FFillDrawColor.Color:=Value;
+
 end;
 
 procedure TBaseDrawRectParam.SetDrawEffectSetting(
@@ -1891,7 +1910,7 @@ begin
 
   {$IFDEF FMX}
   FBrushKind:=drpbkFill;
-  {$ENDIF FMX}
+  {$ENDIF}
 
 end;
 
@@ -1931,7 +1950,7 @@ begin
 
   FGradient := TGradient.Create;
   FGradient.OnChanged := DoChange;
-  {$ENDIF FMX}
+  {$ENDIF}
 
   inherited Create(AName,ACaption);
 end;

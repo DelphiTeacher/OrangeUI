@@ -21,6 +21,7 @@ type
     imgRefresh: TSkinWinImage;
     imglistDelete: TSkinImageList;
     btnDelete: TSkinWinButton;
+    procedure imgItemCaptionMouseEnter(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,6 +40,12 @@ begin
   Result:=ItemDesignerPanel;
 end;
 
+
+procedure TFrameListItemStyle_IconLeft_CaptionRight.imgItemCaptionMouseEnter(
+  Sender: TObject);
+begin
+  //
+end;
 
 initialization
   RegisterListItemStyle('IconLeft_CaptionRight',TFrameListItemStyle_IconLeft_CaptionRight);

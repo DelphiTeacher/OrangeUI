@@ -32,6 +32,7 @@ type
     chkColor4: TSkinFMXCheckBox;
     SkinFMXCheckBox8: TSkinFMXCheckBox;
     SkinFMXCheckBox1: TSkinFMXCheckBox;
+    SkinFMXCheckBox3: TSkinFMXCheckBox;
   private
     { Private declarations }
   private

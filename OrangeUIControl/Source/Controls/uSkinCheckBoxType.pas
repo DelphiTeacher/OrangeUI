@@ -230,7 +230,8 @@ type
   public
     procedure DrawTo(ACanvas:TDrawCanvas;
                       ACaption:String;
-                      ADrawRect:TRectF);virtual;
+                      ADrawRect:TRectF;
+                    AChecked:Boolean);virtual;
   published
 
     /// <summary>
@@ -425,10 +426,16 @@ type
     FIsSimpleDrawCheckState: Boolean;
 
     FIsProcessedSimpleDrawCheckState:Boolean;
+    FCheckChar: Char;
+    FIsSimpleDrawCheckChar: Boolean;
+    FDrawCheckCharParam: TDrawTextParam;
     procedure ProcessSimpleDrawCheckState;
     procedure SetDrawCheckStateParam(const Value: TDrawPathParam);
     procedure SetDrawCheckRectParam(const Value: TDrawRectParam);
     procedure SetIsSimpleDrawCheckState(const Value: Boolean);
+    procedure SetCheckChar(const Value: Char);
+    procedure SetIsSimpleDrawCheckChar(const Value: Boolean);
+    procedure SetDrawCheckCharParam(const Value: TDrawTextParam);
   protected
     procedure AssignTo(Dest: TPersistent); override;
   public
@@ -437,8 +444,11 @@ type
   public
     procedure DrawTo(ACanvas:TDrawCanvas;
                     ACaption:String;
-                    ADrawRect:TRectF);override;
+                    ADrawRect:TRectF;
+                    AChecked:Boolean);override;
   published
+    //√,✓,✔   √,✓,✔
+    property CheckChar:Char read FCheckChar write SetCheckChar;
     /// <summary>
     ///   <para>
     ///     勾选状态路径
@@ -459,6 +469,9 @@ type
     property DrawCheckRectParam:TDrawRectParam read FDrawCheckRectParam write SetDrawCheckRectParam;
     //是否自动绘制勾选状态
     property IsSimpleDrawCheckState:Boolean read FIsSimpleDrawCheckState write SetIsSimpleDrawCheckState;
+    //√,✓,✔   √,✓,✔
+    property IsSimpleDrawCheckChar:Boolean read FIsSimpleDrawCheckChar write SetIsSimpleDrawCheckChar;
+    property DrawCheckCharParam:TDrawTextParam read FDrawCheckCharParam write SetDrawCheckCharParam;
   end;
 
   //颜色类型
@@ -569,7 +582,7 @@ begin
                         AWidth,
                         ATempHeight,
                         cdstBoth);
-    AWidth:=AWidth+AHeight+Length(Self.FSkinControlIntf.Caption)*4+5;
+    AWidth:=AWidth+AHeight;//+Length(Self.FSkinControlIntf.Caption)*4+5;
   end;
 
 end;
@@ -867,7 +880,8 @@ end;
 
 procedure TSkinCheckBoxMaterial.DrawTo(ACanvas: TDrawCanvas;
   ACaption:String;
-  ADrawRect: TRectF);
+  ADrawRect: TRectF;
+                    AChecked:Boolean);
 begin
 
 end;
@@ -1024,6 +1038,7 @@ begin
     DestObject:=TSkinCheckBoxColorMaterial(Dest);
 
     DestObject.FIsSimpleDrawCheckState:=Self.FIsSimpleDrawCheckState;
+    DestObject.FIsSimpleDrawCheckChar:=Self.FIsSimpleDrawCheckChar;
 
     DestObject.FIsProcessedSimpleDrawCheckState:=False;
 
@@ -1039,8 +1054,20 @@ begin
 
   FDrawCheckStateParam:=CreateDrawPathParam('DrawCheckStateParam','勾选状态的路径绘制参数');
   FDrawCheckRectParam:=CreateDrawRectParam('DrawCheckRectParam','勾选状态的方框绘制参数');
+  FDrawCheckCharParam:=CreateDrawTextParam('DrawCheckCharParam','勾选状态字符的文本绘制参数');
 
+//  {$IFDEF FMX}
   FIsSimpleDrawCheckState:=True;
+//  {$ENDIF}
+
+  //√,✓,✔   √,✓,✔
+  //字体要微软雅黑才好看
+  FCheckChar:='✔';
+//  {$IFDEF VCL}
+//  FIsSimpleDrawCheckChar:=True;
+//  {$ENDIF}
+
+
   FIsProcessedSimpleDrawCheckState:=False;
 end;
 
@@ -1048,12 +1075,14 @@ destructor TSkinCheckBoxColorMaterial.Destroy;
 begin
   FreeAndNil(FDrawCheckStateParam);
   FreeAndNil(FDrawCheckRectParam);
+  FreeAndNil(FDrawCheckCharParam);
   inherited;
 end;
 
 procedure TSkinCheckBoxColorMaterial.DrawTo(ACanvas: TDrawCanvas;
   ACaption:String;
-  ADrawRect: TRectF);
+  ADrawRect: TRectF;
+  AChecked:Boolean);
 var
   ACaptionDrawRect:TRectF;
   ACheckDrawRect:TRectF;
@@ -1074,7 +1103,18 @@ begin
       ACheckDrawRect.Right:=ACheckDrawRect.Left+ACheckDrawRect.Height;
       ACheckDrawRect.Bottom:=ACheckDrawRect.Top+ACheckDrawRect.Height;
       ACanvas.DrawRect(Self.FDrawCheckRectParam,ACheckDrawRect);
-      ACanvas.DrawPath(Self.FDrawCheckStateParam,ACheckDrawRect);
+
+
+      if FIsSimpleDrawCheckChar then
+      begin
+        if AChecked then ACanvas.DrawText(Self.FDrawCheckCharParam,FCheckChar,ACheckDrawRect);
+      end
+      else
+      begin
+        ACanvas.DrawPath(Self.FDrawCheckStateParam,ACheckDrawRect,FDrawCheckStateParam.PathActions);
+      end;
+
+
 
       ACaptionDrawRect:=ADrawRect;
       ACaptionDrawRect.Left:=ACheckDrawRect.Right+5;
@@ -1083,7 +1123,21 @@ begin
   else
   begin
       ACanvas.DrawRect(Self.FDrawCheckRectParam,ADrawRect);
-      ACanvas.DrawPath(Self.FDrawCheckStateParam,ADrawRect);
+
+
+//      ACanvas.DrawPath(Self.FDrawCheckStateParam,ADrawRect);
+
+      if FIsSimpleDrawCheckChar then
+      begin
+        if AChecked then ACanvas.DrawText(Self.FDrawCheckCharParam,FCheckChar,ADrawRect);
+      end
+      else
+      begin
+        ACanvas.DrawPath(Self.FDrawCheckStateParam,ADrawRect,FDrawCheckStateParam.PathActions);
+      end;
+
+
+
       ACanvas.DrawText(Self.FDrawCaptionParam,ACaption,ADrawRect);
   end;
 end;
@@ -1100,6 +1154,8 @@ begin
     begin
         Self.FDrawCheckStateParam.PathActions.Clear;
 
+
+        //左上角的点
         APathActionItem:=TPathActionItem(Self.FDrawCheckStateParam.PathActions.Add);
         APathActionItem.ActionType:=patMoveTo;
         APathActionItem.SizeType:=dpstPercent;
@@ -1110,12 +1166,16 @@ begin
 //        APathActionItem.Y:=45;
 
 
-        APathActionItem.X:=20;
-        APathActionItem.Y:=35;
+//        APathActionItem.X:=20;
+//        APathActionItem.Y:=35;
+
+        APathActionItem.X:=15;
+        APathActionItem.Y:=50;
         {$ENDIF}
 
 
 
+        //中间的下点
         APathActionItem:=TPathActionItem(Self.FDrawCheckStateParam.PathActions.Add);
         APathActionItem.ActionType:=patLineTo;
         APathActionItem.SizeType:=dpstPercent;
@@ -1128,10 +1188,14 @@ begin
 //        APathActionItem.Y:=80;
 //        {$ENDIF}
 
+        {$IFDEF VCL}
+        APathActionItem.X:=35;
+        APathActionItem.Y:=75;
+        {$ENDIF}
 
 
 
-
+        //画一条线
         {$IFDEF VCL}
         APathActionItem:=TPathActionItem(Self.FDrawCheckStateParam.PathActions.Add);
         APathActionItem.ActionType:=patDrawPath;
@@ -1153,6 +1217,15 @@ begin
         APathActionItem.Y:=25;
         {$ENDIF}
 
+
+
+        {$IFDEF VCL}
+        APathActionItem.X:=80;
+        APathActionItem.Y:=15;
+        {$ENDIF}
+
+
+
         APathActionItem:=TPathActionItem(Self.FDrawCheckStateParam.PathActions.Add);
         APathActionItem.ActionType:=patDrawPath;
 
@@ -1167,6 +1240,16 @@ begin
   FDrawCheckStateParam.Assign(Value);
 end;
 
+procedure TSkinCheckBoxColorMaterial.SetIsSimpleDrawCheckChar(
+  const Value: Boolean);
+begin
+  if FIsSimpleDrawCheckChar<>Value then
+  begin
+    FIsSimpleDrawCheckChar := Value;
+    Self.DoChange();
+  end;
+end;
+
 procedure TSkinCheckBoxColorMaterial.SetIsSimpleDrawCheckState(const Value: Boolean);
 begin
   if FIsSimpleDrawCheckState<>Value then
@@ -1176,6 +1259,21 @@ begin
     //需要重新处理路径
     Self.FIsProcessedSimpleDrawCheckState:=False;
   end;
+end;
+
+procedure TSkinCheckBoxColorMaterial.SetCheckChar(const Value: Char);
+begin
+  if FCheckChar<>Value then
+  begin
+    FCheckChar := Value;
+    Self.DoChange();
+  end;
+end;
+
+procedure TSkinCheckBoxColorMaterial.SetDrawCheckCharParam(
+  const Value: TDrawTextParam);
+begin
+  FDrawCheckCharParam.Assign(Value);
 end;
 
 procedure TSkinCheckBoxColorMaterial.SetDrawCheckRectParam(const Value: TDrawRectParam);
@@ -1207,8 +1305,8 @@ begin
 
     GetSkinMaterial.DrawTo(ACanvas,
                            Self.FSkinControlIntf.Caption,
-                           ADrawRect
-                            );
+                           ADrawRect,
+                           Self.FSkinCheckBoxIntf.Properties.Checked);
   end;
 end;
 

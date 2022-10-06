@@ -4,7 +4,7 @@
         <MainSource>OrangeUIControl_FMX_D10_4.dpk</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <TargetedPlatforms>33811</TargetedPlatforms>
+        <TargetedPlatforms>37907</TargetedPlatforms>
         <AppType>Package</AppType>
         <FrameworkType>FMX</FrameworkType>
         <ProjectVersion>19.2</ProjectVersion>
@@ -279,7 +279,6 @@
         <DCCReference Include="Source\Controls\uSkinControlPanDragGestureManager.pas"/>
         <DCCReference Include="Source\Controls\uSkinCustomListType.pas"/>
         <DCCReference Include="Source\Controls\uSkinDateEditType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinDBGridType.pas"/>
         <DCCReference Include="Source\Controls\uSkinDrawPanelType.pas"/>
         <DCCReference Include="Source\Controls\uSkinEditType.pas"/>
         <DCCReference Include="Source\Controls\uSkinFrameImageType.pas"/>
@@ -287,12 +286,10 @@
         <DCCReference Include="Source\Controls\uSkinImageListViewerType.pas"/>
         <DCCReference Include="Source\Controls\uSkinImageType.pas"/>
         <DCCReference Include="Source\Controls\uSkinItemDesignerPanelType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinItemGridType.pas"/>
         <DCCReference Include="Source\Controls\uSkinItems.pas"/>
         <DCCReference Include="Source\Controls\uSkinLabelType.pas"/>
         <DCCReference Include="Source\Controls\uSkinListBoxType.pas"/>
         <DCCReference Include="Source\Controls\uSkinListLayouts.pas"/>
-        <DCCReference Include="Source\Controls\uSkinListViewType.pas"/>
         <DCCReference Include="Source\Controls\uSkinMemoType.pas"/>
         <DCCReference Include="Source\Controls\uSkinMultiColorLabelType.pas"/>
         <DCCReference Include="Source\Controls\uSkinNotifyNumberIconType.pas"/>
@@ -316,8 +313,6 @@
         <DCCReference Include="Source\Controls\uSkinSwitchType.pas"/>
         <DCCReference Include="Source\Controls\uSkinTimeEditType.pas"/>
         <DCCReference Include="Source\Controls\uSkinTrackBarType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinTreeViewType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinVirtualGridType.pas"/>
         <DCCReference Include="Source\Controls\uSkinVirtualListType.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uBaseSkinControl.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyButton.pas"/>
@@ -327,7 +322,6 @@
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyControl.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyCustomList.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyDateEdit.pas"/>
-        <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyDBGrid.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyDirectUIParent.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyDrawPanel.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyEdit.pas"/>
@@ -338,10 +332,8 @@
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyiOSNativeEdit.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyiOSNativeMemo.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyItemDesignerPanel.pas"/>
-        <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyItemGrid.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyLabel.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyListBox.pas"/>
-        <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyListView.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyMemo.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyMultiColorLabel.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyNotifyNumberIcon.pas"/>
@@ -366,8 +358,6 @@
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeySwitchPageListPanel.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyTimeEdit.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyTrackBar.pas"/>
-        <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyTreeView.pas"/>
-        <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyVirtualGrid.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFireMonkeyVirtualList.pas"/>
         <DCCReference Include="Source\Controls\FireMonkey\uSkinFMX.Memo.iOS.pas"/>
         <DCCReference Include="Source\Base\uTimerTaskEvent.pas"/>
@@ -378,30 +368,11 @@
         <DCCReference Include="Source\Base\uComponentType.pas"/>
         <DCCReference Include="Source\Base\uUrlPicture.pas"/>
         <DCCReference Include="Source\Base\uVersion.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\SelectMonthFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\SelectTimeFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\SingleSelectFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\TakePictureMenuFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\WaitingFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\AddressBookListFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\CalendarFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\ClipHeadFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\HintFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\InputFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\InputMemoFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\LoadingFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\LoadingProgressFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MessageBoxFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\SavePictureMenuFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\SelectCityFrame.pas"/>
         <DCCReference Include="Source\Common\uUIFunction.pas"/>
-        <DCCReference Include="Source\Common\uMobileUtils.pas"/>
-        <DCCReference Include="Source\Common\uSelectContactor.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\IOS\Contacts\iOSApi.CNContact.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\IOS\Contacts\iOSApi.CNLabeledValue.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\IOS\Contacts\iOSApi.CNPhoneNumber.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\IOS\iOSApi.CNContactPickerViewController.pas"/>
-        <DCCReference Include="Source\Common\uAndroidPermission_D10_2.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\HzSpell\HzSpell.pas"/>
         <DCCReference Include="Source\Common\uBasePageStructure.pas"/>
         <DCCReference Include="Source\SystemTTS\Androidapi.JNI.TTS.pas"/>
@@ -412,13 +383,6 @@
         <DCCReference Include="Source\SystemTTS\uSystemTTS.pas"/>
         <DCCReference Include="Source\SystemTTS\Winapi.SpVoice.pas"/>
         <DCCReference Include="Source\SystemTTS\Android.SpeechTTS.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.Android.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.iOS.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.Windows.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\iOSapi.Photos.Manager.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\iOSapi.Photos.pas"/>
-        <DCCReference Include="Source\Controls\uSkinRegExTagLabelViewType.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\OrangeUI\uBaseList.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\OrangeUI\uBaseLog.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\OrangeUI\uFileCommon.pas"/>
@@ -431,6 +395,8 @@
         <DCCReference Include="..\OrangeProjectCommon\MD5\MD5_OrangeUI.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperObject.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperJSON.pas"/>
+        <DCCReference Include="Source\Controls\uBasePageStructureControls.pas"/>
+        <DCCReference Include="Source\Controls\uSkinVirtualChartType.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -459,7 +425,7 @@
                 <Platform value="iOSDevice64">True</Platform>
                 <Platform value="iOSSimulator">False</Platform>
                 <Platform value="Linux64">False</Platform>
-                <Platform value="OSX64">False</Platform>
+                <Platform value="OSX64">True</Platform>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">True</Platform>
             </Platforms>
@@ -496,6 +462,11 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\OSX32\bplfmx220.dylib" Configuration="Release" Class="DependencyPackage">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\OrangeUIPublish\OrangeUIDesign\DCU\FMX\XE8\OSX32\Release\bplOrangeUIControl_FMX_D10_3.dylib" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="OSX32">
                         <RemoteName>bplOrangeUIControl_FMX_D10_3.dylib</RemoteName>
@@ -514,11 +485,6 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\OSX32\bplfmx220.dylib" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

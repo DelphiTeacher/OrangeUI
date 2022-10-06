@@ -697,6 +697,7 @@ procedure {$I Source\Controls\INC\Common\ISkinComponent_Skin_Impl_ClassName.inc}
 begin
   //在设计时要即时查看效果
   if (SkinControlInvalidateLocked=0)
+    and (FProperties.FIsChanging=0)
     and not (csReading in Self.ComponentState)
     and not (csLoading in Self.ComponentState)
     //在设计时要即时查看效果,但是会闪的厉害

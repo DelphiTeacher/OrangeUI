@@ -25,7 +25,7 @@ uses
   IOUtils,
   uTimerTask,
 //  uPhotoManager,
-  uPageStructure,
+//  uPageStructure,
 
 
 //  uSelectMediaDialog,
@@ -147,7 +147,7 @@ type
 //    { Private declarations }
 //  protected
 //    //针对页面框架的控件接口IControlForPageFramework
-//    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+//    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;
 //    //获取与设置自定义属性
 //    function GetPropJsonStr:String;
 //    procedure SetPropJsonStr(AJsonStr:String);
@@ -1158,7 +1158,7 @@ end;
 //
 //end;
 //
-//function TFrameAddPictureListSub.LoadFromFieldControlSetting(ASetting: TFieldControlSetting): Boolean;
+//function TFrameAddPictureListSub.LoadFromFieldControlSetting(ASetting: TFieldControlSetting;AFieldControlSettingMap:TObject): Boolean;
 //var
 //  AImageClipWidth:Integer;
 //  AImageClipHeight:Integer;

@@ -11,6 +11,9 @@ uses
   Math,
   SysUtils,
 
+  {$IF CompilerVersion>=30.0}
+  Types,//定义了TRectF
+  {$IFEND}
 
   {$IFDEF VCL}
   Windows,
@@ -21,7 +24,6 @@ uses
 
 
   {$IFDEF FMX}
-  Types,
   UITypes,
   FMX.Types,
   FMX.Graphics,
@@ -36,7 +38,6 @@ uses
 
 type
   TDrawPathDataClass=class of TBaseDrawPathData;
-
 
 
 
@@ -73,12 +74,29 @@ type
     constructor Create;virtual;
     destructor Destroy;override;
   public
+
     procedure Clear;virtual;
-    function MoveTo(const X:Double;const Y:Double):Boolean;virtual;abstract;
-    function CurveTo(const X:Double;const Y:Double;
+    procedure MoveTo(const X:Double;const Y:Double);virtual;abstract;
+    procedure CurveTo(const X:Double;const Y:Double;
                     const X1:Double;const Y1:Double;
-                    const X2:Double;const Y2:Double):Boolean;virtual;abstract;
-    function LineTo(const X:Double;const Y:Double):Boolean;virtual;abstract;
+                    const X2:Double;const Y2:Double);virtual;abstract;
+    procedure LineTo(const X:Double;const Y:Double);virtual;abstract;
+    procedure AddRect(const ARect:TRectF);virtual;abstract;
+    procedure AddPie(const ARect:TRectF;
+                      AStartAngle, ASweepAngle:Double
+                      );virtual;abstract;
+    //添加一个圆边
+    procedure AddArc(const ARect:TRectF;
+                      AStartAngle, ASweepAngle:Double
+                      );virtual;abstract;
+    //添加一个圆
+    procedure AddEllipse(const ARect:TRectF);virtual;abstract;
+//    //闭合路径
+//    procedure Close;virtual;abstract;
+//    //获取区域,用来判断鼠标是否在区域内
+//    procedure GetRegion;virtual;abstract;
+//    //判断鼠标是否在路径内
+//    function IsInRegion(const APoint: TPointF):Boolean;virtual;abstract;
   end;
 
 

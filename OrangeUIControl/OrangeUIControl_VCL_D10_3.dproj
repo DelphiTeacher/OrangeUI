@@ -7,7 +7,7 @@
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <TargetedPlatforms>3</TargetedPlatforms>
+        <TargetedPlatforms>131</TargetedPlatforms>
         <AppType>Package</AppType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
     </PropertyGroup>
@@ -21,6 +21,11 @@
     </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Android64' and '$(Base)'=='true') or '$(Base_Android64)'!=''">
         <Base_Android64>true</Base_Android64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Linux64' and '$(Base)'=='true') or '$(Base_Linux64)'!=''">
+        <Base_Linux64>true</Base_Linux64>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
@@ -45,16 +50,16 @@
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;System;Xml;Data;Datasnap;Web;Soap;VCL;Vcl.Imaging;$(DCC_Namespace)</DCC_Namespace>
         <SanitizedProjectName>OrangeUIControl_VCL_D10_3</SanitizedProjectName>
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
-        <DCC_DcuOutput>..\OrangeUIDesign\DCU\VCL\D10_3\$(Config)</DCC_DcuOutput>
+        <DCC_DcuOutput>..\OrangeUIDesign\DCU\VCL\D10_3\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
         <DCC_S>false</DCC_S>
         <DCC_F>false</DCC_F>
         <DCC_K>false</DCC_K>
-        <DCC_DcpOutput>..\OrangeUIDesign\DCU\VCL\D10_3\$(Config)</DCC_DcpOutput>
-        <DCC_BplOutput>..\OrangeUIDesign\DCU\VCL\D10_3\$(Config)</DCC_BplOutput>
-        <DCC_Define>SKIN_SUPEROBJECT;$(DCC_Define)</DCC_Define>
+        <DCC_DcpOutput>..\OrangeUIDesign\DCU\VCL\D10_3\$(Platform)\$(Config)</DCC_DcpOutput>
+        <DCC_BplOutput>..\OrangeUIDesign\DCU\VCL\D10_3\$(Platform)\$(Config)</DCC_BplOutput>
+        <DCC_Define>SKIN_SUPEROBJECT;NEED_SystemHttpControl;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;fmx.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services-ads-7.0.0.dex.jar;google-play-services-analytics-7.0.0.dex.jar;google-play-services-base-7.0.0.dex.jar;google-play-services-identity-7.0.0.dex.jar;google-play-services-maps-7.0.0.dex.jar;google-play-services-panorama-7.0.0.dex.jar;google-play-services-plus-7.0.0.dex.jar;google-play-services-wallet-7.0.0.dex.jar</EnabledSysJars>
@@ -66,6 +71,9 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
         <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;fmx.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services-ads-7.0.0.dex.jar;google-play-services-analytics-7.0.0.dex.jar;google-play-services-base-7.0.0.dex.jar;google-play-services-identity-7.0.0.dex.jar;google-play-services-maps-7.0.0.dex.jar;google-play-services-panorama-7.0.0.dex.jar;google-play-services-plus-7.0.0.dex.jar;google-play-services-wallet-7.0.0.dex.jar</EnabledSysJars>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Linux64)'!=''">
+        <DCC_UnitSearchPath>$(fmxlinux)\Lib\$(ProductVersion)\$(Config);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -108,7 +116,6 @@
         <DCCReference Include="Source\Controls\uSkinPanelType.pas"/>
         <DCCReference Include="Source\Controls\uSkinRadioButtonType.pas"/>
         <DCCReference Include="Source\Controls\uSkinImageListPlayerType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinListViewType.pas"/>
         <DCCReference Include="Source\Base\uSkinPublic.pas"/>
         <DCCReference Include="Source\Base\uSkinPicture.pas"/>
         <DCCReference Include="Source\Base\uSkinMaterial.pas"/>
@@ -129,7 +136,6 @@
         <DCCReference Include="Source\Engines\VCL\GDIPlus\GDIPlus\uSkinGDIPlus.pas"/>
         <DCCReference Include="Source\Controls\uSkinAnimator.pas"/>
         <DCCReference Include="Source\Controls\uSkinControlGestureManager.pas"/>
-        <DCCReference Include="Source\Controls\uSkinDBGridType.pas"/>
         <DCCReference Include="Source\Controls\uSkinImageListViewerType.pas"/>
         <DCCReference Include="Source\Controls\uSkinMultiColorLabelType.pas"/>
         <DCCReference Include="Source\Controls\uSkinNotifyNumberIconType.pas"/>
@@ -144,8 +150,6 @@
         <DCCReference Include="Source\Controls\uSkinSwitchPageListControlGestureManager.pas"/>
         <DCCReference Include="Source\Controls\uSkinSwitchPageListPanelType.pas"/>
         <DCCReference Include="Source\Controls\uSkinSwitchType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinTreeViewType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinVirtualGridType.pas"/>
         <DCCReference Include="Source\Controls\uSkinVirtualListType.pas"/>
         <DCCReference Include="Source\Controls\uSkinDrawPanelType.pas"/>
         <DCCReference Include="Source\Base\uBinaryObjectList.pas"/>
@@ -161,7 +165,6 @@
         <DCCReference Include="Source\Controls\Windows\uBaseSkinControl.pas"/>
         <DCCReference Include="Source\Base\uTimerTaskEvent.pas"/>
         <DCCReference Include="Source\Controls\uSkinCustomListType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinItemGridType.pas"/>
         <DCCReference Include="Source\Base\uSkinGIFImage.pas"/>
         <DCCReference Include="Source\Base\uComponentType.pas"/>
         <DCCReference Include="Source\Base\uVersion.pas"/>
@@ -188,6 +191,10 @@
         <DCCReference Include="..\OrangeProjectCommon\MD5\MD5_OrangeUI.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperJSON.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperObject.pas"/>
+        <DCCReference Include="Source\Common\uUIFunction.pas"/>
+        <DCCReference Include="Source\Controls\uSkinCommonFrames.pas"/>
+        <DCCReference Include="Source\Controls\uBasePageStructureControls.pas"/>
+        <DCCReference Include="Source\Controls\uSkinVirtualChartType.pas"/>
         <None Include="Source\Controls\Windows\WinControl.inc"/>
         <None Include="Source\Controls\INC\VCL\ISkinControl_Control_Impl_Mouse_Code_VCL.inc"/>
         <None Include="Source\Controls\INC\VCL\ISkinControl_Control_Impl_Mouse_Declare_VCL.inc"/>
@@ -252,10 +259,14 @@
                     <Source Name="MainSource">OrangeUIControl_VCL_D10_3.dpk</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\FMDHTMLEditD2010.bpl">ProfDHTMLEdit for Delphi 2010</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k260.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp260.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi26.win32\Bin\DclTeePro926.bpl">TeeChart Pro 2020 VCL Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi26.win32\Bin\DclTeeMaker126.bpl">TeeMaker</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\TeeTree\Compiled\Delphi26.win32\Bin\DclTree2D26Tee9.bpl">TeeTree 2 Components</Excluded_Packages>
                 </Excluded_Packages>
                 <Parameters>
                     <Parameters Name="UseLauncher">False</Parameters>
@@ -291,24 +302,18 @@
                 </VersionInfoKeys>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="..\OrangeUIDesign\DCU\VCL\D10_3\Debug\OrangeUIControl_VCL_D10_3.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>OrangeUIControl_VCL_D10_3.bpl</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\OrangeUIDesign\DCU\VCL\D10_3\Win64\OrangeUIControl_VCL_D10_3.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\OrangeUIDesign\DCU\VCL\D10_3\Win64\Debug\OrangeUIControl_VCL_D10_3.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>OrangeUIControl_VCL_D10_3.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\OrangeUIDesign\DCU\VCL\D10_3\Release\OrangeUIControl_VCL_D10_3.bpl" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName="..\OrangeUIDesign\DCU\VCL\D10_3\Win32\Release\OrangeUIControl_VCL_D10_3.bpl" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>OrangeUIControl_VCL_D10_3.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -331,6 +336,12 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgsqlite3.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\OrangeUIDesign\DCU\VCL\D10_3\Win32\Debug\OrangeUIControl_VCL_D10_3.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>OrangeUIControl_VCL_D10_3.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -1136,6 +1147,7 @@
                 <Platform value="iOSDevice32">False</Platform>
                 <Platform value="iOSDevice64">False</Platform>
                 <Platform value="iOSSimulator">False</Platform>
+                <Platform value="Linux64">True</Platform>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">True</Platform>
             </Platforms>

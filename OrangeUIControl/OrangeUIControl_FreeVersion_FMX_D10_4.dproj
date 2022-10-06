@@ -417,13 +417,6 @@
         <DCCReference Include="..\OrangeProjectCommon\OrangeUI\uLang.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\OrangeUI\uTimerTask.pas"/>
         <DCCReference Include="Source\uBitmapOperation.pas"/>
-        <DCCReference Include="Source\uDataInterface.pas"/>
-        <DCCReference Include="Source\uDataSetToJson.pas"/>
-        <DCCReference Include="Source\uDownloadListItemStyleManager.pas"/>
-        <DCCReference Include="Source\uPageStructure.pas"/>
-        <DCCReference Include="Source\uRestInterfaceCall.pas"/>
-        <DCCReference Include="Source\uSkinItemJsonHelper.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\ListItemStyleFrame_Page.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\MD5\MD5_OrangeUI.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\XSuperObject\XSuperJSON.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\XSuperObject\XSuperObject.pas"/>
@@ -508,13 +501,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\OrangeUIDesign\DCU\FMX\D10_3\Win32\Release\OrangeUIControl_FreeVersion_FMX_D10_4.bpl" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName="..\OrangeUIDesign\DCU\FMX\D10_4\Win32\Debug\OrangeUIControl_FreeVersion_FMX_D10_4.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>OrangeUIControl_FreeVersion_FMX_D10_4.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\OrangeUIDesign\DCU\FMX\D10_4\Win32\Debug\OrangeUIControl_FreeVersion_FMX_D10_4.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\OrangeUIDesign\DCU\FMX\D10_3\Win32\Release\OrangeUIControl_FreeVersion_FMX_D10_4.bpl" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>OrangeUIControl_FreeVersion_FMX_D10_4.bpl</RemoteName>
                         <Overwrite>true</Overwrite>

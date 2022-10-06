@@ -4,6 +4,8 @@ unit DemoViewFrame;
 
 interface
 
+{$I Version.inc}
+
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
@@ -45,6 +47,7 @@ uses
   RollLabelFrame,
 
 
+  ListBoxFrame_UseListItemStyleFrame,
   ListBoxFrame_UseCenterSelect,
   ListBoxFrame_UseHorzListBox,
   ListBoxFrame_UseItemDesignerPanel,
@@ -63,6 +66,7 @@ uses
   ListBoxFrame_UseMultiDesignerPanel,
   ListBoxFrame_AutoPullDownRefresh,
   ListBoxFrame_UseItemAnimate,
+  ListBoxFrame_HorzSelectionStyle,
 
 
 
@@ -75,6 +79,7 @@ uses
   ListViewFrame_ItemDesignTimeColor,
   TestFreeVersionFrame,
 
+  ListViewFrame_UseListItemStyleFrame,
   ListViewFrame_UseSelfOwnMaterial,
   ListViewFrame_UseSelfOwnMaterial_9BoxMenu,
   ListViewFrame_ItemDesignerPanel_9BoxMenu,
@@ -90,6 +95,7 @@ uses
   ListViewFrame_HorzFixColCountFit,
   ListViewFrame_HorzAutoColCountNotFit,
   ListViewFrame_HorzAutoColCountFit,
+  ListViewFrame_HorzSelectionStyle,
 
 
   TreeViewFrame_Common,
@@ -105,6 +111,8 @@ uses
   ItemGridFrame_CustomRowColor,
   ItemGridFrame_GridDevideLine,
   ItemGridFrame,
+
+  ChartFrame,
   {$ENDIF}
 
 
@@ -201,6 +209,7 @@ begin
   if Pos('(ListView)',Demo)>0 then ShowFrame(TFrameListView_Main);
   if Pos('(TreeView)',Demo)>0 then ShowFrame(TFrameTreeView_Main);
   if Pos('(ItemGrid)',Demo)>0 then ShowFrame(TFrameItemGrid_Main);
+  if Pos('(Chart)',Demo)>0 then ShowFrame(TFrameChart);
   {$ENDIF}
 
   if Pos('(Edit)',Demo)>0 then ShowFrame(TFrameEdit);
@@ -251,6 +260,8 @@ begin
 
 
 
+    if Pos('(ListItemStyleFrame)',Demo)>0 then ShowFrame(TFrameListBox_UseListItemStyleFrame);
+    if Pos('(Use SelfOwnMaterial)',Demo)>0 then ShowFrame(TFrameListBox_UseSelfOwnMaterial);
     if Pos('(Use SelfOwnMaterial)',Demo)>0 then ShowFrame(TFrameListBox_UseSelfOwnMaterial);
     if Pos('(Use ItemDesignerPanel)',Demo)>0 then ShowFrame(TFrameListBox_UseItemDesignerPanel);
     if Pos('(Dynamic Binding)',Demo)>0 then ShowFrame(TFrameListBox_UseDynamicBinding);
@@ -269,6 +280,7 @@ begin
     if Pos('(PullDownRefresh Auto)',Demo)>0 then ShowFrame(TFrameListBox_AutoPullDownRefresh);
     if Pos('(GetSkinItemDataIntf)',Demo)>0 then ShowFrame(TFrameListBox_GetSkinItemDataIntf);
     if Pos('(Use ItemAnimate)',Demo)>0 then ShowFrame(TFrameListBox_UseItemAnimate);
+    if Pos('(Horz Selection Style)',Demo)>0 then ShowFrame(TFrameListBox_HorzSelectionStyle);
   end;
 
 
@@ -280,6 +292,7 @@ begin
 
   if Classify='ListView' then
   begin
+    if Pos('(ListItemStyleFrame)',Demo)>0 then ShowFrame(TFrameListView_UseListItemStyleFrame);
     if Pos('(Use SelfOwnMaterial)',Demo)>0 then ShowFrame(TFrameListView_UseSelfOwnMaterial);
     if Pos('(Custom Item Color)',Demo)>0 then ShowFrame(TFrameListView_ItemDesignTimeColor);
     if Pos('(9BoxMenu by SelfOwnMaterial)',Demo)>0 then ShowFrame(TFrameListView_UseSelfOwnMaterial_9BoxMenu);
@@ -299,6 +312,7 @@ begin
     if Pos('(HorzMode FixColCount Fit)',Demo)>0 then ShowFrame(TFrameListView_HorzFixColCountFit);
     if Pos('(HorzMode AutoColCount NotFit)',Demo)>0 then ShowFrame(TFrameListView_HorzAutoColCountNotFit);
     if Pos('(HorzMode AutoColCount Fit)',Demo)>0 then ShowFrame(TFrameListView_HorzAutoColCountFit);
+    if Pos('(Horz Selection Style)',Demo)>0 then ShowFrame(TFrameListView_HorzSelectionStyle);
   end;
 
   if Classify='TreeView' then
@@ -319,6 +333,8 @@ begin
 //    if Pos('(SetRowColorAtDesignTime)',Demo)>0 then ShowFrame(TFrameItemGrid_SetRowColorAtDesignTime);
     if Pos('(GridDevideLine)',Demo)>0 then ShowFrame(TFrameItemGrid_GridDevideLine);
   end;
+
+
 
   {$ENDIF}
 

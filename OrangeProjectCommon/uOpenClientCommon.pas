@@ -35,7 +35,7 @@ uses
 
   {$IFDEF FMX}
   uDrawPicture,
-  {$ENDIF FMX}
+  {$ENDIF}
 
   uBaseLog,
   Variants,
@@ -47,9 +47,15 @@ uses
   uFileCommon,
   uBaseList,
   uDataSetToJson,
-//  {$IF CompilerVersion > 21.0} // XE or older
-  uGPSUtils,
-//  {$IFEND}
+
+  {$IFDEF OPEN_PLATFORM_SERVER}
+    //在开放平台服务端中使用
+  {$ELSE}
+      //在开放平台客户端中使用
+    //  {$IF CompilerVersion > 21.0} // XE or older
+      uGPSUtils,
+    //  {$IFEND}
+  {$ENDIF}
 
 //  uOpenClientCommon,
 
@@ -2195,9 +2201,14 @@ type
     ServerPort:Integer;
     //广告信息
     LastNonce:String;
+
+    //点击关闭按钮所执行的操作
+    ClickCloseButtonAction:String;
   public
     //公司名称,授权公司名
     CompanyName:String;
+    //公司名称,授权公司名
+    CompanyID:String;
 //    //授权中心的服务器,默认都是www.orangeui.cn:10020
 //    CenterServerHost:String;
 //    CenterServerPort:Integer;
@@ -2327,7 +2338,8 @@ var
 
 var
   //客户应用ID
-  AppID:Integer;
+  //app-id
+  AppID:String;
 
   //用户类型
   APPUserType:TUserType;
@@ -2346,7 +2358,7 @@ var
 
 
 //更新服务器设置
-procedure CommonSyncServerSetting(AServer:String;APort:Integer);
+procedure CommonSyncServerSetting(AServer:String;APort:Integer;AIsSSL:Boolean=False);
 
 //授权信息
 function GetVIPProductAuthInfo(AAuthJson:ISuperObject):String;
@@ -2356,7 +2368,8 @@ function GetVIPProductAuthEndDate(AAuthJson:ISuperObject):String;
 function GetImageLocalPath(APicPath:String):String;
 
 
-
+//获取内容中心该用户的账号列表的统计数据
+procedure GetContentCenterAccountStatistics(AAccountList:ISuperArray;ADataJson:ISuperObject);
 
 
 
@@ -2371,7 +2384,6 @@ procedure SaveJsonToFile(AJson:ISuperObject;AFilePath:String);
 procedure SaveJsonArrayToFile(AJsonArray:ISuperArray;AFilePath:String);
 procedure LoadJsonFromFile(var AJson:ISuperObject;AFilePath:String);
 procedure LoadJsonArrayFromFile(var AJsonArray:ISuperArray;AFilePath:String);
-
 
 function GetDefaultUserHeadUrl:String;
 function GetDefaultGroupHeadUrl:String;
@@ -2414,6 +2426,59 @@ function IsTakeAwayFoodShop(AShop:TShop):Boolean;
 implementation
 
 
+//获取内容中心该用户的账号列表的统计数据
+procedure GetContentCenterAccountStatistics(AAccountList:ISuperArray;ADataJson:ISuperObject);
+var
+  I:Integer;
+  ARecordDataJson:ISuperObject;
+begin
+  //作品数
+  ADataJson.I['content_count']:=0;
+  //私信数
+  ADataJson.I['message_count']:=0;
+  //粉丝数
+  ADataJson.I['fans_count']:=0;
+
+
+  //播放量
+  ADataJson.I['view_count']:=0;
+  //点赞数
+  ADataJson.I['like_count']:=0;
+  //评论数
+  ADataJson.I['comment_count']:=0;
+  //分享数/转发数
+  ADataJson.I['transfer_count']:=0;
+
+
+  //计算出作品数
+  if AAccountList<>nil then
+  begin
+    for I := 0 to AAccountList.Length-1 do
+    begin
+      ARecordDataJson:=AAccountList.O[I];
+
+      //作品数
+      ADataJson.I['content_count']:=ADataJson.I['content_count']+ARecordDataJson.I['content_count'];
+      //私信数
+      ADataJson.I['message_count']:=ADataJson.I['message_count']+ARecordDataJson.I['message_count'];
+      //粉丝数
+      ADataJson.I['fans_count']:=ADataJson.I['fans_count']+ARecordDataJson.I['fans_count'];
+
+
+      //播放量
+      ADataJson.I['view_count']:=ADataJson.I['view_count']+ARecordDataJson.I['view_count'];
+      //点赞数
+      ADataJson.I['like_count']:=ADataJson.I['like_count']+ARecordDataJson.I['like_count'];
+      //评论数
+      ADataJson.I['comment_count']:=ADataJson.I['comment_count']+ARecordDataJson.I['comment_count'];
+      //分享数/转发数
+      ADataJson.I['transfer_count']:=ADataJson.I['transfer_count']+ARecordDataJson.I['transfer_count'];
+
+    end;
+  end;
+end;
+
+
 //授权信息
 function GetVIPProductAuthInfo(AAuthJson:ISuperObject):String;
 begin
@@ -2430,6 +2495,26 @@ begin
   end;
 end;
 
+//授权信息
+function GetVIPProductAuthVIPType(AAuthJson:ISuperObject):String;
+begin
+  Result:='试用';
+  if AAuthJson.Contains('ValidVIPDateAreaJson') then
+  begin
+
+    if (AAuthJson.O['ValidVIPDateAreaJson'].I['is_trial']=1) then
+    begin
+      Result:='试用';
+    end
+    else
+    begin
+      Result:='VIP';
+
+    end;
+
+  end;
+end;
+
 //授权结束日期
 function GetVIPProductAuthEndDate(AAuthJson:ISuperObject):String;
 var
@@ -2441,7 +2526,7 @@ begin
     Result:=AAuthJson.O['ValidVIPDateAreaJson'].S['end_date'];
 
     AEndDate:=StdStrToDateTime(Result);
-    Result:=FormatDateTime('YYYY-MM-DD',AEndDate);
+    Result:=GetVIPProductAuthVIPType(AAuthJson)+'至'+FormatDateTime('YYYY-MM-DD',AEndDate);
   end;
 end;
 
@@ -2456,15 +2541,23 @@ begin
 end;
 {$ENDIF}
 
-procedure CommonSyncServerSetting(AServer: String; APort: Integer);
+procedure CommonSyncServerSetting(AServer: String; APort: Integer; AIsSSL:Boolean);
 begin
   //设置连接
   ServerHost:=AServer;
 
 
+  if not AIsSSL then
+  begin
+    //服务端接口地址
+    InterfaceUrl:='http://'+AServer+':'+IntToStr(APort)+'/';
+  end
+  else
+  begin
+    //服务端接口地址
+    InterfaceUrl:='https://'+AServer+':'+IntToStr(APort)+'/';
+  end;
 
-  //服务端接口地址
-  InterfaceUrl:='http://'+AServer+':'+IntToStr(APort)+'/';
   //支持HTTPS
 //  InterfaceUrl:='https://'+AServer+':'+IntToStr(443)+'/';
 
@@ -2563,7 +2656,7 @@ begin
   ///upload/1011/userhead_pic/Default_Pic/user_pic.png
   Result:=ImageHttpServerUrl+'/'
               +'upload'+'/'
-              +IntToStr(AppID)+'/'
+              +(AppID)+'/'
               +'userhead_pic'+'/'
               +'Default_Pic'+'/'
               +'user_pic.png';
@@ -2575,7 +2668,7 @@ begin
   //默认用户头像
   Result:=ImageHttpServerUrl+'/'
               +'upload'+'/'
-              +IntToStr(AppID)+'/'
+              +(AppID)+'/'
               +'userhead_pic'+'/'
               +'Default_Pic'+'/'
               +'group.png';
@@ -4313,9 +4406,17 @@ end;
 
 function TShop.ParseFromJson(AJson: ISuperObject): Boolean;
 begin
+  uBaseLog.HandleException(nil,'TShop.ParseFromJson Begin');
   fid:=AJson.I['fid'];
+
   //Self.appid:=AJson.I['appid'];
-  user_fid:=AJson.S['user_fid'];
+  try
+    user_fid:=AJson.V['user_fid'];
+  except
+    user_fid:=IntToStr(AJson.I['user_fid']);
+  end;
+
+
   request_fid:=AJson.I['request_fid'];
   is_deleted:=AJson.I['is_deleted'];
   createtime:=AJson.S['createtime'];
@@ -4472,7 +4573,12 @@ begin
   app_business_category_name:=AJson.S['app_business_category_name'];
   app_coop_scheme_name:=AJson.S['app_coop_scheme_name'];
 
-  audit_user_fid:=AJson.S['audit_user_fid'];
+  try
+    audit_user_fid:=AJson.V['audit_user_fid'];
+  except
+    audit_user_fid:=IntToStr(AJson.I['audit_user_fid']);
+  end;
+
   audit_state:=AJson.I['audit_state'];
   audit_remark:=AJson.S['audit_remark'];
   audit_time:=AJson.S['audit_time'];
@@ -4501,6 +4607,7 @@ begin
   ShopGoodsList.Clear(True);
 
   ShopGoodsList.ParseFromJsonArray(TShopGoods,AJson.A['GoodsList']);
+  uBaseLog.HandleException(nil,'TShop.ParseFromJson End');
 
 end;
 
@@ -5363,7 +5470,7 @@ begin
    Result:='';
   if Self.pic1path<>'' then
   begin
-    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Pay_Pic/'+Self.pic1path;
+    Result:=ImageHttpServerUrl+'/Upload/'+(appid)+'/Pay_Pic/'+Self.pic1path;
   end;
 end;
 
@@ -5372,7 +5479,7 @@ begin
    Result:='';
   if Self.pic1path<>'' then
   begin
-    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Pay_Pic/'+Self.pic2path;
+    Result:=ImageHttpServerUrl+'/Upload/'+(appid)+'/Pay_Pic/'+Self.pic2path;
   end;
 end;
 
@@ -5381,7 +5488,7 @@ begin
    Result:='';
   if Self.pic1path<>'' then
   begin
-    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Pay_Pic/'+Self.pic3path;
+    Result:=ImageHttpServerUrl+'/Upload/'+(appid)+'/Pay_Pic/'+Self.pic3path;
   end;
 end;
 
@@ -5390,7 +5497,7 @@ begin
    Result:='';
   if Self.pic1path<>'' then
   begin
-    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Pay_Pic/'+Self.pic4path;
+    Result:=ImageHttpServerUrl+'/Upload/'+(appid)+'/Pay_Pic/'+Self.pic4path;
   end;
 end;
 function TOrderPayment.GetPic5Url: String;
@@ -5398,7 +5505,7 @@ begin
    Result:='';
   if Self.pic1path<>'' then
   begin
-    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Pay_Pic/'+Self.pic5path;
+    Result:=ImageHttpServerUrl+'/Upload/'+appid+'/Pay_Pic/'+Self.pic5path;
   end;
 end;
 function TOrderPayment.GetPic6Url: String;
@@ -5406,7 +5513,7 @@ begin
    Result:='';
   if Self.pic1path<>'' then
   begin
-    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Pay_Pic/'+Self.pic6path;
+    Result:=ImageHttpServerUrl+'/Upload/'+appid+'/Pay_Pic/'+Self.pic6path;
   end;
 end;
 
@@ -5902,7 +6009,7 @@ end;
 //  Result:='';
 //  if Self.pic1path<>'' then
 //  begin
-//    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Suggestion_Pic/'+Self.pic1path;
+//    Result:=ImageHttpServerUrl+'/Upload/'+appid+'/Suggestion_Pic/'+Self.pic1path;
 //  end;
 //end;
 //
@@ -5911,7 +6018,7 @@ end;
 //  Result:='';
 //  if Self.pic2path<>'' then
 //  begin
-//    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Suggestion_Pic/'+Self.pic2path;
+//    Result:=ImageHttpServerUrl+'/Upload/'+appid+'/Suggestion_Pic/'+Self.pic2path;
 //  end;
 //end;
 //
@@ -5920,7 +6027,7 @@ end;
 //  Result:='';
 //  if Self.pic3path<>'' then
 //  begin
-//    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Suggestion_Pic/'+Self.pic3path;
+//    Result:=ImageHttpServerUrl+'/Upload/'+appid+'/Suggestion_Pic/'+Self.pic3path;
 //  end;
 //end;
 //
@@ -5929,7 +6036,7 @@ end;
 //  Result:='';
 //  if Self.pic4path<>'' then
 //  begin
-//    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Suggestion_Pic/'+Self.pic4path;
+//    Result:=ImageHttpServerUrl+'/Upload/'+appid+'/Suggestion_Pic/'+Self.pic4path;
 //  end;
 //end;
 //
@@ -5938,7 +6045,7 @@ end;
 //  Result:='';
 //  if Self.pic5path<>'' then
 //  begin
-//    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Suggestion_Pic/'+Self.pic5path;
+//    Result:=ImageHttpServerUrl+'/Upload/'+appid+'/Suggestion_Pic/'+Self.pic5path;
 //  end;
 //end;
 //
@@ -5947,7 +6054,7 @@ end;
 //  Result:='';
 //  if Self.pic6path<>'' then
 //  begin
-//    Result:=ImageHttpServerUrl+'/Upload/'+IntToStr(appid)+'/Suggestion_Pic/'+Self.pic6path;
+//    Result:=ImageHttpServerUrl+'/Upload/'+appid+'/Suggestion_Pic/'+Self.pic6path;
 //  end;
 //end;
 //
@@ -6130,7 +6237,7 @@ function TShopRequest.ParseFromJson(AJson: ISuperObject): Boolean;
 begin
   fid:=AJson.I['fid'];//8,
   //Self.appid:=AJson.I['appid'];//1002,
-  user_fid:=AJson.S['user_fid'];//31,
+  user_fid:=AJson.V['user_fid'];//31,
   is_deleted:=AJson.I['is_deleted'];//0,
   createtime:=AJson.S['createtime'];//"2018-02-01 14:57:05",
   app_business_category_fid:=AJson.I['app_business_category_fid'];//2,
@@ -6170,11 +6277,22 @@ begin
   delivery_fee:=AJSon.F['delivery_fee'];
 
   first_audit_state:=AJson.I['first_audit_state'];//-1,
+
+  {$IFDEF INT_USER_FID}
+  first_audit_user_fid:=IntToStr(AJson.I['first_audit_user_fid']);//0,
+  {$ELSE}
   first_audit_user_fid:=AJson.S['first_audit_user_fid'];//0,
+  {$ENDIF}
+
+
   first_audit_remark:=AJson.S['first_audit_remark'];//"",
   first_audit_time:=AJson.S['first_audit_time'];//"1899-12-30 00:00:00",
   final_audit_state:=AJson.I['final_audit_state'];//0,
+  {$IFDEF INT_USER_FID}
+  final_audit_user_fid:=IntToStr(AJson.I['final_audit_user_fid']);//0,
+  {$ELSE}
   final_audit_user_fid:=AJson.S['final_audit_user_fid'];//0,
+  {$ENDIF}
   final_audit_remark:=AJson.S['final_audit_remark'];//"",
   final_audit_time:=AJson.S['final_audit_time'];//""
 end;
@@ -6783,7 +6901,7 @@ begin
   end
   else
   begin
-    Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\userhead_pic\Default_Pic\user_pic.png','\','/');
+    Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+(AppID)+'\userhead_pic\Default_Pic\user_pic.png','\','/');
   end;
 end;
 
@@ -7067,13 +7185,13 @@ begin
 
   if Self.fee_type=Const_FeeType_DeliveryFee then
   begin
-    Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\other_pic\delivery_fee.png','\','/');
+    Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+AppID+'\other_pic\delivery_fee.png','\','/');
   end;
 
 
   if Self.fee_type=Const_FeeType_PackingFee then
   begin
-    Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\other_pic\packing_fee.png','\','/');
+    Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+AppID+'\other_pic\packing_fee.png','\','/');
   end;
 
 end;
@@ -7977,7 +8095,9 @@ procedure TUser.Clear;
 begin
   //wn
   fid:='';
-
+  {$IFDEF INT_USER_FID}
+  fid:='0';
+  {$ENDIF}
 
 //  //Self.appid:=0;
 
@@ -8097,6 +8217,9 @@ end;
 constructor TUser.Create;
 begin
   inherited;
+  {$IFDEF INT_USER_FID}
+  fid:='0';
+  {$ENDIF}
 end;
 
 destructor TUser.Destroy;
@@ -8121,6 +8244,7 @@ begin
 //  end;
 
   Result:=GetImageUrl(head_pic_path,itUserHead);
+
 //  Result:='';
 //  if Self.head_pic_path<>'' then
 //  begin
@@ -8138,17 +8262,17 @@ begin
 //  begin
 //    if APPUserType=utRider then
 //    begin
-//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\userhead_pic\Default_Pic\rider_pic.png','\','/');
+//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+AppID+'\userhead_pic\Default_Pic\rider_pic.png','\','/');
 //    end;
 //
 //    if APPUserType=utClient then
 //    begin
-//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\userhead_pic\Default_Pic\user_pic.png','\','/');
+//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+AppID+'\userhead_pic\Default_Pic\user_pic.png','\','/');
 //    end;
 //
 //    if APPUserType=utShop then
 //    begin
-//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+IntToStr(AppID)+'\userhead_pic\Default_Pic\user_pic.png','\','/');
+//      Result:=ImageHttpServerUrl+'/'+ReplaceStr('Upload\'+AppID+'\userhead_pic\Default_Pic\user_pic.png','\','/');
 //    end;
 //  end;
 end;
@@ -8260,11 +8384,19 @@ begin
 
   //wn
 //  fid:=AJson.I['fid'];//64,
-  try
-    fid:=AJson.V['fid'];//64,
-  except
-    //兼容旧版本
-    fid:=IntToStr(AJson.I['fid']);//64,
+  if AJson.Contains('fid') then
+  begin
+    try
+      {$IFDEF INT_USER_FID}
+      //兼容旧版本
+      fid:=IntToStr(AJson.I['fid']);//64,
+      {$ELSE}
+      fid:=AJson.V['fid'];//64,
+      {$ENDIF}
+    except
+      //兼容旧版本
+      fid:=IntToStr(AJson.I['fid']);//64,
+    end;
   end;
 
 
@@ -8311,7 +8443,7 @@ begin
   score:=AJson.F['score'];//0,
   is_deleted:=AJson.I['is_deleted'];//0,
   createtime:=AJson.S['createtime'];//"2018-03-29 09:57:27",
-  is_active:=AJson.I['is_active'];//0
+//  is_active:=AJson.I['is_active'];//0
 
   second_contactor_name:=AJson.S['second_contactor_name'];//0
   second_contactor_phone:=AJson.S['second_contactor_phone'];//0
@@ -8440,7 +8572,14 @@ begin
   //wn
   //上次登录的用户FID
 //  Self.User.fid:=AIniFile.ReadInteger('','LastLoginUserFid',0);
+
+  {$IFDEF INT_USER_FID}
+  Self.User.fid:=AIniFile.ReadString('','LastLoginUserFid','0');
+  {$ELSE}
   Self.User.fid:=AIniFile.ReadString('','LastLoginUserFid','');
+  {$ENDIF}
+
+
 
 //  Self.LastFastMsgUserID:=AIniFile.ReadInteger('','LastFastMsgUserID',0);
 
@@ -8482,11 +8621,13 @@ begin
 
 
   Self.CompanyName:=AIniFile.ReadString('','CompanyName',Self.CompanyName);
-  if (AppID=0) or GlobalIsNeedAPPIDSetting then
+  Self.CompanyID:=AIniFile.ReadString('','CompanyID',Self.CompanyID);
+  if (AppID='') or GlobalIsNeedAPPIDSetting then
   begin
-    AppID:=AIniFile.ReadInteger('','AppID',AppID);
+    AppID:=AIniFile.ReadString('','AppID',AppID);
   end;
 
+  ClickCloseButtonAction:=AIniFile.ReadString('','ClickCloseButtonAction', '');
 
   CustomLoadFromINI(AIniFile);
 
@@ -8568,8 +8709,10 @@ begin
 
   //公司名称
   AIniFile.WriteString('','CompanyName',Self.CompanyName);
-  AIniFile.WriteInteger('','AppID',AppID);
+  AIniFile.WriteString('','CompanyID',Self.CompanyID);
+  AIniFile.WriteString('','AppID',AppID);
 
+  AIniFile.WriteString('','ClickCloseButtonAction',Self.ClickCloseButtonAction);
 
   CustomSaveToINI(AIniFile);
 

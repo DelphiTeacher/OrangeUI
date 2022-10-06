@@ -29,7 +29,7 @@ uses
   uSkinFireMonkeyPanel, uSkinFireMonkeyRadioButton, FMX.ScrollBox, FMX.Memo,
   uSkinFireMonkeyMemo, uSkinFireMonkeyCheckBox, uSkinCheckBoxType,
   uSkinScrollBoxContentType, uSkinScrollControlType, uSkinScrollBoxType,
-  uSkinButtonType, uSkinPanelType;
+  uSkinButtonType, uSkinPanelType, FMX.Memo.Types;
 
 type
   TFrameAddHotelRecvAddr = class(TFrame,IFrameVirtualKeyboardAutoProcessEvent)
@@ -76,6 +76,8 @@ type
     //当前需要处理的控件
     function GetCurrentPorcessControl(AFocusedControl:TControl):TControl;
     function GetVirtualKeyboardControlParent:TControl;
+    //获取虚拟键盘的高度校正
+    function GetVirtualKeyboardHeightAdjustHeight:Double;
   public
     FHotelRecvAddr:THotelRecvAddr;
     procedure Clear;
@@ -433,6 +435,11 @@ end;
 function TFrameAddHotelRecvAddr.GetVirtualKeyboardControlParent: TControl;
 begin
   Result:=Self;
+end;
+
+function TFrameAddHotelRecvAddr.GetVirtualKeyboardHeightAdjustHeight: Double;
+begin
+  Result:=0;
 end;
 
 procedure TFrameAddHotelRecvAddr.Input(AHotelRecvAddr:THotelRecvAddr);

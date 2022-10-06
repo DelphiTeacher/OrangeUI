@@ -9,6 +9,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls, uSkinImageList, uSkinFireMonkeyControl, uSkinFireMonkeyScrollControl,
 
   uLang,
+//  FMX.Types,
   uFrameContext,
   uSkinFireMonkeyImageListViewer, uDrawPicture, FMX.TabControl,
   uSkinFireMonkeyButton, FMX.Controls.Presentation, uSkinButtonType,
@@ -19,20 +20,22 @@ type
     imglistWelcome: TSkinImageList;
     tcImageListViewer: TTabControl;
     tabCommon: TTabItem;
-    tabBindButtonGroup: TTabItem;
     imglistviewerCommon: TSkinFMXImageListViewer;
     imglistPlayer: TSkinImageList;
-    imglistviewerBindButtonGroup: TSkinFMXImageListViewer;
-    btngroupIndicator: TSkinFMXButtonGroup;
-    btnDeleteFirstPicture: TButton;
-    btnClearImageList: TButton;
-    btnSwitchImageList: TButton;
-    lblTestImageListChangeThenButtonCountChange: TLabel;
+    SkinImageList1: TSkinImageList;
+    Panel1: TPanel;
+    Button1: TButton;
+    SkinImageList2: TSkinImageList;
+    Button2: TButton;
+    Button3: TButton;
+    Label1: TLabel;
     procedure btnDeleteFirstPictureClick(Sender: TObject);
     procedure btnClearImageListClick(Sender: TObject);
-    procedure btnSwitchImageListClick(Sender: TObject);
     procedure imglistviewerBindButtonGroupImageListSwitchBegin(Sender: TObject;
       ABeforeIndex, AAfterIndex: Integer);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
     procedure ChangeLanguage(ALangKind:TLangKind);
@@ -63,17 +66,83 @@ begin
   Self.imglistPlayer.PictureList.Clear(True);
 end;
 
-procedure TFrameImageListViewer.btnSwitchImageListClick(Sender: TObject);
+procedure TFrameImageListViewer.Button1Click(Sender: TObject);
+var
+  Handled:Boolean;
+  EventInfo: TGestureEventInfo;
 begin
-  //切换ImageList
-  if Self.imglistviewerBindButtonGroup.Prop.Picture.SkinImageList<>imglistWelcome then
-  begin
-    Self.imglistviewerBindButtonGroup.Prop.Picture.SkinImageList:=Self.imglistWelcome;
-  end
-  else
-  begin
-    Self.imglistviewerBindButtonGroup.Prop.Picture.SkinImageList:=Self.imglistPlayer;
-  end;
+  //模拟手势绽放
+  EventInfo.GestureID := igiZoom;
+  EventInfo.Distance:=0;
+  EventInfo.Flags:=[TInteractiveGestureFlag.gfBegin];
+  imglistviewerCommon.SkinControlType.Gesture(EventInfo,Handled);
+
+
+  EventInfo.Distance:=80;
+  EventInfo.Flags:=[];
+  imglistviewerCommon.SkinControlType.Gesture(EventInfo,Handled);
+
+  EventInfo.Distance:=0;
+  EventInfo.Flags:=[TInteractiveGestureFlag.gfEnd];
+  imglistviewerCommon.SkinControlType.Gesture(EventInfo,Handled);
+  imglistviewerCommon.Invalidate;
+end;
+
+procedure TFrameImageListViewer.Button2Click(Sender: TObject);
+var
+  Handled:Boolean;
+  EventInfo: TGestureEventInfo;
+begin
+  //两个手指所在的位置
+//  gFormTouch1.X:=10;//imglistviewerCommon.Width/2-10;
+//  gFormTouch1.Y:=10;//imglistviewerCommon.Height/2;
+//
+//  gFormTouch2.X:=50;//imglistviewerCommon.Width/2+10;
+//  gFormTouch2.Y:=50;//imglistviewerCommon.Height/2;
+
+  gFormTouch1.X:=114-30;//imglistviewerCommon.Width/2-10;
+  gFormTouch1.Y:=184;//imglistviewerCommon.Height/2;
+
+  gFormTouch2.X:=114+30;//imglistviewerCommon.Width/2+10;
+  gFormTouch2.Y:=184;//imglistviewerCommon.Height/2;
+
+
+//  gFormTouch1.X:=imglistviewerCommon.Width/2-30;
+//  gFormTouch1.Y:=imglistviewerCommon.Height/2;
+//
+//  gFormTouch2.X:=imglistviewerCommon.Width/2+30;
+//  gFormTouch2.Y:=imglistviewerCommon.Height/2;
+
+
+  EventInfo.GestureID := igiZoom;
+  EventInfo.Distance:=0;
+  EventInfo.Flags:=[TInteractiveGestureFlag.gfBegin];
+  imglistviewerCommon.SkinControlType.Gesture(EventInfo,Handled);
+  imglistviewerCommon.Invalidate;
+
+end;
+
+procedure TFrameImageListViewer.Button3Click(Sender: TObject);
+var
+  Handled:Boolean;
+  EventInfo: TGestureEventInfo;
+begin
+  //模拟手势绽放
+  EventInfo.GestureID := igiZoom;
+  EventInfo.Distance:=0;
+  EventInfo.Flags:=[TInteractiveGestureFlag.gfBegin];
+  imglistviewerCommon.SkinControlType.Gesture(EventInfo,Handled);
+
+
+  EventInfo.Distance:=-80;
+  EventInfo.Flags:=[];
+  imglistviewerCommon.SkinControlType.Gesture(EventInfo,Handled);
+
+  EventInfo.Distance:=0;
+  EventInfo.Flags:=[TInteractiveGestureFlag.gfEnd];
+  imglistviewerCommon.SkinControlType.Gesture(EventInfo,Handled);
+  imglistviewerCommon.Invalidate;
+
 end;
 
 procedure TFrameImageListViewer.ChangeLanguage(ALangKind: TLangKind);
@@ -81,18 +150,7 @@ begin
   //翻译
   Self.tabCommon.Text:=
     GetLangString(Self.tabCommon.Name,ALangKind);
-  Self.tabBindButtonGroup.Text:=
-    GetLangString(Self.tabBindButtonGroup.Name,ALangKind);
 
-  Self.lblTestImageListChangeThenButtonCountChange.Text:=
-    GetLangString(Self.lblTestImageListChangeThenButtonCountChange.Name,ALangKind);
-
-  Self.btnDeleteFirstPicture.Text:=
-    GetLangString(Self.btnDeleteFirstPicture.Name,ALangKind);
-  Self.btnClearImageList.Text:=
-    GetLangString(Self.btnClearImageList.Name,ALangKind);
-  Self.btnSwitchImageList.Text:=
-    GetLangString(Self.btnSwitchImageList.Name,ALangKind);
 
 end;
 
@@ -104,31 +162,15 @@ begin
   RegLangString(Self.tabCommon.Name,
       [Self.tabCommon.Text,
       'Common']);
-  RegLangString(Self.tabBindButtonGroup.Name,
-      [Self.tabBindButtonGroup.Text,
-      'Bind ButtonGroup']);
-
-  RegLangString(Self.lblTestImageListChangeThenButtonCountChange.Name,
-      [Self.lblTestImageListChangeThenButtonCountChange.Text,
-      'Test button count same as picture count']);
-
-  RegLangString(Self.btnDeleteFirstPicture.Name,
-      [Self.btnDeleteFirstPicture.Text,
-      'Delete first picture']);
-  RegLangString(Self.btnClearImageList.Name,
-      [Self.btnClearImageList.Text,
-      'Clear ImageList']);
-  RegLangString(Self.btnSwitchImageList.Name,
-      [Self.btnSwitchImageList.Text,
-      'Switch ImageList']);
-
+  imglistviewerCommon.Prop.ContentWidth:=-1;
+  imglistviewerCommon.Prop.ContentHeight:=-1;
 end;
 
 procedure TFrameImageListViewer.imglistviewerBindButtonGroupImageListSwitchBegin(
   Sender: TObject; ABeforeIndex, AAfterIndex: Integer);
 begin
   //
-  FMX.Types.Log.d(IntToStr(ABeforeIndex)+' -> '+IntToStr(AAfterIndex));
+  //FMX.Types.Log.d(IntToStr(ABeforeIndex)+' -> '+IntToStr(AAfterIndex));
 end;
 
 end.

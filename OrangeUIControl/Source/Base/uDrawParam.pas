@@ -20,6 +20,11 @@ uses
   SysUtils,
   uBaseList,
 
+  {$IFDEF FMX}
+  FMX.Effects,
+  FMX.Graphics,
+  {$ENDIF}
+
 
 //  XSuperObject,
 
@@ -236,7 +241,9 @@ type
                        ///     Alpha change
                        ///   </para>
                        /// </summary>
-                       dpcetAlphaChange
+                       dpcetAlphaChange,
+                       //阴影尺寸改变
+                       dpcetShadowSizeChange
                        );
   /// <summary>
   ///   <para>
@@ -539,6 +546,8 @@ type
     FAlpha: Byte;
     //位移
     FOffset: Double;
+
+    FShadowSize: Double;
     //更改的事件
     FOnChange:TNotifyEvent;
     //效果种类
@@ -620,6 +629,7 @@ type
   public
 //    function LoadFromJson(ASuperObject:ISuperObject):Boolean;virtual;
 //    function SaveToJson(ASuperObject:ISuperObject):Boolean;virtual;
+    property ShadowSize:Double read FShadowSize write FShadowSize;
   published
     /// <summary>
     ///   <para>
@@ -955,11 +965,15 @@ type
     //高级设置FDrawRectSetting+FDrawEffectSetting
 //    FSetting: TDrawParamSetting;
 
+
+
+
     //所属的素材,用于IDE设计时给组件设计器使用
     FSkinMaterial:TObject;
   protected
     function IsAlphaStored:Boolean;
   protected
+    procedure SetShadowSize(const Value: Double);
     procedure SetAlpha(const Value: Byte);
     procedure SetDrawRectSetting(const Value: TDrawRectSetting);
     procedure SetDrawEffectSetting(const Value: TDrawEffectSetting);
@@ -1010,6 +1024,16 @@ type
     constructor Create(const AName:String;const ACaption:String);virtual;
     destructor Destroy;override;
   public
+    //属性是否有修改过,如果修改过,阴影效果缓存图需要重绘
+    FIsChanged:Boolean;
+    FShadowSize: Double;
+
+    {$IFDEF FMX}
+    FShadowEffectBitmap:TBitmap;
+    //阴影效果
+    FShadowEffect:TShadowEffect;
+    FShadowEffectRect:TRectF;
+    {$ENDIF}
 
     /// <summary>
     ///   <para>
@@ -1082,6 +1106,11 @@ type
     ///   </para>
     /// </summary>
     function CurrentEffectAlpha:Byte;
+    function CurrentEffectShadowSize:Double;
+
+
+    //阴影尺寸
+    property ShadowSize:Double read FShadowSize write SetShadowSize;
 
     /// <summary>
     ///   <para>
@@ -1363,6 +1392,8 @@ begin
 
   FName:=AName;
   FCaption:=ACaption;
+
+  FIsChanged:=True;
 end;
 
 function TDrawParam.CreateDrawColor(const AName:String;const ACaption:String): TDrawColor;
@@ -1451,6 +1482,15 @@ begin
   end;
 end;
 
+function TDrawParam.CurrentEffectShadowSize: Double;
+begin
+  Result:=Self.FShadowSize;
+  if (CurrentEffect<>nil) and (dpcetShadowSizeChange in Self.CurrentEffect.CommonEffectTypes) then
+  begin
+    Result:=CurrentEffect.FShadowSize;
+  end;
+end;
+
 //function TDrawParam.CustomLoadFromJson(ASuperObject: ISuperObject): Boolean;
 //begin
 //  //
@@ -1464,6 +1504,11 @@ end;
 
 destructor TDrawParam.Destroy;
 begin
+  {$IFDEF FMX}
+  FreeAndNil(FShadowEffect);
+  FreeAndNil(FShadowEffectBitmap);
+  {$ENDIF}
+
 //  FreeAndNil(FSetting);
   FreeAndNil(FDrawRectSetting);
   FreeAndNil(FDrawEffectSetting);
@@ -1587,6 +1632,15 @@ begin
   end;
 end;
 
+procedure TDrawParam.SetShadowSize(const Value: Double);
+begin
+  if FShadowSize<>Value then
+  begin
+    FShadowSize := Value;
+    DoChange;
+  end;
+end;
+
 //procedure TDrawParam.SetSetting(const Value: TDrawParamSetting);
 //begin
 //  FSetting.Assign(Value);
@@ -1634,7 +1688,7 @@ end;
 
 procedure TDrawParam.DoChange(Sender:TObject);
 begin
-
+  FIsChanged:=True;
   if Assigned(FOnChange) then
   begin
     FOnChange(Self);
@@ -1671,6 +1725,8 @@ begin
 //    AControlRect.Bottom:=AControlRect.Bottom+CurrentEffect.FOffset;
 //  end;
   //判断有没有启用位移效果
+
+
   //计算完再处理偏移
   if (CurrentEffect<>nil) and (dpcetOffsetChange in CurrentEffect.FCommonEffectTypes) then
   begin
@@ -1680,6 +1736,10 @@ begin
 //    AControlRect.Right:=AControlRect.Right+CurrentEffect.FOffset;
 //    AControlRect.Bottom:=AControlRect.Bottom+CurrentEffect.FOffset;
   end;
+
+
+
+
 end;
 
 procedure TDrawParam.Clear;
@@ -3080,5 +3140,6 @@ end;
 
 
 end.
+
 
 

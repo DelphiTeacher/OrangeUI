@@ -10,6 +10,7 @@ uses
 
   uLang,
   uFrameContext,
+  EasyServiceCommonMaterialDataMoudle,
 
   uSkinFireMonkeyControl, uSkinFireMonkeyScrollControl,
   uSkinFireMonkeyVirtualList, uSkinFireMonkeyListBox, uSkinFireMonkeyLabel,
@@ -28,6 +29,7 @@ type
     lblViewItemDefaultPrice: TSkinFMXLabel;
     lblViewItemDefaultDetail1: TSkinFMXLabel;
     SkinFMXLabel1: TSkinFMXLabel;
+    SkinFMXListBox1: TSkinFMXListBox;
   private
     { Private declarations }
   private

@@ -4,9 +4,9 @@ object frmLogin: TfrmLogin
   BorderIcons = [biMinimize]
   BorderStyle = bsSingle
   Caption = #30331#24405
-  ClientHeight = 430
-  ClientWidth = 497
-  Color = clBtnFace
+  ClientHeight = 401
+  ClientWidth = 457
+  Color = clRed
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -18,8 +18,8 @@ object frmLogin: TfrmLogin
   TextHeight = 13
   object pnlBottom: TSkinWinPanel
     Left = 0
-    Top = 200
-    Width = 497
+    Top = 171
+    Width = 457
     Height = 230
     ParentMouseEvent = True
     DirectUIVisible = False
@@ -74,7 +74,7 @@ object frmLogin: TfrmLogin
     Text = ''
     ExplicitTop = 209
     object pnlUser: TSkinWinPanel
-      Left = 160
+      Left = 130
       Top = 32
       Width = 200
       Height = 33
@@ -228,7 +228,7 @@ object frmLogin: TfrmLogin
       end
     end
     object pnlPassword: TSkinWinPanel
-      Left = 160
+      Left = 130
       Top = 64
       Width = 200
       Height = 33
@@ -382,7 +382,7 @@ object frmLogin: TfrmLogin
       end
     end
     object chkRememberPassword: TCheckBox
-      Left = 160
+      Left = 130
       Top = 103
       Width = 97
       Height = 17
@@ -390,7 +390,7 @@ object frmLogin: TfrmLogin
       TabOrder = 2
     end
     object lblForget: TSkinWinLabel
-      Left = 263
+      Left = 233
       Top = 103
       Width = 94
       Height = 22
@@ -449,7 +449,7 @@ object frmLogin: TfrmLogin
       Properties.AutoSize = False
     end
     object btnLogin: TSkinWinButton
-      Left = 163
+      Left = 133
       Top = 144
       Width = 194
       Height = 40
@@ -610,8 +610,8 @@ object frmLogin: TfrmLogin
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
-    SelfOwnMaterial.IsTransparent = True
-    SelfOwnMaterial.IsRoundForm = True
+    SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.IsRoundForm = False
     SelfOwnMaterial.FormRoundWidth = 4
     SelfOwnMaterial.FormRoundHeight = 4
     SelfOwnMaterial.AlignSysBtnRightMargin = 12

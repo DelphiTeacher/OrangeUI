@@ -1025,7 +1025,8 @@ type
     procedure StartScrollToInitial(AMinOverRangePosValue_Min:Double=0;
                                    AMaxOverRangePosValue_Min:Double=0);
 
-
+    //取消本次惯性滚动,用于ImageListViewer开始缩放前有鼠标滑动，缩放结束后不能再惯性滚动
+    procedure CancelInertiaScroll;
 
 
 
@@ -1166,6 +1167,7 @@ var
   FOverRangeScrollBarSizeStep: Double;
   FDefaultOverRangePosValueStep:Double;
 
+  //用于ClipHeadFrame
   ZoomingHorzGestureManager:TObject;
   ZoomingVertGestureManager:TObject;
 
@@ -1438,7 +1440,18 @@ begin
 //                               +'FMaxOverRangePosValue:'+FloatToStr(FMaxOverRangePosValue)+', '
 //                                );
 //  end;
-//
+
+  if Self.FKind=gmkHorizontal then
+  begin
+    uBaseLog.OutputDebugString(GetDebugLogID+'前 FPosition:'+FloatToStr(FPosition)+', '
+                               +'APosition:'+FloatToStr(APosition)+', '
+                               +'AMin:'+FloatToStr(AMin)+', '
+                               +'AMax:'+FloatToStr(AMax)+', '
+                               +'FMinOverRangePosValue:'+FloatToStr(FMinOverRangePosValue)+', '
+                               +'FMaxOverRangePosValue:'+FloatToStr(FMaxOverRangePosValue)+', '
+                                );
+  end;
+
 
 
   //因为Min和Max与Position无关
@@ -1729,6 +1742,10 @@ begin
   if Not Self.FIsDraging then
   begin
     Self.FCheckUserStopMouseWheelTimer.Enabled:=False;
+
+//    if Self.FKind=gmkHorizontal then
+//      OutputDebugString(GetDebugLogID+'TSkinControlGestureManager.OnCheckUserStopMouseWheelTimer 启动惯性滚动');
+
     //启动惯性滚动
     Self.StartInertiaScroll;
   end;
@@ -2205,7 +2222,9 @@ begin
 //  begin
 
 
-//      uBaseLog.OutputDebugString(GetDebugLogID+'开始惯性滚动');
+//      if Self.FKind=gmkHorizontal then
+//        uBaseLog.OutputDebugString(GetDebugLogID+'StartInertiaScroll 开始惯性滚动 AUpVelocity:'+FloatToStr(AUpVelocity));
+
       if AUpVelocity<0 then
       begin
         FInertiaScrollDirection:=isdScrollToMin;
@@ -2242,9 +2261,9 @@ begin
       if Assigned(FOnInnerCalcInertiaScrollDistance) then
       begin
         FOnInnerCalcInertiaScrollDistance(Self,
-                                      FInertiaDistance,
-                                      AIsCanInertiaScroll
-                                      );
+                                          FInertiaDistance,
+                                          AIsCanInertiaScroll
+                                          );
       end;
       DoCustomCalcInertiaScrollDistance(Self,
                                         FInertiaDistance,
@@ -2257,29 +2276,29 @@ begin
 //      {$ELSE}
       if AIsCanInertiaScroll then
       begin
-        //可以惯性滚动,可以反方向滚回来
-        if FInertiaDistance<0 then
-        begin
-            case FInertiaScrollDirection of
-              isdNone: ;
-              isdScrollToMin: FInertiaScrollDirection:=isdScrollToMax;
-              isdScrollToMax: FInertiaScrollDirection:=isdScrollToMin;
-            end;
-            FInertiaScrollAnimator.Min:=FInertiaDistance;
-            FInertiaScrollAnimator.Max:=0;
-        end
-        else
-        begin
-            FInertiaScrollAnimator.Min:=0;
-            FInertiaScrollAnimator.Max:=FInertiaDistance;
-        end;
+          //可以惯性滚动,可以反方向滚回来
+          if FInertiaDistance<0 then
+          begin
+              case FInertiaScrollDirection of
+                isdNone: ;
+                isdScrollToMin: FInertiaScrollDirection:=isdScrollToMax;
+                isdScrollToMax: FInertiaScrollDirection:=isdScrollToMin;
+              end;
+              FInertiaScrollAnimator.Min:=FInertiaDistance;
+              FInertiaScrollAnimator.Max:=0;
+          end
+          else
+          begin
+              FInertiaScrollAnimator.Min:=0;
+              FInertiaScrollAnimator.Max:=FInertiaDistance;
+          end;
 
-        FInertiaScrollAnimator.Start;
+          FInertiaScrollAnimator.Start;
       end
       else
       begin
-        //回滚到初始
-        StartScrollToInitial;
+          //回滚到初始
+          StartScrollToInitial;
       end;
 //      {$ENDIF}
 
@@ -2302,6 +2321,8 @@ procedure TSkinControlGestureManager.StartScrollToInitial(
 begin
 //  uBaseLog.OutputDebugString(GetDebugLogID+' 滚回 StartScrollToInitial FMaxOverRangePosValue '+FloatToStr(FMaxOverRangePosValue));
 //  uBaseLog.OutputDebugString(GetDebugLogID+' 滚回 StartScrollToInitial FMinOverRangePosValue '+FloatToStr(FMinOverRangePosValue));
+
+
 
   //启动越界回滚到初始
   if (FMinOverRangePosValue<>0) or (FMaxOverRangePosValue<>0) then
@@ -2406,7 +2427,8 @@ procedure TSkinControlGestureManager.MouseLeave;
 begin
   if Not FEnabled then Exit;
 
-//  OutputDebugString(GetDebugLogID+'MouseLeave');
+//  if Self.FKind=gmkHorizontal then
+//    OutputDebugString(GetDebugLogID+'TSkinControlGestureManager.MouseLeave');
 
   MouseUp({$IFDEF FMX}TMouseButton.{$ENDIF}mbLeft,[],Self.FLastMouseMovePt.X,Self.FLastMouseMovePt.Y);
 end;
@@ -2446,6 +2468,9 @@ begin
   {$IFDEF _MACOS}
   if Not FIsMouseDown then Exit;
   {$ENDIF}
+  {$IFDEF LINUX}
+  if Not FIsMouseDown then Exit;
+  {$ENDIF}
 
 
 
@@ -2453,6 +2478,8 @@ begin
   //确定不了手势方向就不更改Position
   if FHasDecidedFirstGestureKind and (FDecidedFirstGestureKind<>FKind) then
   begin
+//    if Self.FKind=gmkHorizontal then
+//      OutputDebugString(GetDebugLogID+'TSkinControlGestureManager.MouseMove FHasDecidedFirstGestureKind and FDecidedFirstGestureKind<>FKind 确定不了手势方向就不更改Position');
     Exit;
   end;
 
@@ -2813,6 +2840,9 @@ begin
   //确定不了手势方向就不更改Position
   if (FDecidedFirstGestureKind<>FKind) then
   begin
+//    if Self.FKind=gmkHorizontal then
+//      OutputDebugString(GetDebugLogID+'TSkinControlGestureManager.MouseMove FDecidedFirstGestureKind<>FKind 确定不了手势方向就不更改Position');
+
     Exit;
   end;
 
@@ -2861,72 +2891,97 @@ begin
 
 
   //鼠标移动
-  if Self.FIsStartDrag
-    //手指滑动的时候,到达一定的偏移才开始滚动,可以提高绘制效率
-    and (GetDis(Self.FLastMouseMoveAbsolutePt,FMouseMoveAbsolutePt)>=FDecideDoDragDirectionCrement)  then
+  if Self.FIsStartDrag then
   begin
+    //手指滑动的时候,到达一定的偏移才开始滚动,可以提高绘制效率
+    if (GetDis(Self.FLastMouseMoveAbsolutePt,FMouseMoveAbsolutePt)>=FDecideDoDragDirectionCrement)  then
+    begin
 
-        //移动一段距离才显示滚动条
-        //检测用户是否停止滚动
-        SetIsDraging(True);
-        Self.FIsDraging:=True;
+          //移动一段距离才显示滚动条
+          //检测用户是否停止滚动
+          SetIsDraging(True);
+          Self.FIsDraging:=True;
 
 
 
-        //第二次鼠标移动
-        //直接滚动
-        case Self.Kind of
-          gmkHorizontal:
-          begin
+          //第二次鼠标移动
+          //直接滚动
+          case Self.Kind of
+            gmkHorizontal:
+            begin
 
-              //更新位置(正常模式)
-              Crement:=FMouseMoveAbsolutePt.X - Self.FLastMouseMoveAbsolutePt.X;
+                //更新位置(正常模式)
+                Crement:=FMouseMoveAbsolutePt.X - Self.FLastMouseMoveAbsolutePt.X;
 
-              //更新位置(正常模式)
-              Self.Position:=Self.FPosition-Crement;
-//              uBaseLog.OutputDebugString(GetDebugLogID+' 更新位置 FPosition:'+FloatToStr(FPosition)
-//                                                +' FMaxOverRangePosValue:'+FloatToStr(FMaxOverRangePosValue));
+                //更新位置(正常模式)
+                Self.Position:=Self.FPosition-Crement;
+//                uBaseLog.OutputDebugString(GetDebugLogID+' 更新位置 Crement:'+FloatToStr(-Crement)
+//                                                  +' FPosition:'+FloatToStr(FPosition)
+//                                                  +' FMaxOverRangePosValue:'+FloatToStr(FMaxOverRangePosValue)
+//                                                  +' FLastMouseMoveAbsolutePt.X:'+FloatToStr(FLastMouseMoveAbsolutePt.X)
+//                                                  +' FMouseMoveAbsolutePt.X:'+FloatToStr(FMouseMoveAbsolutePt.X)
+//                                                  );
 
+            end;
+            gmkVertical:
+            begin
+
+                Crement:=FMouseMoveAbsolutePt.Y - Self.FLastMouseMoveAbsolutePt.Y;
+
+                //更新位置(正常模式)
+                Self.Position:=Self.FPosition-Crement;
+//                uBaseLog.OutputDebugString(GetDebugLogID+' 更新位置 Crement:'+FloatToStr(-Crement)
+//                                                  +' FPosition'+FloatToStr(FPosition)
+//                                                  +' FMaxOverRangePosValue'+FloatToStr(FMaxOverRangePosValue)
+//                                                  +' FLastMouseMoveAbsolutePt.Y:'+FloatToStr(FLastMouseMoveAbsolutePt.Y)
+//                                                  +' FMouseMoveAbsolutePt.Y:'+FloatToStr(FMouseMoveAbsolutePt.Y)
+//                                                  );
+            end;
           end;
-          gmkVertical:
+
+
+
+          //确定方向
+          if (Crement>=0) then//2) then
           begin
-
-              Crement:=FMouseMoveAbsolutePt.Y - Self.FLastMouseMoveAbsolutePt.Y;
-
-              //更新位置(正常模式)
-              Self.Position:=Self.FPosition-Crement;
-//              uBaseLog.OutputDebugString(GetDebugLogID+' 更新位置 FPosition:'+FloatToStr(FPosition)
-//                                                +' FMaxOverRangePosValue'+FloatToStr(FMaxOverRangePosValue));
+            AMouseMoveDirection:=isdScrollToMin;
+          end
+          else if (Crement<=0) then//-2) then
+          begin
+            AMouseMoveDirection:=isdScrollToMax;
           end;
-        end;
+          if AMouseMoveDirection<>FMouseMoveDirection then
+          begin
+            FMouseMoveDirection:=AMouseMoveDirection;
+            Self.FLastMouseMoveDirectionChangePoint:=FMouseMovePt;
+          end;
 
 
+          //确定方向
+          if (Crement>=0) then//FDecideInertiaDirectionCrement) then
+          begin
+            Self.FInertiaScrollDirection:=isdScrollToMin;
+          end;
+          if (Crement<=0) then//-FDecideInertiaDirectionCrement) then
+          begin
+            Self.FInertiaScrollDirection:=isdScrollToMax;
+          end;
 
-        //确定方向
-        if (Crement>=0) then//2) then
-        begin
-          AMouseMoveDirection:=isdScrollToMin;
-        end
-        else if (Crement<=0) then//-2) then
-        begin
-          AMouseMoveDirection:=isdScrollToMax;
-        end;
-        if AMouseMoveDirection<>FMouseMoveDirection then
-        begin
-          FMouseMoveDirection:=AMouseMoveDirection;
-          Self.FLastMouseMoveDirectionChangePoint:=FMouseMovePt;
-        end;
+    end
+    else
+    begin
+
+//        if Self.FKind=gmkHorizontal then
+//          OutputDebugString(GetDebugLogID+'TSkinControlGestureManager.MouseMove distance < '+IntToStr(FDecideDoDragDirectionCrement));
 
 
-        //确定方向
-        if (Crement>=0) then//FDecideInertiaDirectionCrement) then
-        begin
-          Self.FInertiaScrollDirection:=isdScrollToMin;
-        end;
-        if (Crement<=0) then//-FDecideInertiaDirectionCrement) then
-        begin
-          Self.FInertiaScrollDirection:=isdScrollToMax;
-        end;
+    end;
+  end
+  else
+  begin
+//    if Self.FKind=gmkHorizontal then
+//      OutputDebugString(GetDebugLogID+'TSkinControlGestureManager.MouseMove not FIsStartDrag');
+
 
   end;
 
@@ -2939,7 +2994,8 @@ end;
 procedure TSkinControlGestureManager.MouseUp(Button: TMouseButton; Shift: TShiftState;X, Y: Double);
 begin
 
-//    uBaseLog.OutputDebugString(GetDebugLogID+'MouseUp');
+//    if Self.FKind=gmkHorizontal then
+//      uBaseLog.OutputDebugString(GetDebugLogID+'MouseUp');
 //    uBaseLog.OutputDebugString(GetDebugLogID+'MouseUp('+FloatToStr(X)+','+FloatToStr(Y)+')');
 //    uBaseLog.OutputDebugString(GetDebugLogID+'MouseDown('+FloatToStr(Self.FFirstMouseMovePt.X)+','+FloatToStr(Self.FFirstMouseMovePt.Y)+')');
 
@@ -2949,6 +3005,7 @@ begin
     //从激活手势列表去排除
     CurrentGestureManagerList.Remove(Self,False);
 
+    //用于ClipHeadFrame
     if Self=ZoomingHorzGestureManager then
     begin
         CancelMouseUp;
@@ -2979,7 +3036,14 @@ begin
     if Down then
     begin
 
+
+//      if Self.FKind=gmkHorizontal then
+//        uBaseLog.OutputDebugString(GetDebugLogID+'MouseUp MouseMove Begin');
+      //最后再来个MouseMove
       MouseMove(Shift,X, Y);
+//      if Self.FKind=gmkHorizontal then
+//        uBaseLog.OutputDebugString(GetDebugLogID+'MouseUp MouseMove End');
+
 
   //    //添加坐标点
   //    AddPointTime(X, Y, Now);
@@ -3040,7 +3104,8 @@ begin
 
         if (FDecidedFirstGestureKind=FKind) then
         begin
-//          OutputDebugString(GetDebugLogID+'启动惯性滚动');
+//          if Self.FKind=gmkHorizontal then
+//            OutputDebugString(GetDebugLogID+'TSkinControlGestureManager.MouseUp 启动惯性滚动');
           //启动惯性滚动
           Self.StartInertiaScroll;
         end
@@ -3052,6 +3117,12 @@ begin
     end;
 
 
+end;
+
+procedure TSkinControlGestureManager.CancelInertiaScroll;
+begin
+  Self.FUpVelocity.X:=0;
+  Self.FUpVelocity.Y:=0;
 end;
 
 procedure TSkinControlGestureManager.CancelMouseUp;
@@ -4395,7 +4466,8 @@ begin
     if Not FIsMouseDown then
     begin
 
-  //      OutputDebugString(GetDebugLogID+'FirstMouseDown');
+//        if Self.FKind=gmkHorizontal then
+//          OutputDebugString(GetDebugLogID+'FirstMouseDown');
         //鼠标按下
         FIsMouseDown:=True;
 
@@ -4453,6 +4525,9 @@ begin
         FLastMouseMovePt:=PointF(X,Y);
         FLastMouseMoveDirectionChangePoint:=PointF(X,Y);
         FLastMouseMoveAbsolutePt:=FFirstMouseMoveAbsolutePt;
+
+//        if Self.FKind=gmkHorizontal then
+//          uBaseLog.OutputDebugString('GetDebugLogID FirstMouseDown FLastMouseMoveAbsolutePt:'+FloatToStr(FLastMouseMoveAbsolutePt.X)+','+FloatToStr(FLastMouseMoveAbsolutePt.Y));
 
     end;
 

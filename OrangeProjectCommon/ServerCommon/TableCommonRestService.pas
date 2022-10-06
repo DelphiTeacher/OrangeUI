@@ -62,7 +62,7 @@ uses
 //  Forms,
   XMLDoc,
   XMLIntf,
-  ActiveX,
+//  ActiveX,
 
   ZLib,
 
@@ -74,7 +74,7 @@ uses
   uBaseDBHelper,
   uUniDBHelper,
   uFuncCommon,
-  uLang,
+//  uLang,
 
   uRestInterfaceCall,
 //  Redis.Commons,
@@ -114,7 +114,7 @@ type
 
   //是否可以添加记录的事件
   TCanAddRecordEvent=function(Sender:TObject;
-                              const AAppID:Integer;const
+                              const AAppID:String;const
                               AUserFID: String;
                               const AKey,
                               ARestName: String;
@@ -173,7 +173,7 @@ type
 
      [kbmMW_Method]
      [kbmMW_Rest('method:get, path: "cal/addnumbers"')]
-     function AddNumbers([kbmMW_Rest('value: "$arg1", required: true')] const AValue1:Integer;
+     function AddNumbers([kbmMW_Rest('value: "$arg1", required: false')] const AValue1:Integer;
                          [kbmMW_Rest('value: "$arg2", required: true')] const AValue2:Integer;
                          [kbmMW_Arg(mwatRemoteLocation)] const ARemoteLocation:String):Integer;
 
@@ -183,7 +183,7 @@ type
       //添加记录
       [kbmMW_Method]
       [kbmMW_Rest('method:get, path: "add_record"')]
-      function AddRecord([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function AddRecord([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                  [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                  [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                  [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -193,7 +193,7 @@ type
       //添加记录
       [kbmMW_Method]
       [kbmMW_Rest('method:post, path: "add_record_post"')]
-      function AddRecordPost([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function AddRecordPost([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                  [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                  [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                  [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -202,7 +202,7 @@ type
       //添加记录
       [kbmMW_Method]
       [kbmMW_Rest('method:post, path: "add_record_post_2"')]
-      function AddRecordPost2([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function AddRecordPost2([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                  [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                  [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                  [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -212,7 +212,7 @@ type
       //添加记录列表
       [kbmMW_Method]
       [kbmMW_Rest('method:post, path: "add_record_list_post"')]
-      function AddRecordListPost([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function AddRecordListPost([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                  [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                  [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                  [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -223,7 +223,7 @@ type
       //添加记录列表
       [kbmMW_Method]
       [kbmMW_Rest('method:post, path: "add_record_list_post_2"')]
-      function AddRecordListPost2([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function AddRecordListPost2([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                  [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                  [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                  [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -233,7 +233,7 @@ type
       //修改记录
       [kbmMW_Method]
       [kbmMW_Rest('method:get, path: "update_record"')]
-      function UpdateRecord([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function UpdateRecord([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                  [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                  [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                  [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -243,7 +243,7 @@ type
                  [kbmMW_Arg(mwatRemoteLocation)] const ARemoteLocation:String):String;
       [kbmMW_Method]
       [kbmMW_Rest('method:post, path: "update_record_post"')]
-      function UpdateRecordPost([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function UpdateRecordPost([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                  [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                  [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                  [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -255,7 +255,7 @@ type
       //修改记录
       [kbmMW_Method]
       [kbmMW_Rest('method:get, path: "update_record_list"')]
-      function UpdateRecordList([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function UpdateRecordList([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                  [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                  [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                  [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -267,7 +267,7 @@ type
       //删除记录
       [kbmMW_Method]
       [kbmMW_Rest('method:get, path: "del_record"')]
-      function DelRecord([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function DelRecord([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                  [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                  [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                  [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -278,7 +278,7 @@ type
       //删除记录列表
       [kbmMW_Method]
       [kbmMW_Rest('method:get, path: "del_record_list"')]
-      function DelRecordList([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function DelRecordList([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                  [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                  [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                  [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -288,7 +288,7 @@ type
       //获取记录列表
       [kbmMW_Method]
       [kbmMW_Rest('method:get, path: "get_record_list"')]
-      function GetRecordList([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function GetRecordList([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                 [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                 [kbmMW_Rest('value: "$key", required: true')] const AKey:String;
                 [kbmMW_Rest('value: "$pageindex", required: true')] const APageIndex:Integer;
@@ -300,12 +300,13 @@ type
                 [kbmMW_Rest('value: "$is_need_return_level", required: false')] const AIsNeedReturnLevel:String;
                 [kbmMW_Rest('value: "$record_data_json", required: false')] const ARecordDataJson:String;
                 [kbmMW_Rest('value: "$is_need_sub_query_list", required: false')] const AIsNeedSubQueryList:String;
+                [kbmMW_Rest('value: "$is_need_sum_count", required: false')] const is_need_sum_count:String;
                 [kbmMW_Arg(mwatRemoteLocation)] const ARemoteLocation:String):String;
 
       //获取记录
       [kbmMW_Method]
       [kbmMW_Rest('method:get, path: "get_record"')]
-      function GetRecord([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function GetRecord([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                 [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                 [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                 [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -318,7 +319,7 @@ type
       //获取字段列表
       [kbmMW_Method]
       [kbmMW_Rest('method:get, path: "get_field_list"')]
-      function GetFieldList([kbmMW_Rest('value: "$appid", required: true')] const AAppID:Integer;
+      function GetFieldList([kbmMW_Rest('value: "$appid", required: true')] const AAppID:String;
                 [kbmMW_Rest('value: "$user_fid", required: true')] const AUserFID:String;
                 [kbmMW_Rest('value: "$key", required: false')] const AKey:String;
                 [kbmMW_Rest('value: "$rest_name", required: true')] const ARestName:String;
@@ -342,7 +343,7 @@ type
   TCommonRestServiceModule=class(TKbmMWServiceModule)
   public
     //表服务列表
-    IntfList:TCommonRestIntfList;
+    function IntfList:TCommonRestIntfList;
   public
     constructor Create; {$IFDEF USE_IDHTTPSERVERMODE}{$ELSE}override;{$ENDIF}
     destructor Destroy; override;
@@ -359,7 +360,7 @@ type
     //添加一条记录
     function AddRecord(ARestName:String;
                         ASQLDBHelper:TBaseDBHelper;
-                        AAppID:Integer;
+                        AAppID:String;
                         ARecordDataJson:ISuperObject;
                         var ACode:Integer;
                         var ADesc:String;
@@ -368,7 +369,7 @@ type
     //添加记录列表
     function AddRecordList(ARestName:String;
                         ASQLDBHelper:TBaseDBHelper;
-                        AAppID:Integer;
+                        AAppID:String;
                         ARecordDataJsonArray:ISuperArray;
                         var ACode:Integer;
                         var ADesc:String;
@@ -377,7 +378,7 @@ type
     //修改一条记录
     function UpdateRecord(ARestName:String;
                           ASQLDBHelper:TBaseDBHelper;
-                          AAppID:Integer;
+                          AAppID:String;
                           ARecordDataJson:ISuperObject;
                           //更新条件数组,Json数组
                           AWhereKeyJson:String;
@@ -390,7 +391,7 @@ type
     //获取记录列表
     function GetRecordList(ARestName:String;
                           ASQLDBHelper:TBaseDBHelper;
-                          AAppID:Integer;
+                          AAppID:String;
                            APageIndex:Integer;
                            APageSize:Integer;
                            //查询条件,Json数组
@@ -413,7 +414,7 @@ type
     //获取记录
     function GetRecord(ARestName:String;
                         ASQLDBHelper:TBaseDBHelper;
-                        AAppID:Integer;
+                        AAppID:String;
                        //查询条件,Json数组
                        AWhereKeyJson:String;
                        //自带的Where条件,如 AND (1=1),可以不使用AWhereKeyJson
@@ -437,7 +438,7 @@ type
     function RealDeleteRecord(
                           ARestName:String;
                           ASQLDBHelper:TBaseDBHelper;
-                          AAppID:Integer;
+                          AAppID:String;
                           //删除条件数组,Json数组
                           AWhereKeyJson:String;
                           //自带的Where条件,如  AND (1=1),可以不使用AWhereKeyJson
@@ -450,7 +451,7 @@ type
     function DeleteRecord(
                           ARestName:String;
                           ASQLDBHelper:TBaseDBHelper;
-                          AAppID:Integer;
+                          AAppID:String;
                           //删除条件数组,Json数组
                           AWhereKeyJson:String;
                           //自带的Where条件,如  AND (1=1),可以不使用AWhereKeyJson
@@ -492,7 +493,7 @@ uses
 { TsrvTableCommonRestService }
 
 
-function TsrvTableCommonRestService.AddRecord(const AAppID:Integer;const
+function TsrvTableCommonRestService.AddRecord(const AAppID:String;const
   AUserFID: String; const AKey, ARestName, ARecordDataJson: String;
   const ARemoteLocation: String): String;
 var
@@ -513,23 +514,23 @@ begin
   ADataJson:=nil;
 
 
-  if AAppID=0 then
+  if AAppID='' then
   begin
-    ADesc:=Trans('AppID不能为空');
+    ADesc:=('AppID不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
 //  if (Trim(AUserFID)='') or (Trim(AUserFID)='0') then
 //  begin
-//    ADesc:=Trans('UserFID不能为空');
+//    ADesc:=('UserFID不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
 
   if ARestName='' then
   begin
-    ADesc:=Trans('RestName不能为空');
+    ADesc:=('RestName不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -542,7 +543,7 @@ begin
 
   if ATableItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -570,7 +571,7 @@ begin
 //    end
 //    else
 //    begin
-//      ADesc:=Trans(AHttpResponseJson.S['Desc']);
+//      ADesc:=(AHttpResponseJson.S['Desc']);
 //      Exit;
 //    end;
 
@@ -605,7 +606,7 @@ begin
 
 end;
 
-function TsrvTableCommonRestService.AddRecordPost(const AAppID: Integer;
+function TsrvTableCommonRestService.AddRecordPost(const AAppID: String;
   const AUserFID, AKey, ARestName, ARecordDataJson, ARemoteLocation: String): String;
 //var
 //  AStringStream:TStringStream;
@@ -623,11 +624,13 @@ begin
   Result:=AddRecord(AAppID,AUserFID,AKey,ARestName,ARecordDataJson,ARemoteLocation);
 end;
 
-function TsrvTableCommonRestService.AddRecordPost2(const AAppID: Integer;
+function TsrvTableCommonRestService.AddRecordPost2(const AAppID: String;
   const AUserFID, AKey, ARestName, ARemoteLocation: String): String;
 var
   AStringStream:TStringStream;
 begin
+  {$IFDEF USE_IDHTTPSERVERMODE}
+  {$ELSE}
   AStringStream:=TStringStream.Create('',TEncoding.UTF8);
   try
     RequestStream.Position:=0;
@@ -637,10 +640,11 @@ begin
   finally
     FreeAndNil(AStringStream);
   end;
+  {$ENDIF}
 
 end;
 
-function TsrvTableCommonRestService.AddRecordListPost(const AAppID: Integer;
+function TsrvTableCommonRestService.AddRecordListPost(const AAppID: String;
   const AUserFID, AKey, ARestName, ARecordDataJsonArrayStr, ARemoteLocation: String): String;
 //var
 //  AStringStream:TStringStream;
@@ -687,11 +691,13 @@ begin
 
 end;
 
-function TsrvTableCommonRestService.AddRecordListPost2(const AAppID: Integer;
+function TsrvTableCommonRestService.AddRecordListPost2(const AAppID: String;
   const AUserFID, AKey, ARestName, ARemoteLocation: String): String;
 var
   AStringStream:TStringStream;
 begin
+  {$IFDEF USE_IDHTTPSERVERMODE}
+  {$ELSE}
 
   AStringStream:=TStringStream.Create('',TEncoding.UTF8);
   try
@@ -703,6 +709,7 @@ begin
   finally
     FreeAndNil(AStringStream);
   end;
+  {$ENDIF}
 
 end;
 
@@ -712,7 +719,7 @@ begin
   Result:=AValue1+AValue2;
 end;
 
-function TsrvTableCommonRestService.DelRecord(const AAppID:Integer;const
+function TsrvTableCommonRestService.DelRecord(const AAppID:String;const
   AUserFID: String; const AKey: String;
   const ARestName,AWhereKeyJson, ACustomConditionSQL: String;
   const ARemoteLocation: String): String;
@@ -731,16 +738,16 @@ begin
   ADataJson:=nil;
 
 
-  if AAppID=0 then
+  if AAppID='' then
   begin
-    ADesc:=Trans('AppID不能为空');
+    ADesc:=('AppID不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
 //  if (Trim(AUserFID)='') or (Trim(AUserFID)='0') then
 //  begin
-//    ADesc:=Trans('UserFID不能为空');
+//    ADesc:=('UserFID不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
@@ -748,14 +755,14 @@ begin
 
   if ARestName='' then
   begin
-    ADesc:=Trans('RestName不能为空');
+    ADesc:=('RestName不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
   if (AWhereKeyJson='') and (ACustomConditionSQL='') then
   begin
-    ADesc:=Trans('条件不能同时为空');
+    ADesc:=('条件不能同时为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -766,7 +773,7 @@ begin
   ATableItem:=CommonRestServiceModule.IntfList.Find(ARestName);
   if ATableItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -796,7 +803,7 @@ begin
 //    end
 //    else
 //    begin
-//      ADesc:=Trans(AHttpResponseJson.S['Desc']);
+//      ADesc:=(AHttpResponseJson.S['Desc']);
 //      Exit;
 //    end;
 
@@ -820,7 +827,7 @@ begin
 
 end;
 
-function TsrvTableCommonRestService.DelRecordList(const AAppID:Integer;const
+function TsrvTableCommonRestService.DelRecordList(const AAppID:String;const
   AUserFID: String; const AKey, ARestName, AWhereJsonArray,
   ARemoteLocation: String): String;
 var
@@ -840,16 +847,16 @@ begin
   ADataJson:=nil;
 
 
-  if AAppID=0 then
+  if AAppID='' then
   begin
-    ADesc:=Trans('AppID不能为空');
+    ADesc:=('AppID不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
 //  if (Trim(AUserFID)='') or (Trim(AUserFID)='0') then
 //  begin
-//    ADesc:=Trans('UserFID不能为空');
+//    ADesc:=('UserFID不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
@@ -857,14 +864,14 @@ begin
 
   if ARestName='' then
   begin
-    ADesc:=Trans('RestName不能为空');
+    ADesc:=('RestName不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
   if (AWhereJsonArray='') then
   begin
-    ADesc:=Trans('条件不能同时为空');
+    ADesc:=('条件不能同时为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -875,7 +882,7 @@ begin
   ATableItem:=CommonRestServiceModule.IntfList.Find(ARestName);
   if ATableItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -905,7 +912,7 @@ begin
 //    end
 //    else
 //    begin
-//      ADesc:=Trans(AHttpResponseJson.S['Desc']);
+//      ADesc:=(AHttpResponseJson.S['Desc']);
 //      Exit;
 //    end;
 
@@ -935,7 +942,7 @@ begin
   Result:='你好！'+astring;
 end;
 
-function TsrvTableCommonRestService.GetFieldList(const AAppID:Integer;const
+function TsrvTableCommonRestService.GetFieldList(const AAppID:String;const
   AUserFID: String; const AKey, ARestName, ARemoteLocation: String): String;
 var
   ACode:Integer;
@@ -952,23 +959,23 @@ begin
   ADataJson:=nil;
 
 
-  if AAppID=0 then
+  if AAppID='' then
   begin
-    ADesc:=Trans('AppID不能为空');
+    ADesc:=('AppID不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
 //  if (Trim(AUserFID)='') or (Trim(AUserFID)='0') then
 //  begin
-//    ADesc:=Trans('UserFID不能为空');
+//    ADesc:=('UserFID不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
 
   if ARestName='' then
   begin
-    ADesc:=Trans('RestName不能为空');
+    ADesc:=('RestName不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -981,7 +988,7 @@ begin
 
   if (ATableItem=nil) then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -1011,7 +1018,7 @@ begin
 //    end
 //    else
 //    begin
-//      ADesc:=Trans(AHttpResponseJson.S['Desc']);
+//      ADesc:=(AHttpResponseJson.S['Desc']);
 //      Exit;
 //    end;
 
@@ -1037,13 +1044,14 @@ begin
   end;
 end;
 
-function TsrvTableCommonRestService.GetRecordList(const AAppID:Integer;const
+function TsrvTableCommonRestService.GetRecordList(const AAppID:String;const
   AUserFID: String; const AKey:String;
   const APageIndex,APageSize:Integer;
   const ARestName,AWhereKeyJson, ACustomConditionSQL, AOrderBy:String;
   const AIsNeedReturnLevel:String;
   const ARecordDataJson:String;
   const AIsNeedSubQueryList:String;
+  const is_need_sum_count:String;
   const ARemoteLocation: String): String;
 var
   ACode:Integer;
@@ -1060,23 +1068,23 @@ begin
   ADataJson:=nil;
 
 
-  if AAppID=0 then
-  begin
-    ADesc:=Trans('AppID不能为空');
-    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
-    Exit;
-  end;
+//  if AAppID='' then
+//  begin
+//    ADesc:=('AppID不能为空');
+//    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
+//    Exit;
+//  end;
 
 //  if (Trim(AUserFID)='') or (Trim(AUserFID)='0') then
 //  begin
-//    ADesc:=Trans('UserFID不能为空');
+//    ADesc:=('UserFID不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
 
   if ARestName='' then
   begin
-    ADesc:=Trans('RestName不能为空');
+    ADesc:=('RestName不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -1089,7 +1097,7 @@ begin
 
   if (ATableItem=nil) then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -1132,22 +1140,22 @@ begin
 
 
         ATableItem.GetRecordList(
-              ATableItem.DBModule,
-              nil,
-              AAppID,
-              APageIndex,
-              APageSize,
-              AWhereKeyJson,
-              AOrderBy,
-              ACustomConditionSQL,
-              1,//需要返回sum_count
-              Ord(AIsNeedReturnLevel='1'),//是否需要返回层级Level
-              ARecordDataJson,
-              Ord(AIsNeedSubQueryList='1'),
-              ACode,
-              ADesc,
-              ADataJson
-              );
+                                  ATableItem.DBModule,
+                                  nil,
+                                  AAppID,
+                                  APageIndex,
+                                  APageSize,
+                                  AWhereKeyJson,
+                                  AOrderBy,
+                                  ACustomConditionSQL,
+                                  Ord((is_need_sum_count='1') or (is_need_sum_count='')),//1,//需要返回sum_count
+                                  Ord(AIsNeedReturnLevel='1'),//是否需要返回层级Level
+                                  ARecordDataJson,
+                                  Ord(AIsNeedSubQueryList='1'),
+                                  ACode,
+                                  ADesc,
+                                  ADataJson
+                                  );
     end;
 
 
@@ -1157,7 +1165,7 @@ begin
 
 end;
 
-function TsrvTableCommonRestService.GetRecord(const AAppID:Integer;const
+function TsrvTableCommonRestService.GetRecord(const AAppID:String;const
   AUserFID: String; const AKey:String;
   const ARestName,AWhereKeyJson, ACustomConditionSQL,
   ARecordDataJson,AIsMustExist,
@@ -1182,23 +1190,23 @@ begin
   ADataJson:=nil;
 
 
-  if AAppID=0 then
+  if AAppID='' then
   begin
-    ADesc:=Trans('AppID不能为空');
+    ADesc:=('AppID不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
 //  if (Trim(AUserFID)='') or (Trim(AUserFID)='0') then
 //  begin
-//    ADesc:=Trans('UserFID不能为空');
+//    ADesc:=('UserFID不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
 
   if ARestName='' then
   begin
-    ADesc:=Trans('RestName不能为空');
+    ADesc:=('RestName不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -1211,7 +1219,7 @@ begin
 
   if (ATableItem=nil) then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -1239,7 +1247,7 @@ begin
 //    end
 //    else
 //    begin
-//      ADesc:=Trans(AHttpResponseJson.S['Desc']);
+//      ADesc:=(AHttpResponseJson.S['Desc']);
 //      Exit;
 //    end;
 
@@ -1255,11 +1263,19 @@ begin
 //      if
 //
 //          //取缓存失败
-//          not ARedisClient.GET(IntToStr(AAppID)+'_'+'get_record'+'_'+ARestName+'_'+AWhereKeyJson,ARedisValue)
+//          (ARedisClient<>nil) and  ARedisClient.GET(IntToStr(AAppID)+'_'+'get_record'+'_'+ARestName+'_'+AWhereKeyJson,ARedisValue)
 //          then
 //      begin
 
 
+//
+//          //有缓存
+//          ADataJson:=TSuperObject.Create(ARedisValue);
+//          ACode:=SUCC;
+//      end
+//      else
+//      begin
+//
 
           ATableItem.GetRecord(
                       ATableItem.DBModule,
@@ -1277,15 +1293,7 @@ begin
 
 
 //          //设置缓存,10分钟过期
-//          ARedisClient.&Set(IntToStr(AAppID)+'_'+'get_record'+'_'+ARestName+'_'+AWhereKeyJson,ADataJson.AsJSON,REDIS_COMMON_TIMEOUT);
-//
-//      end
-//      else
-//      begin
-//
-//          //有缓存
-//          ADataJson:=TSuperObject.Create(ARedisValue);
-//          ACode:=SUCC;
+//          if (ARedisClient<>nil) then ARedisClient.&Set(IntToStr(AAppID)+'_'+'get_record'+'_'+ARestName+'_'+AWhereKeyJson,ADataJson.AsJSON,REDIS_COMMON_TIMEOUT);
 //
 //      end;
 
@@ -1303,7 +1311,7 @@ begin
 
 end;
 
-//function TsrvTableCommonRestService.QueryRecordList(const AAppID:Integer;const
+//function TsrvTableCommonRestService.QueryRecordList(const AAppID:String;const
 //  AUserFID: String; const AKey:String;
 //  const APageIndex,APageSize:Integer;
 //  const ARestName,AWhereKeyJson,AOrderBy,
@@ -1324,23 +1332,23 @@ end;
 //  ADataJson:=nil;
 //
 //
-//  if AAppID=0 then
+//  if AAppID='' then
 //  begin
-//    ADesc:=Trans('AppID不能为空');
+//    ADesc:=('AppID不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
 //
 //  if (Trim(AUserFID)='') or (Trim(AUserFID)='0') then
 //  begin
-//    ADesc:=Trans('UserFID不能为空');
+//    ADesc:=('UserFID不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
 //
 //  if ARestName='' then
 //  begin
-//    ADesc:=Trans('RestName不能为空');
+//    ADesc:=('RestName不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
@@ -1352,7 +1360,7 @@ end;
 //  ATableItem:=CommonRestServiceModule.QueryList.Find(ARestName);
 //  if ATableItem=nil then
 //  begin
-//    ADesc:=Trans('不存在'+ARestName+'服务');
+//    ADesc:=('不存在'+ARestName+'服务');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
@@ -1382,7 +1390,7 @@ end;
 //    end
 //    else
 //    begin
-//      ADesc:=Trans(AHttpResponseJson.S['Desc']);
+//      ADesc:=(AHttpResponseJson.S['Desc']);
 //      Exit;
 //    end;
 //
@@ -1436,13 +1444,21 @@ var
   inBuffer: TBytes;
   outBuffer: TBytes;
   AResultStr:String;
+  AStartTime:TDateTime;
+  ARestName:String;
+  AStartIndex:Integer;
+  AEndIndex:Integer;
 begin
+  AStartTime:=Now;
 
   ProcessCORSRequest;
 
+
+  ARestName:='';
   if length(Args)>2 then
   begin
-
+    //Args[2]=appid=1016&user_fid=B25FF37922F54D98AAA5C6E4B2C90154&key=830F5B18BCC9450C9E15FC072738235A&
+    //rest_name=workshop&pageindex=1&pagesize=2147483647&where_key_json=&timestamp=1653976246&nonce=1653976246dkuac&signtype=md5&sign=bd9fb54baabe02f6044efd9dd4d21e99
     //验签
     //取到appid,获取到appsecret,再验签,appid放在列表中,每次服务器启动时获取签名
     if not GlobalServiceProject.CheckInterfaceSign(Args[0],Args[2],ADesc) then
@@ -1451,6 +1467,18 @@ begin
       Exit;
     end;
 
+    AStartIndex:=Pos('rest_name=',Args[2]);
+    if AStartIndex>0 then
+    begin
+      AStartIndex:=AStartIndex+Length('rest_name=');
+      AEndIndex:=Pos('&',Args[2],AStartIndex);
+      if AEndIndex=0 then
+      begin
+        AEndIndex:=Length(Args[2]);
+      end;
+      ARestName:=Copy(Args[2],AStartIndex,AEndIndex-AStartIndex);
+
+    end;
   end;
 
 
@@ -1473,10 +1501,14 @@ begin
 
 
 
+  //统计接口调用
+  GlobalServiceProject.FAPICallStatisticsList.AddCall(ClientIdent.ServicePath+'?rest_name='+ARestName,DateUtils.MilliSecondsBetween(Now,AStartTime));
+
+
 end;
 {$ENDIF}
 
-function TsrvTableCommonRestService.UpdateRecord(const AAppID:Integer;const
+function TsrvTableCommonRestService.UpdateRecord(const AAppID:String;const
   AUserFID: String; const AKey: String; const ARestName,
   ARecordDataJson, AWhereKeyJson, ACustomConditionSQL: String;
   const ARemoteLocation: String): String;
@@ -1496,37 +1528,37 @@ begin
   ADataJson:=nil;
 
 
-  if AAppID=0 then
+  if AAppID='' then
   begin
-    ADesc:=Trans('AppID不能为空');
+    ADesc:=('AppID不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
 //  if (Trim(AUserFID)='') or (Trim(AUserFID)='0') then
 //  begin
-//    ADesc:=Trans('UserFID不能为空');
+//    ADesc:=('UserFID不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
 
   if ARestName='' then
   begin
-    ADesc:=Trans('RestName不能为空');
+    ADesc:=('RestName不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
   if ARecordDataJson='' then
   begin
-    ADesc:=Trans('RecordDataJson不能为空');
+    ADesc:=('RecordDataJson不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
   if (AWhereKeyJson='') and (ACustomConditionSQL='') then
   begin
-    ADesc:=Trans('条件不能同时为空');
+    ADesc:=('条件不能同时为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -1537,7 +1569,7 @@ begin
   ATableItem:=CommonRestServiceModule.IntfList.Find(ARestName);
   if ATableItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -1569,7 +1601,7 @@ begin
 //    end
 //    else
 //    begin
-//      ADesc:=Trans(AHttpResponseJson.S['Desc']);
+//      ADesc:=(AHttpResponseJson.S['Desc']);
 //      Exit;
 //    end;
 
@@ -1596,7 +1628,7 @@ begin
 
 end;
 
-function TsrvTableCommonRestService.UpdateRecordList(const AAppID:Integer;const
+function TsrvTableCommonRestService.UpdateRecordList(const AAppID:String;const
   AUserFID: String; const AKey: String; const ARestName,
   ARecordDataJsonArray: String;
   const ARemoteLocation: String): String;
@@ -1619,30 +1651,30 @@ begin
   ADataJson:=nil;
 
 
-  if AAppID=0 then
+  if AAppID='' then
   begin
-    ADesc:=Trans('AppID不能为空');
+    ADesc:=('AppID不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
 //  if (Trim(AUserFID)='') or (Trim(AUserFID)='0') then
 //  begin
-//    ADesc:=Trans('UserFID不能为空');
+//    ADesc:=('UserFID不能为空');
 //    Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
 //    Exit;
 //  end;
 
   if ARestName='' then
   begin
-    ADesc:=Trans('RestName不能为空');
+    ADesc:=('RestName不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
 
   if ARecordDataJsonArray='' then
   begin
-    ADesc:=Trans('RecordDataJsonArray不能为空');
+    ADesc:=('RecordDataJsonArray不能为空');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -1653,7 +1685,7 @@ begin
   ATableItem:=CommonRestServiceModule.IntfList.Find(ARestName);
   if ATableItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
     Exit;
   end;
@@ -1685,7 +1717,7 @@ begin
 //    end
 //    else
 //    begin
-//      ADesc:=Trans(AHttpResponseJson.S['Desc']);
+//      ADesc:=(AHttpResponseJson.S['Desc']);
 //      Exit;
 //    end;
 
@@ -1714,7 +1746,7 @@ begin
 
 
     ACode:=SUCC;
-    ADesc:=Trans('批量编辑成功');
+    ADesc:=('批量编辑成功');
 
   finally
     Result:=ReturnJson(ACode,ADesc,ADataJson).AsJSON;
@@ -1725,12 +1757,14 @@ end;
 
 
 
-function TsrvTableCommonRestService.UpdateRecordPost(const AAppID: Integer;
+function TsrvTableCommonRestService.UpdateRecordPost(const AAppID: String;
   const AUserFID, AKey, ARestName, AWhereKeyJson, ACustomConditionSQL,
   ARemoteLocation: String): String;
 var
   AStringStream:TStringStream;
 begin
+  {$IFDEF USE_IDHTTPSERVERMODE}
+  {$ELSE}
   AStringStream:=TStringStream.Create('',TEncoding.UTF8);
   try
     RequestStream.Position:=0;
@@ -1740,6 +1774,7 @@ begin
   finally
     FreeAndNil(AStringStream);
   end;
+  {$ENDIF}
 
 end;
 
@@ -1747,7 +1782,7 @@ end;
 
 function TCommonRestServiceModule.AddRecord(ARestName:String;
   ASQLDBHelper: TBaseDBHelper;
-  AAppID:Integer;
+  AAppID:String;
   ARecordDataJson: ISuperObject;
   var ACode: Integer;
   var ADesc: String;
@@ -1768,7 +1803,7 @@ begin
   ATableItem:=CommonRestServiceModule.IntfList.Find(ARestName);
   if ATableItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Exit;
   end;
 
@@ -1788,7 +1823,7 @@ end;
 
 function TCommonRestServiceModule.AddRecordList(ARestName:String;
   ASQLDBHelper: TBaseDBHelper;
-  AAppID:Integer;
+  AAppID:String;
   ARecordDataJsonArray: ISuperArray;
   var ACode: Integer;
   var ADesc: String;
@@ -1809,7 +1844,7 @@ begin
   ATableItem:=CommonRestServiceModule.IntfList.Find(ARestName);
   if ATableItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Exit;
   end;
 
@@ -1835,7 +1870,7 @@ begin
   AIntfItem:=CommonRestServiceModule.IntfList.Find(ARestName);
   if AIntfItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Exit;
   end;
   Result:=True;
@@ -1845,13 +1880,13 @@ constructor TCommonRestServiceModule.Create;
 begin
   inherited;
 
-  IntfList:=TCommonRestIntfList.Create;
+//  IntfList:=TCommonRestIntfList.Create;
 
 end;
 
 function TCommonRestServiceModule.DeleteRecord(ARestName:String;
   ASQLDBHelper: TBaseDBHelper;
-  AAppID:Integer;
+  AAppID:String;
   AWhereKeyJson, ACustomConditionSQL: String;
   var ACode: Integer;
   var ADesc: String;
@@ -1872,7 +1907,7 @@ begin
   ATableItem:=CommonRestServiceModule.IntfList.Find(ARestName);
   if ATableItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Exit;
   end;
 
@@ -1893,7 +1928,7 @@ end;
 
 destructor TCommonRestServiceModule.Destroy;
 begin
-  FreeAndNil(IntfList);
+//  FreeAndNil(IntfList);
   inherited;
 end;
 
@@ -2006,7 +2041,7 @@ begin
 
   if (ATableItem=nil) then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Exit;
   end;
 
@@ -2029,7 +2064,7 @@ end;
 
 function TCommonRestServiceModule.GetRecord(ARestName:String;
   ASQLDBHelper: TBaseDBHelper;
-  AAppID:Integer;
+  AAppID:String;
   AWhereKeyJson,
   ACustomConditionSQL: String;
   ARecordDataJsonStr:String;
@@ -2053,7 +2088,7 @@ begin
 
   if (ATableItem=nil) then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Exit;
   end;
 
@@ -2078,7 +2113,7 @@ end;
 
 function TCommonRestServiceModule.GetRecordList(ARestName:String;
   ASQLDBHelper: TBaseDBHelper;
-  AAppID:Integer;
+  AAppID:String;
   APageIndex, APageSize: Integer;
   AWhereKeyJson, AOrderBy,
   ACustomConditionSQL: String;
@@ -2105,7 +2140,7 @@ begin
 
   if (ATableItem=nil) then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Exit;
   end;
 
@@ -2136,9 +2171,14 @@ begin
 
 end;
 
+function TCommonRestServiceModule.IntfList: TCommonRestIntfList;
+begin
+  Result:=GlobalCommonRestIntfList;
+end;
+
 function TCommonRestServiceModule.RealDeleteRecord(ARestName:String;
   ASQLDBHelper: TBaseDBHelper;
-  AAppID:Integer;
+  AAppID:String;
   AWhereKeyJson, ACustomConditionSQL: String;
   var ACode: Integer;
   var ADesc: String;
@@ -2159,7 +2199,7 @@ begin
   ATableItem:=CommonRestServiceModule.IntfList.Find(ARestName);
   if ATableItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Exit;
   end;
 
@@ -2180,7 +2220,7 @@ end;
 
 function TCommonRestServiceModule.UpdateRecord(ARestName:String;
   ASQLDBHelper: TBaseDBHelper;
-  AAppID:Integer;
+  AAppID:String;
   ARecordDataJson: ISuperObject; AWhereKeyJson, ACustomConditionSQL: String;
   var ACode: Integer; var ADesc: String; var ADataJson: ISuperObject): Boolean;
 var
@@ -2199,7 +2239,7 @@ begin
   ATableItem:=CommonRestServiceModule.IntfList.Find(ARestName);
   if ATableItem=nil then
   begin
-    ADesc:=Trans('不存在'+ARestName+'服务');
+    ADesc:=('不存在'+ARestName+'服务');
     Exit;
   end;
 

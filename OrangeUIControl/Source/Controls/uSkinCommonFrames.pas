@@ -8,17 +8,39 @@ interface
 
 uses
   Classes,
+
+  {$IFDEF FMX}
   Types,
-  UITypes,
   FMX.Types,
-  FMX.Forms,
   FMX.Controls,
+  FMX.Forms,
+  {$ENDIF}
+
+  {$IFDEF VCL}
+  Windows,
+  Controls,
+  Forms,
+  {$ENDIF}
+
+  {$IF CompilerVersion > 21.0}
+  UITypes,
+  {$IFEND}
+
+
 //  System.UITypes,
   SysUtils;
 
 
 
 type
+  {$IFDEF VCL}
+  TFmxObject=TWinControl;
+  {$ENDIF}
+
+  {$IF CompilerVersion <= 21.0}
+  TMsgDlgType = (mtWarning, mtError, mtInformation, mtConfirmation, mtCustom);
+  {$IFEND}
+
   TSkinMessageBox=class;
 
   TModalResultExEvent=procedure(Sender:TObject;
@@ -39,6 +61,8 @@ type
                                   AModalResult:String;
                                   AModalResultName:String;
                                   var AIsCanModalResult:Boolean) of object;
+
+
   TCanModalResultProc=reference to procedure(Sender:TObject;
                                   AModalResult:String;
                                   AModalResultName:String;
@@ -52,8 +76,8 @@ type
                                    ASkinMessageBox:TSkinMessageBox):TFrame;
   //实现显示简单的对话框,在MessageBoxFrame中实现
   TDoShowSimpleMessageBoxEvent=function(Sender:TFmxObject;
-                                  AMsg:String;
-                                  AOtherMsg:String):TFrame;
+                                        AMsg:String;
+                                        AOtherMsg:String):TFrame;
   //实现显示等待框,在WaitingFrame中实现
   TDoShowWaitingEvent=procedure(Sender:TFmxObject;AHint:String);
   //实现隐藏对话框,在WaitingFrame中实现

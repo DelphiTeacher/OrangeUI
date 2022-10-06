@@ -73,6 +73,7 @@ type
   TFieldMapItem=class
   public
     SrcField:String;
+    SrcFieldSQL:String;
     DestField:String;
     UseDefaultValueType:TUseDefaultValueType;
     FDefaultValue:Variant;
@@ -83,16 +84,17 @@ type
     function GetItem(Index: Integer): TFieldMapItem;
   public
     function GetSrcFieldsCommaText:String;
+    function GetSrcFieldsSQLCommaText:String;
     function GetDestFieldsCommaText:String;
-    function Add(ASrcField:String;ADestField:String):TFieldMapItem;
+    function Add(ASrcField:String;ADestField:String;ASrcFieldSQL:String=''):TFieldMapItem;
     property Items[Index:Integer]:TFieldMapItem read GetItem;default;
   end;
 
 
   TBaseTableDataSyncTask=class
   public
-    SrcAppID:Integer;
-    DestAppID:Integer;
+    SrcAppID:String;
+    DestAppID:String;
 
     SrcKeyField:String;
     DestKeyField:String;
@@ -139,13 +141,14 @@ type
   //表数据同步任务处理的线程
   TTableDataSyncTaskThread=class(TBaseServiceThread)
   protected
-    FRecvEvent:TEvent;
+//    FRecvEvent:TEvent;
     FBaseTableDataSyncTask:TBaseTableDataSyncTask;
     procedure Execute;override;
   public
+    OnSyncEnd:TNotifyEvent;
     constructor Create(ACreateSuspended:Boolean;ATableDataSyncTask:TTableDataSyncTask);
     destructor Destroy;override;
-    procedure SetWorkEvent;
+//    procedure SetWorkEvent;
   end;
 
 
@@ -329,11 +332,11 @@ end;
 
 { TFieldMapList }
 
-function TFieldMapList.Add(ASrcField,
-  ADestField: String): TFieldMapItem;
+function TFieldMapList.Add(ASrcField,ADestField: String;ASrcFieldSQL:String=''): TFieldMapItem;
 begin
   Result:=TFieldMapItem.Create;
   Result.SrcField:=ASrcField;
+  Result.SrcFieldSQL:=ASrcFieldSQL;
   Result.DestField:=ADestField;
   Inherited Add(Result);
 end;
@@ -385,8 +388,42 @@ begin
 
 end;
 
+function TFieldMapList.GetSrcFieldsSQLCommaText: String;
+var
+//  AStringList:TStringList;
+  I: Integer;
+begin
+//  AStringList:=TStringList.Create;
+  Result:='';
+  try
+    for I := 0 to Count-1 do
+    begin
+      if Items[I].SrcField<>'' then
+      begin
+        if Result<>'' then
+        begin
+          Result:=Result+',';
+        end;
+        if Items[I].SrcFieldSQL<>'' then
+        begin
+          Result:=Result+Items[I].SrcFieldSQL;
+        end
+        else if Items[I].SrcField<>'' then
+        begin
+          Result:=Result+Items[I].SrcField;
+        end;
+      end;
+    end;
+//    Result:=AStringList.CommaText;
+
+  finally
+//    FreeAndNil(AStringList);
+  end;
 
 
+
+
+end;
 
 { TTableDataSyncTask }
 
@@ -428,7 +465,7 @@ var
   AFID:Variant;
 begin
 
-  uBaseLog.HandleException(nil,'TTableDataSyncTask.SyncData Begin');
+//  uBaseLog.HandleException(nil,'TTableDataSyncTask.SyncData Begin');
 
 
 
@@ -437,31 +474,30 @@ begin
   begin
     Exit;
   end;
+  if not DestDBModule.GetDBHelperFromPool(ADestDBHelper,ADesc) then
+  begin
+    Exit;
+  end;
+  ADestTempQuery:=ADestDBHelper.NewTempQuery;
   try
-      if not DestDBModule.GetDBHelperFromPool(ADestDBHelper,ADesc) then
-      begin
-        Exit;
-      end;
-      ADestTempQuery:=ADestDBHelper.NewTempQuery;
-      try
 
 
 
           //先获取源表的数据
 
           ASrcWhere:='';
-          if SrcAppID<>0 then
+          if SrcAppID<>'' then
           begin
-            ASrcWhere:=' WHERE appid='+IntToStr(SrcAppID);
+            ASrcWhere:=' WHERE appid='+(SrcAppID);
           end;
 
           ASrcSelectSQL:=SrcSelectSQL;
           if ASrcSelectSQL='' then
           begin
             //源表一般没有appid
-            ASrcSelectSQL:='SELECT '+Self.FieldMapList.GetSrcFieldsCommaText+' FROM '+Self.SrcTable+ASrcWhere;
+            ASrcSelectSQL:='SELECT '+Self.FieldMapList.GetSrcFieldsSQLCommaText+' FROM '+Self.SrcTable+ASrcWhere;
           end;
-          
+
 
           if not ASrcDBHelper.SelfQuery(ASrcSelectSQL) then
           begin
@@ -476,9 +512,9 @@ begin
 
 
           ADestWhere:='';
-          if DestAppID<>0 then
+          if DestAppID<>'' then
           begin
-            ADestWhere:=' WHERE appid='+IntToStr(DestAppID);
+            ADestWhere:=' WHERE appid='+(DestAppID);
           end;
 
           //再获取目标表的数据
@@ -509,7 +545,7 @@ begin
 
 
           ADestKeyFields:=DestKeyField;
-          if DestAppID<>0 then
+          if DestAppID<>'' then
           begin
             ADestKeyFields:='appid;'+DestKeyField;
           end;
@@ -525,11 +561,11 @@ begin
           while not ASrcDBHelper.Query.Eof do
           begin
 
-              uBaseLog.HandleException(nil,'TTableDataSyncTask.SyncData '+'appid;'+DestKeyField+'='+IntToStr(DestAppID)+';'+ASrcDBHelper.Query.FieldByName(SrcKeyField).AsVariant);
+//              uBaseLog.HandleException(nil,'TTableDataSyncTask.SyncData '+'appid;'+DestKeyField+'='+(DestAppID)+';'+ASrcDBHelper.Query.FieldByName(SrcKeyField).AsVariant);
 
 
 
-              if DestAppID<>0 then
+              if DestAppID<>'' then
               begin
                 ADestKeyValues:=vararrayof([DestAppID,ASrcDBHelper.Query.FieldByName(SrcKeyField).AsVariant]);
               end
@@ -569,7 +605,13 @@ begin
                     begin
 //                      AParamValues[I]:=ASrcDBHelper.Query.FieldByName(FieldMapList[I].SrcField).AsVariant;
                       ADestDBHelper.Query.FieldByName(FieldMapList[I].DestField).AsVariant:=ASrcDBHelper.Query.FieldByName(FieldMapList[I].SrcField).AsVariant;
+
+
+
                       ARecordDataJson.V[FieldMapList[I].DestField]:=ASrcDBHelper.Query.FieldByName(FieldMapList[I].SrcField).AsVariant;
+
+
+
                     end;
                   end;
 
@@ -588,6 +630,7 @@ begin
 
                   if SyncToInterfaceUrl<>'' then
                   begin
+                      //插入
                       if not SaveRecordToServer(SyncToInterfaceUrl,
                                                 DestAppID,
                                                 '',
@@ -603,6 +646,7 @@ begin
                                                 ) then
                       begin
                         ADesc:=ADesc2;
+                        //不能中断同步
                         Exit;
                       end;
 
@@ -624,7 +668,7 @@ begin
                   AHasDifferentFieldValue:=False;
                   AFID:=ADestDBHelper.Query.FieldByName(Self.DestKeyField).AsVariant;
 
-
+                  //比对字段是否更改过
                   for I := 0 to Self.FieldMapList.Count-1 do
                   begin
 
@@ -677,11 +721,12 @@ begin
                                                     ADataJson,
                                                     GlobalRestAPISignType,
                                                     GlobalRestAPIAppSecret,
-                                                    (DestAppID<>0),//是否有AppID
+                                                    (DestAppID<>''),//是否有AppID
                                                     Self.DestKeyField
                                                     ) then
                           begin
                             ADesc:=ADesc2;
+                            //不能中断
                             Exit;
                           end;
 
@@ -698,13 +743,10 @@ begin
 
 
           Result:=True;
-      finally
-        FreeAndNil(ADestTempQuery);
-        DestDBModule.FreeDBHelperToPool(ADestDBHelper);
-      end;
-
 
   finally
+    FreeAndNil(ADestTempQuery);
+    DestDBModule.FreeDBHelperToPool(ADestDBHelper);
     SrcDBModule.FreeDBHelperToPool(ASrcDBHelper);
   end;
 
@@ -717,7 +759,7 @@ constructor TTableDataSyncTaskThread.Create(ACreateSuspended: Boolean;
   ATableDataSyncTask: TTableDataSyncTask);
 begin
   FBaseTableDataSyncTask:=ATableDataSyncTask;
-  FRecvEvent:=TEvent.Create(nil, True, False, '');
+//  FRecvEvent:=TEvent.Create(nil, True, False, '');
 
   Inherited Create(ACreateSuspended);
 end;
@@ -726,7 +768,7 @@ destructor TTableDataSyncTaskThread.Destroy;
 begin
 
   inherited;
-  FreeAndNil(FRecvEvent);
+//  FreeAndNil(FRecvEvent);
 end;
 
 procedure TTableDataSyncTaskThread.Execute;
@@ -746,6 +788,12 @@ begin
     try
       FBaseTableDataSyncTask.SyncData(ADesc);
       uBaseLog.HandleException(nil,'TTableDataSyncTaskThread.Execute FBaseTableDataSyncTask.SyncData Desc:'+ADesc);
+
+      if Assigned(OnSyncEnd) then
+      begin
+        OnSyncEnd(FBaseTableDataSyncTask);
+      end;
+
     except
       on E:Exception do
       begin
@@ -755,9 +803,9 @@ begin
 
 
     //一分钟同步一次
-//    SleepThread(60*1000);
-    FRecvEvent.WaitFor(60*1000);
-    FRecvEvent.ResetEvent;
+    SleepThread(60*1000);
+//    FRecvEvent.WaitFor(60*1000);
+//    FRecvEvent.ResetEvent;
 
 
   end;
@@ -766,10 +814,10 @@ begin
 
 end;
 
-procedure TTableDataSyncTaskThread.SetWorkEvent;
-begin
-  FRecvEvent.SetEvent;
-end;
+//procedure TTableDataSyncTaskThread.SetWorkEvent;
+//begin
+//  FRecvEvent.SetEvent;
+//end;
 
 { TFieldMapItem }
 

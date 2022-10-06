@@ -4,10 +4,17 @@ object FrameRollLabel: TFrameRollLabel
   Size.PlatformDefault = False
   object lblAbout: TSkinFMXRollLabel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
     SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
     SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
     SelfOwnMaterial.DrawCaptionParam.IsWordWrap = True
@@ -17,10 +24,11 @@ object FrameRollLabel: TFrameRollLabel
     SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.Height = 60.000000000000000000
     MouseDownFocus = False
     CanFocus = True
+    ClipChildren = True
     Position.X = 8.000000000000000000
-    Position.Y = 125.000000000000000000
+    Position.Y = 85.000000000000000000
     Size.Width = 308.000000000000000000
-    Size.Height = 308.000000000000000000
+    Size.Height = 217.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     Caption = 
@@ -37,15 +45,22 @@ object FrameRollLabel: TFrameRollLabel
       #24066#20892#20135#21697#36136#37327#23433#20840#30417#31649#24037#20316#30340#22909#21161#25163#12290
     Properties.AutoSize = True
     Properties.Speed = 10.000000000000000000
-    Properties.EffectType = ilasetMoveHorz
+    Properties.EffectType = ilasetMoveVert
     Top = 165
   end
   object lblLink: TSkinFMXRollLabel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
     SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
     SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
     SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -59,7 +74,7 @@ object FrameRollLabel: TFrameRollLabel
     ClipChildren = True
     Position.X = 8.000000000000000000
     Position.Y = 53.000000000000000000
-    Size.Width = 185.096679687500000000
+    Size.Width = 200.000000000000000000
     Size.Height = 19.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
@@ -67,7 +82,40 @@ object FrameRollLabel: TFrameRollLabel
     Text = #38142#25509#25991#26412#26679#24335':www.baidu.com'
     Properties.AutoSize = True
     Properties.Speed = 10.000000000000000000
-    Properties.EffectType = ilasetMoveHorz
+    Properties.EffectType = ilasetMoveVert
     Top = 88
+  end
+  object SkinFMXHintLabel1: TSkinFMXHintLabel
+    ParentMouseEvent = False
+    DirectUIVisible = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawHintParam.FontColor = claGray
+    SelfOwnMaterial.DrawHintParam.DrawFont.Color = claGray
+    SelfOwnMaterial.DrawHintParam.DrawFont.FontColor.Color = claGray
+    SelfOwnMaterial.DrawHintParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawHintParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawHintParam.FontVertAlign = fvaTop
+    MouseDownFocus = False
+    Position.X = 48.000000000000000000
+    Position.Y = 376.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Caption = '99.00'
+    Text = '99.00'
+    Properties.AutoSize = False
+    Properties.Hint = #37329#39069#65306
   end
 end

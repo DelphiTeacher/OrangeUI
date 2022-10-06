@@ -98,7 +98,7 @@ type
     //自定义调用接口获取数据的查询条件
     function CustomGetRestDatasetPageCustomWhereKeyJson:String;virtual;
     //自定义初始控件,比如ListView
-    procedure CustomInitFieldControl(AControl:TComponent;AFieldControlSetting:TFieldControlSetting);virtual;
+    procedure CustomInitFieldControl(AControl:TComponent;AFieldControlSettingMap:TFieldControlSettingMap);virtual;
 //    //Page加载数据结束事件
 //    procedure DoLoadDataTaskEnd(Sender:TObject;
 //                                 APageInstance:TPageInstance;
@@ -281,7 +281,7 @@ begin
 
   //页面控件列表
   FPage:=uPageStructure.TPage.Create(nil);
-  FPageInstance:=TPageInstance.Create;
+  FPageInstance:=TPageInstance.Create(nil);
   FPageInstance.PageStructure:=FPage;
   FPageInstance.FOnCustomInitFieldControl:=Self.CustomInitFieldControl;
 //  FPageInstance.OnLoadDataTaskEnd:=DoLoadDataTaskEnd;
@@ -320,7 +320,7 @@ begin
 end;
 
 procedure TfrmBaseTableManage.CustomInitFieldControl(AControl: TComponent;
-  AFieldControlSetting: TFieldControlSetting);
+  AFieldControlSettingMap: TFieldControlSettingMap);
 begin
 
 end;
@@ -333,7 +333,7 @@ var
 begin
 
   ARecordDataJson:=JsonFromRecord(Self.RestMemTable1);
-  Self.FPageInstance.LoadDataJsonToControls(ARecordDataJson);
+  Self.FPageInstance.LoadCurrentRecordDataJsonToControls(ARecordDataJson);
 
 end;
 

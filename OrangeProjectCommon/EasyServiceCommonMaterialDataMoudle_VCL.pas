@@ -17,7 +17,7 @@ uses
   uSkinNotifyNumberIconType, uSkinCustomListType, uSkinVirtualListType,
   uSkinListBoxType, uSkinSwitchPageListPanelType, uSkinPageControlType,
   uSkinComboBoxType, uSkinComboEditType, uSkinMemoType, uSkinTimeEditType,
-  uSkinDateEditType, uSkinListViewType, uSkinPopupType, pngimage,
+  uSkinDateEditType, uSkinPopupType, pngimage,
   uSkinFormType;
 
 type
@@ -40,15 +40,12 @@ type
     rbRedRadioButtonMaterial: TSkinRadioButtonColorMaterial;
     btnSelectButtonMaterial: TSkinButtonDefaultMaterial;
     pnlInputMemoBlackCaptionPanelMaterial: TSkinPanelDefaultMaterial;
-    imglistBankIcon: TSkinImageList;
     edtSearchGoodsMaterial: TSkinEditDefaultMaterial;
     btnDeleteButtonMaterial: TSkinButtonDefaultMaterial;
-    ilPictureList: TSkinImageList;
     btnIconButtonMaterial: TSkinButtonDefaultMaterial;
     btnSearchButtonMaterial: TSkinButtonDefaultMaterial;
     btnNoticeNotifyNumberIconMaterial: TSkinNotifyNumberIconColorMaterial;
     nniRedNotifyNumberMaterial: TSkinNotifyNumberIconDefaultMaterial;
-    imgPayTypePicList: TSkinImageList;
     lbFilterHorzListBoxMaterial: TSkinListBoxDefaultMaterial;
     imgTakePicList: TSkinImageList;
     btnRedRectButtonMaterial: TSkinButtonDefaultMaterial;
@@ -60,15 +57,8 @@ type
     edtInputEditHasCenterHelpTextMaterial: TSkinEditDefaultMaterial;
     btnGrayBorderSmallTextButtonMaterial: TSkinButtonDefaultMaterial;
     btnSelectButtonRightAlignMaterial: TSkinButtonDefaultMaterial;
-    imglistSign: TSkinImageList;
     pcOrder_Material: TSkinPageControlDefaultMaterial;
     lbOrderList_Material: TSkinListBoxDefaultMaterial;
-    imgHomeStarList: TSkinImageList;
-    imglistMyCarBack: TSkinImageList;
-    imgHomeIcons: TSkinImageList;
-    imgShopListTakePicture: TSkinImageList;
-    imgShopHomeList: TSkinImageList;
-    Shopactivitylist: TSkinImageList;
     edtInputEditHasHelpTextAndIconMaterial: TSkinEditDefaultMaterial;
     cmbComboBox_Material: TSkinComboBoxDefaultMaterial;
     lblInputBlackCaptionPanelMaterial: TSkinLabelDefaultMaterial;
@@ -113,6 +103,9 @@ type
     fsdForm_Material: TSkinFormDefaultMaterial;
     btnBlackTransHoverColorIconLeftCaptionRight: TSkinButtonDefaultMaterial;
     pcLeftMargin2: TSkinPageControlDefaultMaterial;
+    btnThemeColorIconLeftCaptionRightGroupLeft: TSkinButtonDefaultMaterial;
+    btnThemeColorIconLeftCaptionRightGroupMiddle: TSkinButtonDefaultMaterial;
+    btnTransparentDropDownButtonMaterial: TSkinButtonDefaultMaterial;
   private
     { Private declarations }
   public

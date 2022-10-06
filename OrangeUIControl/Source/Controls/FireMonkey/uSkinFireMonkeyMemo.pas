@@ -135,7 +135,6 @@ Type
     procedure AdjustFixedSize(const Ref: TControl); override;
 
 
-
   protected
     function DefinePresentationName: string;
 //    {$IF CompilerVersion >= 29.0}
@@ -150,7 +149,7 @@ Type
     procedure TranslateControlLang(APrefix:String;ALang:TLang;ACurLang:String);virtual;
   public
     //针对页面框架的控件接口
-    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;virtual;
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;virtual;
 //    //获取合适的高度
 //    function GetSuitDefaultItemHeight:Double;
     //获取与设置自定义属性
@@ -164,9 +163,10 @@ Type
     procedure SetControlValue(ASetting:TFieldControlSetting;APageDataDir:String;AImageServerUrl:String;AValue:Variant;AValueCaption:String;
                             //要设置多个值,整个字段的记录
                             AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
-    //设置属性
-    function GetProp(APropName:String):Variant;
-    procedure SetProp(APropName:String;APropValue:Variant);
+//    //设置属性
+//    function GetProp(APropName:String):Variant;
+//    procedure SetProp(APropName:String;APropValue:Variant);
+    procedure DoReturnFrame(AFromFrame:TFrame);virtual;
   public
     constructor Create(AOwner:TComponent);override;
     destructor Destroy;override;
@@ -351,6 +351,7 @@ begin
   {$ENDIF}
   {$ENDIF}
 
+  Self.StyledSettings:=Self.StyledSettings-[TStyledSetting.Size,TStyledSetting.FontColor];
 end;
 
 
@@ -609,7 +610,7 @@ begin
   Self.OnPainting:=Self.DoPaintBackGround;
 
 
-  Self.StyledSettings:=Self.StyledSettings-[TStyledSetting.Size];
+  Self.StyledSettings:=Self.StyledSettings-[TStyledSetting.Size,TStyledSetting.FontColor];
 
 
   GlobalSkinFMXMemoList.Add(Self);
@@ -647,7 +648,7 @@ begin
   Self.FProperties.Assign(Value);
 end;
 
-function TSkinFMXCustomMemo.LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+function TSkinFMXCustomMemo.LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;
 begin
 //  SetMaterialUseKind(TMaterialUseKind.mukRefByStyleName);
 //  SetMaterialName(ASetting.ControlStyle);
@@ -714,13 +715,18 @@ begin
   Text:=AValue;
 end;
 
-//设置属性
-function TSkinFMXCustomMemo.GetProp(APropName:String):Variant;
-begin
+////设置属性
+//function TSkinFMXCustomMemo.GetProp(APropName:String):Variant;
+//begin
+//
+//end;
+//
+//procedure TSkinFMXCustomMemo.SetProp(APropName:String;APropValue:Variant);
+//begin
+//
+//end;
 
-end;
-
-procedure TSkinFMXCustomMemo.SetProp(APropName:String;APropValue:Variant);
+procedure TSkinFMXCustomMemo.DoReturnFrame(AFromFrame:TFrame);
 begin
 
 end;

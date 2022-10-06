@@ -91,6 +91,10 @@ type
                                 tpaatBind,
                                 tpaatUnBind
                                 );
+
+
+
+
   TBaseUserBindThirdPartyAccount=class
   public
     FActionType:TThirdPartyAccountActionType;

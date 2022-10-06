@@ -157,6 +157,7 @@
         </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='Win64'"/>
+    <ItemGroup Condition="'$(Platform)'=='Linux64'"/>
     <ItemGroup Condition="'$(Platform)'=='Win32'">
         <DeployFile Include="Win32\Debug\OrangeUIDemo_FMX_D10_4.exe" Condition="'$(Config)'=='Debug'">
             <RemoteDir>OrangeUIDemo_FMX_D10_4\</RemoteDir>
@@ -169,7 +170,6 @@
             <Required>True</Required>
         </DeployFile>
     </ItemGroup>
-    <ItemGroup Condition="'$(Platform)'=='Linux64'"/>
     <ItemGroup Condition="'$(Platform)'=='OSX64'"/>
     <ItemGroup Condition="'$(Platform)'=='Android'">
         <DeployFile Include="Android\Release\provider_paths.xml" Condition="'$(Config)'=='Release'">

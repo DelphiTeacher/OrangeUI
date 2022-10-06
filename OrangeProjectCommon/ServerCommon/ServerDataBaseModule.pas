@@ -7,14 +7,15 @@ uses
   System.SysUtils, System.Classes,
   kbmMWCustomConnectionPool,
 
-  Vcl.Controls,
-  Vcl.StdCtrls,
-  Vcl.ExtCtrls,
-  uLang,
+//  Vcl.Controls,
+//  Vcl.StdCtrls,
+//  Vcl.ExtCtrls,
+//  uLang,
   System.StrUtils,
-  DES,
+  uFileCommon,
+//  DES,
 
-  Forms,
+//  Forms,
   uBaseLog,
   XSuperObject,
   uBaseDBHelper,
@@ -185,7 +186,8 @@ begin
   begin
       if DBConfigFileName<>'' then
       begin
-          if FileExists(ExtractFilePath(Application.ExeName)+DBConfigFileName) then
+//          if FileExists(ExtractFilePath(Application.ExeName)+DBConfigFileName) then
+          if FileExists(GetApplicationPath+DBConfigFileName) then
           begin
               //加载数据库配置文件
               DBConfig.Load(DBConfigFileName);

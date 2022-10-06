@@ -46,12 +46,36 @@ type
     OriginX:Double;
     OriginY:Double;
     Path:IGPGraphicsPath;
+//    Region:IGPRegion;
   public
     constructor Create;override;
     destructor Destroy;override;
+//  private
+//    procedure GetRegion;
   public
-    function MoveTo(const X:Double;const Y:Double):Boolean;override;
-    function LineTo(const X:Double;const Y:Double):Boolean;override;
+    procedure Clear;override;
+    procedure MoveTo(const X:Double;const Y:Double);override;
+    procedure LineTo(const X:Double;const Y:Double);override;
+
+
+    //添加一个矩形
+    procedure AddRect(const ARect:TRectF);override;
+    //添加一个饼图
+    procedure AddPie(const ARect:TRectF;
+                      AStartAngle, ASweepAngle:Double
+                      );override;
+    //添加一个圆边
+    procedure AddArc(const ARect:TRectF;
+                      AStartAngle, ASweepAngle:Double
+                      );override;
+    //添加一个圆
+    procedure AddEllipse(const ARect:TRectF);override;
+//    //闭合路径
+//    procedure Close;override;
+//    //获取区域,用来判断鼠标是否在区域内
+//    procedure GetRegion;override;
+//    //判断鼠标是否在路径内
+//    function IsInRegion(const APoint: TPointF):Boolean;override;
   end;
 
 
@@ -138,7 +162,7 @@ type
     function DrawPathData(ADrawPathData:TBaseDrawPathData):Boolean;override;
     function FillPathData(ADrawPathParam:TDrawPathParam;ADrawPathData:TBaseDrawPathData):Boolean;override;
     //绘制路径
-    function DrawPath(ADrawPathParam:TDrawPathParam;const ADrawRect:TRectF):Boolean;override;
+    function DrawPath(ADrawPathParam:TDrawPathParam;const ADrawRect:TRectF;APathActions:TPathActionCollection):Boolean;override;
 
 
   end;
@@ -631,6 +655,7 @@ begin
 
 
 
+  Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeAntiAlias;
 
   AGPColor:=TGPColor_CreateFromColorRef(ADrawLineParam.Color.Color);
   TGPColor_SetAlpha(AGPColor.FArgb,ADrawLineParam.Color.Alpha);
@@ -638,10 +663,13 @@ begin
   AGPPen:=TGPPen.Create(AGPColor, ADrawLineParam.PenWidth);
   FGraphics.DrawLine(AGPPen,X1,Y1,X2,Y2);
 
+
+  Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeDefault;
+
   Result:=True;
 end;
 
-function TGDIPlusDrawCanvas.DrawPath(ADrawPathParam:TDrawPathParam;const ADrawRect:TRectF):Boolean;
+function TGDIPlusDrawCanvas.DrawPath(ADrawPathParam:TDrawPathParam;const ADrawRect:TRectF;APathActions:TPathActionCollection):Boolean;
 //var
 //  AGPPen:IGPPen;
 //  AGPColor:TGPColor;
@@ -681,11 +709,12 @@ var
   BDrawRect:TRectF;
   APathActionItem:TPathActionItem;
   ADrawPathData:TBaseDrawPathData;
+  ARect:TRectF;
 begin
   //根据DrawRectSetting返回需要绘制的实际矩形
   BDrawRect:=ADrawPathParam.CalcDrawRect(ADrawRect);
 
-  ADrawPathData:=TBaseDrawPathData(ADrawPathParam.PathActions.FDrawPathData);
+  ADrawPathData:=TBaseDrawPathData(APathActions.FDrawPathData);
 
   ADrawPathData.PenWidth:=ADrawPathParam.CurrentEffectPenWidth;
   ADrawPathData.PenColor.Color:=ADrawPathParam.CurrentEffectPenColor.Color;
@@ -700,43 +729,59 @@ begin
 //
 //  AGPPen:=TGPPen.Create(AGPColor, ADrawPathData.PenWidth);
 
+  Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeHighQuality;
 
+//  if APathActions.FIsChanged then
+//  begin
+    ADrawPathData.Clear;
+//  end;
 
-  ADrawPathData.Clear;
-  for I := 0 to ADrawPathParam.PathActions.Count-1 do
+  for I := 0 to APathActions.Count-1 do
   begin
-    APathActionItem:=ADrawPathParam.PathActions[I];
+    APathActionItem:=APathActions[I];
     case APathActionItem.ActionType of
       patClear:
       begin
-        ADrawPathData.Clear;
+//        if APathActions.FIsChanged then
+//        begin
+          ADrawPathData.Clear;
+//        end;
       end;
       patMoveTo:
       begin
-        ADrawPathData.MoveTo(
-                            BDrawRect.Left+(APathActionItem.GetX(BDrawRect)),
-                            BDrawRect.Top+(APathActionItem.GetY(BDrawRect))
-                            );
+//        if APathActions.FIsChanged then
+//        begin
+          ADrawPathData.MoveTo(
+                              BDrawRect.Left+(APathActionItem.GetX(BDrawRect)),
+                              BDrawRect.Top+(APathActionItem.GetY(BDrawRect))
+                              );
+//        end;
       end;
       patCurveTo:
       begin
-        ADrawPathData.CurveTo(
-                              BDrawRect.Left+APathActionItem.GetX(BDrawRect),
-                              BDrawRect.Top+APathActionItem.GetY(BDrawRect),
+//        if APathActions.FIsChanged then
+//        begin
+          ADrawPathData.CurveTo(
+                                BDrawRect.Left+APathActionItem.GetX(BDrawRect),
+                                BDrawRect.Top+APathActionItem.GetY(BDrawRect),
 
-                              BDrawRect.Left+APathActionItem.GetX1(BDrawRect),
-                              BDrawRect.Top+APathActionItem.GetY1(BDrawRect),
+                                BDrawRect.Left+APathActionItem.GetX1(BDrawRect),
+                                BDrawRect.Top+APathActionItem.GetY1(BDrawRect),
 
-                              BDrawRect.Left+APathActionItem.GetX2(BDrawRect),
-                              BDrawRect.Top+APathActionItem.GetY2(BDrawRect)
-                              );
+                                BDrawRect.Left+APathActionItem.GetX2(BDrawRect),
+                                BDrawRect.Top+APathActionItem.GetY2(BDrawRect)
+                                );
+//        end;
       end;
       patLineTo:
       begin
-        ADrawPathData.LineTo(
-                            BDrawRect.Left+(APathActionItem.GetX(BDrawRect)),
-                            BDrawRect.Top+(APathActionItem.GetY(BDrawRect))
-                            );
+//        if APathActions.FIsChanged then
+//        begin
+          ADrawPathData.LineTo(
+                              BDrawRect.Left+(APathActionItem.GetX(BDrawRect)),
+                              BDrawRect.Top+(APathActionItem.GetY(BDrawRect))
+                              );
+//        end;
       end;
       patDrawPath:
       begin
@@ -750,7 +795,10 @@ begin
 //                ADrawPathData.Stroke
                 );
         end;
-        TGDIPlusDrawPathData(ADrawPathData).Path.Reset;//不然在画CheckBox的勾时,线条会合起来
+//        if APathActions.FIsChanged then
+//        begin
+          TGDIPlusDrawPathData(ADrawPathData).Path.Reset;//不然在画CheckBox的勾时,线条会合起来
+//        end;
       end;
       patFillPath:
       begin
@@ -766,8 +814,80 @@ begin
 //                Self.FCanvas.Fill);
 
       end;
+
+
+
+      patAddRect:
+      begin
+//        if APathActions.FIsChanged then
+//        begin
+          ARect:=RectF(
+                      BDrawRect.Left+APathActionItem.GetX(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY(BDrawRect),
+                      BDrawRect.Left+APathActionItem.GetX1(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY1(BDrawRect)
+                      );
+          ADrawPathData.AddRect(ARect);
+//        end;
+      end;
+      patAddPie:
+      begin
+//        if APathActions.FIsChanged then
+//        begin
+          ARect:=RectF(
+                      BDrawRect.Left+APathActionItem.GetX(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY(BDrawRect),
+                      BDrawRect.Left+APathActionItem.GetX1(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY1(BDrawRect)
+                      );
+          //饼图扇形鼠标移上去要变大
+          ARect:=ADrawPathParam.CalcDrawPathRect(ARect);
+          ADrawPathData.AddPie(ARect,APathActionItem.StartAngle,APathActionItem.SweepAngle);
+//        end;
+      end;
+      patAddArc:
+      begin
+//        if APathActions.FIsChanged then
+//        begin
+          ARect:=RectF(
+                      BDrawRect.Left+APathActionItem.GetX(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY(BDrawRect),
+                      BDrawRect.Left+APathActionItem.GetX1(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY1(BDrawRect)
+                      );
+          //饼图扇形鼠标移上去要变大
+          ARect:=ADrawPathParam.CalcDrawPathRect(ARect);
+          ADrawPathData.AddArc(ARect,APathActionItem.StartAngle,APathActionItem.SweepAngle);
+//        end;
+      end;
+      patAddEllipse:
+      begin
+//        if APathActions.FIsChanged then
+//        begin
+          ARect:=RectF(
+                      BDrawRect.Left+APathActionItem.GetX(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY(BDrawRect),
+                      BDrawRect.Left+APathActionItem.GetX1(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY1(BDrawRect)
+                      );
+          ARect:=ADrawPathParam.CalcDrawPathRect(ARect);
+          ADrawPathData.AddEllipse(ARect);
+//        end;
+      end;
+//      patGetRegion:
+//      begin
+//          ADrawPathData.GetRegion;
+//      end;
+
+
     end;
   end;
+
+  APathActions.FIsChanged:=False;
+
+  Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeDefault;
+
+
 end;
 
 function TGDIPlusDrawCanvas.DrawPathData(ADrawPathData: TBaseDrawPathData): Boolean;
@@ -887,7 +1007,7 @@ begin
   AGPImageAttributes:=nil;
 
   if //ADrawPictureParam.IsGray or
-  (ADrawPictureParam.Alpha<>255) then
+  (ADrawPictureParam.CurrentEffectAlpha<>255) then
   begin
 
     TGPColorMatrix_SetToIdentity(AGPColorMatrix);
@@ -905,9 +1025,9 @@ begin
 //      AGPColorMatrix.M[2, 2]:=0.11;
 //    end;
 
-    if ADrawPictureParam.Alpha<>255 then
+    if ADrawPictureParam.CurrentEffectAlpha<>255 then
     begin
-      AGPColorMatrix.M[3, 3]:=ADrawPictureParam.Alpha / 255;
+      AGPColorMatrix.M[3, 3]:=ADrawPictureParam.CurrentEffectAlpha / 255;
     end;
 
     AGPImageAttributes:=TGPImageAttributes.Create;
@@ -1290,6 +1410,136 @@ end;
 //  SetLength(AGPPointF,0);
 //end;
 
+procedure AddRoundRectPath(AGPPath:IGPGraphicsPath;ADrawRectParam:TDrawRectParam;ARoundDrawRect:TRectF;
+  ADrawRectParam_RoundWidth:Double;
+  ADrawRectParam_RoundHeight:Double
+);
+var
+  ALineFix:Integer;
+begin
+
+
+          if rcTopLeft in ADrawRectParam.RectCorners then
+          begin
+            //左上角
+            AGPPath.AddArc(ARoundDrawRect.Left,
+                            ARoundDrawRect.Top,
+                            ADrawRectParam_RoundWidth*2,
+                            ADrawRectParam_RoundHeight*2,
+                            180, 90);
+          end
+          else
+          begin
+            AGPPath.AddLine(ARoundDrawRect.Left,ARoundDrawRect.Top-ADrawRectParam_RoundHeight,
+                            ARoundDrawRect.Left,ARoundDrawRect.Top);
+            AGPPath.AddLine(ARoundDrawRect.Left,ARoundDrawRect.Top,
+                            ARoundDrawRect.Left+ADrawRectParam_RoundWidth,ARoundDrawRect.Top);
+          end;
+
+
+          if rcTopRight in ADrawRectParam.RectCorners then
+          begin
+            //右上角
+            AGPPath.AddArc(ARoundDrawRect.Right - ADrawRectParam_RoundWidth*2,
+                            ARoundDrawRect.Top,
+                            ADrawRectParam_RoundWidth*2,
+                            ADrawRectParam_RoundHeight*2,
+                            270, 90);
+          end
+          else
+          begin
+            AGPPath.AddLine(ARoundDrawRect.Right - ADrawRectParam_RoundWidth,ARoundDrawRect.Top,
+                            ARoundDrawRect.Right,ARoundDrawRect.Top);
+            AGPPath.AddLine(ARoundDrawRect.Right,ARoundDrawRect.Top,
+                            ARoundDrawRect.Right,ARoundDrawRect.Top-ADrawRectParam_RoundHeight);
+          end;
+
+
+
+          if rcBottomRight in ADrawRectParam.RectCorners then
+          begin
+            if ADrawRectParam.RoundWidth=-1 then
+            begin
+              AGPPath.AddArc(ARoundDrawRect.Right - ADrawRectParam_RoundWidth*2,
+                            ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight*2,
+                            ADrawRectParam_RoundWidth*2,
+                            ADrawRectParam_RoundHeight*2,
+                            0, 90);
+            end
+            else
+            begin
+              //右下角，由２改３，因为２不够大
+//              AGPPath.AddArc(ARoundDrawRect.Right - ADrawRectParam_RoundWidth*3,
+//                            ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight*3,
+//                            ADrawRectParam_RoundWidth*3,
+//                            ADrawRectParam_RoundHeight*3,
+//                            0, 90);
+              AGPPath.AddArc(ARoundDrawRect.Right - ADrawRectParam_RoundWidth*2,
+                            ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight*2,
+                            ADrawRectParam_RoundWidth*2,
+                            ADrawRectParam_RoundHeight*2,
+                            0, 90);
+            end;
+
+          end
+          else
+          begin
+            AGPPath.AddLine(ARoundDrawRect.Right,ARoundDrawRect.Bottom-ADrawRectParam_RoundHeight,
+                            ARoundDrawRect.Right,ARoundDrawRect.Bottom);
+            AGPPath.AddLine(ARoundDrawRect.Right,ARoundDrawRect.Bottom,
+                            ARoundDrawRect.Right - ADrawRectParam_RoundWidth,ARoundDrawRect.Bottom);
+          end;
+
+
+          if rcBottomLeft in ADrawRectParam.RectCorners then
+          begin
+            //左下圆角
+            AGPPath.AddArc(ARoundDrawRect.Left,
+                          ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight*2,
+                          ADrawRectParam_RoundWidth*2,
+                          ADrawRectParam_RoundHeight*2,
+                          90, 90);
+          end
+          else
+          begin
+            AGPPath.AddLine(ARoundDrawRect.Left + ADrawRectParam_RoundWidth,ARoundDrawRect.Bottom,
+                            ARoundDrawRect.Left,ARoundDrawRect.Bottom);
+            AGPPath.AddLine(ARoundDrawRect.Left,ARoundDrawRect.Bottom,
+                            ARoundDrawRect.Left,ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight);
+          end;
+
+
+
+          AGPPath.CloseFigure;
+
+
+          ALineFix:=1;
+      //    //顶部横线
+      //    AGPPath.AddLine(ARoundDrawRect.Left+ADrawRectParam_RoundWidth/2-ALineFix,
+      //                      ARoundDrawRect.Top,
+      //                      ARoundDrawRect.Right-ADrawRectParam_RoundWidth/2+ALineFix,
+      //                      ARoundDrawRect.Top);
+      //
+      //    //右部竖线
+      //    AGPPath.AddLine(ARoundDrawRect.Right,
+      //                      ARoundDrawRect.Top+ADrawRectParam_RoundHeight/2-ALineFix,
+      //                      ARoundDrawRect.Right,
+      //                      ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight/2+ALineFix);
+      //
+      //    //底部横线
+      //    AGPPath.AddLine(ARoundDrawRect.Right-ADrawRectParam_RoundWidth/2+ALineFix,
+      //                      ARoundDrawRect.Bottom,
+      //                      ARoundDrawRect.Left+ADrawRectParam_RoundWidth/2-ALineFix,
+      //                      ARoundDrawRect.Bottom
+      //                      );
+
+          //左部竖线
+          AGPPath.AddLine(ARoundDrawRect.Left,
+                            ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight+ALineFix,
+                            ARoundDrawRect.Left,
+                            ARoundDrawRect.Top+ADrawRectParam_RoundHeight-ALineFix);
+end;
+
 function TGDIPlusDrawCanvas.DrawRect(const ADrawRectParam:TDrawRectParam;
                       const ADrawRect:TRectF):Boolean;
 var
@@ -1297,12 +1547,15 @@ var
 
 
   AGPPath:IGPGraphicsPath;
+  AShadowGPPath:IGPGraphicsPath;
   AGPPen:IGPPen;
 
   BDrawRect:TRectF;
+  CDrawRect:TRectF;
   AFillRect:TRectF;
   ABorderRect:TRectF;
   ARoundDrawRect:TRectF;
+  AGPRoundDrawRect:TGPRectF;
 
 
   AGPBrush:IGPBrush;
@@ -1312,12 +1565,20 @@ var
   AGPLinearGradientFillColor2:TGPColor;
   AGPLinearGradientMode:TGPLinearGradientMode;
 
-  ALineFix:Integer;
   ADrawRectParam_RoundWidth:Double;
   ADrawRectParam_RoundHeight:Double;
+  AGPRegion:IGPRegion;
+  AShadowGPRegion:IGPRegion;
+  AShadowGPColor:TGPColor;
+  AShadowGPColor1:TGPColor;
+  AShadowGPBrush:IGPPathGradientBrush;
+  AShadowGPPoints: array of TGPPoint;
+  I: Integer;
 begin
   AGPPath:=nil;
 
+
+  //如果不填充并且没有边框,则不需要绘制
   if Not ADrawRectParam.CurrentEffectIsFill
     and (ADrawRectParam.CurrentEffectBorderWidth=0)
   then
@@ -1325,7 +1586,16 @@ begin
     Exit;
   end;
 
+
   BDrawRect:=ADrawRectParam.CalcDrawRect(ADrawRect);
+  CDrawRect:=BDrawRect;
+
+  //是否需要阴影的效果
+//  ADrawRectParam.ShadowSize:=5;
+  if ADrawRectParam.ShadowSize>0 then
+  begin
+    InflateRect(BDrawRect,-ADrawRectParam.ShadowSize,-ADrawRectParam.ShadowSize);
+  end;
 
 
   AFillRect:=BDrawRect;
@@ -1337,75 +1607,79 @@ begin
   //生成圆角Path
   if ADrawRectParam.IsRound then
   begin
-      FGraphics.SetSmoothingMode(TGPSmoothingMode.SmoothingModeHighQuality);
+//      FGraphics.SetSmoothingMode(TGPSmoothingMode.SmoothingModeHighQuality);
+      AGPPath:=TGPGraphicsPath.Create(FillModeAlternate);
 
 
       ARoundDrawRect:=BDrawRect;
 
-      
+
       ADrawRectParam_RoundWidth:=ADrawRectParam.RoundWidth;
       ADrawRectParam_RoundHeight:=ADrawRectParam.RoundHeight;
-      if ADrawRectParam_RoundWidth=-1 then
+
+
+      //如果角半径为-1,那么默认为圆形
+      if IsSameDouble(ADrawRectParam_RoundWidth,-1) or IsSameDouble(ADrawRectParam_RoundHeight,-1) then
       begin
-        ADrawRectParam_RoundWidth:=AFillRect.Width / 2;
-        ADrawRectParam_RoundHeight:=AFillRect.Height / 2;
+          ADrawRectParam_RoundWidth:=AFillRect.Width/2;
+          ADrawRectParam_RoundHeight:=AFillRect.Height/2;
+          //圆角保持一致,取最小的半径
+          if ADrawRectParam_RoundWidth<ADrawRectParam_RoundHeight then
+          begin
+            ADrawRectParam_RoundHeight:=ADrawRectParam_RoundWidth;
+          end
+          else
+          begin
+            ADrawRectParam_RoundWidth:=ADrawRectParam_RoundHeight;
+          end;
+
+
       end;
 
-      
       //要减一,不然右底边框被会挡住
       ARoundDrawRect.Right:=ARoundDrawRect.Right-1;
       ARoundDrawRect.Bottom:=ARoundDrawRect.Bottom-1;
 
+//      if (AFillRect.Width=AFillRect.Height) and () then
+//      begin
+//          //纯圆
+//          AGPRoundDrawRect:=TGPRectF_Create(ARoundDrawRect);
+//          AGPPath.AddEllipse(AGPRoundDrawRect);
+//
+//      end
+//      else
+//      begin
+          //圆角矩形
+
+//      if ADrawRectParam_RoundWidth=-1 then
+//      begin
+//          //纯圆
+//          ADrawRectParam_RoundWidth:=AFillRect.Width / 2;
+//          ADrawRectParam_RoundHeight:=AFillRect.Height / 2;
+//
+//
+////          AGPPath.AddEllipse(ARoundDrawRect.Left,ARoundDrawRect.Top,ARoundDrawRect.Width,ARoundDrawRect.Height);
+//      end;
+////      else
+//      begin
+          //只是圆角
 
 
-      AGPPath:=TGPGraphicsPath.Create(FillModeAlternate);
+//          //要减一,不然右底边框被会挡住
+//          ARoundDrawRect.Right:=ARoundDrawRect.Right-1;
+//          ARoundDrawRect.Bottom:=ARoundDrawRect.Bottom-1;
+//
+
+
+          AddRoundRectPath(AGPPath,ADrawRectParam,ARoundDrawRect,ADrawRectParam_RoundWidth,ADrawRectParam_RoundHeight);
+
+//      end;
 
 
 
-      //左上角
-      AGPPath.AddArc(ARoundDrawRect.Left,
-                      ARoundDrawRect.Top,
-                      ADrawRectParam_RoundWidth*2, ADrawRectParam_RoundHeight*2, 180, 90);
-      //右上角
-      AGPPath.AddArc(ARoundDrawRect.Right - ADrawRectParam_RoundWidth*2,
-                      ARoundDrawRect.Top,
-                      ADrawRectParam_RoundWidth*2, ADrawRectParam_RoundHeight*2, 270, 90);
-      //右下角，由２改３，因为２不够大
-      AGPPath.AddArc(ARoundDrawRect.Right - ADrawRectParam_RoundWidth*3,
-                    ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight*3,
-                    ADrawRectParam_RoundWidth*3, ADrawRectParam_RoundHeight*3, 0, 90);
-      //左下圆角
-      AGPPath.AddArc(ARoundDrawRect.Left,
-                    ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight*2,
-                    ADrawRectParam_RoundWidth*2, ADrawRectParam_RoundHeight*2, 90, 90);
 
 
-      ALineFix:=1;
-  //    //顶部横线
-  //    AGPPath.AddLine(ARoundDrawRect.Left+ADrawRectParam_RoundWidth/2-ALineFix,
-  //                      ARoundDrawRect.Top,
-  //                      ARoundDrawRect.Right-ADrawRectParam_RoundWidth/2+ALineFix,
-  //                      ARoundDrawRect.Top);
-  //
-  //    //右部竖线
-  //    AGPPath.AddLine(ARoundDrawRect.Right,
-  //                      ARoundDrawRect.Top+ADrawRectParam_RoundHeight/2-ALineFix,
-  //                      ARoundDrawRect.Right,
-  //                      ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight/2+ALineFix);
-  //
-  //    //底部横线
-  //    AGPPath.AddLine(ARoundDrawRect.Right-ADrawRectParam_RoundWidth/2+ALineFix,
-  //                      ARoundDrawRect.Bottom,
-  //                      ARoundDrawRect.Left+ADrawRectParam_RoundWidth/2-ALineFix,
-  //                      ARoundDrawRect.Bottom
-  //                      );
-
-      //左部竖线
-      AGPPath.AddLine(ARoundDrawRect.Left,
-                        ARoundDrawRect.Bottom - ADrawRectParam_RoundHeight+ALineFix,
-                        ARoundDrawRect.Left,
-                        ARoundDrawRect.Top+ADrawRectParam_RoundHeight-ALineFix);
-
+//    end;
 
   end;
 
@@ -1418,34 +1692,56 @@ begin
       //去掉边框
       if ADrawRectParam.CurrentEffectBorderWidth>0 then
       begin
-        AFillRect.Left:=BDrawRect.Left+ADrawRectParam.CurrentEffectBorderWidth-1;
-        AFillRect.Top:=BDrawRect.Top+ADrawRectParam.CurrentEffectBorderWidth-1;
-        AFillRect.Right:=BDrawRect.Right-ADrawRectParam.CurrentEffectBorderWidth;
-        AFillRect.Bottom:=BDrawRect.Bottom-ADrawRectParam.CurrentEffectBorderWidth;
+        if TSide.Left in ASides then
+        begin
+          AFillRect.Left:=BDrawRect.Left+ADrawRectParam.CurrentEffectBorderWidth-1;
+        end;
+        if TSide.Top in ASides then
+        begin
+          AFillRect.Top:=BDrawRect.Top+ADrawRectParam.CurrentEffectBorderWidth-1;
+        end;
+        if TSide.Right in ASides then
+        begin
+          AFillRect.Right:=BDrawRect.Right-ADrawRectParam.CurrentEffectBorderWidth;
+        end;
+        if TSide.Bottom in ASides then
+        begin
+          AFillRect.Bottom:=BDrawRect.Bottom-ADrawRectParam.CurrentEffectBorderWidth;
+        end;
       end;
 
 
       //创建画刷
       AGPFillColor:=TGPColor_CreateFromColorRef(ADrawRectParam.CurrentEffectFillDrawColor.Color);
-      TGPColor_SetAlpha(AGPFillColor.FArgb,ADrawRectParam.CurrentEffectFillDrawColor.Alpha);
+      TGPColor_SetAlpha(AGPFillColor.FArgb,Ceil(ADrawRectParam.CurrentEffectFillDrawColor.Alpha*ADrawRectParam.DrawAlpha/255));
       AGPBrush:=TGPSolidBrush.Create(AGPFillColor);
 
       if Not ADrawRectParam.IsRound then
       begin
-        FGraphics.FillRectangle(AGPBrush, TGPRectF_Create(AFillRect));
+          //不是圆角,直接用FillRectangle
+          FGraphics.FillRectangle(AGPBrush, TGPRectF_Create(AFillRect));
       end
       else
       begin
-      
+          //圆角则用FillPath
           if (ADrawRectParam.RoundWidth=-1) and (ADrawRectParam.RoundHeight=-1) then
           begin
-            FGraphics.FillEllipse(AGPBrush,TGPRectF_Create(AFillRect));
-        
-          end
-          else
+            //纯圆,有钜齿
+//            FGraphics.FillEllipse(AGPBrush,TGPRectF_Create(AFillRect));
+//            Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeHighQuality;
+//            Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeAntiAlias;
+//            Self.FGraphics.CompositingQuality:=TGPCompositingQuality.CompositingQualityHighQuality;
+//            FGraphics.FillEllipse(AGPBrush,AFillRect.Left,AFillRect.Top,AFillRect.Width-1,AFillRect.Height-1);
+//            Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeDefault;
+
+          end;
+//          else
           begin
+            //圆角
             //要画边框
+            Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeHighQuality;
             FGraphics.FillPath(AGPBrush,AGPPath);
+            Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeDefault;
           end;
 
 //        //测试
@@ -1480,7 +1776,7 @@ begin
   begin
 
       //边框做较正
-      if ADrawRectParam.CurrentEffectBorderWidth=1 then
+      if (ADrawRectParam.CurrentEffectBorderWidth=1) then
       begin
         ABorderRect.Left:=BDrawRect.Left;
         ABorderRect.Top:=BDrawRect.Top;
@@ -1577,12 +1873,97 @@ begin
       end
       else
       begin
+        //SmoothingModeAntiAlias会糊,还是用图片吧
+//        Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeAntiAlias;
         FGraphics.DrawPath(AGPPen,AGPPath);
+//        Self.FGraphics.SmoothingMode:=TGPSmoothingMode.SmoothingModeDefault;
       end;
 
 
 
   end;
+
+
+  //画阴影
+  //是否需要阴影的效果
+  if (ADrawRectParam.ShadowSize>0) then
+  begin
+      AShadowGPPath:=TGPGraphicsPath.Create(FillModeAlternate);
+
+
+      AShadowGPRegion:=TGPRegion.Create(TGPRectF_Create(CDrawRect));
+      if Not ADrawRectParam.IsRound then
+      begin
+        //直角矩形
+        AShadowGPPath.AddRectangle(TGPRectF_Create(CDrawRect));
+
+        AGPRegion:=TGPRegion.Create(TGPRectF_Create(BDrawRect));
+      end
+      else
+      begin
+        //圆角矩形
+        AddRoundRectPath(AShadowGPPath,ADrawRectParam,CDrawRect,ADrawRectParam_RoundWidth,ADrawRectParam_RoundHeight);
+
+        AGPRegion:=TGPRegion.Create(AGPPath);
+      end;
+      AShadowGPRegion.Exclude(AGPRegion);
+
+
+      //创建阴影渐变画刷
+      AShadowGPColor:=TGPColor_CreateFromColorRef(clBlack);
+      TGPColor_SetAlpha(AShadowGPColor.FArgb,100);
+
+      AShadowGPColor1:=TGPColor_CreateFromColorRef(clBlack);
+      TGPColor_SetAlpha(AShadowGPColor1.FArgb,0);
+
+      //阴影颜色的自动比较难,因为有时候白色的也需要阴影，难道弄个白色的阴影，那效果都看不出来
+//      if ADrawRectParam.BorderWidth>0 then
+//      begin
+//        //创建阴影渐变画刷
+//        AShadowGPColor:=TGPColor_CreateFromColorRef(ADrawRectParam.CurrentEffectBorderColor.Color);
+//        TGPColor_SetAlpha(AShadowGPColor.FArgb,150);
+//
+//        AShadowGPColor1:=TGPColor_CreateFromColorRef(ADrawRectParam.CurrentEffectBorderColor.Color);
+//        TGPColor_SetAlpha(AShadowGPColor1.FArgb,0);
+//      end
+//      else
+//      begin
+//        //创建阴影渐变画刷
+//        AShadowGPColor:=TGPColor_CreateFromColorRef(ADrawRectParam.CurrentEffectFillDrawColor.Color);
+//        TGPColor_SetAlpha(AShadowGPColor.FArgb,150);
+//
+//        AShadowGPColor1:=TGPColor_CreateFromColorRef(ADrawRectParam.CurrentEffectFillDrawColor.Color);
+//        TGPColor_SetAlpha(AShadowGPColor1.FArgb,0);
+//      end;
+
+
+//      AShadowGPBrush:=TGPPathGradientBrush.Create(AShadowGPPath);
+//      AShadowGPPoints;
+//      if CDrawRect.Width>=CDrawRect.Height then
+//      begin
+//
+//          for I := 0 to CDrawRect.Width div CDrawRect.Height do
+//          begin
+//
+//          end;
+//
+//      end
+//      else
+//      begin
+//
+//      end;
+
+      AShadowGPBrush:=TGPPathGradientBrush.Create(AShadowGPPath);
+      AShadowGPBrush.CenterColor:=AShadowGPColor;
+      AShadowGPBrush.SetSurroundColors([AShadowGPColor1]);
+//      AShadowGPBrush.SetFocusScales(0.75,0.75);
+      //越小,阴影越浅
+//      AShadowGPBrush.SetFocusScales(0.5,0.5);
+
+
+      FGraphics.FillRegion(AShadowGPBrush,AShadowGPRegion);
+  end;
+
 
 
 
@@ -1655,7 +2036,7 @@ begin
 //  end;
 
   AGPColor:=TGPColor_CreateFromColorRef(ADrawPathParam.CurrentEffectFillDrawColor.Color);
-  TGPColor_SetAlpha(AGPColor.FArgb,ADrawPathParam.CurrentEffectFillDrawColor.Alpha);
+  TGPColor_SetAlpha(AGPColor.FArgb,Ceil(ADrawPathParam.CurrentEffectFillDrawColor.Alpha*ADrawPathParam.DrawAlpha/255));
 
   AGPBrush:=TGPSolidBrush.Create(AGPColor);
 
@@ -1673,10 +2054,44 @@ end;
 
 { TGDIPlusDrawPathData }
 
+procedure TGDIPlusDrawPathData.AddArc(const ARect: TRectF; AStartAngle,
+  ASweepAngle: Double);
+begin
+  Path.AddArc(TGPRectF_Create(ARect),AStartAngle,ASweepAngle);
+
+end;
+
+procedure TGDIPlusDrawPathData.AddEllipse(const ARect: TRectF);
+begin
+  Path.AddEllipse(TGPRectF_Create(ARect));
+end;
+
+procedure TGDIPlusDrawPathData.AddPie(const ARect: TRectF; AStartAngle,
+  ASweepAngle: Double);
+begin
+  Path.AddPie(TGPRectF_Create(ARect),AStartAngle,ASweepAngle);
+end;
+
+procedure TGDIPlusDrawPathData.AddRect(const ARect: TRectF);
+begin
+  Path.AddRectangle(TGPRectF_Create(ARect));
+end;
+
+procedure TGDIPlusDrawPathData.Clear;
+begin
+  Path:=TGPGraphicsPath.Create();
+//  Region:=nil;
+end;
+
+//procedure TGDIPlusDrawPathData.Close;
+//begin
+//  Path.CloseFigure;
+//end;
+
 constructor TGDIPlusDrawPathData.Create;
 begin
   inherited;
-//  Path:=TGPGraphicsPath.Create();
+  Path:=TGPGraphicsPath.Create();
 end;
 
 destructor TGDIPlusDrawPathData.Destroy;
@@ -1686,21 +2101,32 @@ begin
   inherited;
 end;
 
-function TGDIPlusDrawPathData.LineTo(const X:Double;const Y:Double): Boolean;
+//procedure TGDIPlusDrawPathData.GetRegion;
+//begin
+//  Region:=TGPRegion.Create(Path);
+//
+//end;
+//
+//function TGDIPlusDrawPathData.IsInRegion(const APoint: TPointF): Boolean;
+//begin
+//  Result:=False;
+//  if Self.Region<>nil then
+//  begin
+//    Result:=Region.IsVisible(APoint.X,APoint.Y);
+//  end;
+//end;
+
+procedure TGDIPlusDrawPathData.LineTo(const X:Double;const Y:Double);
 begin
-//  Path.AddLine(OriginX,OriginY,X,Y);
+  Path.AddLine(OriginX,OriginY,X,Y);
   OriginX:=X;
   OriginY:=Y;
-  Result:=True;
 end;
 
-function TGDIPlusDrawPathData.MoveTo(const X:Double;const Y:Double): Boolean;
+procedure TGDIPlusDrawPathData.MoveTo(const X:Double;const Y:Double);
 begin
   OriginX:=X;
   OriginY:=Y;
-  //Path.
-
-  Result:=True;
 end;
 
 

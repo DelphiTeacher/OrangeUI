@@ -179,6 +179,7 @@ uses
   MainFrame,
   MyFrame,
   ViewPictureListFrame,
+  uViewPictureListFrame,
   AddSpiritFrame
   {$ENDIF}
   ;

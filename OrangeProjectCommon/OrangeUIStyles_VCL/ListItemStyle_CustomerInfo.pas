@@ -60,6 +60,9 @@ type
 
 implementation
 
+uses
+  uLangRes;
+
 {$R *.dfm}
 
 { TFrameListItemStyle_CustomerInfo }
@@ -67,7 +70,7 @@ implementation
 procedure TFrameListItemStyle_CustomerInfo.AutoSize;
 var
   AItem:TSkinItem;
-  I: Integer;
+//  I: Integer;
   ASizeF:TSizeF;
   AItemWidth:Double;
   AlvTagsContentHeight:Integer;
@@ -136,7 +139,7 @@ begin
     Self.lvTags.Prop.Items.FindItemByName('memo').Caption:='';
     Self.lvTags.Height:=Self.lvTags.Prop.CalcContentHeight;
 
-    Self.lblName.Caption:='Ä°Éú¿Í»§';
+    Self.lblName.Caption:=SDATA_StrangeCustomer;
     Self.lblCompanyName.Caption:='';
     Self.lblCompany.Caption:='';
     Self.lblTime.Caption:='';

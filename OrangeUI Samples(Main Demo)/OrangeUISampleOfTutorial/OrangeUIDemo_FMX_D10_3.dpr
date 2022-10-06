@@ -129,7 +129,11 @@ uses
   uBaseList_Copy in '..\..\OrangeProjectCommon\OrangeUI_Copy\uBaseList_Copy.pas',
   uBaseLog_Copy in '..\..\OrangeProjectCommon\OrangeUI_Copy\uBaseLog_Copy.pas',
   uFuncCommon_Copy in '..\..\OrangeProjectCommon\OrangeUI_Copy\uFuncCommon_Copy.pas',
-  uFileCommon_Copy in '..\..\OrangeProjectCommon\OrangeUI_Copy\uFileCommon_Copy.pas';
+  uFileCommon_Copy in '..\..\OrangeProjectCommon\OrangeUI_Copy\uFileCommon_Copy.pas',
+  ListItemStyleFrame_IconCaption in '..\..\OrangeUIStyles\ListItemStyleFrame_IconCaption.pas',
+  BaseListItemStyleFrame in '..\..\OrangeUIStyles\BaseListItemStyleFrame.pas',
+  ListItemStyleFrame_IconTopCenter_CaptionBottomCenterBlack in '..\..\OrangeUIStyles\ListItemStyleFrame_IconTopCenter_CaptionBottomCenterBlack.pas',
+  ListItemStyleFrame_Base in '..\..\OrangeUIStyles\ListItemStyleFrame_Base.pas';
 
 {$R *.res}
 

@@ -13,10 +13,11 @@ unit uVersion;
 interface
 
 
+{$I Version.inc}
 
 
 const
-  OrangeUIControl_Version='1.90'+{$IFDEF FREE_VERSION}' Free'{$ELSE}' VIP'{$ENDIF};
+  OrangeUIControl_Version='2.1'+{$IFDEF FREE_VERSION}' Free'{$ELSE}' VIP'{$ENDIF};
   OrangeUIControl_Author='DelphiTeacher(项目合作:QQ452330643,TEL+8618957901025,ggggcexx@163.com)';
   OrangeUIControl_AuthorQQ='452330643';
   OrangeUIControl_AuthorEmail='ggggcexx@163.com';

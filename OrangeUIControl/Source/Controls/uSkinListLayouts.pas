@@ -12,6 +12,7 @@ unit uSkinListLayouts;
 
 interface
 {$I FrameWork.inc}
+{$I Version.inc}
 
 uses
   Classes,
@@ -25,11 +26,13 @@ uses
   {$IFDEF FMX}
   FMX.Controls,
   FMX.Types,
+  UITypes,
   {$ENDIF}
 
   uBaseList,
   uSkinPicture,
   uDrawPicture,
+  uDrawParam,
   uBinaryTreeDoc,
   uDrawEngine,
   uUrlPicture,
@@ -80,7 +83,7 @@ type
     ///     Width
     ///   </para>
     /// </summary>
-    function GetWidth:TControlSize;
+    function GetWidth:Double;
     //层级
     function GetLevel:Integer;
 
@@ -92,7 +95,7 @@ type
     ///     Height
     ///   </para>
     /// </summary>
-    function GetHeight:TControlSize;
+    function GetHeight:Double;
 
     /// <summary>
     ///   <para>
@@ -156,6 +159,9 @@ type
     function GetItemRect:TRectF;
 
     function GetIsRowEnd:Boolean;
+    //因为列表项有间隔，所以在计算宽度的时候，要计算这行有几个Item，有几个Item就有几个间隔，就可以根据百分比算出来剩下那个Item的宽度，以便排成一行，
+    //不然最后一个Item会排到下一行去
+    function GetThisRowItemCount:Integer;
 
     /// <summary>
     ///   <para>
@@ -189,6 +195,10 @@ type
     /// </summary>
     procedure SetItemDrawRect(Value:TRectF);
 
+
+    //鼠标是否在Item里面
+    function PtInItem(APoint:TPointF):Boolean;
+
     /// <summary>
     ///   <para>
     ///     是否显示
@@ -206,7 +216,7 @@ type
     ///     Height
     ///   </para>
     /// </summary>
-    property Height:TControlSize read GetHeight;
+    property Height:Double read GetHeight;
     /// <summary>
     ///   <para>
     ///     宽度
@@ -215,7 +225,7 @@ type
     ///     Width
     ///   </para>
     /// </summary>
-    property Width:TControlSize read GetWidth;
+    property Width:Double read GetWidth;
     /// <summary>
     ///   <para>
     ///     是否选中
@@ -392,18 +402,18 @@ type
 
 
     //内容的尺寸,计算出来的(比控件大的时候会出现滚动条)
-    FContentWidth: TControlSize;
-    FContentHeight: TControlSize;
+    FContentWidth: Double;
+    FContentHeight: Double;
 
 
     //保存下来,省的再计算控件的尺寸
-    FCalcItemsMaxRight: TControlSize;
-    FCalcItemsMaxBottom: TControlSize;
+    FCalcItemsMaxRight: Double;
+    FCalcItemsMaxBottom: Double;
 
 
     //控件的尺寸
-    FControlWidth: TControlSize;
-    FControlHeight: TControlSize;
+    FControlWidth: Double;
+    FControlHeight: Double;
     //获取控件的尺寸(应对不断变化的控件尺寸)
     FOnGetControlWidth:TOnGetControlSizeEvent;
     FOnGetControlHeight:TOnGetControlSizeEvent;
@@ -411,23 +421,23 @@ type
 
 
     //列表项之间的间隔
-    FItemSpace:TControlSize;
+    FItemSpace:Double;
     //列表项之间的间隔类型
     FItemSpaceType:TSkinItemSpaceType;
 
 
 
     //列表项的尺寸(如果是-1,表示使用控件宽度,0~1小数表示百分比)
-    FItemWidth:TControlSize;
+    FItemWidth:Double;
     //列表项的尺寸(如果是-1,表示使用控件高度,0~1小数表示百分比)
-    FItemHeight:TControlSize;
+    FItemHeight:Double;
 
 
 
 
     //选中状态时列表项的尺寸
-    FSelectedItemHeight:TControlSize;
-    FSelectedItemWidth:TControlSize;
+    FSelectedItemHeight:Double;
+    FSelectedItemWidth:Double;
 
 
 
@@ -460,6 +470,7 @@ type
 
     //设置选中的列表项
     FOnSetSelectedItem: TNotifyEvent;
+    FOnItemExpandedChange: TNotifyEvent;
 
 
 
@@ -467,16 +478,16 @@ type
 
 
     //设置列表项高度
-    procedure SetItemHeight(const Value: TControlSize);
+    procedure SetItemHeight(const Value: Double);
     //设置列表项宽度
-    procedure SetItemWidth(const Value: TControlSize);
+    procedure SetItemWidth(const Value: Double);
 
     //设置列表项间隔
-    procedure SetItemSpace(const Value: TControlSize);
+    procedure SetItemSpace(const Value: Double);
     procedure SetItemSpaceType(const Value: TSkinItemSpaceType);
 
-    procedure SetSelectedItemHeight(const Value: TControlSize);
-    procedure SetSelectedItemWidth(const Value: TControlSize);
+    procedure SetSelectedItemHeight(const Value: Double);
+    procedure SetSelectedItemWidth(const Value: Double);
 
 
 
@@ -487,8 +498,8 @@ type
     //列表项排列方向(水平或垂直)
     procedure SetItemLayoutType(const Value: TItemLayoutType);
 
-    procedure SetControlLeftOffset(const Value: TControlSize);
-    procedure SetControlTopOffset(const Value: TControlSize);
+    procedure SetControlLeftOffset(const Value: Double);
+    procedure SetControlTopOffset(const Value: Double);
   public
     //
     /// <summary>
@@ -546,6 +557,7 @@ type
     ///   </para>
     /// </summary>
     procedure DoItemSelected(AItem:TObject);
+    procedure DoItemExpandedChange(AItem:TObject);
 
 
 
@@ -583,8 +595,8 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    function GetItemDefaultWidth:TControlSize;virtual;
-    function GetSelectedItemDefaultWidth:TControlSize;virtual;
+    function GetItemDefaultWidth:Double;virtual;
+    function GetSelectedItemDefaultWidth:Double;virtual;
     //
     /// <summary>
     ///   <para>
@@ -594,8 +606,8 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    function GetItemDefaultHeight:TControlSize;virtual;
-    function GetSelectedItemDefaultHeight:TControlSize;virtual;
+    function GetItemDefaultHeight:Double;virtual;
+    function GetSelectedItemDefaultHeight:Double;virtual;
 
 
 
@@ -607,7 +619,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    function CalcItemWidth(AItem:ISkinItem):TControlSize;virtual;
+    function CalcItemWidth(AItem:ISkinItem):Double;virtual;
 
     /// <summary>
     ///   <para>
@@ -617,7 +629,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    function CalcItemHeight(AItem:ISkinItem):TControlSize;virtual;
+    function CalcItemHeight(AItem:ISkinItem):Double;virtual;
 
 
     /// <summary>
@@ -628,7 +640,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    function CalcItemLevelLeftOffsetAtVerticalLayout(AItem:ISkinItem):TControlSize;virtual;
+    function CalcItemLevelLeftOffsetAtVerticalLayout(AItem:ISkinItem):Double;virtual;
 
 
 
@@ -640,7 +652,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    function CalcItemsMaxRight:TControlSize;
+    function CalcItemsMaxRight:Double;
 
     /// <summary>
     ///   <para>
@@ -650,7 +662,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    function CalcItemsMaxBottom:TControlSize;
+    function CalcItemsMaxBottom:Double;
 
 
 
@@ -665,7 +677,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    function CalcContentWidth:TControlSize;virtual;
+    function CalcContentWidth:Double;virtual;
     /// <summary>
     ///   <para>
     ///     计算内容高度(用于处理滚动条的Max)
@@ -674,7 +686,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    function CalcContentHeight:TControlSize;virtual;
+    function CalcContentHeight:Double;virtual;
 
 
 
@@ -693,9 +705,9 @@ type
                                       ADrawTopOffset//,
 //                                      ADrawRightOffset,
 //                                      ADrawBottomOffset
-                                      :TControlSize;
+                                      :Double;
                                       //控件的尺寸,可以自定义
-                                      AControlWidth,AControlHeight:TControlSize;
+                                      AControlWidth,AControlHeight:Double;
                                       var ADrawStartIndex:Integer;
                                       var ADrawEndIndex:Integer);virtual;
 //    //获取指定宽度内的列表项起始下标
@@ -792,16 +804,116 @@ type
     ///   </para>
     /// </summary>
     function VisibleItemRectByItem(AVisibleItem:ISkinItem): TRectF;
+
+  public
+
+
+    //鼠标按下的列表项
+    //有时候鼠标点击在ItemDesignerPanel的子控件上,
+    //那么MouseDownItem为nil,不然列表项会有点击效果
+    FMouseDownItem:ISkinItem;
+    FInteractiveMouseDownItem:ISkinItem;
+
+    //延迟调用ClickItem事件中使用
+    FLastMouseDownItem:ISkinItem;
+    FLastMouseDownX:Double;
+    FLastMouseDownY:Double;
+    //鼠标按下的列表项
+    //即使鼠标点击在ItemDesignerPanel的子控件上,
+    //MouseDownItem为nil,InnerMouseDownItem指向鼠标所在行
+    FInnerMouseDownItem:ISkinItem;
+
+
+    //鼠标停靠的列表项
+    FMouseOverItem:ISkinItem;
+
+    //选中的列表项
+    FSelectedItem:ISkinItem;
+
+    //处理Item的状态
+    function ProcessItemDrawEffectStates(AItem:ISkinItem):TDPEffectStates;virtual;
+
+    //设置选中的列表项
+    procedure DoSetSelectedItem(Value: ISkinItem);virtual;
+
+    procedure SetMouseDownItem(Value: ISkinItem);
+    procedure SetMouseOverItem(Value: ISkinItem);
+    procedure SetSelectedItem(Value: ISkinItem);
+//    procedure SetCenterItem(Value: ISkinItem);
+//    procedure SetPanDragItem(Value: ISkinItem);
+
+
+    function VisibleItemIndexAt(X, Y: Double):Integer;overload;
+//    function VisibleItemAt(X, Y: Double):ISkinItem;overload;
+    function VisibleItemAt(X, Y: Double):ISkinItem;overload;
+    function VisibleItemDrawRect(AVisibleItem:ISkinItem): TRectF;
+
+    procedure CustomMouseDown(Button: TMouseButton; Shift: TShiftState;X, Y: Double);virtual;
+    procedure CustomMouseUp(Button: TMouseButton; Shift: TShiftState;X, Y: Double);virtual;
+    procedure CustomMouseMove(Shift: TShiftState;X,Y:Double);virtual;
+    procedure CustomMouseEnter;virtual;
+    procedure CustomMouseLeave;virtual;
+
+    /// <summary>
+    ///   <para>
+    ///     获取当前交互的项
+    ///   </para>
+    ///   <para>
+    ///     Get interactive Item
+    ///   </para>
+    /// </summary>
+//    property InteractiveItem:ISkinItem read GetInteractiveItem;
+
+    /// <summary>
+    ///   <para>
+    ///     选中的列表项
+    ///   </para>
+    ///   <para>
+    ///     Selected ListItem
+    ///   </para>
+    /// </summary>
+    property SelectedItem:ISkinItem read FSelectedItem write SetSelectedItem;
+
+    /// <summary>
+    ///   <para>
+    ///     鼠标按下的列表项
+    ///   </para>
+    ///   <para>
+    ///     Pressed ListItem
+    ///   </para>
+    /// </summary>
+    property MouseDownItem:ISkinItem read FMouseDownItem write SetMouseDownItem;
+    property InnerMouseDownItem:ISkinItem read FInnerMouseDownItem write FInnerMouseDownItem;
+
+    /// <summary>
+    ///   <para>
+    ///     居中的列表项
+    ///   </para>
+    ///   <para>
+    ///     Centered ListItem
+    ///   </para>
+    /// </summary>
+//    property CenterItem:ISkinItem read GetCenterItem write SetCenterItem;
+
+    /// <summary>
+    ///   <para>
+    ///     停靠的列表项
+    ///   </para>
+    ///   <para>
+    ///     Hovered :ListItem
+    ///   </para>
+    /// </summary>
+    property MouseOverItem:ISkinItem read FMouseOverItem write SetMouseOverItem;
   public
     constructor Create(ASkinList:ISkinList);virtual;
     destructor Destroy;override;
   public
-    FControlLeftOffset:TControlSize;
-    FControlTopOffset:TControlSize;
+    FControlLeftOffset:Double;
+    FControlTopOffset:Double;
 
 
-    function GetControlHeight: TControlSize;
-    function GetControlWidth: TControlSize;
+    function GetControlHeight: Double;
+    function GetControlWidth: Double;
 
     /// <summary>
     ///   <para>
@@ -811,7 +923,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property ContentWidth:TControlSize read FContentWidth;
+    property ContentWidth:Double read FContentWidth;
     /// <summary>
     ///   <para>
     ///     内容的高度
@@ -820,7 +932,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property ContentHeight:TControlSize read FContentHeight;
+    property ContentHeight:Double read FContentHeight;
 
 
 
@@ -833,7 +945,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-//    property SkinListIntf:ISkinList read FSkinListIntf write SetSkinListIntf;
+    property SkinListIntf:ISkinList read FSkinListIntf write SetSkinListIntf;
 
 
 
@@ -847,7 +959,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property ItemWidth:TControlSize read FItemWidth write SetItemWidth;
+    property ItemWidth:Double read FItemWidth write SetItemWidth;
 
     /// <summary>
     ///   <para>
@@ -857,7 +969,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property ItemHeight:TControlSize read FItemHeight write SetItemHeight;
+    property ItemHeight:Double read FItemHeight write SetItemHeight;
 
 
     /// <summary>
@@ -868,7 +980,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property ItemSpace:TControlSize read FItemSpace write SetItemSpace;
+    property ItemSpace:Double read FItemSpace write SetItemSpace;
     /// <summary>
     ///   <para>
     ///     列表项间隔类型
@@ -887,7 +999,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property StaticItemWidth:TControlSize read FItemWidth write FItemWidth;
+    property StaticItemWidth:Double read FItemWidth write FItemWidth;
     /// <summary>
     ///   <para>
     ///     静态的设置列表项高度
@@ -896,7 +1008,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property StaticItemHeight:TControlSize read FItemHeight write FItemHeight;
+    property StaticItemHeight:Double read FItemHeight write FItemHeight;
 
 
 
@@ -908,7 +1020,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property SelectedItemHeight:TControlSize read FSelectedItemHeight write SetSelectedItemHeight;
+    property SelectedItemHeight:Double read FSelectedItemHeight write SetSelectedItemHeight;
     /// <summary>
     ///   <para>
     ///     选中状态的列表项宽度
@@ -917,11 +1029,11 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property SelectedItemWidth:TControlSize read FSelectedItemWidth write SetSelectedItemWidth;
+    property SelectedItemWidth:Double read FSelectedItemWidth write SetSelectedItemWidth;
 
 
-    property ControlLeftOffset:TControlSize read FControlLeftOffset write SetControlLeftOffset;
-    property ControlTopOffset:TControlSize read FControlTopOffset write SetControlTopOffset;
+    property ControlLeftOffset:Double read FControlLeftOffset write SetControlLeftOffset;
+    property ControlTopOffset:Double read FControlTopOffset write SetControlTopOffset;
 
 
     /// <summary>
@@ -932,7 +1044,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property ControlWidth:TControlSize read GetControlWidth write FControlWidth;
+    property ControlWidth:Double read GetControlWidth write FControlWidth;
     /// <summary>
     ///   <para>
     ///     控件的高度
@@ -941,7 +1053,7 @@ type
     ///     ??
     ///   </para>
     /// </summary>
-    property ControlHeight:TControlSize read GetControlHeight write FControlHeight;
+    property ControlHeight:Double read GetControlHeight write FControlHeight;
 
 
 
@@ -1003,6 +1115,7 @@ type
     ///   </para>
     /// </summary>
     property OnSetSelectedItem:TNotifyEvent read FOnSetSelectedItem write FOnSetSelectedItem;
+    property OnItemExpandedChange:TNotifyEvent read FOnItemExpandedChange write FOnItemExpandedChange;
 
 
 
@@ -1086,12 +1199,17 @@ type
 
 
 
-
 implementation
 
 
-
-
+{$IFDEF OPENSOURCE_VERSION}
+{$ELSE}
+//  {$IFDEF OPENSOURCE_VERSION}
+//  {$ELSE}
+//uses
+//  uSkinListViewType;
+//  {$ENDIF}
+{$ENDIF}
 
 
 
@@ -1150,6 +1268,395 @@ begin
 
   FIsNeedReCalcItemRect:=True;
   FIsNeedReCalcVisibleItems:=True;
+
+end;
+
+procedure TSkinListLayoutsManager.CustomMouseDown(Button: TMouseButton;
+  Shift: TShiftState; X, Y: Double);
+var
+  AItemDrawRect:TRectF;
+//  APanDragItemDrawRect:TRectF;
+//  APanDragItemDrawItemDesignerPanel:TSkinItemDesignerPanel;
+//  APanDragItemDesignerPanelClipRect:TRectF;
+begin
+//  uBaseLog.OutputDebugString('TSkinCustomListDefaultType.CustomMouseDown');
+
+
+//  inherited;
+
+
+//  //去掉子控件传递过来的鼠标消息
+//  if Self.FCurrentMouseEventIsChildOwn then
+//  begin
+////    uBaseLog.OutputDebugString('TSkinCustomListDefaultType.CustomMouseDown IsChildMouseEvent');
+//    Exit;
+//  end;
+
+
+//    //启动长按列表项事件的定时器
+//    Self.FHasCalledOnLongTapItem:=False;
+//    Self.CreateCheckLongTapItemTimer;
+//    Self.StartCheckLongTapItemTimer;
+//
+//
+//    Self.FIsStayPressedItem:=False;
+    Self.FLastMouseDownItem:=nil;
+//    Self.CreateCheckStayPressedItemTimer;
+//    Self.StartCheckStayPressedItemTimer;
+
+
+
+    //获取列表项绘制矩形
+    AItemDrawRect:=RectF(0,0,0,0);
+    if Self.FMouseOverItem<>nil then
+    begin
+        AItemDrawRect:=Self.VisibleItemDrawRect(Self.FMouseOverItem);
+//        //平拖过了,则获取平拖列表项的绘制矩形(加下平拖之后的偏移)
+//        if Self.IsStartedItemPanDrag
+//          and (Self.FMouseOverItem=Self.FPanDragItem) then
+//        begin
+//          AItemDrawRect:=Self.GetPanDragItemDrawRect;
+//        end;
+    end;
+
+
+
+
+
+    //设置鼠标点击的内部的列表项
+    //用于鼠标弹起的时候,调用该Item.FDrawItemDesignerPanel的弹起事件
+    //避免点击了ItemDesignerPanel中的子控件,而不知道点击的是哪个列表项
+    if PtInRect(AItemDrawRect,PointF(X,Y)) then
+    begin
+        Self.FInnerMouseDownItem:=Self.VisibleItemAt(X,Y);
+        Self.FInteractiveMouseDownItem:=
+              Self.FInnerMouseDownItem;
+
+
+//        if Self.FInnerMouseDownItem<>
+//          Self.FEditingItem then
+//        begin
+//          //点击的列表项切换过了,结束编辑
+//          Self.StopEditingItem;
+//        end
+    end;
+
+
+
+
+//    //处理列表项的鼠标点击事件
+//    //判断鼠标点击事件是否被列表项的ItemDesignerPanel处理了
+//    if DoProcessItemCustomMouseDown(Self.FMouseOverItem,
+//                                    AItemDrawRect,Button,Shift,X,Y) then
+//    begin
+//      //点击到HitTest为True的子控件
+//      Self.Invalidate;
+//      Exit;
+//    end
+//    else
+//    begin
+//      //如果事件没有被处理,那么传递给Item,也就是点击列表项
+//    end;
+
+
+
+
+
+
+    //如果鼠标没有点击到ItemDesignerPanel上面的子控件
+    //那么设置鼠标点击的列表项
+    Self.MouseDownItem:=
+        Self.InnerMouseDownItem;
+
+
+
+//    //平拖列表项的事件
+//    //如果开始了列表项平拖,获取平拖列表项的鼠标按下事件,并且鼠标在平拖列表设计面板上
+//    if Self.IsStartedItemPanDrag then
+//    begin
+//        APanDragItemDrawRect:=Self.VisibleItemDrawRect(Self.FPanDragItem);
+//        APanDragItemDesignerPanelClipRect:=Self.GetPanDragItemDesignerPanelDrawRect;
+//
+//        if PtInRect(APanDragItemDrawRect,PointF(X,Y)) then
+//        begin
+//
+//            Self.FItemPanDragGestureManager.MouseDown(Button,Shift,X,Y);
+//
+//
+//            if PtInRect(APanDragItemDesignerPanelClipRect,PointF(X,Y)) then
+//            begin
+//              APanDragItemDrawItemDesignerPanel:=TSkinItemDesignerPanel(Self.FItemPanDragDesignerPanel);
+//              //初始事件没有被处理
+//              APanDragItemDrawItemDesignerPanel.SkinControlType.EventProcessedByChild:=False;
+//              //处理鼠标按下消息
+//              APanDragItemDrawItemDesignerPanel.SkinControlType
+//                              .DirectUIMouseDown(Self.FSkinControl,Button,Shift,X-APanDragItemDesignerPanelClipRect.Left,Y-APanDragItemDesignerPanelClipRect.Top);
+//              if APanDragItemDrawItemDesignerPanel.SkinControlType.EventProcessedByChild then
+//              begin
+//                Self.Invalidate;
+//                //消息被平拖列表项的控件处理过了
+//                Exit;
+//              end
+//              else
+//              begin
+//                //如果事件没有被处理,那么传递给Item,也就是点击列表项
+//              end;
+//            end;
+//
+//
+//        end
+//        else
+//        begin
+//          //在别的地方平拖
+//          //停止平拖
+//          Self.StopItemPanDrag;
+//        end;
+//
+//
+//    end
+//    else
+//    begin
+//
+//        //尚没有启动平拖
+//        if Self.CanEnableItemPanDrag
+//          and (Self.FMouseDownItem<>nil) then
+//        begin
+//          Self.FItemPanDragGestureManager.MouseDown(Button,Shift,X,Y);
+//        end;
+//
+//
+//    end;
+
+
+end;
+
+procedure TSkinListLayoutsManager.CustomMouseEnter;
+begin
+
+end;
+
+procedure TSkinListLayoutsManager.CustomMouseLeave;
+begin
+
+//  Self.FItemPanDragGestureManager.MouseLeave;
+//
+//  //如果开始项目平拖了
+//  if Self.IsStartedItemPanDrag then
+//  begin
+//    TSkinItemDesignerPanel(Self.FItemPanDragDesignerPanel).SkinControlType.DirectUIMouseLeave;
+//  end;
+//
+//  DoProcessItemCustomMouseLeave(Self.MouseOverItem);
+
+  Self.MouseOverItem:=nil;
+
+
+end;
+
+procedure TSkinListLayoutsManager.CustomMouseMove(Shift: TShiftState; X,
+  Y: Double);
+var
+  AItemDrawRect:TRectF;
+//  APanDragItemDrawItemDesignerPanel:TSkinItemDesignerPanel;
+//  APanDragItemDesignerPanelClipRect:TRectF;
+begin
+//  inherited;
+
+//
+//  //去掉子控件传递过来的鼠标消息
+//  if Self.FCurrentMouseEventIsChildOwn then
+//  begin
+////    uBaseLog.OutputDebugString('TSkinCustomListDefaultType.CustomMouseMove IsChildMouseEvent');
+//    Exit;
+//  end;
+
+
+
+//  //在一段时间内鼠标超出一段距离
+//  //就表示不是鼠标点击事件
+//  //需要停止长按的定时器
+//  if (Self.FMouseDownItem<>nil)
+//    and (GetDis(PointF(X,Y),FMouseDownPt)>8) then
+//  begin
+//    Self.StopCheckLongTapItemTimer;
+//    Self.StopCheckStayPressedItemTimer;
+//  end;
+
+
+
+
+//
+//  //在这里也要判断是否需要平拖列表项,因为移动平台上有可能MouseMove消息比MousrDown消息早
+//  if
+//    Self.CanEnableItemPanDrag
+//    and not Self.FIsStopingItemPanDrag
+//   then
+//  begin
+//    Self.FItemPanDragGestureManager.MouseMove(Shift,X,Y);
+//  end;
+
+
+
+
+
+
+  //原ItemDesignerPanel处理鼠标离开效果
+  Self.MouseOverItem:=Self.VisibleItemAt(X,Y);
+
+
+
+
+
+//  //获取平拖列表项的鼠标移动事件
+//  if Self.IsStartedItemPanDrag then
+//  begin
+//      APanDragItemDesignerPanelClipRect:=Self.GetPanDragItemDesignerPanelDrawRect;
+//      APanDragItemDrawItemDesignerPanel:=TSkinItemDesignerPanel(Self.FItemPanDragDesignerPanel);
+//
+//      //初始事件没有被处理
+//      APanDragItemDrawItemDesignerPanel.SkinControlType.EventProcessedByChild:=False;
+//      //处理鼠标按下消息
+//      APanDragItemDrawItemDesignerPanel.SkinControlType.DirectUIMouseMove(Self.FSkinControl,Shift,X-APanDragItemDesignerPanelClipRect.Left,Y-APanDragItemDesignerPanelClipRect.Top);
+//      if APanDragItemDrawItemDesignerPanel.SkinControlType.EventProcessedByChild then
+//      begin
+//        Exit;
+//      end;
+//  end;
+//
+//
+//
+//  //现ItemDesignerPanel处理鼠标移动效果
+//  Self.DoProcessItemCustomMouseMove(Self.FMouseOverItem,
+//                  Shift,X,Y);
+
+
+
+
+end;
+
+procedure TSkinListLayoutsManager.CustomMouseUp(Button: TMouseButton;
+  Shift: TShiftState; X, Y: Double);
+var
+  AItem:ISkinItem;
+//  APanDragItemDrawItemDesignerPanel:TSkinItemDesignerPanel;
+//  APanDragItemDesignerPanelClipRect:TRectF;
+//
+//  AIsDoProcessItemCustomMouseUp:Boolean;
+begin
+//  uBaseLog.OutputDebugString('TSkinCustomListDefaultType.CustomMouseUp');
+
+//  inherited;
+
+//  //去掉子控件传递过来的鼠标消息
+//  if Self.FCurrentMouseEventIsChildOwn then
+//  begin
+////    uBaseLog.OutputDebugString('TSkinCustomListDefaultType.CustomMouseDown IsChildMouseEvent');
+//    Exit;
+//  end;
+//
+//
+//      //停止检测长按列表项事件
+//      Self.StopCheckLongTapItemTimer;
+//      Self.StopCheckStayPressedItemTimer;
+//
+//
+//
+//      //平拖列表项处理
+//      if Self.CanEnableItemPanDrag
+//        and Not Self.FIsStopingItemPanDrag then
+//      begin
+//        Self.FItemPanDragGestureManager.MouseUp(Button,Shift,X,Y);
+//      end;
+
+
+
+
+//      //获取平拖列表项的鼠标弹起事件
+//      if Self.IsStartedItemPanDrag then
+//      begin
+//          APanDragItemDesignerPanelClipRect:=Self.GetPanDragItemDesignerPanelDrawRect;
+//          APanDragItemDrawItemDesignerPanel:=TSkinItemDesignerPanel(Self.FItemPanDragDesignerPanel);
+//          //初始事件没有被处理
+//          APanDragItemDrawItemDesignerPanel.SkinControlType.EventProcessedByChild:=False;
+//
+//          //处理鼠标按下消息
+//          APanDragItemDrawItemDesignerPanel.SkinControlType
+//                          .DirectUIMouseUp(Self.FSkinControl,Button,
+//                                Shift,
+//                                X-APanDragItemDesignerPanelClipRect.Left,
+//                                Y-APanDragItemDesignerPanelClipRect.Top,
+//                                True);
+//          if APanDragItemDrawItemDesignerPanel.SkinControlType.EventProcessedByChild then
+//          begin
+//            Invalidate;
+//
+//            Exit;
+//          end;
+//
+//      end;
+
+
+
+//      //处理列表项的鼠标消息
+//      //判断鼠标消息是否被列表项的DrawItemDesignerPanel上面的子控件处理
+//      AIsDoProcessItemCustomMouseUp:=DoProcessItemCustomMouseUp(
+//                                Self.FInnerMouseDownItem,
+//                                Button,Shift,X,Y
+//                                );
+
+
+
+//      if
+//        Not Self.FHasCalledOnLongTapItem
+//        and Not AIsDoProcessItemCustomMouseUp
+//        then
+//      begin
+
+          //选中列表项
+          AItem:=Self.VisibleItemAt(X,Y);
+          if
+            (AItem = Self.FMouseDownItem)
+
+//              and (Abs(FMouseDownAbsolutePt.X-Self.FMouseUpAbsolutePt.X)<Const_CanCallClickEventDistance)
+//                and (Abs(FMouseDownAbsolutePt.Y-FMouseUpAbsolutePt.Y)<Const_CanCallClickEventDistance)
+            then
+              begin
+//
+//
+//
+//                  //也可以呼叫点击事件
+//                  //选中列表项
+////                  Self.DoClickItem(AItem,X,Y);
+//
+////                  uBaseLog.OutputDebugString('TSkinCustomListDefaultType.CustomMouseUp ClickItem');
+//
+//
+//                  //在Timer中调用DoClickItem
+//                  Self.CreateCallOnClickItemTimer;
+//                  Self.StartCallOnClickItemTimer;
+
+                  //需要绘制点击效果
+                  Self.FLastMouseDownItem:=AItem;
+                  Self.FLastMouseDownX:=X;
+                  Self.FLastMouseDownY:=Y;
+              end;
+//              else
+//              begin
+////                  uBaseLog.OutputDebugString('TSkinCustomListDefaultType.CustomMouseUp Move Over 5Pixel,Not Click');
+//
+//              end;
+
+//      end;
+
+
+
+      Self.FMouseDownItem:=nil;
+      Self.FInnerMouseDownItem:=nil;
+
+      DoItemPropChange(Self);
+//      Invalidate;
+
+
 
 end;
 
@@ -1225,11 +1732,11 @@ begin
 
               if FCalcItemsMaxRight<AItemRect.Right then
               begin
-                FCalcItemsMaxRight:=ControlSize(AItemRect.Right);
+                FCalcItemsMaxRight:=AItemRect.Right;
               end;
               if FCalcItemsMaxBottom<AItemRect.Bottom then
               begin
-                FCalcItemsMaxBottom:=ControlSize(AItemRect.Bottom);
+                FCalcItemsMaxBottom:=AItemRect.Bottom;
               end;
 
 
@@ -1283,11 +1790,11 @@ begin
 
                 if FCalcItemsMaxRight<AItemRect.Right then
                 begin
-                  FCalcItemsMaxRight:=ControlSize(AItemRect.Right);
+                  FCalcItemsMaxRight:=AItemRect.Right;
                 end;
                 if FCalcItemsMaxBottom<AItemRect.Bottom then
                 begin
-                  FCalcItemsMaxBottom:=ControlSize(AItemRect.Bottom);
+                  FCalcItemsMaxBottom:=AItemRect.Bottom;
                 end;
 
 
@@ -1328,6 +1835,14 @@ begin
   end;
 end;
 
+procedure TSkinListLayoutsManager.DoItemExpandedChange(AItem: TObject);
+begin
+  if Assigned(FOnItemExpandedChange) then
+  begin
+    FOnItemExpandedChange(AItem);
+  end;
+end;
+
 procedure TSkinListLayoutsManager.DoItemSizeChange(Sender:TObject;AIsNeedCheck:Boolean);
 begin
   if Not AIsNeedCheck then
@@ -1338,7 +1853,7 @@ begin
 
   if Not AIsNeedCheck or AIsNeedCheck and FIsNeedReCalcItemRect then
   begin
-    if FSkinListIntf.GetUpdateCount=0 then
+    if (FSkinListIntf<>nil) and (FSkinListIntf.GetUpdateCount=0) then
     begin
 
       //计算所有列表项的矩形
@@ -1366,6 +1881,8 @@ end;
 
 procedure TSkinListLayoutsManager.DoItemVisibleChange(Sender:TObject;AIsNeedCheck_IsNeedReCalcVisibleItems:Boolean);
 begin
+  if FSkinListIntf=nil then Exit;
+  
   if Not AIsNeedCheck_IsNeedReCalcVisibleItems then
   begin
     FIsNeedReCalcItemRect:=True;
@@ -1392,7 +1909,7 @@ begin
 
 end;
 
-function TSkinListLayoutsManager.GetControlHeight: TControlSize;
+function TSkinListLayoutsManager.GetControlHeight: Double;
 begin
   Result:=FControlHeight;
   if Assigned(Self.FOnGetControlHeight) then
@@ -1401,7 +1918,7 @@ begin
   end;
 end;
 
-function TSkinListLayoutsManager.GetControlWidth: TControlSize;
+function TSkinListLayoutsManager.GetControlWidth: Double;
 begin
   Result:=FControlWidth;
   if Assigned(Self.FOnGetControlWidth) then
@@ -1410,7 +1927,7 @@ begin
   end;
 end;
 
-function TSkinListLayoutsManager.GetItemDefaultHeight: TControlSize;
+function TSkinListLayoutsManager.GetItemDefaultHeight: Double;
 begin
   Result:=FItemHeight;
   //ListBox.Prop.ItemHeight为-1,表示使用控件高度
@@ -1432,7 +1949,7 @@ begin
   end;
 end;
 
-function TSkinListLayoutsManager.GetSelectedItemDefaultHeight: TControlSize;
+function TSkinListLayoutsManager.GetSelectedItemDefaultHeight: Double;
 begin
   Result:=FSelectedItemHeight;
   //ListBox.Prop.SelectedItemHeight为-1,表示使用控件高度
@@ -1447,7 +1964,7 @@ begin
   end
 end;
 
-function TSkinListLayoutsManager.GetItemDefaultWidth: TControlSize;
+function TSkinListLayoutsManager.GetItemDefaultWidth: Double;
 begin
   Result:=FItemWidth;
   //ListBox.Prop.ItemWidth为-1,表示使用控件宽度
@@ -1470,7 +1987,7 @@ begin
   end;
 end;
 
-function TSkinListLayoutsManager.GetSelectedItemDefaultWidth: TControlSize;
+function TSkinListLayoutsManager.GetSelectedItemDefaultWidth: Double;
 begin
   Result:=FSelectedItemWidth;
   //ListBox.Prop.SelectedItemWidth为-1,表示使用控件宽度
@@ -1505,8 +2022,44 @@ begin
   Result:=FVisibleItems.Count;
 end;
 
+function TSkinListLayoutsManager.ProcessItemDrawEffectStates(
+  AItem: ISkinItem): TDPEffectStates;
+begin
+  Result:=[];
+
+  if Self.FMouseOverItem=AItem then
+  begin
+    Result:=Result+[dpstMouseOver];
+  end;
+
+  if (Self.FMouseDownItem=AItem) then
+  begin
+      //当前按下,且移动距离不超过5个像素，触发了OnClickItem事件,需要重绘
+//      if Self.FSkinCustomListIntf.Prop.FIsStayPressedItem then
+//      begin
+        Result:=Result+[dpstMouseDown];
+
+//        Self.FSkinCustomListIntf.Prop.StopCheckStayPressedItemTimer;
+//      end;
+  end;
+
+
+  //上次按下的列表项,调用了OnClickItem之后会清空
+  if (Self.FLastMouseDownItem=AItem) then
+  begin
+    Result:=Result+[dpstMouseDown];
+  end;
+
+  //选中的效果
+  if AItem.Selected then
+  begin
+    Result:=Result+[dpstPushed];
+  end;
+
+end;
+
 procedure TSkinListLayoutsManager.SetControlLeftOffset(
-  const Value: TControlSize);
+  const Value: Double);
 begin
   if FControlLeftOffset<>Value then
   begin
@@ -1516,7 +2069,7 @@ begin
 end;
 
 procedure TSkinListLayoutsManager.SetControlTopOffset(
-  const Value: TControlSize);
+  const Value: Double);
 begin
   if FControlTopOffset<>Value then
   begin
@@ -1525,7 +2078,7 @@ begin
   end;
 end;
 
-procedure TSkinListLayoutsManager.SetItemHeight(const Value: TControlSize);
+procedure TSkinListLayoutsManager.SetItemHeight(const Value: Double);
 begin
   if (FItemHeight<>Value) then
   begin
@@ -1534,7 +2087,7 @@ begin
   end;
 end;
 
-procedure TSkinListLayoutsManager.SetSelectedItemHeight(const Value: TControlSize);
+procedure TSkinListLayoutsManager.SetSelectedItemHeight(const Value: Double);
 begin
   if (FSelectedItemHeight<>Value) then
   begin
@@ -1554,7 +2107,7 @@ begin
   end;
 end;
 
-procedure TSkinListLayoutsManager.SetItemWidth(const Value: TControlSize);
+procedure TSkinListLayoutsManager.SetItemWidth(const Value: Double);
 begin
   if (FItemWidth<>Value) then
   begin
@@ -1563,7 +2116,7 @@ begin
   end;
 end;
 
-procedure TSkinListLayoutsManager.SetSelectedItemWidth(const Value: TControlSize);
+procedure TSkinListLayoutsManager.SetSelectedItemWidth(const Value: Double);
 begin
   if (FSelectedItemWidth<>Value) then
   begin
@@ -1605,7 +2158,7 @@ begin
   end;
 end;
 
-procedure TSkinListLayoutsManager.SetItemSpace(const Value: TControlSize);
+procedure TSkinListLayoutsManager.SetItemSpace(const Value: Double);
 begin
   if (FItemSpace<>Value) then
   begin
@@ -1722,7 +2275,7 @@ begin
 
 end;
 
-function TSkinListLayoutsManager.CalcContentHeight: TControlSize;
+function TSkinListLayoutsManager.CalcContentHeight: Double;
 begin
   Result:=0;
   //算出列表最大的高度
@@ -1757,7 +2310,7 @@ begin
 //  end;
 end;
 
-function TSkinListLayoutsManager.CalcContentWidth: TControlSize;
+function TSkinListLayoutsManager.CalcContentWidth: Double;
 begin
   Result:=0;
   //算出列表最大的宽度
@@ -1798,15 +2351,15 @@ procedure TSkinListLayoutsManager.CalcDrawStartAndEndIndex(ADrawLeftOffset,
                                                             ADrawTopOffset//,
 //                                                            ADrawRightOffset,
 //                                                            ADrawBottomOffset
-                                                            :TControlSize;
-                                                            AControlWidth,AControlHeight:TControlSize;
+                                                            :Double;
+                                                            AControlWidth,AControlHeight:Double;
                                                             var ADrawStartIndex:Integer;
                                                             var ADrawEndIndex:Integer);
 var
   I: Integer;
 
-  AFirstItemBottom:TControlSize;
-  AFirstItemRight:TControlSize;
+  AFirstItemBottom:Double;
+  AFirstItemRight:Double;
 var
   l,h,m :Integer;
   found :Boolean;
@@ -1924,7 +2477,7 @@ begin
 //                      ADrawStartIndex:=m;
 //                    end;
                     ADrawStartIndex:=m;
-                    AFirstItemBottom:=ControlSize(Self.GetVisibleItem(m).ItemRect.Bottom);
+                    AFirstItemBottom:=Self.GetVisibleItem(m).ItemRect.Bottom;
 
 
                     //uBaseLog.HandleException(nil,'TSkinListLayoutsManager.CalcDrawStartAndEndIndex ASearchCount:'+IntToStr(ASearchCount));
@@ -2072,7 +2625,7 @@ begin
 //                      ADrawStartIndex:=m;
 //                    end;
                     ADrawStartIndex:=m;
-                    AFirstItemRight:=ControlSize(Self.GetVisibleItem(m).ItemRect.Right);
+                    AFirstItemRight:=Self.GetVisibleItem(m).ItemRect.Right;
 
 
 
@@ -2147,7 +2700,7 @@ begin
   end;
 end;
 
-function TSkinListLayoutsManager.CalcItemHeight(AItem: ISkinItem): TControlSize;
+function TSkinListLayoutsManager.CalcItemHeight(AItem: ISkinItem): Double;
 begin
   if
       (Self.FItemSizeCalcType=isctFixed)
@@ -2182,12 +2735,12 @@ begin
   end;
 end;
 
-function TSkinListLayoutsManager.CalcItemLevelLeftOffsetAtVerticalLayout(AItem: ISkinItem): TControlSize;
+function TSkinListLayoutsManager.CalcItemLevelLeftOffsetAtVerticalLayout(AItem: ISkinItem): Double;
 begin
   Result:=0;
 end;
 
-function TSkinListLayoutsManager.CalcItemsMaxBottom: TControlSize;
+function TSkinListLayoutsManager.CalcItemsMaxBottom: Double;
 var
   I: Integer;
 begin
@@ -2199,13 +2752,13 @@ begin
     begin
       if Self.VisibleItemRectByIndex(I).Bottom>Result then
       begin
-        Result:=ControlSize(Self.VisibleItemRectByIndex(I).Bottom);
+        Result:=Self.VisibleItemRectByIndex(I).Bottom;
       end;
     end;
   end;
 end;
 
-function TSkinListLayoutsManager.CalcItemsMaxRight: TControlSize;
+function TSkinListLayoutsManager.CalcItemsMaxRight: Double;
 var
   I: Integer;
 begin
@@ -2217,13 +2770,15 @@ begin
     begin
       if Self.VisibleItemRectByIndex(I).Right>Result then
       begin
-        Result:=ControlSize(Self.VisibleItemRectByIndex(I).Right);
+        Result:=Self.VisibleItemRectByIndex(I).Right;
       end;
     end;
 //  end;
 end;
 
-function TSkinListLayoutsManager.CalcItemWidth(AItem: ISkinItem): TControlSize;
+function TSkinListLayoutsManager.CalcItemWidth(AItem: ISkinItem): Double;
+var
+  AThisRowItemCount:Integer;
 begin
   if  //固定尺寸
       (Self.FItemSizeCalcType=isctFixed)
@@ -2235,8 +2790,21 @@ begin
   end
   else if BiggerDouble(AItem.Width,0) and SmallerDouble(AItem.Width,1) then
   begin
-      //如果是小数,那么取控件宽度的百分比
-      Result:=AItem.Width*GetControlWidth;
+      if Self.FItemSpace=0 then
+      begin
+        //如果是小数,那么取控件宽度的百分比,要去掉间隔的
+        Result:=AItem.Width*GetControlWidth;
+      end
+      else
+      begin
+        case Self.FItemSpaceType of
+          sistDefault: Result:=AItem.Width*(GetControlWidth-(AItem.GetThisRowItemCount-1+2)*FItemSpace);
+          sistMiddle: Result:=AItem.Width*(GetControlWidth-(AItem.GetThisRowItemCount-1)*FItemSpace);
+        end;
+
+      end;
+
+
   end
   else
   begin
@@ -2262,6 +2830,238 @@ begin
 
 end;
 
+procedure TSkinListLayoutsManager.DoSetSelectedItem(Value: ISkinItem);
+begin
+  if FSelectedItem<>Value then
+  begin
+
+//      //如果是单选的,那么之前选中的列表项取消选择
+//      if FSelectedItem<>nil then
+//      begin
+//  //        uBaseLog.OutputDebugString('--取消选中 ');
+//          if not Self.FMultiSelect then
+//          begin
+//            FSelectedItem.StaticSelected:=False;
+//          end;
+//          FSelectedItem.DoPropChange;
+//
+//      end
+//      else
+//      begin
+//  //        uBaseLog.OutputDebugString('FSelectedItem 为nil');
+//      end;
+
+      FSelectedItem := Value;
+
+//      if FSelectedItem<>nil then
+//      begin
+//  //        uBaseLog.OutputDebugString('--选中 ');
+//          FSelectedItem.StaticSelected:=True;
+//          FSelectedItem.DoPropChange;
+//
+//          CallOnSelectedItemEvent(Self,FSelectedItem);
+//      end;
+//
+//
+//      //如果选中列表项的宽度和高度与正常的宽度和高度不一样,
+//      //那么需要重新计算每个列表项的绘制尺寸
+//      if IsNotSameDouble(Self.FListLayoutsManager.SelectedItemHeight,-1)
+//        or IsNotSameDouble(Self.FListLayoutsManager.SelectedItemWidth,-1) then
+//      begin
+//        //重新计算尺寸
+//        Self.FListLayoutsManager.DoItemSizeChange(Self);
+//      end;
+//
+//      Invalidate;
+      DoItemPropChange(Self);
+  end
+  else
+  begin
+//    uBaseLog.OutputDebugString('已经选中此Item');
+  end;
+end;
+
+procedure TSkinListLayoutsManager.SetMouseDownItem(Value: ISkinItem);
+begin
+  if FMouseDownItem<>Value then
+  begin
+    FMouseDownItem := Value;
+    DoItemPropChange(Self);
+//    Invalidate;
+  end;
+end;
+
+procedure TSkinListLayoutsManager.SetMouseOverItem(Value: ISkinItem);
+begin
+  if FMouseOverItem<>Value then
+  begin
+//    if FMouseOverItem<>nil then
+//    begin
+//      FMouseOverItem.IsBufferNeedChange:=True;
+//    end;
+//
+//    DoMouseOverItemChange(Value,FMouseOverItem);
+
+    FMouseOverItem := Value;
+
+//    if FMouseOverItem<>nil then
+//    begin
+//      FMouseOverItem.IsBufferNeedChange:=True;
+//    end;
+//
+//    Invalidate;
+    DoItemPropChange(Self);
+  end;
+end;
+
+
+procedure TSkinListLayoutsManager.SetSelectedItem(Value: ISkinItem);
+begin
+  if FSelectedItem<>Value then
+  begin
+    DoSetSelectedItem(Value);
+
+
+//    //居中选择
+//    if Self.FIsEnabledCenterItemSelectMode then
+//    begin
+//      DoSetCenterItem(Value);
+//    end;
+  end;
+end;
+
+//procedure TSkinListLayoutsManager.SetCenterItem(Value: ISkinItem);
+//begin
+//  DoSetCenterItem(Value);
+//  if Self.FIsEnabledCenterItemSelectMode then
+//  begin
+//    DoSetSelectedItem(Value);
+//  end;
+//end;
+
+
+function TSkinListLayoutsManager.VisibleItemAt(X, Y: Double):ISkinItem;
+var
+  AVisibleItemIndex:Integer;
+begin
+  Result:=nil;
+  AVisibleItemIndex:=Self.VisibleItemIndexAt(X,Y);
+  if AVisibleItemIndex<>-1 then
+  begin
+    Result:=Self.GetVisibleItem(AVisibleItemIndex);
+  end
+  else
+  begin
+    Result:=nil;
+  end;
+end;
+
+function TSkinListLayoutsManager.VisibleItemDrawRect(AVisibleItem:ISkinItem): TRectF;
+//var
+//  AVisibleItemIndex:Integer;
+begin
+
+  Result:=Self.VisibleItemRectByItem(AVisibleItem);
+
+//  Result.Top:=Result.Top
+//              -Self.GetTopDrawOffset
+//              +GetItemTopDrawOffset
+//              +GetCenterItemSelectModeTopDrawOffset;
+//  Result.Bottom:=Result.Bottom
+//              -Self.GetBottomDrawOffset
+//              +GetItemTopDrawOffset
+//              +GetCenterItemSelectModeTopDrawOffset;
+//  Result.Left:=Result.Left
+//                -Self.GetLeftDrawOffset
+//                +GetCenterItemSelectModeLeftDrawOffset;
+//  Result.Right:=Result.Right
+//                -Self.GetRightDrawOffset
+//                +GetCenterItemSelectModeLeftDrawOffset;
+
+  AVisibleItem.ItemDrawRect:=Result;
+
+//  Result:=RectF(0,0,0,0);
+//  AVisibleItemIndex:=Self.FListLayoutsManager.GetVisibleItemObjectIndex(AVisibleItem);
+//  if AVisibleItemIndex<>-1 then
+//  begin
+//    Result:=VisibleItemDrawRect(AVisibleItemIndex);
+//  end;
+
+end;
+
+function TSkinListLayoutsManager.VisibleItemIndexAt(X, Y: Double): Integer;
+var
+  I: Integer;
+//  ADrawStartIndex,ADrawEndIndex:Integer;
+begin
+  Result:=-1;
+//  ADrawStartIndex:=0;
+//  ADrawEndIndex:=Self.GetVisibleItemsCount;
+//  if Self.FListLayoutsManager.GetVisibleItemsCount>0 then
+//  begin
+//    Self.FListLayoutsManager.CalcDrawStartAndEndIndex(
+//
+//                                                      Self.GetLeftDrawOffset,
+//                                                      Self.GetTopDrawOffset,
+//                                          //            Self.GetRightDrawOffset,
+//                                          //            Self.GetBottomDrawOffset,
+//                                                      Self.FListLayoutsManager.GetControlWidth,
+//                                                      Self.FListLayoutsManager.GetControlHeight,
+//                                                      ADrawStartIndex,
+//                                                      ADrawEndIndex
+//                                                      );
+
+    for I:=0 to Self.GetVisibleItemsCount-1 do
+    begin
+//      if Self.GetVisibleItem(I).PtInItem(VisibleItemDrawRect(Self.GetVisibleItem(I)),PointF(X,Y)) then
+      if Self.GetVisibleItem(I).PtInItem(PointF(X,Y)) then
+      begin
+        Result:=I;
+        Break;
+      end;
+    end;
+
+//  end;
+
+
+end;
+
+//function TSkinListLayoutsManager.VisibleItemAt(X, Y: Double): ISkinItem;
+//var
+//  I: Integer;
+//  ADrawStartIndex,ADrawEndIndex:Integer;
+//begin
+//  Result:=-1;
+//  ADrawStartIndex:=0;
+//  ADrawEndIndex:=Self.
+////  if Self.FListLayoutsManager.GetVisibleItemsCount>0 then
+////  begin
+////    Self.FListLayoutsManager.CalcDrawStartAndEndIndex(
+////
+////                                                      Self.GetLeftDrawOffset,
+////                                                      Self.GetTopDrawOffset,
+////                                          //            Self.GetRightDrawOffset,
+////                                          //            Self.GetBottomDrawOffset,
+////                                                      Self.FListLayoutsManager.GetControlWidth,
+////                                                      Self.FListLayoutsManager.GetControlHeight,
+////                                                      ADrawStartIndex,
+////                                                      ADrawEndIndex
+////                                                      );
+//
+//    for I:=ADrawStartIndex to ADrawEndIndex do
+//    begin
+//      if PtInRect(VisibleItemDrawRect(TBaseSkinItem(Self.FListLayoutsManager.GetVisibleItemObject(I))),PointF(X,Y)) then
+//      begin
+//        Result:=I;
+//        Break;
+//      end;
+//    end;
+//
+////  end;
+//
+//
+//end;
+
 function TSkinListLayoutsManager.VisibleItemRectByIndex(AVisibleItemIndex:Integer): TRectF;
 var
   AItem:ISkinItem;
@@ -2278,23 +3078,24 @@ begin
 end;
 
 function TSkinListLayoutsManager.VisibleItemRectByItem(AVisibleItem:ISkinItem): TRectF;
-var
-  AItemIndex:Integer;
+//var
+//  AItemIndex:Integer;
 begin
-  Result:=RectF(0,0,0,0);
-  AItemIndex:=Self.GetVisibleItemObjectIndex(AVisibleItem.GetObject);
-  if AItemIndex<>-1 then
-  begin
-    Result:=VisibleItemRectByIndex(AItemIndex);
-  end;
+  Result:=AVisibleItem.GetItemRect;
+
+//  Result:=RectF(0,0,0,0);
+//  AItemIndex:=Self.GetVisibleItemObjectIndex(AVisibleItem.GetObject);
+//  if AItemIndex<>-1 then
+//  begin
+//    Result:=VisibleItemRectByIndex(AItemIndex);
+//  end;
+
+
 //  if AVisibleItem<>nil then
 //  begin
 //    Result:=AVisibleItem.GetItemRect;
 //  end;
 end;
-
-
-
 
 
 

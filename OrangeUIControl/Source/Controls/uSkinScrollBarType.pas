@@ -15,7 +15,6 @@ interface
 
 uses
   Classes,
-  Types,
   Math,
   DateUtils,
   SysUtils,
@@ -36,6 +35,7 @@ uses
   FMX.Controls,
   uSkinFireMonkeyControl,
   {$ENDIF}
+  Types,
 
   uGraphicCommon,
   uDrawParam,
@@ -962,6 +962,7 @@ var
   AThumbBtnDrawRect:TRectF;
   BSkinMaterial:TSkinScrollBarMobileMaterial;
 begin
+
   BSkinMaterial:=GetSkinMaterial;
   if BSkinMaterial<>nil then
   begin
@@ -1078,7 +1079,8 @@ begin
   FThumbBtnMinSize:=20;
   {$ENDIF FMX}
   {$IFDEF VCL}
-  Self.FThumbBtnRectParam.FillDrawColor.Color:=clGray;
+//  Self.FThumbBtnRectParam.FillDrawColor.Color:=clGray;
+  Self.FThumbBtnRectParam.FillDrawColor.Color:=$AFAFAF;
   FThumbBtnMinSize:=40;
   {$ENDIF VCL}
 
@@ -1814,6 +1816,9 @@ begin
   Self.FSkinScrollBarIntf.Prop.IsCanAutoHide:=False;
   {$ENDIF}
   {$IFDEF _MACOS}
+  Self.FSkinScrollBarIntf.Prop.IsCanAutoHide:=False;
+  {$ENDIF}
+  {$IFDEF LINUX}
   Self.FSkinScrollBarIntf.Prop.IsCanAutoHide:=False;
   {$ENDIF}
 end;

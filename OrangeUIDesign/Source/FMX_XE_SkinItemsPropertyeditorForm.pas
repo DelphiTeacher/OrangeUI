@@ -190,7 +190,7 @@ begin
     Item := TListBoxItem.Create(nil);
     Item.Parent := ItemsClasses;
     Item.Text := AItemDescriptions[I].ItemClass.ClassName;
-    Item.TextAlign := TTextAlign.taCenter;
+    Item.TextAlign := TTextAlign.{$IF CompilerVersion >= 35.0}Center{$ELSE}taCenter{$IFEND};;
 
     FItemsDescription[ItemIndex] := AItemDescriptions[I];
     Inc(ItemIndex);

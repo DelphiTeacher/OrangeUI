@@ -12,12 +12,15 @@ uses
   SysUtils,
   Math,
 
+  {$IF CompilerVersion>=30.0}
+  Types,//定义了TRectF
+  {$IFEND}
+
   {$IFDEF VCL}
   Graphics,
   {$ENDIF}
   {$IFDEF FMX}
   UITypes,
-  Types,
   {$ENDIF}
 
 //  XSuperObject,
@@ -34,6 +37,7 @@ type
 
   TDrawPathParam=class;
   TBaseDrawPathParam=class;
+
 
 
 
@@ -77,7 +81,10 @@ type
                    ///    Change border color
                    ///   </para>
                    /// </summary>
-                   dppetPenColorChange
+                   dppetPenColorChange,
+                   //矩形尺寸变化
+                   //饼图扇形鼠标移上去要变大
+                   dpcetPathRectSizeChange
                    );
   /// <summary>
   ///   <para>
@@ -92,53 +99,99 @@ type
 
 
 
-  TPathActionType=(patLineTo,
+  TPathActionType=(
+                    //画一条线
+                    patLineTo,
+                    //移动画笔
                     patMoveTo,
                     patCurveTo,
+                    //清除
                     patClear,
+                    //填充路径
                     patFillPath,
-                    patDrawPath
+                    //画路径
+                    patDrawPath,
+                    //添加一个矩形
+                    patAddRect,
+                    //添加一个扇形
+                    patAddPie,
+                    //添加一个圆边
+                    patAddArc,
+                    //添加一个圆
+                    patAddEllipse//,
+
+
+//                    //闭合路径,FillPath自动会闭合
+//                    patClose,
+                    //获取区域,用来判断鼠标是否在区域内
+//                    patGetRegion
+
                     );
+
+  TDrawPathParamEffect=class;
+
   TPathActionItem=class(TCollectionItem)
   private
     FActionType: TPathActionType;
-    FX: TControlSize;
-    FY: TControlSize;
-    FX1: TControlSize;
-    FY1: TControlSize;
-    FX2: TControlSize;
-    FY2: TControlSize;
     FSizeType:TDPSizeType;
+    FX: Double;
+    FY: Double;
+    FX1: Double;
+    FY1: Double;
+    FX2: Double;
+    FY2: Double;
+    FSweepAngle: Double;
+    FStartAngle: Double;
     procedure SetActionType(const Value: TPathActionType);
-    procedure SetX(const Value: TControlSize);
-    procedure SetY(const Value: TControlSize);
-    procedure SetX1(const Value: TControlSize);
-    procedure SetY1(const Value: TControlSize);
-    procedure SetX2(const Value: TControlSize);
-    procedure SetY2(const Value: TControlSize);
+    procedure SetX(const Value: Double);
+    procedure SetY(const Value: Double);
+    procedure SetX1(const Value: Double);
+    procedure SetY1(const Value: Double);
+    procedure SetX2(const Value: Double);
+    procedure SetY2(const Value: Double);
     procedure SetSizeType(const Value: TDPSizeType);
   protected
+    procedure DoChange;
     procedure AssignTo(Dest: TPersistent); override;
   public
 //    function LoadFromJson(ASuperObject:ISuperObject):Boolean;
 //    function SaveToJson(ASuperObject:ISuperObject):Boolean;
   public
+//    FMouseOverEffectTypes: TDPPEffectTypes;
+//    //尺寸增量
+//    FSizeChange: Double;
+//    property SizeChange:Double read FSizeChange write FSizeChange;
+  public
     constructor Create(Collection: TCollection); override;
   public
-    function GetX(Const ADrawRect:TRectF):TControlSize;
-    function GetY(Const ADrawRect:TRectF):TControlSize;
-    function GetX1(Const ADrawRect:TRectF):TControlSize;
-    function GetY1(Const ADrawRect:TRectF):TControlSize;
-    function GetX2(Const ADrawRect:TRectF):TControlSize;
-    function GetY2(Const ADrawRect:TRectF):TControlSize;
+    function GetX(Const ADrawRect:TRectF):Double;
+    function GetY(Const ADrawRect:TRectF):Double;
+    function GetX1(Const ADrawRect:TRectF):Double;
+    function GetY1(Const ADrawRect:TRectF):Double;
+    function GetX2(Const ADrawRect:TRectF):Double;
+    function GetY2(Const ADrawRect:TRectF):Double;
   published
     //点
-    property X:TControlSize read FX write SetX;
-    property Y:TControlSize read FY write SetY;
-    property X1:TControlSize read FX1 write SetX1;
-    property Y1:TControlSize read FY1 write SetY1;
-    property X2:TControlSize read FX2 write SetX2;
-    property Y2:TControlSize read FY2 write SetY2;
+    //画线条时使用,添加矩形框时使用
+    property X:Double read FX write SetX;
+    property Y:Double read FY write SetY;
+
+
+    property X1:Double read FX1 write SetX1;
+    property Y1:Double read FY1 write SetY1;
+
+
+    //画曲线时使用
+    property X2:Double read FX2 write SetX2;
+    property Y2:Double read FY2 write SetY2;
+
+    //扇形的开始角度
+    property StartAngle:Double read FStartAngle write FStartAngle;
+    //扇形的开始度数
+    property SweepAngle:Double read FSweepAngle write FSweepAngle;
+
+
+
     property SizeType:TDPSizeType read FSizeType write SetSizeType;
     //类型,线,弧,圆
     property ActionType:TPathActionType read FActionType write SetActionType;
@@ -154,6 +207,8 @@ type
                       ADrawPathDataClass:TDrawPathDataClass);
     destructor Destroy; override;
   public
+    FIsChanged:Boolean;
+    //属于它
     FDrawPathParam:TBaseDrawPathParam;
     FDrawPathData:TBaseDrawPathData;
     property Items[Index:Integer]:TPathActionItem read GetItem write SetItem;default;
@@ -186,6 +241,7 @@ type
 
     FEffectTypes: TDPPEffectTypes;
   private
+    FFillColorChangeType: TColorChangeType;
     function IsRectPenWidthStored: Boolean;
     function IsEffectTypesStored: Boolean;
     function IsIsFillStored: Boolean;
@@ -194,11 +250,15 @@ type
     procedure SetFillDrawColor(const Value: TDrawColor);
     procedure SetIsFill(const Value: Boolean);
     procedure SetPenDrawColor(const Value: TDrawColor);
+    procedure SetFillColorChangeType(const Value: TColorChangeType);
   protected
     procedure AssignTo(Dest: TPersistent); override;
   public
 //    function LoadFromJson(ASuperObject:ISuperObject):Boolean;override;
 //    function SaveToJson(ASuperObject:ISuperObject):Boolean;override;
+    //尺寸增量
+    FSizeChange: Double;
+    property SizeChange:Double read FSizeChange write FSizeChange;
   public
     constructor Create;override;
     destructor Destroy;override;
@@ -232,6 +292,8 @@ type
     ///   </para>
     /// </summary>
     function SaveToDocNode(ADocNode:TBTNode20_Class):Boolean;override;
+  public
+    property FillColorChangeType:TColorChangeType read FFillColorChangeType write SetFillColorChangeType;
   published
 
     /// <summary>
@@ -411,6 +473,7 @@ type
   private
     FIsFill: Boolean;
     FFillDrawColor: TDrawColor;
+    FTempFillDrawColor: TDrawColor;
 
     FPenDrawColor: TDrawColor;
     FPenWidth: TControlSize;
@@ -492,7 +555,7 @@ type
     ///     Whether fill current effect
     ///   </para>
     /// </summary>
-    function CurrentEffectIsFill:Boolean;
+//    function CurrentEffectIsFill:Boolean;
     /// <summary>
     ///   <para>
     ///     当前效果的边框宽度
@@ -521,6 +584,7 @@ type
     ///   </para>
     /// </summary>
     procedure Clear;override;
+    function CalcDrawPathRect(APathRect:TRectF):TRectF;
   public
     constructor Create(const AName:String;const ACaption:String);override;
     destructor Destroy;override;
@@ -791,18 +855,36 @@ begin
   Result:=Self.FFillDrawColor;
   if (CurrentEffect<>nil) and (dppetFillColorChange in TDrawPathParamEffect(CurrentEffect).FEffectTypes) then
   begin
-    Result:=TDrawPathParamEffect(CurrentEffect).FFillDrawColor;
+//    Result:=TDrawPathParamEffect(CurrentEffect).FFillDrawColor;
+    case TDrawPathParamEffect(CurrentEffect).FFillColorChangeType of
+      cctNone:
+          Result:=TDrawPathParamEffect(CurrentEffect).FFillDrawColor;
+      cctBrightness:
+        begin
+//          FTempFillDrawColor.Assign(FFillDrawColor);
+          FTempFillDrawColor.FColor:=FFillDrawColor.Color;
+          FTempFillDrawColor.FColor:=BrightnessColor(FTempFillDrawColor.Color,20);
+          Result:=FTempFillDrawColor;
+        end;
+      cctDarkness:
+        begin
+//          FTempFillDrawColor.Assign(FFillDrawColor);
+          FTempFillDrawColor.FColor:=FFillDrawColor.Color;
+          FTempFillDrawColor.FColor:=DarknessColor(FTempFillDrawColor.Color,20);
+          Result:=FTempFillDrawColor;
+        end;
+    end;
   end;
 end;
 
-function TBaseDrawPathParam.CurrentEffectIsFill:Boolean;
-begin
-  Result:=Self.FIsFill;
-  if (CurrentEffect<>nil) and (dppetIsFillChange in TDrawPathParamEffect(CurrentEffect).FEffectTypes) then
-  begin
-    Result:=TDrawPathParamEffect(CurrentEffect).FIsFill;
-  end;
-end;
+//function TBaseDrawPathParam.CurrentEffectIsFill:Boolean;
+//begin
+//  Result:=Self.FIsFill;
+//  if (CurrentEffect<>nil) and (dppetIsFillChange in TDrawPathParamEffect(CurrentEffect).FEffectTypes) then
+//  begin
+//    Result:=TDrawPathParamEffect(CurrentEffect).FIsFill;
+//  end;
+//end;
 
 function TBaseDrawPathParam.CurrentEffectPenWidth:TControlSize;
 begin
@@ -937,6 +1019,7 @@ begin
   FreeAndNil(FPathActions);
   FreeAndNil(FFillDrawColor);
   FreeAndNil(FPenDrawColor);
+  FreeAndNil(FTempFillDrawColor);
   inherited;
 end;
 
@@ -1042,6 +1125,21 @@ begin
   Inherited;
 end;
 
+function TBaseDrawPathParam.CalcDrawPathRect(APathRect: TRectF): TRectF;
+begin
+  Result:=APathRect;
+  //饼图扇形鼠标移上去要变大
+  if (CurrentEffect<>nil) and (dpcetPathRectSizeChange in TDrawPathParamEffect(CurrentEffect).FEffectTypes) then
+  begin
+    InflateRect(Result,TDrawPathParamEffect(CurrentEffect).FSizeChange,TDrawPathParamEffect(CurrentEffect).FSizeChange);
+//    AControlRect.Left:=AControlRect.Left+CurrentEffect.FOffset;
+//    AControlRect.Top:=AControlRect.Top+CurrentEffect.FOffset;
+//    AControlRect.Right:=AControlRect.Right+CurrentEffect.FOffset;
+//    AControlRect.Bottom:=AControlRect.Bottom+CurrentEffect.FOffset;
+  end;
+
+end;
+
 procedure TBaseDrawPathParam.Clear;
 begin
   inherited Clear;
@@ -1067,6 +1165,7 @@ begin
   FFillDrawColor.StoredDefaultColor:=WhiteColor;
   FFillDrawColor.OnChange:=DoChange;
 
+  FTempFillDrawColor:=TDrawColor.Create('TempFillDrawColor','Temp填充颜色');
 
   FPenDrawColor:=CreateDrawColor('PenDrawColor','边框颜色');
 
@@ -1086,6 +1185,7 @@ begin
   begin
     DestObject:=TDrawPathParamEffect(Dest);
     DestObject.FFillDrawColor.Assign(FFillDrawColor);
+    DestObject.FPenDrawColor.Assign(FPenDrawColor);
     DestObject.FIsFill:=FIsFill;
     DestObject.FPenWidth:=FPenWidth;
     DestObject.FEffectTypes:=FEffectTypes;
@@ -1237,6 +1337,16 @@ begin
   if FEffectTypes<>Value then
   begin
     FEffectTypes := Value;
+    DoChange;
+  end;
+end;
+
+procedure TDrawPathParamEffect.SetFillColorChangeType(
+  const Value: TColorChangeType);
+begin
+  if FFillColorChangeType<>Value then
+  begin
+    FFillColorChangeType := Value;
     DoChange;
   end;
 end;
@@ -1762,6 +1872,10 @@ begin
     TPathActionItem(Dest).FActionType:=FActionType;
     TPathActionItem(Dest).FX:=FX;
     TPathActionItem(Dest).FY:=FY;
+    TPathActionItem(Dest).FX1:=FX1;
+    TPathActionItem(Dest).FY1:=FY1;
+    TPathActionItem(Dest).FX2:=FX2;
+    TPathActionItem(Dest).FY2:=FY2;
     TPathActionItem(Dest).FSizeType:=FSizeType;
   end
   else
@@ -1776,7 +1890,17 @@ begin
 
 end;
 
-function TPathActionItem.GetX(const ADrawRect: TRectF): TControlSize;
+procedure TPathActionItem.DoChange;
+begin
+  TPathActionCollection(Self.Collection).FIsChanged:=True;
+  if TPathActionCollection(Self.Collection).FDrawPathParam<>nil then
+  begin
+    TPathActionCollection(Self.Collection).FDrawPathParam.DoChange();
+  end;
+
+end;
+
+function TPathActionItem.GetX(const ADrawRect: TRectF): Double;
 begin
   case Self.FSizeType of
     dpstPixel: Result:=FX;
@@ -1784,7 +1908,7 @@ begin
   end;
 end;
 
-function TPathActionItem.GetY(const ADrawRect: TRectF): TControlSize;
+function TPathActionItem.GetY(const ADrawRect: TRectF): Double;
 begin
   case Self.FSizeType of
     dpstPixel: Result:=FY;
@@ -1792,7 +1916,7 @@ begin
   end;
 end;
 
-function TPathActionItem.GetX1(const ADrawRect: TRectF): TControlSize;
+function TPathActionItem.GetX1(const ADrawRect: TRectF): Double;
 begin
   case Self.FSizeType of
     dpstPixel: Result:=FX1;
@@ -1800,7 +1924,7 @@ begin
   end;
 end;
 
-function TPathActionItem.GetY1(const ADrawRect: TRectF): TControlSize;
+function TPathActionItem.GetY1(const ADrawRect: TRectF): Double;
 begin
   case Self.FSizeType of
     dpstPixel: Result:=FY1;
@@ -1808,7 +1932,7 @@ begin
   end;
 end;
 
-function TPathActionItem.GetX2(const ADrawRect: TRectF): TControlSize;
+function TPathActionItem.GetX2(const ADrawRect: TRectF): Double;
 begin
   case Self.FSizeType of
     dpstPixel: Result:=FX2;
@@ -1816,7 +1940,7 @@ begin
   end;
 end;
 
-function TPathActionItem.GetY2(const ADrawRect: TRectF): TControlSize;
+function TPathActionItem.GetY2(const ADrawRect: TRectF): Double;
 begin
   case Self.FSizeType of
     dpstPixel: Result:=FY2;
@@ -1867,7 +1991,7 @@ begin
   if FActionType<>Value then
   begin
     FActionType := Value;
-    TPathActionCollection(Self.Collection).FDrawPathParam.DoChange();
+    DoChange;
   end;
 end;
 
@@ -1876,61 +2000,61 @@ begin
   if FSizeType<>Value then
   begin
     FSizeType := Value;
-    TPathActionCollection(Self.Collection).FDrawPathParam.DoChange();
+    DoChange();
   end;
 end;
 
-procedure TPathActionItem.SetX(const Value: TControlSize);
+procedure TPathActionItem.SetX(const Value: Double);
 begin
   if FX<>Value then
   begin
     FX := Value;
-    TPathActionCollection(Self.Collection).FDrawPathParam.DoChange();
+    DoChange();
   end;
 end;
 
-procedure TPathActionItem.SetY(const Value: TControlSize);
+procedure TPathActionItem.SetY(const Value: Double);
 begin
   if FY<>Value then
   begin
     FY := Value;
-    TPathActionCollection(Self.Collection).FDrawPathParam.DoChange();
+    DoChange();
   end;
 end;
 
-procedure TPathActionItem.SetX1(const Value: TControlSize);
+procedure TPathActionItem.SetX1(const Value: Double);
 begin
   if FX1<>Value then
   begin
     FX1 := Value;
-    TPathActionCollection(Self.Collection).FDrawPathParam.DoChange();
+    DoChange();
   end;
 end;
 
-procedure TPathActionItem.SetY1(const Value: TControlSize);
+procedure TPathActionItem.SetY1(const Value: Double);
 begin
   if FY1<>Value then
   begin
     FY1 := Value;
-    TPathActionCollection(Self.Collection).FDrawPathParam.DoChange();
+    DoChange();
   end;
 end;
 
-procedure TPathActionItem.SetX2(const Value: TControlSize);
+procedure TPathActionItem.SetX2(const Value: Double);
 begin
   if FX2<>Value then
   begin
     FX2 := Value;
-    TPathActionCollection(Self.Collection).FDrawPathParam.DoChange();
+    DoChange();
   end;
 end;
 
-procedure TPathActionItem.SetY2(const Value: TControlSize);
+procedure TPathActionItem.SetY2(const Value: Double);
 begin
   if FY2<>Value then
   begin
     FY2 := Value;
-    TPathActionCollection(Self.Collection).FDrawPathParam.DoChange();
+    DoChange();
   end;
 end;
 

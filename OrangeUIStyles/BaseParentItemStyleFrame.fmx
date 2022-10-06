@@ -4,12 +4,18 @@ object FrameBaseParentItemStyle: TFrameBaseParentItemStyle
   Size.PlatformDefault = False
   object ItemDesignerPanel: TSkinFMXItemDesignerPanel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     SelfOwnMaterial.BackColor.IsFill = True
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Color = claLightgray
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = claCornflowerblue
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.IsTransparent = False
     MouseDownFocus = False
     ClipChildren = True
@@ -21,10 +27,10 @@ object FrameBaseParentItemStyle: TFrameBaseParentItemStyle
     TabOrder = 0
     Properties.IsPreview = False
     Properties.PreviewItem.Selected = False
+    Properties.PreviewItem.Checked = False
     Properties.PreviewItem.Height = -1.000000000000000000
     Properties.PreviewItem.Visible = True
     Properties.PreviewItem.Color = claNull
-    Properties.PreviewItem.Checked = False
     Properties.PreviewItem.Width = -1.000000000000000000
     Properties.PreviewItem.Icon.IsClipRound = False
     Properties.PreviewItem.Pic.IsClipRound = False
@@ -41,10 +47,16 @@ object FrameBaseParentItemStyle: TFrameBaseParentItemStyle
     Top = 461
     object imgGroupExpanded: TSkinFMXImage
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
       SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
       SelfOwnMaterial.DrawPictureParam.PictureHorzAlign = phaCenter
       SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaCenter
@@ -77,10 +89,16 @@ object FrameBaseParentItemStyle: TFrameBaseParentItemStyle
     end
     object lblGroupName: TSkinFMXLabel
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
       SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontName = #24494#36719#38597#40657
       SelfOwnMaterial.DrawCaptionParam.FontSize = 15.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Family = #24494#36719#38597#40657

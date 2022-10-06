@@ -578,16 +578,16 @@
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_SettingIcon_29x29.png" Configuration="Release" Class="iPad_Setting29"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Configuration="Debug" Class="Android_SplashImage470"/>
                 <DeployFile LocalName="iOSSimulator\Debug\FriendCircleClient_D10_1.info.plist" Configuration="Debug" Class="ProjectiOSInfoPList"/>
+                <DeployFile LocalName="58x58.png" Configuration="Release" Class="iPhone_Spotlight58"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_828x1792.png" Configuration="Release" Class="iPhone_Launch828"/>
+                <DeployFile LocalName="72x72.png" Configuration="Release" Class="iPad_AppIcon72"/>
+                <DeployFile LocalName="iOSDevice64\Release\FriendCircleClient_D10_3" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="Android\Release\libFriendCircleClient_D10_4.so" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Android">
                         <RemoteName>libFriendCircleClient_D10_4.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_828x1792.png" Configuration="Release" Class="iPhone_Launch828"/>
-                <DeployFile LocalName="72x72.png" Configuration="Release" Class="iPad_AppIcon72"/>
-                <DeployFile LocalName="iOSDevice64\Release\FriendCircleClient_D10_3" Configuration="Release" Class="ProjectOutput"/>
-                <DeployFile LocalName="58x58.png" Configuration="Release" Class="iPhone_Spotlight58"/>
                 <DeployFile LocalName="iOSSimulator\Release\FriendCircleClient_D10_3" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="Android\Release\provider_paths.xml" Configuration="Release" Class="AndroidFileProvider">
                     <Platform Name="Android">
@@ -653,13 +653,13 @@
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_1242x2208.png" Configuration="Release" Class="iPhone_Launch1242"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_768x1004.png" Configuration="Release" Class="iPad_Launch768"/>
                 <DeployFile LocalName="144x144.png" Configuration="Release" Class="iPad_AppIcon144"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x748.png" Configuration="Release" Class="iPad_Launch1024"/>
                 <DeployFile LocalName="48x48.png" Configuration="Release" Class="Android_LauncherIcon48">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x748.png" Configuration="Release" Class="iPad_Launch1024"/>
                 <DeployFile LocalName="iOSSimulator\Debug\FriendCircleClient_D10_3" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="Android\Release\styles.xml" Configuration="Release" Class="AndroidSplashStyles">
                     <Platform Name="Android">
@@ -751,7 +751,7 @@
                 <DeployFile LocalName="120x120.png" Configuration="Release" Class="iPhone_AppIcon120"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_640x960.png" Configuration="Debug" Class="iPhone_Launch640"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_60x60.png" Configuration="Debug" Class="iPhone_AppIcon60"/>
-                <DeployFile LocalName="60x60.png" Configuration="Release" Class="iPhone_AppIcon60"/>
+                <DeployFile LocalName="iOSSimulator\Release\FriendCircleClient_D10_1.info.plist" Configuration="Release" Class="ProjectiOSInfoPList"/>
                 <DeployFile LocalName="Android\Debug\AndroidManifest.xml" Configuration="Debug" Class="ProjectAndroidManifest"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Configuration="Debug" Class="Android_LauncherIcon72"/>
                 <DeployFile LocalName="network_security_config.xml" Configuration="Release" Class="File">
@@ -782,7 +782,7 @@
                 <DeployFile LocalName="Android\Debug\splash_image_def.xml" Configuration="Debug" Class="AndroidSplashImageDef"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x768.png" Configuration="Debug" Class="iPad_Launch1024x768"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_768x1004.png" Configuration="Debug" Class="iPad_Launch768"/>
-                <DeployFile LocalName="iOSSimulator\Release\FriendCircleClient_D10_1.info.plist" Configuration="Release" Class="ProjectiOSInfoPList"/>
+                <DeployFile LocalName="60x60.png" Configuration="Release" Class="iPhone_AppIcon60"/>
                 <DeployFile LocalName="$(BDS)\lib\android\debug\x86\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeX86File"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_768x1024.png" Configuration="Debug" Class="iPad_Launch768x1024"/>
                 <DeployFile LocalName="144x144.png" Configuration="Release" Class="Android_LauncherIcon144">

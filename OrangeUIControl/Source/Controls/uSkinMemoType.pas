@@ -38,6 +38,14 @@ uses
   uBaseLog,
   uBinaryTreeDoc,
 //  uSkinPackage,
+
+//  {$IFDEF SKIN_SUPEROBJECT}
+  uSkinSuperObject,
+//  {$ELSE}
+//  XSuperObject,
+//  XSuperJson,
+//  {$ENDIF}
+
   uSkinRegManager,
   uSkinBufferBitmap,
   uDrawCanvas,
@@ -131,6 +139,9 @@ type
     procedure SetIsAutoHeight(const Value: Boolean);
     procedure SetAutoHeightMaxLineCount(const Value: Integer);
   protected
+    procedure GetPropJson(ASuperObject:ISuperObject);override;
+    procedure SetPropJson(ASuperObject:ISuperObject);override;
+
     procedure AssignProperties(Src:TSkinControlProperties);override;
   public
     constructor Create(ASkinControl:TControl);override;
@@ -939,6 +950,12 @@ begin
   Result:='SkinMemo';
 end;
 
+procedure TMemoProperties.GetPropJson(ASuperObject: ISuperObject);
+begin
+  inherited;
+
+end;
+
 procedure TMemoProperties.AssignProperties(Src: TSkinControlProperties);
 begin
   inherited;
@@ -1015,6 +1032,16 @@ begin
     FIsDrawHelpWhenFocused:=Value;
     Invalidate;
   end;
+end;
+
+procedure TMemoProperties.SetPropJson(ASuperObject: ISuperObject);
+begin
+  inherited;
+  if ASuperObject.Contains('input_prompt') then
+  begin
+    Self.HelpText:=ASuperObject.S['input_prompt'];
+  end;
+
 end;
 
 procedure TMemoProperties.SetAutoHeightMaxLineCount(const Value: Integer);

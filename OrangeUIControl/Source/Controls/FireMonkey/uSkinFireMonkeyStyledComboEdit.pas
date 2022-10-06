@@ -82,6 +82,7 @@ Type
     procedure AdjustFixedSize(const Ref: TControl); override;
     procedure DoPaintBackGround(Sender: TObject; Canvas: TCanvas; const ARect: TRectF);
 
+//    procedure DoComboMouseDown(Sender:TObject; Button: TMouseButton; Shift: TShiftState; x, Y: Single); override;
   public
     //InScrollBox属性实现
     //鼠标事件(系统自带的)(用于支持DirectUI)
@@ -123,6 +124,24 @@ uses
 
 { TSkinFMXStyledComboEdit }
 
+//procedure TSkinFMXStyledComboEdit.DoComboMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+//var
+//  OldPressed: Boolean;
+//begin
+//  if CanDropDown(Button, Shift) then
+//  begin
+////    if FNeedSetFocusAfterButtonClick then
+////      SetFocus;
+//    OldPressed := Pressed;
+//    try
+//      Pressed := True;
+//      DropDown;
+//    finally
+//      Pressed := OldPressed;
+//    end;
+//  end;
+//end;
+
 procedure TSkinFMXStyledComboEdit.AdjustFixedSize(const Ref: TControl);
 begin
 end;
@@ -157,9 +176,13 @@ begin
   if Self.FIsUseDefaultStyle then Exit;
 
 
+  //'TActiveStyleObject'
   if (ArrowButton<>nil) and Assigned(ArrowButton) then
   begin
-    ArrowButton.Visible:=False;
+    //ArrowButton.Visible:=False;
+    //隐藏图片即可
+
+    ClearStyleObjectVisiualElement(ArrowButton,'ComboEdit');
   end;
 
 

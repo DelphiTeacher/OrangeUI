@@ -18,6 +18,9 @@ uses
   Math,
   SysUtils,
 
+  {$IF CompilerVersion>=30.0}
+  Types,//定义了TRectF
+  {$IFEND}
 
   {$IFDEF VCL}
   Windows,
@@ -28,7 +31,6 @@ uses
 
 
   {$IFDEF FMX}
-  Types,
   UITypes,
   FMX.Types,
 //  FMX.Graphics,
@@ -218,7 +220,7 @@ type
     /// </summary>
     function DrawPathData(ADrawPathData:TBaseDrawPathData):Boolean;virtual;
     function FillPathData(ADrawPathParam:TDrawPathParam;ADrawPathData:TBaseDrawPathData):Boolean;virtual;
-    function DrawPath(ADrawPathParam:TDrawPathParam;const ADrawRect:TRectF):Boolean;virtual;
+    function DrawPath(ADrawPathParam:TDrawPathParam;const ADrawRect:TRectF;APathActions:TPathActionCollection):Boolean;virtual;
 
 
     /// <summary>
@@ -1237,7 +1239,7 @@ begin
 end;
 
 
-function TDrawCanvas.DrawPath(ADrawPathParam: TDrawPathParam;const ADrawRect: TRectF): Boolean;
+function TDrawCanvas.DrawPath(ADrawPathParam: TDrawPathParam;const ADrawRect: TRectF;APathActions:TPathActionCollection): Boolean;
 begin
   Result:=True;
 end;

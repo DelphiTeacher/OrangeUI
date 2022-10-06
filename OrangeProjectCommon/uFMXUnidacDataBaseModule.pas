@@ -65,9 +65,9 @@ type
   //FireMonkey平台下Unidac数据库访问模块
   TFMXUnidacDatabaseModule = class(TBaseDatabaseModule)
   private
-//    FSQLiteUniProvider:TSQLiteUniProvider;
-//    FMySQLUniProvider:TMySQLUniProvider;
-//    FSQLServerUniProvider:TSQLServerUniProvider;
+    FSQLiteUniProvider:TSQLiteUniProvider;
+    FMySQLUniProvider:TMySQLUniProvider;
+    FSQLServerUniProvider:TSQLServerUniProvider;
 //    tmrActiveMySQLPoolConnection: TTimer;
 //    FActiveMySQLPoolConnectionThread:TActiveMySQLPoolConnectionThread;
 //    procedure tmrActiveMySQLPoolConnectionTimer(Sender: TObject);override;
@@ -102,21 +102,22 @@ type
 //var
 //  GlobalDataBaseCharset:String;
 
+
 implementation
 
 
 
 
 
-  { TFMXUnidacDatabaseModule }
+{ TFMXUnidacDatabaseModule }
 
 constructor TFMXUnidacDatabaseModule.Create;
 begin
   Inherited Create;
 
-//  FSQLiteUniProvider:=TSQLiteUniProvider.Create(nil);
-//  FMySQLUniProvider:=TMySQLUniProvider.Create(nil);
-//  FSQLServerUniProvider:=TSQLServerUniProvider.Create(nil);
+  FSQLiteUniProvider:=TSQLiteUniProvider.Create(nil);
+  FMySQLUniProvider:=TMySQLUniProvider.Create(nil);
+  FSQLServerUniProvider:=TSQLServerUniProvider.Create(nil);
 
 //  DBType:='MYSQL';
 
@@ -163,9 +164,9 @@ begin
 
   FreeAndNil(UniConnection1);
 
-//  FreeAndNil(FSQLiteUniProvider);
-//  FreeAndNil(FMySQLUniProvider);
-//  FreeAndNil(FSQLServerUniProvider);
+  FreeAndNil(FSQLiteUniProvider);
+  FreeAndNil(FMySQLUniProvider);
+  FreeAndNil(FSQLServerUniProvider);
   Inherited;
 end;
 

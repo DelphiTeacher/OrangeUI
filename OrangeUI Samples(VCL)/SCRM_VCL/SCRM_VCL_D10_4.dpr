@@ -14,9 +14,6 @@ uses
   ListItemStyle_MailList in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_MailList.pas',
   ListItemStyle_CaptionDetailItem in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_CaptionDetailItem.pas',
   ListItemStyle_ClassifyHasSelectedEffect in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_ClassifyHasSelectedEffect.pas',
-  ListItemStyle_CompanyInfo in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_CompanyInfo.pas',
-  ListItemStyle_ContactInfo in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_ContactInfo.pas',
-  ListItemStyle_CustomerInfo in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_CustomerInfo.pas',
   ListItemStyle_CustomerTag in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_CustomerTag.pas',
   ListItemStyle_Edit in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_Edit.pas',
   ListItemStyle_HistoryMadical in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_HistoryMadical.pas',
@@ -33,13 +30,13 @@ uses
   ListItemStyle_TreeMainMenuItem in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_TreeMainMenuItem.pas',
   ListItemStyle_TwoButton in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_TwoButton.pas',
   ListItemStyle_VertSelectedSignLeft_CaptionRight in '..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_VertSelectedSignLeft_CaptionRight.pas',
-  CustomerInfoFrame in '..\..\OrangeProjectCommon\MXSearcher\CustomerInfoFrame.pas',
   TagLabelManageFrame in '..\..\OrangeProjectCommon\MXSearcher\TagLabelManageFrame.pas',
   uSkinItemJsonHelper in '..\..\OrangeProjectCommon\uSkinItemJsonHelper.pas',
   uDataSetToJson in '..\..\OrangeProjectCommon\uDataSetToJson.pas',
   EasyServiceCommonMaterialDataMoudle_VCL in '..\..\OrangeProjectCommon\EasyServiceCommonMaterialDataMoudle_VCL.pas' {dmEasyServiceCommonMaterial: TDataModule},
   uIdHttpControl in '..\..\OrangeProjectCommon\uIdHttpControl.pas',
-  HostForm in '..\..\OrangeProjectCommon\MXSearcher\HostForm.pas';
+  HostForm in '..\..\OrangeProjectCommon\MXSearcher\HostForm.pas',
+  uListItemStyleJsonHelper in '..\..\OrangeProjectCommon\uListItemStyleJsonHelper.pas';
 
 {$R *.res}
 

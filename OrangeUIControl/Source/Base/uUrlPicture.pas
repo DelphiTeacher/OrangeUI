@@ -216,7 +216,7 @@ type
 
     //上次使用时间,如果长时间不使用,那么释放
     LastUseTime:TDateTime;
-    function IsLoaded:Boolean;virtual;abstract;
+    function IsLoaded:Boolean;virtual;//abstract;
     procedure Load;virtual;
 //    procedure Init( //链接
 //                      const AUrl:String;
@@ -431,7 +431,7 @@ type
     constructor Create(AOwner:TComponent);override;
     destructor Destroy;override;
   public
-
+    FDownloadRootDir:String;
 
     //下载图片的Http控件
     FDownloadItemHttpControl:THttpControl;
@@ -792,6 +792,7 @@ constructor TDefaultDownloadManager.Create(AOwner:TComponent);
 begin
   Inherited;
 
+  FDownloadRootDir:=GetApplicationPath+'OrangeUIDownloadItems'+PathDelim;
 
   //创建下载线程
   FDownloadItemThread:=TTimerThread.Create(False);
@@ -888,7 +889,6 @@ begin
 
 
 
-
   //使用内存流
   AResponseStream:=TMemoryStream.Create;
   try
@@ -896,6 +896,10 @@ begin
 
       //标记正在下载
       AUrlCacheItem.State:=dpsDownloading;
+      TThread.Synchronize(nil,procedure
+      begin
+        AUrlCacheItem.DoNotifyDownloadStateChange(False);
+      end);
 
 
       //刷新DrawPicture,线程里面不能通知
@@ -1352,7 +1356,7 @@ begin
 
             //延时加载,如果DrawPicture绘制的时候，图片下载成功，不直接加载
             //图片加载多的时候，不会造成卡顿
-            ATimerTask:=TTimerTask.Create(0);
+            ATimerTask:=TTimerTask.Create();
             ATimerTask.TaskName:='LoadItem';
 
             //不用下载图片,而是在线程中加载
@@ -1392,7 +1396,7 @@ begin
 
             if ATimerTask<>nil then
             begin
-              FDownloadItemThread.RunTask(ATimerTask);
+              FDownloadItemThread.RunTask(ATimerTask,False);//排队下载
             end;
 
 
@@ -1421,7 +1425,7 @@ begin
 
 
         //执行下载线程
-        ATimerTask:=TTimerTask.Create(0);
+        ATimerTask:=TTimerTask.Create();
         ATimerTask.TaskName:='DownloadItem';
 
 
@@ -1491,7 +1495,7 @@ begin
 
         if ATimerTask<>nil then
         begin
-          FDownloadItemThread.RunTask(ATimerTask);
+          FDownloadItemThread.RunTask(ATimerTask,False);//排队下载
         end;
 
   end;
@@ -1539,7 +1543,7 @@ begin
 //      ShowException('Please Set TDefaultDownloadManager.GroupName!');
 //    end;
 
-    Result:=GetApplicationPath+'OrangeUIDownloadItems'+PathDelim+FGroupName+PathDelim;
+    Result:=FDownloadRootDir+FGroupName+PathDelim;
   end
   else
   begin
@@ -1626,6 +1630,11 @@ begin
   begin
     Result:=Self.FManager.GetDownloadDir+GUID+FileExt;
   end;
+end;
+
+function TUrlCacheItem.IsLoaded: Boolean;
+begin
+  Result:=FileExists(Self.GetOriginFilePath);
 end;
 
 //procedure TUrlCacheItem.Init(const AUrl: String; const ADataObject: TObject;
@@ -1940,67 +1949,22 @@ begin
   Result:=TUrlPictureList.Create;
 end;
 
+
 procedure TBaseDownloadPictureManager.DoCustomDownloadedStream(
   AUrlCacheItem: TUrlCacheItem; AResponseStream: TStream;var AIsValidResponse:Boolean);
-var
-  AFileHeaderBytes:Array [0..4] of Byte;
 begin
   AIsValidResponse:=True;
 
-  AResponseStream.Position:=0;
+  AUrlCacheItem.FileExt:=GetPicStreamFileExt(AResponseStream);
 
-  //下载成功
-  AResponseStream.Position:=0;
-  AResponseStream.Read(AFileHeaderBytes[0],Length(AFileHeaderBytes));
-  AResponseStream.Position:=0;
-
-
-  //比对是否是图片文件
-//    if Copy(ImageExt,1,2)='BM' then
-  if (AFileHeaderBytes[0]=Ord('B'))
-    and (AFileHeaderBytes[1]=Ord('M')) then
+  //识别不出来就是下载失败
+  if AUrlCacheItem.FileExt='' then
   begin
-      //if AUrlCacheItem.FileExt='' then
-      AUrlCacheItem.FileExt:='.bmp';
-  end
-  else
-  if (AFileHeaderBytes[0]=Ord('G'))
-    and (AFileHeaderBytes[1]=Ord('I'))
-    and (AFileHeaderBytes[2]=Ord('F')) then
-//    else if Copy(ImageExt,1,3)='GIF' then
-  begin
-      //if AUrlCacheItem.FileExt='' then
-      AUrlCacheItem.FileExt:='.gif';
-  end
-  else
-  if (AFileHeaderBytes[1]=Ord('P'))
-    and (AFileHeaderBytes[2]=Ord('N'))
-    and (AFileHeaderBytes[3]=Ord('G')) then
-//    else if Copy(ImageExt,2,3)='PNG' then
-  begin
-      //if AUrlCacheItem.FileExt='' then
-      AUrlCacheItem.FileExt:='.png';
-  end
-  else
-  if (AFileHeaderBytes[0]=255)
-    and (AFileHeaderBytes[1]=216) then
-//    else if (Copy(ImageExt,1,1)=#255) and (Copy(ImageExt,2,1)=#216) then
-  begin
-      //0xff,0xd8
-      //if AUrlCacheItem.FileExt='' then
-      AUrlCacheItem.FileExt:='.jpg';
-  end
-  else
-  begin
-      //文件内容出错
-      //uBaseLog.OutputDebugString('TDefaultDownloadManager.DownloadItem 文件内容出错');
-      AUrlCacheItem.State:=dpsDownloadImageInvalid;
-      AIsValidResponse:=False;
+    //文件内容出错
+    //uBaseLog.OutputDebugString('TDefaultDownloadManager.DownloadItem 文件内容出错');
+    AUrlCacheItem.State:=dpsDownloadImageInvalid;
+    AIsValidResponse:=False;
   end;
-  ;
-
-
-
 
 end;
 

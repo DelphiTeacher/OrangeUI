@@ -15,7 +15,6 @@ interface
 uses
   Classes,
   SysUtils,
-  Types,
 
 
   {$IFDEF VCL}
@@ -29,6 +28,15 @@ uses
   FMX.Controls,
   {$ENDIF}
   uBaseSkinControl,
+  Types,
+
+
+//  {$IFDEF SKIN_SUPEROBJECT}
+  uSkinSuperObject,
+//  {$ELSE}
+//  XSuperObject,
+//  XSuperJson,
+//  {$ENDIF}
 
 
   uLang,
@@ -233,6 +241,9 @@ type
     procedure SetHelpText(const Value: String);
   protected
     procedure AssignProperties(Src:TSkinControlProperties);override;
+
+    procedure GetPropJson(ASuperObject:ISuperObject);override;
+    procedure SetPropJson(ASuperObject:ISuperObject);override;
   public
     constructor Create(ASkinControl:TControl);override;
     destructor Destroy;override;
@@ -416,11 +427,11 @@ type
     //获取分页的绘制矩形
     function GetButtonRect(Index:Integer):TRectF;
 
-    function GetButtonSize: TControlSize;
+    function GetButtonSize: Double;
     function GetButtonSizeCalcType: TButtonSizeCalcType;
     function GetOrientation: TButtonOrientation;
 
-    procedure SetButtonSize(const Value: TControlSize);
+    procedure SetButtonSize(const Value: Double);
     procedure SetOrientation(const Value: TButtonOrientation);
     procedure SetButtonSizeCalcType(const Value: TButtonSizeCalcType);
 
@@ -438,8 +449,8 @@ type
     //按钮布局管理者
     FListLayoutsManager:TSkinListLayoutsManager;
 
-    function DoGetListLayoutsManagerControlHeight(Sender:TObject):TControlSize;
-    function DoGetListLayoutsManagerControlWidth(Sender:TObject):TControlSize;
+    function DoGetListLayoutsManagerControlHeight(Sender:TObject):Double;
+    function DoGetListLayoutsManagerControlWidth(Sender:TObject):Double;
 
     //IsCheckNeed,检查是否需要,如果不需要,那么就不调用相关的事件
     //列表项属性更改事件,只需要重绘
@@ -506,7 +517,7 @@ type
     ///     Button size
     ///   </para>
     /// </summary>
-    property ButtonSize:TControlSize read GetButtonSize write SetButtonSize;
+    property ButtonSize:Double read GetButtonSize write SetButtonSize;
 
     /// <summary>
     ///   <para>
@@ -575,6 +586,8 @@ type
     procedure SetDrawDetailParam(const Value: TDrawTextParam);
     procedure SetDrawDetail1Param(const Value: TDrawTextParam);
     procedure SetDrawHelpTextParam(const Value: TDrawTextParam);
+  protected
+    procedure AssignTo(Dest: TPersistent); override;
   public
     function HasMouseDownEffect:Boolean;override;
     function HasMouseOverEffect:Boolean;override;
@@ -1527,6 +1540,8 @@ type
     FSkinListIntf:ISkinList;
     //层级
     function GetLevel:Integer;
+    function GetWidth:Double;
+    function GetHeight:Double;
     function GetSelected:Boolean;
     function GetObject:TObject;
     function GetItemRect:TRectF;
@@ -1534,11 +1549,14 @@ type
     function GetItemDrawRect:TRectF;
     procedure SetItemDrawRect(Value:TRectF);
     function GetIsRowEnd:Boolean;
+    function GetThisRowItemCount:Integer;
 
     procedure SetSkinListIntf(ASkinListIntf:ISkinList);
     function GetListLayoutsManager:TSkinListLayoutsManager;
     procedure ClearItemRect;
 
+    //鼠标是否在Item里面
+    function PtInItem(APoint:TPointF):Boolean;
   protected
     procedure BindingItemText(const AName:String;const AText:String;ASkinItem:TObject;AIsDrawItemInteractiveState:Boolean);
     procedure SetControlValueByBindItemField(const AFieldName:String;
@@ -1551,15 +1569,27 @@ type
                                               AIsDrawItemInteractiveState:Boolean);
   public
     Value:Variant;
+    //是不是选择性的按钮
+    //选择性的按钮,Caption是值的标题,value存值
+    //非选择性的按钮,Caption就是FieldCaption
+    IsSelectButton:Boolean;
+    Setting:TFieldControlSetting;
     //针对页面框架的控件接口
-    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;override;
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;override;
+    //获取与设置自定义属性
+    function GetPropJsonStr:String;override;
+    procedure SetPropJsonStr(AJsonStr:String);override;
     //获取提交的值
     function GetPostValue(ASetting:TFieldControlSetting;
                             APageDataDir:String;
                             ASetRecordFieldValueIntf:ISetRecordFieldValue;
                             var AErrorMessage:String):Variant;override;
     //设置值
-    procedure SetControlValue(ASetting:TFieldControlSetting;APageDataDir:String;AImageServerUrl:String;AValue:Variant;AValueCaption:String;
+    procedure SetControlValue(ASetting:TFieldControlSetting;
+                            APageDataDir:String;
+                            AImageServerUrl:String;
+                            AValue:Variant;
+                            AValueCaption:String;
                             //要设置多个值,整个字段的记录
                             AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);override;
   public
@@ -1650,6 +1680,27 @@ type
   {$ENDIF VCL}
 
 
+
+
+  //选择日期范围的按钮
+  TSkinSelectDateAreaButton=class(TBaseSkinButton)
+  private
+  protected
+    FEndDate: String;
+    FStartDate: String;
+    procedure SyncCaption;
+    procedure SetEndDate(const Value: String);
+    procedure SetStartDate(const Value: String);
+  published
+    property StartDate:String read FStartDate write SetStartDate;
+    property EndDate:String read FEndDate write SetEndDate;
+  end;
+
+
+
+
+
+
   TSkinChildButton=TBaseSkinButton;//{$IFDEF VCL}TSkinWinButton{$ENDIF}{$IFDEF FMX}TSkinFMXButton{$ENDIF};
   TSkinParentButtonGroup=TBaseSkinButtonGroup;//{$IFDEF VCL}TSkinWinButtonGroup{$ENDIF}{$IFDEF FMX}TSkinFMXButtonGroup{$ENDIF};
 
@@ -1717,6 +1768,7 @@ begin
 
         if not GetCurrentIcon.CurrentPictureIsEmpty and (Self.FSkinControlIntf.Caption='') then
         begin
+            //没有标题
             //居中绘制图标
             //绘制图标
             AOldPictureHorzAlign:=GetSkinMaterial.FDrawIconParam.StaticPictureHorzAlign;
@@ -1727,6 +1779,7 @@ begin
         else
         if GetCurrentIcon.CurrentPictureIsEmpty and (Self.FSkinControlIntf.Caption<>'') then
         begin
+            //没有图标
             //居中绘制标题
             //绘制标题
             AOldFontHorzAlign:=GetSkinMaterial.FDrawCaptionParam.StaticFontHorzAlign;
@@ -1738,10 +1791,10 @@ begin
         end
         else
         begin
+            //有图标，有标题
 
-
-            if not GetCurrentIcon.CurrentPictureIsEmpty then
-            begin
+//            if not GetCurrentIcon.CurrentPictureIsEmpty then
+//            begin
                 //图标不为空
                 AIconDrawRect:=GetSkinMaterial.FDrawIconParam.CalcDrawRect(ADrawRect);
                 CalcImageDrawRect(GetSkinMaterial.FDrawIconParam,
@@ -1752,16 +1805,16 @@ begin
                                   );
                 AContentWidth:=AIconDrawRect.Width;
 
-            end;
+//            end;
             ACaptionDrawSize.cx:=0;
-            if Self.FSkinControlIntf.Caption<>'' then
-            begin
+//            if Self.FSkinControlIntf.Caption<>'' then
+//            begin
                 ACaptionDrawSize:=GetStringSize(Self.FSkinControlIntf.Caption,
                                                 ADrawRect,
                                                 GetSkinMaterial.FDrawCaptionParam);
                 AContentWidth:=AContentWidth+ACaptionDrawSize.cx;
-            end;
-        
+//            end;
+
 
 
 
@@ -1804,6 +1857,7 @@ begin
                 begin
                   ATempDrawRect.Left:=ATempDrawRect.Left+AIconDrawRect.Width;
                 end;
+                ATempDrawRect.Right:=ATempDrawRect.Left+ACaptionDrawSize.cx;
                 //绘制标题
                 ACanvas.DrawText(Self.GetSkinMaterial.FDrawCaptionParam,
                                     Self.FSkinControlIntf.Caption,
@@ -2217,6 +2271,13 @@ begin
   Result:=True;
 end;
 
+procedure TSkinButtonMaterial.AssignTo(Dest: TPersistent);
+begin
+  inherited;
+
+  TSkinButtonMaterial(Dest).FIsAutoCenterIconAndCaption:=FIsAutoCenterIconAndCaption;
+end;
+
 constructor TSkinButtonMaterial.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
@@ -2370,9 +2431,31 @@ begin
   Result:='SkinButton';
 end;
 
+procedure TBaseButtonProperties.GetPropJson(ASuperObject: ISuperObject);
+begin
+  inherited;
+
+end;
+
 procedure TBaseButtonProperties.SetIcon(const Value: TDrawPicture);
 begin
   Self.FIcon.Assign(Value);
+end;
+
+procedure TBaseButtonProperties.SetPropJson(ASuperObject: ISuperObject);
+begin
+  inherited;
+
+  if ASuperObject.Contains('IsAutoPush') then
+  begin
+    Self.IsAutoPush:=ASuperObject.B['IsAutoPush'];
+  end;
+
+  if ASuperObject.Contains('PushedGroupIndex') then
+  begin
+    Self.PushedGroupIndex:=ASuperObject.I['PushedGroupIndex'];
+  end;
+
 end;
 
 procedure TBaseButtonProperties.SetPushedIcon(const Value: TDrawPicture);
@@ -2507,12 +2590,12 @@ begin
     case Self.FSkinButtonGroupIntf.Prop.FListLayoutsManager.ItemLayoutType of
       iltVertical:
       begin
-          AHeight:=Self.FSkinButtonGroupIntf.Prop.FListLayoutsManager.CalcContentHeight;
+          AHeight:=ControlSize(Self.FSkinButtonGroupIntf.Prop.FListLayoutsManager.CalcContentHeight);
           AWidth:=Self.FSkinControlIntf.Width;
       end;
       iltHorizontal:
       begin
-          AWidth:=Self.FSkinButtonGroupIntf.Prop.FListLayoutsManager.CalcContentWidth;
+          AWidth:=ControlSize(Self.FSkinButtonGroupIntf.Prop.FListLayoutsManager.CalcContentWidth);
           AHeight:=Self.FSkinControlIntf.Height;
       end;
     end;
@@ -2845,12 +2928,12 @@ begin
   inherited;
 end;
 
-function TButtonGroupProperties.DoGetListLayoutsManagerControlHeight(Sender: TObject): TControlSize;
+function TButtonGroupProperties.DoGetListLayoutsManagerControlHeight(Sender: TObject): Double;
 begin
   Result:=Self.FSkinControl.Height;
 end;
 
-function TButtonGroupProperties.DoGetListLayoutsManagerControlWidth(Sender: TObject): TControlSize;
+function TButtonGroupProperties.DoGetListLayoutsManagerControlWidth(Sender: TObject): Double;
 begin
   Result:=Self.FSkinControl.Width;
 end;
@@ -2967,7 +3050,7 @@ begin
 //  end;
 end;
 
-function TButtonGroupProperties.GetButtonSize: TControlSize;
+function TButtonGroupProperties.GetButtonSize: Double;
 begin
   case FListLayoutsManager.ItemLayoutType of
     iltVertical: Result:=FListLayoutsManager.ItemHeight;
@@ -2985,7 +3068,7 @@ end;
 
 procedure TButtonGroupProperties.SetOrientation(const Value: TButtonOrientation);
 var
-  AOldButtonSize:TControlSize;
+  AOldButtonSize:Double;
 begin
   //预先保留按钮的尺寸
   AOldButtonSize:=GetButtonSize;
@@ -3008,7 +3091,7 @@ begin
   ButtonSize:=AOldButtonSize;
 end;
 
-procedure TButtonGroupProperties.SetButtonSize(const Value: TControlSize);
+procedure TButtonGroupProperties.SetButtonSize(const Value: Double);
 begin
   case FListLayoutsManager.ItemLayoutType of
     iltVertical:
@@ -3809,15 +3892,60 @@ begin
   Result:=False;
 end;
 
+function TBaseSkinButton.GetThisRowItemCount: Integer;
+begin
+  Result:=0;
+end;
+
 //层级
 function TBaseSkinButton.GetLevel:Integer;
 begin
   Result:=0;
 end;
 
-function TBaseSkinButton.LoadFromFieldControlSetting(ASetting: TFieldControlSetting): Boolean;
+//获取与设置自定义属性
+function TBaseSkinButton.GetPropJsonStr:String;
 begin
+  Result:=Inherited;
+end;
+
+procedure TBaseSkinButton.SetPropJsonStr(AJsonStr:String);
+var
+  APropJson:ISuperObject;
+begin
+  Inherited;
+
+  APropJson:=SO(AJsonStr);
+  if APropJson.Contains('ReadOnly') then
+  begin
+    Self.Enabled:=not APropJson.B['ReadOnly'];
+    Invalidate;
+  end;
+
+  if APropJson.Contains('IsSelectButton') then
+  begin
+    Self.IsSelectButton:=APropJson.B['IsSelectButton'];
+  end;
+
+end;
+
+
+function TBaseSkinButton.LoadFromFieldControlSetting(ASetting: TFieldControlSetting;AFieldControlSettingMap:TObject): Boolean;
+begin
+  Setting:=ASetting;
   Caption:=ASetting.field_caption;
+
+//  {$IFDEF FMX}
+//  IsSelectButton:=True;
+//  {$ENDIF}
+//
+//  {$IFDEF VCL}
+  IsSelectButton:=False;
+//  {$ENDIF}
+
+
+
+
 //  Result:=Inherited;
 //
 //  if (ASetting.ControlStyle='') and (ASetting.Action<>'') then
@@ -3825,7 +3953,7 @@ begin
 //    //根据按钮的功能来设置按钮的素材风格
 //    SetMaterialName(ASetting.Action);
 //  end;
-
+  Result:=True;
 end;
 
 procedure TBaseSkinButton.SetItemDrawRect(Value: TRectF);
@@ -3896,11 +4024,27 @@ begin
   Result:=Self;
 end;
 
+function TBaseSkinButton.GetWidth:Double;
+begin
+  Result:=Width;
+end;
+
+function TBaseSkinButton.GetHeight:Double;
+begin
+  Result:=Height;
+end;
 
 function TBaseSkinButton.Material:TSkinButtonDefaultMaterial;
 begin
   Result:=TSkinButtonDefaultMaterial(SelfOwnMaterial);
 end;
+
+function TBaseSkinButton.PtInItem(APoint: TPointF): Boolean;
+begin
+  Result:=PtInRect(Self.FItemDrawRect,APoint);
+
+end;
+
 function TBaseSkinButton.CurrentUseMaterialToDefault:TSkinButtonDefaultMaterial;
 begin
   Result:=TSkinButtonDefaultMaterial(CurrentUseMaterial);
@@ -4077,10 +4221,32 @@ begin
 //  Result:=Ord(Self.Prop.Checked);
 
 
-  //wn
-  //内部ID
-//  Result:=Value;
-  Result:=Caption;
+//  //wn
+//  if IsSelectButton then
+//  begin
+
+  if Setting.search_operator<>'' then
+  begin
+    if Self.Prop.IsPushed then
+    begin
+      Result:=Value;
+    end
+    else
+    begin
+      Result:='';
+    end;
+  end
+  else
+  begin
+//    //内部ID
+    Result:=Value;
+  end;
+
+//  end
+//  else
+//  begin
+//    Result:=Value;
+//  end;
 
 
 
@@ -4099,10 +4265,24 @@ begin
 //  begin
 
 
-    //标题
-    Text:=AValue;//AValueCaption;//AGetDataIntfResultFieldValueIntf.GetFieldValue(ASetting.options_caption_field_name);
+  if IsSelectButton then
+  begin
     //用于保存选择后的内部ID
     //Value:=AValue;
+
+
+
+    Caption:=AValueCaption;
+    Value:=AValue;
+  end
+  else
+  begin
+//    //标题
+//    Text:=AValue;//AValueCaption;//AGetDataIntfResultFieldValueIntf.GetFieldValue(ASetting.options_caption_field_name);
+
+    Value:=AValue;
+  end;
+
 
 
 //  end;
@@ -4298,6 +4478,33 @@ begin
   inherited ReadState(Reader);
 end;
 
+
+{ TSkinSelectDateAreaButton }
+
+procedure TSkinSelectDateAreaButton.SetEndDate(const Value: String);
+begin
+  FEndDate := Value;
+  SyncCaption;
+end;
+
+procedure TSkinSelectDateAreaButton.SetStartDate(const Value: String);
+begin
+  FStartDate := Value;
+  SyncCaption;
+end;
+
+procedure TSkinSelectDateAreaButton.SyncCaption;
+begin
+//  Caption:=FormatDateTime('YYYY-MM-DD',FStartDate)+'至'+FormatDateTime('YYYY-MM-DD',FEndDate);
+  if (FStartDate='') and (FEndDate='') then
+  begin
+    Caption:='';
+  end
+  else
+  begin
+    Caption:=FStartDate+'至'+FEndDate;
+  end;
+end;
 
 
 end.

@@ -83,8 +83,8 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
     Size.Width = 80.000000000000000000
     Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 7
-    Text = #28165#38500
+    TabOrder = 8
+    Text = #28165#38500#21015#34920
     OnClick = ClearClick
   end
   object ExportPicture: TButton
@@ -94,16 +94,16 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
     Size.Width = 80.000000000000000000
     Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 10
+    TabOrder = 11
     Text = #23548#20986
     OnClick = ExportPictureClick
   end
   object edtImageIndex: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     Anchors = [akTop, akRight]
-    TabOrder = 15
+    TabOrder = 16
     Position.X = 409.000000000000000000
-    Position.Y = 333.000000000000000000
+    Position.Y = 397.000000000000000000
     Size.Width = 139.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -112,7 +112,7 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
   object lblImageIndex: TLabel
     Anchors = [akTop, akRight]
     Position.X = 405.000000000000000000
-    Position.Y = 314.000000000000000000
+    Position.Y = 378.000000000000000000
     Size.Width = 141.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -125,14 +125,14 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
     Size.Width = 80.000000000000000000
     Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 9
+    TabOrder = 10
     Text = #20840#37096#23548#20986
     OnClick = ExportAllClick
   end
   object lblImageName: TLabel
     Anchors = [akTop, akRight]
     Position.X = 403.000000000000000000
-    Position.Y = 354.000000000000000000
+    Position.Y = 418.000000000000000000
     Size.Width = 143.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -141,9 +141,9 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
   object edtImageName: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     Anchors = [akTop, akRight]
-    TabOrder = 14
+    TabOrder = 15
     Position.X = 408.000000000000000000
-    Position.Y = 374.000000000000000000
+    Position.Y = 438.000000000000000000
     Size.Width = 140.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -152,7 +152,7 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
   object lblFileName: TLabel
     Anchors = [akTop, akRight]
     Position.X = 403.000000000000000000
-    Position.Y = 397.000000000000000000
+    Position.Y = 461.000000000000000000
     Size.Width = 143.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -161,9 +161,9 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
   object edtFileName: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     Anchors = [akTop, akRight]
-    TabOrder = 13
+    TabOrder = 14
     Position.X = 408.000000000000000000
-    Position.Y = 417.000000000000000000
+    Position.Y = 481.000000000000000000
     Size.Width = 140.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -176,13 +176,13 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
     Size.Width = 153.000000000000000000
     Size.Height = 19.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 22
+    TabOrder = 23
     Text = #28155#21152#22270#29255#26102#21482#35774#32622#36335#24452
   end
   object lblResourceName: TLabel
     Anchors = [akTop, akRight]
     Position.X = 403.000000000000000000
-    Position.Y = 440.000000000000000000
+    Position.Y = 504.000000000000000000
     Size.Width = 151.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -191,9 +191,9 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
   object edtResourceName: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     Anchors = [akTop, akRight]
-    TabOrder = 12
+    TabOrder = 13
     Position.X = 408.000000000000000000
-    Position.Y = 460.000000000000000000
+    Position.Y = 524.000000000000000000
     Size.Width = 140.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -202,9 +202,9 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
   object edtUrl: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     Anchors = [akTop, akRight]
-    TabOrder = 11
+    TabOrder = 12
     Position.X = 410.000000000000000000
-    Position.Y = 502.000000000000000000
+    Position.Y = 566.000000000000000000
     Size.Width = 140.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -213,7 +213,7 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
   object lblUrl: TLabel
     Anchors = [akTop, akRight]
     Position.X = 403.000000000000000000
-    Position.Y = 482.000000000000000000
+    Position.Y = 546.000000000000000000
     Size.Width = 151.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -237,7 +237,7 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
     Size.Width = 80.000000000000000000
     Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 8
+    TabOrder = 9
     Text = #20445#23384
     OnClick = SaveSelectedClick
   end
@@ -3269,11 +3269,22 @@ object frmSkinPictureListPropertyEditor: TfrmSkinPictureListPropertyEditor
   object chkIsClipRound: TCheckBox
     Anchors = [akTop, akRight]
     Position.X = 405.000000000000000000
-    Position.Y = 525.000000000000000000
+    Position.Y = 589.000000000000000000
     Size.Width = 153.000000000000000000
     Size.Height = 19.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 21
+    TabOrder = 22
     Text = #26159#21542#21098#35009#25104#22278#24418
+  end
+  object btnClear: TButton
+    Anchors = [akTop, akRight]
+    Position.X = 442.000000000000000000
+    Position.Y = 307.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    Text = #28165#31354
+    OnClick = btnClearClick
   end
 end

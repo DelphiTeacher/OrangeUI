@@ -48,6 +48,8 @@ type
     //当前需要处理的控件
     function GetCurrentPorcessControl(AFocusedControl:TControl):TControl;
     function GetVirtualKeyboardControlParent:TControl;
+    //获取虚拟键盘的高度校正
+    function GetVirtualKeyboardHeightAdjustHeight:Double;
   private
     FOldPass:String;
     FPassword:String;
@@ -197,6 +199,11 @@ end;
 function TFrameChangePassword.GetVirtualKeyboardControlParent: TControl;
 begin
   Result:=Self;
+end;
+
+function TFrameChangePassword.GetVirtualKeyboardHeightAdjustHeight: Double;
+begin
+  Result:=0;
 end;
 
 procedure TFrameChangePassword.OnChangePasswordMessageBoxModalResult(

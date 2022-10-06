@@ -53,6 +53,8 @@ type
     //当前需要处理的控件
     function GetCurrentPorcessControl(AFocusedControl:TControl):TControl;
     function GetVirtualKeyboardControlParent:TControl;
+    //获取虚拟键盘的高度校正
+    function GetVirtualKeyboardHeightAdjustHeight:Double;
   private
     FLoginUser:String;
     FLoginPass:String;
@@ -213,6 +215,11 @@ end;
 function TFrameLogin.GetVirtualKeyboardControlParent: TControl;
 begin
   Result:=Self;
+end;
+
+function TFrameLogin.GetVirtualKeyboardHeightAdjustHeight: Double;
+begin
+  Result:=0;
 end;
 
 procedure TFrameLogin.lblForgetPasswordClick(Sender: TObject);

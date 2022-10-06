@@ -29,7 +29,7 @@ uses
 
 //  System.ImageList,
 
-  ImgList;
+  ImgList, System.ImageList;
 
 type
   TfrmSkinPictureListPropertyEditor = class(TForm)
@@ -125,6 +125,7 @@ procedure TfrmSkinPictureListPropertyEditor.AddClick(Sender: TObject);
 var
   ListItem:TListItem;
   I: Integer;
+  AFileName:String;
 //  ASkinPicture:TDrawPicture;
 begin
   OpenDialog.Title := '添加图片';
@@ -141,6 +142,15 @@ begin
       Replace.Enabled:=True;
       Delete.Enabled:=True;
       ExportPicture.Enabled:=True;
+
+      //把文件名当做ImageName
+      AFileName:=ExtractFileName(OpenDialog.Files[I]);
+      AFileName:=Copy(AFileName,1,Length(AFileName)-Length(ExtractFileExt(AFileName)));
+      FPictureList[FPictureList.Count-1].ImageName:=AFileName;
+
+
+      ListView1Click(nil);
+
     end;
   end;
 end;

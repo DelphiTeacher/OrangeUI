@@ -184,11 +184,6 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="ListItemStyle_CustomerInfo.pas">
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="ListItemStyle_ContactInfo.pas"/>
-        <DCCReference Include="ListItemStyle_CompanyInfo.pas"/>
         <DCCReference Include="ListItemStyle_TreeMainMenu_LabelAndArrow.pas"/>
         <DCCReference Include="ListItemStyle_CaptionDetailItem.pas"/>
         <DCCReference Include="ListItemStyle_VertSelectedGray_CaptionLeft.pas">
@@ -199,6 +194,43 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
+        <DCCReference Include="ListItemStyle_IconLeft_CaptionRight_CloseBtnRight.pas">
+            <Form>FrameListItemStyle_IconLeft_CaptionRight_CloseBtnRight</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ListItemStyle_CarLocation.pas">
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyle_CheckBoxIconLeft_CaptionRight.pas">
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyle_IconCaptionLeft_DetailRight.pas">
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyle_CaptionTopDetailBottom.pas">
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyle_CaptionCenter_CloseBtnRight_TopBorderSelected.pas">
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyle_CaptionTopDetailBottom_Summary.pas"/>
+        <DCCReference Include="ListItemStyle_Default.pas">
+            <Form>FrameListItemStyle_Default</Form>
+        </DCCReference>
+        <DCCReference Include="ListItemStyle_IconCaptionLeft_NotifyNumberRight.pas">
+            <Form>FrameListItemStyle_IconCaptionLeft_NotifyNumberRight</Form>
+        </DCCReference>
+        <DCCReference Include="ListItemStyle_IconCaptionLeft_NotifyIconRight.pas">
+            <Form>FrameListItemStyle_IconCaptionLeft_NotifyIconRight</Form>
+        </DCCReference>
+        <DCCReference Include="ListItemStyle_IconCaptionLeft_ArrowRight.pas"/>
+        <DCCReference Include="ListItemStyle_DashBoardSummaryItem.pas">
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyle_ProgressBar.pas"/>
+        <DCCReference Include="ListItemStyle_IconTop_CaptionDetailBottom.pas"/>
+        <DCCReference Include="ListItemStyle_TwoIconButton.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

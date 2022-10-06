@@ -15,12 +15,14 @@ uses
 
   BaseListItemStyleFrame, uSkinImageType, uSkinFireMonkeyImage, uSkinLabelType,
   uSkinFireMonkeyLabel, uSkinFireMonkeyControl, uSkinItemDesignerPanelType,
-  uSkinFireMonkeyItemDesignerPanel;
+  uSkinFireMonkeyItemDesignerPanel, uDrawPicture, uSkinImageList;
 
 type
   TFrameIconCaption_RightGrayDetailListItemStyle = class(TFrameBaseListItemStyle)
     imgItemIcon: TSkinFMXImage;
     lblItemDetail: TSkinFMXLabel;
+    imglistExpanded: TSkinImageList;
+    imgAccessory: TSkinFMXImage;
     procedure ItemDesignerPanelResize(Sender: TObject);
   private
     { Private declarations }

@@ -16,6 +16,11 @@ uses
   Math,
   uLang,
   Graphics,
+
+  {$IF CompilerVersion>=30.0}
+  Types,//定义了TRectF
+  {$IFEND}
+
   Controls,
   uBaseLog,
   uBaseList,
@@ -97,12 +102,12 @@ Type
     procedure Paint(DC:HDC;EnableBuffer:Boolean=True);
   public
     //针对页面框架的控件接口
-    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;virtual;
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;virtual;
 //    //获取合适的高度
 //    function GetSuitDefaultItemHeight:Double;
     //获取与设置自定义属性
-    function GetPropJsonStr:String;
-    procedure SetPropJsonStr(AJsonStr:String);
+    function GetPropJsonStr:String;virtual;
+    procedure SetPropJsonStr(AJsonStr:String);virtual;
 
     //获取提交的值
     function GetPostValue(ASetting:TFieldControlSetting;APageDataDir:String;ASetRecordFieldValueIntf:ISetRecordFieldValue;
@@ -111,9 +116,10 @@ Type
     procedure SetControlValue(ASetting:TFieldControlSetting;APageDataDir:String;AImageServerUrl:String;AValue:Variant;AValueCaption:String;
                             //要设置多个值,整个字段的记录
                             AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);virtual;
-    //设置属性
-    function GetProp(APropName:String):Variant;
-    procedure SetProp(APropName:String;APropValue:Variant);
+//    //设置属性
+//    function GetProp(APropName:String):Variant;virtual;
+//    procedure SetProp(APropName:String;APropValue:Variant);virtual;
+    procedure DoReturnFrame(AFromFrame:TFrame);virtual;
   public
     //非客户区点击测试值
     property HitTestValue:Integer read GetHitTestValue write FHitTestValue;
@@ -245,7 +251,7 @@ begin
 end;
 
 
-function TSkinWindowsControl.LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+function TSkinWindowsControl.LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;
 begin
 //  SetMaterialUseKind(TMaterialUseKind.mukRefByStyleName);
 //  SetMaterialName(ASetting.ControlStyle);
@@ -268,35 +274,42 @@ begin
   Self.Properties.SetPropJsonStr(AJsonStr);
 end;
 
-//设置属性
-function TSkinWindowsControl.GetProp(APropName:String):Variant;
-begin
-  Result:='';
-end;
-
-procedure TSkinWindowsControl.SetProp(APropName:String;APropValue:Variant);
-begin
-end;
+////设置属性
+//function TSkinWindowsControl.GetProp(APropName:String):Variant;
+//begin
+//  Result:='';
+//end;
+//
+//procedure TSkinWindowsControl.SetProp(APropName:String;APropValue:Variant);
+//begin
+//end;
 
 
 
 function TSkinWindowsControl.GetPostValue(ASetting:TFieldControlSetting;APageDataDir:String;ASetRecordFieldValueIntf:ISetRecordFieldValue;
-                            var AErrorMessage:String):Variant;
+                                          var AErrorMessage:String):Variant;
 begin
   Result:='';//GetCaption;
 end;
 
 procedure TSkinWindowsControl.SetControlValue(ASetting:TFieldControlSetting;APageDataDir:String;AImageServerUrl:String;AValue:Variant;AValueCaption:String;
-                            //要设置多个值,整个字段的记录
-                            AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
+                                              //要设置多个值,整个字段的记录
+                                              AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
 begin
   //Caption:='';//AValue;
 end;
+
+procedure TSkinWindowsControl.DoReturnFrame(AFromFrame:TFrame);
+begin
+
+end;
+
 
 procedure TSkinWindowsControl.Paint(DC: HDC;EnableBuffer: Boolean);
 var
   ACanvas:TDrawCanvas;
 begin
+//    OutputDebugString('TSkinWindowsControl.Paint '+ClassName+' '+Name);
 
     if EnableBuffer
       and
@@ -393,6 +406,7 @@ procedure TSkinWindowsControl.PaintWindow(DC: HDC);
 begin
   Paint(DC
           ,True
+//          ,False
           );
 end;
 
@@ -447,6 +461,7 @@ var
   ADirectUIParentIntf:IDirectUIParent;
 begin
   if (SkinControlInvalidateLocked>0)
+    and (Self.FProperties.FIsChanging>0)
     or (csLoading in Self.ComponentState)
     or (csReading in Self.ComponentState) then
   begin

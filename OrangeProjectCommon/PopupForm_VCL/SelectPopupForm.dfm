@@ -3,7 +3,7 @@ object frmSelectPopup: TfrmSelectPopup
   Top = 0
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = #30331#24405
+  Caption = #36873#25321
   ClientHeight = 237
   ClientWidth = 384
   Color = clWindow
@@ -26,9 +26,11 @@ object frmSelectPopup: TfrmSelectPopup
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     ComponentTypeName = 'Default'
+    SelfOwnMaterial.BackColor.Color = 10796800
     SelfOwnMaterial.BackColor.IsFill = True
     SelfOwnMaterial.BackColor.FillColor.UseThemeColor = ctThemeColor
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
+    SelfOwnMaterial.BackColor.FillColor.Color = 10796800
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
@@ -65,9 +67,9 @@ object frmSelectPopup: TfrmSelectPopup
     SelfOwnMaterial.BackGndDrawPictureParam.DrawRectSetting.Height = 240.000000000000000000
     SelfOwnMaterial.BackGndDrawPictureParam.DrawRectSetting.Enabled = True
     SelfOwnMaterial.BackGndDrawPictureParam.DrawRectSetting.SizeType = dpstPixel
-    DesignWidth = 528
-    DesignHeight = 470
-    Caption = #30331#24405
+    DesignWidth = 390
+    DesignHeight = 266
+    Caption = #36873#25321
     CloseSysBtn.Left = 348
     CloseSysBtn.Top = 6
     CloseSysBtn.Width = 36
@@ -78,6 +80,7 @@ object frmSelectPopup: TfrmSelectPopup
     CloseSysBtn.MaterialUseKind = mukSelfOwn
     CloseSysBtn.KeepSelfOwnMaterial = True
     CloseSysBtn.ComponentTypeName = 'Default'
+    CloseSysBtn.SelfOwnMaterial.BackColor.Color = clWhite
     CloseSysBtn.SelfOwnMaterial.BackColor.IsFill = False
     CloseSysBtn.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     CloseSysBtn.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -230,6 +233,7 @@ object frmSelectPopup: TfrmSelectPopup
     MaxRestoreSysBtn.MaterialUseKind = mukSelfOwn
     MaxRestoreSysBtn.KeepSelfOwnMaterial = True
     MaxRestoreSysBtn.ComponentTypeName = 'Default'
+    MaxRestoreSysBtn.SelfOwnMaterial.BackColor.Color = clWhite
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.IsFill = False
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     MaxRestoreSysBtn.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -373,6 +377,7 @@ object frmSelectPopup: TfrmSelectPopup
     MinSysBtn.MaterialUseKind = mukSelfOwn
     MinSysBtn.KeepSelfOwnMaterial = True
     MinSysBtn.ComponentTypeName = 'Default'
+    MinSysBtn.SelfOwnMaterial.BackColor.Color = clWhite
     MinSysBtn.SelfOwnMaterial.BackColor.IsFill = False
     MinSysBtn.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     MinSysBtn.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -516,6 +521,7 @@ object frmSelectPopup: TfrmSelectPopup
     FormSysIcon.MaterialUseKind = mukSelfOwn
     FormSysIcon.KeepSelfOwnMaterial = True
     FormSysIcon.ComponentTypeName = 'Default'
+    FormSysIcon.SelfOwnMaterial.BackColor.Color = clWhite
     FormSysIcon.SelfOwnMaterial.BackColor.IsFill = False
     FormSysIcon.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     FormSysIcon.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -1111,6 +1117,7 @@ object frmSelectPopup: TfrmSelectPopup
     FormSysCaption.MaterialUseKind = mukSelfOwn
     FormSysCaption.KeepSelfOwnMaterial = True
     FormSysCaption.ComponentTypeName = 'Default'
+    FormSysCaption.SelfOwnMaterial.BackColor.Color = clWhite
     FormSysCaption.SelfOwnMaterial.BackColor.IsFill = False
     FormSysCaption.SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     FormSysCaption.SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -1157,8 +1164,8 @@ object frmSelectPopup: TfrmSelectPopup
     FormSysCaption.HitTest = True
     FormSysCaption.MouseDownFocus = False
     FormSysCaption.Visible = False
-    FormSysCaption.Caption = #30331#24405
-    FormSysCaption.Text = #30331#24405
+    FormSysCaption.Caption = #36873#25321
+    FormSysCaption.Text = #36873#25321
     FormSysCaption.Properties.AutoSize = True
     Left = 168
     Top = 96

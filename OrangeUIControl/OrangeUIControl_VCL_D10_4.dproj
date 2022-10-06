@@ -7,7 +7,7 @@
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <TargetedPlatforms>1</TargetedPlatforms>
+        <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Package</AppType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
     </PropertyGroup>
@@ -60,15 +60,16 @@
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;System;Xml;Data;Datasnap;Web;Soap;VCL;Vcl.Imaging;$(DCC_Namespace)</DCC_Namespace>
         <SanitizedProjectName>OrangeUIControl_VCL_D10_4</SanitizedProjectName>
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
-        <DCC_DcuOutput>..\OrangeUIDesign\DCU\VCL\D10_4\$(Config)</DCC_DcuOutput>
+        <DCC_DcuOutput>..\OrangeUIDesign\DCU\VCL\D10_4\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
         <DCC_S>false</DCC_S>
         <DCC_F>false</DCC_F>
         <DCC_K>false</DCC_K>
-        <DCC_DcpOutput>..\OrangeUIDesign\DCU\VCL\D10_4\$(Config)</DCC_DcpOutput>
-        <DCC_BplOutput>..\OrangeUIDesign\DCU\VCL\D10_4\$(Config)</DCC_BplOutput>
+        <DCC_DcpOutput>..\OrangeUIDesign\DCU\VCL\D10_4\$(Platform)\$(Config)</DCC_DcpOutput>
+        <DCC_BplOutput>..\OrangeUIDesign\DCU\VCL\D10_4\$(Platform)\$(Config)</DCC_BplOutput>
+        <DCC_Define>NEED_SystemHttpControl;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;fmx.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services-ads-7.0.0.dex.jar;google-play-services-analytics-7.0.0.dex.jar;google-play-services-base-7.0.0.dex.jar;google-play-services-identity-7.0.0.dex.jar;google-play-services-maps-7.0.0.dex.jar;google-play-services-panorama-7.0.0.dex.jar;google-play-services-plus-7.0.0.dex.jar;google-play-services-wallet-7.0.0.dex.jar</EnabledSysJars>
@@ -136,7 +137,6 @@
         <DCCReference Include="Source\Controls\uSkinPanelType.pas"/>
         <DCCReference Include="Source\Controls\uSkinRadioButtonType.pas"/>
         <DCCReference Include="Source\Controls\uSkinImageListPlayerType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinListViewType.pas"/>
         <DCCReference Include="Source\Base\uSkinPublic.pas"/>
         <DCCReference Include="Source\Base\uSkinPicture.pas"/>
         <DCCReference Include="Source\Base\uSkinMaterial.pas"/>
@@ -157,7 +157,6 @@
         <DCCReference Include="Source\Engines\VCL\GDIPlus\GDIPlus\uSkinGDIPlus.pas"/>
         <DCCReference Include="Source\Controls\uSkinAnimator.pas"/>
         <DCCReference Include="Source\Controls\uSkinControlGestureManager.pas"/>
-        <DCCReference Include="Source\Controls\uSkinDBGridType.pas"/>
         <DCCReference Include="Source\Controls\uSkinImageListViewerType.pas"/>
         <DCCReference Include="Source\Controls\uSkinMultiColorLabelType.pas"/>
         <DCCReference Include="Source\Controls\uSkinNotifyNumberIconType.pas"/>
@@ -172,8 +171,6 @@
         <DCCReference Include="Source\Controls\uSkinSwitchPageListControlGestureManager.pas"/>
         <DCCReference Include="Source\Controls\uSkinSwitchPageListPanelType.pas"/>
         <DCCReference Include="Source\Controls\uSkinSwitchType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinTreeViewType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinVirtualGridType.pas"/>
         <DCCReference Include="Source\Controls\uSkinVirtualListType.pas"/>
         <DCCReference Include="Source\Controls\uSkinDrawPanelType.pas"/>
         <DCCReference Include="Source\Base\uBinaryObjectList.pas"/>
@@ -189,7 +186,6 @@
         <DCCReference Include="Source\Controls\Windows\uBaseSkinControl.pas"/>
         <DCCReference Include="Source\Base\uTimerTaskEvent.pas"/>
         <DCCReference Include="Source\Controls\uSkinCustomListType.pas"/>
-        <DCCReference Include="Source\Controls\uSkinItemGridType.pas"/>
         <DCCReference Include="Source\Base\uSkinGIFImage.pas"/>
         <DCCReference Include="Source\Base\uComponentType.pas"/>
         <DCCReference Include="Source\Base\uVersion.pas"/>
@@ -218,6 +214,10 @@
         <DCCReference Include="..\OrangeProjectCommon\XSuperObject\XSuperJSON.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\XSuperObject\XSuperObject.pas"/>
         <DCCReference Include="Source\Base\uFrameContext.pas"/>
+        <DCCReference Include="Source\Common\uUIFunction.pas"/>
+        <DCCReference Include="Source\Controls\uSkinVirtualChartType.pas"/>
+        <DCCReference Include="Source\Controls\uBasePageStructureControls.pas"/>
+        <DCCReference Include="Source\Controls\uSkinCommonFrames.pas"/>
         <None Include="Source\Controls\Windows\WinControl.inc"/>
         <None Include="Source\Controls\INC\VCL\ISkinControl_Control_Impl_Mouse_Code_VCL.inc"/>
         <None Include="Source\Controls\INC\VCL\ISkinControl_Control_Impl_Mouse_Declare_VCL.inc"/>
@@ -281,7 +281,9 @@
                 <Source>
                     <Source Name="MainSource">OrangeUIControl_VCL_D10_4.dpk</Source>
                 </Source>
-                <Excluded_Packages/>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="C:\MyFiles\OrangeUIProduct\医院自助血压测量\TSuperCom_20201130\Pack\bin\D10.1\Win32\Debug\TCom.bpl">File C:\MyFiles\OrangeUIProduct\医院自助血压测量\TSuperCom_20201130\Pack\bin\D10.1\Win32\Debug\TCom.bpl not found</Excluded_Packages>
+                </Excluded_Packages>
                 <Parameters>
                     <Parameters Name="UseLauncher">False</Parameters>
                     <Parameters Name="LoadAllSymbols">True</Parameters>
@@ -321,6 +323,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="..\OrangeUIDesign\DCU\VCL\D10_4\Win32\Debug\OrangeUIControl_VCL_D10_4.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>OrangeUIControl_VCL_D10_4.bpl</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libPCRE.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
@@ -328,12 +336,6 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\OrangeUIDesign\DCU\VCL\D10_4\Debug\OrangeUIControl_VCL_D10_4.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>OrangeUIControl_VCL_D10_4.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -1358,7 +1360,7 @@
                 <Platform value="Linux64">False</Platform>
                 <Platform value="OSX64">False</Platform>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
+                <Platform value="Win64">True</Platform>
             </Platforms>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

@@ -9,7 +9,8 @@ uses
   uSkinItems,
   uSkinScrollControlType, uSkinCustomListType, uSkinVirtualListType,
   uSkinListViewType, uSkinPanelType, uSkinImageListViewerType, uDrawPicture,
-  uSkinImageList, uSkinLabelType, uSkinImageType, uSkinItemDesignerPanelType;
+  uSkinImageList, uSkinLabelType, uSkinImageType, uSkinItemDesignerPanelType,
+  uDrawCanvas;
 
 type
   TfrmHome = class(TForm)

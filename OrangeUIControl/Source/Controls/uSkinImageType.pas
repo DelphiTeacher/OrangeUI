@@ -349,6 +349,7 @@ type
     //皮肤素材更改通知事件
     procedure DoCustomSkinMaterialChange(Sender: TObject);override;
   protected
+    FItemFieldValue:Variant;
     //多少Item启动了动画
     ItemAnimateRefCount:Integer;
     procedure BindingItemText(const AName:String;const AText:String;ASkinItem:TObject;AIsDrawItemInteractiveState:Boolean);
@@ -364,7 +365,7 @@ type
                                               AIsDrawItemInteractiveState:Boolean);
   public
 //    //针对页面框架的控件接口
-//    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;override;
+//    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;override;
 
     //获取提交的值,将设置的图片保存到文件夹
     function GetPostValue(ASetting:TFieldControlSetting;
@@ -859,6 +860,10 @@ begin
       end;
 
   end
+  else if not VarIsNULL(FItemFieldValue) then
+  begin
+    Result:=FItemFieldValue;
+  end
   else
   begin
       //没有改过,用旧的,是url
@@ -947,6 +952,8 @@ begin
 //      Self.Prop.Picture.StaticRefPicture:=AFieldValue.Picture;
 //  end
 //  else
+  //用于判断图片有没有内容，用于页面框自动尺寸,内容为空,则Image的width将被设置为0
+  FItemFieldValue:=AFieldValue;
 
   if VarType(AFieldValue)=varInteger then
   begin
@@ -972,7 +979,7 @@ begin
 
       if (NewDelphiStringIndexOf(#13#10,AFieldValueStr)) then
       begin
-          //Base64
+          //是图片的Base64
           //但也不能每次都转换一下,毕竟Base64的字符串那么长
           //根据长度来判断吧
 
@@ -1038,8 +1045,18 @@ begin
           ATempBindDrawPicture.IsClipRound:=Prop.Picture.IsClipRound or ATempBindDrawPicture.IsClipRound;
           ATempBindDrawPicture.Url:=AFieldValueStr;
 
-          Self.Prop.Picture.StaticPictureDrawType:=pdtReference;
-          Self.Prop.Picture.StaticRefPicture:=ATempBindDrawPicture.CurrentPicture;
+
+//          Self.Prop.Picture.StaticPictureDrawType:=pdtReference;
+//          //这里调用CurrentPicture会造成立即下载
+//          Self.Prop.Picture.StaticRefPicture:=ATempBindDrawPicture.CurrentPicture;
+          //这样不会造成立即下载
+          Self.Prop.Picture.StaticPictureDrawType:=pdtRefDrawPicture;
+          Self.Prop.Picture.StaticRefDrawPicture:=ATempBindDrawPicture;
+
+
+          //要刷新下ListBox,或者等图片下载完,刷新下ListBox
+          //下载完图片,找到FTempBindDrawPictureList,再找到TSkinItem,刷新
+          ATempBindDrawPicture.OnChange:=TBaseSkinItem(ASkinItem).DoPropChange;
 
       end
       else
@@ -1428,7 +1445,7 @@ begin
 
 end;
 
-//function TSkinImage.LoadFromFieldControlSetting(ASetting: TFieldControlSetting): Boolean;
+//function TSkinImage.LoadFromFieldControlSetting(ASetting: TFieldControlSetting;AFieldControlSettingMap:TObject): Boolean;
 //begin
 //  Result:=Inherited;
 ////  Self.Prop.Picture.Url:=ASetting.pic_path;

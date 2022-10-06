@@ -16,6 +16,9 @@ interface
 {$I FrameWork.inc}
 
 
+{$I Version.inc}
+
+
 
 {$IFDEF FMX}
 //是否需要SystemHttpControl
@@ -71,6 +74,7 @@ uses
   StrUtils,
   DB,
 
+
   {$IFDEF VCL}
   Messages,
   Windows,
@@ -78,7 +82,6 @@ uses
   Forms,
   {$ENDIF}
   {$IFDEF FMX}
-  Types,
   FMX.Forms,
   UITypes,
   FMX.Types,
@@ -94,6 +97,10 @@ uses
   Macapi.ObjectiveC,
   iOSapi.UIKit,
   {$ENDIF}
+
+  {$IF CompilerVersion>=30.0}
+  Types,//定义了TRectF
+  {$IFEND}
 //  {$IFDEF MSWINDOWS}
 //  WinApi.Windows,
 //  Vcl.Graphics,
@@ -114,12 +121,12 @@ uses
 
   uSkinItems,
 
-  {$IFDEF SKIN_SUPEROBJECT}
+//  {$IFDEF SKIN_SUPEROBJECT}
   uSkinSuperObject,
-  {$ELSE}
-  XSuperObject,
-  XSuperJson,
-  {$ENDIF}
+//  {$ELSE}
+//  XSuperObject,
+//  XSuperJson,
+//  {$ENDIF}
 
 
   uVersion,
@@ -174,7 +181,7 @@ const
 const
   IID_IProcessItemColor:TGUID='{FF1F61B6-D8F8-4B6F-9FE1-B85E9869BEA3}';
 
-
+  IID_ISkinControlValueChange:TGUID='{C78927A0-D5A4-471A-B8E3-2AC8883467E1}';
 
 
 
@@ -342,7 +349,11 @@ type
   TSkinControlCustomMouseUpEvent=procedure(Button: TMouseButton; Shift: TShiftState;X, Y: Double;const AIsChildMouseEvent:Boolean;const AChild:TObject) of object;
   TSkinControlCustomMouseMoveEvent=procedure(Shift: TShiftState; X, Y: Double;const AIsChildMouseEvent:Boolean;const AChild:TObject) of object;
 
-
+  //控件的值更改事件
+  ISkinControlValueChange=interface
+    ['{C78927A0-D5A4-471A-B8E3-2AC8883467E1}']
+    procedure SetOnChange(Value:TNotifyEvent);
+  end;
 
 
   {$REGION '皮肤控件接口ISkinControl'}
@@ -1161,6 +1172,10 @@ type
   public
     constructor Create(ASkinControl:TControl);virtual;
   public
+    FIsChanging:Integer;
+    procedure BeginUpdate;virtual;
+    procedure EndUpdate;virtual;
+
     function GetPropJsonStr:String;
     procedure SetPropJsonStr(AJsonStr:String);
     /// <summary>
@@ -1782,6 +1797,11 @@ procedure ProcessMaterialEffectStates(ASkinMaterial:TSkinMaterial;
             AControlOpacity:Double;
             AControlCurrentEffectStates:TDPEffectStates;
             APaintData:TPaintData);
+
+procedure ProcessParamEffectStates(ADrawParam:TDrawParam;
+                                        AControlOpacity:Double;
+                                        AControlCurrentEffectStates:TDPEffectStates;
+                                        APaintData:TPaintData);
 //获取bound id
 function GetIOSBundleKey(AKey:String): string;
 //{$IFDEF IOS}
@@ -2434,11 +2454,47 @@ begin
 end;
 
 
+procedure ProcessParamEffectStates(ADrawParam:TDrawParam;
+                                        AControlOpacity:Double;
+                                        AControlCurrentEffectStates:TDPEffectStates;
+                                        APaintData:TPaintData);
+var
+  I: Integer;
+  ACurrentEffectStates:TDPEffectStates;
+begin
+
+
+    ACurrentEffectStates:=AControlCurrentEffectStates;
+
+
+
+    //设置绘制参数的效果状态
+    if APaintData.IsDrawInteractiveState and ADrawParam.IsControlParam then
+    begin
+      //如果是控件本身的绘制参数,那么直接賦值
+      ADrawParam.StaticEffectStates:=ACurrentEffectStates;
+    end
+    else
+    begin
+      //如果不是控件的參數,那么去除交互的效果
+      ADrawParam.StaticEffectStates:=ACurrentEffectStates
+                                    -[dpstMouseDown,dpstMouseOver];
+    end;
+
+
+    //处理绘制参数的透明度
+    ADrawParam.DrawAlpha:=Ceil(ADrawParam.CurrentEffectAlpha*AControlOpacity);
+
+
+
+end;
+
+
 { TSkinControlProperties }
 
 procedure TSkinControlProperties.AdjustAutoSizeBounds;
 var
-  Width,Height: TControlSize;
+  AWidth,AHeight: TControlSize;
 begin
   if  (Self.FSkinControl<>nil)
       and not (csReading in Self.FSkinControl.ComponentState)
@@ -2447,12 +2503,12 @@ begin
   begin
     if Self.FSkinControlIntf.GetSkinControlType<>nil then
     begin
-      if Self.FSkinControlIntf.GetSkinControlType.CalcAutoSize(Width,Height) then
+      if Self.FSkinControlIntf.GetSkinControlType.CalcAutoSize(AWidth,AHeight) then
       begin
         Self.FSkinControlIntf.SetBounds(Self.FSkinControlIntf.Left,
                                         Self.FSkinControlIntf.Top,
-                                        ControlSize(Width),
-                                        ControlSize(Height));
+                                        ControlSize(AWidth),
+                                        ControlSize(AHeight));
       end;
     end;
   end;
@@ -2472,6 +2528,16 @@ begin
     Invalidate;
   end;
 end;
+
+procedure TSkinControlProperties.EndUpdate;
+begin
+  Dec(FIsChanging);
+  if FIsChanging=0 then
+  begin
+    Invalidate;
+  end;
+end;
+
 
 procedure TSkinControlProperties.AssignProperties(Src: TSkinControlProperties);
 begin
@@ -2502,7 +2568,7 @@ end;
 
 procedure TSkinControlProperties.Invalidate;
 begin
-  if SkinControlInvalidateLocked=0 then
+  if (SkinControlInvalidateLocked=0) and (FIsChanging=0) then
   begin
     if (Self.FSkinControlIntf.GetSkinControlType<>nil) then
     begin
@@ -2543,6 +2609,11 @@ begin
   begin
     inherited;
   end;
+end;
+
+procedure TSkinControlProperties.BeginUpdate;
+begin
+  Inc(FIsChanging);
 end;
 
 function TSkinControlProperties.GetComponentClassify: String;
@@ -2709,7 +2780,7 @@ end;
 
 procedure TSkinControlType.Invalidate;
 begin
-  if SkinControlInvalidateLocked=0 then
+  if (SkinControlInvalidateLocked=0) and (Self.FSkinControlIntf.Properties.FIsChanging=0) then
   begin
     if Self.FSkinControlIntf<>nil then
     begin
@@ -3121,11 +3192,11 @@ begin
 
         and (RectWidthF(AControlWindowRect)>0)
         and (RectHeightF(AControlWindowRect)>0)
-        {$IFDEF FMX}
-        and Types.PtInRect(AControlWindowRect,Pt)
-        {$ELSE}
+//        {$IFDEF FMX}
+//        and Types.PtInRect(AControlWindowRect,Pt)
+//        {$ELSE}
         and PtInRect(AControlWindowRect,Pt)
-        {$ENDIF FMX}
+//        {$ENDIF FMX}
       then
       begin
           //控件显示,并且在控件中
@@ -4026,36 +4097,37 @@ end;
 initialization
   GlobalNullPaintData.OtherData:=nil;
 
-  {$IFDEF NEED_GET_LATEST_VERSION}
-  GlobalGetLatestVersionThread:=nil;
-  {$ENDIF}
 
 
   {$IFDEF FMX}
-  IsSimulateVirtualKeyboardOnWindows:=False;
-  SimulateWindowsVirtualKeyboardHeight:=150;
-  {$ENDIF}
+    IsSimulateVirtualKeyboardOnWindows:=False;
+    SimulateWindowsVirtualKeyboardHeight:=150;
 
 
-
-  {$IFDEF FREE_VERSION}
-  {$IFDEF MSWINDOWS}
     {$IFDEF NEED_GET_LATEST_VERSION}
-    if DirectoryExists('E:\MyFiles')
-      and (not DirectoryExists('E:\MyFiles\OrangeUIControl'))
-      then
-    begin
-      //在Windows下,只有我的电脑才启动版本更新线程
-      if GlobalGetLatestVersionThread=nil then
-      begin
-        GlobalGetLatestVersionThread:=TGetLatestVersionThread.Create(False);
-        GlobalGetLatestVersionThread.FreeOnTerminate:=True;
-      end;
-    end;
+    GlobalGetLatestVersionThread:=nil;
     {$ENDIF}
-  {$ENDIF}
-  {$ENDIF}
 
+    {$IFDEF FREE_VERSION}
+    {$IFDEF MSWINDOWS}
+      {$IFDEF NEED_GET_LATEST_VERSION}
+      if DirectoryExists('E:\MyFiles')
+        and (not DirectoryExists('E:\MyFiles\OrangeUIControl'))
+        then
+      begin
+        //在Windows下,只有我的电脑才启动版本更新线程
+        if GlobalGetLatestVersionThread=nil then
+        begin
+          GlobalGetLatestVersionThread:=TGetLatestVersionThread.Create(False);
+          GlobalGetLatestVersionThread.FreeOnTerminate:=True;
+        end;
+      end;
+      {$ENDIF}
+    {$ENDIF}
+    {$ENDIF}
+
+
+  {$ENDIF}
 
 
 
@@ -4065,15 +4137,20 @@ initialization
 
 
 finalization
-  {$IFDEF FREE_VERSION}
-  {$IFDEF NEED_GET_LATEST_VERSION}
-  //释放新版本检测线程
-  if GlobalGetLatestVersionThread<>nil then
-  begin
-    GlobalGetLatestVersionThread.Terminate;
-  end;
+
+  {$IFDEF FMX}
+    {$IFDEF FREE_VERSION}
+    {$IFDEF NEED_GET_LATEST_VERSION}
+    //释放新版本检测线程
+    if GlobalGetLatestVersionThread<>nil then
+    begin
+      GlobalGetLatestVersionThread.Terminate;
+    end;
+    {$ENDIF}
+    {$ENDIF}
+
   {$ENDIF}
-  {$ENDIF}
+
 
 
 

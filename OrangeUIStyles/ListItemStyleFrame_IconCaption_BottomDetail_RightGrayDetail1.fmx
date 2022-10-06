@@ -1,11 +1,15 @@
 inherited FrameIconCaption_BottomDetail_RightGrayDetail1ListItemStyle: TFrameIconCaption_BottomDetail_RightGrayDetail1ListItemStyle
-  Size.Width = 356.000000000000000000
-  Size.Height = 86.000000000000000000
+  Size.Width = 788.000000000000000000
+  Size.Height = 371.000000000000000000
   inherited ItemDesignerPanel: TSkinFMXItemDesignerPanel
+    Align = None
+    Position.X = 40.000000000000000000
+    Position.Y = 152.000000000000000000
     Size.Width = 356.000000000000000000
     Size.Height = 86.000000000000000000
     OnResize = ItemDesignerPanelResize
     Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+    Properties.ItemAccessoryMoreBindingControl = imgAccessory
     Properties.ItemDetailBindingControl = lblItemDetail
     Properties.ItemDetail1BindingControl = lblItemDetail1
     Properties.ItemIconBindingControl = imgItemIcon
@@ -17,14 +21,20 @@ inherited FrameIconCaption_BottomDetail_RightGrayDetail1ListItemStyle: TFrameIco
       Margins.Bottom = 5.000000000000000000
       Position.X = 86.000000000000000000
       Position.Y = 5.000000000000000000
-      Size.Width = 260.000000000000000000
+      Size.Width = 230.000000000000000000
       Size.Height = 36.000000000000000000
       TabOrder = 1
       object lblItemDetail1: TSkinFMXLabel
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawCaptionParam.FontColor = claDarkgray
         SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claDarkgray
         SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claDarkgray
@@ -33,9 +43,9 @@ inherited FrameIconCaption_BottomDetail_RightGrayDetail1ListItemStyle: TFrameIco
         SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
         MouseDownFocus = False
         Align = Right
+        Anchors = [akLeft, akTop, akRight, akBottom]
         HitTest = False
-        Position.X = 180.000000000000000000
-        Size.Width = 80.000000000000000000
+        Size.Width = 230.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
@@ -46,9 +56,15 @@ inherited FrameIconCaption_BottomDetail_RightGrayDetail1ListItemStyle: TFrameIco
     end
     object imgItemIcon: TSkinFMXImage
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
       SelfOwnMaterial.DrawPictureParam.PictureHorzAlign = phaCenter
       SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaCenter
@@ -66,7 +82,7 @@ inherited FrameIconCaption_BottomDetail_RightGrayDetail1ListItemStyle: TFrameIco
       Size.Width = 76.000000000000000000
       Size.Height = 76.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 2
+      TabOrder = 3
       Properties.AutoSize = False
       Properties.Picture.IsClipRound = False
       Properties.Picture.PNG = {
@@ -138,9 +154,15 @@ inherited FrameIconCaption_BottomDetail_RightGrayDetail1ListItemStyle: TFrameIco
     end
     object lblItemDetail: TSkinFMXLabel
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claGray
       SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claGray
@@ -154,7 +176,7 @@ inherited FrameIconCaption_BottomDetail_RightGrayDetail1ListItemStyle: TFrameIco
       Margins.Left = 5.000000000000000000
       Margins.Right = 10.000000000000000000
       Margins.Bottom = 5.000000000000000000
-      Size.Width = 260.000000000000000000
+      Size.Width = 230.000000000000000000
       Size.Height = 35.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
@@ -162,5 +184,128 @@ inherited FrameIconCaption_BottomDetail_RightGrayDetail1ListItemStyle: TFrameIco
       Text = #21015#34920#39033#26126#32454#20869#23481
       Properties.AutoSize = False
     end
+    object imgAccessory: TSkinFMXImage
+      ParentMouseEvent = False
+      DirectUIVisible = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+      SelfOwnMaterial.DrawPictureParam.PictureHorzAlign = phaRight
+      SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaCenter
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Height = 15.000000000000000000
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.SizeType = dpstPixel
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      MouseDownFocus = False
+      Align = MostRight
+      HitTest = False
+      Margins.Right = 10.000000000000000000
+      Position.X = 326.000000000000000000
+      Size.Width = 20.000000000000000000
+      Size.Height = 86.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Properties.AutoSize = False
+      Properties.Picture.IsClipRound = False
+      Properties.Picture.ImageIndex = 0
+      Properties.Picture.SkinImageList = imglistExpanded
+      Properties.Animated = False
+      Properties.AnimateSpeed = 10.000000000000000000
+      Properties.GIFDelayExp = 12
+      Properties.CurrentRotateAngle = 0
+      Properties.Rotated = False
+      Properties.RotateSpeed = 5.000000000000000000
+      Properties.RotateIncrement = 20
+      Properties.IsToolBar = False
+    end
+  end
+  object imglistExpanded: TSkinImageList
+    PictureList.Data = {
+      140000020000000400000000005C000000180E0000001A001A00000042006900
+      6E006100720079004F0062006A00650063007400000054004400720061007700
+      50006900630074007500720065000000040000000014000000000049006D0061
+      00670065004E0061006D00650000000400000000180008000000470072006100
+      70006800690063005400790070006500000050006E0067000000170000000020
+      003F020000470072006100700068006900630044006100740061002E0050006E
+      006700000089504E470D0A1A0A0000000D494844520000004000000040080600
+      0000AA6971DE000000017352474200AECE1CE90000000467414D410000B18F0B
+      FC6105000001E949444154785EED98C16DC240104559A780A48574C08D2B2550
+      825381492954403A082584A34F2125A403A701CC7C181C24100798DDF92BF649
+      6858727A0FDB44332A140A85C20313749A309FCF97326A79757DDFBF2F168B8F
+      FD1F88310BD034CD2C84F0A9C73D12E18D3D42A5D382179D03126429617045D0
+      62196025DFF8AFBE1F608F6016402EF54EC66CBBDDFE1D3EF9873982E9431088
+      E858AE84AFAAAA9EF5A301C6678279009053842801402E11A205003944881A00
+      B047881E003047481200B0464816003046481A00B045481E0030457009005822
+      B805000C115C0300EF08EE018067048A00C02B024D00E011812A00481D812E00
+      4819813200B812012BF757898015DCDD582E454D11C14D08617A61C788EDB3D9
+      7E9136003846D0E329672BF85BA10EA08C7546813A803C076AACD4F578CA46E7
+      DD303F042FCACB03702DB7C6A5DBE22628AF802BF23F326687930D8CFF085D93
+      9F5AFDFC1DA10A905A1ED004F090071401BCE4817B004F79E01AC05B1EB80560
+      90072E0158E441F2004CF22069003679902C00A33C481280551E440FC02C0FA2
+      06609707D102E4200FA204C8451E9807C8491E9806C84D1E980510F9B1C87FEB
+      7180591E58EE04CF1695ECF2C032C04AE79E1CE4C193CEBB69DBB69B4C266B79
+      8BDB0AB366972F140A85C263331AED00FAEBD334A4E1DD8A0000000049454E44
+      AE4260821700000000200000000000470049004600460069006C006500440061
+      00740061002E0050006E006700000004000000000A06000000004E0061006D00
+      650000000D54F07900000400000000100600000000430061007000740069006F
+      006E00000007689898000004000000000C0600000000470072006F0075007000
+      00000652C47E00000700000000200A0400000050006900630074007500720065
+      00440072006100770054007900700065000000D87E36527B7C8B570000000000
+      000700000000160A0400000049006D0061006700650049006E00640065007800
+      0000FE5647720B4E07680000FFFFFFFF0400000000140A0000000049006D0061
+      00670065004E0061006D0065000000FE5647720D54F07900000400000000120C
+      00000000460069006C0065004E0061006D0065000000FE5647728765F64E0D54
+      000004000000001A0E000000005200650073006F0075007200630065004E0061
+      006D0065000000FE564772448D906E0D54F07900000400000000080A00000000
+      550072006C000000FE564772FE94A56300001500000000181004000000490073
+      0043006C006900700052006F0075006E00640000002F6626546A52C188106206
+      57625F000000000000180E0000001A001A000000420069006E00610072007900
+      4F0062006A006500630074000000540044007200610077005000690063007400
+      7500720065000000040000000014000000000049006D006100670065004E0061
+      006D006500000004000000001800080000004700720061007000680069006300
+      5400790070006500000050006E00670000001700000000200004020000470072
+      006100700068006900630044006100740061002E0050006E006700000089504E
+      470D0A1A0A0000000D4948445200000040000000400806000000AA6971DE0000
+      00017352474200AECE1CE90000000467414D410000B18F0BFC6105000001AE49
+      444154785EEDD9D151C2401845E1240D6807DA8196400996201530766009A402
+      29810EC40EB0133AC0FFC08264804D427637EB78BF1967310F99DC23F2A08588
+      88888888888888FC33A53B2F9ACD668F76BCD8D7AAAEEBF5EEE21F61CF7E6F07
+      CFBEB1675FEE2E5E703580DD605296E5A7FBB6D86EB753BBD1C27D9B357BF667
+      3B96F6FC0FFB2BC5623E9F4FDDEB86CA9D97BCBA73C76EF661376E5CCB11E3ED
+      87B53A198FABCFED0BB071E751EE110EE3ABAABA73970ECEB61CF802BCDBCDBE
+      DDEBA35C2378C6F3EBFBE65E9E69FB10E48384B7D3D3FECA2FBB69369F092DE3
+      BDCFE90D80DC230C198FD600C835C2D0F1E81400B94508311E9D03209708A1C6
+      A357008C1D21E478F40E80B122841E8F9B0220758418E3717300A48A106B3C06
+      0540EC0831C7637000C48A107B3C820440E80829C6235800848A906A3C8206C0
+      D00829C7237800DC1A21F578440980BE11C6188F6801D035C258E3113500DA22
+      D8B11E6B3CA207802FC23529C6234900F489906A3C920540970829C7C3F757E1
+      E06C187F9E9ED8C8AFFD95864DEAF148FA0E3865EF06FE6DC57F704098850B24
+      2222222222222222124D51FC0057E5B6B56C6A521B0000000049454E44AE4260
+      821700000000200000000000470049004600460069006C006500440061007400
+      61002E0050006E006700000004000000000A06000000004E0061006D00650000
+      000D54F07900000400000000100600000000430061007000740069006F006E00
+      000007689898000004000000000C0600000000470072006F0075007000000006
+      52C47E00000700000000200A0400000050006900630074007500720065004400
+      72006100770054007900700065000000D87E36527B7C8B570000000000000700
+      000000160A0400000049006D0061006700650049006E006400650078000000FE
+      5647720B4E07680000FFFFFFFF0400000000140A0000000049006D0061006700
+      65004E0061006D0065000000FE5647720D54F07900000400000000120C000000
+      00460069006C0065004E0061006D0065000000FE5647728765F64E0D54000004
+      000000001A0E000000005200650073006F0075007200630065004E0061006D00
+      65000000FE564772448D906E0D54F07900000400000000080A00000000550072
+      006C000000FE564772FE94A56300001500000000181004000000490073004300
+      6C006900700052006F0075006E00640000002F6626546A52C18810620657625F
+      000000000000}
+    Left = 208
+    Top = 12
   end
 end

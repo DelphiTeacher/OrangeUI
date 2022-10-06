@@ -212,13 +212,6 @@ contains
   uLang in '..\OrangeProjectCommon\OrangeUI\uLang.pas',
   uTimerTask in '..\OrangeProjectCommon\OrangeUI\uTimerTask.pas',
   uBitmapOperation in 'Source\uBitmapOperation.pas',
-  uDataInterface in 'Source\uDataInterface.pas',
-  uDataSetToJson in 'Source\uDataSetToJson.pas',
-  uDownloadListItemStyleManager in 'Source\uDownloadListItemStyleManager.pas',
-  uPageStructure in 'Source\uPageStructure.pas',
-  uRestInterfaceCall in 'Source\uRestInterfaceCall.pas',
-  uSkinItemJsonHelper in 'Source\uSkinItemJsonHelper.pas',
-  ListItemStyleFrame_Page in 'Source\Common\CommonFrames\ListItemStyleFrame_Page.pas',
   MD5_OrangeUI in '..\OrangeProjectCommon\MD5\MD5_OrangeUI.pas',
   XSuperJSON in '..\OrangeProjectCommon\XSuperObject\XSuperJSON.pas',
   XSuperObject in '..\OrangeProjectCommon\XSuperObject\XSuperObject.pas';

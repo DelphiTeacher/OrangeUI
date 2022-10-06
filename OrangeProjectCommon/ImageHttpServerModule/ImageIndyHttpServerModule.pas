@@ -39,7 +39,9 @@ type
     { Private declarations }
   public
     WWWRootDir:String;
+    WWWRootDirs:TStringList;
     constructor Create(AOwner:TComponent);override;
+    destructor Destroy;override;
     { Public declarations }
   end;
 
@@ -87,10 +89,18 @@ begin
   inherited;
 
   WWWRootDir:=ExtractFilePath(Application.ExeName);
+  WWWRootDirs:=TStringList.Create;
 
 end;
 
 
+
+destructor TdmImageIndyHttpServer.Destroy;
+begin
+  FreeAndNil(WWWRootDirs);
+
+  inherited;
+end;
 
 procedure TdmImageIndyHttpServer.IdImageHTTPServerCommandGet(AContext: TIdContext;
   ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);

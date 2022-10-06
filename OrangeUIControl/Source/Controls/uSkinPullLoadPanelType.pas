@@ -1167,7 +1167,7 @@ begin
     begin
         //设计时
         //设计时模拟刷新
-        ATimerTask:=TTimerTask.Create(0);
+        ATimerTask:=TTimerTask.Create();
         ATimerTask.OnExecute:=DoDesigningExecuteLoad;
         ATimerTask.OnExecuteEnd:=DoDesigningExecuteLoadEnd;
         GetGlobalTimerThread.RunTask(ATimerTask);
@@ -1186,7 +1186,7 @@ begin
           //线程中加载
           if Assigned(Self.FSkinPullLoadPanelIntf.OnThreadExecuteLoad) then
           begin
-            ATimerTask:=TTimerTask.Create(0);
+            ATimerTask:=TTimerTask.Create();
             ATimerTask.OnExecute:=DoThreadExecuteLoad;
             ATimerTask.OnExecuteEnd:=DoThreadExecuteLoadEnd;
             GetGlobalTimerThread.RunTask(ATimerTask);
@@ -2066,5 +2066,7 @@ end;
 
 
 end.
+
+
 
 

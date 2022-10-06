@@ -477,7 +477,7 @@ begin
             AWidth,
             ATempHeight,
             cdstBoth);
-      AWidth:=AWidth+Self.FSkinControl.Height+5;//
+      AWidth:=AWidth+Self.FSkinControl.Height;//+5;//
 //            +Length(Self.FSkinControlIntf.Caption)*4+5;
   end;
 end;

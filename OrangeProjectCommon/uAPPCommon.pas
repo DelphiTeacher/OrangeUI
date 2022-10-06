@@ -16,6 +16,7 @@ uses
   System.Types,
   StrUtils,
   Math,
+  XSuperObject,
   System.IOUtils,
 
 
@@ -50,6 +51,15 @@ uses
 
   SysUtils;
 
+const
+  IID_IPageSavedValue:TGUID='{56154C25-7AB3-4D9A-903D-30CF7A43A86E}';
+
+type
+
+  IPageSavedValue=interface
+    ['{56154C25-7AB3-4D9A-903D-30CF7A43A86E}']
+    function GetSavedValue:ISuperObject;
+  end;
 
 
 //function GetApplicationPath:String;

@@ -118,28 +118,23 @@ type
 
 
 
+  protected
     //绘制的图片
     FPicture:TDrawPicture;
 
 
 
-    //GIF支持
-    FAnimated:Boolean;
-    FAnimateSpeed:Double;
-
-
-
-    //图片列表滚动
+    //图片列表是否需要滚动
     FImageListAnimated: Boolean;
     //图片列表滚动速度
     FImageListAnimateSpeed: Double;
-    //图片列表滚动顺序
+    //图片列表滚动顺序,从012345，还是543210
     FImageListAnimateOrderType:TAnimateOrderType;
 
 
 
 
-    //图片列表切换的类型
+    //图片列表切换的类型,水平还是垂直切换
     FImageListSwitchEffectType:TAnimateSwitchEffectType;
     //图片列表循环速度
     FImageListSwitchingSpeed:Double;
@@ -150,6 +145,7 @@ type
 
 
 
+  protected
     //当前正在切换
     FImageListSwitching:Boolean;
     //当前切换的进度
@@ -160,6 +156,13 @@ type
     FUserStopDragSwitchToImageIndex:Integer;
 
 
+
+  protected
+
+
+    //GIF支持
+    FAnimated:Boolean;
+    FAnimateSpeed:Double;
 
     //当前旋转的角度
     FRotated:Boolean;
@@ -177,6 +180,7 @@ type
 
 
 
+  protected
     //是否是第一次用户拖动
     FIsFirstUserDrag:Boolean;
     //是否正在手势切换
@@ -184,10 +188,11 @@ type
 
 
 
+  protected
     //上次手势缩放的距离
     FLastGestureZoomDistance:Integer;
     //手势缩放的比例
-    FGestureZoomScale:Double;
+    FCurrentGestureZoomScale:Double;
     //最大缩放比例
     FMaxGestureZoomScale: Double;
     //最小缩放比例
@@ -207,18 +212,25 @@ type
     FCanGestureSwitchDistance:Double;
 
 
+    //恢复到初始缩放比例
+    FZoomingToInitialAnimator:TSkinAnimator;
+
+    //缩放时双指中心点在控件上的位置
+    FZoomTouchControlCenter:TPointF;
+    FZoomTouchImageCenter:TPointF;
+
+    FImageCenterXWidthRate:Double;
+    FImageCenterYHeightRate:Double;
 
 
+
+
+  protected
     FImageListAnimateTimer:TTimer;
 
     FImageListSwitchingTimer:TTimer;
 
     FSkinImageListViewerIntf:ISkinImageListViewer;
-
-
-    //恢复到初始缩放比例
-    FZoomingToInitialAnimator:TSkinAnimator;
-
 
     //如果超出缩放比例,那么弹回缩放比例
     procedure DoZoomToInitialAnimate(Sender:TObject);
@@ -312,6 +324,10 @@ type
 
 
   private
+    //宽度和高度放大的距离
+    FContentWidthZoomDistance:Double;
+    FContentHeightZoomDistance:Double;
+
     //初始滚动条
     procedure InitScrollBars;
     //根据图片的移动进度来初始手势管理滚动条越界值
@@ -321,8 +337,13 @@ type
     procedure AdjustScrollBarRangeByPicture;
 
 
-    //设置缩放比例,来确定是否显示滚动条
-    procedure SetGestureZoomScale(Value:Double);
+    //获取内容尺寸,UpdateScrollBars中调用
+    function GetContentHeight: Double;override;
+    function GetContentWidth: Double;override;
+
+
+//    //设置缩放比例,来确定是否显示滚动条
+//    procedure SetCurrentGestureZoomScale(Value:Double);
 
 
     //获取当前切换的滚动条类型
@@ -403,6 +424,12 @@ type
     constructor Create(ASkinControl:TControl);override;
     destructor Destroy;override;
   public
+    {$IFDEF FMX}
+    procedure Gesture(const EventInfo: TGestureEventInfo; var Handled: Boolean);
+    {$ENDIF}
+    procedure ZoomEnd;
+    procedure CancelZoom;
+    procedure CancelSwitching;
 
     /// <summary>
     ///   <para>
@@ -454,7 +481,7 @@ type
     //开始缩放到初始大小
     procedure StartZoomingToInitial;
     //手势缩放的比例
-    property GestureZoomScale:Double read FGestureZoomScale write SetGestureZoomScale;
+    property CurrentGestureZoomScale:Double read FCurrentGestureZoomScale;// write SetCurrentGestureZoomScale;
 
   public
     //获取分类名称
@@ -718,9 +745,19 @@ type
     property DrawRoundOutSideRectParam: TDrawRectParam read FDrawRoundOutSideRectParam write SetDrawRoundOutSideRectParam;
   end;
 
+
+
+
+
+
+
+
   TSkinImageListViewerType=class(TSkinScrollControlDefaultType)
   protected
-    FIsZoomed:Boolean;
+    //鼠标按下了
+//    FIsMouseDown:Boolean;
+//    FLastMouseMovePt:TPointF;
+//    FIsZoomed:Boolean;
     FSkinImageListViewerIntf:ISkinImageListViewer;
     function GetSkinMaterial:TSkinImageListViewerMaterial;
 
@@ -791,6 +828,7 @@ type
     function GetOnImageListSwitchBegin:TSwitchBeginNotifyEvent;
 
   protected
+    procedure DblClick;override;
     procedure Loaded;override;
     //通知
     procedure Notification(AComponent:TComponent;Operation:TOperation);override;
@@ -833,13 +871,36 @@ type
   end;
   {$ENDIF VCL}
 
+var
+  gFormTouch1:TPointF;
+  gFormTouch2:TPointF;
+  gFormTouchCount:Integer;
 
+
+{$IFDEF FMX}
+procedure ProcessFormTouch(Sender: TObject; const Touches: TTouches;const Action: TTouchAction);
+{$ENDIF}
 
 
 implementation
 
+{$IFDEF FMX}
 
+procedure ProcessFormTouch(Sender: TObject; const Touches: TTouches;const Action: TTouchAction);
+begin
 
+  //引用uSkinImageListViewerType单元
+  //可能是放大缩小的手势
+  if (Length(Touches)=2) then
+  begin
+    gFormTouch1:=Touches[0].Location;
+    gFormTouch2:=Touches[1].Location;
+  end;
+  gFormTouchCount:=Length(Touches);
+
+end;
+
+{$ENDIF}
 
 
 { TSkinImageListViewerType }
@@ -871,8 +932,8 @@ begin
   if GetSkinMaterial<>nil then
   begin
     //缩放比例
-    GetSkinMaterial.FDrawPictureParam.StaticScale:=
-      Self.FSkinImageListViewerIntf.Prop.FGestureZoomScale;
+//    GetSkinMaterial.FDrawPictureParam.StaticScale:=
+//      Self.FSkinImageListViewerIntf.Prop.FCurrentGestureZoomScale;
     //计算绘制矩形
     CalcImageDrawRect(GetSkinMaterial.DrawPictureParam,
                               APicture.CurrentPictureDrawWidth,
@@ -900,9 +961,18 @@ begin
 
 //  if Button={$IFDEF FMX}TMouseButton.{$ENDIF}mbLeft  then
 //  begin
-    FIsZoomed:=False;
+//    FIsZoomed:=False;
 
-    if Self.FSkinImageListViewerIntf.Prop.FIsGestureZooming then Exit;
+    //这里其实不需要,缩放手势之前必然会先点击屏幕触发MouseDown
+    if Self.FSkinImageListViewerIntf.Prop.FIsGestureZooming then
+    begin
+//      uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouse Down IsGestureZooming Exit');
+      Exit;
+    end;
+
+//    uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouse Down gFormTouchCount:'+IntToStr(gFormTouchCount));
+
+
 
     //初始滚动条
     Self.FSkinImageListViewerIntf.Prop.InitScrollBarOverrangePosValue;
@@ -954,6 +1024,7 @@ begin
       end;
     end;
   end;
+
 end;
 
 
@@ -1006,22 +1077,82 @@ end;
 
 procedure TSkinImageListViewerType.CustomMouseLeave;
 begin
+
+  if Self.FSkinImageListViewerIntf.Prop.FIsGestureZooming then
+  begin
+//    uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouse Leave IsGestureZooming Exit');
+    Exit;
+  end;
+
+//  uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouse Leave gFormTouchCount:'+IntToStr(gFormTouchCount));
+
+
   inherited;
 end;
 
 procedure TSkinImageListViewerType.CustomMouseMove(Shift: TShiftState; X, Y: Double);
 begin
 
-  if Self.FSkinImageListViewerIntf.Prop.FIsGestureZooming then Exit;
 
+
+
+  if Self.FSkinImageListViewerIntf.Prop.FIsGestureZooming then
+  begin
+//    uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouse Move FIsGestureZooming Exit');
+
+    //IOS
+    Exit;
+  end;
+
+  if Self.FSkinScrollControlIntf.Prop.HorzControlGestureManager.IsMouseDown and (gFormTouchCount>=2) then
+  begin
+      if (ABS(Self.FSkinScrollControlIntf.Prop.HorzControlGestureManager.FLastMouseMovePt.X-X)>50)
+        or (ABS(Self.FSkinScrollControlIntf.Prop.HorzControlGestureManager.FLastMouseMovePt.Y-Y)>50) then
+      begin
+//        uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouse Move Zoom another figure touch Exit');
+
+        Exit;
+      end;
+  end;
+
+
+
+//  uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouse Move Begin gFormTouchCount:'+IntToStr(gFormTouchCount));
+
+  //wn
   //手指滑动的时候也初始滚动条(因为移动平台MouseMove和MouseDown无先后)
   Self.FSkinImageListViewerIntf.Prop.InitScrollBarOverrangePosValue;
 
   inherited;
+
+//  uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouse Move End');
 end;
 
 procedure TSkinImageListViewerType.CustomMouseUp(Button: TMouseButton; Shift: TShiftState;X, Y: Double);
 begin
+//  FMX.Types.Log.d('OrangeUI TSkinImageListViewerType.CustomMouseUp');
+
+  //这里比较奇怪 ，在IOS平台下面，手势缩放开始之后，会调用一次MouseUp
+
+  if Self.FSkinImageListViewerIntf.Prop.FIsGestureZooming then
+  begin
+
+    {$IFDEF IOS}
+    //IOS下,手弹起不代表缩放结束,两根手指弹起，会弹起两次，调用两次MouseUp，造成惯性滚动
+    //所以IOS下，直到收到TInteractiveGestureFlag.gfEnd，才算缩放结束
+//    uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouse Up FIsGestureZooming Exit');
+    Exit;
+
+    {$ELSE}
+    //其他平台
+//    uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouseUp FIsGestureZooming,Need Zoom End');
+    Self.FSkinImageListViewerIntf.Prop.ZoomEnd;
+    Self.FSkinImageListViewerIntf.Prop.FIsGestureZooming:=False;
+    {$ENDIF}
+  end;
+//  uBaseLog.OutputDebugString('TSkinImageListViewerType.CustomMouse Up gFormTouchCount:'+IntToStr(gFormTouchCount));
+
+
   inherited;
 end;
 
@@ -1037,47 +1168,13 @@ begin
   Self.FSkinImageListViewerIntf.Prop.AdjustScrollBarRangeByPicture;
 end;
 
+type
+TProtectedControl=class(TControl);
+
 {$IFDEF FMX}
 procedure TSkinImageListViewerType.Gesture(const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
-  inherited;
-
-
-  if (EventInfo.GestureID = igiZoom) and Self.FSkinImageListViewerIntf.Prop.FCanGestureZoom then
-  begin
-    Handled:=True;
-    FIsZoomed:=True;
-    if (TInteractiveGestureFlag.gfBegin in EventInfo.Flags) then
-    begin
-      //暂停切换
-      Self.FSkinImageListViewerIntf.Prop.FIsGestureZooming:=True;
-    end;
-    if (TInteractiveGestureFlag.gfEnd in EventInfo.Flags) then
-    begin
-      //可以切换
-      Self.FSkinImageListViewerIntf.Prop.FIsGestureZooming:=False;
-      Self.FSkinImageListViewerIntf.Prop.StartZoomingToInitial;
-    end;
-
-    if (not(TInteractiveGestureFlag.gfBegin in EventInfo.Flags)) and
-      (not(TInteractiveGestureFlag.gfEnd in EventInfo.Flags)) then
-    begin
-
-      { zoom the image }
-        Self.FSkinImageListViewerIntf.Prop.FGestureZoomScale:=
-          Self.FSkinImageListViewerIntf.Prop.FGestureZoomScale
-          *(1-(Self.FSkinImageListViewerIntf.Prop.FLastGestureZoomDistance-EventInfo.Distance)
-              /Self.FSkinControlIntf.Width);
-        Self.FSkinImageListViewerIntf.Prop.SetGestureZoomScale(
-                Self.FSkinImageListViewerIntf.Prop.FGestureZoomScale);
-
-        Self.Invalidate;
-
-    end;
-    Self.FSkinImageListViewerIntf.Prop.FLastGestureZoomDistance := EventInfo.Distance;
-
-
-  end;
+  Self.FSkinImageListViewerIntf.Properties.Gesture(EventInfo,Handled);
 end;
 {$ENDIF}
 
@@ -1095,9 +1192,13 @@ var
   ADrawRectLeftOffset,
   ADrawRectTopOffset:Double;
   AClipRect:TRectF;
+
+  AFingureRect:TRectF;
+  AOldColor:TDelphiColor;
 begin
   if Self.GetSkinMaterial<>nil then
   begin
+
 
 
       AClipRect:=GetSkinMaterial.DrawPictureParam.CalcDrawRect(ADrawRect);
@@ -1105,7 +1206,7 @@ begin
       try
 
 
-          //滚动位移
+          //获取当前是水平滚动位移，还是垂直滚动位移
           case Self.FSkinImageListViewerIntf.Prop.GetCurrentCanGestureScrollBarKind of
             sbHorizontal:
             begin
@@ -1121,6 +1222,23 @@ begin
 
 
           AScrollDrawRect:=ADrawRect;
+
+          if Self.FSkinImageListViewerIntf.Prop.FContentWidthZoomDistance>0 then
+          begin
+            //加上缩放放大的区域
+            AScrollDrawRect.Right:=AScrollDrawRect.Right+Self.FSkinImageListViewerIntf.Prop.FContentWidthZoomDistance;
+            AScrollDrawRect.Bottom:=AScrollDrawRect.Bottom+Self.FSkinImageListViewerIntf.Prop.FContentHeightZoomDistance;
+          end
+          else
+          begin
+            //缩小区域了,那么这个区域要居中
+            AScrollDrawRect.Left:=AScrollDrawRect.Left-Self.FSkinImageListViewerIntf.Prop.FContentWidthZoomDistance/2;
+            AScrollDrawRect.Top:=AScrollDrawRect.Top-Self.FSkinImageListViewerIntf.Prop.FContentHeightZoomDistance/2;
+            AScrollDrawRect.Right:=AScrollDrawRect.Right+Self.FSkinImageListViewerIntf.Prop.FContentWidthZoomDistance/2;
+            AScrollDrawRect.Bottom:=AScrollDrawRect.Bottom+Self.FSkinImageListViewerIntf.Prop.FContentHeightZoomDistance/2;
+          end;
+
+          //加上滚动偏移
           AScrollDrawRect.Left:=AScrollDrawRect.Left-ADrawRectLeftOffset;
           AScrollDrawRect.Top:=AScrollDrawRect.Top-ADrawRectTopOffset;
           AScrollDrawRect.Right:=AScrollDrawRect.Right-ADrawRectLeftOffset;
@@ -1128,8 +1246,7 @@ begin
 
 
           //缩放比例
-          GetSkinMaterial.FDrawPictureParam.StaticScale:=
-            Self.FSkinImageListViewerIntf.Prop.FGestureZoomScale;
+//          GetSkinMaterial.FDrawPictureParam.StaticScale:=Self.FSkinImageListViewerIntf.Prop.FCurrentGestureZoomScale;
 
 
 
@@ -1142,127 +1259,155 @@ begin
             //当前正在切换图片
             if Self.FSkinImageListViewerIntf.Prop.CheckIsImageListSwitching then
             begin
-      //        OutputDebugString('前一张 '+IntToStr(Self.FSkinImageListViewerIntf.Prop.GetCurrentBeforePictureImageIndex)
-      //                          +'后一张 '+IntToStr(Self.FSkinImageListViewerIntf.Prop.GetCurrentAfterPictureImageIndex)
-      //                          );
+        //        OutputDebugString('前一张 '+IntToStr(Self.FSkinImageListViewerIntf.Prop.GetCurrentBeforePictureImageIndex)
+        //                          +'后一张 '+IntToStr(Self.FSkinImageListViewerIntf.Prop.GetCurrentAfterPictureImageIndex)
+        //                          );
 
 
 
 
-              //切换之前的图片
-              ABeforePicture:=Self.FSkinImageListViewerIntf.Prop.GetCurrentBeforeSkinPicture;
-              //切换之后的图片
-              AAfterPicture:=Self.FSkinImageListViewerIntf.Prop.GetCurrentAfterSkinPicture;
+                //切换之前的图片
+                ABeforePicture:=Self.FSkinImageListViewerIntf.Prop.GetCurrentBeforeSkinPicture;
+                //切换之后的图片
+                AAfterPicture:=Self.FSkinImageListViewerIntf.Prop.GetCurrentAfterSkinPicture;
 
 
-              //切换之前图片和切换之后图片的绘制矩形
-              ABeforePictureDrawRect:=Self.GetImageListSwitchingBeforePictureDrawRect(AScrollDrawRect);
-              //下一张图片不做缩放
-              AAfterPictureDrawRect:=Self.GetImageListSwitchingAfterPictureDrawRect(ADrawRect);
+                //切换之前图片和切换之后图片的绘制矩形
+                ABeforePictureDrawRect:=Self.GetImageListSwitchingBeforePictureDrawRect(AScrollDrawRect);
+                //下一张图片不做缩放
+                AAfterPictureDrawRect:=Self.GetImageListSwitchingAfterPictureDrawRect(ADrawRect);
 
 
-              //绘制之前的图片
-              if (ABeforePicture<>nil) then
-              begin
-      //            if Self.FSkinImageListViewerIntf.Prop.FAnimated
-      //              //是GIF引擎
-      //              and (ABeforePicture.SkinPictureEngine is TSkinBaseGIFPictureEngine)
-      //            then
-      //            begin
-      //              //GIF图片播放
-      //              TSkinBaseGIFPictureEngine(ABeforePicture.SkinPictureEngine).DrawToCanvas(ACanvas,
-      //                                              Self.GetSkinMaterial.FDrawPictureParam,
-      //                                              ABeforePictureDrawRect);
-      //            end
-      //            else
-      //            begin
+                //绘制之前的图片
+                if (ABeforePicture<>nil) then
+                begin
+        //            if Self.FSkinImageListViewerIntf.Prop.FAnimated
+        //              //是GIF引擎
+        //              and (ABeforePicture.SkinPictureEngine is TSkinBaseGIFPictureEngine)
+        //            then
+        //            begin
+        //              //GIF图片播放
+        //              TSkinBaseGIFPictureEngine(ABeforePicture.SkinPictureEngine).DrawToCanvas(ACanvas,
+        //                                              Self.GetSkinMaterial.FDrawPictureParam,
+        //                                              ABeforePictureDrawRect);
+        //            end
+        //            else
+        //            begin
+                      ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawPictureParam,
+                                              ABeforePicture,
+                                              ABeforePictureDrawRect
+                                              );
+
+    //                    if (GetSkinMaterial<>nil) and (GetSkinMaterial.FIsDrawClipRound) then
+    //                    begin
+    //                      ACanvas.DrawRect(GetSkinMaterial.FDrawRoundOutSideRectParam,ABeforePictureDrawRect);
+    //                    end;
+        //            end;
+                end;
+
+
+
+                //绘制之后的图片
+                if (AAfterPicture<>nil) then
+                begin
+        //          if Self.FSkinImageListViewerIntf.Prop.FAnimated
+        //            //是GIF引擎
+        //            and (AAfterPicture.SkinPictureEngine is TSkinBaseGIFPictureEngine)
+        //          then
+        //          begin
+        //            //GIF图片播放
+        //            TSkinBaseGIFPictureEngine(AAfterPicture.SkinPictureEngine).DrawToCanvas(ACanvas,
+        //                                            Self.GetSkinMaterial.FDrawPictureParam,
+        //                                            AAfterPictureDrawRect);
+        //          end
+        //          else
+        //          begin
+                    GetSkinMaterial.FDrawPictureParam.StaticScale:=1;
                     ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawPictureParam,
-                                            ABeforePicture,
-                                            ABeforePictureDrawRect
+                                            AAfterPicture,
+                                            AAfterPictureDrawRect
                                             );
 
-//                    if (GetSkinMaterial<>nil) and (GetSkinMaterial.FIsDrawClipRound) then
-//                    begin
-//                      ACanvas.DrawRect(GetSkinMaterial.FDrawRoundOutSideRectParam,ABeforePictureDrawRect);
-//                    end;
-      //            end;
-              end;
+    //                  if (GetSkinMaterial<>nil) and (GetSkinMaterial.FIsDrawClipRound) then
+    //                  begin
+    //                    ACanvas.DrawRect(GetSkinMaterial.FDrawRoundOutSideRectParam,AAfterPictureDrawRect);
+    //                  end;
+        //          end;
+                end;
 
 
 
-              //绘制之后的图片
-              if (AAfterPicture<>nil) then
-              begin
-      //          if Self.FSkinImageListViewerIntf.Prop.FAnimated
-      //            //是GIF引擎
-      //            and (AAfterPicture.SkinPictureEngine is TSkinBaseGIFPictureEngine)
-      //          then
-      //          begin
-      //            //GIF图片播放
-      //            TSkinBaseGIFPictureEngine(AAfterPicture.SkinPictureEngine).DrawToCanvas(ACanvas,
-      //                                            Self.GetSkinMaterial.FDrawPictureParam,
-      //                                            AAfterPictureDrawRect);
-      //          end
-      //          else
-      //          begin
-                  GetSkinMaterial.FDrawPictureParam.StaticScale:=1;
-                  ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawPictureParam,
-                                          AAfterPicture,
-                                          AAfterPictureDrawRect
-                                          );
-
-//                  if (GetSkinMaterial<>nil) and (GetSkinMaterial.FIsDrawClipRound) then
-//                  begin
-//                    ACanvas.DrawRect(GetSkinMaterial.FDrawRoundOutSideRectParam,AAfterPictureDrawRect);
-//                  end;
-      //          end;
-              end;
-
-
-
-              if (GetSkinMaterial<>nil) and (GetSkinMaterial.FIsDrawClipRound) then
-              begin
-                ACanvas.DrawRect(GetSkinMaterial.FDrawRoundOutSideRectParam,ADrawRect);
-              end;
-
-          end
-          else
-          begin
-
-      //        if Self.FSkinImageListViewerIntf.Prop.FAnimated
-      //          //是GIF引擎
-      //          and (Self.FSkinImageListViewerIntf.Prop.Picture.SkinPictureEngine is TSkinBaseGIFPictureEngine)
-      //        then
-      //        begin
-      //          //GIF图片播放
-      //          TSkinBaseGIFPictureEngine(Self.FSkinImageListViewerIntf.Prop.Picture.SkinPictureEngine).DrawToCanvas(ACanvas,
-      //                                          Self.GetSkinMaterial.FDrawPictureParam,
-      //                                          AScrollDrawRect);
-      //        end
-      //        else
-      //        begin
-
-      //          if Self.FSkinImageListViewerIntf.Prop.Rotated then
-      //          begin
-      //            //图片旋转
-      //            Self.GetSkinMaterial.FDrawPictureParam.StaticRotateAngle:=Self.FSkinImageListViewerIntf.Prop.FCurrentRotateAngle;
-      //          end;
-
-                ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawPictureParam,
-                                    Self.FSkinImageListViewerIntf.Prop.Picture,
-                                    AScrollDrawRect);
                 if (GetSkinMaterial<>nil) and (GetSkinMaterial.FIsDrawClipRound) then
                 begin
-                  ACanvas.DrawRect(GetSkinMaterial.FDrawRoundOutSideRectParam,AScrollDrawRect);
+                  ACanvas.DrawRect(GetSkinMaterial.FDrawRoundOutSideRectParam,ADrawRect);
                 end;
-      //        end;
 
-          end;
+            end
+            else
+            begin
+
+        //        if Self.FSkinImageListViewerIntf.Prop.FAnimated
+        //          //是GIF引擎
+        //          and (Self.FSkinImageListViewerIntf.Prop.Picture.SkinPictureEngine is TSkinBaseGIFPictureEngine)
+        //        then
+        //        begin
+        //          //GIF图片播放
+        //          TSkinBaseGIFPictureEngine(Self.FSkinImageListViewerIntf.Prop.Picture.SkinPictureEngine).DrawToCanvas(ACanvas,
+        //                                          Self.GetSkinMaterial.FDrawPictureParam,
+        //                                          AScrollDrawRect);
+        //        end
+        //        else
+        //        begin
+
+        //          if Self.FSkinImageListViewerIntf.Prop.Rotated then
+        //          begin
+        //            //图片旋转
+        //            Self.GetSkinMaterial.FDrawPictureParam.StaticRotateAngle:=Self.FSkinImageListViewerIntf.Prop.FCurrentRotateAngle;
+        //          end;
+
+                  ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawPictureParam,
+                                      Self.FSkinImageListViewerIntf.Prop.Picture,
+                                      AScrollDrawRect);
+                  if (GetSkinMaterial<>nil) and (GetSkinMaterial.FIsDrawClipRound) then
+                  begin
+                    ACanvas.DrawRect(GetSkinMaterial.FDrawRoundOutSideRectParam,AScrollDrawRect);
+                  end;
+        //        end;
+
+            end;
 
 
       finally
         ACanvas.ResetClip;
       end;
+
+
+//      AOldColor:=GetSkinMaterial.BackColor.FillColor.FColor;
+//      GetSkinMaterial.BackColor.FillColor.FColor:=RedColor;
+//
+//      //画上手势绽放的两点
+//      AFingureRect.Left:=gFormTouch1.X-10;
+//      AFingureRect.Top:=gFormTouch1.Y-10;
+//      AFingureRect.Right:=gFormTouch1.X+10;
+//      AFingureRect.Bottom:=gFormTouch1.Y+10;
+//      ACanvas.DrawRect(GetSkinMaterial.BackColor,AFingureRect);
+//
+//
+//      AFingureRect.Left:=gFormTouch2.X-10;
+//      AFingureRect.Top:=gFormTouch2.Y-10;
+//      AFingureRect.Right:=gFormTouch2.X+10;
+//      AFingureRect.Bottom:=gFormTouch2.Y+10;
+//      ACanvas.DrawRect(GetSkinMaterial.BackColor,AFingureRect);
+//
+//      AFingureRect.Left:=Self.FSkinImageListViewerIntf.Properties.FZoomTouchControlCenter.X-2;
+//      AFingureRect.Top:=Self.FSkinImageListViewerIntf.Properties.FZoomTouchControlCenter.Y-2;
+//      AFingureRect.Right:=Self.FSkinImageListViewerIntf.Properties.FZoomTouchControlCenter.X+2;
+//      AFingureRect.Bottom:=Self.FSkinImageListViewerIntf.Properties.FZoomTouchControlCenter.Y+2;
+//      ACanvas.DrawRect(GetSkinMaterial.BackColor,AFingureRect);
+//
+//
+//      GetSkinMaterial.BackColor.FillColor.FColor:=AOldColor;
+
   end;
 end;
 
@@ -1445,6 +1590,25 @@ begin
 
 end;
 
+procedure TImageListViewerProperties.CancelSwitching;
+begin
+  FImageListSwitching:=False;
+  FImageListSwitchingProgress:=0;
+end;
+
+procedure TImageListViewerProperties.CancelZoom;
+begin
+
+  //宽度和高度放大的距离
+  FContentWidthZoomDistance:=0;
+  FContentHeightZoomDistance:=0;
+
+  Self.UpdateScrollBars;
+
+
+  Self.Invalidate;
+end;
+
 function TImageListViewerProperties.CheckIsImageListSwitching: Boolean;
 begin
   //当前是否正在切换
@@ -1527,7 +1691,7 @@ begin
 
 
       FLastGestureZoomDistance:=0;
-      FGestureZoomScale:=1;
+      FCurrentGestureZoomScale:=1;
       FIsGestureZooming:=False;
 
       FCanGestureZoom:=False;
@@ -1535,7 +1699,8 @@ begin
       Self.FCanGestureSwitch:=True;
       FCanGestureSwitchDistance:=8;//0.33
       FMaxGestureZoomScale:=3;
-      FMinGestureZoomScale:=1;
+//      FMinGestureZoomScale:=1;
+      FMinGestureZoomScale:=0.6;
 
 
 
@@ -1642,8 +1807,8 @@ end;
 
 procedure TImageListViewerProperties.DoZoomToInitialAnimate(Sender: TObject);
 begin
-  Self.FGestureZoomScale:=Self.FZoomingToInitialAnimator.Position/100;
-  SetGestureZoomScale(FGestureZoomScale);
+//  Self.FCurrentGestureZoomScale:=Self.FZoomingToInitialAnimator.Position/100;
+//  SetCurrentGestureZoomScale(FCurrentGestureZoomScale);
   Self.Invalidate;
 end;
 
@@ -1905,6 +2070,7 @@ begin
       end;
 
       Self.FImageListSwitchingProgress:=Self.GetCurrentCanGestureControlGestureManager.CalcOverRangePosValue(NewValue);
+
 //      uBaseLog.OutputDebugString('FImageListSwitchingProgress:'+FloatToStr(FImageListSwitchingProgress));
 
 
@@ -2087,41 +2253,41 @@ begin
     if GetCurrentCanGestureScrollBarKind=sbVertical then
     begin
 
-      FIsGestureSwitching:=True;
-      Self.FCurrentSwitchOrderType:=TAnimateOrderType.ilaotDesc;
+        FIsGestureSwitching:=True;
+        Self.FCurrentSwitchOrderType:=TAnimateOrderType.ilaotDesc;
 
-      //如果是最后一张,需要加大拖动难度
-      if (Self.FPicture.SkinImageList<>nil) then
-      begin
-        if (Self.FPicture.ImageIndex=0)
-          and (not Self.FGestureSwitchLooped)
-          then
+        //如果是最后一张,需要加大拖动难度
+        if (Self.FPicture.SkinImageList<>nil) then
         begin
-          Self.GetCurrentCanGestureControlGestureManager.FOverRangePosValueStep:=FDefaultOverRangePosValueStep;
+          if (Self.FPicture.ImageIndex=0)
+            and (not Self.FGestureSwitchLooped)
+            then
+          begin
+            Self.GetCurrentCanGestureControlGestureManager.FOverRangePosValueStep:=FDefaultOverRangePosValueStep;
+          end
+          else
+          begin
+            Self.GetCurrentCanGestureControlGestureManager.FOverRangePosValueStep:=1;
+          end;
         end
         else
         begin
-          Self.GetCurrentCanGestureControlGestureManager.FOverRangePosValueStep:=1;
+          Self.GetCurrentCanGestureControlGestureManager.FOverRangePosValueStep:=FDefaultOverRangePosValueStep;
         end;
-      end
-      else
-      begin
-        Self.GetCurrentCanGestureControlGestureManager.FOverRangePosValueStep:=FDefaultOverRangePosValueStep;
-      end;
 
-      Self.FCurrentImageListSwitchEffectType:=TAnimateSwitchEffectType.ilasetMoveVert;
+        Self.FCurrentImageListSwitchEffectType:=TAnimateSwitchEffectType.ilasetMoveVert;
 
 
-      if FIsFirstUserDrag and (FImageListSwitchingProgress>0) then
-      begin
-        FIsFirstUserDrag:=False;
-        NewValue:=FImageListSwitchingProgress;
-      end;
+        if FIsFirstUserDrag and (FImageListSwitchingProgress>0) then
+        begin
+          FIsFirstUserDrag:=False;
+          NewValue:=FImageListSwitchingProgress;
+        end;
 
-      Self.FImageListSwitchingProgress:=Self.GetCurrentCanGestureControlGestureManager.CalcOverRangePosValue(NewValue);
-//      uBaseLog.OutputDebugString('FImageListSwitchingProgress:'+FloatToStr(FImageListSwitchingProgress));
+        Self.FImageListSwitchingProgress:=Self.GetCurrentCanGestureControlGestureManager.CalcOverRangePosValue(NewValue);
+//        uBaseLog.OutputDebugString('FImageListSwitchingProgress:'+FloatToStr(FImageListSwitchingProgress));
 
-      Self.Invalidate;
+        Self.Invalidate;
     end;
   end;
 end;
@@ -2167,13 +2333,13 @@ begin
   end;
 end;
 
-procedure TImageListViewerProperties.SetGestureZoomScale(Value: Double);
-begin
-  FGestureZoomScale:=Value;
-
-  AdjustScrollBarRangeByPicture;
-
-end;
+//procedure TImageListViewerProperties.SetCurrentGestureZoomScale(Value: Double);
+//begin
+//  FCurrentGestureZoomScale:=Value;
+//
+////  AdjustScrollBarRangeByPicture;
+//
+//end;
 
 procedure TImageListViewerProperties.SetImageListAnimated(const Value: Boolean);
 begin
@@ -2328,34 +2494,33 @@ end;
 procedure TImageListViewerProperties.StartZoomingToInitial;
 begin
 
-  //启动越界回滚到初始
-  if (Self.FGestureZoomScale<Self.FMinGestureZoomScale)
-    or (Self.FGestureZoomScale>Self.FMaxGestureZoomScale) then
-  begin
-    if Self.FGestureZoomScale>FMaxGestureZoomScale then
-    begin
-      //滚回边界
-      FZoomingToInitialAnimator.Tag:=1;
-      FZoomingToInitialAnimator.Min:=Ceil(FMaxGestureZoomScale*100);
-      FZoomingToInitialAnimator.Max:=Ceil(FGestureZoomScale*100);
-    end
-    else if Self.FGestureZoomScale<FMinGestureZoomScale then
-    begin
-      //滚回边界
-      FZoomingToInitialAnimator.Tag:=2;
-      FZoomingToInitialAnimator.Min:=Ceil(FMinGestureZoomScale*100);
-      FZoomingToInitialAnimator.Max:=Ceil(FGestureZoomScale*100);
-    end;
-
-    FZoomingToInitialAnimator.DirectionType:=TAnimateDirectionType.adtBackward;
-
-    FZoomingToInitialAnimator.Start;
-  end
-  else
-  begin
-
-
-  end;
+//  //启动越界回滚到初始
+//  if (Self.FCurrentGestureZoomScale<Self.FMinGestureZoomScale) or (Self.FCurrentGestureZoomScale>Self.FMaxGestureZoomScale) then
+//  begin
+//      if Self.FCurrentGestureZoomScale>FMaxGestureZoomScale then
+//      begin
+//        //滚回边界
+//        FZoomingToInitialAnimator.Tag:=1;
+//        FZoomingToInitialAnimator.Min:=Ceil(FMaxGestureZoomScale*100);
+//        FZoomingToInitialAnimator.Max:=Ceil(FCurrentGestureZoomScale*100);
+//      end
+//      else if Self.FCurrentGestureZoomScale<FMinGestureZoomScale then
+//      begin
+//        //滚回边界
+//        FZoomingToInitialAnimator.Tag:=2;
+//        FZoomingToInitialAnimator.Min:=Ceil(FMinGestureZoomScale*100);
+//        FZoomingToInitialAnimator.Max:=Ceil(FCurrentGestureZoomScale*100);
+//      end;
+//
+//      FZoomingToInitialAnimator.DirectionType:=TAnimateDirectionType.adtBackward;
+//
+//      FZoomingToInitialAnimator.Start;
+//  end
+//  else
+//  begin
+//
+//
+//  end;
 end;
 
 procedure TImageListViewerProperties.SwitchNext;
@@ -2549,6 +2714,23 @@ begin
   end;
 end;
 
+procedure TImageListViewerProperties.ZoomEnd;
+begin
+  if FIsGestureZooming then
+  begin
+//        uBaseLog.OutputDebugString('TImageListViewerProperties.ZoomEnd');
+        //可以切换
+        Self.FIsGestureZooming:=False;
+//        Self.StartZoomingToInitial;
+
+        FHorzControlGestureManager.CancelInertiaScroll;
+        FVertControlGestureManager.CancelInertiaScroll;
+
+        FHorzControlGestureManager.CancelMouseUp;
+        FVertControlGestureManager.CancelMouseUp;
+  end;
+end;
+
 //procedure TImageListViewerProperties.FreeSwitchButtons;
 //begin
 //  if (Self.FSkinImageListViewerIntf.GetSwitchButtonGroup<>nil) then
@@ -2559,6 +2741,8 @@ end;
 
 procedure TImageListViewerProperties.AdjustScrollBarRangeByPicture;
 var
+//  AContentWidth:Double;
+//  AContentHeight:Double;
   AHorzScrollBarMax:TControlSize;
   AVertScrollBarMax:TControlSize;
 var
@@ -2582,30 +2766,32 @@ begin
   begin
 
 
-    //计算出图片绘制的矩形
-    ADrawRect:=RectF(0,0,Self.FSkinControlIntf.Width,Self.FSkinControlIntf.Height);
-    AImageDrawRect:=TSkinImageListViewerType(Self.FSkinControlIntf.GetSkinControlType)
-        .CalcPictureDrawRect(uSkinBufferBitmap.GetGlobalAutoSizeBufferBitmap.DrawCanvas,
-                              Self.FPicture,
-                              ADrawRect);
+      //计算出图片绘制的矩形
+      ADrawRect:=RectF(0,0,Self.FSkinControlIntf.Width,Self.FSkinControlIntf.Height);
+      AImageDrawRect:=TSkinImageListViewerType(Self.FSkinControlIntf.GetSkinControlType)
+          .CalcPictureDrawRect(uSkinBufferBitmap.GetGlobalAutoSizeBufferBitmap.DrawCanvas,
+                                Self.FPicture,
+                                ADrawRect);
 
 
-    //计算出绘制大小
-    Self.FContentWidth:=ControlSize(RectWidthF(AImageDrawRect));
-    Self.FContentHeight:=ControlSize(RectHeightF(AImageDrawRect));
-    AHorzScrollBarMax:=ControlSize(RectWidthF(AImageDrawRect)-Self.FSkinControlIntf.Width);
-    AVertScrollBarMax:=ControlSize(RectHeightF(AImageDrawRect)-Self.FSkinControlIntf.Height);
+      //计算出绘制大小
+//      AContentWidth:=RectWidthF(AImageDrawRect);
+//      AContentHeight:=RectHeightF(AImageDrawRect);
+      AHorzScrollBarMax:=RectWidthF(AImageDrawRect)-Self.FSkinControlIntf.Width;
+      AVertScrollBarMax:=RectHeightF(AImageDrawRect)-Self.FSkinControlIntf.Height;
 
 
 
-    if AHorzScrollBarMax<0 then
-    begin
-      AHorzScrollBarMax:=0;
-    end;
-    if AVertScrollBarMax<0 then
-    begin
-      AVertScrollBarMax:=0;
-    end;
+      if AHorzScrollBarMax<0 then
+      begin
+        AHorzScrollBarMax:=0;
+      end;
+      if AVertScrollBarMax<0 then
+      begin
+        AVertScrollBarMax:=0;
+      end;
+
+
 
   end;
 
@@ -2619,6 +2805,19 @@ begin
   Self.FSkinScrollControlIntf.Prop.VertControlGestureManager.MaxOverRangePosValue:=0;
   Self.FSkinScrollControlIntf.Prop.VertControlGestureManager.Max:=AVertScrollBarMax;
 
+
+
+
+//  //计算出放大后的滚动条位置
+//  if AHorzScrollBarMax>0 then
+//  begin
+//    Self.FSkinScrollControlIntf.Prop.HorzControlGestureManager.Position:=AHorzScrollBarMax/2;
+//  end;
+//
+//  if AVertScrollBarMax>0 then
+//  begin
+//    Self.FSkinScrollControlIntf.Prop.VertControlGestureManager.Position:=AVertScrollBarMax/2;
+//  end;
 
 end;
 
@@ -2766,10 +2965,257 @@ begin
     Result:=Self.FImageListAnimateOrderType;
   end;
 end;
+    {$IFDEF FMX}
+
+procedure TImageListViewerProperties.Gesture(const EventInfo: TGestureEventInfo;var Handled: Boolean);
+var
+  AHorzScrollBarMax:TControlSize;
+  AVertScrollBarMax:TControlSize;
+var
+  ADrawRect:TRectF;
+//  AImageWidth:Integer;
+//  AImageHeight:Integer;
+//  AImageDrawWidth:Integer;
+//  AImageDrawHeight:Integer;
+//  AImageDrawMaxWidth:Integer;
+//  AImageDrawMaxHeight:Integer;
+  AImageDrawRect:TRectF;
+  ADistance:Double;
+
+//  AImageDrawRect:TRectF;
+  AHeightDistance:Double;
+//  AImageDrawRectZoomScale:Double;
+var
+  AZoomRate:Double;
+begin
+  inherited;
+//  FMX.Types.Log.d('OrangeUI TSkinImageListViewerType.Gesture Begin');
+
+  if (EventInfo.GestureID = igiZoom) and Self.FCanGestureZoom then
+  begin
+      Handled:=True;
+//      FIsZoomed:=True;
+      if (TInteractiveGestureFlag.gfBegin in EventInfo.Flags) then
+      begin
+          FMX.Types.Log.d('OrangeUI TImageListViewerProperties.Gesture gfBegin');
+          //暂停切换
+          Self.FIsGestureZooming:=True;
+
+//          if FContentWidth=-1 then
+//          begin
+//            Self.FContentWidth:=Self.FSkinControlIntf.Width;
+//            Self.FContentHeight:=Self.FSkinControlIntf.Height;
+//          end;
+
+
+
+
+          //开始缩放前，两指中心点，对于控件的坐标
+          gFormTouch1:=TProtectedControl(Self.FSkinControl).AbsoluteToLocal(gFormTouch1);
+          gFormTouch2:=TProtectedControl(Self.FSkinControl).AbsoluteToLocal(gFormTouch2);
+  //        FMX.Types.Log.d('OrangeUI TImageListViewerProperties.Gesture gFormTouch1:'
+  //                            +FloatToStr(gFormTouch1.Location.X)+','+FloatToStr(gFormTouch1.Location.Y)
+  //                            +' gFormTouch2:'+FloatToStr(gFormTouch2.Location.X)+','+FloatToStr(gFormTouch2.Location.Y)
+  //                            );
+
+
+
+          Self.FZoomTouchControlCenter.X:=gFormTouch1.X+(gFormTouch2.X-gFormTouch1.X)/2;
+          Self.FZoomTouchControlCenter.Y:=gFormTouch1.Y+(gFormTouch2.Y-gFormTouch1.Y)/2;
+
+          //开始缩放前，两指中心点，对于图片的坐标
+          Self.FZoomTouchImageCenter.X:=Self.FZoomTouchControlCenter.X+Self.HorzControlGestureManager.Position;
+          Self.FZoomTouchImageCenter.Y:=Self.FZoomTouchControlCenter.Y+Self.VertControlGestureManager.Position;
+
+//          ADrawRect:=RectF(0,0,FContentWidth+FContentWidthZoomDistance,FContentHeight+FContentHeightZoomDistance);
+          ADrawRect:=RectF(0,0,GetContentWidth,GetContentHeight);
+          AImageDrawRect:=ADrawRect;
+//          CalcImageDrawRect(TSkinImageListViewerMaterial(Self.FSkinControlIntf.GetCurrentUseMaterial).DrawPictureParam,
+//                                    Self.FSkinImageListViewerIntf.Prop.Picture.CurrentPictureDrawWidth,
+//                                    Self.FSkinImageListViewerIntf.Prop.Picture.CurrentPictureDrawHeight,
+//                                    ADrawRect,
+//                                    AImageDrawRect);
+          FImageCenterXWidthRate:=Self.FZoomTouchImageCenter.X/AImageDrawRect.Width;
+          FImageCenterYHeightRate:=Self.FZoomTouchImageCenter.Y/AImageDrawRect.Height;
+
+
+          CancelSwitching;
+      end;
+      if (TInteractiveGestureFlag.gfEnd in EventInfo.Flags) then
+      begin
+        FMX.Types.Log.d('OrangeUI TImageListViewerProperties.Gesture gfEnd');
+
+        ZoomEnd;
+      end;
+
+      if (not(TInteractiveGestureFlag.gfBegin in EventInfo.Flags)) and
+        (not(TInteractiveGestureFlag.gfEnd in EventInfo.Flags)) then
+      begin
+
+          { zoom the image }
+          //计算出放大比例
+          ADistance:=(EventInfo.Distance-Self.FLastGestureZoomDistance);
+          FMX.Types.Log.d('OrangeUI TImageListViewerProperties.Gesture gfZooming ADistance:'+FloatToStr(ADistance)+' EventInfo.Distance:'+FloatToStr(EventInfo.Distance));
+
+          {$IFDEF IOS}
+          //(7)缩放，一个手指弹起，再按下去，Distance太大了，有130多，造成图片突然变大，或者缩小，所以，突然的增量，则取消
+          if ABS(ADistance)>30 then
+          begin
+            FMX.Types.Log.d('OrangeUI TImageListViewerProperties.Gesture gfZooming ADistance is too big,cancel,may another figure mouseup and mousedown');
+            Self.FLastGestureZoomDistance := EventInfo.Distance;
+            Exit;
+          end;
+          {$ENDIF}
+
+
+
+//          AZoomRate:=(1+ADistance/Self.FSkinControlIntf.Width);
+          AZoomRate:=(1+ADistance/GetContentWidth);
+
+          if Self.FCurrentGestureZoomScale*AZoomRate<Self.FMinGestureZoomScale then
+          begin
+            //太小了
+            AZoomRate:=FMinGestureZoomScale/FCurrentGestureZoomScale;
+            ADistance:=GetContentWidth*(AZoomRate-1);
+          end;
+          if Self.FCurrentGestureZoomScale*AZoomRate>Self.FMaxGestureZoomScale then
+          begin
+            //太大了
+            AZoomRate:=FMaxGestureZoomScale/FCurrentGestureZoomScale;
+            ADistance:=GetContentWidth*(AZoomRate-1);
+          end;
+
+          //要按比例放大拉伸的,不然变形了
+          AHeightDistance:=GetContentHeight*ADistance/GetContentWidth;
+
+
+          Self.FContentWidthZoomDistance:=FContentWidthZoomDistance+ADistance;
+          Self.FContentHeightZoomDistance:=FContentHeightZoomDistance+AHeightDistance;
+
+//          FMX.Types.Log.d('OrangeUI TImageListViewerProperties.Gesture AZoomRate '+FloatToStr(AZoomRate));
+
+          Self.FCurrentGestureZoomScale:=Self.FCurrentGestureZoomScale*AZoomRate;
+
+
+//          Self.SetCurrentGestureZoomScale(Self.FCurrentGestureZoomScale);
+
+
+
+          //当前的绘制矩形
+
+
+
+          //看一下图片的绘制矩形
+
+
+          //计算出图片绘制的矩形
+//          ADrawRect:=RectF(0,0,Self.FSkinControlIntf.Width,Self.FSkinControlIntf.Height);
+//          AImageDrawRect:=TSkinImageListViewerType(Self.FSkinControlIntf.GetSkinControlType)
+//              .CalcPictureDrawRect(uSkinBufferBitmap.GetGlobalAutoSizeBufferBitmap.DrawCanvas,
+//                                    Self.FPicture,
+//                                    ADrawRect);
+//          //计算出绘制大小
+//          Self.FContentWidth:=RectWidthF(AImageDrawRect);
+//          Self.FContentHeight:=RectHeightF(AImageDrawRect);
+//          AHorzScrollBarMax:=RectWidthF(AImageDrawRect)-Self.FSkinControlIntf.Width;
+//          AVertScrollBarMax:=RectHeightF(AImageDrawRect)-Self.FSkinControlIntf.Height;
+
+
+
+          //计算绘制矩形
+
+
+          //计算出绘制大小
+//          Self.FContentWidth:=FContentWidth*AZoomRate;
+//          Self.FContentHeight:=FContentHeight*AZoomRate;
+//          Self.FContentWidth:=FContentWidth+ADistance;
+//          Self.FContentHeight:=FContentHeight*AZoomRate;
+          AHorzScrollBarMax:=GetContentWidth-Self.FSkinControlIntf.Width;
+          AVertScrollBarMax:=GetContentHeight-Self.FSkinControlIntf.Height;
+
+
+
+          if AHorzScrollBarMax<0 then
+          begin
+            AHorzScrollBarMax:=0;
+          end;
+          if AVertScrollBarMax<0 then
+          begin
+            AVertScrollBarMax:=0;
+          end;
+
+
+
+          Self.HorzControlGestureManager.MinOverRangePosValue:=0;
+          Self.HorzControlGestureManager.MaxOverRangePosValue:=0;
+          Self.HorzControlGestureManager.Max:=AHorzScrollBarMax;
+//          FMX.Types.Log.d('OrangeUI TImageListViewerProperties.Gesture HorzControlGestureManager.Max '+FloatToStr(AHorzScrollBarMax));
+
+          Self.VertControlGestureManager.MinOverRangePosValue:=0;
+          Self.VertControlGestureManager.MaxOverRangePosValue:=0;
+          Self.VertControlGestureManager.Max:=AVertScrollBarMax;
+//          FMX.Types.Log.d('OrangeUI TImageListViewerProperties.Gesture VertControlGestureManager.Max '+FloatToStr(AVertScrollBarMax));
+
+//          Self.UpdateScrollBars;
+
+
+//          Self.HorzControlGestureManager.Position:=Self.FZoomTouchImageCenter.X*AZoomRate-Self.FZoomTouchControlCenter.X;
+//          Self.VertControlGestureManager.Position:=Self.FZoomTouchImageCenter.Y*AZoomRate-Self.FZoomTouchControlCenter.Y;
+
+
+
+          if Self.HorzControlGestureManager.Position+FImageCenterXWidthRate*ADistance>=0 then
+          begin
+            Self.HorzControlGestureManager.Position:=Self.HorzControlGestureManager.Position+FImageCenterXWidthRate*ADistance;
+          end
+          else
+          begin
+            Self.HorzControlGestureManager.Position:=0;
+          end;
+
+          if Self.VertControlGestureManager.Position+FImageCenterYHeightRate*AHeightDistance>=0 then
+          begin
+            Self.VertControlGestureManager.Position:=Self.VertControlGestureManager.Position+FImageCenterYHeightRate*AHeightDistance;
+          end
+          else
+          begin
+            Self.VertControlGestureManager.Position:=0;
+          end;
+
+
+//          Self.HorzControlGestureManager.Position:=Self.HorzControlGestureManager.Position+ADistance/2;
+//          Self.VertControlGestureManager.Position:=Self.VertControlGestureManager.Position+ADistance/2;
+
+
+//          FMX.Types.Log.d('OrangeUI TImageListViewerProperties.Gesture HorzControlGestureManager.Position '+FloatToStr(Self.HorzControlGestureManager.Position));
+//          FMX.Types.Log.d('OrangeUI TImageListViewerProperties.Gesture VertControlGestureManager.Position '+FloatToStr(Self.VertControlGestureManager.Position));
+
+
+
+          Self.Invalidate;
+
+      end;
+      Self.FLastGestureZoomDistance := EventInfo.Distance;
+
+
+  end;
+//  FMX.Types.Log.d('OrangeUI TSkinImageListViewerType.Gesture End');
+end;
+    {$ENDIF}
 
 function TImageListViewerProperties.GetComponentClassify: String;
 begin
   Result:='SkinImageListViewer';
+end;
+
+function TImageListViewerProperties.GetContentHeight: Double;
+begin
+  Result:=Inherited + FContentHeightZoomDistance;
+end;
+
+function TImageListViewerProperties.GetContentWidth: Double;
+begin
+  Result:=Inherited + FContentWidthZoomDistance;
 end;
 
 function TImageListViewerProperties.GetImageListSwitchingProgressMaxSize: Double;
@@ -2842,10 +3288,14 @@ end;
 
 procedure TImageListViewerProperties.InitScrollBarOverrangePosValue;
 begin
-  if Self.FIsFirstUserDrag then
-  begin
-    Self.InitScrollBars;
-  end;
+  //wn  测试
+//  Exit;
+
+
+//  if Self.FIsFirstUserDrag then
+//  begin
+//    Self.InitScrollBars;
+//  end;
 
   if Self.FIsFirstUserDrag and (Self.FImageListSwitchingProgress>0) then
   begin
@@ -2962,9 +3412,20 @@ begin
   Self.FImageListSwitchingProgress:=0;
   Self.FCurrentSwitchBeforeImageIndex:=-1;
   Self.FCurrentSwitchAfterImageIndex:=-1;
+
+
+  Self.FContentWidth:=-1;
+  Self.FContentHeight:=-1;
+
+  Self.FContentWidthZoomDistance:=0;
+  Self.FContentHeightZoomDistance:=0;
+
+
   //初始的缩放比例
-  Self.FGestureZoomScale:=1;
-  Self.SetGestureZoomScale(1);
+  Self.FCurrentGestureZoomScale:=1;
+//  Self.SetCurrentGestureZoomScale(1);
+
+
 
   Self.GetCurrentCanGestureControlGestureManager.MinOverRangePosValue:=0;
   Self.GetCurrentCanGestureControlGestureManager.MaxOverRangePosValue:=0;
@@ -2988,18 +3449,17 @@ end;
 constructor TSkinImageListViewer.Create(AOwner:TComponent);
 begin
   inherited;
-  {$IFDEF FMX}
-  Touch.DefaultInteractiveGestures := Touch.DefaultInteractiveGestures
-    + [TInteractiveGesture.{$IF CompilerVersion >= 35.0}Zoom{$ELSE}igZoom{$IFEND}]
-    + [TInteractiveGesture.{$IF CompilerVersion >= 35.0}Rotate{$ELSE}igRotate{$IFEND}]
-
-    ;
-  Touch.InteractiveGestures := Touch.InteractiveGestures
-    + [TInteractiveGesture.{$IF CompilerVersion >= 35.0}Zoom{$ELSE}igZoom{$IFEND}]
-    + [TInteractiveGesture.{$IF CompilerVersion >= 35.0}Rotate{$ELSE}igRotate{$IFEND}]
-
-    ;
-  {$ENDIF}
+//  {$IFDEF FMX}
+//  Touch.DefaultInteractiveGestures := Touch.DefaultInteractiveGestures
+//    + [TInteractiveGesture.{$IF CompilerVersion >= 35.0}Zoom{$ELSE}igZoom{$IFEND}]
+//    + [TInteractiveGesture.{$IF CompilerVersion >= 35.0}Rotate{$ELSE}igRotate{$IFEND}]
+//
+//    ;
+//  Touch.InteractiveGestures := Touch.InteractiveGestures
+//    + [TInteractiveGesture.{$IF CompilerVersion >= 35.0}Zoom{$ELSE}igZoom{$IFEND}]
+//    + [TInteractiveGesture.{$IF CompilerVersion >= 35.0}Rotate{$ELSE}igRotate{$IFEND}]
+//    ;
+//  {$ENDIF}
 
 end;
 function TSkinImageListViewer.Material:TSkinImageListViewerDefaultMaterial;
@@ -3040,6 +3500,14 @@ end;
 procedure TSkinImageListViewer.SetImageListViewerProperties(Value: TImageListViewerProperties);
 begin
   Self.FProperties.Assign(Value);
+end;
+
+procedure TSkinImageListViewer.DblClick;
+begin
+  inherited;
+  //判断是否是放大了
+  //如果是放大了,则要恢复原样
+  Self.Prop.CancelZoom;
 end;
 
 procedure TSkinImageListViewer.DoCustomSkinMaterialChange(Sender: TObject);
@@ -3111,12 +3579,15 @@ begin
           Properties.AlignSwitchButtons;
 
       end;
+
   end;
+
 end;
 
 procedure TSkinImageListViewer.Notification(AComponent: TComponent;Operation: TOperation);
 begin
   inherited Notification(AComponent,Operation);
+
   if (Operation=opRemove) then
   begin
     if (AComponent=Self.FSwitchButtonGroup) then
@@ -3124,11 +3595,14 @@ begin
       SetSwitchButtonGroup(nil);
     end;
   end;
+
 end;
 
 
 
 end.
+
+
 
 
 

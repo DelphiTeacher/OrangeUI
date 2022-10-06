@@ -30,7 +30,11 @@ requires
   rtl,
   vcl,
   vclimg,
-  dbrtl;
+  dbrtl,
+  xmlrtl,
+  IndyCore,
+  IndySystem,
+  IndyProtocols;
 
 contains
   uSkinWindowsControl in 'Source\Controls\Windows\uSkinWindowsControl.pas',
@@ -128,6 +132,11 @@ contains
   MD5_OrangeUI in '..\OrangeProjectCommon\MD5\MD5_OrangeUI.pas',
   uFrameContext in 'Source\Base\uFrameContext.pas',
   uPhotoManager in 'Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.pas',
-  uPhotoManager.Windows in 'Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.Windows.pas';
+  uPhotoManager.Windows in 'Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.Windows.pas',
+  uUIFunction in 'Source\Common\uUIFunction.pas',
+  uSkinRegExTagLabelViewType in 'Source\Controls\uSkinRegExTagLabelViewType.pas',
+  PerlRegEx in '..\OrangeProjectCommon\TPerlRegEx\PerlRegEx.pas',
+  pcre in '..\OrangeProjectCommon\TPerlRegEx\pcre.pas',
+  uSkinVirtualChartType in 'Source\Controls\uSkinVirtualChartType.pas';
 
 end.

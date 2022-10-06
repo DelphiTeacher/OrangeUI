@@ -120,6 +120,8 @@ function CompressedJSonFromDataSet(DataSet: TDataSet;tableName: string='RecordLi
 function JSonFromDataSetTo(DataSet: TDataSet;tableName: string;sj:ISuperObject;AFieldMapList:TStringList=nil;AIsNeedNullField:Boolean=DEFAULT_IsNeedNullField): ISuperObject;
 function JSonArrayFromDataSetTo(DataSet: TDataSet;AFieldMapList:TStringList=nil;AIsNeedNullField:Boolean=DEFAULT_IsNeedNullField): ISuperArray;
 
+//数组切片(传入起始坐标和结束坐标，返回截取子数组)
+function SliceJsonArray(JsonArray: ISuperArray; StartIndex, EndIndex: Integer): ISuperArray;
 
 function JSonFromDataSet(DataSet: TDataSet;tableName: string='RecordList';AFieldMapList:TStringList=nil;AIsNeedNullField:Boolean=DEFAULT_IsNeedNullField): ISuperObject;
 
@@ -128,13 +130,17 @@ function GetJsonDoubleValue(AJson: ISuperObject;AName:String):Double;
 function GetJsonIntegerValue(AJson: ISuperObject;AName:String):Integer;
 function GetJsonStringValue(AJson: ISuperObject;AName:String):String;
 
+function ComposeJsonObjectsToArray(AJsonObjects:Array of ISuperObject):ISuperArray;
 
 procedure ConvertArrayToJson(ANameArray:TStringDynArray;
                             AValueArray:TVariantDynArray;
                             AJson:ISuperObject);overload;
+function ConvertArrayToJson(ANameArray:TStringDynArray;
+                            AValueArray:TVariantDynArray):ISuperObject;overload;
 
 procedure ConvertArrayToJson(ANameValueArray:TVariantDynArray;
                             AJson:ISuperObject);overload;
+function ConvertArrayToJson(ANameValueArray:TVariantDynArray):ISuperObject;overload;
 
 
 //获取Json中元素的个数
@@ -144,18 +150,30 @@ function ConvertJsonToArray(AJson:ISuperObject;
                             //只添加在FieldList中的Key
                             AFieldList:TStringList=nil;
                             //不添加的字段名
-                            ANoAddKeyName:String=''):Integer;overload;
+                            ANoAddKeyName:String='';
+                            AIsNeedNullValueField:Boolean=True;
+                            AIsNeedArrayValueField:Boolean=True;
+                            AIsNeedObjectValueField:Boolean=True):Integer;overload;
 function ConvertJsonToArray(AJson:ISuperObject;
                             var ANameArray:TStringDynArray;
                             var AValueArray:TVariantDynArray;
                             var AValueTypeArray:TVarTypeDynArray;
                             //只添加在FieldList中的Key
                             AFieldList:TStringList=nil;
-                            ANoAddKeyName:String=''):Integer;overload;
+                            ANoAddKeyName:String='';
+                            AIsNeedNullValueField:Boolean=True;
+                            AIsNeedArrayValueField:Boolean=True;
+                            AIsNeedObjectValueField:Boolean=True):Integer;overload;
 function GetJsonCount(AJson:ISuperObject;
                             AFieldList:TStringList=nil;
-                            ANoAddKeyName:String=''):Integer;
-function GetJsonNameArray(AJson:ISuperObject;AFieldList:TStringList=nil):TStringDynArray;
+                            ANoAddKeyName:String='';
+                            AIsNeedNullValueField:Boolean=True;
+                            AIsNeedArrayValueField:Boolean=True;
+                            AIsNeedObjectValueField:Boolean=True):Integer;
+function GetJsonNameArray(AJson:ISuperObject;AIgnoreFieldList:TStringList=nil;
+                            AIsNeedNullValueField:Boolean=True;
+                            AIsNeedArrayValueField:Boolean=True;
+                            AIsNeedObjectValueField:Boolean=True):TStringDynArray;
 //function GetJsonValueTypeArray(AJson:ISuperObject;AFieldList:TStringList=nil):Array of Integer;
 //function GetJsonValueArray(AJson:ISuperObject;AFieldList:String=''):TVariantDynArray;
 
@@ -167,6 +185,9 @@ function LocateJsonArray(AJsonArray:ISuperArray;
                           AName:String;
                           AValue:Variant;
                           AStartIndex:Integer=0):ISuperObject;overload;
+function LocateJsonValueArray(AJsonArray:ISuperArray;
+                          AValue:Variant;
+                          AStartIndex:Integer=0):Integer;
 function LocateJsonArrayIndex(AJsonArray:ISuperArray;
                           AName:String;
                           AValue:Variant;
@@ -175,6 +196,9 @@ function LocateJsonArray(AJsonArray:ISuperArray;
                           ANames:TStringDynArray;
                           AValues:TVariantDynArray;
                           AStartIndex:Integer=0):ISuperObject;overload;
+function GetJsonArrayValues(AJsonArray: ISuperArray;AName:String):TVariantDynArray;
+function ConvertArrayToStringList(AValues:TVariantDynArray):TStringList;
+
 
 //将Json数组转换成层级的
 procedure ConvertJsonArrayToLevel(AJsonArray:ISuperArray;
@@ -190,6 +214,15 @@ procedure MergeJson(AJson:ISuperObject;AToJson:ISuperObject);
 function GetWhereConditions(AFieldNames:Array of String;
                             AFieldValues:Array of Variant):String;
 
+function ConvertJsonArray(AJsonArray:Array of ISuperObject):ISuperArray;
+
+function GetFieldCondition(ALogicalOperator:String;
+                            AFieldName:String;
+                            //条件运算符
+                            ACompareOperator:String;
+                            AFieldValue:Variant;
+                            AFieldValueIsFieldName:Boolean=False):ISuperObject;
+
 function CutStringArray(AFieldNames:Array of String;ACount:Integer):TStringDynArray;
 function CutVariantArray(AFieldValues:TVariantDynArray;ACount:Integer):TVariantDynArray;
 
@@ -199,7 +232,7 @@ function GetKeyValuesFromJsonObjectArray(AJsonObjectArray:ISuperArray;
 
 
 //获取数据集的字段定义列表JsonArray
-function GetDatasetFieldDefsJson(ADataset:TDataset):ISuperArray;
+function GetDatasetFieldDefsJson(ADataset:TDataset;AFieldMapList:TStringList=nil):ISuperArray;
 
 
 //比较两个Json是否相同
@@ -210,7 +243,33 @@ function IsSameJsonObject(AJson,BJson:ISuperObject):Boolean;
 //使用UTF8的字符集来解析出Json
 function TSuperObjectParseStream(AStream:TStream):ISuperObject;
 
+//获取参数数组中的参数值
+function GetParamValue(ANameArray:TStringDynArray;
+                            AValueArray:TVariantDynArray;
+                            AParamName:String;
+                            ADefaultValue:Variant):Variant;
+
 implementation
+
+//获取参数数组中的参数值
+function GetParamValue(ANameArray:TStringDynArray;
+                            AValueArray:TVariantDynArray;
+                            AParamName:String;
+                            ADefaultValue:Variant):Variant;
+var
+  I:Integer;
+begin
+  Result:=ADefaultValue;
+
+  for I := 0 to Length(ANameArray)-1 do
+  begin
+    if ANameArray[I]=AParamName then
+    begin
+      Result:=AValueArray[I];
+      Exit;
+    end;
+  end;
+end;
 
 
 function TSuperObjectParseStream(AStream:TStream):ISuperObject;
@@ -238,31 +297,44 @@ end;
 //
 //end;
 
-function GetDatasetFieldDefsJson(ADataset:TDataset):ISuperArray;
+function GetDatasetFieldDefsJson(ADataset:TDataset;AFieldMapList:TStringList=nil):ISuperArray;
 var
   I: Integer;
   ASuperObject:ISuperObject;
   ADataTypeName:String;
+  AFieldDef:TFieldDef;
 begin
   Result:=TSuperArray.Create();
   for I := 0 to ADataset.FieldDefs.Count-1 do
   begin
+    AFieldDef:=ADataset.FieldDefs[I];
+
+    if not (faHiddenCol in AFieldDef.Attributes) then
+    begin
+
       ASuperObject:=TSuperObject.Create();
 
 
-      ASuperObject.S['name']:=ADataset.FieldDefs[I].Name;
-      ASuperObject.I['size']:=ADataset.FieldDefs[I].Size;
+      ASuperObject.S['name']:=AFieldDef.Name;
+      if AFieldMapList<>nil then
+      begin
+        if AFieldMapList.Values[AFieldDef.Name]<>'' then
+        begin
+          ASuperObject.S['name']:=AFieldMapList.Values[AFieldDef.Name];
+        end;
+      end;
+      ASuperObject.I['size']:=AFieldDef.Size;
 
       //精度
-      ASuperObject.I['precision']:=ADataset.FieldDefs[I].Precision;
+      ASuperObject.I['precision']:=AFieldDef.Precision;
 
 
       //直接取字段类型的整型值
-      ASuperObject.I['field_type']:=Ord(ADataset.FieldDefs[I].DataType);
+      ASuperObject.I['field_type']:=Ord(AFieldDef.DataType);
 
 
 
-      case ADataset.FieldDefs[I].DataType of
+      case AFieldDef.DataType of
         ftUnknown:
         begin
           ADataTypeName:='unknown';
@@ -510,7 +582,8 @@ begin
       ASuperObject.S['data_type']:=ADataTypeName;
 
 
-      Result.O[I]:=ASuperObject;
+      Result.O[Result.Length]:=ASuperObject;
+    end;
   end;
 end;
 
@@ -567,28 +640,52 @@ begin
   end;
 end;
 
+function ConvertJsonArray(AJsonArray:Array of ISuperObject):ISuperArray;
+var
+  I: Integer;
+begin
+  Result:=SA();
+  for I := 0 to Length(AJsonArray)-1 do
+  begin
+    Result.O[I]:=AJsonArray[I];
+  end;
+end;
+
+function GetFieldCondition(ALogicalOperator:String;
+                            AFieldName:String;
+                            //条件运算符
+                            ACompareOperator:String;
+                            AFieldValue:Variant;
+                            AFieldValueIsFieldName:Boolean):ISuperObject;
+var
+  AWhereKeyJson:ISuperObject;
+begin
+  AWhereKeyJson:=TSuperObject.Create;
+  AWhereKeyJson.S['logical_operator']:=ALogicalOperator;
+  AWhereKeyJson.S['name']:=AFieldName;
+  AWhereKeyJson.S['operator']:=ACompareOperator;
+  AWhereKeyJson.V['value']:=AFieldValue;
+
+  if AFieldValueIsFieldName then
+  begin
+    AWhereKeyJson.B['value_is_field']:=AFieldValueIsFieldName;
+  end;
+
+  Result:=AWhereKeyJson;
+end;
+
 
 function GetWhereConditions(AFieldNames:Array of String;
                             AFieldValues:Array of Variant):String;
 var
   I:Integer;
-
-  AWhereKeyJson:ISuperObject;
   AWhereKeyJsonArray:ISuperArray;
 begin
   AWhereKeyJsonArray:=TSuperArray.Create;
 
   for I := 0 to Length(AFieldNames)-1 do
   begin
-
-    AWhereKeyJson:=TSuperObject.Create;
-    AWhereKeyJson.S['logical_operator']:='AND';
-    AWhereKeyJson.S['name']:=AFieldNames[I];
-    AWhereKeyJson.S['operator']:='=';
-    AWhereKeyJson.V['value']:=AFieldValues[I];
-
-    AWhereKeyJsonArray.O[I]:=AWhereKeyJson;
-
+    AWhereKeyJsonArray.O[I]:=GetFieldCondition('AND',AFieldNames[I],'=',AFieldValues[I]);
   end;
 
   Result:=AWhereKeyJsonArray.AsJSON;
@@ -647,6 +744,25 @@ begin
 
 end;
 
+function LocateJsonValueArray(AJsonArray:ISuperArray;
+                        AValue:Variant;
+                        AStartIndex:Integer=0):Integer;
+var
+  I:Integer;
+begin
+  Result:=-1;
+  for I := AStartIndex to AJsonArray.Length-1 do
+  begin
+    //遍历所有key
+    if (AJsonArray.V[I]=AValue) then
+    begin
+      Result:=I;
+      Break;
+    end;
+  end;
+
+end;
+
 function LocateJsonArrayIndex(AJsonArray:ISuperArray;
                         AName:String;
                         AValue:Variant;
@@ -665,6 +781,29 @@ begin
     end;
   end;
 
+end;
+
+function GetJsonArrayValues(AJsonArray: ISuperArray;AName:String):TVariantDynArray;
+var
+  I:Integer;
+begin
+  SetLength(Result,AJsonArray.Length);
+  for I := 0 to AJsonArray.Length-1 do
+  begin
+    Result[I]:=AJsonArray.O[I].V[AName];
+  end;
+
+end;
+
+function ConvertArrayToStringList(AValues:TVariantDynArray):TStringList;
+var
+  I: Integer;
+begin
+  Result:=TStringList.Create;
+  for I := 0 to Length(AValues)-1 do
+  begin
+    Result.Add(AValues[I]);
+  end;
 end;
 
 //function LocateJsonArray(AJsonArray:ISuperArray;
@@ -720,6 +859,12 @@ begin
   end;
 end;
 
+function ConvertArrayToJson(ANameValueArray:TVariantDynArray):ISuperObject;
+begin
+  Result:=SO();
+  ConvertArrayToJson(ANameValueArray,Result);
+end;
+
 procedure ConvertArrayToJson(ANameValueArray:TVariantDynArray;
                             AJson:ISuperObject);
 var
@@ -742,6 +887,14 @@ begin
 //
 //<<<<<<< .mine
 end;
+
+function ConvertArrayToJson(ANameArray:TStringDynArray;
+                            AValueArray:TVariantDynArray):ISuperObject;
+begin
+  Result:=SO();
+  ConvertArrayToJson(ANameArray,AValueArray,Result);
+end;
+
 
 procedure ConvertArrayToJson(ANameArray:TStringDynArray;
                             AValueArray:TVariantDynArray;
@@ -774,12 +927,26 @@ end;
 //
 //>>>>>>> .r17253
 
+function ComposeJsonObjectsToArray(AJsonObjects:Array of ISuperObject):ISuperArray;
+var
+  I: Integer;
+begin
+  Result:=TSuperArray.Create();
+  for I := 0 to Length(AJsonObjects)-1 do
+  begin
+    Result.O[I]:=AJsonObjects[I];
+  end;
+end;
+
 
 function ConvertJsonToArray(AJson:ISuperObject;
                             var ANameArray:TStringDynArray;
                             var AValueArray:TVariantDynArray;
                             AFieldList:TStringList;
-                            ANoAddKeyName:String):Integer;
+                            ANoAddKeyName:String;
+                            AIsNeedNullValueField:Boolean;
+                            AIsNeedArrayValueField:Boolean;
+                            AIsNeedObjectValueField:Boolean):Integer;
 var
   I:Integer;
   {$IF CompilerVersion > 21.0} // XE or older
@@ -790,7 +957,7 @@ var
   ACurrentName:String;
   ACurrentValue:Variant;
 begin
-  Result:=GetJsonCount(AJson,AFieldList,ANoAddKeyName);
+  Result:=GetJsonCount(AJson,AFieldList,ANoAddKeyName,AIsNeedNullValueField,AIsNeedArrayValueField,AIsNeedObjectValueField);
   SetLength(ANameArray,Result);
   SetLength(AValueArray,Result);
 
@@ -812,6 +979,8 @@ begin
       ACurrentName:=ASuperEnumerator.Current.Name;
       ACurrentValue:=AJson.V[ASuperEnumerator.Current.Name];
       {$IFEND} // XE or older
+
+
       if  //字段没有NOPOST前缀
           Not SameText(
                 Copy(ACurrentName,1,Length(NOPOST)),
@@ -820,7 +989,11 @@ begin
                 (AFieldList=nil)
               or (AFieldList<>nil) and (AFieldList.IndexOf(ACurrentName)<>-1)
               )
-          and ((ANoAddKeyName='') or (ANoAddKeyName<>ACurrentName)) then
+          and ((ANoAddKeyName='') or (ANoAddKeyName<>ACurrentName))
+         and (AIsNeedNullValueField or not AIsNeedNullValueField and not VarIsNULL(ACurrentValue))
+         and (AIsNeedArrayValueField or not AIsNeedArrayValueField and (AJson.GetType(ACurrentName)<>varArray)  )
+         and (AIsNeedObjectValueField or not AIsNeedObjectValueField and (AJson.GetType(ACurrentName)<>varObject)  )
+         then
       begin
         ANameArray[I]:=ACurrentName;
         AValueArray[I]:=ACurrentValue;
@@ -836,7 +1009,10 @@ function ConvertJsonToArray(AJson:ISuperObject;
                             var AValueArray:TVariantDynArray;
                             var AValueTypeArray:TVarTypeDynArray;
                             AFieldList:TStringList;
-                            ANoAddKeyName:String):Integer;
+                            ANoAddKeyName:String;
+                            AIsNeedNullValueField:Boolean;
+                            AIsNeedArrayValueField:Boolean;
+                            AIsNeedObjectValueField:Boolean):Integer;
 var
   I:Integer;
   {$IF CompilerVersion > 21.0} // XE or older
@@ -847,7 +1023,7 @@ var
   ACurrentName:String;
   ACurrentValue:Variant;
 begin
-  Result:=GetJsonCount(AJson,AFieldList,ANoAddKeyName);
+  Result:=GetJsonCount(AJson,AFieldList,ANoAddKeyName,AIsNeedNullValueField,AIsNeedArrayValueField,AIsNeedObjectValueField);
   SetLength(ANameArray,Result);
   SetLength(AValueArray,Result);
   SetLength(AValueTypeArray,Result);
@@ -880,7 +1056,11 @@ begin
                 (AFieldList=nil)
               or (AFieldList<>nil) and (AFieldList.IndexOf(ACurrentName)<>-1)
               )
-          and ((ANoAddKeyName='') or (ANoAddKeyName<>ACurrentName)) then
+          and ((ANoAddKeyName='') or (ANoAddKeyName<>ACurrentName))
+         and (AIsNeedNullValueField or not AIsNeedNullValueField and not VarIsNULL(ACurrentValue))
+         and (AIsNeedArrayValueField or not AIsNeedArrayValueField and (AJson.GetType(ACurrentName)<>varArray)  )
+         and (AIsNeedObjectValueField or not AIsNeedObjectValueField and (AJson.GetType(ACurrentName)<>varObject)  )
+         then
       begin
         ANameArray[I]:=ACurrentName;
         AValueArray[I]:=ACurrentValue;
@@ -893,7 +1073,10 @@ begin
 end;
 
 function GetJsonCount(AJson:ISuperObject;AFieldList:TStringList;
-                            ANoAddKeyName:String):Integer;
+                            ANoAddKeyName:String;
+                            AIsNeedNullValueField:Boolean;
+                            AIsNeedArrayValueField:Boolean;
+                            AIsNeedObjectValueField:Boolean):Integer;
 var
   {$IF CompilerVersion > 21.0} // XE or older
   ASuperEnumerator:TSuperEnumerator<IJSONPair>;
@@ -930,14 +1113,22 @@ begin
               or (AFieldList<>nil) and (AFieldList.IndexOf(ACurrentName)<>-1)
               )
 
-         and ((ANoAddKeyName='') or (ANoAddKeyName<>ACurrentName)) then
+         and ((ANoAddKeyName='') or (ANoAddKeyName<>ACurrentName))
+         and (AIsNeedNullValueField or not AIsNeedNullValueField and not VarIsNULL(ACurrentValue))
+         and (AIsNeedArrayValueField or not AIsNeedArrayValueField and (AJson.GetType(ACurrentName)<>varArray)  )
+         and (AIsNeedObjectValueField or not AIsNeedObjectValueField and (AJson.GetType(ACurrentName)<>varObject)  )
+         then
       begin
+
         Inc(Result);
       end;
   end;
 end;
 
-function GetJsonNameArray(AJson:ISuperObject;AFieldList:TStringList):TStringDynArray;
+function GetJsonNameArray(AJson:ISuperObject;AIgnoreFieldList:TStringList;
+                            AIsNeedNullValueField:Boolean;
+                            AIsNeedArrayValueField:Boolean;
+                            AIsNeedObjectValueField:Boolean):TStringDynArray;
 var
   I:Integer;
   {$IF CompilerVersion > 21.0} // XE or older
@@ -949,7 +1140,7 @@ var
   ACurrentValue:Variant;
 begin
 
-  SetLength(Result,GetJsonCount(AJson));
+  SetLength(Result,GetJsonCount(AJson,AIgnoreFieldList,'',AIsNeedNullValueField,AIsNeedArrayValueField,AIsNeedObjectValueField));
 
   //遍历所有key
   I:=0;
@@ -975,9 +1166,13 @@ begin
           Copy(ACurrentName,1,Length(NOPOST)),
           NOPOST)
         and (
-              (AFieldList=nil)
-            or (AFieldList<>nil) and (AFieldList.IndexOf(ACurrentName)<>-1)
-            ) then
+              (AIgnoreFieldList=nil)
+            or (AIgnoreFieldList<>nil) and (AIgnoreFieldList.IndexOf(ACurrentName)<>-1)
+            )
+         and (AIsNeedNullValueField or not AIsNeedNullValueField and not VarIsNULL(ACurrentValue))
+         and (AIsNeedArrayValueField or not AIsNeedArrayValueField and (AJson.GetType(ACurrentName)<>varArray)  )
+         and (AIsNeedObjectValueField or not AIsNeedObjectValueField and (AJson.GetType(ACurrentName)<>varObject)  )
+         then
     begin
       Result[I]:=ACurrentName;
 
@@ -1653,6 +1848,21 @@ begin
 
 end;
 
+//数组切片
+function SliceJsonArray(JsonArray: ISuperArray; StartIndex,EndIndex: Integer): ISuperArray;
+var
+  I: Integer;
+begin
+  Result := TSuperArray.Create();
+  for I := 0 to JsonArray.Length-1 do
+  begin
+    if (I >= StartIndex) and (I <= EndIndex) then
+    begin
+      Result.S[Result.Length]:= JsonArray.S[I];
+    end;
+    if I > EndIndex then Exit;
+  end;
+end;
 
 function JSonFromDataSet(DataSet: TDataSet;tableName: string='RecordList';AFieldMapList:TStringList=nil;AIsNeedNullField:Boolean=DEFAULT_IsNeedNullField): ISuperObject;
 var

@@ -12,10 +12,11 @@ uses
   uSkinItems,
   uSkinBufferBitmap,
   uSkinCustomListType,
-  BaseListItemStyleFrame,
-
-
-  ListItemStyleFrame_Base, uSkinLabelType, uSkinFireMonkeyLabel,
+//  BaseListItemStyleFrame,
+//
+//
+//  ListItemStyleFrame_Base,
+  uSkinLabelType, uSkinFireMonkeyLabel,
   uSkinFireMonkeyControl, uSkinItemDesignerPanelType,
   uSkinFireMonkeyItemDesignerPanel, uSkinImageType, uSkinFireMonkeyImage,
   uDrawPicture, uSkinImageList;

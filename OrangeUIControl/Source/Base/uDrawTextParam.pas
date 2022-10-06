@@ -865,6 +865,7 @@ Type
     ///   </para>
     /// </summary>
     property FontVertAlign: TFontVertAlign read FFontVertAlign write SetFontVertAlign;// stored IsFontVertAlignStored;
+    property StaticFontVertAlign: TFontVertAlign read FFontVertAlign write FFontVertAlign;// stored IsFontHorzAlignStored;
 
 
     /// <summary>
@@ -1367,10 +1368,15 @@ var
 begin
 
   {$IFDEF FMX}
-    if TPlatformServices.Current.SupportsPlatformService(IFMXSystemFontService, FontSvc) then
-      Result := FontSvc.GetDefaultFontSize
-    else
-      Result := DefaultFontSize;
+    {$IFDEF LINUX}
+    Result:=12;
+    {$ELSE}
+      //Linux下面会报错
+      if TPlatformServices.Current.SupportsPlatformService(IFMXSystemFontService, FontSvc) then
+        Result := FontSvc.GetDefaultFontSize
+      else
+        Result := DefaultFontSize;
+    {$ENDIF}
   {$ENDIF}
 
   {$IFDEF VCL}
@@ -1885,7 +1891,7 @@ end;
 
 procedure TBaseDrawTextParam.SetAutoSizeWidthAdjust(const Value: Double);
 begin
-  if FAutoSizeHeightAdjust<>Value then
+  if FAutoSizeWidthAdjust<>Value then
   begin
     FAutoSizeWidthAdjust := Value;
     DoChange;

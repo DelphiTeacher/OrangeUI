@@ -12,15 +12,21 @@ unit uSkinVirtualChartType;
 
 interface
 {$I FrameWork.inc}
+{$I Version.inc}
 
 uses
   Classes,
   SysUtils,
   uFuncCommon,
-  Types,
+
+  {$IF CompilerVersion>=30.0}
+  Types,//定义了TRectF
+  {$IFEND}
+
   uBaseList,
   uBaseLog,
   DateUtils,
+
   {$IFDEF VCL}
   Messages,
   ExtCtrls,
@@ -32,6 +38,8 @@ uses
   FMX.Controls,
   FMX.Dialogs,
   {$ENDIF}
+
+
   Math,
   uBaseSkinControl,
   uSkinItems,
@@ -53,11 +61,21 @@ uses
   uSkinImageList,
   uSkinListLayouts,
   uSkinPanelType,
-//  uSkinCustomListType,
-//  uSkinVirtualListType,
-  uSkinListViewType,
+  uSkinCustomListType,
+  uSkinVirtualListType,
+  uSkinListBoxType,
   uSkinLabelType,
   uSkinItemDesignerPanelType,
+
+  {$IFDEF FMX}
+  uSkinFireMonkeyItemDesignerPanel,
+  {$ENDIF}
+
+  {$IFDEF OPENSOURCE_VERSION}
+  {$ELSE}
+  uSkinListViewType,
+  {$ENDIF}
+
 //  uSkinControlGestureManager,
 //  uSkinScrollControlType,
   uDrawPictureParam;
@@ -153,6 +171,36 @@ type
   TVirtualChartSeriesDataItem=class(TRealSkinItem)
   public
     FValue:Double;
+  protected
+    /// <summary>
+    ///   <para>
+    ///     复制
+    ///   </para>
+    ///   <para>
+    ///     Copy
+    ///   </para>
+    /// </summary>
+    procedure AssignTo(Dest: TPersistent); override;
+
+    /// <summary>
+    ///   <para>
+    ///     从文档节点中加载
+    ///   </para>
+    ///   <para>
+    ///     Load from document node
+    ///   </para>
+    /// </summary>
+    function LoadFromDocNode(ADocNode:TBTNode20_Class):Boolean;override;
+
+    /// <summary>
+    ///   <para>
+    ///     保存到文档节点
+    ///   </para>
+    ///   <para>
+    ///     Save to document node
+    ///   </para>
+    /// </summary>
+    function SaveToDocNode(ADocNode:TBTNode20_Class):Boolean;override;
   public
     FDrawPercent:Double;
     FDrawPathActions:TPathActionCollection;
@@ -181,17 +229,21 @@ type
   public
     //判断鼠标是否在Item里面
     function PtInItem(APoint:TPointF):Boolean;override;
+  private
+    procedure SetValue(const AValue: Double);
   public
     constructor Create;override;
     destructor Destroy;override;
   published
-    property Value:Double read FValue write FValue;
+    //数据值
+    property Value:Double read FValue write SetValue;
   end;
   TVirtualChartSeriesDataItems=class(TSkinItems)
   private
     function GetItem(Index: Integer): TVirtualChartSeriesDataItem;
     procedure SetItem(Index: Integer; const Value: TVirtualChartSeriesDataItem);
   protected
+//    function GetSkinItemClass:TBaseSkinItemClass;override;
 //    function CreateBinaryObject(const AClassName:String=''):TInterfacedPersistent;override;
 //    procedure InitSkinItemClass;override;
     function GetSkinItemClass:TBaseSkinItemClass;override;
@@ -220,6 +272,8 @@ type
     procedure DoItemPropChange(Sender:TObject);
     procedure SetDataItems(const Value: TVirtualChartSeriesDataItems);
     function CustomPaint(ACanvas:TDrawCanvas;ASkinMaterial:TSkinControlMaterial;const ADrawRect:TRectF;APaintData:TPaintData):Boolean;virtual;
+    procedure SetCaption(const Value: String);
+    procedure SetChartType(const Value: TSkinChartType);
   public
     constructor Create(Collection: TCollection); override;
     destructor Destroy; override;
@@ -231,9 +285,9 @@ type
 
   published
     //图表项的名称,比如统计是的金额还是数量
-    property Caption:String read FCaption write FCaption;
+    property Caption:String read FCaption write SetCaption;
     //图标类型
-    property ChartType:TSkinChartType read FChartType write FChartType;
+    property ChartType:TSkinChartType read FChartType write SetChartType;
     //FDataFieldName:String;
     //数据列表，数据放Item.Json中即可
     property DataItems:TVirtualChartSeriesDataItems read FDataItems write SetDataItems;
@@ -259,6 +313,8 @@ type
     FPieSeriesCount:Integer;
     FBarSeriesCount:Integer;
 
+    procedure DoChange;
+
     constructor Create(ItemClass: TCollectionItemClass;ASkinVirtualChartIntf:ISkinVirtualChart);
     //获取最大的值,用来计算柱状图的百分比
     procedure CalcMinMaxValueAndStep;
@@ -282,11 +338,20 @@ type
     function GetPathDrawRect(ADrawRect:TRectF):TRectF;virtual;
     //生成绘制的Path列表
     procedure GenerateDrawPathList(APathDrawRect:TRectF);virtual;abstract;
+    //获取这个数据项的颜色
     function GetDataItemColor(ADataItem:TVirtualChartSeriesDataItem):TDelphiColor;virtual;
     //绘制坐标轴
-    procedure PaintAxis(ACanvas:TDrawCanvas;ASkinMaterial:TSkinControlMaterial;const ADrawRect:TRectF;APaintData:TPaintData;const APathDrawRect:TRectF);
+    procedure PaintAxis(ACanvas:TDrawCanvas;ASkinMaterial:TSkinControlMaterial;
+                        const ADrawRect:TRectF;
+                        APaintData:TPaintData;
+                        const APathDrawRect:TRectF);
     //绘制
-    function CustomPaint(ACanvas:TDrawCanvas;ASkinMaterial:TSkinControlMaterial;const ADrawRect:TRectF;APaintData:TPaintData;const APathDrawRect:TRectF):Boolean;virtual;
+    function CustomPaint(ACanvas:TDrawCanvas;
+                          ASkinMaterial:TSkinControlMaterial;
+                          const ADrawRect:TRectF;
+                          APaintData:TPaintData;
+                          const APathDrawRect:TRectF):Boolean;virtual;
+  public
     constructor Create(AVirtualChartSeries:TVirtualChartSeries);virtual;
   end;
 
@@ -294,9 +359,12 @@ type
   TVirtualChartSeriesBarDrawer=class(TVirtualChartSeriesDrawer)
   public
     procedure GenerateDrawPathList(APathDrawRect:TRectF);override;
-//    function GetDataItemColor(ADataItem:TVirtualChartSeriesDataItem):TDelphiColor;override;
     //绘制Y轴分隔线，X轴刻度值
-    function CustomPaint(ACanvas:TDrawCanvas;ASkinMaterial:TSkinControlMaterial;const ADrawRect:TRectF;APaintData:TPaintData;const APathDrawRect:TRectF):Boolean;override;
+    function CustomPaint(ACanvas:TDrawCanvas;
+                          ASkinMaterial:TSkinControlMaterial;
+                          const ADrawRect:TRectF;
+                          APaintData:TPaintData;
+                          const APathDrawRect:TRectF):Boolean;override;
   end;
 
   //线状图生成路径
@@ -318,6 +386,11 @@ type
     FInnerRadius:Double;
     //圆心
     FCircleCenterPoint:TPointF;
+
+    procedure DoLegendListViewPrepareDrawItem(Sender: TObject; ACanvas: TDrawCanvas;
+      AItemDesignerPanel: {$IFDEF FMX}TSkinFMXItemDesignerPanel{$ENDIF}{$IFDEF VCL}TSkinItemDesignerPanel{$ENDIF}; AItem: TSkinItem;
+      AItemDrawRect: TRect);
+
     //获取Path的绘制区域
     function GetPathDrawRect(ADrawRect:TRectF):TRectF;override;
     procedure GenerateDrawPathList(APathDrawRect:TRectF);override;
@@ -354,11 +427,11 @@ type
 //    procedure SetXAxis(const Value: TVirtualChartAxis);
 //    procedure SetYAxis(const Value: TVirtualChartAxis);
     procedure SetSeriesList(const Value: TVirtualChartSeriesList);
-    function GetXAxisItems: TSkinListViewItems;
-    function GetYAxisItems: TSkinListViewItems;
-    procedure SetXAxisItems(const Value: TSkinListViewItems);
+    function GetAxisItems: TSkinListBoxItems;
+    function GetYAxisItems: TSkinListBoxItems;
+    procedure SetAxisItems(const Value: TSkinListBoxItems);
     procedure SetXAxisType(const Value: TSkinChartAxisType);
-    procedure SetYAxisItems(const Value: TSkinListViewItems);
+    procedure SetYAxisItems(const Value: TSkinListBoxItems);
     procedure SetYAxisType(const Value: TSkinChartAxisType);
 
     //X轴类型,默认是分类
@@ -372,15 +445,22 @@ type
     constructor Create(ASkinControl:TControl);override;
     destructor Destroy;override;
   public
+    {$IFDEF OPENSOURCE_VERSION}
+    FLegendSkinListView:TSkinListBox;
+    {$ELSE}
     FLegendSkinListView:TSkinListView;
-    FXAxisSkinListView:TSkinListView;
-    FYAxisSkinListView:TSkinListView;
+    {$ENDIF}
+    FXAxisSkinListBox:TSkinListBox;
+    FYAxisSkinListBox:TSkinListBox;
 
 //    FXAxis: TVirtualChartAxis;
 //    FYAxis: TVirtualChartAxis;
 
 
     FSeriesList: TVirtualChartSeriesList;
+
+    procedure BeginUpdate;override;
+    procedure EndUpdate;override;
   public
     //饼图提示ListView的设计面板样式
     //默认的
@@ -416,11 +496,11 @@ type
 //    //提示窗体的样式
 //    property TooltipItemStyle:String read FTooltipItemStyle write FTooltipItemStyle;
 
-    property YAxisItems:TSkinListViewItems read GetYAxisItems write SetYAxisItems;
+    property YAxisItems:TSkinListBoxItems read GetYAxisItems write SetYAxisItems;
 
   published
     //X轴刻度列表
-    property XAxisItems:TSkinListViewItems read GetXAxisItems write SetXAxisItems;
+    property AxisItems:TSkinListBoxItems read GetAxisItems write SetAxisItems;
 
     //图表项列表
     property SeriesList:TVirtualChartSeriesList read FSeriesList write SetSeriesList;
@@ -499,16 +579,23 @@ type
     FBarAxisLineParam: TDrawLineParam;
     FDrawAxisCaptionParam: TDrawTextParam;
     FBarSizePercent: Double;
-    FPieSizePercent: Double;
+    FPieRadiusPercent: Double;
     FPieColorParam: TDrawPathParam;
     FPieInnerSizePercent: Double;
     FLineColorParam: TDrawLineParam;
     FLineDotParam: TDrawPathParam;
     FLineDotRadius: Double;
-    FPieLegendListViewVisible: Boolean;
+    FSeriesLegendListViewVisible: Boolean;
     FPieInfoVisible: Boolean;
     FPieInfoCaptionParam: TDrawTextParam;
     FBarsStackType: TBarsStackType;
+
+    FYAxisCaptionWidth: Double;
+    FXAxisCaptionHeight: Double;
+    FMarginsLeft: Double;
+    FMarginsTop: Double;
+    FMarginsRight: Double;
+    FMarginsBottom: Double;
     procedure SetBarColorParam(const Value: TDrawPathParam);
     procedure SetBarAxisLineParam(const Value: TDrawLineParam);
     procedure SetBarSizePercent(const Value: Double);
@@ -520,55 +607,68 @@ type
     procedure SetLineDotParam(const Value: TDrawPathParam);
     procedure SetPieInfoCaptionParam(const Value: TDrawTextParam);
     procedure SetBarsStackType(const Value: TBarsStackType);
+    procedure SetPieInfoVisible(const Value: Boolean);
+    procedure SetSeriesLegendListViewVisible(const Value: Boolean);
   public
     //多个柱状图、线状图，和饼图扇形的颜色数组
     FSeriesColorArray:Array of TDelphiColor;
     constructor Create(AOwner:TComponent);override;
     destructor Destroy;override;
-  public
-    FMarginsLeft:Double;
-    FMarginsTop:Double;
-    FMarginsRight:Double;
-    FMarginsBottom:Double;
 
-    //纵坐标刻度标题的宽度
-    FYAxisCaptionWidth:Double;
-    //横坐标刻度标题的高度
-    FYAxisCaptionHeight:Double;
 
-    //多个柱子的时候的排列方式
-    property BarsStackType: TBarsStackType read FBarsStackType write SetBarsStackType;
-
-    //柱子宽度的百分比
-    property BarSizePercent: Double read FBarSizePercent write SetBarSizePercent;
     //柱子的路径绘制参数
     property BarColorParam: TDrawPathParam read FBarColorParam write SetBarColorParam;
+
+
+    property LineDotParam: TDrawPathParam read FLineDotParam write SetLineDotParam;
+    property LineDotRadius:Double read FLineDotRadius write FLineDotRadius;
+    //线状图
+    property LineColorParam: TDrawLineParam read FLineColorParam write SetLineColorParam;
+
+
+    //饼图扇形的路径绘制参数
+    property PieColorParam: TDrawPathParam read FPieColorParam write SetPieColorParam;
+    //饼图说明的标题
+    property PieInfoCaptionParam:TDrawTextParam read FPieInfoCaptionParam write SetPieInfoCaptionParam;
+
 
     //坐标线的颜色
     property BarAxisLineParam:TDrawLineParam read FBarAxisLineParam write SetBarAxisLineParam;
 //    //坐标轴刻度线的位置
 //    property BarXAxisMarkPosition:TAxisMarkPosition read FBarXAxisMarkPosition write SetBarXAxisMarkPosition;
 
-  public
-    //饼图半径占控件的百分比
-    property PieRadiusPercent: Double read FPieSizePercent write SetPieRadiusPercent;
-    property PieInnerRadiusPercent: Double read FPieInnerSizePercent write SetPieInnerRadiusPercent;
-    //饼图扇形的路径绘制参数
-    property PieColorParam: TDrawPathParam read FPieColorParam write SetPieColorParam;
-    //饼图介绍的ListView是否显示
-    property PieLegendListViewVisible:Boolean read FPieLegendListViewVisible write FPieLegendListViewVisible;
-    //饼图说明是否需要显示
-    property PieInfoVisible:Boolean read FPieInfoVisible write FPieInfoVisible;
-    //饼图说明的标题
-    property PieInfoCaptionParam:TDrawTextParam read FPieInfoCaptionParam write SetPieInfoCaptionParam;
-  public
-    //线状图
-    property LineColorParam: TDrawLineParam read FLineColorParam write SetLineColorParam;
-    property LineDotParam: TDrawPathParam read FLineDotParam write SetLineDotParam;
-    property LineDotRadius:Double read FLineDotRadius write FLineDotRadius;
-  public
     //坐标刻度标题的文本绘制参数
     property DrawAxisCaptionParam:TDrawTextParam read FDrawAxisCaptionParam write SetDrawAxisCaptionParam;
+
+
+  published
+    property MarginsLeft:Double read FMarginsLeft write FMarginsLeft;
+    property MarginsTop:Double read FMarginsTop write FMarginsTop;
+    property MarginsRight:Double read FMarginsRight write FMarginsRight;
+    property MarginsBottom:Double read FMarginsBottom write FMarginsBottom;
+
+    //纵坐标刻度标题的宽度
+    property YAxisCaptionWidth:Double read FYAxisCaptionWidth write FYAxisCaptionWidth;
+    //横坐标刻度标题的高度
+    property XAxisCaptionHeight:Double read FXAxisCaptionHeight write FXAxisCaptionHeight;
+
+  published
+    //多个柱子的时候的排列方式
+    property BarsStackType: TBarsStackType read FBarsStackType write SetBarsStackType;
+
+    //柱子宽度的百分比
+    property BarSizePercent: Double read FBarSizePercent write SetBarSizePercent;
+
+  published
+    //饼图半径占控件的百分比
+    property PieRadiusPercent: Double read FPieRadiusPercent write SetPieRadiusPercent;
+    //饼图内部空心圆的半径百分比
+    property PieInnerRadiusPercent: Double read FPieInnerSizePercent write SetPieInnerRadiusPercent;
+    //饼图说明是否需要显示
+    property PieInfoVisible:Boolean read FPieInfoVisible write SetPieInfoVisible;
+
+    //饼图介绍的ListView是否显示
+    property SeriesLegendListViewVisible:Boolean read FSeriesLegendListViewVisible write SetSeriesLegendListViewVisible;
   end;
 
 
@@ -614,6 +714,8 @@ type
   protected
     //获取控件属性类
     function GetPropertiesClassType:TPropertiesClassType;override;
+    //皮肤素材更改通知事件
+    procedure DoCustomSkinMaterialChange(Sender: TObject);override;
   public
     function SelfOwnMaterialToDefault:TSkinVirtualChartDefaultMaterial;
     function CurrentUseMaterialToDefault:TSkinVirtualChartDefaultMaterial;
@@ -661,6 +763,13 @@ implementation
 { TVirtualChartProperties }
 
 
+procedure TVirtualChartProperties.BeginUpdate;
+begin
+  inherited;
+  Self.FXAxisSkinListBox.Prop.Items.BeginUpdate;
+  Self.FYAxisSkinListBox.Prop.Items.BeginUpdate;
+end;
+
 constructor TVirtualChartProperties.Create(ASkinControl:TControl);
 begin
   inherited Create(ASkinControl);
@@ -684,33 +793,43 @@ begin
 
 
 
-    //图表提示的ListView
-    FLegendSkinListView:=TSkinListView.Create(nil);
-    FLegendSkinListView.Parent:=TParentControl(Self.FSkinControl);
-    FLegendSkinListView.Visible:=False;
-    {$IFDEF FMX}
-    FLegendSkinListView.Stored:=False;
+    {$IFDEF OPENSOURCE_VERSION}
+      //图表提示的ListView
+      FLegendSkinListView:=TSkinListBox.Create(nil);
+    {$ELSE}
+      //图表提示的ListView
+      FLegendSkinListView:=TSkinListView.Create(nil);
     {$ENDIF}
-    FLegendSkinListView.Prop.ListLayoutsManager.SkinListIntf:=nil;
-    FreeAndNil(FLegendSkinListView.Properties.FItems);
+      FLegendSkinListView.Parent:=TParentControl(Self.FSkinControl);
+      FLegendSkinListView.Visible:=False;
+      {$IFDEF FMX}
+      FLegendSkinListView.Stored:=False;
+      FLegendSkinListView.Locked:=True;
+      {$ENDIF}
+      {$IFDEF VCL}
+      FLegendSkinListView.Material.IsTransparent:=True;
+      FLegendSkinListView.Material.BackColor.IsFill:=False;
+      {$ENDIF}
+      FLegendSkinListView.Prop.ListLayoutsManager.SkinListIntf:=nil;
+      FreeAndNil(FLegendSkinListView.Properties.FItems);
 
 
     //X轴
-    FXAxisSkinListView:=TSkinListView.Create(nil);
-    FXAxisSkinListView.Parent:=TParentControl(Self.FSkinControl);
-    FXAxisSkinListView.Visible:=False;
+    FXAxisSkinListBox:=TSkinListBox.Create(nil);
+    FXAxisSkinListBox.Parent:=TParentControl(Self.FSkinControl);
+    FXAxisSkinListBox.Visible:=False;
     {$IFDEF FMX}
-    FXAxisSkinListView.Stored:=False;
+    FXAxisSkinListBox.Stored:=False;
     {$ENDIF}
 
 
 
     //Y轴
-    FYAxisSkinListView:=TSkinListView.Create(nil);
-    FYAxisSkinListView.Parent:=TParentControl(Self.FSkinControl);
-    FYAxisSkinListView.Visible:=False;
+    FYAxisSkinListBox:=TSkinListBox.Create(nil);
+    FYAxisSkinListBox.Parent:=TParentControl(Self.FSkinControl);
+    FYAxisSkinListBox.Visible:=False;
     {$IFDEF FMX}
-    FYAxisSkinListView.Stored:=False;
+    FYAxisSkinListBox.Stored:=False;
     {$ENDIF}
 
 
@@ -727,6 +846,13 @@ begin
     FLegendItemDesignerPanel:=TSkinItemDesignerPanel.Create(nil);
     FLegendItemDesignerPanel.SkinControlType;
     FLegendItemDesignerPanel.SelfOwnMaterial;
+    {$IFDEF FMX}
+    FLegendItemDesignerPanel.Stored:=False;
+    {$ENDIF}
+    {$IFDEF VCL}
+    FLegendItemDesignerPanel.Material.IsTransparent:=True;
+    FLegendItemDesignerPanel.Material.BackColor.IsFill:=False;
+    {$ENDIF}
 //    FLegendItemDesignerPanel.Material.IsTransparent:=True;
 //    FLegendItemDesignerPanel.Material.BackColor.FillColor.Color:=WhiteColor;
 //    FLegendItemDesignerPanel.Material.BackColor.ShadowSize:=8;
@@ -840,6 +966,7 @@ begin
       {$ENDIF}
       {$IFDEF FMX}
       FTooltipItemDesignerPanel.Material.IsTransparent:=False;
+      FTooltipItemDesignerPanel.Stored:=False;
       {$ENDIF}
 
       FTooltipItemDesignerPanel.Material.BackColor.IsFill:=True;
@@ -848,8 +975,8 @@ begin
       FTooltipItemDesignerPanel.Material.BackColor.IsRound:=True;
 
       FTooltipItemDesignerPanel.Material.BackColor.BorderWidth:=1;
-      FTooltipItemDesignerPanel.Parent:=TParentControl(Self.FSkinControl);
-      FTooltipItemDesignerPanel.Visible:=False;
+//      FTooltipItemDesignerPanel.Parent:=TParentControl(Self.FSkinControl);
+//      FTooltipItemDesignerPanel.Visible:=False;
 
   //    FTooltipItemDesignerPanel.Padding.SetBounds(Ceil(FTooltipItemDesignerPanel.Material.BackColor.ShadowSize),
   //                                    Ceil(FTooltipItemDesignerPanel.Material.BackColor.ShadowSize),
@@ -877,12 +1004,13 @@ begin
       FTooltipSeriesCaptionLabel.Material.BackColor.IsFill:=False;
   //    FTooltipSeriesCaptionLabel.AlignWithMargins:=True;
   //    FTooltipSeriesCaptionLabel.Margins.SetBounds(5,5,5,5);
-      FTooltipSeriesCaptionLabel.Material.DrawCaptionParam.FontSize:=10;
       {$IFDEF VCL}
+      FTooltipSeriesCaptionLabel.Material.DrawCaptionParam.FontSize:=8;
       FTooltipSeriesCaptionLabel.Anchors:=[akLeft,akRight];
       FTooltipSeriesCaptionLabel.SetBounds(10,10,FTooltipItemDesignerPanel.Width-10-10,20);
       {$ENDIF}
       {$IFDEF FMX}
+      FTooltipSeriesCaptionLabel.Material.DrawCaptionParam.FontSize:=10;
       FTooltipSeriesCaptionLabel.Anchors:=[TAnchorKind.akLeft,TAnchorKind.akRight];
       FTooltipSeriesCaptionLabel.SetBounds(5,5,FTooltipItemDesignerPanel.Width-5-5,20);
       {$ENDIF}
@@ -906,7 +1034,7 @@ begin
       FTooltipItemColorPanel.Material.BackColor.RoundWidth:=-1;
       FTooltipItemColorPanel.Material.BackColor.RoundHeight:=-1;
       FTooltipItemColorPanel.Material.BackColor.Color:=RedColor;
-      FTooltipItemColorPanel.Material.BackColor.ShadowSize:=3;
+//      FTooltipItemColorPanel.Material.BackColor.ShadowSize:=3;
   //    FTooltipItemColorPanel.Material.BackColor.DrawRectSetting.Enabled:=True;
   //    FTooltipItemColorPanel.Material.BackColor.DrawRectSetting.SizeType:=dpstPixel;
   //    FTooltipItemColorPanel.Material.BackColor.DrawRectSetting.Height:=16;
@@ -937,12 +1065,13 @@ begin
       FTooltipCategoryPanel.Material.BackColor.IsFill:=False;
   //    FTooltipCategoryPanel.AlignWithMargins:=True;
   //    FTooltipCategoryPanel.Margins.SetBounds(5,5,5,5);
-      FTooltipCategoryPanel.Material.DrawCaptionParam.FontSize:=10;
       FTooltipCategoryPanel.Material.DrawCaptionParam.FontVertAlign:=TFontVertAlign.fvaCenter;
       {$IFDEF VCL}
+      FTooltipCategoryPanel.Material.DrawCaptionParam.FontSize:=8;
       FTooltipCategoryPanel.Anchors:=[akLeft,akRight];
       {$ENDIF}
       {$IFDEF FMX}
+      FTooltipCategoryPanel.Material.DrawCaptionParam.FontSize:=10;
       FTooltipCategoryPanel.Anchors:=[TAnchorKind.akLeft,TAnchorKind.akRight];
       {$ENDIF}
       FTooltipCategoryPanel.SetBounds(FTooltipItemColorPanel.Left+FTooltipItemColorPanel.Width+5,
@@ -965,16 +1094,20 @@ begin
       FTooltipItemValuePanel.Material.BackColor.IsFill:=False;
   //    FTooltipItemValuePanel.AlignWithMargins:=True;
   //    FTooltipItemValuePanel.Margins.SetBounds(5,5,5,5);
-      FTooltipItemValuePanel.Material.DrawCaptionParam.FontSize:=10;
       FTooltipItemValuePanel.Material.DrawCaptionParam.FontHorzAlign:=TFontHorzAlign.fhaRight;
       FTooltipItemValuePanel.Material.DrawCaptionParam.FontVertAlign:=TFontVertAlign.fvaCenter;
       {$IFDEF VCL}
+      FTooltipItemValuePanel.Material.DrawCaptionParam.FontSize:=8;
       FTooltipItemValuePanel.Anchors:=[akLeft,akRight];
       {$ENDIF}
       {$IFDEF FMX}
+      FTooltipItemValuePanel.Material.DrawCaptionParam.FontSize:=10;
       FTooltipItemValuePanel.Anchors:=[TAnchorKind.akLeft,TAnchorKind.akRight];
       {$ENDIF}
-      FTooltipItemValuePanel.SetBounds(FTooltipItemColorPanel.Left+FTooltipItemColorPanel.Width+5,FTooltipItemColorPanel.Top,FTooltipSeriesCaptionLabel.Width-FTooltipItemColorPanel.Width-5,24);
+      FTooltipItemValuePanel.SetBounds(FTooltipItemColorPanel.Left+FTooltipItemColorPanel.Width+5,
+                                        FTooltipItemColorPanel.Top,
+                                        FTooltipSeriesCaptionLabel.Width-FTooltipItemColorPanel.Width-5,
+                                        24);
   //    FTooltipItemValuePanel.Prop.AutoSize:=True;
 
 
@@ -989,15 +1122,18 @@ begin
   FreeAndNil(FTooltipItemDesignerPanel);
   FreeAndNil(FLegendItemDesignerPanel);
 
-
+  {$IFDEF OPENSOURCE_VERSION}
+  {$ELSE}
   FLegendSkinListView.Properties.FItems:=nil;
   FreeAndNil(FLegendSkinListView);
+  {$ENDIF}
 
-//  FXAxisSkinListView.Properties.FItems:=nil;
-  FreeAndNil(FXAxisSkinListView);
 
-//  FYAxisSkinListView.Properties.FItems:=nil;
-  FreeAndNil(FYAxisSkinListView);
+//  FXAxisSkinListBox.Properties.FItems:=nil;
+  FreeAndNil(FXAxisSkinListBox);
+
+//  FYAxisSkinListBox.Properties.FItems:=nil;
+  FreeAndNil(FYAxisSkinListBox);
 
 
 
@@ -1013,7 +1149,9 @@ end;
 
 procedure TVirtualChartProperties.DoLegendListViewMouseOverItemChange(Sender: TObject);
 begin
-    //提示Item鼠标停靠状态改变的时候,相应的扇形也鼠标停靠
+  {$IFDEF OPENSOURCE_VERSION}
+  {$ELSE}
+  //提示Item鼠标停靠状态改变的时候,相应的扇形也鼠标停靠
   if Self.FLegendSkinListView.Prop.MouseOverItem<>nil then
   begin
     Self.FSeriesList[0].FListLayoutsManager.MouseOverItem:=Self.FSeriesList[0].FListLayoutsManager.GetVisibleItem(Self.FLegendSkinListView.Prop.MouseOverItem.Index);
@@ -1022,8 +1160,9 @@ begin
   begin
     Self.FSeriesList[0].FListLayoutsManager.MouseOverItem:=nil;
   end;
-  
+
   //if  then
+  {$ENDIF}
 
 end;
 
@@ -1057,8 +1196,8 @@ begin
         //ATooltipDataItem.Caption:=ASeries.Caption;
         Self.FTooltipSeriesCaptionLabel.Caption:=ASeries.Caption;
         //分类名称
-        //ATooltipDataItem.Detail:=Self.XAxisItems[ATooltipDataItem.Index].Caption;
-//        Self.FTooltipCategoryPanel.Caption:=Self.XAxisItems[ATooltipDataItem.Index].Caption;
+        //ATooltipDataItem.Detail:=Self.AxisItems[ATooltipDataItem.Index].Caption;
+//        Self.FTooltipCategoryPanel.Caption:=Self.AxisItems[ATooltipDataItem.Index].Caption;
         Self.FTooltipCategoryPanel.Caption:=ATooltipDataItem.Caption;
         //值
         //ATooltipDataItem.Detail1:=FloatToStr(ATooltipDataItem.Value);
@@ -1072,7 +1211,16 @@ begin
         Self.FTooltipItemDesignerPanel.Material.BackColor.BorderColor.Color:=ASeries.FDrawer.GetDataItemColor(FLastTooltipDataItem);
 
         //计算宽度
-        FTooltipItemDesignerPanel.Width:=Ceil(10+24+5+GetStringWidth(Self.FTooltipCategoryPanel.Caption,10)+10+GetStringWidth(FloatToStr(ATooltipDataItem.Value),10)+10+5);
+        FTooltipItemDesignerPanel.Width:=Ceil(10+24+5
+                                            +GetStringWidth(Self.FTooltipCategoryPanel.Caption,Self.FTooltipCategoryPanel.CurrentUseMaterialToDefault.DrawCaptionParam.FontSize)
+                                            +10
+                                            +GetStringWidth(FloatToStr(ATooltipDataItem.Value),FTooltipItemValuePanel.CurrentUseMaterialToDefault.DrawCaptionParam.FontSize)
+                                            +10+5);
+
+        FTooltipItemValuePanel.SetBounds(FTooltipItemColorPanel.Left+FTooltipItemColorPanel.Width+5,
+                                          FTooltipItemColorPanel.Top,
+                                          FTooltipItemDesignerPanel.Width-FTooltipItemValuePanel.Left-10,
+                                          24);
       end;
 
 
@@ -1116,6 +1264,18 @@ begin
 
 end;
 
+procedure TVirtualChartProperties.EndUpdate;
+begin
+  Self.FXAxisSkinListBox.Prop.Items.EndUpdate;
+  Self.FYAxisSkinListBox.Prop.Items.EndUpdate;
+  if Self.FIsChanging=1 then
+  begin
+    //需要重新生成数据项的路径
+    Self.FSeriesList.FIsGeneratedDrawPathList:=False;
+  end;
+  inherited;
+end;
+
 //procedure TVirtualChartProperties.GenerateDrawPathList;
 //var
 //  I: Integer;
@@ -1138,14 +1298,14 @@ begin
   Result:='SkinVirtualChart';
 end;
 
-function TVirtualChartProperties.GetXAxisItems: TSkinListViewItems;
+function TVirtualChartProperties.GetAxisItems: TSkinListBoxItems;
 begin
-  Result:=FXAxisSkinListView.Prop.Items;
+  Result:=FXAxisSkinListBox.Prop.Items;
 end;
 
-function TVirtualChartProperties.GetYAxisItems: TSkinListViewItems;
+function TVirtualChartProperties.GetYAxisItems: TSkinListBoxItems;
 begin
-  Result:=FYAxisSkinListView.Prop.Items;
+  Result:=FYAxisSkinListBox.Prop.Items;
 end;
 
 //function TVirtualChartProperties.GetInteractiveItem: TSkinItem;
@@ -1219,9 +1379,9 @@ begin
   FSeriesList.Assign(Value);
 end;
 
-procedure TVirtualChartProperties.SetXAxisItems(const Value: TSkinListViewItems);
+procedure TVirtualChartProperties.SetAxisItems(const Value: TSkinListBoxItems);
 begin
-  FXAxisSkinListView.Prop.Items:=TSkinListViewItems(Value);
+  FXAxisSkinListBox.Prop.Items:=TSkinListBoxItems(Value);
 end;
 
 procedure TVirtualChartProperties.SetXAxisType(const Value: TSkinChartAxisType);
@@ -1229,9 +1389,9 @@ begin
   FXAxisType:=Value;
 end;
 
-procedure TVirtualChartProperties.SetYAxisItems(const Value: TSkinListViewItems);
+procedure TVirtualChartProperties.SetYAxisItems(const Value: TSkinListBoxItems);
 begin
-  FYAxisSkinListView.Prop.Items:=TSkinListViewItems(Value);
+  FYAxisSkinListBox.Prop.Items:=TSkinListBoxItems(Value);
 
 end;
 
@@ -1325,24 +1485,25 @@ begin
   AMouseOverDataItem:=nil;
   for I := 0 to FSkinVirtualChartIntf.Properties.FSeriesList.Count-1 do
   begin
+    //设置数据项是否鼠标停靠
     FSkinVirtualChartIntf.Properties.FSeriesList[I].FListLayoutsManager.CustomMouseMove(Shift,X,Y);
     if FSkinVirtualChartIntf.Properties.FSeriesList[I].FListLayoutsManager.MouseOverItem<>nil then
     begin
-      AMouseOverDataItem:=TVirtualChartSeriesDataItem(FSkinVirtualChartIntf.Properties.FSeriesList[I].FListLayoutsManager.MouseOverItem.GetObject);
+      AMouseOverDataItem:=TVirtualChartSeriesDataItem(
+        FSkinVirtualChartIntf.Properties.FSeriesList[I].FListLayoutsManager.MouseOverItem.GetObject);
     end;
   end;
 
   if (AMouseOverDataItem<>nil) and Self.FSkinVirtualChartIntf.Properties.ShowTooltip then
   begin
+      //显示数据项提示框
       Self.FSkinVirtualChartIntf.Properties.DoShowTooltip(AMouseOverDataItem,X,Y);
-
   end
   else
   begin
-
+      //隐藏数据项提示框
       if Self.FSkinVirtualChartIntf.Properties.FTooltipItemDesignerPanel<>nil then
       begin
-//        Self.FSkinVirtualChartIntf.Properties.FTooltipItemDesignerPanel.Visible:=False;
         Self.FSkinVirtualChartIntf.Properties.FTooltipItemDesignerPanelVisible:=False;
       end;
 
@@ -1455,7 +1616,13 @@ end;
 procedure TSkinVirtualChartDefaultType.SizeChanged;
 begin
   inherited;
-  FSkinVirtualChartIntf.Properties.FSeriesList.FIsGeneratedDrawPathList:=False;
+
+  if (FSkinVirtualChartIntf<>nil)
+    and (FSkinVirtualChartIntf.Properties<>nil)
+    and (FSkinVirtualChartIntf.Properties.FSeriesList<>nil) then
+  begin
+    FSkinVirtualChartIntf.Properties.FSeriesList.FIsGeneratedDrawPathList:=False;
+  end;
 
 end;
 
@@ -1512,6 +1679,12 @@ end;
 function TSkinVirtualChart.CurrentUseMaterialToDefault:TSkinVirtualChartDefaultMaterial;
 begin
   Result:=TSkinVirtualChartDefaultMaterial(CurrentUseMaterial);
+end;
+
+procedure TSkinVirtualChart.DoCustomSkinMaterialChange(Sender: TObject);
+begin
+  inherited;
+  Self.Prop.FSeriesList.FIsGeneratedDrawPathList:=False;
 end;
 
 function TSkinVirtualChart.GetPropertiesClassType: TPropertiesClassType;
@@ -1598,8 +1771,10 @@ end;
 
 procedure TVirtualChartSeries.DoItemPropChange(Sender: TObject);
 begin
-  TVirtualChartSeriesList(Self.Collection).FSkinVirtualChartIntf.Properties.Invalidate;
+//  TVirtualChartSeriesList(Self.Collection).DoChange;
 
+  //这里只是Item的MouseOver状态改变,不需要重新计算绘制路径
+  TVirtualChartSeriesList(Self.Collection).FSkinVirtualChartIntf.Properties.Invalidate;
 end;
 
 procedure TVirtualChartSeries.GenerateDrawPathList(const ADrawRect:TRectF);
@@ -1613,6 +1788,7 @@ begin
     begin
       if (FDrawer=nil) or not (FDrawer is TVirtualChartSeriesBarDrawer) then
       begin
+        FreeAndNil(FDrawer);
         FDrawer:=TVirtualChartSeriesBarDrawer.Create(Self);
       end;
 
@@ -1621,6 +1797,7 @@ begin
     begin
       if (FDrawer=nil) or not (FDrawer is TVirtualChartSeriesLineDrawer) then
       begin
+        FreeAndNil(FDrawer);
         FDrawer:=TVirtualChartSeriesLineDrawer.Create(Self);
       end;
 
@@ -1629,6 +1806,7 @@ begin
     begin
       if (FDrawer=nil) or not (FDrawer is TVirtualChartSeriesPieDrawer) then
       begin
+        FreeAndNil(FDrawer);
         FDrawer:=TVirtualChartSeriesPieDrawer.Create(Self);
       end;
 
@@ -1678,6 +1856,24 @@ begin
   end;
 end;
 
+procedure TVirtualChartSeries.SetCaption(const Value: String);
+begin
+  if FCaption<>Value then
+  begin
+    FCaption := Value;
+    TVirtualChartSeriesList(Self.Collection).DoChange;
+  end;
+end;
+
+procedure TVirtualChartSeries.SetChartType(const Value: TSkinChartType);
+begin
+  if FChartType<> Value then
+  begin
+    FChartType := Value;
+    TVirtualChartSeriesList(Self.Collection).DoChange;
+  end;
+end;
+
 procedure TVirtualChartSeries.SetDataItems(const Value: TVirtualChartSeriesDataItems);
 begin
   FDataItems.Assign(Value);
@@ -1689,11 +1885,12 @@ begin
     Result := Ln(n)/ln(10.0);
 end;
 
-function standard( cormax:double;  var cormin:double; cornumber:double;var keduwidth:Double;var realmaxmoney: Double;var realminmoney: Double):Boolean;
+function standard( cormax:double;  var cormin:double; var cornumber:Integer;var keduwidth:Double;var realmaxmoney: Double;var realminmoney: Double):Boolean;
 var
          //realmaxmoney,
 //         realminmoney,
-         corstep, tmpstep, tmpnumber, temp, extranumber:double;
+         corstep, tmpstep, temp:double;
+         tmp_cor_number:Integer;
          nummoney:Double;
          text:String;
          I:Integer;
@@ -1799,36 +1996,36 @@ begin
             cormax := Floor(cormax / tmpstep + 1) * tmpstep;
         end;
 
-
-        tmpnumber := (cormax - cormin) / tmpstep;
-//        if (tmpnumber < cornumber) {
-//            extranumber = cornumber - tmpnumber;
-//            tmpnumber = cornumber;
-//            if (extranumber % 2 = 0) {
-//                cormax = cormax + tmpstep * (int) (extranumber / 2);
+        //多出来的刻度,比如我要6个刻度，但是算出来只需要4个，那么多出来的会往底下减，原本从0开始的最小刻度，会变为负数
+        tmp_cor_number := Ceil((cormax - cormin) / tmpstep);
+//        if (tmp_cor_number < cornumber) {
+//            extra_cor_number = cornumber - tmp_cor_number;
+//            tmp_cor_number = cornumber;
+//            if (extra_cor_number % 2 = 0) {
+//                cormax = cormax + tmpstep * (int) (extra_cor_number / 2);
 //            } else {
-//                cormax = cormax + tmpstep * (int) (extranumber / 2 + 1);
+//                cormax = cormax + tmpstep * (int) (extra_cor_number / 2 + 1);
 //            }
-//            cormin = cormin - tmpstep * (int) (extranumber / 2);
+//            cormin = cormin - tmpstep * (int) (extra_cor_number / 2);
 //        }
-        if (tmpnumber < cornumber) then
-        begin
-            extranumber := cornumber - tmpnumber;
-            tmpnumber := cornumber;
-            if ((Floor(extranumber) mod 2) = 0) then
-            begin
-                cormax := cormax + tmpstep * Floor(extranumber / 2);
-            end
-            else
-            begin
-                cormax := cormax + tmpstep * Floor(extranumber / 2 + 1);
-            end;
-            cormin := cormin - tmpstep * Floor(extranumber / 2);
-        end;
+//        if (tmp_cor_number < cornumber) then
+//        begin
+//            extra_cor_number := cornumber - tmp_cor_number;
+//            tmp_cor_number := cornumber;
+//            if ((Floor(extra_cor_number) mod 2) = 0) then
+//            begin
+//                cormax := cormax + tmpstep * Floor(extra_cor_number / 2);
+//            end
+//            else
+//            begin
+//                cormax := cormax + tmpstep * Floor(extra_cor_number / 2 + 1);
+//            end;
+//            cormin := cormin - tmpstep * Floor(extra_cor_number / 2);
+//        end;
 
 
 
-        cornumber := tmpnumber;
+        cornumber := tmp_cor_number;
 
 //        double nummoney = 0;
 //        String text = "";
@@ -1876,6 +2073,7 @@ var
   nummoney:Double;
   ACorMinValue:Double;
   ACorMaxValue:Double;
+  cornumber:Integer;
 begin
   //最小值默认是0
   FMinValue:=0;
@@ -1911,7 +2109,8 @@ begin
 
   ACorMinValue:=FMinValue;
   ACorMaxValue:=FMaxValue;
-  standard(ACorMaxValue,ACorMinValue,6,keduwidth,realmaxmoney,realminmoney);
+  cornumber:=6;
+  standard(ACorMaxValue,ACorMinValue,cornumber,keduwidth,realmaxmoney,realminmoney);
 
 
   //清除坐标系
@@ -1920,7 +2119,7 @@ begin
     Self.FSkinVirtualChartIntf.Properties.YAxisItems.Clear();
 
     nummoney := 0;
-    i := 1;
+    i := 0;//1;
     while nummoney < realmaxmoney do
     begin
       nummoney := keduwidth * i + ACorMinValue;
@@ -1929,7 +2128,8 @@ begin
       I:=I+1;
     end;
 
-    FMinValue:=keduwidth * 1 + ACorMinValue;
+//    FMinValue:=keduwidth * 1 + ACorMinValue;
+    FMinValue:=ACorMinValue;
     FMaxValue:=nummoney;
 
 
@@ -1946,6 +2146,13 @@ constructor TVirtualChartSeriesList.Create(ItemClass: TCollectionItemClass;
 begin
   Inherited Create(ItemClass);
   FSkinVirtualChartIntf:=ASkinVirtualChartIntf;
+end;
+
+procedure TVirtualChartSeriesList.DoChange;
+begin
+  FIsGeneratedDrawPathList:=False;
+  Self.FSkinVirtualChartIntf.Properties.Invalidate;
+
 end;
 
 procedure TVirtualChartSeriesList.GenerateDrawPathList(const ADrawRect: TRectF);
@@ -2182,8 +2389,8 @@ end;
 function TVirtualChartSeriesDrawer.GetPathDrawRect(ADrawRect: TRectF): TRectF;
 var
 //  ADrawRect:TRectF;
-//  AXAxisSkinListView:TSkinListView;
-//  AYAxisSkinListView:TSkinListView;
+//  AXAxisSkinListBox:TSkinListBox;
+//  AYAxisSkinListBox:TSkinListBox;
   ASkinVirtualChartIntf:ISkinVirtualChart;
   ASkinVirtualChartDefaultMaterial:TSkinVirtualChartDefaultMaterial;
 begin
@@ -2194,86 +2401,92 @@ begin
   ASkinVirtualChartIntf:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf;
   Result:=ADrawRect;
 //
-//  AXAxisSkinListView:=ASkinVirtualChartIntf.Properties.FXAxisSkinListView;
-////  AXAxisSkinListView.Visible:=False;
-//  AYAxisSkinListView:=ASkinVirtualChartIntf.Properties.FYAxisSkinListView;
-////  AYAxisSkinListView.Visible:=False;
+//  AXAxisSkinListBox:=ASkinVirtualChartIntf.Properties.FXAxisSkinListBox;
+////  AXAxisSkinListBox.Visible:=False;
+//  AYAxisSkinListBox:=ASkinVirtualChartIntf.Properties.FYAxisSkinListBox;
+////  AYAxisSkinListBox.Visible:=False;
 
 
 //
-//  AXAxisSkinListView.Properties.ListLayoutsManager.SkinListIntf:=ASkinVirtualChartIntf.Properties.XAxisItems;
+//  AXAxisSkinListBox.Properties.ListLayoutsManager.SkinListIntf:=ASkinVirtualChartIntf.Properties.AxisItems;
 //
-//  FreeAndNil(AXAxisSkinListView.Properties.FItems);
-//  AXAxisSkinListView.Properties.FItems:=ASkinVirtualChartIntf.Properties.FXAxis.FItems;
-//
-//
+//  FreeAndNil(AXAxisSkinListBox.Properties.FItems);
+//  AXAxisSkinListBox.Properties.FItems:=ASkinVirtualChartIntf.Properties.FXAxis.FItems;
 //
 //
-//  AYAxisSkinListView.Properties.ListLayoutsManager.SkinListIntf:=ASkinVirtualChartIntf.Properties.FYAxis.FItems;
 //
-//  FreeAndNil(AYAxisSkinListView.Properties.FItems);
-//  AYAxisSkinListView.Properties.FItems:=ASkinVirtualChartIntf.Properties.FYAxis.FItems;
+//
+//  AYAxisSkinListBox.Properties.ListLayoutsManager.SkinListIntf:=ASkinVirtualChartIntf.Properties.FYAxis.FItems;
+//
+//  FreeAndNil(AYAxisSkinListBox.Properties.FItems);
+//  AYAxisSkinListBox.Properties.FItems:=ASkinVirtualChartIntf.Properties.FYAxis.FItems;
 //
 
 
 
 //  //画出纵坐标系
 //  {$IFDEF VCL}
-//  AYAxisSkinListView.AlignWithMargins:=True;
-//  AYAxisSkinListView.Align:=alLeft;
+//  AYAxisSkinListBox.AlignWithMargins:=True;
+//  AYAxisSkinListBox.Align:=alLeft;
 //  {$ENDIF}
 //  {$IFDEF FMX}
-//  AYAxisSkinListView.Align:=TAlignLayout.Left;
+//  AYAxisSkinListBox.Align:=TAlignLayout.Left;
 //  {$ENDIF}
-//  AYAxisSkinListView.Margins.Left:=0;
-//  AYAxisSkinListView.Margins.Top:=100;
-//  AYAxisSkinListView.Margins.Right:=0;
-//  AYAxisSkinListView.Margins.Bottom:=0;
+//  AYAxisSkinListBox.Margins.Left:=0;
+//  AYAxisSkinListBox.Margins.Top:=100;
+//  AYAxisSkinListBox.Margins.Right:=0;
+//  AYAxisSkinListBox.Margins.Bottom:=0;
 //  //水平排列的
-//  AYAxisSkinListView.Prop.ItemWidth:=-2;
-//  if AYAxisSkinListView.Prop.Items.Count>1 then
+//  AYAxisSkinListBox.Prop.ItemWidth:=-2;
+//  if AYAxisSkinListBox.Prop.Items.Count>1 then
 //  begin
-//    AYAxisSkinListView.Prop.ItemHeight:=1/AYAxisSkinListView.Prop.Items.Count;
+//    AYAxisSkinListBox.Prop.ItemHeight:=1/AYAxisSkinListBox.Prop.Items.Count;
 //  end
 //  else
 //  begin
-//    AYAxisSkinListView.Prop.ItemHeight:=1/AYAxisSkinListView.Prop.Items.Count;
+//    AYAxisSkinListBox.Prop.ItemHeight:=1/AYAxisSkinListBox.Prop.Items.Count;
 //  end;
 //
 //
 //  //画出横坐标系
 //  {$IFDEF VCL}
-//  AXAxisSkinListView.AlignWithMargins:=True;
-//  AXAxisSkinListView.Align:=alBottom;
+//  AXAxisSkinListBox.AlignWithMargins:=True;
+//  AXAxisSkinListBox.Align:=alBottom;
 //  {$ENDIF}
 //  {$IFDEF FMX}
-//  AYAxisSkinListView.Align:=TAlignLayout.Bottom;
+//  AYAxisSkinListBox.Align:=TAlignLayout.Bottom;
 //  {$ENDIF}
-//  AXAxisSkinListView.Margins.Left:=100;
-//  AXAxisSkinListView.Margins.Top:=0;
-//  AXAxisSkinListView.Margins.Right:=0;
-//  AXAxisSkinListView.Margins.Bottom:=0;
+//  AXAxisSkinListBox.Margins.Left:=100;
+//  AXAxisSkinListBox.Margins.Top:=0;
+//  AXAxisSkinListBox.Margins.Right:=0;
+//  AXAxisSkinListBox.Margins.Bottom:=0;
 //  //水平排列的
-//  if AXAxisSkinListView.Prop.Items.Count>1 then
+//  if AXAxisSkinListBox.Prop.Items.Count>1 then
 //  begin
-//    AXAxisSkinListView.Prop.ItemCountPerLine:=AXAxisSkinListView.Prop.Items.Count;
+//    AXAxisSkinListBox.Prop.ItemCountPerLine:=AXAxisSkinListBox.Prop.Items.Count;
 //  end
 //  else
 //  begin
-//    AXAxisSkinListView.Prop.ItemCountPerLine:=1;
+//    AXAxisSkinListBox.Prop.ItemCountPerLine:=1;
 //  end;
 
 
-//  Result:=RectF(AYAxisSkinListView.Width,
-//                    AYAxisSkinListView.Margins.Top,
+//  Result:=RectF(AYAxisSkinListBox.Width,
+//                    AYAxisSkinListBox.Margins.Top,
 //                    ASkinVirtualChartIntf.Properties.SkinControl.Width,
-//                    AYAxisSkinListView.Margins.Top+AYAxisSkinListView.Height
+//                    AYAxisSkinListBox.Margins.Top+AYAxisSkinListBox.Height
 //                    );
 
-  Result:=RectF(ASkinVirtualChartDefaultMaterial.FMarginsLeft+ASkinVirtualChartDefaultMaterial.FYAxisCaptionWidth,
+  Result:=RectF(ASkinVirtualChartDefaultMaterial.FMarginsLeft
+                            +ASkinVirtualChartDefaultMaterial.FYAxisCaptionWidth,
                 ASkinVirtualChartDefaultMaterial.FMarginsTop,
-                ASkinVirtualChartIntf.Properties.SkinControl.Width-ASkinVirtualChartDefaultMaterial.FMarginsRight,
-                ASkinVirtualChartIntf.Properties.SkinControl.Height-ASkinVirtualChartDefaultMaterial.FMarginsBottom-ASkinVirtualChartDefaultMaterial.FYAxisCaptionHeight
+
+                ASkinVirtualChartIntf.Properties.SkinControl.Width
+                            -ASkinVirtualChartDefaultMaterial.FMarginsRight,
+
+                ASkinVirtualChartIntf.Properties.SkinControl.Height
+                            -ASkinVirtualChartDefaultMaterial.FMarginsBottom
+                            -ASkinVirtualChartDefaultMaterial.FXAxisCaptionHeight
                 );
 
 end;
@@ -2287,8 +2500,8 @@ var
 //  ADrawRect:TRectF;
   X:Double;
   Y:Double;
-  AXAxisSkinListView:TSkinListView;
-  AYAxisSkinListView:TSkinListView;
+  AXAxisSkinListBox:TSkinListBox;
+  AYAxisSkinListBox:TSkinListBox;
   ASkinVirtualChartIntf:ISkinVirtualChart;
   ACaptionRect:TRectF;
   AItemWidth:Double;
@@ -2310,8 +2523,8 @@ begin
   ASkinVirtualChartDefaultMaterial:=TSkinVirtualChartDefaultMaterial(ASkinMaterial);
   ASkinVirtualChartIntf:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf;
 
-  AXAxisSkinListView:=ASkinVirtualChartIntf.Properties.FXAxisSkinListView;
-  AYAxisSkinListView:=ASkinVirtualChartIntf.Properties.FYAxisSkinListView;
+  AXAxisSkinListBox:=ASkinVirtualChartIntf.Properties.FXAxisSkinListBox;
+  AYAxisSkinListBox:=ASkinVirtualChartIntf.Properties.FYAxisSkinListBox;
 
 
 
@@ -2319,7 +2532,7 @@ begin
   //绘制Y轴的背景线
 
   Y:=APathDrawRect.Top;
-  for I := 0 to AYAxisSkinListView.Prop.Items.Count-1 do
+  for I := 0 to AYAxisSkinListBox.Prop.Items.Count-1 do
   begin
     //画行线
     ACanvas.DrawLine(ASkinVirtualChartDefaultMaterial.FBarAxisLineParam,APathDrawRect.Left,Y,APathDrawRect.Right,Y);
@@ -2331,10 +2544,10 @@ begin
     ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam.StaticFontVertAlign:=fvaCenter;
     //右边要空出一点
     ACaptionRect:=RectF(0,Y-20,APathDrawRect.Left-5,Y+20);
-    ACanvas.DrawText(ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam,AYAxisSkinListView.Prop.Items[I].Caption,ACaptionRect);
+    ACanvas.DrawText(ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam,AYAxisSkinListBox.Prop.Items[I].Caption,ACaptionRect);
 
-//    Y:=Y+AYAxisSkinListView.Prop.ListLayoutsManager.CalcItemHeight(AYAxisSkinListView.Prop.Items[I]);
-    Y:=Y+APathDrawRect.Height / (AYAxisSkinListView.Prop.Items.Count-1);
+//    Y:=Y+AYAxisSkinListBox.Prop.ListLayoutsManager.CalcItemHeight(AYAxisSkinListBox.Prop.Items[I]);
+    Y:=Y+APathDrawRect.Height / (AYAxisSkinListBox.Prop.Items.Count-1);
   end;
 
 
@@ -2345,9 +2558,9 @@ begin
 
   //画X轴的刻度线
   X:=APathDrawRect.Left;
-  AItemWidth:=APathDrawRect.Width / (AXAxisSkinListView.Prop.Items.Count);
+  AItemWidth:=APathDrawRect.Width / (AXAxisSkinListBox.Prop.Items.Count);
   ALastItemCaptionDrawLeft:=0;
-  for I := 0 to AXAxisSkinListView.Prop.Items.Count-1 do
+  for I := 0 to AXAxisSkinListBox.Prop.Items.Count-1 do
   begin
 
 
@@ -2363,8 +2576,8 @@ begin
                       APathDrawRect.Bottom,
                       X,
                       APathDrawRect.Bottom+5);
-
-    if I=AXAxisSkinListView.Prop.Items.Count-1 then
+    //画最后的刻度线
+    if I=AXAxisSkinListBox.Prop.Items.Count-1 then
     begin
       ACanvas.DrawLine(ASkinVirtualChartDefaultMaterial.FBarAxisLineParam,
                         X+AItemWidth,
@@ -2383,23 +2596,23 @@ begin
 
     //上边要空出一点
     //绘制刻度标题
-    AItemCaptionWidth:=GetStringWidth(AXAxisSkinListView.Prop.Items[I].Caption,ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam.FontSize);
+    AItemCaptionWidth:=GetStringWidth(AXAxisSkinListBox.Prop.Items[I].Caption,ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam.FontSize);
 
     //绘制标题前需要判断能不能绘制的下,绘制不下则不绘制
 //    if (X+AItemWidth/2-ALastItemCaptionDrawLeft)>AItemCaptionWidth/2 then
-    if (X-ALastItemCaptionDrawLeft)>AItemCaptionWidth/2 then
+    if ((X-ALastItemCaptionDrawLeft)*2+AItemWidth)>AItemCaptionWidth then
     begin
       ACaptionRect.Left:=X+(AItemWidth-AItemCaptionWidth)/2;
-      ACaptionRect.Top:=APathDrawRect.Bottom+5;
+      ACaptionRect.Top:=APathDrawRect.Bottom+5;//上面空出一点
       ACaptionRect.Right:=ACaptionRect.Left+AItemCaptionWidth;
       ACaptionRect.Bottom:=APathDrawRect.Bottom+5+24;
-      ACanvas.DrawText(ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam,AXAxisSkinListView.Prop.Items[I].Caption,ACaptionRect);
+      ACanvas.DrawText(ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam,AXAxisSkinListBox.Prop.Items[I].Caption,ACaptionRect);
 
       ALastItemCaptionDrawLeft:=ACaptionRect.Right;
 
     end;
 
-//    Y:=Y+AYAxisSkinListView.Prop.ListLayoutsManager.CalcItemHeight(AYAxisSkinListView.Prop.Items[I]);
+//    Y:=Y+AYAxisSkinListBox.Prop.ListLayoutsManager.CalcItemHeight(AYAxisSkinListBox.Prop.Items[I]);
     X:=X+AItemWidth;
 
 
@@ -2415,39 +2628,17 @@ function TVirtualChartSeriesBarDrawer.CustomPaint(ACanvas: TDrawCanvas;
   APaintData: TPaintData;const APathDrawRect:TRectF): Boolean;
 var
   I: Integer;
-var
-//  ADrawRect:TRectF;
-  X:Double;
-  Y:Double;
-  AXAxisSkinListView:TSkinListView;
-  AYAxisSkinListView:TSkinListView;
-  ASkinVirtualChartIntf:ISkinVirtualChart;
-  ACaptionRect:TRectF;
-  AItemWidth:Double;
-var
-  ASkinVirtualChartDefaultMaterial:TSkinVirtualChartDefaultMaterial;
-//var
-//  I:Integer;
-var
   ADataItem:TVirtualChartSeriesDataItem;
   AItemEffectStates:TDPEffectStates;
   AOldColor:TDelphiColor;
-  AItemCaptionWidth:Double;
-  ALastItemCaptionDrawLeft:Double;
-//  AItemPaintData:TPaintData;
-//var
-//  ASkinVirtualChartDefaultMaterial:TSkinVirtualChartDefaultMaterial;
+  ASkinVirtualChartIntf:ISkinVirtualChart;
+  ASkinVirtualChartDefaultMaterial:TSkinVirtualChartDefaultMaterial;
 begin
 
   ASkinVirtualChartDefaultMaterial:=TSkinVirtualChartDefaultMaterial(ASkinMaterial);
   ASkinVirtualChartIntf:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf;
 
-
-
-//  PaintAxis(ACanvas,ASkinMaterial,ADrawRect,APaintData,APathDrawRect);
-
   Inherited;
-
 
 
   ASkinVirtualChartDefaultMaterial:=TSkinVirtualChartDefaultMaterial(ASkinMaterial);
@@ -2458,24 +2649,21 @@ begin
     ADataItem:=Self.FSeries.FDataItems[I];
 
 
-    //给数据项加上状态
+    //获取数据项的状态，是否鼠标停靠
     AItemEffectStates:=Self.FSeries.FListLayoutsManager.ProcessItemDrawEffectStates(ADataItem);
     ASkinVirtualChartDefaultMaterial.FBarColorParam.StaticEffectStates:=AItemEffectStates;
+
+
     AOldColor:=ASkinVirtualChartDefaultMaterial.FBarColorParam.FillColor.FColor;
+    //获取数据项的柱子填充色
     ASkinVirtualChartDefaultMaterial.FBarColorParam.FillColor.FColor:=Self.GetDataItemColor(ADataItem);
 
 
     //处理绘制参数的透明度
-    ASkinVirtualChartDefaultMaterial.FBarColorParam.DrawAlpha:=Ceil(ASkinVirtualChartDefaultMaterial.FBarColorParam.CurrentEffectAlpha*1);
+    ASkinVirtualChartDefaultMaterial.FBarColorParam.DrawAlpha:=
+                  Ceil(ASkinVirtualChartDefaultMaterial.FBarColorParam.CurrentEffectAlpha*1);
 
-//    AItemPaintData:=GlobalNullPaintData;
-//    AItemPaintData.IsDrawInteractiveState:=True;
-//    ProcessParamEffectStates(ASkinVirtualChartDefaultMaterial.FBarColorParam,
-//                                1,
-//                                AItemEffectStates,
-//                                AItemPaintData
-//                                );
-
+    //绘制柱子
     ACanvas.DrawPath(ASkinVirtualChartDefaultMaterial.FBarColorParam,APathDrawRect,ADataItem.FDrawPathActions);
 
     ASkinVirtualChartDefaultMaterial.FBarColorParam.FillColor.FColor:=AOldColor;
@@ -2489,7 +2677,8 @@ var
   ADataItemRect:TRectF;
   ADataItemPathRect:TRectF;
   AVirtualChartSeriesList:TVirtualChartSeriesList;
-  AXAxisSkinListView:TSkinListView;
+  AXAxisSkinListBox:TSkinListBox;
+  ALegendSkinListView:TSkinVirtualList;
   AAxisItemWidth:Double;
   ADataItemLeft:Double;
   ADataItemWidth:Double;
@@ -2506,9 +2695,18 @@ begin
 
   AVirtualChartSeriesList:=TVirtualChartSeriesList(Self.FSeries.Collection);
 
-  AXAxisSkinListView:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FXAxisSkinListView;
+  AXAxisSkinListBox:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FXAxisSkinListBox;
   ASkinVirtualChartDefaultMaterial:=TSkinVirtualChartDefaultMaterial(TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FSkinControlIntf.GetCurrentUseMaterial);
 
+
+  ALegendSkinListView:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FLegendSkinListView;
+
+  if ALegendSkinListView<>nil then
+  begin
+      ALegendSkinListView.Visible:=False;
+      ALegendSkinListView.OnMouseOverItemChange:=nil;
+      ALegendSkinListView.OnPrepareDrawItem:=nil;
+  end;
 
   //取出柱子宽度的百分比
   ABarSizePercent:=0.5;
@@ -2540,8 +2738,8 @@ begin
 
       //横排的
       //生成Path列表
-      //AAxisItemWidth:=AXAxisSkinListView.Prop.CalcItemWidth(AXAxisSkinListView.Prop.Items[I]);
-      AAxisItemWidth:=APathDrawRect.Width / AXAxisSkinListView.Prop.Items.Count;
+      //AAxisItemWidth:=AXAxisSkinListBox.Prop.CalcItemWidth(AXAxisSkinListBox.Prop.Items[I]);
+      AAxisItemWidth:=APathDrawRect.Width / AXAxisSkinListBox.Prop.Items.Count;
 
 
 
@@ -2648,6 +2846,28 @@ end;
 
 { TVirtualChartSeriesDataItem }
 
+procedure TVirtualChartSeriesDataItem.AssignTo(Dest: TPersistent);
+var
+  DestObject:TVirtualChartSeriesDataItem;
+begin
+  if Dest is TVirtualChartSeriesDataItem then
+  begin
+
+    DestObject:=Dest as TVirtualChartSeriesDataItem;
+
+    DestObject.FValue:=Self.FValue;
+
+    //inherited里面已经有了DestObject.DoPropChange;
+    inherited;
+
+  end
+  else
+  begin
+    inherited;
+  end;
+
+end;
+
 constructor TVirtualChartSeriesDataItem.Create;
 begin
   Inherited;
@@ -2660,6 +2880,33 @@ begin
   FreeAndNil(FDrawPathActions);
 
   inherited;
+end;
+
+function TVirtualChartSeriesDataItem.LoadFromDocNode(
+  ADocNode: TBTNode20_Class): Boolean;
+var
+  I: Integer;
+  ABTNode:TBTNode20;
+begin
+  Result:=False;
+
+  Inherited LoadFromDocNode(ADocNode);
+
+  for I := 0 to ADocNode.ChildNodes.Count - 1 do
+  begin
+    ABTNode:=ADocNode.ChildNodes[I];
+
+    if ABTNode.NodeName='Value' then
+    begin
+      FValue:=ABTNode.ConvertNode_Real64.Data;
+    end
+    ;
+
+  end;
+
+  Result:=True;
+
+
 end;
 
 function TVirtualChartSeriesDataItem.PtInItem(APoint: TPointF): Boolean;
@@ -2732,6 +2979,32 @@ begin
 
 end;
 
+function TVirtualChartSeriesDataItem.SaveToDocNode(
+  ADocNode: TBTNode20_Class): Boolean;
+var
+  ABTNode:TBTNode20;
+begin
+  Result:=False;
+
+  Inherited SaveToDocNode(ADocNode);
+
+  ABTNode:=ADocNode.AddChildNode_Real64('Value');
+  ABTNode.ConvertNode_Real64.Data:=FValue;
+
+  Result:=True;
+
+
+end;
+
+procedure TVirtualChartSeriesDataItem.SetValue(const AValue: Double);
+begin
+  if FValue<>AValue then
+  begin
+    FValue := AValue;
+    Self.DoPropChange();
+  end;
+end;
+
 { TSkinVirtualChartDefaultMaterial }
 
 constructor TSkinVirtualChartDefaultMaterial.Create(AOwner: TComponent);
@@ -2793,7 +3066,7 @@ begin
 
 
 
-  FPieSizePercent:=0.7;
+  FPieRadiusPercent:=0.7;
   FPieInnerSizePercent:=0.4;
 
   SetLength(FSeriesColorArray,9);
@@ -2807,7 +3080,7 @@ begin
   FSeriesColorArray[7]:={$IFDEF VCL}$C669A9{$ENDIF}{$IFDEF FMX}$FFA969C6{$ENDIF};
   FSeriesColorArray[8]:={$IFDEF VCL}$E088FF{$ENDIF}{$IFDEF FMX}$FFFF88E0{$ENDIF};
 
-  FPieLegendListViewVisible:=True;
+  FSeriesLegendListViewVisible:=True;
   FPieInfoVisible:=True;
 
 
@@ -2841,7 +3114,7 @@ begin
   FMarginsBottom:=10;
 
   FYAxisCaptionWidth:=32;
-  FYAxisCaptionHeight:=24;
+  FXAxisCaptionHeight:=24;
 end;
 
 destructor TSkinVirtualChartDefaultMaterial.Destroy;
@@ -2859,13 +3132,21 @@ end;
 
 procedure TSkinVirtualChartDefaultMaterial.SetBarSizePercent(const Value: Double);
 begin
-  FBarSizePercent := Value;
+  if FBarSizePercent<>Value then
+  begin
+    FBarSizePercent := Value;
+    DoChange;
+  end;
 end;
 
 procedure TSkinVirtualChartDefaultMaterial.SetBarsStackType(
   const Value: TBarsStackType);
 begin
-  FBarsStackType := Value;
+  if FBarsStackType<>Value then
+  begin
+    FBarsStackType := Value;
+    DoChange;
+  end;
 end;
 
 procedure TSkinVirtualChartDefaultMaterial.SetDrawAxisCaptionParam(
@@ -2880,10 +3161,24 @@ begin
   FPieInfoCaptionParam.Assign(Value);
 end;
 
+procedure TSkinVirtualChartDefaultMaterial.SetPieInfoVisible(
+  const Value: Boolean);
+begin
+  if FPieInfoVisible<>Value then
+  begin
+    FPieInfoVisible := Value;
+    DoChange;
+  end;
+end;
+
 procedure TSkinVirtualChartDefaultMaterial.SetPieInnerRadiusPercent(
   const Value: Double);
 begin
-  FPieInnerSizePercent := Value;
+  if FPieInnerSizePercent<>Value then
+  begin
+    FPieInnerSizePercent := Value;
+    DoChange;
+  end;
 end;
 
 procedure TSkinVirtualChartDefaultMaterial.SetLineColorParam(
@@ -2919,7 +3214,21 @@ end;
 procedure TSkinVirtualChartDefaultMaterial.SetPieRadiusPercent(
   const Value: Double);
 begin
-  FPieSizePercent := Value;
+  if FPieRadiusPercent<>Value then
+  begin
+    FPieRadiusPercent := Value;
+    DoChange;
+  end;
+end;
+
+procedure TSkinVirtualChartDefaultMaterial.SetSeriesLegendListViewVisible(
+  const Value: Boolean);
+begin
+  if FSeriesLegendListViewVisible<>Value then
+  begin
+    FSeriesLegendListViewVisible := Value;
+    DoChange;
+  end;
 end;
 
 { TVirtualChartSeriesPieDrawer }
@@ -3002,8 +3311,8 @@ var
 //  ADrawRect:TRectF;
   X:Double;
   Y:Double;
-  AXAxisSkinListView:TSkinListView;
-  AYAxisSkinListView:TSkinListView;
+  AXAxisSkinListBox:TSkinListBox;
+  AYAxisSkinListBox:TSkinListBox;
   ASkinVirtualChartIntf:ISkinVirtualChart;
 //  ACaptionRect:TRectF;
 //  AItemWidth:Double;
@@ -3027,8 +3336,8 @@ begin
   ASkinVirtualChartDefaultMaterial:=TSkinVirtualChartDefaultMaterial(ASkinMaterial);
   ASkinVirtualChartIntf:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf;
 
-//  AXAxisSkinListView:=ASkinVirtualChartIntf.Properties.FXAxisSkinListView;
-//  AYAxisSkinListView:=ASkinVirtualChartIntf.Properties.FYAxisSkinListView;
+//  AXAxisSkinListBox:=ASkinVirtualChartIntf.Properties.FXAxisSkinListBox;
+//  AYAxisSkinListBox:=ASkinVirtualChartIntf.Properties.FYAxisSkinListBox;
 
 
 
@@ -3037,7 +3346,7 @@ begin
 //
 ////  ADrawLineParam:=TDrawLineParam.Create('','');
 //  Y:=APathDrawRect.Top;
-//  for I := 0 to AYAxisSkinListView.Prop.Items.Count-1 do
+//  for I := 0 to AYAxisSkinListBox.Prop.Items.Count-1 do
 //  begin
 //    //画行线
 //    ACanvas.DrawLine(ASkinVirtualChartDefaultMaterial.FBarAxisLineParam,APathDrawRect.Left,Y,APathDrawRect.Right,Y);
@@ -3046,10 +3355,10 @@ begin
 //    ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam.StaticFontVertAlign:=fvaCenter;
 //    //右边要空出一点
 //    ACaptionRect:=RectF(0,Y-20,APathDrawRect.Left-5,Y+20);
-//    ACanvas.DrawText(ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam,AYAxisSkinListView.Prop.Items[I].Caption,ACaptionRect);
+//    ACanvas.DrawText(ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam,AYAxisSkinListBox.Prop.Items[I].Caption,ACaptionRect);
 //
-////    Y:=Y+AYAxisSkinListView.Prop.ListLayoutsManager.CalcItemHeight(AYAxisSkinListView.Prop.Items[I]);
-//    Y:=Y+APathDrawRect.Height / (AYAxisSkinListView.Prop.Items.Count-1);
+////    Y:=Y+AYAxisSkinListBox.Prop.ListLayoutsManager.CalcItemHeight(AYAxisSkinListBox.Prop.Items[I]);
+//    Y:=Y+APathDrawRect.Height / (AYAxisSkinListBox.Prop.Items.Count-1);
 //  end;
 //
 ////  FreeAndNil(ADrawLineParam);
@@ -3061,9 +3370,9 @@ begin
 //
 //  //画X轴的刻度线
 //  X:=APathDrawRect.Top;
-//  AItemWidth:=APathDrawRect.Width / (AXAxisSkinListView.Prop.Items.Count);
+//  AItemWidth:=APathDrawRect.Width / (AXAxisSkinListBox.Prop.Items.Count);
 //  ALastItemCaptionDrawLeft:=0;
-//  for I := 0 to AXAxisSkinListView.Prop.Items.Count-1 do
+//  for I := 0 to AXAxisSkinListBox.Prop.Items.Count-1 do
 //  begin
 //
 //
@@ -3085,7 +3394,7 @@ begin
 //
 //    //上边要空出一点
 //    //绘制刻度标题
-//    AItemCaptionWidth:=GetStringWidth(AXAxisSkinListView.Prop.Items[I].Caption,ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam.FontSize);
+//    AItemCaptionWidth:=GetStringWidth(AXAxisSkinListBox.Prop.Items[I].Caption,ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam.FontSize);
 //
 //    //绘制标题前需要判断能不能绘制的下,绘制不下则不绘制
 //    if (X+AItemWidth/2-ALastItemCaptionDrawLeft)>AItemCaptionWidth/2 then
@@ -3094,13 +3403,13 @@ begin
 //      ACaptionRect.Top:=APathDrawRect.Bottom+5;
 //      ACaptionRect.Right:=ACaptionRect.Left+AItemCaptionWidth;
 //      ACaptionRect.Bottom:=APathDrawRect.Bottom+5+24;
-//      ACanvas.DrawText(ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam,AXAxisSkinListView.Prop.Items[I].Caption,ACaptionRect);
+//      ACanvas.DrawText(ASkinVirtualChartDefaultMaterial.FDrawAxisCaptionParam,AXAxisSkinListBox.Prop.Items[I].Caption,ACaptionRect);
 //
 //      ALastItemCaptionDrawLeft:=ACaptionRect.Right;
 //
 //    end;
 //
-////    Y:=Y+AYAxisSkinListView.Prop.ListLayoutsManager.CalcItemHeight(AYAxisSkinListView.Prop.Items[I]);
+////    Y:=Y+AYAxisSkinListBox.Prop.ListLayoutsManager.CalcItemHeight(AYAxisSkinListBox.Prop.Items[I]);
 //    X:=X+AItemWidth;
 //
 //
@@ -3230,13 +3539,23 @@ begin
 
 end;
 
+procedure TVirtualChartSeriesPieDrawer.DoLegendListViewPrepareDrawItem(
+  Sender: TObject; ACanvas: TDrawCanvas;
+  AItemDesignerPanel: {$IFDEF FMX}TSkinFMXItemDesignerPanel{$ENDIF}{$IFDEF VCL}TSkinItemDesignerPanel{$ENDIF}; AItem: TSkinItem;
+  AItemDrawRect: TRect);
+begin
+  TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FLegendItemColorPanel.Material.BackColor.FillColor.Color:=
+    GetDataItemColor(TVirtualChartSeriesDataItem(AItem));
+
+end;
+
 procedure TVirtualChartSeriesPieDrawer.GenerateDrawPathList(APathDrawRect: TRectF);
 var
   I: Integer;
 //  ADataItemRect:TRectF;
 //  ADataItemPathRect:TRectF;
   AVirtualChartSeriesList:TVirtualChartSeriesList;
-  ALegendSkinListView:TSkinListView;
+  ALegendSkinListView:TSkinVirtualList;
 //  AItemWidth:Double;
   AStartAngle:Double;
   ADataItem:TVirtualChartSeriesDataItem;
@@ -3260,44 +3579,46 @@ begin
   ASkinVirtualChartDefaultMaterial:=TSkinVirtualChartDefaultMaterial(TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FSkinControlIntf.GetCurrentUseMaterial);
 
 
-  if ASkinVirtualChartDefaultMaterial.FPieLegendListViewVisible then
+  if ASkinVirtualChartDefaultMaterial.FSeriesLegendListViewVisible then
   begin
-    ALegendSkinListView.Prop.ListLayoutsManager.SkinListIntf:=Self.FSeries.FDataItems;
-    ALegendSkinListView.Prop.FItems:=Self.FSeries.FDataItems;
+      ALegendSkinListView.Prop.ListLayoutsManager.SkinListIntf:=Self.FSeries.FDataItems;
+      ALegendSkinListView.Prop.FItems:=Self.FSeries.FDataItems;
 
-    ALegendSkinListView.Visible:=True;
-    //设置提示区的位置
-    //默认在最左边,从上到下排列
-    {$IFDEF VCL}
-    ALegendSkinListView.Align:=alLeft;
-    {$ENDIF}
-    {$IFDEF FMX}
-    ALegendSkinListView.Align:=TAlignLayout.Left;
-    {$ENDIF}
+      ALegendSkinListView.Visible:=True;
+      //设置提示区的位置
+      //默认在最左边,从上到下排列
+      {$IFDEF VCL}
+      ALegendSkinListView.Align:=alLeft;
+      {$ENDIF}
+      {$IFDEF FMX}
+      ALegendSkinListView.Align:=TAlignLayout.Left;
+      {$ENDIF}
 
-    ALegendSkinListView.Visible:=True;
-    if TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FLegendItemDesignerPanel=nil then
-    begin
-      TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.CreateLegendItemDesignerPanel;
-    end;
-    ALegendSkinListView.Prop.ItemDesignerPanel:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FLegendItemDesignerPanel;
-    ALegendSkinListView.Prop.ItemHeight:=26;
-    {$IFDEF VCL}
-    ALegendSkinListView.AlignWithMargins:=True;
-    ALegendSkinListView.Margins.SetBounds(10,10,0,10);
-    {$ENDIF}
-    {$IFDEF FMX}
-    ALegendSkinListView.Margins.Left:=10;
-    ALegendSkinListView.Margins.Top:=10;
-    ALegendSkinListView.Margins.Right:=0;
-    ALegendSkinListView.Margins.Bottom:=10;
-    {$ENDIF}
-    ALegendSkinListView.OnMouseOverItemChange:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.DoLegendListViewMouseOverItemChange;
+      ALegendSkinListView.Visible:=True;
+      if TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FLegendItemDesignerPanel=nil then
+      begin
+        TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.CreateLegendItemDesignerPanel;
+      end;
+      ALegendSkinListView.Prop.ItemDesignerPanel:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FLegendItemDesignerPanel;
+      ALegendSkinListView.Prop.ItemHeight:=26;
+      {$IFDEF VCL}
+      ALegendSkinListView.AlignWithMargins:=True;
+      ALegendSkinListView.Margins.SetBounds(10,10,0,10);
+      {$ENDIF}
+      {$IFDEF FMX}
+      ALegendSkinListView.Margins.Left:=10;
+      ALegendSkinListView.Margins.Top:=10;
+      ALegendSkinListView.Margins.Right:=0;
+      ALegendSkinListView.Margins.Bottom:=10;
+      {$ENDIF}
+      ALegendSkinListView.OnPrepareDrawItem:=DoLegendListViewPrepareDrawItem;
+      ALegendSkinListView.OnMouseOverItemChange:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.DoLegendListViewMouseOverItemChange;
   end
   else
   begin
-    ALegendSkinListView.Visible:=False;
-    ALegendSkinListView.OnMouseOverItemChange:=nil;
+      ALegendSkinListView.Visible:=False;
+      ALegendSkinListView.OnMouseOverItemChange:=nil;
+      ALegendSkinListView.OnPrepareDrawItem:=nil;
   end;
 
 
@@ -3318,14 +3639,14 @@ begin
         ADataItem.FDrawPercent:=ADataItem.Value/ASumValue;
       end;
 
-      //提示
-      ADataItem.Color:=Self.GetDataItemColor(ADataItem);
+//      //提示,不能直接这样赋值,不然DataItem的颜色被改过来了
+//      ADataItem.Color:=Self.GetDataItemColor(ADataItem);
 
 
       //横排的
       //生成Path列表
-      //AItemWidth:=AXAxisSkinListView.Prop.CalcItemWidth(AXAxisSkinListView.Prop.Items[I]);
-      //AItemWidth:=APathDrawRect.Width / AXAxisSkinListView.Prop.Items.Count;
+      //AItemWidth:=AXAxisSkinListBox.Prop.CalcItemWidth(AXAxisSkinListBox.Prop.Items[I]);
+      //AItemWidth:=APathDrawRect.Width / AXAxisSkinListBox.Prop.Items.Count;
 
 //      //数据项所在的大矩形-相对坐标
 //      ADataItemRect:=RectF(0,0,0,0);
@@ -3380,7 +3701,7 @@ begin
           APathActionItem.StartAngle:=AStartAngle-90;
           APathActionItem.SweepAngle:=ADataItem.FDrawPercent*360;
           //内环
-          AOffset:=(APathDrawRect.Width-(APathDrawRect.Width/ASkinVirtualChartDefaultMaterial.FPieSizePercent)*ASkinVirtualChartDefaultMaterial.FPieInnerSizePercent)/2;
+          AOffset:=(APathDrawRect.Width-(APathDrawRect.Width/ASkinVirtualChartDefaultMaterial.FPieRadiusPercent)*ASkinVirtualChartDefaultMaterial.FPieInnerSizePercent)/2;
           APathActionItem:=TPathActionItem(ADataItem.FDrawPathActions.Add);
           APathActionItem.ActionType:=patAddArc;
           APathActionItem.X:=AOffset;
@@ -3506,12 +3827,12 @@ begin
   //取最小的长度
   if ADrawRect.Width>ADrawRect.Height then
   begin
-    FRadius:=ADrawRect.Height*ASkinVirtualChartDefaultMaterial.FPieSizePercent/2;
+    FRadius:=ADrawRect.Height*ASkinVirtualChartDefaultMaterial.FPieRadiusPercent/2;
     FInnerRadius:=ADrawRect.Height*ASkinVirtualChartDefaultMaterial.FPieInnerSizePercent/2;
   end
   else
   begin
-    FRadius:=ADrawRect.Width*ASkinVirtualChartDefaultMaterial.FPieSizePercent/2;
+    FRadius:=ADrawRect.Width*ASkinVirtualChartDefaultMaterial.FPieRadiusPercent/2;
     FInnerRadius:=ADrawRect.Width*ASkinVirtualChartDefaultMaterial.FPieInnerSizePercent/2;
   end;
 
@@ -3625,8 +3946,8 @@ var
 //  ADrawRect:TRectF;
   X:Double;
   Y:Double;
-  AXAxisSkinListView:TSkinListView;
-  AYAxisSkinListView:TSkinListView;
+  AXAxisSkinListBox:TSkinListBox;
+  AYAxisSkinListBox:TSkinListBox;
   ASkinVirtualChartIntf:ISkinVirtualChart;
   ACaptionRect:TRectF;
   AItemWidth:Double;
@@ -3717,7 +4038,8 @@ var
 //  ADataItemRect:TRectF;
 //  ADataItemPathRect:TRectF;
   AVirtualChartSeriesList:TVirtualChartSeriesList;
-  AXAxisSkinListView:TSkinListView;
+  AXAxisSkinListBox:TSkinListBox;
+  ALegendSkinListView:TSkinVirtualList;
   AItemWidth:Double;
   ALeft:Double;
   ADataItem:TVirtualChartSeriesDataItem;
@@ -3730,10 +4052,17 @@ begin
 
   AVirtualChartSeriesList:=TVirtualChartSeriesList(Self.FSeries.Collection);
 
-  AXAxisSkinListView:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FXAxisSkinListView;
+  AXAxisSkinListBox:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FXAxisSkinListBox;
   ASkinVirtualChartDefaultMaterial:=TSkinVirtualChartDefaultMaterial(TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FSkinControlIntf.GetCurrentUseMaterial);
 
+  ALegendSkinListView:=TVirtualChartSeriesList(Self.FSeries.Collection).FSkinVirtualChartIntf.Properties.FLegendSkinListView;
 
+  if ALegendSkinListView<>nil then
+  begin
+      ALegendSkinListView.Visible:=False;
+      ALegendSkinListView.OnMouseOverItemChange:=nil;
+      ALegendSkinListView.OnPrepareDrawItem:=nil;
+  end;
 
   //然后生成柱子
   //需要最大值,计算出百分比
@@ -3755,8 +4084,8 @@ begin
 
       //横排的
       //生成Path列表
-      //AItemWidth:=AXAxisSkinListView.Prop.CalcItemWidth(AXAxisSkinListView.Prop.Items[I]);
-      AItemWidth:=APathDrawRect.Width / AXAxisSkinListView.Prop.Items.Count;
+      //AItemWidth:=AXAxisSkinListBox.Prop.CalcItemWidth(AXAxisSkinListBox.Prop.Items[I]);
+      AItemWidth:=APathDrawRect.Width / AXAxisSkinListBox.Prop.Items.Count;
 
 //      //数据项所在的大矩形-相对坐标
 //      ADataItemRect:=RectF(0,0,0,0);

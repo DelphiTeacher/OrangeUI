@@ -5,8 +5,8 @@
         <FrameworkType>FMX</FrameworkType>
         <MainSource>TakeOrderClient_D10_3.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Config Condition="'$(Config)'==''">Release</Config>
+        <Platform Condition="'$(Platform)'==''">Android</Platform>
         <TargetedPlatforms>33817</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -529,6 +529,8 @@
         <DCCReference Include="..\..\..\OrangeProjectCommon\uVirtualListDataController.pas"/>
         <DCCReference Include="..\..\..\OrangeProjectCommon\uOpenCommon.pas"/>
         <DCCReference Include="..\..\..\OrangeProjectCommon\uModule_InterfaceSign.pas"/>
+        <DCCReference Include="..\..\..\OrangeProjectCommon\XSuperObject\XSuperJSON.pas"/>
+        <DCCReference Include="..\..\..\OrangeProjectCommon\XSuperObject\XSuperObject.pas"/>
         <JavaReference Include="..\BarCode\CreateActivity.jar">
             <Disabled/>
         </JavaReference>
@@ -607,6 +609,11 @@
                 </DeployFile>
                 <DeployFile LocalName="iOSSimulator\Release\TakeOrderClient_D10_3" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2048x1496.png" Configuration="Debug" Class="iPad_Launch2048"/>
+                <DeployFile LocalName="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Release" Class="AndroidGDBServer">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_ApplicationIcon_72x72.png" Configuration="Debug" Class="iPad_AppIcon72"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Configuration="Debug" Class="Android_SplashImage426"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_40x40.png" Configuration="Debug" Class="iPhone_Spotlight40"/>
@@ -680,6 +687,7 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="144x144.png" Configuration="Release" Class="iPad_AppIcon144"/>
+                <DeployFile LocalName="iOSSimulator\Release\EasyServiceClient_D10_1.entitlements" Configuration="Release" Class="ProjectiOSEntitlements"/>
                 <DeployFile LocalName="48x48.png" Configuration="Release" Class="Android_LauncherIcon48">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
@@ -687,7 +695,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x748.png" Configuration="Release" Class="iPad_Launch1024"/>
-                <DeployFile LocalName="iOSSimulator\Release\EasyServiceClient_D10_1.entitlements" Configuration="Release" Class="ProjectiOSEntitlements"/>
                 <DeployFile LocalName="..\BarCode\res\layout\app_picker_list_item.xml" Configuration="Release" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\layout\</RemoteDir>
@@ -741,16 +748,16 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="180x180.png" Configuration="Release" Class="iPhone_AppIcon180"/>
-                <DeployFile LocalName="29x29.png" Configuration="Release" Class="iPad_Setting29"/>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Debug" Class="Android_LauncherIcon48"/>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_2048x2732.png" Configuration="Release" Class="iPad_Launch2048x2732"/>
-                <DeployFile LocalName="$(BDS)\lib\android\release\mips\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeMipsFile">
+                <DeployFile LocalName="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeArmeabiFile">
                     <Platform Name="Android">
                         <RemoteName>libTakeOrderClient_D10_3.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="180x180.png" Configuration="Release" Class="iPhone_AppIcon180"/>
+                <DeployFile LocalName="29x29.png" Configuration="Release" Class="iPad_Setting29"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Debug" Class="Android_LauncherIcon48"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_2048x2732.png" Configuration="Release" Class="iPad_Launch2048x2732"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_SpotlightSearchIcon_100x100.png" Configuration="Debug" Class="iPad_SpotLight100"/>
                 <DeployFile LocalName="Win32\Debug\TakeOrderClient_D10_3.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Configuration="Debug" Class="Android_LauncherIcon144"/>
@@ -770,12 +777,6 @@
                 </DeployFile>
                 <DeployFile LocalName="40x40.png" Configuration="Release" Class="iPad_SpotLight40"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_1334x750.png" Configuration="Release" Class="iPhone_Launch1334"/>
-                <DeployFile LocalName="$(BDS)\lib\android\release\armeabi\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeArmeabiFile">
-                    <Platform Name="Android">
-                        <RemoteName>libTakeOrderClient_D10_3.so</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_120x120.png" Configuration="Release" Class="iPhone_AppIcon120"/>
                 <DeployFile LocalName="iOSDevice64\Release\ResourceRules.plist" Configuration="Release" Class="ProjectiOSDeviceResourceRules"/>
                 <DeployFile LocalName="..\BarCode\res\layout\history_list_item.xml" Configuration="Release" Class="File">
@@ -938,6 +939,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Configuration="Debug" Class="Android_SplashImage640"/>
+                <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeMipsFile">
+                    <Platform Name="Android">
+                        <RemoteName>libTakeOrderClient_D10_3.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_1125x2436.png" Configuration="Release" Class="iPhone_Launch1125"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_48x48.png" Configuration="Release" Class="Android_NotificationIcon48">
                     <Platform Name="Android">
@@ -1037,6 +1044,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_114x114.png" Configuration="Release" Class="iPhone_AppIcon114"/>
                 <DeployFile LocalName="..\BarCode\res\menu\capture.xml" Configuration="Release" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\menu\</RemoteDir>
@@ -1044,7 +1052,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_114x114.png" Configuration="Release" Class="iPhone_AppIcon114"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>

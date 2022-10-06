@@ -4,6 +4,7 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
   Size.PlatformDefault = False
   object pnlToolBar: TSkinFMXPanel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukRef
     KeepSelfOwnMaterial = False
@@ -13,12 +14,13 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
     Size.Width = 320.000000000000000000
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 2
+    TabOrder = 1
     Caption = #32534#36753#25910#36135#22320#22336
     Text = #32534#36753#25910#36135#22320#22336
     Properties.IsToolBar = False
     object btnReturn: TSkinFMXButton
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukRef
       KeepSelfOwnMaterial = False
@@ -41,6 +43,7 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
   end
   object sbClient: TSkinFMXScrollBox
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukRef
     KeepSelfOwnMaterial = False
@@ -53,12 +56,20 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
     Size.PlatformDefault = False
     TabOrder = 0
     VertScrollBar.ParentMouseEvent = False
+    VertScrollBar.DirectUIVisible = False
     VertScrollBar.ComponentTypeUseKind = ctukDefault
     VertScrollBar.MaterialUseKind = mukSelfOwn
     VertScrollBar.KeepSelfOwnMaterial = True
+    VertScrollBar.SelfOwnMaterial.BackColor.Color = claWhite
+    VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     VertScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
     VertScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
     VertScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.Color = x64000000
     VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.IsFill = True
     VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Color = x64000000
     VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.IsRound = True
@@ -68,6 +79,11 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
     VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawRectSetting.Enabled = True
     VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawRectSetting.SizeType = dpstPixel
     VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawRectSetting.PositionHorzType = dpphtCenter
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     VertScrollBar.MouseDownFocus = False
     VertScrollBar.Position.X = 312.000000000000000000
     VertScrollBar.Size.Width = 7.000000000000000000
@@ -79,12 +95,26 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
     VertScrollBar.Properties.LargeChange = 10
     VertScrollBar.Properties.CanOverRangeTypes = [cortMin, cortMax]
     HorzScrollBar.ParentMouseEvent = False
+    HorzScrollBar.DirectUIVisible = False
     HorzScrollBar.ComponentTypeUseKind = ctukDefault
     HorzScrollBar.MaterialUseKind = mukSelfOwn
     HorzScrollBar.KeepSelfOwnMaterial = True
+    HorzScrollBar.SelfOwnMaterial.BackColor.Color = claWhite
+    HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     HorzScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
     HorzScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
     HorzScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.Color = x64000000
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Color = x64000000
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     HorzScrollBar.MouseDownFocus = False
     HorzScrollBar.Position.Y = 512.000000000000000000
     HorzScrollBar.Size.Width = 320.000000000000000000
@@ -96,9 +126,16 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
     HorzScrollBar.Properties.LargeChange = 10
     HorzScrollBar.Properties.CanOverRangeTypes = []
     ScrollControlCorner.ParentMouseEvent = False
+    ScrollControlCorner.DirectUIVisible = False
     ScrollControlCorner.ComponentTypeUseKind = ctukDefault
     ScrollControlCorner.MaterialUseKind = mukSelfOwn
     ScrollControlCorner.KeepSelfOwnMaterial = True
+    ScrollControlCorner.SelfOwnMaterial.BackColor.Color = claWhite
+    ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     ScrollControlCorner.MouseDownFocus = False
     ScrollControlCorner.Position.X = 313.000000000000000000
     ScrollControlCorner.Position.Y = 513.000000000000000000
@@ -116,9 +153,16 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
     Properties.ScrollBoxType = sbtVert
     object sbcClient: TSkinFMXScrollBoxContent
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = claWhite
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       MouseDownFocus = False
       Align = Top
       CanFocus = True
@@ -128,6 +172,7 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
       TabOrder = 0
       object pnlName: TSkinFMXPanel
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -152,6 +197,7 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -175,9 +221,16 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
       end
       object pnlEmpty: TSkinFMXPanel
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = claWhite
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
         SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
         SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
@@ -191,6 +244,7 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
       end
       object pnlPhoneNumber: TSkinFMXPanel
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -215,6 +269,7 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
           ParentMouseEvent = True
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -238,9 +293,16 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
       end
       object pnlEmpty5: TSkinFMXPanel
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = claWhite
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
         SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
         SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
@@ -255,6 +317,7 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
       end
       object pnlArea: TSkinFMXPanel
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -265,12 +328,13 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
         Size.Width = 320.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 13
+        TabOrder = 12
         Caption = #25152#22312#21306#22495
         Text = #25152#22312#21306#22495
         Properties.IsToolBar = False
         object btnArea: TSkinFMXButton
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = False
@@ -296,9 +360,16 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
       end
       object pnlEmpty6: TSkinFMXPanel
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = claWhite
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
         SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
         SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
@@ -313,6 +384,7 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
       end
       object pnlIsDefault: TSkinFMXPanel
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -327,14 +399,22 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
         Properties.IsToolBar = False
         object chkIsDefault: TSkinFMXCheckBox
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukName
           MaterialUseKind = mukRef
           KeepSelfOwnMaterial = True
           ComponentTypeName = 'Color'
+          SelfOwnMaterial.BackColor.Color = claWhite
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.IsAutoPosition = False
           SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
           SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
           SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+          SelfOwnMaterial.CheckChar = #10004
           SelfOwnMaterial.DrawCheckStateParam.PathActions = <
             item
               X = 25.000000000000000000
@@ -358,7 +438,17 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
               SizeType = dpstPixel
               ActionType = patDrawPath
             end>
+          SelfOwnMaterial.DrawCheckRectParam.Color = claWhite
+          SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.IsSimpleDrawCheckState = True
+          SelfOwnMaterial.IsSimpleDrawCheckChar = False
+          SelfOwnMaterial.DrawCheckCharParam.FontTrimming = fttNone
+          SelfOwnMaterial.DrawCheckCharParam.FontHorzAlign = fhaLeft
+          SelfOwnMaterial.DrawCheckCharParam.FontVertAlign = fvaTop
           RefMaterial = dmEasyServiceCommonMaterial.chkDefaultCheckBoxMaterial
           MouseDownFocus = False
           Align = Client
@@ -379,6 +469,7 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
       end
       object pnlAddr: TSkinFMXPanel
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = False
@@ -411,9 +502,16 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
           Size.PlatformDefault = False
           TabOrder = 0
           ParentMouseEvent = False
+          DirectUIVisible = False
           ComponentTypeUseKind = ctukDefault
           MaterialUseKind = mukSelfOwn
           KeepSelfOwnMaterial = True
+          SelfOwnMaterial.BackColor.Color = claWhite
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+          SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
           SelfOwnMaterial.NormalPicture.IsClipRound = False
           SelfOwnMaterial.HoverPicture.IsClipRound = False
           SelfOwnMaterial.FocusedPicture.IsClipRound = False
@@ -462,9 +560,16 @@ object FrameAddHotelRecvAddr: TFrameAddHotelRecvAddr
       end
       object btnOk: TSkinFMXButton
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukRef
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = claWhite
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.IsAutoCenterIconAndCaption = False
         SelfOwnMaterial.DrawDetailParam.FontTrimming = fttNone
         SelfOwnMaterial.DrawDetailParam.FontHorzAlign = fhaLeft

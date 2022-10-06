@@ -11,6 +11,7 @@ object frmDrawPicturePropertyEditor: TfrmDrawPicturePropertyEditor
   FormFamily = 'TForm'
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnKeyUp = FormKeyUp
   OnShow = FormShow
   OnHide = FormHide
   Left = 497

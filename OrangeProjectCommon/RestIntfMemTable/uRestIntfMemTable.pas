@@ -69,7 +69,7 @@ type
 
     procedure Refresh;
 
-    procedure LoadDataIntfResult(ADataJson:ISuperObject);
+    procedure LoadDataIntfResult(ADataJson:ISuperObject;AIsNeedLoadRecordList:Boolean=True);
   public
     constructor Create(AOwner:TComponent);override;
     destructor Destroy;override;
@@ -284,7 +284,7 @@ begin
   end;
 end;
 
-procedure TRestMemTable.LoadDataIntfResult(ADataJson:ISuperObject);
+procedure TRestMemTable.LoadDataIntfResult(ADataJson:ISuperObject;AIsNeedLoadRecordList:Boolean);
 begin
 
     if (ADataJson<>nil) then
@@ -292,25 +292,29 @@ begin
         SumRecordCount:=ADataJson.I['SumCount'];
         PageCount:=Ceil(SumRecordCount/PageSize);
 
-        //放在线程中加载,不然会卡
-        if IsNeedReCreateFieldDefs then
-        begin
-            LoadDataJsonTokbmMemTable(Self,ADataJson,RECORDLIST_KEY);
-        end
-        else
-        begin
 
-            TThread.Synchronize(nil,procedure
+        if AIsNeedLoadRecordList then
+        begin
+            //放在线程中加载,不然会卡
+            if IsNeedReCreateFieldDefs then
             begin
-                Self.DisableControls;
-                try
-                  Self.EmptyDataSet;
-                  LoadDataFromJsonArray(Self,ADataJson.A[RECORDLIST_KEY]);
-                finally
-                  Self.EnableControls;
-                end;
-            end);
+                LoadDataJsonTokbmMemTable(Self,ADataJson,RECORDLIST_KEY);
+            end
+            else
+            begin
 
+                TThread.Synchronize(nil,procedure
+                begin
+                    Self.DisableControls;
+                    try
+                      Self.EmptyDataSet;
+                      LoadDataFromJsonArray(Self,ADataJson.A[RECORDLIST_KEY]);
+                    finally
+                      Self.EnableControls;
+                    end;
+                end);
+
+            end;
         end;
 
     end

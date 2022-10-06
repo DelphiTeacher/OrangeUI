@@ -17,16 +17,19 @@ unit uSkinPageControlType;
 interface
 {$I FrameWork.inc}
 
+{$I Version.inc}
+
+
 uses
   Classes,
   SysUtils,
   uFuncCommon,
-  Types,
   Math,
   {$IFDEF VCL}
   Messages,
   Windows,
   Controls,
+  Dialogs,
 //  uSkinWindowsControl,
 //  uSkinWindowsSwitchPageListPanel,
   Forms,
@@ -40,6 +43,7 @@ uses
 //  uSkinFireMonkeySwitchPageListPanel,
   FMX.Dialogs,
   {$ENDIF}
+  Types,
 //  uSkinSwitchPageListPanelType,
   uBaseLog,
   uBaseList,
@@ -202,6 +206,7 @@ type
   TCustomCalcHeadDrawRectEvent = procedure(Sender:TObject;var AHeadDrawRect:TRectF) of object;
   //自定义分页头的绘制矩形
   TCustomCalcTabDrawRectEvent = procedure(Sender:TObject;AVisibleIndex:Integer;var ATabDrawRect:TRectF) of object;
+  TCustomCalcTabDrawIconRectEvent = procedure(Sender:TObject;ATabSheet:TSkinTabSheet;var ATabDrawRect:TRectF) of object;
 
 
 
@@ -249,12 +254,14 @@ type
     procedure SetOnChanging(const Value: TPageChangingEvent);
 
     function GetOnCustomCalcTabDrawRect:TCustomCalcTabDrawRectEvent;
+    function GetOnCustomCalcTabIconDrawRect:TCustomCalcTabDrawIconRectEvent;
     function GetOnCustomCalcHeadDrawRect:TCustomCalcHeadDrawRectEvent;
 
     //更改事件
     property OnChange: TNotifyEvent read GetOnChange write SetOnChange;
     property OnChanging: TPageChangingEvent read GetOnChanging write SetOnChanging;
     property OnCustomCalcTabDrawRect:TCustomCalcTabDrawRectEvent read GetOnCustomCalcTabDrawRect;
+    property OnCustomCalcTabIconDrawRect:TCustomCalcTabDrawIconRectEvent read GetOnCustomCalcTabIconDrawRect;
     property OnCustomCalcHeadDrawRect:TCustomCalcHeadDrawRectEvent read GetOnCustomCalcHeadDrawRect;
 
 
@@ -516,6 +523,9 @@ type
     procedure ChangeActivePage(Page: TSkinTabSheet;HasAligned:Boolean=False);
     function GetCanGesutreSwitch: Boolean;
     procedure SetCanGesutreSwitch(const Value: Boolean);
+  private
+    FIsAfterPaintTabIcon: Boolean;
+    procedure SetIsAfterPaintTabIcon(const Value: Boolean);
 
   protected
     procedure AssignProperties(Src:TSkinControlProperties);override;
@@ -553,6 +563,7 @@ type
     function PageAt(X,Y:Double):TSkinTabSheet;
     //获取分页按钮的绘制矩形
     function GetVisibleTabDrawRect(VisibleIndex:Integer):TRectF;
+    function GetVisibleTabIconDrawRect(ATabSheet:TSkinTabSheet;ATabIconDrawRect:TRectF):TRectF;
     //分页矩形
     property PageRect:TRectF read GetPageRect;
     //标签头矩形
@@ -597,7 +608,7 @@ type
     /// </summary>
     property ActivePageIndex:Integer read GetActivePageIndex write SetActivePageIndex;
   published
-
+    property IsAfterPaintTabIcon:Boolean read FIsAfterPaintTabIcon write SetIsAfterPaintTabIcon;
     /// <summary>
     ///   <para>
     ///     标签头居中
@@ -1083,6 +1094,7 @@ type
     procedure CustomMouseEnter;override;
     procedure CustomMouseLeave;override;
   protected
+    procedure PaintPageControlTabIcons(ACanvas:TDrawCanvas;ASkinMaterial:TSkinControlMaterial;const ADrawRect:TRectF;APaintData:TPaintData);
     //自定义绘制方法
     function CustomPaint(ACanvas:TDrawCanvas;ASkinMaterial:TSkinControlMaterial;const ADrawRect:TRectF;APaintData:TPaintData):Boolean;override;
     //绑定对象
@@ -1166,6 +1178,7 @@ type
     FOnChanging: TPageChangingEvent;
     FOnCustomCalcHeadDrawRect:TCustomCalcHeadDrawRectEvent;
     FOnCustomCalcTabDrawRect:TCustomCalcTabDrawRectEvent;
+    FOnCustomCalcTabIconDrawRect:TCustomCalcTabDrawIconRectEvent;
 
     function GetOnChange: TNotifyEvent;
     procedure SetOnChange(const Value: TNotifyEvent);
@@ -1173,6 +1186,7 @@ type
     function GetOnChanging: TPageChangingEvent;
     procedure SetOnChanging(const Value: TPageChangingEvent);
     function GetOnCustomCalcTabDrawRect:TCustomCalcTabDrawRectEvent;
+    function GetOnCustomCalcTabIconDrawRect:TCustomCalcTabDrawIconRectEvent;
     function GetOnCustomCalcHeadDrawRect:TCustomCalcHeadDrawRectEvent;
 
     function GetPageControlProperties:TPageControlProperties;
@@ -1183,6 +1197,8 @@ type
       const Value: TCustomCalcHeadDrawRectEvent);
     procedure SetOnCustomCalcTabDrawRect(
       const Value: TCustomCalcTabDrawRectEvent);
+    procedure SetOnCustomCalcTabIconDrawRect(
+      const Value: TCustomCalcTabDrawIconRectEvent);
   protected
     //水平滚动条
     FSwitchButtonGroup:TSkinBaseButtonGroup;
@@ -1202,6 +1218,7 @@ type
     procedure Notification(AComponent:TComponent;Operation:TOperation);override;
     //获取控件属性类
     function GetPropertiesClassType:TPropertiesClassType;override;
+    procedure AfterPaint;{$IFDEF FMX}override;{$ENDIF}
   public
     procedure StayClick;override;
   public
@@ -1219,6 +1236,7 @@ type
     property OnChange: TNotifyEvent read FOnChange write SetOnChange;
     property OnChanging: TPageChangingEvent read FOnChanging write SetOnChanging;
     property OnCustomCalcTabDrawRect:TCustomCalcTabDrawRectEvent read GetOnCustomCalcTabDrawRect write SetOnCustomCalcTabDrawRect;
+    property OnCustomCalcTabIconDrawRect:TCustomCalcTabDrawIconRectEvent read GetOnCustomCalcTabIconDrawRect write SetOnCustomCalcTabIconDrawRect;
     property OnCustomCalcHeadDrawRect:TCustomCalcHeadDrawRectEvent read GetOnCustomCalcHeadDrawRect write SetOnCustomCalcHeadDrawRect;
     property SwitchButtonGroup: TSkinBaseButtonGroup read GetSwitchButtonGroup write SetSwitchButtonGroup;
     //属性
@@ -1308,6 +1326,230 @@ begin
   end;
 end;
 
+
+procedure TSkinPageControlType.PaintPageControlTabIcons(ACanvas: TDrawCanvas;
+  ASkinMaterial: TSkinControlMaterial; const ADrawRect: TRectF;
+  APaintData: TPaintData);
+var
+  I: Integer;
+  ATabIcon:TDrawPicture;
+  ATabDrawRect:TRectF;
+  ATabIconDrawRect:TRectF;
+  ATempTabDrawRect:TRectF;
+  ATabSheet:TSkinTabSheet;
+  ATabSheetIntf:ISkinTabSheet;
+  ATabSheetControlIntf:ISkinControl;
+  ATabDrawPicture:TDrawPicture;
+
+  AItemEffectStates:TDPEffectStates;
+  AItemPaintData:TPaintData;
+  ANotifyNumberIconControlIntf:ISkinControl;
+var
+  ANotifySkinMaterial:TSkinControlMaterial;
+begin
+
+  if Self.GetSkinMaterial<>nil then
+  begin
+
+//    if not GlobalIsGetedIPhoneX then
+//    begin
+//      IsIPhoneX(TForm(Application.MainForm));
+//    end;
+
+
+//    //绘制整体背景
+//    ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawBackGndPictureParam,
+//                        Self.GetSkinMaterial.FBackGndPicture,
+//                        ADrawRect);
+
+
+    if (Self.FSkinPageControlIntf.PageControlProperties.FOrientation=TTabOrientation.toNone)
+     or (Self.FSkinPageControlIntf.PageControlProperties.FTabHeaderHeight<=0) then
+    begin
+      Exit;
+    end;
+
+
+//    ACanvas.DrawRect(Self.GetSkinMaterial.FDrawTabHeaderColorParam,
+//                        Self.FSkinPageControlIntf.PageControlProperties.HeaderRect);
+
+
+//    if    (Self.FSkinPageControlIntf.PageControlProperties.FOrientation<>TTabOrientation.toNone)
+//      and (Self.FSkinPageControlIntf.PageControlProperties.FTabHeaderHeight>0) then
+//    begin
+//      //绘制头部背景
+//      ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawTabHeaderPictureParam,
+//                          Self.GetSkinMaterial.FTabHeaderPicture,
+//                          Self.FSkinPageControlIntf.PageControlProperties.HeaderRect);
+//    end;
+
+
+    if Self.FSkinPageControlIntf.PageControlProperties.FVisiblePages.Count=0 then Exit;
+
+
+
+    for I := 0 to Self.FSkinPageControlIntf.PageControlProperties.FVisiblePages.Count-1 do
+    begin
+          ATabSheet:=TSkinTabSheet(Self.FSkinPageControlIntf.PageControlProperties.FVisiblePages[I]);
+          ATabSheetIntf:=ATabSheet as ISkinTabSheet;
+          ATabSheetControlIntf:=ATabSheet as ISkinControl;
+          ATabDrawRect:=Self.FSkinPageControlIntf.PageControlProperties.GetVisibleTabDrawRect(I);
+
+
+          if   IsSameDouble(RectWidthF(ATabDrawRect),0)
+            or IsSameDouble(RectHeightF(ATabDrawRect),0) then
+          begin
+            Continue;
+          end;
+
+
+          AItemEffectStates:=[];
+          if Self.FSkinPageControlIntf.PageControlProperties.FMouseOverPage=ATabSheet then
+          begin
+            AItemEffectStates:=AItemEffectStates+[dpstMouseOver];
+          end;
+          if Self.FSkinPageControlIntf.PageControlProperties.FMouseDownPage=ATabSheet then
+          begin
+            AItemEffectStates:=AItemEffectStates+[dpstMouseDown];
+          end;
+          if Self.FSkinPageControlIntf.PageControlProperties.FActivePage=ATabSheet then
+          begin
+            AItemEffectStates:=AItemEffectStates+[dpstPushed];
+          end;
+
+//          Self.GetSkinMaterial.FDrawTabPictureParam.StaticEffectStates:=AItemEffectStates;
+//          Self.GetSkinMaterial.FDrawTabCaptionParam.StaticEffectStates:=AItemEffectStates;
+          Self.GetSkinMaterial.FDrawTabIconParam.StaticEffectStates:=AItemEffectStates;
+//          Self.GetSkinMaterial.FDrawTabBackColorParam.StaticEffectStates:=AItemEffectStates;
+//          Self.GetSkinMaterial.FDrawTabBackColor2Param.StaticEffectStates:=AItemEffectStates;
+
+          //处理绘制参数的透明度
+//          ProcessDrawParamDrawAlpha(GetSkinMaterial.FDrawTabPictureParam);
+//          ProcessDrawParamDrawAlpha(GetSkinMaterial.FDrawTabCaptionParam);
+          ProcessDrawParamDrawAlpha(GetSkinMaterial.FDrawTabIconParam);
+//          ProcessDrawParamDrawAlpha(GetSkinMaterial.FDrawTabBackColorParam);
+//          ProcessDrawParamDrawAlpha(GetSkinMaterial.FDrawTabBackColor2Param);
+
+
+
+//          //绘制背景颜色
+//          ACanvas.DrawRect(Self.GetSkinMaterial.FDrawTabBackColorParam,ATabDrawRect);
+//          ACanvas.DrawRect(Self.GetSkinMaterial.FDrawTabBackColor2Param,ATabDrawRect);
+
+
+
+//          //绘制背景图片
+//          ATabDrawPicture:=nil;
+//    //        if Not Self.FSkinControlIntf.Enabled then
+//    //        begin
+//    //          ATabDrawPicture:=Self.GetSkinMaterial.FTabDisabledPicture;
+//    //        end
+//    //        else
+//          if ATabSheet=Self.FSkinPageControlIntf.PageControlProperties.ActivePage then
+//          begin
+//            ATabDrawPicture:=Self.GetSkinMaterial.FTabPushedPicture;
+//          end
+//          else
+//          if (ATabSheet=Self.FSkinPageControlIntf.PageControlProperties.MouseDownPage) and APaintData.IsDrawInteractiveState then
+//          begin
+//            ATabDrawPicture:=Self.GetSkinMaterial.FTabDownPicture;
+//          end
+//          else if (ATabSheet=Self.FSkinPageControlIntf.PageControlProperties.MouseOverPage) and APaintData.IsDrawInteractiveState then
+//          begin
+//            ATabDrawPicture:=Self.GetSkinMaterial.FTabHoverPicture;
+//          end
+//          else
+//          begin
+//            ATabDrawPicture:=Self.GetSkinMaterial.FTabNormalPicture;
+//          end;
+//          if ATabDrawPicture.CurrentPictureIsEmpty then
+//          begin
+//            ATabDrawPicture:=Self.GetSkinMaterial.FTabNormalPicture;
+//          end;
+//          ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawTabPictureParam,
+//                              ATabDrawPicture,
+//                              ATabDrawRect);
+
+
+
+
+          ATempTabDrawRect:=ATabDrawRect;
+          //标签头在底部才需要抬高
+          if (Self.FSkinPageControlIntf.PageControlProperties.FOrientation=TTabOrientation.toBottom)
+            and IsIPhoneX(TForm(Application.MainForm)) then
+          begin
+            //IPhoneX底部要抬起来20
+            ATempTabDrawRect.Bottom:=ATempTabDrawRect.Bottom-GlobalIPhoneXBottomBarHeight;
+          end;
+
+
+//          if not Self.FSkinPageControlIntf.PageControlProperties.FIsAfterPaintTabIcon then
+//          begin
+//
+              ATabIconDrawRect:=Self.FSkinPageControlIntf.PageControlProperties.GetVisibleTabIconDrawRect(ATabSheet,ATempTabDrawRect);
+              //绘制图标
+              if Self.FSkinPageControlIntf.PageControlProperties.FActivePage<>ATabSheet then
+              begin
+                ATabIcon:=ATabSheetIntf.Prop.FIcon;
+              end
+              else
+              begin
+                ATabIcon:=ATabSheetIntf.Prop.FPushedIcon;
+              end;
+              if ATabIcon.CurrentPictureIsEmpty then
+              begin
+                ATabIcon:=ATabSheetIntf.Prop.FIcon;
+              end;
+              ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawTabIconParam,
+                                  ATabIcon,
+                                  ATabIconDrawRect);
+
+
+              //绘制通知图标
+              if ATabSheetIntf.Prop.FNotifyNumberIconControlIntf<>nil then
+              begin
+
+                ANotifyNumberIconControlIntf:=ATabSheetIntf.Prop.FNotifyNumberIconControlIntf;
+                if ANotifyNumberIconControlIntf.GetSkinControlType<>nil then
+                begin
+                  //绘制
+                  ANotifyNumberIconControlIntf.GetSkinControlType.IsUseCurrentEffectStates:=True;
+                  ANotifyNumberIconControlIntf.GetSkinControlType.CurrentEffectStates:=AItemEffectStates;
+                  //绘制
+                  AItemPaintData:=GlobalNullPaintData;
+                  AItemPaintData.IsDrawInteractiveState:=True;
+                  AItemPaintData.IsInDrawDirectUI:=APaintData.IsInDrawDirectUI;
+                  ANotifySkinMaterial:=ANotifyNumberIconControlIntf.GetSkinControlType.GetPaintCurrentUseMaterial;
+                  ANotifyNumberIconControlIntf.GetSkinControlType.Paint(ACanvas,
+                            ANotifySkinMaterial,
+                            TSkinTabSheetMaterial(ATabSheetControlIntf.GetCurrentUseMaterial).FDrawNotifyNumberIconRectSetting.CalcDrawRect(ATabDrawRect),
+                            AItemPaintData);
+                end;
+
+              end;
+
+
+
+//          end;
+//
+//
+//          //绘制标题
+//          ACanvas.DrawText(Self.GetSkinMaterial.FDrawTabCaptionParam,
+//                            ATabSheetControlIntf.Caption,
+//                            ATempTabDrawRect);
+//
+//
+//
+
+    end;
+
+
+
+
+  end;
+
+end;
+
 procedure TSkinPageControlType.SizeChanged;
 begin
   inherited;
@@ -1331,6 +1573,7 @@ var
 var
   ANotifySkinMaterial:TSkinControlMaterial;
 begin
+
   if Self.GetSkinMaterial<>nil then
   begin
 
@@ -1464,24 +1707,30 @@ begin
             //IPhoneX底部要抬起来20
             ATempTabDrawRect.Bottom:=ATempTabDrawRect.Bottom-GlobalIPhoneXBottomBarHeight;
           end;
-          //绘制图标
-          if Self.FSkinPageControlIntf.PageControlProperties.FActivePage<>ATabSheet then
-          begin
-            ATabIcon:=ATabSheetIntf.Prop.FIcon;
-          end
-          else
-          begin
-            ATabIcon:=ATabSheetIntf.Prop.FPushedIcon;
-          end;
-          if ATabIcon.CurrentPictureIsEmpty then
-          begin
-            ATabIcon:=ATabSheetIntf.Prop.FIcon;
-          end;
-          ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawTabIconParam,
-                              ATabIcon,
-                              ATempTabDrawRect);
 
-
+//
+//          if not Self.FSkinPageControlIntf.PageControlProperties.FIsAfterPaintTabIcon then
+//          begin
+//
+//              //绘制图标
+//              if Self.FSkinPageControlIntf.PageControlProperties.FActivePage<>ATabSheet then
+//              begin
+//                ATabIcon:=ATabSheetIntf.Prop.FIcon;
+//              end
+//              else
+//              begin
+//                ATabIcon:=ATabSheetIntf.Prop.FPushedIcon;
+//              end;
+//              if ATabIcon.CurrentPictureIsEmpty then
+//              begin
+//                ATabIcon:=ATabSheetIntf.Prop.FIcon;
+//              end;
+//              ACanvas.DrawPicture(Self.GetSkinMaterial.FDrawTabIconParam,
+//                                  ATabIcon,
+//                                  ATempTabDrawRect);
+//
+//          end;
+//
 
           //绘制标题
           ACanvas.DrawText(Self.GetSkinMaterial.FDrawTabCaptionParam,
@@ -1491,28 +1740,28 @@ begin
 
 
 
-          //绘制通知图标
-          if ATabSheetIntf.Prop.FNotifyNumberIconControlIntf<>nil then
-          begin
-
-            ANotifyNumberIconControlIntf:=ATabSheetIntf.Prop.FNotifyNumberIconControlIntf;
-            if ANotifyNumberIconControlIntf.GetSkinControlType<>nil then
-            begin
-              //绘制
-              ANotifyNumberIconControlIntf.GetSkinControlType.IsUseCurrentEffectStates:=True;
-              ANotifyNumberIconControlIntf.GetSkinControlType.CurrentEffectStates:=AItemEffectStates;
-              //绘制
-              AItemPaintData:=GlobalNullPaintData;
-              AItemPaintData.IsDrawInteractiveState:=True;
-              AItemPaintData.IsInDrawDirectUI:=APaintData.IsInDrawDirectUI;
-              ANotifySkinMaterial:=ANotifyNumberIconControlIntf.GetSkinControlType.GetPaintCurrentUseMaterial;
-              ANotifyNumberIconControlIntf.GetSkinControlType.Paint(ACanvas,
-                        ANotifySkinMaterial,
-                        TSkinTabSheetMaterial(ATabSheetControlIntf.GetCurrentUseMaterial).FDrawNotifyNumberIconRectSetting.CalcDrawRect(ATabDrawRect),
-                        AItemPaintData);
-            end;
-
-          end;
+//          //绘制通知图标
+//          if ATabSheetIntf.Prop.FNotifyNumberIconControlIntf<>nil then
+//          begin
+//
+//            ANotifyNumberIconControlIntf:=ATabSheetIntf.Prop.FNotifyNumberIconControlIntf;
+//            if ANotifyNumberIconControlIntf.GetSkinControlType<>nil then
+//            begin
+//              //绘制
+//              ANotifyNumberIconControlIntf.GetSkinControlType.IsUseCurrentEffectStates:=True;
+//              ANotifyNumberIconControlIntf.GetSkinControlType.CurrentEffectStates:=AItemEffectStates;
+//              //绘制
+//              AItemPaintData:=GlobalNullPaintData;
+//              AItemPaintData.IsDrawInteractiveState:=True;
+//              AItemPaintData.IsInDrawDirectUI:=APaintData.IsInDrawDirectUI;
+//              ANotifySkinMaterial:=ANotifyNumberIconControlIntf.GetSkinControlType.GetPaintCurrentUseMaterial;
+//              ANotifyNumberIconControlIntf.GetSkinControlType.Paint(ACanvas,
+//                        ANotifySkinMaterial,
+//                        TSkinTabSheetMaterial(ATabSheetControlIntf.GetCurrentUseMaterial).FDrawNotifyNumberIconRectSetting.CalcDrawRect(ATabDrawRect),
+//                        AItemPaintData);
+//            end;
+//
+//          end;
 
 
 
@@ -1536,7 +1785,8 @@ begin
 
     end;
 
-
+    //最后绘制图标
+    PaintPageControlTabIcons(ACanvas,ASkinMaterial,ADrawRect,APaintData);
 
 
   end;
@@ -2056,6 +2306,16 @@ begin
   Self.ActivePageIndex:=((Sender as TChildControl) as ISkinButton).Properties.ButtonIndex;
 end;
 
+function TPageControlProperties.GetVisibleTabIconDrawRect(ATabSheet:TSkinTabSheet;ATabIconDrawRect:TRectF):TRectF;
+begin
+  Result:=ATabIconDrawRect;
+  if Assigned(Self.FSkinPageControlIntf.OnCustomCalcTabIconDrawRect) then
+  begin
+    Self.FSkinPageControlIntf.OnCustomCalcTabIconDrawRect(Self,ATabSheet,Result);
+  end;
+
+end;
+
 function TPageControlProperties.GetVisibleTabDrawRect(VisibleIndex: Integer): TRectF;
       function GetTabHeaderSize:Double;
       var
@@ -2242,6 +2502,15 @@ begin
   if FTabSizeCalcType<>Value then
   begin
     FTabSizeCalcType := Value;
+    Invalidate;
+  end;
+end;
+
+procedure TPageControlProperties.SetIsAfterPaintTabIcon(const Value: Boolean);
+begin
+  if FIsAfterPaintTabIcon<>Value then
+  begin
+    FIsAfterPaintTabIcon := Value;
     Invalidate;
   end;
 end;
@@ -3377,6 +3646,25 @@ begin
   Result:=TSkinPageControlDefaultMaterial(CurrentUseMaterial);
 end;
 
+procedure TSkinPageControl.AfterPaint;
+var
+  ACanvas:TDrawCanvas;
+begin
+  {$IFDEF FMX}
+  if Self.Properties.FIsAfterPaintTabIcon then
+  begin
+    ACanvas:=CreateDrawCanvas('TSkinPageControl');
+    try
+      ACanvas.Prepare(Canvas);
+      TSkinPageControlType(Self.GetSkinControlType).PaintPageControlTabIcons(ACanvas,Self.CurrentUseMaterial,RectF(0,0,Width,Height),GlobalNullPaintData);
+    finally
+      FreeAndNil(ACanvas);
+    end;
+  end;
+  {$ENDIF FMX}
+
+end;
+
 function TSkinPageControl.GetPropertiesClassType: TPropertiesClassType;
 begin
   Result:=TPageControlProperties;
@@ -3449,6 +3737,12 @@ begin
   FOnCustomCalcTabDrawRect:=Value;
 end;
 
+procedure TSkinPageControl.SetOnCustomCalcTabIconDrawRect(
+  const Value: TCustomCalcTabDrawIconRectEvent);
+begin
+  FOnCustomCalcTabIconDrawRect:=Value;
+end;
+
 function TSkinPageControl.GetOnChanging: TPageChangingEvent;
 begin
   Result:=Self.FOnChanging;
@@ -3462,6 +3756,11 @@ end;
 function TSkinPageControl.GetOnCustomCalcTabDrawRect: TCustomCalcTabDrawRectEvent;
 begin
   Result:=FOnCustomCalcTabDrawRect;
+end;
+
+function TSkinPageControl.GetOnCustomCalcTabIconDrawRect: TCustomCalcTabDrawIconRectEvent;
+begin
+  Result:=FOnCustomCalcTabIconDrawRect;
 end;
 
 function TSkinPageControl.GetSwitchButtonGroupIntf:ISkinButtonGroup;

@@ -1021,7 +1021,7 @@ begin
       begin
         FIsOldFill:=ASkinMaterial.BackColor.IsFill;
 //        TSkinNotifyNumberIconType(GetSkinControlType).FIsOldFill:=GetSkinControlType.GetPaintCurrentUseMaterial.BackColor.IsFill;
-        ASkinMaterial.BackColor.IsFill:=(Self.FSkinNotifyNumberIconIntf.Prop.FNotifyText<>'');
+        ASkinMaterial.BackColor.StaticIsFill:=(Self.FSkinNotifyNumberIconIntf.Prop.FNotifyText<>'');
       end;
   end;
 
@@ -1033,7 +1033,7 @@ begin
       if (Self.FSkinNotifyNumberIconIntf.Prop.FShowType=nnistNumber)
         or (Self.FSkinNotifyNumberIconIntf.Prop.FShowType=nnistText) then
       begin
-        ASkinMaterial.BackColor.IsFill:=FIsOldFill;
+        ASkinMaterial.BackColor.StaticIsFill:=FIsOldFill;
       end;
   end;
 

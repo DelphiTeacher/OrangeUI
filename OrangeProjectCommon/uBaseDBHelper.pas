@@ -9,10 +9,11 @@ uses
   SyncObjs,
   Classes,
   DB,
-  uLang,
+//  uLang,
   uBaseLog,
   StrUtils,
   uFuncCommon,
+  XSuperObject,
   uDataBaseConfig,
   Variants;
 
@@ -73,6 +74,7 @@ type
     function Query:TDataset;virtual;abstract;
     function NewTempQuery:TDataset;virtual;abstract;
 
+    function QueryRecordList:ISuperArray;virtual;abstract;
     //上次异常字符串
     property LastExceptMessage:String read FLastExceptMessage write FLastExceptMessage;
 
@@ -301,7 +303,7 @@ begin
   if Not Result then
   begin
     //数据库连接失败或异常
-    ADesc:=Trans('数据库连接失败或异常')+' '+Self.FLastExceptMessage;
+    ADesc:='数据库连接失败或异常'+' '+Self.FLastExceptMessage;
     Exit;
   end;
 
@@ -309,7 +311,7 @@ begin
   if Self.Query.Eof then
   begin
     Result:=False;
-    ADesc:=ARecordCaption+Trans('记录不存在!');
+    ADesc:=ARecordCaption+'记录不存在!';
     Exit;
   end;
 
@@ -489,6 +491,7 @@ begin
   if Trim(ATempWhere)='' then
   begin
     //必须要有条件
+    Self.FLastExceptMessage:='SelfQuery_EasyUpdate必须要有条件';
     Exit;
   end;
   

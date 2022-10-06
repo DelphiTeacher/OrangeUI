@@ -6,11 +6,11 @@ inherited frmSelectRecordPopup: TfrmSelectRecordPopup
   Padding.Right = 1
   Padding.Bottom = 1
   OnPaint = FormPaint
-  ExplicitWidth = 445
-  ExplicitHeight = 239
+  ExplicitWidth = 451
+  ExplicitHeight = 268
   PixelsPerInch = 96
   TextHeight = 13
-  object cxGrid1: TcxGrid
+  object cxGrid1: TcxGrid [0]
     Left = 1
     Top = 1
     Width = 443
@@ -39,6 +39,10 @@ inherited frmSelectRecordPopup: TfrmSelectRecordPopup
     object cxGrid1Level1: TcxGridLevel
       GridView = cxGrid1DBTableView1
     end
+  end
+  inherited fsdForm: TSkinWinForm
+    DesignWidth = 451
+    DesignHeight = 268
   end
   object RestMemTable1: TRestMemTable
     Active = True

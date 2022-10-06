@@ -125,52 +125,52 @@ type
                       ///   Tensile
                       ///   </para>
                       /// </summary>
-                      issTensile,
+                      issTensile,//0
                       /// <summary>
                       ///   九宫格
                       ///   <para>
                       ///     Square
                       ///   </para>
                       /// </summary>
-                      issSquare,
+                      issSquare,//1
                       /// <summary>
                       ///   九宫格扩展
                       ///   <para>
                       ///   Square expand
                       ///   </para>
                       /// </summary>
-                      issSquarePro,
+                      issSquarePro,//2
                       /// <summary>
                       ///   水平三分法
                       ///   <para>
                       ///   Horizontal Trichotomy:Divide the picture horizontally into three parts, stretch the middle part
                       ///   </para>
                       /// </summary>
-                      issThreePartHorz,
+                      issThreePartHorz,//3
                       /// <summary>
                       ///   垂直三分法
                       ///   <para>
                       ///   Vertical Trichotomy:Divide the picture vertically into three parts, stretch the middle part
                       ///   </para>
                       /// </summary>
-                      issThreePartVert,
+                      issThreePartVert,//4
                       /// <summary>
                       ///   水平三分法扩展
                       ///   <para>
                       ///   Horizontal trichotomy expand
                       ///   </para>
                       /// </summary>
-                      issThreePartHorzPro,
+                      issThreePartHorzPro,//5
                       /// <summary>
                       ///   垂直三分法扩展
                       ///   <para>
                       ///   Vertical trichotomy expand
                       ///   </para>
                       /// </summary>
-                      issThreePartVertPro,
+                      issThreePartVertPro,//6
 
                       //自适应填满
-                      issAutoFitFillMax
+                      issAutoFitFillMax//7
                       );
 
 

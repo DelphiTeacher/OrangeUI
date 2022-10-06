@@ -215,7 +215,12 @@ begin
               AUniConnection.SpecificOptions.Values['ForceCreateDatabase']:='True';
             end;
 //            AUniConnection.SpecificOptions.Values['EnableSharedCache']:='True';
-//            AUniConnection.SpecificOptions.Values['Direct']:='True';//查询诊断的时候会卡
+
+            {$IFDEF MSWINDOWS}
+            {$IFDEF CPUX64}
+            AUniConnection.SpecificOptions.Values['Direct']:='True';//查询诊断的时候会卡
+            {$ENDIF}
+            {$ENDIF}
           end
           else if (ADataBaseConfig.FDBType='') or SameText(ADataBaseConfig.FDBType,'MYSQL') then
           begin

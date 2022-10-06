@@ -5,6 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes,
 
+  Types,
   uSkinItems,
   uSkinVirtualListType,
   uSkinCustomListType,

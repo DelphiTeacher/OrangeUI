@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
 
 //  CommonImageDataMoudle,
-  FastMsg.Client,
+//  FastMsg.Client,
   System.IOUtils,
 
   uDrawCanvas,

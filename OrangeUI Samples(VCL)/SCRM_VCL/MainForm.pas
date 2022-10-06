@@ -7,6 +7,7 @@ uses
   Dialogs, uSkinWindowsForm, ExtCtrls, pngimage, uSkinWindowsControl,
   uSkinPanelType, uDrawCanvas, uSkinItems, uSkinScrollControlType,
 
+  Types,
   Math,
   uSkinBufferBitmap,
   uGraphicCommon,
@@ -17,8 +18,8 @@ uses
   uSkinItemDesignerPanelType,
 
 //  ListItemStyle_CustomerInfo,
-  ListItemStyle_ContactInfo,
-  ListItemStyle_CompanyInfo,
+//  ListItemStyle_ContactInfo,
+//  ListItemStyle_CompanyInfo,
   ListItemStyle_TreeMainMenu_LabelAndArrow,
 //  EasyServiceCommonMaterialDataMoudle_VCL,
   uGDIPlusDrawCanvas,
@@ -26,17 +27,20 @@ uses
   uIdHttpControl,
 
 //  CustomerInfoFrame,
+//  uAddPictureListSubFrame,
 
   uSkinCustomListType, uSkinVirtualListType, uSkinListBoxType, uSkinButtonType,
   uSkinMaterial, uSkinPageControlType, uSkinImageType, uSkinLabelType, StdCtrls,
-  uSkinWindowsMemo, uSkinWindowsEdit, uSkinEditType, Menus;
+  uSkinWindowsMemo, uSkinWindowsEdit, uSkinEditType, Menus, uSkinListViewType,
+  uSkinTreeViewType, Vcl.ExtDlgs;
+
 
 type
   TfrmMain = class(TForm)
     fsdForm: TSkinWinForm;
     imgLogo: TImage;
     pnlClient: TSkinWinPanel;
-    lbSubMenu: TSkinWinListBox;
+    lbSubMenu: TSkinWinListView;
     btnClose_Material: TSkinButtonDefaultMaterial;
     imgUserHead: TImage;
     lbMainMenu: TSkinWinListBox;
@@ -84,6 +88,7 @@ type
     pcMain_Material: TSkinPageControlDefaultMaterial;
     pcOrder_Material: TSkinPageControlDefaultMaterial;
     pcLeftMargin2: TSkinPageControlDefaultMaterial;
+    OpenPictureDialog1: TOpenPictureDialog;
     procedure btnMinClick(Sender: TObject);
     procedure btnNormalClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -119,7 +124,10 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
+    FCurrentFrame:TFrame;
 //    FCustomerInfoFrame:TFrameCustomerInfo;
+//    FCustomerInfoFrame:TFrameCustomerInfo;
+//    OpenPictureDialog1: TOpenPictureDialog;
     { Private declarations }
   protected
     procedure CreateParams(var Params: TCreateParams); override;
@@ -303,6 +311,35 @@ procedure TfrmMain.lbSubMenuClickItem(AItem: TSkinItem);
 begin
   //ShowMessage(AItem.Caption);
 
+  FreeAndNil(FCurrentFrame);
+
+
+//  //图片多选框
+//  if AItem.Name='add_picture_list_sub_frame' then
+//  begin
+//      Self.FCurrentFrame:=TFrameAddPictureListSub.Create(Self);
+//      Self.FCurrentFrame.Parent:=Self.pnlClient;
+//      Self.FCurrentFrame.Align:=alClient;
+//
+//      TFrameAddPictureListSub(FCurrentFrame).pnlToolBar.Visible:=False;
+//      TFrameAddPictureListSub(FCurrentFrame).lvPictures.Align:=alClient;
+//      TFrameAddPictureListSub(FCurrentFrame).lvPictures.Margins.Left:=0;
+//      TFrameAddPictureListSub(FCurrentFrame).Init(
+//                                                  '',
+//                                                  [],//
+//                                                  [],//
+//                                                  False,//不裁剪
+//                                                  0,
+//                                                  0,
+//                                                  3//最多3张
+//                                                  );
+//
+//
+//
+//
+//  end;
+
+
 end;
 
 procedure TfrmMain.lbSubMenuClickItemDesignerPanelChild(Sender: TObject;
@@ -317,13 +354,13 @@ end;
 
 procedure TfrmMain.lbSubMenuMouseLeave(Sender: TObject);
 begin
-  //鼠标离开的时候,MouseOverItem要设置为0,要重绘一下
-  if lbSubMenu.Prop.MouseOverItem<>nil then
-  begin
-    lbSubMenu.Prop.MouseOverItem.IsBufferNeedChange:=True;
-    lbSubMenu.Prop.MouseOverItem:=nil;
-  end;
-  Self.lbSubMenu.Repaint;
+//  //鼠标离开的时候,MouseOverItem要设置为0,要重绘一下
+//  if lbSubMenu.Prop.MouseOverItem<>nil then
+//  begin
+//    lbSubMenu.Prop.MouseOverItem.IsBufferNeedChange:=True;
+//    lbSubMenu.Prop.MouseOverItem:=nil;
+//  end;
+//  Self.lbSubMenu.Repaint;
 end;
 
 procedure TfrmMain.lbSubMenuMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -331,12 +368,12 @@ procedure TfrmMain.lbSubMenuMouseMove(Sender: TObject; Shift: TShiftState; X,
 var
   I: Integer;
 begin
-  //鼠标移动的时候,要切换MouseOverItem,要重绘一下
-  for I := 0 to lbSubMenu.Prop.Items.Count - 1 do
-  begin
-    lbSubMenu.Prop.Items[I].IsBufferNeedChange:=True;
-  end;
-  lbSubMenu.Repaint;
+//  //鼠标移动的时候,要切换MouseOverItem,要重绘一下
+//  for I := 0 to lbSubMenu.Prop.Items.Count - 1 do
+//  begin
+//    lbSubMenu.Prop.Items[I].IsBufferNeedChange:=True;
+//  end;
+//  lbSubMenu.Repaint;
 end;
 
 procedure TfrmMain.lbSubMenuPrepareDrawItem(Sender: TObject;

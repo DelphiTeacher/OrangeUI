@@ -1,7 +1,7 @@
 object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconCaptionLeft_DetailRight
   Left = 0
   Top = 0
-  Width = 556
+  Width = 823
   Height = 382
   TabOrder = 0
   object ItemDesignerPanel: TSkinWinItemDesignerPanel
@@ -14,6 +14,7 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = clWhite
     SelfOwnMaterial.BackColor.IsFill = False
     SelfOwnMaterial.BackColor.FillColor.Alpha = 255
     SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -50,10 +51,10 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
     Properties.IsPreview = False
     Properties.PreviewItem.Selected = False
     Properties.PreviewItem.Checked = False
-    Properties.PreviewItem.Height = -1
+    Properties.PreviewItem.Height = -1.000000000000000000
     Properties.PreviewItem.Visible = True
     Properties.PreviewItem.Color = clBlack
-    Properties.PreviewItem.Width = -1
+    Properties.PreviewItem.Width = -1.000000000000000000
     Properties.PreviewItem.Icon.IsClipRound = False
     Properties.PreviewItem.Pic.IsClipRound = False
     Properties.PreviewItem.Tag = 0
@@ -66,7 +67,7 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
     Properties.ItemStringsBindingControlCollection = <>
     object imgItemIcon: TSkinWinImage
       AlignWithMargins = True
-      Left = 10
+      Left = 47
       Top = 5
       Width = 24
       Height = 55
@@ -80,6 +81,7 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = clWhite
       SelfOwnMaterial.BackColor.IsFill = False
       SelfOwnMaterial.BackColor.FillColor.Alpha = 255
       SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -139,7 +141,7 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
       Properties.RotateIncrement = 20
     end
     object imgItemCaption: TSkinWinLabel
-      Left = 36
+      Left = 73
       Top = 0
       Width = 100
       Height = 65
@@ -149,6 +151,7 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = clWhite
       SelfOwnMaterial.BackColor.IsFill = False
       SelfOwnMaterial.BackColor.FillColor.Alpha = 255
       SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -212,6 +215,7 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = clWhite
       SelfOwnMaterial.BackColor.IsFill = False
       SelfOwnMaterial.BackColor.FillColor.Alpha = 255
       SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -299,7 +303,6 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
       Properties.Rotated = False
       Properties.RotateSpeed = 5.000000000000000000
       Properties.RotateIncrement = 20
-      ExplicitLeft = 187
     end
     object btnDelete: TSkinWinButton
       Left = 0
@@ -311,6 +314,7 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = clWhite
       SelfOwnMaterial.BackColor.IsFill = False
       SelfOwnMaterial.BackColor.FillColor.Alpha = 255
       SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -441,9 +445,9 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
     end
     object lblDetail: TSkinWinLabel
       AlignWithMargins = True
-      Left = 139
+      Left = 176
       Top = 3
-      Width = 116
+      Width = 79
       Height = 59
       Margins.Right = 10
       ParentMouseEvent = True
@@ -452,6 +456,7 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = clWhite
       SelfOwnMaterial.BackColor.IsFill = False
       SelfOwnMaterial.BackColor.FillColor.Alpha = 255
       SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
@@ -502,10 +507,130 @@ object FrameListItemStyle_IconCaptionLeft_DetailRight: TFrameListItemStyle_IconC
       Caption = #20114#21160#20132#27969
       Text = #20114#21160#20132#27969
       Properties.AutoSize = False
-      ExplicitLeft = 136
-      ExplicitTop = 0
-      ExplicitWidth = 49
-      ExplicitHeight = 65
+    end
+    object chkSelected: TSkinWinCheckBox
+      AlignWithMargins = True
+      Left = 10
+      Top = 3
+      Width = 24
+      Height = 59
+      Margins.Left = 10
+      ParentMouseEvent = True
+      BindItemFieldName = 'ItemSelected'
+      DirectUIVisible = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'Color'
+      SelfOwnMaterial.BackColor.Color = clWhite
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.BackColor.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.BorderColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.IsAutoPosition = False
+      SelfOwnMaterial.DrawCaptionParam.FontName = 'Tahoma'
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 8
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Charset = DEFAULT_CHARSET
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Height = -11
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Name = 'Tahoma'
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Style = []
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.FontSize = 12
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseOverEffect.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseOverEffect.FontSize = 12
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.PushedEffect.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.PushedEffect.FontSize = 12
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.DisabledEffect.FontSize = 12
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+      SelfOwnMaterial.CheckChar = #10004
+      SelfOwnMaterial.DrawCheckStateParam.IsFill = False
+      SelfOwnMaterial.DrawCheckStateParam.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.PenColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.PathActions = <>
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.MouseDownEffect.PenColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.MouseOverEffect.PenColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.PushedEffect.PenColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.DisabledEffect.PenColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckStateParam.DrawEffectSetting.FocusedEffect.PenColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.Color = clWhite
+      SelfOwnMaterial.DrawCheckRectParam.IsFill = False
+      SelfOwnMaterial.DrawCheckRectParam.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.BorderColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.MouseDownEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.MouseDownEffect.BorderColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.MouseOverEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.MouseOverEffect.BorderColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.PushedEffect.BorderColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.DisabledEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.DisabledEffect.BorderColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.FocusedEffect.FillColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawCheckRectParam.DrawEffectSetting.FocusedEffect.BorderColor.Alpha = 255
+      SelfOwnMaterial.IsSimpleDrawCheckState = False
+      SelfOwnMaterial.IsSimpleDrawCheckChar = True
+      SelfOwnMaterial.DrawCheckCharParam.FontName = 'Tahoma'
+      SelfOwnMaterial.DrawCheckCharParam.FontSize = 8
+      SelfOwnMaterial.DrawCheckCharParam.DrawFont.Charset = DEFAULT_CHARSET
+      SelfOwnMaterial.DrawCheckCharParam.DrawFont.Height = -11
+      SelfOwnMaterial.DrawCheckCharParam.DrawFont.Name = 'Tahoma'
+      SelfOwnMaterial.DrawCheckCharParam.DrawFont.Style = []
+      SelfOwnMaterial.DrawCheckCharParam.DrawFont.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckCharParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCheckCharParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCheckCharParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawCheckCharParam.DrawEffectSetting.MouseDownEffect.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckCharParam.DrawEffectSetting.MouseDownEffect.FontSize = 12
+      SelfOwnMaterial.DrawCheckCharParam.DrawEffectSetting.MouseOverEffect.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckCharParam.DrawEffectSetting.MouseOverEffect.FontSize = 12
+      SelfOwnMaterial.DrawCheckCharParam.DrawEffectSetting.PushedEffect.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckCharParam.DrawEffectSetting.PushedEffect.FontSize = 12
+      SelfOwnMaterial.DrawCheckCharParam.DrawEffectSetting.DisabledEffect.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckCharParam.DrawEffectSetting.DisabledEffect.FontSize = 12
+      SelfOwnMaterial.DrawCheckCharParam.DrawEffectSetting.FocusedEffect.FontColor.Alpha = 255
+      SelfOwnMaterial.DrawCheckCharParam.DrawEffectSetting.FocusedEffect.FontSize = 12
+      RefMaterial = dmEasyServiceCommonMaterial.chkDefaultCheckBoxMaterial
+      HitTest = False
+      MouseDownFocus = False
+      Align = alLeft
+      Visible = False
+      TabOrder = 5
+      Caption = ''
+      Text = ''
+      Properties.AutoSize = False
+      Properties.Checked = False
+      Properties.IsAutoChecked = True
+      Properties.IsAutoCaption = False
     end
   end
   object imglistDelete: TSkinImageList

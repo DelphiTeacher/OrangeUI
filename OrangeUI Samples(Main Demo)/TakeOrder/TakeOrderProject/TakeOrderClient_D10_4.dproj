@@ -549,10 +549,10 @@
             </Delphi.Personality>
             <Deployment Version="3">
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2388x1668.png" Configuration="Release" Class="iPad_Launch2388x1668"/>
-                <DeployFile LocalName="..\BarCode\res\drawable\share_via_barcode.png" Configuration="Release" Class="File">
+                <DeployFile LocalName="..\BarCode\res\menu\capture.xml" Configuration="Release" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>res\drawable\</RemoteDir>
-                        <RemoteName>share_via_barcode.png</RemoteName>
+                        <RemoteDir>res\menu\</RemoteDir>
+                        <RemoteName>capture.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -673,7 +673,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="144x144.png" Configuration="Release" Class="iPad_AppIcon144"/>
-                <DeployFile LocalName="iOSSimulator\Release\EasyServiceClient_D10_1.entitlements" Configuration="Release" Class="ProjectiOSEntitlements"/>
                 <DeployFile LocalName="48x48.png" Configuration="Release" Class="Android_LauncherIcon48">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
@@ -681,6 +680,7 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x748.png" Configuration="Release" Class="iPad_Launch1024"/>
+                <DeployFile LocalName="iOSSimulator\Release\EasyServiceClient_D10_1.entitlements" Configuration="Release" Class="ProjectiOSEntitlements"/>
                 <DeployFile LocalName="..\BarCode\res\layout\app_picker_list_item.xml" Configuration="Release" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\layout\</RemoteDir>
@@ -1043,10 +1043,10 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_114x114.png" Configuration="Release" Class="iPhone_AppIcon114"/>
-                <DeployFile LocalName="..\BarCode\res\menu\capture.xml" Configuration="Release" Class="File">
+                <DeployFile LocalName="..\BarCode\res\drawable\share_via_barcode.png" Configuration="Release" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>res\menu\</RemoteDir>
-                        <RemoteName>capture.xml</RemoteName>
+                        <RemoteDir>res\drawable\</RemoteDir>
+                        <RemoteName>share_via_barcode.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

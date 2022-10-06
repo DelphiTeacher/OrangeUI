@@ -17,6 +17,7 @@ uses
   Dialogs,
   StdCtrls,
   ExtCtrls,
+  uSkinListViewType,
 //  uManager,
   Buttons, uSkinWindowsForm;
 
@@ -39,6 +40,7 @@ type
     procedure DoFilter(AKeyword:String);virtual;
     //用于清理数据
     procedure DoClear;virtual;
+    procedure CustomPopup;virtual;
   protected
     procedure CreateParams(var Params:TCreateParams);override;
 
@@ -47,6 +49,8 @@ type
     FKeyWord:String;
     //选中了记录的事件
     OnSelectRecord: TOnSelectRecordEvent;
+
+
 
     //窗体是否已经弹出
     IsPopuped:Boolean;
@@ -67,6 +71,15 @@ type
                             APopupFormWidth:Integer;
                             APopupFormHeight:Integer);
   end;
+
+
+//  TfrmSelectListViewPopup=class(TfrmSelectPopup)
+//  public
+//    lvData:TSkinWinListView;
+//    constructor Create(AOwner:TComponent);override;
+//    destructor Destroy;override;
+//  end;
+
 
 
 function CreateSelectPopupForm(AOwnerForm:TForm;AfrmSelectPopupClass:TfrmSelectPopupClass):TfrmSelectPopup;
@@ -161,6 +174,11 @@ begin
 
 end;
 
+procedure TfrmSelectPopup.CustomPopup;
+begin
+
+end;
+
 procedure TfrmSelectPopup.DoClear;
 begin
 
@@ -230,6 +248,8 @@ begin
 
   DoHide;
 
+
+
 end;
 
 procedure TfrmSelectPopup.Popup(APopupPoint:TPoint;
@@ -256,6 +276,9 @@ begin
   CurrentPopupSelectPopupForm:=Self;
 
   HookMouse(True);
+
+
+  CustomPopup;
 
 end;
 
@@ -286,6 +309,22 @@ begin
   Self.IsPopuped:=True;
 
 end;
+
+{ TfrmSelectListViewPopup }
+
+//constructor TfrmSelectListViewPopup.Create(AOwner: TComponent);
+//begin
+//  inherited;
+//
+//
+//
+//end;
+//
+//destructor TfrmSelectListViewPopup.Destroy;
+//begin
+//
+//  inherited;
+//end;
 
 initialization
   CurrentPopupSelectPopupForm:=nil;

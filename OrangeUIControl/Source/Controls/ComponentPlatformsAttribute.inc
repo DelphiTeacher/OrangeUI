@@ -2,6 +2,12 @@
 //单元中一定要引用Classes单元,不然在其他平台拖不到界面上去
 
   {$IFDEF FMX}
-//  [ComponentPlatformsAttribute(pidWin32 or pidWin64 or pidOSX32 or pidiOSSimulator or pidiOSDevice32 or pidiOSDevice64 or pidAndroid or pidAndroid64)]
+  {$IF CompilerVersion>=32.0}
+  //Delphi 10.2以上
   [ComponentPlatformsAttribute(pidAllPlatforms)]
+  {$ELSE}
+  //Delphi 10.1
+  [ComponentPlatformsAttribute(pidWin32 or pidWin64 or pidOSX32 or pidiOSSimulator or pidiOSDevice32 or pidiOSDevice64 or pidAndroid or pidAndroid64)]
+  {$IFEND}
+
   {$ENDIF}

@@ -10,7 +10,7 @@ uses
   System.Actions,
   FMX.ActnList,
 
-
+  EasyServiceCommonMaterialDataMoudle,
 //  FlyFilesUtils,
   uVersion,
   uLang,
@@ -63,6 +63,7 @@ type
     lblHasTwoState: TLabel;
     lblButtonHasCaptionAndDetail: TLabel;
     lblButtonHasIcon: TLabel;
+    SkinFMXButton1: TSkinFMXButton;
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }

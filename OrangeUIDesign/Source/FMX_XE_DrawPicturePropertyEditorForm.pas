@@ -74,6 +74,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormHide(Sender: TObject);
     procedure btnGenerateGIFImageListClick(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     { Private declarations }
     FDrawPicture: TDrawPicture;
@@ -132,6 +134,15 @@ begin
     and (Not frmSkinItemsPropertyEditor.Visible) then
   begin
     frmSkinItemsPropertyEditor.Visible:=True;
+  end;
+end;
+
+procedure TfrmDrawPicturePropertyEditor.FormKeyUp(Sender: TObject;
+  var Key: Word; var KeyChar: Char; Shift: TShiftState);
+begin
+  if KeyChar=#27 then
+  begin
+    Close;
   end;
 end;
 

@@ -16,6 +16,7 @@ uses
   uSkinListViewType,
   uFileCommon,
   uGPSLocation,
+  uFrameContext,
 
 
   uPhotoManager,
@@ -26,6 +27,7 @@ uses
 
   WaitingFrame,
   MessageBoxFrame,
+  uLang,
 
   uManager,
   uTimerTask,
@@ -53,7 +55,7 @@ uses
   uSkinButtonType, uBaseSkinControl, uSkinPanelType, uDrawCanvas, FMX.Memo.Types;
 
 type
-  TFrameAddSpirit = class(TFrame)
+  TFrameAddSpirit = class(TFrame,IFrameHistroyReturnEvent)
     pnlToolBar: TSkinFMXPanel;
     btnReturn: TSkinFMXButton;
     sbClient: TSkinFMXScrollBox;
@@ -81,6 +83,12 @@ type
     procedure tmrCalcCharCountTimer(Sender: TObject);
     procedure btnDelPicClick(Sender: TObject);
     procedure btnPositionClick(Sender: TObject);
+  private
+    //是否可以返回上一个Frame
+    function CanReturn:TFrameReturnActionType;
+  private
+    //提交成功后返回
+    procedure OnModalResultFromSuccess(AFrame:TObject);
   private
     //当前需要处理的控件
     function GetCurrentPorcessControl(AFocusedControl:TControl):TControl;
@@ -139,10 +147,31 @@ uses
 
 procedure TFrameAddSpirit.btnReturnClick(Sender: TObject);
 begin
-  if GetFrameHistory(Self)<>nil then GetFrameHistory(Self).OnReturnFrame:=nil;
+  if CanReturnFrame(CurrentFrameHistroy)=TFrameReturnActionType.fratDefault then
+  begin
 
-  HideFrame;////(Self,hfcttBeforeReturnFrame);
-  ReturnFrame;//(Self.FrameHistroy);
+    if GetFrameHistory(Self)<>nil then GetFrameHistory(Self).OnReturnFrame:=nil;
+
+    HideFrame;////(Self,hfcttBeforeReturnFrame);
+    ReturnFrame;//(Self.FrameHistroy);
+  end;
+
+end;
+
+function TFrameAddSpirit.CanReturn: TFrameReturnActionType;
+begin
+  if Self.memSpirit.Text<>'' then
+  begin
+    Result:=TFrameReturnActionType.fratCanNotReturn;
+
+    ShowMessageBoxFrame(Self,Trans('您确定要退出吗？'),'',TMsgDlgType.mtInformation,['取消','确定'],OnModalResultFromSuccess);
+
+  end
+  else
+  begin
+    Result:=TFrameReturnActionType.fratDefault;
+    if GetFrameHistory(Self)<>nil then GetFrameHistory(Self).OnReturnFrame:=nil;
+  end;
 
 end;
 
@@ -654,6 +683,19 @@ end;
 procedure TFrameAddSpirit.memSpiritChange(Sender: TObject);
 begin
   lblCharCount.Caption:=IntToStr(Length(Self.memSpirit.Text))+'/250';
+end;
+
+procedure TFrameAddSpirit.OnModalResultFromSuccess(AFrame: TObject);
+begin
+  if TFrameMessageBox(AFrame).ModalResult=Trans('确定') then
+  begin
+    //清空,表示可以退出
+    Self.memSpirit.Text:='';
+    //返回
+    HideFrame;//(Self,hfcttBeforeReturnFrame);
+    ReturnFrame;//(Self.FrameHistroy);
+  end;
+
 end;
 
 procedure TFrameAddSpirit.btnPositionClick(Sender: TObject);

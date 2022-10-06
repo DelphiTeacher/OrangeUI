@@ -21,7 +21,7 @@ uses
 //  uAppCommon,
   uBasePageStructure,
   uSkinItemJsonHelper,
-  uVirtualListDataController,
+//  uVirtualListDataController,
   uComponentType,
   uSkinBufferBitmap,
   uSkinLabelType,
@@ -92,8 +92,8 @@ type
   private
     FOnCustomLoadDataToUIEnd:TNotifyEvent;
 
-    //列表数据控制器
-    ListDataController:TListDataController;
+//    //列表数据控制器
+//    ListDataController:TListDataController;
 
     procedure DoListDataController_LoadDataToUIEnd(Sender:TObject);
 
@@ -279,12 +279,12 @@ begin
   RecordSubControlsLang(Self);
   TranslateSubControlsLang(Self);
 
-  ListDataController:=TListDataController.Create(nil);
+//  ListDataController:=TListDataController.Create(nil);
 end;
 
 destructor TFramePopupMenu.Destroy;
 begin
-  FreeAndNil(ListDataController);
+//  FreeAndNil(ListDataController);
   inherited;
 end;
 
@@ -480,24 +480,24 @@ begin
   FOnCustomLoadDataToUIEnd:=AOnCustomLoadDataToUIEnd;
 
 
-  //wn
-  ListDataController.FieldControlSettingList.Clear;
-  //菜单标题的绑定字段
-//  AItemCaptionFieldControlSetting:=TFieldControlSetting.Create(ListDataController.FieldControlSettingList);
-  AItemCaptionFieldControlSetting:=TFieldControlSetting(ListDataController.FieldControlSettingList.Add);
-  AItemCaptionFieldControlSetting.bind_listitem_data_type:='ItemCaption';
-  AItemCaptionFieldControlSetting.field_name:=AItemCaptionBindingFieldName;
-
-
-
-  //获取数据
-  ListDataController.GetData(Self,
-                            Self.lbMenus,
-                            AOnGetDataJsonEvent,
-                            DoListDataController_LoadDataToUIEnd,
-                            ADataJsonArrayKey,
-                            AItemStyle,
-                            AIsNeedInsertFirstEmptyItem);
+//  //wn
+//  ListDataController.FieldControlSettingList.Clear;
+//  //菜单标题的绑定字段
+////  AItemCaptionFieldControlSetting:=TFieldControlSetting.Create(ListDataController.FieldControlSettingList);
+//  AItemCaptionFieldControlSetting:=TFieldControlSetting(ListDataController.FieldControlSettingList.Add);
+//  AItemCaptionFieldControlSetting.bind_listitem_data_type:='ItemCaption';
+//  AItemCaptionFieldControlSetting.field_name:=AItemCaptionBindingFieldName;
+//
+//
+//
+//  //获取数据
+//  ListDataController.GetData(Self,
+//                            Self.lbMenus,
+//                            AOnGetDataJsonEvent,
+//                            DoListDataController_LoadDataToUIEnd,
+//                            ADataJsonArrayKey,
+//                            AItemStyle,
+//                            AIsNeedInsertFirstEmptyItem);
 
 
 end;
@@ -719,27 +719,27 @@ begin
 
   FOnCustomLoadDataToUIEnd:=AOnCustomLoadDataToUIEnd;
 
-  ListDataController.FieldControlSettingList.Clear;
-
-  for I := 0 to Length(AItemDataBindingFieldNames)-1 do
-  begin
-    //绑定字段
-//    AFieldControlSetting:=TFieldControlSetting.Create(ListDataController.FieldControlSettingList);
-    AFieldControlSetting:=ListDataController.FieldControlSettingList.Add;
-    AFieldControlSetting.bind_listitem_data_type:=AItemDataType[I];
-    AFieldControlSetting.field_name:=AItemDataBindingFieldNames[I];
-  end;
-
-
-  //获取数据
-  ListDataController.GetData(Self,
-                            Self.lbMenus,
-                            AOnGetDataJsonEvent,
-                            DoListDataController_LoadDataToUIEnd,
-                            ADataJsonArrayKey,
-                            AItemStyle,
-                            AIsNeedInsertFirstEmptyItem);
-
+//  ListDataController.FieldControlSettingList.Clear;
+//
+//  for I := 0 to Length(AItemDataBindingFieldNames)-1 do
+//  begin
+//    //绑定字段
+////    AFieldControlSetting:=TFieldControlSetting.Create(ListDataController.FieldControlSettingList);
+//    AFieldControlSetting:=ListDataController.FieldControlSettingList.Add;
+//    AFieldControlSetting.bind_listitem_data_type:=AItemDataType[I];
+//    AFieldControlSetting.field_name:=AItemDataBindingFieldNames[I];
+//  end;
+//
+//
+//  //获取数据
+//  ListDataController.GetData(Self,
+//                            Self.lbMenus,
+//                            AOnGetDataJsonEvent,
+//                            DoListDataController_LoadDataToUIEnd,
+//                            ADataJsonArrayKey,
+//                            AItemStyle,
+//                            AIsNeedInsertFirstEmptyItem);
+//
 
 end;
 

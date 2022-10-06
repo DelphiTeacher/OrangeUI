@@ -63,7 +63,9 @@ uses
   WebBrowserFrame in '..\WebBrowserFrame.pas' {FrameWebBrowser: TFrame},
   uVirtualListDataController in '..\..\..\OrangeProjectCommon\uVirtualListDataController.pas',
   uOpenCommon in '..\..\..\OrangeProjectCommon\uOpenCommon.pas',
-  uModule_InterfaceSign in '..\..\..\OrangeProjectCommon\uModule_InterfaceSign.pas';
+  uModule_InterfaceSign in '..\..\..\OrangeProjectCommon\uModule_InterfaceSign.pas',
+  XSuperJSON in '..\..\..\OrangeProjectCommon\XSuperObject\XSuperJSON.pas',
+  XSuperObject in '..\..\..\OrangeProjectCommon\XSuperObject\XSuperObject.pas';
 
 {$R *.res}
 

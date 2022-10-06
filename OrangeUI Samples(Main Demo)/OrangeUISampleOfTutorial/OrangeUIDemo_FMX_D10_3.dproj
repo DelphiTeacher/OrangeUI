@@ -3,12 +3,12 @@
         <ProjectGuid>{730461DC-48D7-4DFD-9252-4FF7664F6A65}</ProjectGuid>
         <MainSource>OrangeUIDemo_FMX_D10_3.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <TargetedPlatforms>33809</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>FMX</FrameworkType>
         <ProjectVersion>19.2</ProjectVersion>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Android</Platform>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -793,6 +793,10 @@
         <DCCReference Include="..\..\OrangeProjectCommon\OrangeUI_Copy\uBaseLog_Copy.pas"/>
         <DCCReference Include="..\..\OrangeProjectCommon\OrangeUI_Copy\uFuncCommon_Copy.pas"/>
         <DCCReference Include="..\..\OrangeProjectCommon\OrangeUI_Copy\uFileCommon_Copy.pas"/>
+        <DCCReference Include="..\..\OrangeUIStyles\ListItemStyleFrame_IconCaption.pas"/>
+        <DCCReference Include="..\..\OrangeUIStyles\BaseListItemStyleFrame.pas"/>
+        <DCCReference Include="..\..\OrangeUIStyles\ListItemStyleFrame_IconTopCenter_CaptionBottomCenterBlack.pas"/>
+        <DCCReference Include="..\..\OrangeUIStyles\ListItemStyleFrame_Base.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -827,8 +831,8 @@
             </Platforms>
             <Deployment Version="3">
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2388x1668.png" Configuration="Release" Class="iPad_Launch2388x1668"/>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x768.png" Configuration="Release" Class="iPad_Launch1024x768"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_80x80.png" Configuration="Release" Class="iPhone_Spotlight80"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x768.png" Configuration="Release" Class="iPad_Launch1024x768"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_828x1792.png" Configuration="Release" Class="iPhone_Launch828">
                     <Platform Name="iOSSimulator">
                         <RemoteName>Default-828w-1792h@2x.png</RemoteName>
@@ -845,20 +849,15 @@
                 </DeployFile>
                 <DeployFile LocalName="iOSDevice32\Release\OrangeUIDemo_FMX_D10_3.info.plist" Configuration="Release" Class="ProjectiOSInfoPList"/>
                 <DeployFile LocalName="iOSDevice32\Release\OrangeUIDemo_FMX_XE10" Configuration="Release" Class="ProjectOutput"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_1136x640.png" Configuration="Release" Class="iPhone_Launch1136x640">
+                    <Platform Name="iOSSimulator">
+                        <RemoteName>Default-Landscape-640w-1136h@2x.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="iOSDevice32\Release\OrangeUIDemo_FMX_XE10.info.plist" Configuration="Release" Class="ProjectiOSInfoPList"/>
                 <DeployFile LocalName="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Release" Class="AndroidGDBServer">
                     <Platform Name="Android">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_ApplicationIcon_83.5x83.5.png" Configuration="Release" Class="iPad_AppIcon83_5"/>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_120x120.png" Configuration="Release" Class="iPhone_AppIcon120">
-                    <Platform Name="iOSSimulator">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_40x40.png" Configuration="Release" Class="iPhone_Spotlight40">
-                    <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -873,12 +872,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_1136x640.png" Configuration="Release" Class="iPhone_Launch1136x640">
-                    <Platform Name="iOSSimulator">
-                        <RemoteName>Default-Landscape-640w-1136h@2x.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_ApplicationIcon_83.5x83.5.png" Configuration="Release" Class="iPad_AppIcon83_5"/>
+                <DeployFile LocalName="iOSDevice32\Release\OrangeUIDemo_FMX_XE10.entitlements" Configuration="Release" Class="ProjectiOSEntitlements"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_40x40.png" Configuration="Debug" Class="iPhone_Spotlight40"/>
                 <DeployFile LocalName="Android\Release\styles-v21.xml" Configuration="Release" Class="AndroidSplashStylesV21"/>
                 <DeployFile LocalName="iOSDevice32\Debug\OrangeUIDemo_FMX_D10_3" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="iOSSimulator\Release\OrangeUIDemo_FMX_D10_3" Configuration="Release" Class="ProjectOutput">
@@ -894,8 +890,16 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iOSDevice32\Release\OrangeUIDemo_FMX_XE10.entitlements" Configuration="Release" Class="ProjectiOSEntitlements"/>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_40x40.png" Configuration="Debug" Class="iPhone_Spotlight40"/>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_120x120.png" Configuration="Release" Class="iPhone_AppIcon120">
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_40x40.png" Configuration="Release" Class="iPhone_Spotlight40">
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_2048x2732.png" Configuration="Release" Class="iPad_Launch2048x2732">
                     <Platform Name="iOSSimulator">
                         <RemoteName>Default-2048w-2732h@2x~ipad.png</RemoteName>

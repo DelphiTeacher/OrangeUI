@@ -9,6 +9,7 @@ uses
   uSkinVirtualListType,
   uSkinCustomListType,
   PngImage,
+  System.Types,
   uGraphicCommon,
 
 

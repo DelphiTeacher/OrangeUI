@@ -4,6 +4,7 @@ unit uSkinItemsEditor;
 
 interface
 {$I FrameWork.inc}
+{$I Version.inc}
 
 uses
   Classes,
@@ -47,8 +48,14 @@ uses
 const
   //打开设计器
   EDITOR_OPEN_DESIGNER = 0;
-  //创建顶目
-  EDITOR_CREATE_ITEM = 1;
+//  //创建顶目
+//  EDITOR_CREATE_ITEM = 1;
+//  //选择默认列表项样式
+//  EDITOR_SELECT_DEFAULT_ITEM_STYLE = 2;
+  //打开图表序列设计器
+  EDITOR_OPEN_CHART_SERIES_LIST_DESIGNER = 1;
+  //打开图表第一个序列的数据项设计器
+  EDITOR_OPEN_CHART_FIRST_SERIES_DATAITEM_DESIGNER = 2;
 const
   //表格列
   EDITOR_OPEN_COLUMN_DESIGNER = 0;
@@ -94,6 +101,7 @@ type
     constructor Create(AComponent: TComponent; ADesigner: IDesigner); override;
   end;
 
+
   TVirtualGridEditor = class(TItemsEditor)
   public
     constructor Create(AComponent: TComponent; ADesigner: IDesigner); override;
@@ -102,6 +110,7 @@ type
     function GetVerb(Index: Integer): string; override;
     function GetVerbCount: Integer; override;
   end;
+
 
   TItemGridEditor = class(TVirtualGridEditor)
   public
@@ -124,11 +133,54 @@ type
 
 
 
+  //图片控件编译器
+  TVirtualChartEditor = class(TSkinControlComponentEditor)
+  protected
+    FAllowChild: Boolean;
+    FItemsClasses: array of TItemClassDesc;
+//    procedure DoCreateItem(Sender: TObject); virtual;
+  public
+    constructor Create(AComponent: TComponent; ADesigner: IDesigner); override;
+  public
+    procedure ExecuteVerb(Index: Integer); override;
+    function GetVerb(Index: Integer): string; override;
+    function GetVerbCount: Integer; override;
+//    procedure PrepareItem(Index: Integer; const AItem: IMenuItem); override;
+    procedure Edit; override;
+  end;
+
+
+
+
+  //列表项编译器
+  TSkinItemsProperty = class(TPropertyEditor)
+  protected
+    FAllowChild: Boolean;
+    FItemsClasses: array of TItemClassDesc;
+  public
+    procedure Edit; override;
+    function GetAttributes: TPropertyAttributes; override;
+    function GetValue: string; override;
+    procedure SetValue(const Value: string); override;
+  end;
+
+
+
+
+  TVirtualChartSeriesDataItemsProperty = class(TSkinItemsProperty)
+  public
+    constructor Create(const ADesigner: IDesigner; APropCount: Integer); override;
+  end;
+
+
 
 
 procedure Register;
 
+
 implementation
+
+
 
 uses
   TypInfo,
@@ -154,6 +206,7 @@ uses
 //  uSkinWindowsTreeView,
   {$ENDIF}
   uSkinVirtualListType,
+  uSkinVirtualChartType,
 
 
   {$IFDEF OPENSOURCE_VERSION}
@@ -170,70 +223,87 @@ uses
   uSkinListBoxType;
 
 
+
+
 procedure Register;
 begin
+  RegisterPropertyEditor(TypeInfo(TVirtualChartSeriesDataItems),
+                          //父属性
+                          TVirtualChartSeries,
+                          //属性名称
+                          'DataItems',
+                          TVirtualChartSeriesDataItemsProperty);
+  RegisterComponentEditor(TSkinVirtualChart,TVirtualChartEditor);
+
+
   {$IFDEF FMX}
-    RegisterComponentEditor(TSkinFMXCustomList,TCustomListEditor);
-    RegisterComponentEditor(TSkinFMXVirtualList,TVirtualListEditor);
-    RegisterComponentEditor(TSkinFMXListBox,TListBoxEditor);
+      RegisterComponentEditor(TSkinFMXCustomList,TCustomListEditor);
+      RegisterComponentEditor(TSkinFMXVirtualList,TVirtualListEditor);
+      RegisterComponentEditor(TSkinFMXListBox,TListBoxEditor);
 
 
-    {$IFDEF OPENSOURCE_VERSION}
-    //开源版没有ListView,TreeView,Grid
-    {$ELSE}
-    RegisterComponentEditor(TSkinFMXListView,TListViewEditor);
-    RegisterComponentEditor(TSkinFMXTreeView,TTreeViewEditor);
-    RegisterComponentEditor(TSkinTreeView,TTreeViewEditor);
-    RegisterComponentEditor(TSkinFMXVirtualGrid,TVirtualGridEditor);
-    RegisterComponentEditor(TSkinFMXItemGrid,TItemGridEditor);
-    RegisterComponentEditor(TSkinFMXDBGrid,TDBGridEditor);
-    {$ENDIF}
+
+      {$IFDEF OPENSOURCE_VERSION}
+      //开源版没有ListView,TreeView,Grid
+      {$ELSE}
+      RegisterComponentEditor(TSkinFMXListView,TListViewEditor);
+      RegisterComponentEditor(TSkinFMXTreeView,TTreeViewEditor);
+      RegisterComponentEditor(TSkinTreeView,TTreeViewEditor);
+      RegisterComponentEditor(TSkinFMXVirtualGrid,TVirtualGridEditor);
+      RegisterComponentEditor(TSkinFMXItemGrid,TItemGridEditor);
+      RegisterComponentEditor(TSkinFMXDBGrid,TDBGridEditor);
+      {$ENDIF}
 
 
-    RegisterSelectionEditor(TSkinFMXVirtualList,TCustomListSelectionEditor);
-    RegisterSelectionEditor(TSkinFMXListBox,TCustomListSelectionEditor);
+      RegisterSelectionEditor(TSkinFMXVirtualList,TCustomListSelectionEditor);
+      RegisterSelectionEditor(TSkinFMXListBox,TCustomListSelectionEditor);
 
 
-    {$IFDEF OPENSOURCE_VERSION}
-    //开源版没有ListView,TreeView,Grid
-    {$ELSE}
-    RegisterSelectionEditor(TSkinFMXListView,TCustomListSelectionEditor);
-    RegisterSelectionEditor(TSkinFMXTreeView,TCustomListSelectionEditor);
-    RegisterSelectionEditor(TSkinTreeView,TCustomListSelectionEditor);
-    RegisterSelectionEditor(TSkinFMXVirtualGrid,TCustomListSelectionEditor);
-    RegisterSelectionEditor(TSkinFMXItemGrid,TCustomListSelectionEditor);
-    RegisterSelectionEditor(TSkinFMXDBGrid,TCustomListSelectionEditor);
-    {$ENDIF}
+      {$IFDEF OPENSOURCE_VERSION}
+      //开源版没有ListView,TreeView,Grid
+      {$ELSE}
+      RegisterSelectionEditor(TSkinFMXListView,TCustomListSelectionEditor);
+      RegisterSelectionEditor(TSkinFMXTreeView,TCustomListSelectionEditor);
+      RegisterSelectionEditor(TSkinTreeView,TCustomListSelectionEditor);
+      RegisterSelectionEditor(TSkinFMXVirtualGrid,TCustomListSelectionEditor);
+      RegisterSelectionEditor(TSkinFMXItemGrid,TCustomListSelectionEditor);
+      RegisterSelectionEditor(TSkinFMXDBGrid,TCustomListSelectionEditor);
+      {$ENDIF}
   {$ENDIF}
 
+
+
+
   {$IFDEF VCL}
-  //  RegisterComponentEditor(TSkinWinCustomList,TCustomListEditor);
-    RegisterComponentEditor(TSkinWinVirtualList,TVirtualListEditor);
-    RegisterComponentEditor(TSkinWinListBox,TListBoxEditor);
-    {$IFDEF OPENSOURCE_VERSION}
-    //开源版没有ListView,TreeView,Grid
-    {$ELSE}
-      RegisterComponentEditor(TSkinWinListView,TListViewEditor);
-      RegisterComponentEditor(TSkinWinTreeView,TTreeViewEditor);
-      RegisterComponentEditor(TSkinTreeView,TTreeViewEditor);
-      RegisterComponentEditor(TSkinWinVirtualGrid,TVirtualGridEditor);
-      RegisterComponentEditor(TSkinWinItemGrid,TItemGridEditor);
-    //  RegisterComponentEditor(TSkinWinDBGrid,TDBGridEditor);
-    {$ENDIF}
+    //  RegisterComponentEditor(TSkinWinCustomList,TCustomListEditor);
+      RegisterComponentEditor(TSkinWinVirtualList,TVirtualListEditor);
+      RegisterComponentEditor(TSkinWinListBox,TListBoxEditor);
 
 
-    RegisterSelectionEditor(TSkinWinVirtualList,TCustomListSelectionEditor);
-    RegisterSelectionEditor(TSkinWinListBox,TCustomListSelectionEditor);
-    {$IFDEF OPENSOURCE_VERSION}
-    //开源版没有ListView,TreeView,Grid
-    {$ELSE}
-      RegisterSelectionEditor(TSkinWinListView,TCustomListSelectionEditor);
-      RegisterSelectionEditor(TSkinWinTreeView,TCustomListSelectionEditor);
-      RegisterSelectionEditor(TSkinTreeView,TCustomListSelectionEditor);
-      RegisterSelectionEditor(TSkinWinVirtualGrid,TCustomListSelectionEditor);
-      RegisterSelectionEditor(TSkinWinItemGrid,TCustomListSelectionEditor);
-    //  RegisterSelectionEditor(TSkinWinDBGrid,TCustomListSelectionEditor);
-    {$ENDIF}
+      {$IFDEF OPENSOURCE_VERSION}
+      //开源版没有ListView,TreeView,Grid
+      {$ELSE}
+        RegisterComponentEditor(TSkinWinListView,TListViewEditor);
+        RegisterComponentEditor(TSkinWinTreeView,TTreeViewEditor);
+        RegisterComponentEditor(TSkinTreeView,TTreeViewEditor);
+        RegisterComponentEditor(TSkinWinVirtualGrid,TVirtualGridEditor);
+        RegisterComponentEditor(TSkinWinItemGrid,TItemGridEditor);
+      //  RegisterComponentEditor(TSkinWinDBGrid,TDBGridEditor);
+      {$ENDIF}
+
+
+      RegisterSelectionEditor(TSkinWinVirtualList,TCustomListSelectionEditor);
+      RegisterSelectionEditor(TSkinWinListBox,TCustomListSelectionEditor);
+      {$IFDEF OPENSOURCE_VERSION}
+      //开源版没有ListView,TreeView,Grid
+      {$ELSE}
+        RegisterSelectionEditor(TSkinWinListView,TCustomListSelectionEditor);
+        RegisterSelectionEditor(TSkinWinTreeView,TCustomListSelectionEditor);
+        RegisterSelectionEditor(TSkinTreeView,TCustomListSelectionEditor);
+        RegisterSelectionEditor(TSkinWinVirtualGrid,TCustomListSelectionEditor);
+        RegisterSelectionEditor(TSkinWinItemGrid,TCustomListSelectionEditor);
+      //  RegisterSelectionEditor(TSkinWinDBGrid,TCustomListSelectionEditor);
+      {$ENDIF}
   {$ENDIF}
 
 
@@ -257,6 +327,8 @@ begin
 
 
 end;
+
+
 
 
 { TItemsEditor }
@@ -325,15 +397,23 @@ begin
 
 
 
-  if (Index-(Inherited GetVerbCount)) = EDITOR_CREATE_ITEM then
-  begin
-      if Supports(Component, ISkinItems, SkinItemsIntf) then
-      begin
-        Item := FItemsClasses[0].ItemClass.Create;//(SkinItemsIntf.Items);
-        SkinItemsIntf.Items.Add(Item);
-        Designer.SelectComponent(Item);
-      end;
-  end;
+//  if (Index-(Inherited GetVerbCount)) = EDITOR_CREATE_ITEM then
+//  begin
+//      if Supports(Component, ISkinItems, SkinItemsIntf) then
+//      begin
+//        Item := FItemsClasses[0].ItemClass.Create;//(SkinItemsIntf.Items);
+//        SkinItemsIntf.Items.Add(Item);
+//        Designer.SelectComponent(Item);
+//      end;
+//  end;
+
+
+//  if (Index-(Inherited GetVerbCount)) = EDITOR_SELECT_DEFAULT_ITEM_STYLE then
+//  begin
+//    //选择默认列表项样式
+//
+//
+//  end;
 
 
 end;
@@ -343,22 +423,27 @@ begin
   Result:=Inherited GetVerb(Index);
 
   case Index-(Inherited GetVerbCount) of
-    EDITOR_CREATE_ITEM:
-    begin
-      //新建一个列表项
-      Result := Langs_NewItem[LangKind];
-    end;
+//    EDITOR_CREATE_ITEM:
+//    begin
+//      //新建一个列表项
+//      Result := Langs_NewItem[LangKind];
+//    end;
     EDITOR_OPEN_DESIGNER:
     begin
       //打开列表项编辑器
       Result := Langs_ItemsEditor[LangKind];
     end;
+//    EDITOR_SELECT_DEFAULT_ITEM_STYLE:
+//    begin
+//      //选择默认列表项样式
+//      Result := Langs_SelectDefaultItemStyle[LangKind];
+//    end;
   end;
 end;
 
 function TItemsEditor.GetVerbCount: Integer;
 begin
-  Result := 2 + (Inherited GetVerbCount);
+  Result := 1 + (Inherited GetVerbCount);
 end;
 
 //procedure TItemsEditor.PrepareItem(Index: Integer; const AItem: IMenuItem);
@@ -383,6 +468,195 @@ end;
 //  end;
 //
 //end;
+
+
+
+
+{ TVirtualChartEditor }
+
+//procedure TVirtualChartEditor.DoCreateItem(Sender: TObject);
+//var
+//  MenuItem: VCL.Menus.TMenuItem;
+//  Item: TBaseSkinItem;
+//  IndexOfItemClass: Integer;
+//  SkinItemsIntf:ISkinItems;
+//begin
+//  if Sender is VCL.Menus.TMenuItem then
+//  begin
+//    MenuItem := Sender as VCL.Menus.TMenuItem;
+//
+//    if Supports(Component, ISkinItems, SkinItemsIntf) then
+//    begin
+//        IndexOfItemClass := MenuItem.Tag;
+//
+//        Item := FItemsClasses[IndexOfItemClass].ItemClass.Create(SkinItemsIntf.Items);
+//        SkinItemsIntf.Items.Add(Item);
+//        Designer.SelectComponent(Item);
+//    end;
+//  end;
+//end;
+
+constructor TVirtualChartEditor.Create(AComponent: TComponent;
+  ADesigner: IDesigner);
+begin
+  inherited;
+
+  FAllowChild := False;
+  SetLength(FItemsClasses, 1);
+  FItemsClasses[0] := TItemClassDesc.Create(TSkinListBoxItem);
+
+end;
+
+procedure TVirtualChartEditor.Edit;
+begin
+  ExecuteVerb((Inherited GetVerbCount));
+end;
+
+procedure TVirtualChartEditor.ExecuteVerb(Index: Integer);
+var
+//  SkinItemsIntf:ISkinItems;
+  Item: TBaseSkinItem;
+  AItemsClasses: array of TItemClassDesc;
+begin
+  inherited ExecuteVerb(Index);
+
+
+
+  if (Index-(Inherited GetVerbCount)) = EDITOR_OPEN_DESIGNER then
+  begin
+
+      //打开坐标刻度列表项编辑器
+      if Assigned(frmSkinItemsPropertyEditor) then
+      begin
+        FreeAndNil(frmSkinItemsPropertyEditor);
+      end;
+
+
+      frmSkinItemsPropertyEditor := TfrmSkinItemsPropertyEditor.Create(nil);
+      frmSkinItemsPropertyEditor.Caption := Langs_ChartAxisItemsEditor[LangKind];
+
+      frmSkinItemsPropertyEditor.btnAddChild.Visible := FAllowChild;
+      frmSkinItemsPropertyEditor.Designer := Designer;
+      frmSkinItemsPropertyEditor.SetItemClasses(TSkinVirtualChart(Component).Prop.AxisItems, FItemsClasses);
+      frmSkinItemsPropertyEditor.Show;
+
+  end;
+
+
+  if (Index-(Inherited GetVerbCount)) = EDITOR_OPEN_CHART_SERIES_LIST_DESIGNER then
+  begin
+      ShowCollectionEditor(Designer,
+                            TSkinVirtualChart(Component),
+                            TSkinVirtualChart(Component).Prop.SeriesList,
+                            'SeriesList');
+
+  end;
+
+
+  if (Index-(Inherited GetVerbCount)) = EDITOR_OPEN_CHART_FIRST_SERIES_DATAITEM_DESIGNER then
+  begin
+
+      if Assigned(frmSkinItemsPropertyEditor) then
+      begin
+        FreeAndNil(frmSkinItemsPropertyEditor);
+      end;
+
+      if TSkinVirtualChart(Component).Prop.SeriesList.Count>0 then
+      begin
+        SetLength(AItemsClasses, 1);
+        AItemsClasses[0] := TItemClassDesc.Create(TVirtualChartSeriesDataItem);
+
+        frmSkinItemsPropertyEditor := TfrmSkinItemsPropertyEditor.Create(nil);
+        frmSkinItemsPropertyEditor.Caption := Langs_ChartFirstSeriesDataItemsEditor[LangKind];
+
+        frmSkinItemsPropertyEditor.btnAddChild.Visible := FAllowChild;
+        frmSkinItemsPropertyEditor.Designer := Designer;
+        frmSkinItemsPropertyEditor.SetItemClasses(TSkinVirtualChart(Component).Prop.SeriesList[0].DataItems, AItemsClasses);
+        frmSkinItemsPropertyEditor.Show;
+
+      end;
+
+  end;
+
+
+//  if (Index-(Inherited GetVerbCount)) = EDITOR_CREATE_ITEM then
+//  begin
+////      if Supports(Component, ISkinItems, SkinItemsIntf) then
+//      begin
+//        Item := FItemsClasses[0].ItemClass.Create;//(SkinItemsIntf.Items);
+////        SkinItemsIntf.Items.Add(Item);
+//        TSkinVirtualChart(Component).Prop.XAxisItems.Add(Item);
+//        Designer.SelectComponent(Item);
+//      end;
+//  end;
+//
+//
+//  if (Index-(Inherited GetVerbCount)) = EDITOR_SELECT_DEFAULT_ITEM_STYLE then
+//  begin
+//    //选择默认列表项样式
+//
+//
+//  end;
+
+
+end;
+
+function TVirtualChartEditor.GetVerb(Index: Integer): string;
+begin
+  Result:=Inherited GetVerb(Index);
+
+  case Index-(Inherited GetVerbCount) of
+//    EDITOR_CREATE_ITEM:
+//    begin
+//      //新建一个坐标刻度列表项
+//      Result := Langs_NewChartAxisItem[LangKind];
+//    end;
+    EDITOR_OPEN_DESIGNER:
+    begin
+      //打开坐标刻度列表项编辑器
+      Result := Langs_ChartAxisItemsEditor[LangKind];
+    end;
+    EDITOR_OPEN_CHART_SERIES_LIST_DESIGNER:
+    begin
+      //坐标序列列表编辑器
+      Result := Langs_ChartSeriesListEditor[LangKind];
+    end;
+    EDITOR_OPEN_CHART_FIRST_SERIES_DATAITEM_DESIGNER:
+    begin
+      //坐标第一个序列的数据列表编辑器
+      Result := Langs_ChartFirstSeriesDataItemsEditor[LangKind];
+    end;
+  end;
+end;
+
+function TVirtualChartEditor.GetVerbCount: Integer;
+begin
+  Result := 3 + (Inherited GetVerbCount);
+end;
+
+//procedure TVirtualChartEditor.PrepareItem(Index: Integer; const AItem: IMenuItem);
+//var
+//  I: Integer;
+//  MenuItem: IMenuItem;
+//begin
+//  inherited PrepareItem(Index, AItem);
+//
+//  //添加子菜单
+//  if (Index-(Inherited GetVerbCount)) = EDITOR_CREATE_ITEM then
+//  begin
+//    for I := 0 to High(FItemsClasses) do
+//    begin
+//      MenuItem := AItem.AddItem(FItemsClasses[I].ItemClass.ClassName,
+//                                0,
+//                                False,
+//                                True,
+//                                DoCreateItem);
+//      MenuItem := nil;
+//    end;
+//  end;
+//
+//end;
+
 
 { TCustomListEditor }
 
@@ -564,6 +838,76 @@ begin
 //  Add needed used units to the uses clauses of the form where the component is located.
   Proc('uDrawCanvas');
   Proc('uSkinItems');
+
+end;
+
+{ TSkinItemsProperty }
+
+
+procedure TSkinItemsProperty.Edit;
+//var
+//  ASkinPictureList:TSkinPictureList;
+//  PictureEditor: TSkinPictureListEditorPopupForm;
+begin
+
+      frmSkinItemsPropertyEditor := TfrmSkinItemsPropertyEditor.Create(nil);
+//      if Supports(Component, ISkinItems, SkinItemsIntf) then
+//      begin
+
+        frmSkinItemsPropertyEditor.btnAddChild.Visible := FAllowChild;
+        frmSkinItemsPropertyEditor.Designer := Designer;
+        frmSkinItemsPropertyEditor.SetItemClasses(TSkinItems(Pointer(GetOrdValue)), FItemsClasses);
+        frmSkinItemsPropertyEditor.Show;
+
+//  PictureEditor := TSkinPictureListEditorPopupForm.Create(nil);
+//  try
+//    ASkinPictureList:=TSkinPictureList(Pointer(GetOrdValue));
+//    PictureEditor.FPicDlg.PictureList:=ASkinPictureList;
+//    if PictureEditor.Execute then
+//    begin
+//      SetOrdValue(Longint(PictureEditor.FPicDlg.PictureList));
+//    end;
+//  finally
+//    PictureEditor.Free;
+//  end;
+end;
+
+function TSkinItemsProperty.GetAttributes: TPropertyAttributes;
+begin
+  Result := [paDialog, paReadOnly];
+end;
+
+function TSkinItemsProperty.GetValue: string;
+var
+  ASkinItems: TSkinItems;
+begin
+  ASkinItems := TSkinItems(GetOrdValue);
+  Result:=Format(Langs_SkinItemsCount[LangKind],[ASkinItems.Count]);
+end;
+
+procedure TSkinItemsProperty.SetValue(const Value: string);
+begin
+  if Value = '' then
+  begin
+    SetOrdValue(0);
+  end;
+end;
+
+
+
+{ TVirtualChartSeriesDataItemsProperty }
+
+{ TVirtualChartSeriesDataItemsProperty }
+
+constructor TVirtualChartSeriesDataItemsProperty.Create(
+  const ADesigner: IDesigner; APropCount: Integer);
+begin
+  inherited;
+
+  FAllowChild := False;
+  SetLength(FItemsClasses, 1);
+  FItemsClasses[0] := TItemClassDesc.Create(TVirtualChartSeriesDataItem);
+
 
 end;
 

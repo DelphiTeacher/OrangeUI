@@ -2351,13 +2351,49 @@ begin
   VTyp := VarType(Value);
   if VTyp = varUnknown then
      VTyp := VarType(Value);
+
+//  varEmpty    = $0000; { vt_empty        0 }
+//  varNull     = $0001; { vt_null         1 }
+//  varSmallint = $0002; { vt_i2           2 }
+//  varInteger  = $0003; { vt_i4           3 }
+//  varSingle   = $0004; { vt_r4           4 }
+//  varDouble   = $0005; { vt_r8           5 }
+//  varCurrency = $0006; { vt_cy           6 }
+//  varDate     = $0007; { vt_date         7 }
+//  varOleStr   = $0008; { vt_bstr         8 }
+//  varDispatch = $0009; { vt_dispatch     9 }
+//  varError    = $000A; { vt_error       10 }
+//  varBoolean  = $000B; { vt_bool        11 }
+//  varVariant  = $000C; { vt_variant     12 }
+//  varUnknown  = $000D; { vt_unknown     13 }
+////varDecimal  = $000E; { vt_decimal     14 } {UNSUPPORTED as of v6.x code base}
+////varUndef0F  = $000F; { undefined      15 } {UNSUPPORTED per Microsoft}
+//  varShortInt = $0010; { vt_i1          16 }
+//  varByte     = $0011; { vt_ui1         17 }
+//  varWord     = $0012; { vt_ui2         18 }
+//  varLongWord = $0013; { vt_ui4         19 }
+//  varInt64    = $0014; { vt_i8          20 }
+//  varUInt64   = $0015; { vt_ui8         21 }
+//{  if adding new items, update Variants' varLast, BaseTypeMap and OpTypeMap }
+//
+//  varStrArg   = $0048; { vt_clsid        72 }
+//  varString   = $0100; { Pascal string  256 } {not OLE compatible }
+//  varAny      = $0101; { Corba any      257 } {not OLE compatible }
+//  varUString  = $0102; { Unicode string 258 } {not OLE compatible}
+//  // custom types range from $110 (272) to $7FF (2047)
+//
+//  varTypeMask = $0FFF;
+//  varArray    = $2000;
+//  varByRef    = $4000;
+
+
   case VTyp of
     varString, varUString:
        S[path] := Value;
-    varInt64, varInteger, varByte:
+    varInt64, varInteger, varByte,varShortInt,varSmallint,varWord,varLongWord,varUInt64:
        I[path] := Value;
-    varDouble, varCurrency:
-       C[path] := Value;
+    varDouble, varCurrency,varSingle,varDate:
+       D[path] := Value;
     varBoolean:
        B[path] := Value;
   end;

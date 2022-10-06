@@ -53,6 +53,7 @@ type
     ListBoxItem1: TListBoxItem;
     ListBoxItem2: TListBoxItem;
     chkIsClipRound: TCheckBox;
+    btnClear: TButton;
     procedure AddClick(Sender: TObject);
     procedure ReplaceClick(Sender: TObject);
     procedure DeleteClick(Sender: TObject);
@@ -80,6 +81,7 @@ type
     procedure OKButtonClick(Sender: TObject);
     procedure ListBox1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnClearClick(Sender: TObject);
   private
     FDrawPicturePersistent:TDrawPicturePersistent;
     FPictureList: TSkinPictureList;
@@ -307,6 +309,15 @@ begin
   Replace.Enabled:=True;
   Delete.Enabled:=True;
   ExportPicture.Enabled:=True;
+end;
+
+procedure TfrmSkinPictureListPropertyEditor.btnClearClick(Sender: TObject);
+begin
+  if Self.ListBox1.Selected<>nil then
+  begin
+    Self.FDrawPicturePersistent.DrawPicture.ClearPicture;
+  end;
+
 end;
 
 procedure TfrmSkinPictureListPropertyEditor.ClearClick(Sender: TObject);

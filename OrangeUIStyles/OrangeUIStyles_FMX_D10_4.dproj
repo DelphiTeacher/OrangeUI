@@ -223,359 +223,8 @@
         <DCCReference Include="ListItemStyleFrame_IconTopCenter_CaptionBottomCenter_Selected.pas"/>
         <DCCReference Include="ListItemStyleFrame_IconTopCenter_CaptionBottomCenterWhite.pas"/>
         <DCCReference Include="ListItemStyleFrame_Caption_DelButton.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_AchievementDetail.pas">
-            <Form>FrameListItemStyle_SangNa_AchievementDetail</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_AchievementDetailGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_AchievementDetailGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_AchievementSum.pas">
-            <Form>FrameListItemStyle_SangNa_AchievementSum</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_AchievementSumGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_AchievementSumGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_CancelOrder.pas">
-            <Form>FrameListItemStyle_SangNa_CancelOrder</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_CancelOrderGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_CancelOrderGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_CustomerPosition.pas">
-            <Form>FrameListItemStyle_SangNa_CustomerPosition</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_CustomerPositionGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_CustomerPositionGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_HandCodeConsume.pas">
-            <Form>FrameListItemStyle_SangNa_HandCodeConsume</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_HandCodeConsumeGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_HandCodeConsumeGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_HandCodeItemGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_HandCodeItemGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_HandCodeMessage.pas">
-            <Form>FrameListItemStyle_SangNa_HandCodeMessage</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_HandCodeOrderGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_HandCodeOrderGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_HurryFallClock.pas">
-            <Form>FrameListItemStyle_SangNa_HurryFallClock</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_HurryFallClockGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_HurryFallClockGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_Item.pas">
-            <Form>FrameListItemStyle_SangNa_Item</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_LastLeaveRoom.pas">
-            <Form>FrameListItemStyle_SangNa_LastLeaveRoom</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_LastLeaveRoomGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_LastLeaveRoomGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_MyCustomerGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_MyCustomerGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_OperationLog.pas">
-            <Form>FrameListItemStyle_SangNa_OperationLog</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_Overconsumption.pas">
-            <Form>FrameListItemStyle_SangNa_Overconsumption</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_OverconsumptionGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_OverconsumptionGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_Position.pas">
-            <Form>FrameListItemStyle_SangNa_Position</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_PreDispatch.pas">
-            <Form>FrameListItemStyle_SangNa_PreDispatch</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_PreDispatchGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_PreDispatchGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_RewardAnalysis.pas">
-            <Form>FrameListItemStyle_SangNa_RewardAnalysis</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_RewardAnalysisGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_RewardAnalysisGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_RoomStatus.pas">
-            <Form>FrameListItemStyle_SangNa_RoomStatus</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_SaleBook.pas">
-            <Form>FrameListItemStyle_SangNa_SaleBook</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_SelectItemAndTech.pas">
-            <Form>FrameListItemStyle_SangNa_SelectItemAndTech</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_SelectRoom.pas">
-            <Form>FrameListItemStyle_SangNa_SelectRoom</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_ServiceScheduling.pas">
-            <Form>FrameListItemStyle_SangNa_ServiceScheduling</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_ServiceSchedulingGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_ServiceSchedulingGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_StayHint.pas">
-            <Form>FrameListItemStyle_SangNa_StayHint</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_StayHintGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_StayHintGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_Summary.pas">
-            <Form>FrameListItemStyle_SangNa_Summary</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_Task.pas">
-            <Form>FrameListItemStyle_SangNa_Task</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_TechnicinaClockDetailGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_TechnicinaClockDetailGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_TechnicinaClockSumGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_TechnicinaClockSumGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_TechnicinaInfo.pas">
-            <Form>FrameListItemStyle_SangNa_TechnicinaInfo</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_TechnicinaStatus.pas">
-            <Form>FrameListItemStyle_SangNa_TechnicinaStatus</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_UnDispatch.pas">
-            <Form>FrameListItemStyle_SangNa_UnDispatch</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_UnDispatchGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_UnDispatchGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_VIP.pas">
-            <Form>FrameListItemStyle_SangNa_VIP</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_VIPConsumeHabit.pas">
-            <Form>FrameListItemStyle_SangNa_VIPConsumeHabit</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_VIPConsumeHabitGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_VIPConsumeHabitGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_VIPCoupon.pas">
-            <Form>FrameListItemStyle_SangNa_VIPCoupon</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_VIPCouponGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_VIPCouponGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_VIPInvestConsume.pas">
-            <Form>FrameListItemStyle_SangNa_VIPInvestConsume</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_VIPInvestConsumeGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_VIPInvestConsumeGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_VoteAnalysis.pas">
-            <Form>FrameListItemStyle_SangNa_VoteAnalysis</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_VoteAnalysisGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_VoteAnalysisGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_WaitRiseClock.pas">
-            <Form>FrameListItemStyle_SangNa_WaitRiseClock</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_WaitRiseClockGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_WaitRiseClockGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_WhoFirstFallClock.pas">
-            <Form>FrameListItemStyle_SangNa_WhoFirstFallClock</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_WhoFirstFallClockGridRow.pas">
-            <Form>FrameListItemStyle_SangNa_WhoFirstFallClockGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_WineWaterItem.pas">
-            <Form>FrameListItemStyle_SangNa_WineWaterItem</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_AchievementBillGridRow.pas">
-            <Form>FrameListItemStyle_SangNaTech_AchievementBillGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_PreDispatchGridRow.pas">
-            <Form>FrameListItemStyle_SangNaTech_PreDispatchGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_PromoteSaleGridRow.pas">
-            <Form>FrameListItemStyle_SangNaTech_PromoteSaleGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_SaleBook.pas">
-            <Form>FrameListItemStyle_SangNaTech_SaleBook</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_SaleBookGridRow.pas">
-            <Form>FrameListItemStyle_SangNaTech_SaleBookGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_TechnicinaClockChartGridRow.pas">
-            <Form>FrameListItemStyle_SangNaTech_TechnicinaClockChartGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_TechnicinaClockDetailGridRow.pas">
-            <Form>FrameListItemStyle_SangNaTech_TechnicinaClockDetailGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_TechnicinaClockSumGridRow.pas">
-            <Form>FrameListItemStyle_SangNaTech_TechnicinaClockSumGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_AchievementDetailGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_AchievementSumGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_AchievementChartGridRow.pas">
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_MyCustomerGridHeader.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_HeroPromoteSaleGridRow.pas">
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_HeroVoteGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_CircleStopAddRestGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_OnOffWorkGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_ReturnLogGridRow.pas">
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_RunClockGridRow.pas">
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_TaskNotification.pas">
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="DCommunity\ListItemStyleFrame_SaleManageOrderFrame.pas"/>
         <DCCReference Include="DCommunity\ListItemStyleFrame_GoodsManageFrame.pas"/>
-        <DCCReference Include="DCommunity\ListItemStyleFrame_ShopEvalvateFrame.pas">
-            <Form>FrameListItemStyle_ShopEvalvate</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="..\OrangeProjectCommon\EasyServiceCommonMaterialDataMoudle.pas">
             <Form>dmEasyServiceCommonMaterial</Form>
             <FormType>dfm</FormType>
@@ -601,12 +250,6 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="ListItemStyleFrame_ThemeColorButton.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_SellTicketDetailGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_SellTicketSumGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_CheckTicketDetailGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_CheckTicketSumGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_AchievementSumGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_AchievementDetailGridRow.pas"/>
         <DCCReference Include="ListItemStyleFrame_SearchBar_BottomMargin.pas"/>
         <DCCReference Include="ListItemStyleFrame_RadioButton.pas">
             <FormType>fmx</FormType>
@@ -614,28 +257,11 @@
         <DCCReference Include="ListItemStyleFrame_PushedButton.pas"/>
         <DCCReference Include="ListItemStyleFrame_Caption_BottomDetail_IconRight.pas"/>
         <DCCReference Include="ListItemStyleFrame_CaptionTop16_DetailBottom.pas"/>
-        <DCCReference Include="ListItemStyleFrame_ContentCommentDetail.pas"/>
         <DCCReference Include="ListItemStyleFrame_Group.pas"/>
         <DCCReference Include="ListItemStyleFrame_HorzImageListBox.pas"/>
         <DCCReference Include="ListItemStyleFrame_IconCaption_RightGrayDetail.pas"/>
         <DCCReference Include="ListItemStyleFrame_ItemDevide.pas"/>
         <DCCReference Include="ListItemStyleFrame_SmallCoupon.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_ReturnRentItem.pas">
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_PassengerFlowGridRow.pas">
-            <Form>FrameListItemStyle_ParkTicket_PassengerFlowGridRow</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_CoachDetailGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_CoachItemSumGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_CoachSumGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_CoachSurplusSumGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_ParkTicket_ServiceSchedulingGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNa_RentItem.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_AchievementChartDetailGridRow.pas"/>
-        <DCCReference Include="SangNa\ListItemStyleFrame_SangNaTech_TechnicinaClockChartSumGridRow.pas"/>
         <DCCReference Include="ListItemStyleFrame_CaptionLeft_DetailRight_Accessory.pas">
             <FormType>fmx</FormType>
         </DCCReference>
@@ -657,9 +283,6 @@
         <DCCReference Include="XFOnLine\ListItemStyleFrame_GameList.pas">
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="DCommunity\ListItemStyleFrame_LiveStream.pas">
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="XFOnLine\ListItemStyleFrame_ScoreExchangeActivity.pas">
             <FormType>fmx</FormType>
         </DCCReference>
@@ -669,24 +292,58 @@
         </DCCReference>
         <DCCReference Include="ListItemStyleFrame_ScanBarCodeItem.pas"/>
         <DCCReference Include="ListItemStyleFrame_ScoreExchangeGoods.pas"/>
-        <DCCReference Include="DCommunity\ListItemStyleFrame_News1.pas"/>
-        <DCCReference Include="DCommunity\ListItemStyleFrame_ShortVideo.pas"/>
         <DCCReference Include="DCommunity\ListItemStyleFrame_UserSerivceGoodsVIPFrame.pas"/>
         <DCCReference Include="DCommunity\ListItemStyleFrame_UserSerivceGoodsVIPRightsFrame.pas"/>
-        <DCCReference Include="DCommunity\ListItemStyleFrame_ContentNews.pas"/>
-        <DCCReference Include="DCommunity\ListItemStyleFrame_ContentNews2.pas"/>
-        <DCCReference Include="DCommunity\ListItemStyleFrame_DelphiContent.pas"/>
-        <DCCReference Include="DCommunity\ListItemStyleFrame_News.pas"/>
         <DCCReference Include="XFOnLine\ListItemStyleFrame_ScoreRecharge.pas"/>
         <DCCReference Include="XFOnLine\ListItemStyleFrame_XFOnlineNews.pas"/>
         <DCCReference Include="ListItemStyleFrame_CaptionRightCheckBox.pas"/>
-        <DCCReference Include="DoorManage\ListItemStyleFrame_ProcessTaskOrder.pas">
-            <Form>FrameListItemStyle_ProcessTaskOrder</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="DoorManage\ListItemStyleFrame_FinishedProcessTask.pas"/>
         <DCCReference Include="ListItemStyleFrame_DefaultSelected.pas"/>
         <DCCReference Include="ListItemStyleFrame_IconCaption_NotifyNumberIconRight.pas"/>
+        <DCCReference Include="ListItemStyleFrame_IconCaption_BottomDetail_WhiteBackPic.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_GroupHeader.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_GroupFooter.pas"/>
+        <DCCReference Include="ListItemStyleFrame_DefaultCenterSelected.pas"/>
+        <DCCReference Include="ListItemStyleFrame_IconCaptionButton.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_CaptionTopDetailBottom_SelectedBorder.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_IconCaption_BottomDetailRightPic.pas"/>
+        <DCCReference Include="ListItemStyleFrame_IconCaption_BottomDetail_RightGrayDetail1Edit.pas"/>
+        <DCCReference Include="ListItemStyleFrame_CaptionLeft_DetailRight_Detail1Button.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_IconTopCenter_CaptionBottomCenterBlack_Notify.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_IconCaptionButton_DetailBottom.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_CaptionTop_DetailBottom_Detail1Button.pas"/>
+        <DCCReference Include="ListItemStyleFrame_IconCaptionCheckBox.pas"/>
+        <DCCReference Include="ListItemStyleFrame_CaptionLeft_DetailRight_Expand.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_IconCaption_Expand.pas">
+            <Form>FrameIconCaption_ExpandListItemStyle</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_CaptionCenterBorder_Selected.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_DefaultCenterSelected_NormalGrayRoundBack.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ListItemStyleFrame_CaptionAndMultiDetailsHorz_Accessory.pas"/>
+        <DCCReference Include="ParentItemStyleFrame_CheckBoxRight.pas">
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -708,7 +365,6 @@
                     <Source Name="MainSource">OrangeUIStyles_FMX_D10_4.dpk</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\OrangeUIStyles_FMX_D10_4.bpl">(untitled)</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>

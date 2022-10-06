@@ -15,7 +15,8 @@ uses
   uSkinFireMonkeyEdit, uSkinPageControlType, uSkinFireMonkeyPageControl, uSkinFireMonkeyNotifyNumberIcon,
   uSkinFireMonkeyImage, uSkinFireMonkeyItemDesignerPanel, uSkinFireMonkeyScrollControl, uSkinFireMonkeyListBox, uSkinFireMonkeyScrollBar,
   uSkinFireMonkeyTrackBar, uSkinFireMonkeyCheckBox, uSkinFireMonkeyLabel, uSkinFireMonkeyControl, uSkinFireMonkeyImageListPlayer, FMX.TabControl,
-  uDrawPicture, uSkinImageListPlayerType, uBaseSkinControl, uSkinLabelType;
+  uDrawPicture, uSkinImageListPlayerType, uBaseSkinControl, uSkinLabelType,
+  System.ImageList, FMX.ImgList;
 
 type
   TFrameImageListPlayer = class(TFrame,IFrameChangeLanguageEvent)
@@ -26,6 +27,8 @@ type
     ilpLoading1: TSkinFMXImageListPlayer;
     imlistLoading2: TSkinImageList;
     ilpLoading2: TSkinFMXImageListPlayer;
+    ImageList1: TImageList;
+    imglistWaiting: TSkinImageList;
   private
     { Private declarations }
     procedure ChangeLanguage(ALangKind:TLangKind);

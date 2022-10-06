@@ -1,6 +1,6 @@
 object FrameBaseListItemStyle: TFrameBaseListItemStyle
-  Size.Width = 320.000000000000000000
-  Size.Height = 57.000000000000000000
+  Size.Width = 694.000000000000000000
+  Size.Height = 313.000000000000000000
   Size.PlatformDefault = False
   object ItemDesignerPanel: TSkinFMXItemDesignerPanel
     ParentMouseEvent = False
@@ -8,13 +8,13 @@ object FrameBaseListItemStyle: TFrameBaseListItemStyle
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     MouseDownFocus = False
-    Align = Client
     Size.Width = 320.000000000000000000
     Size.Height = 57.000000000000000000
     Size.PlatformDefault = False
@@ -43,6 +43,7 @@ object FrameBaseListItemStyle: TFrameBaseListItemStyle
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = claWhite
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True

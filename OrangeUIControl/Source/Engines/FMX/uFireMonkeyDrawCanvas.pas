@@ -21,8 +21,10 @@ uses
   System.Math.Vectors,
   {$ENDIF}
 
+//  Math,
   uBaseList,
   FMX.Surfaces,
+  FMX.Effects,
   {$IFDEF ANDROID}
   Androidapi.JNI.GraphicsContentViewText,
   FMX.Graphics.Android,
@@ -37,6 +39,7 @@ uses
   uDrawCanvas,
   uDrawParam,
   uFuncCommon,
+  uSkinBufferBitmap,
   uBasePathData,
   uGraphicCommon,
   uDrawTextParam,
@@ -59,11 +62,31 @@ type
     destructor Destroy;override;
   public
     procedure Clear;override;
-    function MoveTo(const X:Double;const Y:Double):Boolean;override;
-    function CurveTo(const X:Double;const Y:Double;
+    procedure MoveTo(const X:Double;const Y:Double);override;
+    procedure CurveTo(const X:Double;const Y:Double;
                     const X1:Double;const Y1:Double;
-                    const X2:Double;const Y2:Double):Boolean;override;
-    function LineTo(const X:Double;const Y:Double):Boolean;override;
+                    const X2:Double;const Y2:Double);override;
+    procedure LineTo(const X:Double;const Y:Double);override;
+
+
+    //添加一个矩形
+    procedure AddRect(const ARect:TRectF);override;
+    //添加一个饼图
+    procedure AddPie(const ARect:TRectF;
+                      AStartAngle, ASweepAngle:Double
+                      );override;
+    //添加一个圆边
+    procedure AddArc(const ARect:TRectF;
+                      AStartAngle, ASweepAngle:Double
+                      );override;
+    //添加一个圆
+    procedure AddEllipse(const ARect:TRectF);override;
+//    //闭合路径
+//    procedure Close;override;
+//    //获取区域,用来判断鼠标是否在区域内
+//    procedure GetRegion;override;
+//    //判断鼠标是否在路径内
+//    function IsInRegion(const APoint: TPointF):Boolean;override;
   end;
 
   TDrawPathData=TFireMonkeyDrawPathData;
@@ -154,7 +177,7 @@ type
     function DrawPathData(ADrawPathData:TBaseDrawPathData):Boolean;override;
     function FillPathData(ADrawPathParam:TDrawPathParam;ADrawPathData:TBaseDrawPathData):Boolean;override;
     //绘制路径
-    function DrawPath(ADrawPathParam:TDrawPathParam;const ADrawRect:TRectF):Boolean;override;
+    function DrawPath(ADrawPathParam:TDrawPathParam;const ADrawRect:TRectF;APathActions:TPathActionCollection):Boolean;override;
 
 
   end;
@@ -304,10 +327,12 @@ begin
     R := ARect;
     if ((XRadius = 0) and (YRadius = 0)) or (ACorners = []) then
     begin
+      //直角矩形
       ACanvas.DrawRect(ARect,XRadius,YRadius,ACorners, AOpacity,ABrush,ACornerType);
     end
     else
     begin
+      //圆角矩形
       R := ARect;
       x1 := XRadius;
       if RectWidthF(R) - (x1 * 2) < 0 then
@@ -317,6 +342,8 @@ begin
       if RectHeightF(R) - (y1 * 2) < 0 then
         y1 := RectHeightF(R) / 2;
       y2 := YRadius * CurveKappaInv;
+
+
       Path := TPathData.Create;
 
 
@@ -556,7 +583,21 @@ begin
 //         ));
       GlobalPathLineArray[LineIndex].BorderEadge:=beLeft;
       GlobalPathLineArray[LineIndex].LineType:=ltDirect;
+
+      {$IFDEF ANDROID}
+      if x1=3 then
+      begin
+        GlobalPathLineArray[LineIndex].Point1:=PointF(R.Left, R.Top + y1-1.8);
+      end
+      else
+      begin
+        GlobalPathLineArray[LineIndex].Point1:=PointF(R.Left, R.Top + y1);
+      end;
+      {$ELSE}
       GlobalPathLineArray[LineIndex].Point1:=PointF(R.Left, R.Top + y1);
+      {$ENDIF}
+
+//      GlobalPathLineArray[LineIndex].Point1:=PointF(R.Left, R.Top + y1-10);
       Inc(LineIndex);
 
 
@@ -1622,12 +1663,24 @@ begin
   //当时为什么要去掉?
   BDrawRect:=ADrawTextParam.CalcDrawRect(ADrawRect);
 
-  TPresentedTextControl_CalcTextObjectSize(FCanvas,
-                                            BDrawRect,//MaxInt,
-                                            ADrawTextParam,
-                                            AText,
-                                            ASize
-                                            );
+  if Length(AText)<10 then
+  begin
+    TPresentedTextControl_CalcTextObjectSize(FCanvas,
+                                              BDrawRect,//MaxInt,
+                                              ADrawTextParam,
+                                              AText+' ',//加上一个空格较正
+                                              ASize
+                                              );
+  end
+  else
+  begin
+    TPresentedTextControl_CalcTextObjectSize(FCanvas,
+                                              BDrawRect,//MaxInt,
+                                              ADrawTextParam,
+                                              AText+'修',//要修正,加上一个字符
+                                              ASize
+                                              );
+  end;
   if AText='' then
   begin
     ADrawWidth:=0;
@@ -1748,17 +1801,18 @@ begin
   FCanvas.DrawLine(APt1,APt2,ADrawLineParam.DrawAlpha/255);
 end;
 
-function TFireMonkeyDrawCanvas.DrawPath(ADrawPathParam: TDrawPathParam;const ADrawRect: TRectF): Boolean;
+function TFireMonkeyDrawCanvas.DrawPath(ADrawPathParam: TDrawPathParam;const ADrawRect: TRectF;APathActions:TPathActionCollection): Boolean;
 var
   I: Integer;
   BDrawRect:TRectF;
   APathActionItem:TPathActionItem;
   ADrawPathData:TFireMonkeyDrawPathData;
+  ARect:TRectF;
 begin
   //根据DrawRectSetting返回需要绘制的实际矩形
   BDrawRect:=ADrawPathParam.CalcDrawRect(ADrawRect);
 
-  ADrawPathData:=TFireMonkeyDrawPathData(ADrawPathParam.PathActions.FDrawPathData);
+  ADrawPathData:=TFireMonkeyDrawPathData(APathActions.FDrawPathData);
 
 
   ADrawPathData.Stroke.Thickness:=ADrawPathParam.CurrentEffectPenWidth;
@@ -1767,9 +1821,9 @@ begin
 
 
   ADrawPathData.Clear;
-  for I := 0 to ADrawPathParam.PathActions.Count-1 do
+  for I := 0 to APathActions.Count-1 do
   begin
-    APathActionItem:=ADrawPathParam.PathActions[I];
+    APathActionItem:=APathActions[I];
     case APathActionItem.ActionType of
       patClear:
       begin
@@ -1823,6 +1877,71 @@ begin
                 Self.FCanvas.Fill);
 
       end;
+
+
+      patAddRect:
+      begin
+//        if APathActions.FIsChanged then
+//        begin
+          ARect:=RectF(
+                      BDrawRect.Left+APathActionItem.GetX(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY(BDrawRect),
+                      BDrawRect.Left+APathActionItem.GetX1(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY1(BDrawRect)
+                      );
+          ADrawPathData.AddRect(ARect);
+//        end;
+      end;
+      patAddPie:
+      begin
+//        if APathActions.FIsChanged then
+//        begin
+          ARect:=RectF(
+                      BDrawRect.Left+APathActionItem.GetX(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY(BDrawRect),
+                      BDrawRect.Left+APathActionItem.GetX1(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY1(BDrawRect)
+                      );
+          //饼图扇形鼠标移上去要变大
+          ARect:=ADrawPathParam.CalcDrawPathRect(ARect);
+          ADrawPathData.AddPie(ARect,APathActionItem.StartAngle,APathActionItem.SweepAngle);
+//        end;
+      end;
+      patAddArc:
+      begin
+//        if APathActions.FIsChanged then
+//        begin
+          ARect:=RectF(
+                      BDrawRect.Left+APathActionItem.GetX(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY(BDrawRect),
+                      BDrawRect.Left+APathActionItem.GetX1(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY1(BDrawRect)
+                      );
+          //饼图扇形鼠标移上去要变大
+          ARect:=ADrawPathParam.CalcDrawPathRect(ARect);
+          ADrawPathData.AddArc(ARect,APathActionItem.StartAngle,APathActionItem.SweepAngle);
+//        end;
+      end;
+      patAddEllipse:
+      begin
+//        if APathActions.FIsChanged then
+//        begin
+          ARect:=RectF(
+                      BDrawRect.Left+APathActionItem.GetX(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY(BDrawRect),
+                      BDrawRect.Left+APathActionItem.GetX1(BDrawRect),
+                      BDrawRect.Top+APathActionItem.GetY1(BDrawRect)
+                      );
+          ARect:=ADrawPathParam.CalcDrawPathRect(ARect);
+          ADrawPathData.AddEllipse(ARect);
+//        end;
+      end;
+//      patGetRegion:
+//      begin
+//          ADrawPathData.GetRegion;
+//      end;
+
+
     end;
   end;
 end;
@@ -2434,6 +2553,8 @@ var
 
   ARoundRectBitmap:TDrawPicture;
   AClipRoundRectBitmap:TDrawPicture;
+var
+  R:TRectF;
 begin
   Result:=True;
 
@@ -2466,6 +2587,9 @@ begin
 
 
 
+
+
+
   //根据DrawRectSetting返回需要绘制的实际矩形
   BDrawRect:=ADrawRectParam.CalcDrawRect(ADrawRect);
   //万一有小于0的
@@ -2480,12 +2604,12 @@ begin
 
       //有边框才需要较正
       BDrawRect:=GetDrawingShapeRectAndSetThickness(
-                ADrawRectParamCurrentEffectBorderWidth,
-                BDrawRect,
-                ADrawRectParamCurrentEffectIsFill,
-                Not IsSameDouble(ADrawRectParamCurrentEffectBorderWidth,0),
-                StrokeThicknessRestoreValue
-                );
+                                                    ADrawRectParamCurrentEffectBorderWidth,
+                                                    BDrawRect,
+                                                    ADrawRectParamCurrentEffectIsFill,
+                                                    Not IsSameDouble(ADrawRectParamCurrentEffectBorderWidth,0),
+                                                    StrokeThicknessRestoreValue
+                                                    );
 
 
       AFillRect:=BDrawRect;
@@ -2494,8 +2618,20 @@ begin
       ARoundWidth:=ADrawRectParam.RoundWidth;
       ARoundHeight:=ADrawRectParam.RoundHeight;
       //如果角半径为-1,那么默认为圆形
-      if IsSameDouble(ARoundWidth,-1) then ARoundWidth:=AFillRect.Width/2;
-      if IsSameDouble(ARoundHeight,-1) then ARoundHeight:=AFillRect.Height/2;
+      if IsSameDouble(ARoundWidth,-1) or IsSameDouble(ARoundHeight,-1) then
+      begin
+        ARoundWidth:=AFillRect.Width/2;
+        ARoundHeight:=AFillRect.Height/2;
+        //圆角保持一致,取最小的半径
+        if ARoundWidth<ARoundHeight then
+        begin
+          ARoundHeight:=ARoundWidth;
+        end
+        else
+        begin
+          ARoundWidth:=ARoundHeight;
+        end;
+      end;
 
 
       //角
@@ -2516,6 +2652,69 @@ begin
       //填充矩形
       if ADrawRectParamCurrentEffectIsFill then
       begin
+
+
+          //有阴影
+//          ADrawRectParam.ShadowSize:=5;
+          if (ADrawRectParam.CurrentEffectShadowSize>0) then
+          begin
+
+
+              //重新处理阴影缓存
+              if ADrawRectParam.FShadowEffect=nil then
+              begin
+                ADrawRectParam.FShadowEffect:=TShadowEffect.Create(nil);
+              end;
+              //大矩形,加上了阴影部分,比原矩形更大
+              ADrawRectParam.FShadowEffectRect := ADrawRectParam.FShadowEffect.GetRect(BDrawRect);
+
+
+              if (ADrawRectParam.FIsChanged) then
+              begin
+                  if ADrawRectParam.FShadowEffectBitmap = nil then
+                  begin
+                    ADrawRectParam.FShadowEffectBitmap := TBitmap.Create(Trunc(ADrawRectParam.FShadowEffectRect.Width), Trunc(ADrawRectParam.FShadowEffectRect.Height));
+    //                ADrawRectParam.FShadowEffectBitmap.BitmapScale:=
+                  end
+                  else if (ADrawRectParam.FShadowEffectBitmap.Width <> Trunc(ADrawRectParam.FShadowEffectRect.Width)) or (ADrawRectParam.FShadowEffectBitmap.Height <> Trunc(ADrawRectParam.FShadowEffectRect.Height)) then
+                  begin
+                    ADrawRectParam.FShadowEffectBitmap.SetSize(Trunc(ADrawRectParam.FShadowEffectRect.Width), Trunc(ADrawRectParam.FShadowEffectRect.Height));
+                  end;
+                  //在缓存中间绘制,
+                  R := TRectF.Create(ADrawRectParam.FShadowEffect.GetOffset.X,
+                                      ADrawRectParam.FShadowEffect.GetOffset.Y,
+                                      (ADrawRectParam.FShadowEffect.GetOffset.X + AFillRect.Width),
+                                      (ADrawRectParam.FShadowEffect.GetOffset.Y + AFillRect.Height));
+
+                  //生成阴影缓存图
+                  ADrawRectParam.FShadowEffectBitmap.Canvas.BeginScene();
+                  try
+                    ADrawRectParam.FShadowEffectBitmap.Canvas.Clear(0);
+                    ADrawRectParam.FShadowEffectBitmap.Canvas.Fill.Kind:=TBrushKind.Solid;
+                    ADrawRectParam.FShadowEffectBitmap.Canvas.Fill.Color:=ADrawRectParam.CurrentEffectFillDrawColor.Color;
+
+    //                ADrawRectParam.FShadowEffectBitmap.Canvas.FillRect(R,0,0,[],ADrawRectParam.DrawAlpha/255);
+                    ADrawRectParam.FShadowEffectBitmap.Canvas.FillRect(R,
+                                                                        ARoundWidth,
+                                                                        ARoundHeight,
+                                                                        ACorners,
+                                                                        ADrawRectParam.DrawAlpha/255);
+                  finally
+                    ADrawRectParam.FShadowEffectBitmap.Canvas.EndScene;
+                  end;
+                  ADrawRectParam.FShadowEffect.ProcessEffect(ADrawRectParam.FShadowEffectBitmap.Canvas, ADrawRectParam.FShadowEffectBitmap, 1);
+              end;
+
+
+              FCanvas.DrawBitmap(ADrawRectParam.FShadowEffectBitmap,
+                                RectF(0, 0, ADrawRectParam.FShadowEffectBitmap.Width, ADrawRectParam.FShadowEffectBitmap.Height),
+                                ADrawRectParam.FShadowEffectRect,
+                                1,
+                                True);
+
+          end;
+
+
 
 //          //创建画刷
 //          case ADrawRectParam.BrushKind of
@@ -2556,9 +2755,21 @@ begin
                     AClipRect:=ADrawRectParam.FClipRoundRectSetting.CalcDrawRect(BDrawRect);
                     AClipRoundWidth:=ADrawRectParam.FClipRoundWidth;
                     AClipRoundHeight:=ADrawRectParam.FClipRoundHeight;
-                    if IsSameDouble(AClipRoundWidth,-1) then AClipRoundWidth:=AClipRect.Width/2;
-                    if IsSameDouble(AClipRoundHeight,-1) then AClipRoundHeight:=AClipRect.Height/2;
+                    if IsSameDouble(AClipRoundWidth,-1) or IsSameDouble(AClipRoundHeight,-1) then
+                    begin
+                      AClipRoundWidth:=AClipRect.Width/2;
+                      AClipRoundHeight:=AClipRect.Height/2;
+                      //圆角保持一致,取最小的半径
+                      if AClipRoundWidth<AClipRoundHeight then
+                      begin
+                        AClipRoundHeight:=AClipRoundWidth;
+                      end
+                      else
+                      begin
+                        AClipRoundWidth:=AClipRoundHeight;
+                      end;
 
+                    end;
 
 
 
@@ -2670,6 +2881,7 @@ begin
           begin
                 if Not ADrawRectParam.IsRound then
                 begin
+
                       //不是圆角
                       FCanvas.FillRect(AFillRect,0,0,[],ADrawRectParam.DrawAlpha/255);
                 end
@@ -2705,8 +2917,8 @@ begin
                                   ARoundRectBitmap:=GlobalColorRoundRectBitmapList.GetBitmap(ADrawRectParam,
                                                                                               AFillRect.Width,
                                                                                               AFillRect.Height,
-                                                                                              ADrawRectParam.RoundWidth,
-                                                                                              ADrawRectParam.RoundHeight,
+                                                                                              ARoundWidth,
+                                                                                              ARoundHeight,
                                                                                               False
                                                                                               );
                               end;
@@ -2778,12 +2990,17 @@ begin
               else
               begin
                 CanvasDrawRectRoundFix(FCanvas,
-                                ADrawBorderRect,
-                                ARoundWidth,
-                                ARoundHeight,
-                                ACorners,
-                                ADrawRectParam.DrawAlpha/255,
-                                Self.FCanvas.Stroke);
+                                        ADrawBorderRect,
+                                        ARoundWidth,
+                                        ARoundHeight,
+                                        ACorners,
+                                        ADrawRectParam.DrawAlpha/255,
+                                        Self.FCanvas.Stroke);
+//                FCanvas.DrawRect(ADrawBorderRect,
+//                                  ARoundWidth,
+//                                  ARoundHeight,
+//                                  ACorners,
+//                                  ADrawRectParam.DrawAlpha/255);
               end;
           end
           else
@@ -2796,13 +3013,13 @@ begin
               else
               begin
                 CanvasDrawRectSidesRoundFix(FCanvas,
-                              ADrawBorderRect,
-                              ADrawRectParam.RoundWidth,
-                              ADrawRectParam.RoundHeight,
-                              ACorners,
-                              ADrawRectParam.DrawAlpha/255,
-                              ASides,
-                              FCanvas.Stroke);
+                                            ADrawBorderRect,
+                                            ADrawRectParam.RoundWidth,
+                                            ADrawRectParam.RoundHeight,
+                                            ACorners,
+                                            ADrawRectParam.DrawAlpha/255,
+                                            ASides,
+                                            FCanvas.Stroke);
               end;
           end;
       end;
@@ -2869,7 +3086,7 @@ begin
       FCanvas.DrawLine(APt1,APt2,ADrawRectParam.DrawAlpha/255);
   end;
 
-
+  ADrawRectParam.FIsChanged:=False;
 
 //  except
 //    on E:Exception do
@@ -3193,6 +3410,52 @@ end;
 
 { TFireMonkeyDrawPathData }
 
+procedure TFireMonkeyDrawPathData.AddArc(const ARect: TRectF; AStartAngle,
+  ASweepAngle: Double);
+var
+  ACenter:TPointF;
+  ARadius:TPointF;
+begin
+  ACenter.X:=ARect.Left+ARect.Width/2;
+  ACenter.Y:=ARect.Top+ARect.Height/2;
+
+  ARadius.X:=ARect.Width/2;
+  ARadius.Y:=ARect.Width/2;
+
+  Self.Path.AddArc(ACenter,ARadius,AStartAngle,ASweepAngle);
+
+end;
+
+procedure TFireMonkeyDrawPathData.AddEllipse(const ARect: TRectF);
+begin
+  Self.Path.AddEllipse(ARect);
+end;
+
+procedure TFireMonkeyDrawPathData.AddPie(const ARect: TRectF; AStartAngle,
+  ASweepAngle: Double);
+var
+  ACenter:TPointF;
+  ARadius:TPointF;
+begin
+  ACenter.X:=ARect.Left+ARect.Width/2;
+  ACenter.Y:=ARect.Top+ARect.Height/2;
+
+  ARadius.X:=ARect.Width/2;
+  ARadius.Y:=ARect.Width/2;
+
+
+  Self.Path.MoveTo(ACenter);
+  Self.Path.LineTo(ACenter);
+
+  Self.Path.AddArc(ACenter,ARadius,AStartAngle,ASweepAngle);
+end;
+
+procedure TFireMonkeyDrawPathData.AddRect(const ARect: TRectF);
+begin
+  Self.Path.AddRectangle(ARect,0,0,[]);
+
+end;
+
 procedure TFireMonkeyDrawPathData.Clear;
 begin
   Path.Clear;
@@ -3207,11 +3470,10 @@ begin
 
 end;
 
-function TFireMonkeyDrawPathData.CurveTo(const X, Y, X1, Y1, X2,
-  Y2: Double): Boolean;
+procedure TFireMonkeyDrawPathData.CurveTo(const X, Y, X1, Y1, X2,
+  Y2: Double);
 begin
   Path.CurveTo(PointF(X,Y),PointF(X1,Y1),PointF(X2,Y2));
-  Result:=True;
 end;
 
 destructor TFireMonkeyDrawPathData.Destroy;
@@ -3221,16 +3483,24 @@ begin
   inherited;
 end;
 
-function TFireMonkeyDrawPathData.LineTo(const X:Double;const Y:Double): Boolean;
+//procedure TFireMonkeyDrawPathData.GetRegion;
+//begin
+//
+//end;
+//
+//function TFireMonkeyDrawPathData.IsInRegion(const APoint: TPointF): Boolean;
+//begin
+//  Result:=False;
+//end;
+
+procedure TFireMonkeyDrawPathData.LineTo(const X:Double;const Y:Double);
 begin
   Path.LineTo(PointF(X,Y));
-  Result:=True;
 end;
 
-function TFireMonkeyDrawPathData.MoveTo(const X:Double;const Y:Double): Boolean;
+procedure TFireMonkeyDrawPathData.MoveTo(const X:Double;const Y:Double);
 begin
   Path.MoveTo(PointF(X,Y));
-  Result:=True;
 end;
 
 
@@ -3278,30 +3548,45 @@ begin
     Exit;
   end;
 
-  FMX.Types.Log.d('OrangeUI AndroidGenerateColorClipRoundRectBitmap Begin');
+  FMX.Types.Log.d('OrangeUI AndroidGenerateColorClipRoundRectBitmap Begin AXRadius='+FloatToStr(AXRadius)+' AYRadius='+FloatToStr(AYRadius));
 
 
-  //-1表示剪裁成圆形
-  if IsSameDouble(AXRadius,-1) then
+//  //-1表示剪裁成圆形
+//  if IsSameDouble(AXRadius,-1) then
+//  begin
+//    AXRadius := AWidth / 2;
+//  end
+//  else if (AXRadius<1) then
+//  begin
+//    //小数,表示百分比
+//    AXRadius := AWidth * AXRadius;
+//  end;
+//
+//  if IsSameDouble(AYRadius,-1) then
+//  begin
+//    AYRadius := AHeight / 2;
+//  end
+//  else if (AYRadius<1) then
+//  begin
+//    //小数,表示百分比
+//    AYRadius := AHeight * AYRadius;
+//  end;
+
+  if IsSameDouble(AXRadius,-1) or IsSameDouble(AYRadius,-1) then
   begin
-    AXRadius := AWidth / 2;
-  end
-  else if (AXRadius<1) then
-  begin
-    //小数,表示百分比
-    AXRadius := AWidth * AXRadius;
+      AXRadius:=AWidth/2;
+      AYRadius:=AHeight/2;
+      //圆角保持一致,取最小的半径
+      if AXRadius<AYRadius then
+      begin
+        AYRadius:=AXRadius;
+      end
+      else
+      begin
+        AXRadius:=AYRadius;
+      end;
+
   end;
-
-  if IsSameDouble(AYRadius,-1) then
-  begin
-    AYRadius := AHeight / 2;
-  end
-  else if (AYRadius<1) then
-  begin
-    //小数,表示百分比
-    AYRadius := AHeight * AYRadius;
-  end;
-
 
 
 
@@ -3405,29 +3690,46 @@ begin
   end;
 
 
-  FMX.Types.Log.d('OrangeUI AndroidGenerateColorRoundRectBitmap Begin');
+//  FMX.Types.Log.d('OrangeUI AndroidGenerateColorRoundRectBitmap Begin AXRadius='+FloatToStr(AXRadius)+' AYRadius='+FloatToStr(AYRadius));
 
 
   //-1表示剪裁成圆形
-  if IsSameDouble(AXRadius,-1) then
+//  if IsSameDouble(AXRadius,-1) then
+//  begin
+//    AXRadius := AWidth / 2;
+//  end
+//  else if (AXRadius<1) then
+//  begin
+//    //小数,表示百分比
+//    AXRadius := AWidth * AXRadius;
+//  end;
+//
+//  if IsSameDouble(AYRadius,-1) then
+//  begin
+//    AYRadius := AHeight / 2;
+//  end
+//  else if (AYRadius<1) then
+//  begin
+//    //小数,表示百分比
+//    AYRadius := AHeight * AYRadius;
+//  end;
+
+  if IsSameDouble(AXRadius,-1) or IsSameDouble(AYRadius,-1) then
   begin
-    AXRadius := AWidth / 2;
-  end
-  else if (AXRadius<1) then
-  begin
-    //小数,表示百分比
-    AXRadius := AWidth * AXRadius;
+      AXRadius:=AWidth/2;
+      AYRadius:=AHeight/2;
+      //圆角保持一致,取最小的半径
+      if AXRadius<AYRadius then
+      begin
+        AYRadius:=AXRadius;
+      end
+      else
+      begin
+        AXRadius:=AYRadius;
+      end;
+
   end;
 
-  if IsSameDouble(AYRadius,-1) then
-  begin
-    AYRadius := AHeight / 2;
-  end
-  else if (AYRadius<1) then
-  begin
-    //小数,表示百分比
-    AYRadius := AHeight * AYRadius;
-  end;
 
 
 
@@ -3473,7 +3775,7 @@ begin
     AJPaint:=nil;
   end;
 
-  FMX.Types.Log.d('OrangeUI AndroidGenerateColorRoundRectBitmap End');
+//  FMX.Types.Log.d('OrangeUI AndroidGenerateColorRoundRectBitmap End');
 end;
 {$ENDIF}
 
@@ -3539,27 +3841,42 @@ begin
 
 
 
-  //-1表示剪裁成圆形
-  if IsSameDouble(AXRadius,-1) then
-  begin
-    AXRadius := AWidth / 2;
-  end
-  else if (AXRadius<1) then
-  begin
-    //小数,表示百分比
-    AXRadius := AWidth * AXRadius;
-  end;
+//  //-1表示剪裁成圆形
+//  if IsSameDouble(AXRadius,-1) then
+//  begin
+//    AXRadius := AWidth / 2;
+//  end
+//  else if (AXRadius<1) then
+//  begin
+//    //小数,表示百分比
+//    AXRadius := AWidth * AXRadius;
+//  end;
+//
+//  if IsSameDouble(AYRadius,-1) then
+//  begin
+//    AYRadius := AHeight / 2;
+//  end
+//  else if (AYRadius<1) then
+//  begin
+//    //小数,表示百分比
+//    AYRadius := AHeight * AYRadius;
+//  end;
 
-  if IsSameDouble(AYRadius,-1) then
+  if IsSameDouble(AXRadius,-1) or IsSameDouble(AYRadius,-1) then
   begin
-    AYRadius := AHeight / 2;
-  end
-  else if (AYRadius<1) then
-  begin
-    //小数,表示百分比
-    AYRadius := AHeight * AYRadius;
-  end;
+      AXRadius:=AWidth/2;
+      AYRadius:=AHeight/2;
+      //圆角保持一致,取最小的半径
+      if AXRadius<AYRadius then
+      begin
+        AYRadius:=AXRadius;
+      end
+      else
+      begin
+        AXRadius:=AYRadius;
+      end;
 
+  end;
 
 
 
@@ -3625,29 +3942,45 @@ begin
   begin
     Exit;
   end;
+  FMX.Types.Log.d('OrangeUI DefaultGenerateColorClipRoundRectBitmap Begin AXRadius='+FloatToStr(AXRadius)+' AYRadius='+FloatToStr(AYRadius));
 
 
-  //-1表示剪裁成圆形
-  if IsSameDouble(AXRadius,-1) then
+//  //-1表示剪裁成圆形
+//  if IsSameDouble(AXRadius,-1) then
+//  begin
+//    AXRadius := AWidth / 2;
+//  end
+//  else if (AXRadius<1) then
+//  begin
+//    //小数,表示百分比
+//    AXRadius := AWidth * AXRadius;
+//  end;
+//
+//  if IsSameDouble(AYRadius,-1) then
+//  begin
+//    AYRadius := AHeight / 2;
+//  end
+//  else if (AYRadius<1) then
+//  begin
+//    //小数,表示百分比
+//    AYRadius := AHeight * AYRadius;
+//  end;
+
+  if IsSameDouble(AXRadius,-1) or IsSameDouble(AYRadius,-1) then
   begin
-    AXRadius := AWidth / 2;
-  end
-  else if (AXRadius<1) then
-  begin
-    //小数,表示百分比
-    AXRadius := AWidth * AXRadius;
+      AXRadius:=AWidth/2;
+      AYRadius:=AHeight/2;
+      //圆角保持一致,取最小的半径
+      if AXRadius<AYRadius then
+      begin
+        AYRadius:=AXRadius;
+      end
+      else
+      begin
+        AXRadius:=AYRadius;
+      end;
+
   end;
-
-  if IsSameDouble(AYRadius,-1) then
-  begin
-    AYRadius := AHeight / 2;
-  end
-  else if (AYRadius<1) then
-  begin
-    //小数,表示百分比
-    AYRadius := AHeight * AYRadius;
-  end;
-
 
 
 
@@ -3789,26 +4122,26 @@ begin
   Result:=nil;
 
 
-  //-1表示剪裁成圆形
-  if IsSameDouble(AXRadius,-1) then
-  begin
-    AXRadius := AWidth / 2;
-  end
-  else if (AXRadius<1) then
-  begin
-    //小数,表示百分比
-    AXRadius := AWidth * AXRadius;
-  end;
-
-  if IsSameDouble(AYRadius,-1) then
-  begin
-    AYRadius := AHeight / 2;
-  end
-  else if (AYRadius<1) then
-  begin
-    //小数,表示百分比
-    AYRadius := AHeight * AYRadius;
-  end;
+//  //-1表示剪裁成圆形
+//  if IsSameDouble(AXRadius,-1) then
+//  begin
+//    AXRadius := AWidth / 2;
+//  end
+//  else if (AXRadius<1) then
+//  begin
+//    //小数,表示百分比
+//    AXRadius := AWidth * AXRadius;
+//  end;
+//
+//  if IsSameDouble(AYRadius,-1) then
+//  begin
+//    AYRadius := AHeight / 2;
+//  end
+//  else if (AYRadius<1) then
+//  begin
+//    //小数,表示百分比
+//    AYRadius := AHeight * AYRadius;
+//  end;
 
 
 
@@ -3947,5 +4280,7 @@ end.
 //  Writing: 2012-2014
 //
 //------------------------------------------------------------------
+
+
 
 

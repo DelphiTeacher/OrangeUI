@@ -179,7 +179,8 @@ type
     //当前需要处理的控件
     function GetCurrentPorcessControl(AFocusedControl:TControl):TControl;
     function GetVirtualKeyboardControlParent:TControl;
-
+    //获取虚拟键盘的高度校正
+    function GetVirtualKeyboardHeightAdjustHeight:Double;
   public
 //    FrameHistroy:TFrameHistroy;
 
@@ -991,6 +992,11 @@ end;
 function TFrameAddHotel.GetVirtualKeyboardControlParent: TControl;
 begin
   Result:=Self;
+end;
+
+function TFrameAddHotel.GetVirtualKeyboardHeightAdjustHeight: Double;
+begin
+  Result:=0;
 end;
 
 procedure TFrameAddHotel.imgStar1Click(Sender: TObject);

@@ -8,7 +8,11 @@ uses
   SysUtils,
   IniFiles,
   StrUtils,
+
+  {$IFDEF MSWINDOWS}
   DES,
+  {$ENDIF}
+
 //  Forms,
   Types;
 
@@ -30,6 +34,7 @@ type
     procedure Clear;
     procedure Load(AIniFileName:String=Const_Default_DBConfigFileName);
     procedure Save(AIniFileName:String=Const_Default_DBConfigFileName);
+  private
   public
     //数据库类型
     FDBType:String;
@@ -57,6 +62,7 @@ type
     FSpecificOptions_NativeClientVersion:String;
     function IsEmpty:Boolean;
     function GetTablePrefix:String;
+    function ServerUrl: String;
   end;
 
 
@@ -76,6 +82,11 @@ begin
 end;
 
 { TDataBaseConfig }
+
+function TDataBaseConfig.ServerUrl: String;
+begin
+  Result:='http://'+Self.FDBHostName+':'+Self.FDBHostPort+'/';
+end;
 
 procedure TDataBaseConfig.AssignTo(Dest: TPersistent);
 var
@@ -182,10 +193,12 @@ end;
 function TDataBaseConfig.LoadFromINI(AINIFilePath: String): Boolean;
 var
   AIniFile:TIniFile;
+  ATempStr:String;
+  ATempAnsiStr:AnsiString;
 begin
   Result:=False;
 
-  AIniFile:=TIniFile.Create(AINIFilePath);
+  AIniFile:=TIniFile.Create(AINIFilePath{$IFDEF MSWINDOWS}{$ELSE},TEncoding.UTF8{$ENDIF});
 
   Self.FDBType:=AIniFile.ReadString('','DBType','MYSQL');
 
@@ -195,22 +208,25 @@ begin
   Self.FDBPassword:=AIniFile.ReadString('','DBPassword','');
 
 
+  {$IFDEF MSWINDOWS}
   //增加加密存储，Damon
-  if (LeftStr(Self.FDBPassword,5)='[ENC]') and ((Length(Self.FDBPassword)-5) mod 16 = 0) then
+  if (LeftStr(Self.FDBPassword,5)='[ENC]') and (Length(Self.FDBPassword)-5>0) and ((Length(Self.FDBPassword)-5) mod 16 = 0) then
   begin
     //解密
-    Self.FDBPassword:=String(Hex2String(DESDecryptHEX(AnsiString(Trim(
-                                                                      RightStr(Self.FDBPassword,Length(Self.FDBPassword)-5)
-                                                                      )
-                                                      ),
+    ATempStr:=RightStr(Self.FDBPassword,Length(Self.FDBPassword)-5);
+    ATempStr:=Trim(ATempStr);
+    ATempAnsiStr:=ATempStr;
+    ATempAnsiStr:=DESDecryptHEX(ATempAnsiStr,
                                                       gKEY,
-                                                      gIV)
-                                        )
-                            );
+                                                      gIV);
+
+
+    Self.FDBPassword:=Hex2String(ATempAnsiStr);
   end
   else
   begin
   end;
+  {$ENDIF}
 
 
   Self.FDBDataBaseName:=AIniFile.ReadString('','DBDataBaseName','');
@@ -242,7 +258,7 @@ var
   ADBPassword:String;
 begin
   Result:=False;
-  AIniFile:=TIniFile.Create(AINIFilePath);
+  AIniFile:=TIniFile.Create(AINIFilePath{$IFDEF MSWINDOWS}{$ELSE},TEncoding.UTF8{$ENDIF});
 
   AIniFile.WriteString('','DBType',Self.FDBType);
 
@@ -253,12 +269,14 @@ begin
 
   ADBPassword:=FDBPassword;
 
+  {$IFDEF MSWINDOWS}
   if (LeftStr(Self.FDBPassword,5)<>'[ENC]') then
   begin
     ADBPassword:='[ENC]'+String(DESEncryptHEX(String2Hex(AnsiString(
                     RightStr(Self.FDBPassword,Length(Self.FDBPassword))
                     )), gKEY, gIV));
   end;
+  {$ENDIF}
 
 //  Self.SaveToINI(ExtractFilePath(Application.ExeName)+DBConfigFileName);
 //  Self.FDBPassword:=String(Hex2String(DESDecryptHEX(AnsiString(Trim(

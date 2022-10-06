@@ -15,6 +15,7 @@ unit uComponentTypeRegister;
 
 interface
 {$I FrameWork.inc}
+{$I Version.inc}
 
 
 
@@ -136,7 +137,7 @@ uses
 
   uSkinCustomListType,
 
-//  uSkinVirtualListType,
+  uSkinVirtualListType,
   uSkinListBoxType,
 
 
@@ -148,9 +149,11 @@ uses
 //  uSkinVirtualGridType,
   uSkinItemGridType,
   uSkinDBGridType,
+  uSkinRegExTagLabelViewType,
   {$ENDIF}
 
   uSkinPullLoadPanelType,
+  uSkinVirtualChartType,
 
   {$IFDEF VCL}
   uSkinFormType,
@@ -205,7 +208,7 @@ uses
 //  uSkinFireMonkeyVirtualGrid,
   uSkinFireMonkeyItemGrid,
   uSkinFireMonkeyDBGrid,
-  uSkinRegExTagLabelViewType,
+//  uSkinRegExTagLabelViewType,
   {$ENDIF}
 
 
@@ -331,8 +334,10 @@ begin
 
                           TSkinFMXButton,
                           TSkinFMXButtonGroup,
+                          TSkinSelectDateAreaButton,
                           TSkinFMXLabel,
                           TSkinFMXRollLabel,
+                          TSkinFMXHintLabel,
                           TSkinFMXMultiColorLabel,
                           TSkinFMXEdit,
                           TSkinFMXComboBox,
@@ -390,7 +395,8 @@ begin
                           TSkinFMXRadioButton,
 
 
-                          TProcessNativeControlModalShowPanel];
+                          TProcessNativeControlModalShowPanel,
+                          TSkinFMXVirtualChart];
 
   RegisterClasses(ConvertComponentArrayToPersistentArray(OrangeUI_ControlArray));
 
@@ -413,7 +419,7 @@ begin
   //                        TSkinWinPopup,
   //                        TSkinWinComboEdit,
                           TSkinWinMemo,
-  //                        TSkinWinRoundImage,
+                          TSkinWinRoundImage,
   //                        TSkinWinRoundRect,
   //                        TSkinWinSwitch,
   //                        TSkinWinSwitchBar,
@@ -459,14 +465,16 @@ begin
                           TSkinWinTreeView,
                           {$ENDIF}
 
-                          TSkinWinRadioButton
+
+                          TSkinWinRadioButton,
+                          TSkinWinVirtualChart
                           ];
     {$ELSE}
         {$IFDEF OPENSOURCE_VERSION}
         //开源版没有ListView,TreeView,Grid
-        SetLength(OrangeUI_ControlArray,28);
+        SetLength(OrangeUI_ControlArray,29);
         {$ELSE}
-        SetLength(OrangeUI_ControlArray,32);
+        SetLength(OrangeUI_ControlArray,33);
         {$ENDIF}
         I:=0;OrangeUI_ControlArray[I]:=TSkinWinForm;
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinNormalForm;//,
@@ -478,7 +486,8 @@ begin
   //                        TSkinWinPopup,
   //                        TSkinWinComboEdit,
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinMemo;//,
-  //                        TSkinWinRoundImage,
+                          I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinRoundImage;//,
+  //                        ,
   //                        TSkinWinRoundRect,
   //                        TSkinWinSwitch,
   //                        TSkinWinSwitchBar,
@@ -525,6 +534,7 @@ begin
 
 
                           I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinRadioButton;//
+                          I:=I+1;OrangeUI_ControlArray[I]:=TSkinWinChart;//
 
     {$IFEND}
 
@@ -615,15 +625,17 @@ begin
                         TSkinItemGridDefaultMaterial,
                         TSkinDBGridDefaultMaterial,
 
-                        TSkinListViewDefaultMaterial,
                         TSkinTreeViewDefaultMaterial,
-                        {$IFDEF FMX}
+//                        {$IFDEF FMX}
                         TSkinRegExTagLabelViewDefaultMaterial,
-                        {$ENDIF}
+//                        {$ENDIF}
                         {$ENDIF}
 
 
-                        TSkinListBoxDefaultMaterial
+                        TSkinListViewDefaultMaterial,
+                        TSkinListBoxDefaultMaterial,
+                        TSkinVirtualChartDefaultMaterial
+
                         ];
   {$ELSE}
     {$IFDEF VCL}
@@ -706,12 +718,13 @@ begin
 //                        TSkinVirtualGridDefaultMaterial,
                         I:=I+1;OrangeUI_MaterialArray[I]:=TSkinItemGridDefaultMaterial;//,
                         I:=I+1;OrangeUI_MaterialArray[I]:=TSkinDBGridDefaultMaterial;//,
-                        I:=I+1;OrangeUI_MaterialArray[I]:=TSkinListViewDefaultMaterial;//,
                         I:=I+1;OrangeUI_MaterialArray[I]:=TSkinTreeViewDefaultMaterial;//
                         {$ENDIF}
 
 
+                        I:=I+1;OrangeUI_MaterialArray[I]:=TSkinListViewDefaultMaterial;//,
                         I:=I+1;OrangeUI_MaterialArray[I]:=TSkinListBoxDefaultMaterial;//,
+                        I:=I+1;OrangeUI_MaterialArray[I]:=TSkinVirtualChartDefaultMaterial;//,
 
 
 
@@ -770,6 +783,7 @@ begin
   //标签
   RegisterSkinControlStyle('SkinLabel',TSkinLabelDefaultType,TSkinLabelDefaultMaterial,Const_Default_ComponentType,True);
   RegisterSkinControlStyle('SkinRollLabel',TSkinRollLabelType,TSkinLabelDefaultMaterial,Const_Default_ComponentType,True);
+  RegisterSkinControlStyle('SkinHintLabel',TSkinHintLabelType,TSkinHintLabelMaterial,Const_Default_ComponentType,True);
 
 
   //多彩标签
@@ -901,14 +915,16 @@ begin
 
 
   RegisterSkinControlStyle('SkinDBGrid',TSkinDBGridDefaultType,TSkinDBGridDefaultMaterial,Const_Default_ComponentType,True);
-  {$IFDEF FMX}
-  RegisterSkinControlStyle('SkinRegExTagLabelView',TSkinListViewDefaultType,TSkinRegExTagLabelViewDefaultMaterial,Const_Default_ComponentType,True);
-  {$ENDIF}
+//  {$IFDEF FMX}
+  RegisterSkinControlStyle('SkinRegExTagLabelView',TSkinRegExTagLabelViewDefaultType,TSkinRegExTagLabelViewDefaultMaterial,Const_Default_ComponentType,True);
+//  {$ENDIF}
 
   {$ENDIF}
 
 
 
+  //图表视图
+  RegisterSkinControlStyle('SkinVirtualChart',TSkinVirtualChartDefaultType,TSkinVirtualChartDefaultMaterial,Const_Default_ComponentType,True);
 
   RegisterSkinControlStyle('ProcessNativeControlModalShowPanel',
                             TSkinControlType,

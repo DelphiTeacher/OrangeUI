@@ -146,6 +146,8 @@ type
 
 var
   GlobalDatabaseModuleClass:TBaseDatabaseModuleClass;
+var
+  GlobalDBModule:TBaseDatabaseModule;
 
 
 

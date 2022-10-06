@@ -4,10 +4,17 @@ object FrameListItemStyle_Caption_BottomDetail_IconRight: TFrameListItemStyle_Ca
   Size.PlatformDefault = False
   object ItemDesignerPanel: TSkinFMXItemDesignerPanel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.UseThemeColor = ctThemeColor
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.IsTransparent = False
     MouseDownFocus = False
     HitTest = False
@@ -43,9 +50,16 @@ object FrameListItemStyle_Caption_BottomDetail_IconRight: TFrameListItemStyle_Ca
     object imgItemIcon: TSkinFMXImage
       ParentMouseEvent = False
       BindItemFieldName = 'ItemIcon'
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = claWhite
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
       SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaCenter
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -132,9 +146,16 @@ object FrameListItemStyle_Caption_BottomDetail_IconRight: TFrameListItemStyle_Ca
     end
     object SkinFMXPanel1: TSkinFMXPanel
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = claWhite
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
       SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
       SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
@@ -151,11 +172,18 @@ object FrameListItemStyle_Caption_BottomDetail_IconRight: TFrameListItemStyle_Ca
       object lblItemCaption: TSkinFMXLabel
         ParentMouseEvent = False
         BindItemFieldName = 'ItemCaption'
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = claWhite
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
         SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.IsTransparent = False
         SelfOwnMaterial.DrawCaptionParam.FontStyle = [fsBold]
         SelfOwnMaterial.DrawCaptionParam.FontSize = 16.000000000000000000
@@ -181,9 +209,16 @@ object FrameListItemStyle_Caption_BottomDetail_IconRight: TFrameListItemStyle_Ca
       object lblItemDetail: TSkinFMXLabel
         ParentMouseEvent = False
         BindItemFieldName = 'ItemDetail'
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = claWhite
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
         SelfOwnMaterial.DrawCaptionParam.FontColor = claGray
         SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000

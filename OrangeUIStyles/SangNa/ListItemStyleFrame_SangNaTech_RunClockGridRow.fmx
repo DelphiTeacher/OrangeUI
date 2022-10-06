@@ -4,13 +4,19 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
   Size.PlatformDefault = False
   object ItemDesignerPanel: TSkinFMXItemDesignerPanel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
     SelfOwnMaterial.BackColor.BorderEadges = [beRight]
     SelfOwnMaterial.BackColor.IsFill = True
     SelfOwnMaterial.BackColor.DrawRectSetting.SizeType = dpstPixel
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFFEDEDED
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.IsTransparent = False
     MouseDownFocus = False
     HitTest = False
@@ -22,10 +28,10 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     TabOrder = 0
     Properties.IsPreview = False
     Properties.PreviewItem.Selected = False
+    Properties.PreviewItem.Checked = False
     Properties.PreviewItem.Height = -1.000000000000000000
     Properties.PreviewItem.Visible = True
     Properties.PreviewItem.Color = claNull
-    Properties.PreviewItem.Checked = False
     Properties.PreviewItem.Width = -1.000000000000000000
     Properties.PreviewItem.Icon.IsClipRound = False
     Properties.PreviewItem.Pic.IsClipRound = False
@@ -45,9 +51,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     object lblDetail3: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = #25216#24072
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -67,9 +79,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     end
     object lblDetail: TSkinFMXLabel
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontColor = xFF4E8FC7
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
@@ -97,9 +115,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     object lblDetail1: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = #24615#21035
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -120,9 +144,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     object lblDetail4: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = #33829#19994#26085
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -143,9 +173,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     object lblDetail6: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = #31561#24453
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -166,9 +202,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     object lblSubItems0: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = #36215#33853#38047
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -190,9 +232,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     object SkinFMXLabel1: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = #25552#20132
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -213,9 +261,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     object SkinFMXLabel3: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = #39033#30446
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -236,9 +290,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     object SkinFMXLabel2: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = #31867#22411
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -259,9 +319,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     object SkinFMXLabel4: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = #20301#32622
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
@@ -282,9 +348,15 @@ object FrameListItemStyle_SangNaTech_RunClockGridRow: TFrameListItemStyle_SangNa
     object SkinFMXLabel5: TSkinFMXLabel
       ParentMouseEvent = False
       BindItemFieldName = #20998#38047
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone

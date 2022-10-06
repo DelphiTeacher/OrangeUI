@@ -46,6 +46,8 @@ type
     //当前需要处理的控件
     function GetCurrentPorcessControl(AFocusedControl:TControl):TControl;
     function GetVirtualKeyboardControlParent:TControl;
+    //获取虚拟键盘的高度校正
+    function GetVirtualKeyboardHeightAdjustHeight:Double;
   private
     FPassword:String;
     FRePassword:String;
@@ -197,6 +199,11 @@ end;
 function TFrameResetPassword.GetVirtualKeyboardControlParent: TControl;
 begin
   Result:=Self;
+end;
+
+function TFrameResetPassword.GetVirtualKeyboardHeightAdjustHeight: Double;
+begin
+  Result:=0;
 end;
 
 procedure TFrameResetPassword.Load(APhone, ACaptcha: String);

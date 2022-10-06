@@ -338,30 +338,11 @@
         <DCCReference Include="Source\Base\uComponentType.pas"/>
         <DCCReference Include="Source\Base\uUrlPicture.pas"/>
         <DCCReference Include="Source\Base\uVersion.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\SelectMonthFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\SelectTimeFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\SingleSelectFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\TakePictureMenuFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\WaitingFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\AddressBookListFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\CalendarFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\ClipHeadFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\HintFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\InputFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\InputMemoFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\LoadingFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\LoadingProgressFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MessageBoxFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\SavePictureMenuFrame.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\SelectCityFrame.pas"/>
         <DCCReference Include="Source\Common\uUIFunction.pas"/>
-        <DCCReference Include="Source\Common\uMobileUtils.pas"/>
-        <DCCReference Include="Source\Common\uSelectContactor.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\IOS\Contacts\iOSApi.CNContact.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\IOS\Contacts\iOSApi.CNLabeledValue.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\IOS\Contacts\iOSApi.CNPhoneNumber.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\IOS\iOSApi.CNContactPickerViewController.pas"/>
-        <DCCReference Include="Source\Common\uAndroidPermission_D10_2.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\HzSpell\HzSpell.pas"/>
         <DCCReference Include="Source\Common\uBasePageStructure.pas"/>
         <DCCReference Include="Source\SystemTTS\Androidapi.JNI.TTS.pas"/>
@@ -372,16 +353,7 @@
         <DCCReference Include="Source\SystemTTS\uSystemTTS.pas"/>
         <DCCReference Include="Source\SystemTTS\Winapi.SpVoice.pas"/>
         <DCCReference Include="Source\SystemTTS\Android.SpeechTTS.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.Android.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.iOS.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.Windows.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\iOSapi.Photos.Manager.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\MultiSelectPhotos\iOSapi.Photos.pas"/>
         <DCCReference Include="Source\Controls\uSkinRegExTagLabelViewType.pas"/>
-        <DCCReference Include="Source\Common\CommonFrames\UpdateTextFrame.pas">
-            <Form>FrameUpdateText</Form>
-        </DCCReference>
         <DCCReference Include="..\OrangeProjectCommon\OrangeUI\uBaseHttpControl.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\OrangeUI\uBaseList.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\OrangeUI\uBaseLog.pas"/>
@@ -393,6 +365,7 @@
         <DCCReference Include="..\OrangeProjectCommon\MD5\MD5_OrangeUI.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperJSON.pas"/>
         <DCCReference Include="..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperObject.pas"/>
+        <DCCReference Include="Source\Controls\uBasePageStructureControls.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -431,7 +404,7 @@
                 <Platform value="Win64">True</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgsqlite3.dylib" Class="DependencyModule">
+                <DeployFile LocalName="$(BDS)\Redist\OSX32\bplfmx220.dylib" Configuration="Release" Class="DependencyPackage">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -457,25 +430,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\OrangeUIPublish\OrangeUIDesign\DCU\FMX\XE8\OSX32\Release\bplOrangeUIControl_FMX_D10_3.dylib" Configuration="Release" Class="ProjectOutput">
-                    <Platform Name="OSX32">
-                        <RemoteName>bplOrangeUIControl_FMX_D10_3.dylib</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\OSX32\bplfmx220.dylib" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="OSX32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libPCRE.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\OrangeUIDesign\DCU\FMX\D10_3\Win32\Debug\OrangeUIControl_FMX_D10_3.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>OrangeUIControl_FMX_D10_3.bpl</RemoteName>
+                <DeployFile LocalName="..\OrangeUIPublish\OrangeUIDesign\DCU\FMX\XE8\OSX32\Release\bplOrangeUIControl_FMX_D10_3.dylib" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="OSX32">
+                        <RemoteName>bplOrangeUIControl_FMX_D10_3.dylib</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -486,6 +448,17 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgsqlite3.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\OrangeUIDesign\DCU\FMX\D10_3\Win32\Debug\OrangeUIControl_FMX_D10_3.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>OrangeUIControl_FMX_D10_3.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

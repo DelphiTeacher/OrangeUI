@@ -29,12 +29,11 @@ uses
   uSkinFireMonkeyCustomList, uSkinButtonType, uSkinPanelType,
   uSkinMultiColorLabelType, uSkinImageType, uSkinLabelType,
   uSkinItemDesignerPanelType, uBaseSkinControl, uSkinScrollControlType,
-  uSkinCustomListType, uSkinVirtualListType, uSkinListViewType,
-  uSkinFireMonkeyListView;
+  uSkinCustomListType, uSkinVirtualListType;
 
 type
   TFrameListBox_ItemOperCode = class(TFrame,IFrameChangeLanguageEvent)
-    lbTicketProductList: TSkinFMXListView;
+    lbTicketProductList: TSkinFMXListBox;
     ItemDefault: TSkinFMXItemDesignerPanel;
     lblItemCaption: TSkinFMXLabel;
     imgItemIcon: TSkinFMXImage;

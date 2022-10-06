@@ -731,7 +731,8 @@ begin
 
       Self.FDrawPathParam.PathActions.Clear;
 
-      R := GetCalloutRectangleRect(ADrawRect);
+      R:=Self.FDrawPathParam.CalcDrawRect(ADrawRect);
+      R := GetCalloutRectangleRect(R);
 
       //圆角半么
       CornerSize := TSizeF.Create(0, 0);
@@ -1083,7 +1084,7 @@ begin
 
     GetSkinMaterial.ProcessDrawPath(ADrawRect);
 
-    ACanvas.DrawPath(GetSkinMaterial.FDrawPathParam,ADrawRect);
+    ACanvas.DrawPath(GetSkinMaterial.FDrawPathParam,ADrawRect,GetSkinMaterial.FDrawPathParam.PathActions);
     ACanvas.DrawText(GetSkinMaterial.FDrawCaptionParam,Self.FSkinControlIntf.Caption,ADrawRect);
 
   end;

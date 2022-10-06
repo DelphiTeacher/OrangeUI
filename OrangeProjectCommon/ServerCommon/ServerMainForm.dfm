@@ -2,7 +2,7 @@ object frmServerMain: TfrmServerMain
   AlignWithMargins = True
   Left = 0
   Top = 0
-  Width = 694
+  Width = 717
   Height = 492
   AutoScroll = True
   Color = clBtnFace
@@ -11,7 +11,7 @@ object frmServerMain: TfrmServerMain
   Font.Height = -14
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
+  OldCreateOrder = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -20,10 +20,11 @@ object frmServerMain: TfrmServerMain
   object pnlToolBar: TPanel
     Left = 0
     Top = 0
-    Width = 678
-    Height = 97
+    Width = 701
+    Height = 105
     Align = alTop
     TabOrder = 0
+    ExplicitTop = -6
     object Label1: TLabel
       Left = 52
       Top = 12
@@ -108,9 +109,9 @@ object frmServerMain: TfrmServerMain
   end
   object pcClient: TPageControl
     Left = 0
-    Top = 97
-    Width = 678
-    Height = 356
+    Top = 105
+    Width = 701
+    Height = 348
     ActivePage = tsLog
     Align = alClient
     TabOrder = 1
@@ -181,8 +182,8 @@ object frmServerMain: TfrmServerMain
       object memLog: TMemo
         Left = 0
         Top = 0
-        Width = 670
-        Height = 324
+        Width = 693
+        Height = 316
         Align = alClient
         ScrollBars = ssVertical
         TabOrder = 0
@@ -195,8 +196,8 @@ object frmServerMain: TfrmServerMain
       object gridDatabasePool: TStringGrid
         Left = 0
         Top = 0
-        Width = 670
-        Height = 324
+        Width = 693
+        Height = 316
         Align = alClient
         DefaultColWidth = 100
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing]
@@ -215,19 +216,105 @@ object frmServerMain: TfrmServerMain
           24)
       end
     end
+    object tsAuth: TTabSheet
+      Caption = #25480#26435
+      ImageIndex = 3
+      object Label7: TLabel
+        Left = 13
+        Top = 22
+        Width = 56
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Caption = #25480#26435#20844#21496
+      end
+      object Label8: TLabel
+        Left = 13
+        Top = 54
+        Width = 84
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Caption = #25480#26435#24212#29992#36873#25321
+      end
+      object Label9: TLabel
+        Left = 13
+        Top = 86
+        Width = 70
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Caption = #25480#26435#24212#29992'ID'
+      end
+      object edtCompanyName: TEdit
+        Left = 105
+        Top = 19
+        Width = 193
+        Height = 25
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        TabOrder = 0
+        Text = #37329#21326#21170#30028#20449#24687#25216#26415#26377#38480#20844#21496
+      end
+      object btnQueryAuth: TButton
+        Left = 317
+        Top = 19
+        Width = 75
+        Height = 25
+        Caption = #26597#35810#25480#26435
+        TabOrder = 1
+        OnClick = btnQueryAuthClick
+      end
+      object cmbApps: TComboBox
+        Left = 104
+        Top = 51
+        Width = 194
+        Height = 25
+        TabOrder = 2
+        OnChange = cmbAppsChange
+      end
+      object btnSaveAuth: TButton
+        Left = 144
+        Top = 130
+        Width = 75
+        Height = 25
+        Caption = #20445#23384#25480#26435
+        TabOrder = 3
+        OnClick = btnSaveAuthClick
+      end
+      object edtAppID: TEdit
+        Left = 105
+        Top = 83
+        Width = 193
+        Height = 25
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        TabOrder = 4
+      end
+    end
   end
   object timerCopySQL: TTimer
     Enabled = False
     Interval = 3600000
     OnTimer = timerCopySQLTimer
-    Left = 328
-    Top = 48
+    Left = 544
+    Top = 208
   end
   object tmrStartServer: TTimer
     Interval = 2000
     OnTimer = tmrStartServerTimer
-    Left = 240
-    Top = 48
+    Left = 424
+    Top = 216
   end
   object tmrSyncUI: TTimer
     OnTimer = tmrSyncUITimer

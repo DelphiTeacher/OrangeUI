@@ -43,8 +43,9 @@ type
     procedure DoExecuteEnd(Sender:TObject);
     procedure SetTaskOtherInfo(const Value: TStringList);
   public
+    function CreateTimerTask:TTimerTask;
     //运行
-    function Run(const AIsStandalone:Boolean=False):TTimerTask;
+    function Run(const AIsStandalone:Boolean=True):TTimerTask;
     //参数
     property TaskParams:TTaskParamList read FTaskParams;
   public
@@ -108,6 +109,31 @@ implementation
 
 { TTimerTaskEvent }
 
+function TTimerTaskEvent.CreateTimerTask: TTimerTask;
+begin
+  Result:=TTimerTask.Create(IntToStr(FTaskID));
+  Result.TaskTag:=FTaskTag;
+  //用于日志显示
+  if FTaskName='' then
+  begin
+    Result.TaskName:=Self.Name;
+  end
+  else
+  begin
+    Result.TaskName:=FTaskName;
+  end;
+
+//  Result.PageIndex:=PageIndex;
+//  Result.PageSize:=PageSize;
+
+  Result.TaskObject:=TaskObject;
+
+  Result.OnExecute:=DoExecute;
+  Result.OnExecuteEnd:=DoExecuteEnd;
+  Result.TaskOtherInfo.Assign(TaskOtherInfo);
+
+end;
+
 constructor TTimerTaskEvent.Create(AOwner: TComponent);
 begin
   inherited;
@@ -151,26 +177,8 @@ end;
 
 function TTimerTaskEvent.Run(const AIsStandalone:Boolean): TTimerTask;
 begin
-  Result:=TTimerTask.Create(FTaskID);
-  Result.TaskTag:=FTaskTag;
-  //用于日志显示
-  if FTaskName='' then
-  begin
-    Result.TaskName:=Self.Name;
-  end
-  else
-  begin
-    Result.TaskName:=FTaskName;
-  end;
+  Result:=CreateTimerTask;
 
-//  Result.PageIndex:=PageIndex;
-//  Result.PageSize:=PageSize;
-
-  Result.TaskObject:=TaskObject;
-
-  Result.OnExecute:=DoExecute;
-  Result.OnExecuteEnd:=DoExecuteEnd;
-  Result.TaskOtherInfo.Assign(TaskOtherInfo);
 
 
   //放在这里可以立即调用,不用放到Thread中

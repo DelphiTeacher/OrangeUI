@@ -11,6 +11,7 @@ uses
 
   uUIFunction,
   uComponentType,
+  uFrameContext,
 
 
   {$IFDEF ANDROID}
@@ -68,7 +69,7 @@ begin
        and (CurrentFrameHistroy.ToFrame<>GlobalMainFrame)
        then
     begin
-      if CanReturnFrame(CurrentFrameHistroy) then
+      if CanReturnFrame(CurrentFrameHistroy)=TFrameReturnActionType.fratDefault then
       begin
         HideFrame;//(CurrentFrameHistroy.ToFrame);
         ReturnFrame;//(CurrentFrameHistroy);

@@ -15,6 +15,9 @@ object frmMain: TfrmMain
   OnShow = FormShow
   OnVirtualKeyboardShown = FormVirtualKeyboardShown
   OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  Touch.InteractiveGestures = [Zoom, DoubleTap]
+  OnGesture = FormGesture
+  OnTouch = FormTouch
   DesignerMasterStyle = 0
   object pnlLeftPanel: TSkinFMXPanel
     ParentMouseEvent = False
@@ -22,6 +25,7 @@ object frmMain: TfrmMain
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claMediumseagreen
     SelfOwnMaterial.BackColor.IsFill = True
     SelfOwnMaterial.BackColor.FillColor.Color = claMediumseagreen
     SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
@@ -34,8 +38,8 @@ object frmMain: TfrmMain
     SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
     SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
     MouseDownFocus = False
-    Position.X = -100.000000000000000000
-    Size.Width = 101.000000000000000000
+    Position.X = -45.000000000000000000
+    Size.Width = 40.000000000000000000
     Size.Height = 485.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0

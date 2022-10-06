@@ -32,7 +32,7 @@ uses
   StrUtils,
   INIFiles,
   IdURI,
-  uLang,
+//  uLang,
   uBaseLog,
   uBaseList,
 //  uOpenCommon,
@@ -71,6 +71,8 @@ uses
   System.Hash ,
   System.NetEncoding,
   System.Net.URLClient,
+  System.Net.HttpClient,
+  System.Net.HttpClientComponent,
   {$IFEND}
 
 //  {$ENDIF}
@@ -142,7 +144,8 @@ function SimpleGet(API: String;
                   ASignType:String='';
                   ASignSecret:String='';
                   AIsPost:Boolean=False;
-                  APostStream:TStream=nil):Boolean;
+                  APostStream:TStream=nil;
+                  ACustomHeaders:TVariantDynArray=[]):Boolean;
 
 
 
@@ -155,7 +158,8 @@ function SimpleCallAPI(API: String;
                       ASignType:String='';
                       ASignSecret:String='';
                       AIsPost:Boolean=False;
-                      APostStream:TStream=nil): String;overload;
+                      APostStream:TStream=nil;
+                      ACustomHeaders:TVariantDynArray=[]): String;overload;
 function SimpleCallAPIPostString(API: String;
                       AHttpControl: THttpControl;
                       AInterfaceUrl:String;
@@ -164,7 +168,8 @@ function SimpleCallAPIPostString(API: String;
                       ASignType:String='';
                       ASignSecret:String='';
                       AIsPost:Boolean=False;
-                      APostString:String=''): String;overload;
+                      APostString:String='';
+                      ACustomHeaders:TVariantDynArray=[]): String;overload;
 
 //调用rest接口,返回字符串,在服务端中使用
 function SimpleCallAPI(API: String;
@@ -188,7 +193,7 @@ function SimpleCallAPI(API: String;
 
 //保存记录到服务器
 function SaveRecordToServer(AInterfaceUrl:String;
-                            AAppID:Integer;
+                            AAppID:String;
                             AUserFID:String;
                             AKey:String;
                             ATableCommonRestName:String;
@@ -200,7 +205,9 @@ function SaveRecordToServer(AInterfaceUrl:String;
                             ASignType:String;
                             ASignSecret:String;
                             AHasAppID:Boolean=True;
-                            AFIDFieldName:String='fid'):Boolean;
+                            AFIDFieldName:String='fid';
+                            AUpdateRecordCustomWhereSQL:String='';
+                            AWhereKeyJson:String=''):Boolean;
 
 
 {$IF CompilerVersion > 21.0}
@@ -209,7 +216,7 @@ function SimpleCallAPI_TableCommonGetRecordList(
                             ARestName: String;
                             AHttpControl: THttpControl;
                             AInterfaceUrl:String;
-                            AAppID:Integer;
+                            AAppID:String;
                             AUserFID:String;
                             AKey:String;
                             APageIndex:Integer=1;
@@ -250,12 +257,17 @@ function JsonSimpleCall(API: String;
 
 function DoUploadFile(ALocalFilePath:String;
                       AUploadHttpServer:String;
-                      AAppID:Integer;
+                      AAppID:String;
                       ARemoteFileDir:String;
                       var ARemoteFilePath:String;
                       var ADesc:String):Boolean;
 
 
+function GetWhereCondition(ALogicalOperator:String;
+                            AFieldName:String;
+                            ACompareOperator:String;
+                            AFieldValue:Variant;
+                            AFieldValueIsField:Boolean=False):ISuperObject;
 
 function GetWhereConditions(AFieldNames:TStringDynArray;
                             AFieldValues:TVariantDynArray):String;
@@ -265,7 +277,18 @@ function GetWhereConditionsPro(AFieldNames:TStringDynArray;
                             //比较运算符
                             AFieldOpers:TStringDynArray;
                             AFieldValues:TVariantDynArray):String;
-
+//拆分为两个数组
+procedure SplitterNameValues(AUrlParamNameValues:TVariantDynArray;
+                            var ANameArray:TStringDynArray;
+                            var AValueArray:TVariantDynArray);
+//拼接参数
+function UnionUrlParams(
+                        AUrlParamNames:TStringDynArray;
+                        AUrlParamValues:TVariantDynArray):String;overload;
+function UnionUrlParams(AUrlParamNameValues:TVariantDynArray):String;overload;
+//function UnionBodyParams(
+//                        AUrlParamNames:TStringDynArray;
+//                        AUrlParamValues:TVariantDynArray):String;
 
 
 Function myStrtoHex(s:string):string;                       //原字符串转16进制字符串
@@ -303,14 +326,121 @@ function SignParam(
                   ASignType:String;
                   ASignSecret:String):String;
 
+function DownloadAndUpload(
+                  AImageHttpServerUrl:String;
+                  AAppID:String;
+                  APicUrl:String;
+                  AUploadDir:string;
+                  var AUploadedRemotePath:String;
+                  var AError:String):Boolean;
 
 implementation
 
 
 
+function DownloadAndUpload(
+                  AImageHttpServerUrl:String;
+                  AAppID:String;APicUrl: String;AUploadDir:string;
+  var AUploadedRemotePath: String;var AError:String): Boolean;
+var
+  APicStream:TMemoryStream;
+  APicFileExt:String;
+  APicFileName:String;
+  ANetHTTPClient:TNetHTTPClient;
+  AResponseStream:TStringStream;
+  ASuperObject:ISuperObject;
+  APicRemoteFilePath:String;
+  AStringStream:TStringStream;
+begin
+  Result:=False;
+
+  ANetHTTPClient:=TNetHTTPClient.Create(nil);
+  APicStream:=TMemoryStream.Create;
+  AResponseStream:=TStringStream.Create('',TEncoding.UTF8);
+  try
+            APicStream.Size:=0;
+            try
+              //AUserJson.S['pic1_path']
+              ANetHTTPClient.Get(APicUrl,APicStream);
+
+              APicFileExt:=GetPicStreamFileExt(APicStream);
+              APicFileName:=CreateGUIDString+APicFileExt;
+
+              //图片格式合法
+              if APicFileExt<>'' then
+              begin
+                //上传图片
+                ANetHTTPClient.Post(
+                                      TIdURI.URLEncode(
+                                      AImageHttpServerUrl
+                                      +'upload'
+                                        +'?'
+                                        +'appid='+AAppID//IntToStr(AUserJson.S['appid'])
+                                        +'&filename='+ExtractFileName(APicFileName)
+                                        +'&filedir='+AUploadDir//'userhead_Pic'
+                                        +'&fileext='+ExtractFileExt(APicFileName)),
+                                      //图片文件
+                                      APicStream,
+                                      //返回数据流
+                                      AResponseStream
+                                      );
+                              AResponseStream.Position:=0;
+  //                            TTimerTask(ATimerTask).TaskDesc:=AResponseStream.DataString;
+
+          //                    CopyBitmap(ABitmap,Self.lbUserInfo.Prop.Items.FindItemByName('head').Icon);
+                              ASuperObject:=SO(AResponseStream.DataString);
+                              if ASuperObject.I['Code']=SUCC then
+                              begin
+                                AUploadedRemotePath:=ASuperObject.O['Data'].S['RemoteFilePath'];
+
+                                Result:=True;
+                              end;
+
+//                           end
+//                           else
+//                           begin
+//                              TTimerTask(ATimerTask).TaskTag:=2;
+//                              //上传失败
+//                              ShowMessageBoxFrame(Self,'头像上传失败!','',TMsgDlgType.mtInformation,['确定'],nil);
+//                              Exit;
+
+
+
+
+              end
+              else
+              begin
+                    //不是合法的图片格式，很有可能是文本，可以截取前200个字符保存起来
+                    AStringStream:=TStringStream.Create('',TEncoding.UTF8);
+                    try
+                      AStringStream.LoadFromStream(APicStream);
+                      AError:=Copy(AStringStream.DataString,1,200);
+                    finally
+                      FreeAndNil(AStringStream);
+                    end;
+              end;
+
+            except
+              on E:Exception do
+              begin
+                AError:=E.Message;
+                uBaseLog.HandleException(E,'TUserOutNetPicDownloadThread.DownloadAndUpload');
+              end;
+            end;
+  finally
+    FreeAndNil(ANetHTTPClient);
+    FreeAndNil(APicStream);
+    FreeAndNil(AResponseStream);
+
+  end;
+
+end;
+
+
+
 function DoUploadFile(ALocalFilePath:String;
                       AUploadHttpServer:String;
-                      AAppID:Integer;
+                      AAppID:String;
                       ARemoteFileDir:String;
                       var ARemoteFilePath:String;
                       var ADesc:String):Boolean;
@@ -340,7 +470,7 @@ begin
                           TIdURI.URLEncode(
                               AUploadHttpServer
                               +'/upload'
-                                +'?appid='+IntToStr(AAppID)
+                                +'?appid='+(AAppID)
                                 +'&filename='+ExtractFileName(ALocalFilePath)
                                 +'&filedir='+ARemoteFileDir
                                 +'&fileext='+ExtractFileExt(ALocalFilePath)
@@ -383,7 +513,7 @@ begin
       else
       begin
         //Http调用失败
-        ADesc:=Trans('服务器连接失败');
+        ADesc:=('服务器连接失败');
       end;
 
 
@@ -402,6 +532,22 @@ begin
   Result:=GetWhereConditions(AFieldNames,AFieldValues);
 end;
 
+
+function GetWhereCondition(ALogicalOperator:String;
+                            AFieldName:String;
+                            ACompareOperator:String;
+                            AFieldValue:Variant;
+                            AFieldValueIsField:Boolean=False):ISuperObject;
+begin
+
+  Result:=TSuperObject.Create;
+  Result.S['logical_operator']:=ALogicalOperator;//'AND';
+  Result.S['name']:=AFieldName;
+  Result.S['operator']:=ACompareOperator;//'=';
+  Result.V['value']:=AFieldValue;
+  Result.B['value_is_field']:=AFieldValueIsField;
+
+end;
 
 function GetWhereConditions(AFieldNames:TStringDynArray;
                             AFieldValues:TVariantDynArray):String;
@@ -462,7 +608,7 @@ function SimpleCallAPI_TableCommonGetRecordList(
                       ARestName: String;
                       AHttpControl: THttpControl;
                       AInterfaceUrl:String;
-                      AAppID:Integer;
+                      AAppID:String;
                       AUserFID:String;
                       AKey:String;
                       APageIndex:Integer;
@@ -527,7 +673,7 @@ end;
 {$IFEND}
 
 function SaveRecordToServer(AInterfaceUrl:String;
-                            AAppID:Integer;
+                            AAppID:String;
                             AUserFID:String;
                             AKey:String;
                             ATableCommonRestName:String;
@@ -539,7 +685,9 @@ function SaveRecordToServer(AInterfaceUrl:String;
                             ASignType:String;
                             ASignSecret:String;
                             AHasAppID:Boolean;
-                            AFIDFieldName:String):Boolean;
+                            AFIDFieldName:String;
+                            AUpdateRecordCustomWhereSQL:String;
+                            AWhereKeyJson:String):Boolean;
 var
   ACode: Integer;
   AFIDIsEmpty:Boolean;
@@ -551,40 +699,62 @@ begin
   Result:=False;
   AIsAdd:=False;
 
-  if AHasAppID then
+  AWhereKeyJsonStr:='';
+  if AWhereKeyJson<>'' then
   begin
-    AWhereKeyJsonStr:=GetWhereKeyJson(ConvertToStringDynArray(['appid',AFIDFieldName]),ConvertToVariantDynArray([AAppID,AFID]));
+    AWhereKeyJsonStr:=AWhereKeyJson;
   end
   else
+  if not VarIsNULL(AFID) then
   begin
-    AWhereKeyJsonStr:=GetWhereKeyJson(ConvertToStringDynArray([AFIDFieldName]),ConvertToVariantDynArray([AFID]));
+    if AHasAppID then
+    begin
+      AWhereKeyJsonStr:=GetWhereKeyJson(ConvertToStringDynArray(['appid',AFIDFieldName]),ConvertToVariantDynArray([AAppID,AFID]));
+    end
+    else
+    begin
+      AWhereKeyJsonStr:=GetWhereKeyJson(ConvertToStringDynArray([AFIDFieldName]),ConvertToVariantDynArray([AFID]));
+    end;
+
   end;
 
 
   AFIDIsEmpty:=False;
-  if (VarType(AFID)=varInteger)
-    or (VarType(AFID)=varInt64)
-    or (VarType(AFID)=varSmallint)
-    or (VarType(AFID)=varByte)
-    or (VarType(AFID)=varWord)
-    or (VarType(AFID)=varLongWord)
-    {$IF CompilerVersion > 21.0}
-    or (VarType(AFID)=varUInt32)
-    {$IFEND}
-    or (VarType(AFID)=varUInt64)
-    then
+  if (AUpdateRecordCustomWhereSQL='') then
   begin
-    AFIDIsEmpty:=(AFID=0);
-  end
-  else
-  if (VarType(AFID)=varString) or (VarType(AFID)=varUString) then
-  begin
-    AFIDIsEmpty:=(AFID='');
-  end
-  else
-  begin
-    ADesc:='AFID值类型不支持';
-    Exit;
+    if VarIsNULL(AFID) then
+    begin
+      AFIDIsEmpty:=True;
+    end
+    else
+    begin
+
+      if (VarType(AFID)=varInteger)
+        or (VarType(AFID)=varInt64)
+        or (VarType(AFID)=varSmallint)
+        or (VarType(AFID)=varByte)
+        or (VarType(AFID)=varWord)
+        or (VarType(AFID)=varLongWord)
+        {$IF CompilerVersion > 21.0}
+        or (VarType(AFID)=varUInt32)
+        {$IFEND}
+        or (VarType(AFID)=varUInt64)
+        then
+      begin
+        AFIDIsEmpty:=(AFID=0);
+      end
+      else
+      if (VarType(AFID)=varString) or (VarType(AFID)=varUString) then
+      begin
+        AFIDIsEmpty:=(AFID='');
+      end
+      else
+      begin
+        ADesc:='AFID值类型不支持';
+        Exit;
+      end;
+
+    end;
   end;
 
 
@@ -602,13 +772,15 @@ begin
                                                       ['appid',
                                                       'user_fid',
                                                       'key',
-                                                      'rest_name',
-                                                      'record_data_json']),
+                                                      'rest_name'//,
+                                                      //'record_data_json'
+                                                      ]),
                               ConvertToVariantDynArray([AAppID,
                                                         AUserFID,
                                                         AKey,
-                                                        ATableCommonRestName,
-                                                        ARecordDataJson.AsJson]),
+                                                        ATableCommonRestName//,
+                                                        //ARecordDataJson.AsJson
+                                                        ]),
                               ACode,
                               ADesc,
                               ADataJson,
@@ -632,18 +804,20 @@ begin
                               nil,
                               AInterfaceUrl+'tablecommonrest/',
                               ConvertToStringDynArray(['appid',
-                              'user_fid',
-                              'key',
-                              'rest_name',
-                              'record_data_json',
-                              'where_key_json']),
+                                                      'user_fid',
+                                                      'key',
+                                                      'rest_name',
+                                                      'record_data_json',
+                                                      'where_key_json',
+                                                      'where_sql']),
                               ConvertToVariantDynArray([AAppID,
-                              AUserFID,
-                              AKey,
-                              ATableCommonRestName,
-                              ARecordDataJson.AsJson,
-                              AWhereKeyJsonStr//GetWhereKeyJson(['appid','fid'],[AAppID,AFID])
-                              ]),
+                                                      AUserFID,
+                                                      AKey,
+                                                      ATableCommonRestName,
+                                                      ARecordDataJson.AsJson,
+                                                      AWhereKeyJsonStr,//GetWhereKeyJson(['appid','fid'],[AAppID,AFID])
+                                                      AUpdateRecordCustomWhereSQL
+                                                      ]),
                               ACode,
                               ADesc,
                               ADataJson,
@@ -667,13 +841,15 @@ begin
                                                       'key',
                                                       'rest_name',
 //                                                      'record_data_json',
-                                                      'where_key_json']),
+                                                      'where_key_json',
+                                                      'where_sql']),
                               ConvertToVariantDynArray([AAppID,
                                                         AUserFID,
                                                         AKey,
                                                         ATableCommonRestName,
 //                                                        ARecordDataJson.AsJson,
-                                                        AWhereKeyJsonStr//GetWhereKeyJson(['appid','fid'],[AAppID,AFID])
+                                                        AWhereKeyJsonStr,//GetWhereKeyJson(['appid','fid'],[AAppID,AFID])
+                                                        AUpdateRecordCustomWhereSQL
                                                         ]),
                               ACode,
                               ADesc,
@@ -848,38 +1024,38 @@ var
   ARandom:Integer;
 begin
         {$IFDEF MSWINDOWS}
-        if DirectoryExists('C:\MyFiles') or DirectoryExists('D:\MyFiles') then
-        begin
-          Randomize();
-          ARandom:=Random(1000);
-
-          try
-            AResponseStream.Position:=0;
-
-            ALogDir:=GetApplicationPath+'log\ServerReponse\';
-            if not DirectoryExists(ALogDir) then
-            begin
-              SysUtils.ForceDirectories(ALogDir);
-            end;
-            if Pos('://',API)>0 then
-            begin
-              AResponseStream.SaveToFile(ALogDir
-                              //+ReplaceStr(API,'/','_')+' '
-                              +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+' '+IntToStr(ARandom)+'.json');
-
-            end
-            else
-            begin
-
-              AResponseStream.SaveToFile(ALogDir
-                              +ReplaceStr(API,'/','_')+' '
-                              +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+' '+IntToStr(ARandom)+'.json');
-            end;
-
-          except
-
-          end;
-        end;
+//        if DirectoryExists('C:\MyFiles') or DirectoryExists('D:\MyFiles') then
+//        begin
+//          Randomize();
+//          ARandom:=Random(1000);
+//
+//          try
+//            AResponseStream.Position:=0;
+//
+//            ALogDir:=GetApplicationPath+'log\ServerReponse\';
+//            if not DirectoryExists(ALogDir) then
+//            begin
+//              SysUtils.ForceDirectories(ALogDir);
+//            end;
+//            if Pos('://',API)>0 then
+//            begin
+//              AResponseStream.SaveToFile(ALogDir
+//                              //+ReplaceStr(API,'/','_')+' '
+//                              +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+' '+IntToStr(ARandom)+'.json');
+//
+//            end
+//            else
+//            begin
+//
+//              AResponseStream.SaveToFile(ALogDir
+//                              +ReplaceStr(API,'/','_')+' '
+//                              +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+' '+IntToStr(ARandom)+'.json');
+//            end;
+//
+//          except
+//
+//          end;
+//        end;
         {$ENDIF}
 
 
@@ -895,7 +1071,8 @@ function SimpleCallAPI(API: String;
                       ASignType:String;
                       ASignSecret:String;
                       AIsPost:Boolean;
-                      APostStream:TStream): String;
+                      APostStream:TStream;
+                  ACustomHeaders:TVariantDynArray): String;
 var
   ACallResult:Boolean;
   AResponseStream: TStringStream;
@@ -919,7 +1096,7 @@ begin
                           ASignType,
                           ASignSecret,
                           AIsPost,
-                          APostStream
+                          APostStream,ACustomHeaders
                          );
 
 
@@ -977,7 +1154,8 @@ function SimpleCallAPIPostString(API: String;
                                   ASignType:String;
                                   ASignSecret:String;
                                   AIsPost:Boolean;
-                                  APostString:String): String;
+                                  APostString:String;
+                                  ACustomHeaders:TVariantDynArray): String;
 var
   APostStream:TStringStream;
 begin
@@ -999,7 +1177,7 @@ begin
                           ASignType,
                           ASignSecret,
                           AIsPost,
-                          APostStream
+                          APostStream,ACustomHeaders
                          );
   finally
     SysUtils.FreeAndNil(APostStream);
@@ -1093,6 +1271,7 @@ begin
 
       //'Service . not available.'
 
+      //'Timeout/error waiting for connection.'
 
       try
           ASuperObject:=SO(AHttpResponse);
@@ -1129,15 +1308,15 @@ begin
       except
         on E:Exception do
         begin
-          ADesc:=E.Message;
-          uBaseLog.HandleException(E,'SimpleCallAPI Url:'+AInterfaceUrl+' API'+API);
+          ADesc:=E.Message+#13#10+AHttpResponse;
+          uBaseLog.HandleException(E,'SimpleCallAPI Url:'+AInterfaceUrl+' API'+API+' '+AHttpResponse);
         end;
       end;
   end
   else
   begin
       //返回为空
-      ADesc:=API+Trans('接口调用失败'+AHttpResponse+',请检查网络连接');
+      ADesc:=API+('接口调用失败'+AHttpResponse+',请检查网络连接');
   end;
 end;
 
@@ -1230,6 +1409,119 @@ begin
 
 end;
 
+function UnionUrlParams(
+                        AUrlParamNames:TStringDynArray;
+                        AUrlParamValues:TVariantDynArray):String;
+var
+  I:Integer;
+  AStrValue:String;
+  AParamsStr:String;
+begin
+  AParamsStr:='';
+  for I:=0 to Length(AUrlParamNames)-1 do
+  begin
+
+    AStrValue:='';
+    if not VarIsNull(AUrlParamValues[I]) then
+    begin
+      AStrValue:=TNetEncoding.URL.Encode(AUrlParamValues[I]);
+    end;
+
+    if AParamsStr<>'' then
+    begin
+      AParamsStr:=AParamsStr+'&'+AUrlParamNames[I]+'='+AStrValue;
+    end
+    else
+    begin
+      AParamsStr:=AUrlParamNames[I]+'='+AStrValue;
+    end;
+
+  end;
+
+  Result:=AParamsStr;
+end;
+
+function UnionUrlParams(AUrlParamNameValues:TVariantDynArray):String;overload;
+var
+  I:Integer;
+  AStrValue:String;
+  AParamsStr:String;
+begin
+  AParamsStr:='';
+  for I:=0 to Length(AUrlParamNameValues) div 2 - 1 do
+  begin
+
+    AStrValue:='';
+    if not VarIsNull(AUrlParamNameValues[I*2+1]) then
+    begin
+      AStrValue:=TNetEncoding.URL.Encode(AUrlParamNameValues[I*2+1]);
+    end;
+
+    if AParamsStr<>'' then
+    begin
+      AParamsStr:=AParamsStr+'&'+AUrlParamNameValues[I*2]+'='+AStrValue;
+    end
+    else
+    begin
+      AParamsStr:=AUrlParamNameValues[I*2]+'='+AStrValue;
+    end;
+
+  end;
+
+  Result:=AParamsStr;
+
+
+end;
+//拆分为两个数组
+procedure SplitterNameValues(AUrlParamNameValues:TVariantDynArray;
+                            var ANameArray:TStringDynArray;
+                            var AValueArray:TVariantDynArray);
+var
+  I: Integer;
+begin
+  SetLength(ANameArray,Length(AUrlParamNameValues) div 2);
+  SetLength(AValueArray,Length(AUrlParamNameValues) div 2);
+  for I := 0 to Length(AUrlParamNameValues) div 2 -1 do
+  begin
+    ANameArray[I]:=AUrlParamNameValues[I*2];
+    AValueArray[I]:=AUrlParamNameValues[I*2+1];
+  end;
+
+
+end;
+
+
+//function UnionBodyParams(
+//                        AUrlParamNames:TStringDynArray;
+//                        AUrlParamValues:TVariantDynArray):String;
+//var
+//  I:Integer;
+//  AStrValue:String;
+//  AParamsStr:String;
+//begin
+//  AParamsStr:='';
+//  for I:=0 to Length(AUrlParamNames)-1 do
+//  begin
+//
+//    AStrValue:='';
+//    if not VarIsNull(AUrlParamValues[I]) then
+//    begin
+//      AStrValue:=AUrlParamValues[I];
+//    end;
+//
+//    if AParamsStr<>'' then
+//    begin
+//      AParamsStr:=AParamsStr+'&'+AUrlParamNames[I]+'='+AStrValue;
+//    end
+//    else
+//    begin
+//      AParamsStr:=AUrlParamNames[I]+'='+AStrValue;
+//    end;
+//
+//  end;
+//
+//  Result:=AParamsStr;
+//end;
 
 //拼接参数到链接中
 function GetUrl(API: String;
@@ -1379,7 +1671,8 @@ function SimpleGet(API: String;
                   ASignType:String;
                   ASignSecret:String;
                   AIsPost:Boolean;
-                  APostStream:TStream): Boolean;
+                  APostStream:TStream;
+                  ACustomHeaders:TVariantDynArray): Boolean;
 var
   ABefore:TDateTime;
   AIsNeedFreeAHttpControl:Boolean;
@@ -1390,6 +1683,8 @@ var
   AExtractResponseStream: TStream;
 
   AUrlEncode:String;
+  ANameValuePair:TNameValuePair;
+  I: Integer;
 begin
   ABefore:=Now;
   uBaseLog.HandleException(nil,'SimplePost'+' '+'begin'+' '+FormatDateTime('HH:MM:SS',ABefore));
@@ -1399,8 +1694,34 @@ begin
   if AHttpControl=nil then
   begin
     AIsNeedFreeAHttpControl:=True;
+
+    {$IFDEF OPEN_PLATFORM_SERVER}
+    //服务端用NetHttpClient调用自己电脑上的接口会卡死
+    AHttpControl:=GlobalSystemHttpControlClass.Create;
+    {$ELSE}
     AHttpControl:=TSystemHttpControl.Create;
+    {$ENDIF}
+
+    if Length(ACustomHeaders)>0 then
+    begin
+      if AHttpControl is TSystemHttpControl then
+      begin
+      
+        SetLength(TSystemHttpControl(AHttpControl).FNetHTTPRequestHeaders,Length(ACustomHeaders) div 2);
+        for I := 0 to Length(ACustomHeaders) div 2 - 1 do
+        begin
+          ANameValuePair.Name:= ACustomHeaders[I*2];//'Content-type';
+          ANameValuePair.Value:= ACustomHeaders[I*2+1];//AContentType;//'application/json';
+          TSystemHttpControl(AHttpControl).FNetHTTPRequestHeaders[I]:=ANameValuePair;
+        end;
+
+      end;
+      
+    end;
+
+
   end;
+
   try
 
       AUrlEncode:=GetUrl(API,AInterfaceUrl,AUrlParamNames,AUrlParamValues,ASignType,ASignSecret);
@@ -1416,39 +1737,39 @@ begin
       {$IFDEF MSWINDOWS}
       if DirectoryExists('C:\MyFiles') or DirectoryExists('D:\MyFiles') then
       begin
-        try
-            ALogDir:=GetApplicationPath+'log\ServerReponse\';
-            if not DirectoryExists(ALogDir) then
-            begin
-              SysUtils.ForceDirectories(ALogDir);
-            end;
-
-            ALogs:=TStringList.Create;
-            try
-              ALogs.Add(AUrlEncode);
-
-              if Pos('://',API)>0 then
-              begin
-                ALogs.SaveToFile(ALogDir
-                                //+ReplaceStr(API,'/','_')+' '
-                                +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+'.txt');
-
-              end
-              else
-              begin
-
-                ALogs.SaveToFile(ALogDir
-                                +ReplaceStr(API,'/','_')+' '
-                                +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+'.txt');
-              end;
-
-
-            finally
-              FreeAndNil(ALogs);
-            end;
-        except
-
-        end;
+//        try
+//            ALogDir:=GetApplicationPath+'log\ServerReponse\';
+//            if not DirectoryExists(ALogDir) then
+//            begin
+//              SysUtils.ForceDirectories(ALogDir);
+//            end;
+//
+//            ALogs:=TStringList.Create;
+//            try
+//              ALogs.Add(AUrlEncode);
+//
+//              if Pos('://',API)>0 then
+//              begin
+//                ALogs.SaveToFile(ALogDir
+//                                //+ReplaceStr(API,'/','_')+' '
+//                                +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+'.txt');
+//
+//              end
+//              else
+//              begin
+//
+//                ALogs.SaveToFile(ALogDir
+//                                +ReplaceStr(API,'/','_')+' '
+//                                +FormatDateTime('YYYY-MM-DD HH-MM-SS-ZZZ',Now)+'.txt');
+//              end;
+//
+//
+//            finally
+//              FreeAndNil(ALogs);
+//            end;
+//        except
+//
+//        end;
       end;
       {$ENDIF}
 
@@ -1838,6 +2159,8 @@ function LoadMD5SignAsStringList(sl:TStringList; skey:string):string;   //获取
 
 
 initialization
+
+
 
 end.
 

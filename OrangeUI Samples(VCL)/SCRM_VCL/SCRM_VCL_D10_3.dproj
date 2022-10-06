@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{0212CE30-0123-48D2-A664-5E3756FA8A14}</ProjectGuid>
+        <ProjectGuid>{67BE7B99-9F30-454B-824E-E96C7F254E92}</ProjectGuid>
         <ProjectVersion>18.8</ProjectVersion>
         <MainSource>SCRM_VCL_D10_3.dpr</MainSource>
         <Config Condition="'$(Config)'==''">Debug</Config>
@@ -70,7 +70,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_UnitSearchPath>..\..\OrangeUIDesign\DCU\VCL\D10_3\$(Config);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>..\..\OrangeUIDesign\DCU\VCL\D10_3\$(Platform)\$(Config);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_DependencyCheckOutputName>SCRM.exe</DCC_DependencyCheckOutputName>
         <DCC_ImageBase>00400000</DCC_ImageBase>
         <DCC_Platform>x86</DCC_Platform>
@@ -151,15 +151,7 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_CustomerTag.pas"/>
-        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_CustomerInfo.pas"/>
         <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_IconButton.pas"/>
-        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_ContactInfo.pas">
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_CompanyInfo.pas">
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_TreeMainMenu_LabelAndArrow.pas">
             <FormType>dfm</FormType>
         </DCCReference>
@@ -168,15 +160,26 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_MailList.pas"/>
-        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_MailListWithTag.pas"/>
-        <DCCReference Include="..\..\OrangeProjectCommon\MXSearcher\CustomerInfoFrame.pas"/>
-        <DCCReference Include="..\..\OrangeProjectCommon\MXSearcher\TagLabelManageFrame.pas">
-            <Form>FrameTagLabelManage</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="..\..\OrangeProjectCommon\uSkinItemJsonHelper.pas"/>
         <DCCReference Include="..\..\OrangeProjectCommon\uDataSetToJson.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\uOpenCommon.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\uDataInterface.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\uRestInterfaceCall.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\uSelectMediaDialog.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUI_Copy\uFuncCommon_Copy.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUI_Copy\uBaseList_Copy.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUI_Copy\uFileCommon_Copy.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUI_Copy\uBaseLog_Copy.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\uSelectMediaUI_OpenDialog.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\OrangeUIStyles_VCL\ListItemStyle_IconLeft_CaptionRight_CloseBtnRight.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\uOpenClientCommon.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\uGPSUtils.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\VCLFrames\ViewPictureListFrame_VCL.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\uViewPictureListFrame.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\VCLFrames\ClipHeadFrame_VCL.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\VCLFrames\HintFrame_VCL.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\MultiSelectPhotos\uPhotoManager.pas"/>
+        <DCCReference Include="..\..\OrangeProjectCommon\MultiSelectPhotos\uPhotoManager.Windows.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -231,95 +234,14 @@
                     <VersionInfoKeys Name="Comments"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\FMDHTMLEditD2010.bpl">ProfDHTMLEdit for Delphi 2010</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k260.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp260.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxCoreRS26.bpl">ExpressCore Library by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxLibraryRS26.bpl">Express Cross Platform Library by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxHttpIndyRequestRS26.bpl">Express Cross Platform Library Indy Request Handler by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxCloudServiceLibraryRS26.bpl">ExpressCloudService Library by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxEditorFieldLinkRS26.bpl">ExpressEditors FieldLink by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxServerModeRS26.bpl">ExpressDataController Server Mode by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxADOServerModeRS26.bpl">ADO Data Source for ExpressDataController Server Mode by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxDBXServerModeRS26.bpl">dbExpress Data Source for ExpressDataController Server Mode by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxFireDACServerModeRS26.bpl">FireDAC Data Source for ExpressDataController Server Mode by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxmdsRS26.bpl">ExpressMemData by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxDockingRS26.bpl">ExpressDocking Library by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dxRichEditCoreRS26.bpl">ExpressRichEdit Control Core Library by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dxRichEditDocumentModelRS26.bpl">ExpressRichEdit Control Document Model by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxRichEditControlRS26.bpl">ExpressRichEdit Control by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxSpreadSheetRS26.bpl">ExpressSpreadSheet by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxSpreadSheetReportDesignerRS26.bpl">ExpressSpreadSheet Report Designer by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dxSpreadSheetInplaceRichEditRS26.bpl">ExpressSpreadSheet In-place RichEdit Support by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxNavBarRS26.bpl">ExpressNavBar by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxWizardControlRS26.bpl">ExpressWizardControl by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxGridRS26.bpl">ExpressQuantumGrid by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxGridWizardRS26.bpl">ExpressQuantumGrid Wizard by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxPivotGridRS26.bpl">ExpressPivotGrid by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxPivotGridChartRS26.bpl">ExpressPivotGrid connection to ExpressQuantumGrid Chart View by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxPivotGridOLAPRS26.bpl">ExpressPivotGrid OLAP by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxTreeListRS26.bpl">ExpressQuantumTreeList by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxBarRS26.bpl">ExpressBars by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxRibbonRS26.bpl">ExpressBars Ribbon controls by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxRibbonCustomizationFormRS26.bpl">ExpressBars Ribbon Customization Form by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxTabbedMDIRS26.bpl">ExpressBars Tabbed MDI by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxBarExtItemsRS26.bpl">ExpressBars extended items by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxBarExtDBItemsRS26.bpl">ExpressBars extended DB items by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxBarDBNavRS26.bpl">ExpressBars DBNavigator by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxSchedulerRS26.bpl">ExpressScheduler by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxSchedulerGridRS26.bpl">ExpressScheduler connection to ExpressQuantumGrid by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxSchedulerTreeBrowserRS26.bpl">ExpressScheduler tree browser by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxSchedulerRibbonStyleEventEditorRS26.bpl">ExpressScheduler Ribbon Event Window by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxSchedulerWebServiceStorageRS26.bpl">ExpressScheduler Web Service Storage by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxVerticalGridRS26.bpl">ExpressVerticalGrid by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxdbtrRS26.bpl">ExpressDBTree by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxtrmdRS26.bpl">ExpressTreePrintedDataSet by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxSkinsCoreRS26.bpl">ExpressSkins Library by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxSkinsDesignHelperRS26.bpl">ExpressSkins Library Uses Clause Auto Fill Helper by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dxPScxPCProdRS26.bpl">ExpressPrinting System ContainerProducer for ExpressPageControl by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSCoreRS26.bpl">ExpressPrinting System by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSLnksRS26.bpl">ExpressPrinting System ReportLinks (Standard) by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPScxCommonRS26.bpl">ExpressPrinting System Cross Platform Library by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPScxExtCommonRS26.bpl">ExpressPrinting System Extended Cross Platform Library by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSTeeChartRS26.bpl">ExpressPrinting System ReportLink for TeeChart by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSDBTeeChartRS26.bpl">ExpressPrinting System ReportLink for DBTeeChart by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSPrVwAdvRS26.bpl">ExpressPrinting System Advanced Preview Window by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSPrVwRibbonRS26.bpl">ExpressPrinting System Ribbon Preview Window by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxSpellCheckerRS26.bpl">ExpressSpellChecker by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxFlowChartRS26.bpl">ExpressFlowChart by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxFlowChartAdvancedCustomizeFormRS26.bpl">ExpressFlowChart Advanced Customization Form by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxFlowChartDesignerRS26.bpl">ExpressFlowChart Designer by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxOrgChartAdvancedCustomizeFormRS26.bpl">ExpressOrgChart Advanced Customization Form by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxOrgCRS26.bpl">ExpressOrgChart by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxDBOrRS26.bpl">ExpressDBOrgChart by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxTileControlRS26.bpl">ExpressTileControl by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxGaugeControlRS26.bpl">ExpressGaugeControl by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxMapControlRS26.bpl">ExpressMapControl by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPDFViewerRS26.bpl">ExpressPDFViewer by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxEMFRS26.bpl">ExpressEntityMapping Framework by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxADOEMFRS26.bpl">ExpressEntityMapping Framework ADO Data Provider by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxFireDACEMFRS26.bpl">ExpressEntityMapping Framework FireDAC Data Provider by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxIconLibraryRS26.bpl">Express Cross Platform Library Icon Library by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxPageControldxBarPopupMenuRS26.bpl">ExpressPageControl dxBar Popup Menu by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxSpreadSheetCoreConditionalFormattingDialogsRS26.bpl">ExpressSpreadSheetCore Conditional Formatting Dialogs by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxSpreadSheetConditionalFormattingDialogsRS26.bpl">ExpressSpreadSheet Conditional Formatting Dialogs by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dclcxTreeListdxBarPopupMenuRS26.bpl">ExpressQuantumTreeList dxBar Built-In Menu by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSdxLCLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressLayoutControl by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSdxSpreadSheetLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressSpreadSheet by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPScxGridLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressQuantumGrid by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPScxPivotGridLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressPivotGrid by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPScxSchedulerLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressScheduler by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPScxTLLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressQuantumTreeList by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPScxVGridLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressVerticalGrid by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSdxOCLnkRS26.bpl">ExpressPrinting System ReportLinks for ExpressOrgChart by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSdxDBOCLnkRS26.bpl">ExpressPrinting System ReportLinks for ExpressDBOrgChart by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSdxDBTVLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressDBTree by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSdxFCLnkRS26.bpl">ExpressPrinting System ReportLinks for ExpressFlowChart by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSdxGaugeControlLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressGauge Control by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSRichEditControlLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressRichEditControl by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSdxMapControlLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressMap Control by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\dcldxPSdxPDFViewerLnkRS26.bpl">ExpressPrinting System ReportLink for ExpressPDFViewer by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi26.win32\Bin\DclTeePro926.bpl">TeeChart Pro 2020 VCL Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi26.win32\Bin\DclTeeMaker126.bpl">TeeMaker</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\TeeTree\Compiled\Delphi26.win32\Bin\DclTree2D26Tee9.bpl">TeeTree 2 Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Platforms>

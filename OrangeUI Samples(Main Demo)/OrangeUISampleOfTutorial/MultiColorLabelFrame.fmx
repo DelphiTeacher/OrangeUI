@@ -4,10 +4,17 @@ object FrameMultiColorLabel: TFrameMultiColorLabel
   Size.PlatformDefault = False
   object SkinFMXMultiColorLabel2: TSkinFMXMultiColorLabel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
     SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
     SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
     SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaBottom
@@ -57,9 +64,16 @@ object FrameMultiColorLabel: TFrameMultiColorLabel
   end
   object SkinFMXMultiColorLabel3: TSkinFMXMultiColorLabel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
     SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
     SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaBottom
@@ -102,10 +116,17 @@ object FrameMultiColorLabel: TFrameMultiColorLabel
   end
   object SkinFMXMultiColorLabel4: TSkinFMXMultiColorLabel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
     SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
     SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
     SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaBottom
@@ -166,9 +187,16 @@ object FrameMultiColorLabel: TFrameMultiColorLabel
   end
   object lblPriceRightAlign: TSkinFMXMultiColorLabel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.DrawCaptionParam.FontName = '15'
     SelfOwnMaterial.DrawCaptionParam.FontSize = 20.000000000000000000
     SelfOwnMaterial.DrawCaptionParam.FontColor = xFFFB3437
@@ -217,9 +245,16 @@ object FrameMultiColorLabel: TFrameMultiColorLabel
   end
   object SkinFMXLabel1: TSkinFMXMultiColorLabel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.DrawCaptionParam.FontColor = xFF0199FF
     SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = xFF0199FF
     SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = xFF0199FF
@@ -273,9 +308,16 @@ object FrameMultiColorLabel: TFrameMultiColorLabel
   end
   object SkinFMXMultiColorLabel1: TSkinFMXMultiColorLabel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
     SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
     SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop

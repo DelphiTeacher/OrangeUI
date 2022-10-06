@@ -24,7 +24,7 @@ uses
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
 
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, uRestIntfMemTable, Vcl.ExtCtrls,
-  Vcl.StdCtrls;
+  Vcl.StdCtrls, uSkinWindowsForm;
 
 type
   TfrmSelectRecordPopup = class(TfrmSelectPopup)

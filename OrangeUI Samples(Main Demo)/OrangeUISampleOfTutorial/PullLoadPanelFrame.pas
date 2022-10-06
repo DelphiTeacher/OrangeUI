@@ -214,7 +214,7 @@ var
   ATimerTask:TTimerTask;
 begin
   //刷新
-  ATimerTask:=TTimerTask.Create(0);
+  ATimerTask:=TTimerTask.Create();
   ATimerTask.OnExecute:=DoThreadExecuteLoad;
   ATimerTask.OnExecuteEnd:=DoDefaultSyncThreadExecuteLoadEnd;
   GetGlobalTimerThread.RunTask(ATimerTask);
@@ -225,7 +225,7 @@ var
   ATimerTask:TTimerTask;
 begin
   //加载更多
-  ATimerTask:=TTimerTask.Create(0);
+  ATimerTask:=TTimerTask.Create();
   ATimerTask.OnExecute:=DoThreadExecuteLoad;
   ATimerTask.OnExecuteEnd:=DoDefaultLoadMoreThreadExecuteLoadEnd;
   GetGlobalTimerThread.RunTask(ATimerTask);
@@ -237,7 +237,7 @@ var
   ATimerTask:TTimerTask;
 begin
   //加载更多
-  ATimerTask:=TTimerTask.Create(0);
+  ATimerTask:=TTimerTask.Create();
   ATimerTask.OnExecute:=DoThreadExecuteLoad;
   ATimerTask.OnExecuteEnd:=DoDefaultProLoadMoreThreadExecuteLoadEnd;
   GetGlobalTimerThread.RunTask(ATimerTask);
@@ -249,7 +249,7 @@ var
   ATimerTask:TTimerTask;
 begin
   //刷新
-  ATimerTask:=TTimerTask.Create(0);
+  ATimerTask:=TTimerTask.Create();
   ATimerTask.OnExecute:=DoThreadExecuteLoad;
   ATimerTask.OnExecuteEnd:=DoDefaultProSyncThreadExecuteLoadEnd;
   GetGlobalTimerThread.RunTask(ATimerTask);

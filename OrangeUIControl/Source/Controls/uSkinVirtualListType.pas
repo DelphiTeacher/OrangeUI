@@ -58,12 +58,12 @@ uses
   uSkinItemDesignerPanelType,
   uSkinCustomListType,
 
-  {$IFDEF SKIN_SUPEROBJECT}
+//  {$IFDEF SKIN_SUPEROBJECT}
   uSkinSuperObject,
-  {$ELSE}
-  XSuperObject,
-  XSuperJson,
-  {$ENDIF}
+//  {$ELSE}
+//  XSuperObject,
+//  XSuperJson,
+//  {$ENDIF}
 
 
 //  BaseListItemStyleFrame,
@@ -146,7 +146,7 @@ type
 
     function GetOnStartEditingItem: TVirtualListEditingItemEvent;
     function GetOnStopEditingItem: TVirtualListEditingItemEvent;
-
+    function GetOnNewListItemStyleFrameCacheInit:TNewListItemStyleFrameCacheInitEvent;
 
     //居中列表项更改事件
     property OnCenterItemChange:TVirtualListDoItemEvent read GetOnCenterItemChange;
@@ -167,7 +167,6 @@ type
     property OnStopEditingItem:TVirtualListEditingItemEvent read GetOnStopEditingItem;
 
 
-
     property OnGetItemBufferCacheTag:TVirtualListGetItemBufferCacheTagEvent read GetOnGetItemBufferCacheTag;
     //每次绘制列表项之前准备
     property OnPrepareDrawItem:TVirtualListDrawItemEvent read GetOnPrepareDrawItem;
@@ -177,6 +176,8 @@ type
     //准备平拖事件(可以根据Item设置ItemPanDragDesignerPanel)
     property OnPrepareItemPanDrag:TVirtualListPrepareItemPanDragEvent read GetOnPrepareItemPanDrag;
 
+    //列表项样式Frame初始事件
+    property OnNewListItemStyleFrameCacheInit:TNewListItemStyleFrameCacheInitEvent read GetOnNewListItemStyleFrameCacheInit;
 
     function GetVirtualListProperties:TVirtualListProperties;
     property Properties:TVirtualListProperties read GetVirtualListProperties;
@@ -315,6 +316,8 @@ type
 //    procedure BindItemDesignerPanelAndItem(AItemDesignerPanel:TSkinItemDesignerPanel;AItem:TSkinItem;AIsDrawItemInteractiveState:Boolean);virtual;
     //确定列表项使用哪个列表项设计面板来绘制
     function DecideItemDesignerPanel(AItem:TSkinItem):TSkinItemDesignerPanel;virtual;
+    //列表项样式Frame初始事件
+    procedure DoNewListItemStyleFrameCacheInit(Sender:TObject;AListItemTypeStyleSetting:TListItemTypeStyleSetting;ANewListItemStyleFrameCache:TListItemStyleFrameCache);
   protected
     //编辑情况有两种,
     //一种是显示元素是Label,但编辑时使用Edit
@@ -1240,6 +1243,137 @@ type
 
 
 
+  /// <summary>
+  ///   <para>
+  ///     列表视图素材基类
+  ///   </para>
+  ///   <para>
+  ///     Base class of ListView material
+  ///   </para>
+  /// </summary>
+  {$I Source\Controls\ComponentPlatformsAttribute.inc}
+  TSkinListViewDefaultMaterial=class(TSkinVirtualListDefaultMaterial)
+  private
+
+    procedure SetDrawColLineParam(const Value: TDrawLineParam);
+    procedure SetDrawRowLineParam(const Value: TDrawLineParam);
+    procedure SetIsDrawColBeginLine(const Value: Boolean);
+    procedure SetIsDrawColEndLine(const Value: Boolean);
+    procedure SetIsDrawRowBeginLine(const Value: Boolean);
+    procedure SetIsDrawRowEndLine(const Value: Boolean);
+    procedure SetIsDrawColLine(const Value: Boolean);
+    procedure SetIsDrawRowLine(const Value: Boolean);
+  protected
+    procedure AssignTo(Dest: TPersistent); override;
+  protected
+    //从文档节点中加载
+    function LoadFromDocNode(ADocNode:TBTNode20_Class):Boolean;override;
+    //保存到文档节点
+    function SaveToDocNode(ADocNode:TBTNode20_Class):Boolean;override;
+  public
+    FDrawRowLineParam: TDrawLineParam;
+    FDrawColLineParam: TDrawLineParam;
+
+
+
+    FIsDrawColEndLine: Boolean;
+    FIsDrawRowEndLine: Boolean;
+    FIsDrawColBeginLine: Boolean;
+    FIsDrawRowBeginLine: Boolean;
+    FIsDrawColLine: Boolean;
+    FIsDrawRowLine: Boolean;
+
+    constructor Create(AOwner:TComponent);override;
+    destructor Destroy;override;
+  published
+
+    /// <summary>
+    ///   <para>
+    ///     是否绘制行分隔线
+    ///   </para>
+    ///   <para>
+    ///     Whether draw row devide line
+    ///   </para>
+    /// </summary>
+    property IsDrawRowLine:Boolean read FIsDrawRowLine write SetIsDrawRowLine;
+
+    /// <summary>
+    ///   <para>
+    ///     是否绘制首行开始分隔线
+    ///   </para>
+    ///   <para>
+    ///     Whether draw devide line on where first row  begins
+    ///   </para>
+    /// </summary>
+    property IsDrawRowBeginLine:Boolean read FIsDrawRowBeginLine write SetIsDrawRowBeginLine;
+
+    /// <summary>
+    ///   <para>
+    ///     是否绘制末行结束分隔线
+    ///   </para>
+    ///   <para>
+    ///     Whether draw devide line on where last line ends
+    ///   </para>
+    /// </summary>
+    property IsDrawRowEndLine:Boolean read FIsDrawRowEndLine write SetIsDrawRowEndLine;
+
+
+
+
+    /// <summary>
+    ///   <para>
+    ///     是否绘制列分隔线
+    ///   </para>
+    ///   <para>
+    ///     Whether draw devided line of columns
+    ///   </para>
+    /// </summary>
+    property IsDrawColLine:Boolean read FIsDrawColLine write SetIsDrawColLine;
+
+    /// <summary>
+    ///   <para>
+    ///     是否绘制首列开始分隔线
+    ///   </para>
+    ///   <para>
+    ///     Whether draw devide line on where first columns begins
+    ///   </para>
+    /// </summary>
+    property IsDrawColBeginLine:Boolean read FIsDrawColBeginLine write SetIsDrawColBeginLine;
+
+    /// <summary>
+    ///   <para>
+    ///     是否绘制末列结束分隔线
+    ///   </para>
+    ///   <para>
+    ///     Whether draw devide line on where last columns ends
+    ///   </para>
+    /// </summary>
+    property IsDrawColEndLine:Boolean read FIsDrawColEndLine write SetIsDrawColEndLine;
+
+
+
+    /// <summary>
+    ///   <para>
+    ///     行分隔线绘制参数
+    ///   </para>
+    ///   <para>
+    ///     Draw parameters of row devide line
+    ///   </para>
+    /// </summary>
+    property DrawRowLineParam:TDrawLineParam read FDrawRowLineParam write SetDrawRowLineParam;
+    /// <summary>
+    ///   <para>
+    ///     列分隔线绘制参数
+    ///   </para>
+    ///   <para>
+    ///     Draw parameters of columns devide line
+    ///   </para>
+    /// </summary>
+    property DrawColLineParam:TDrawLineParam read FDrawColLineParam write SetDrawColLineParam;
+  end;
+
+
+
   TSkinVirtualListDefaultType=class(TSkinCustomListDefaultType)
   protected
 
@@ -1270,8 +1404,6 @@ type
     procedure CustomUnBind;override;
   protected
     function GetSkinMaterial:TSkinVirtualListDefaultMaterial;
-    //自动调整列表项设计器的宽度和高度
-    procedure AutoAdjustItemDesignerPanelSize(AItemDesignerPanel:TSkinItemDesignerPanel;AItem:TSkinItem);virtual;
     //决定列表项所使用的素材
     function DecideItemMaterial(AItem:TBaseSkinItem;ASkinMaterial:TSkinCustomListDefaultMaterial): TBaseSkinListItemMaterial;override;
     //处理Item绘制参数
@@ -1351,6 +1483,8 @@ type
     FOnPrepareDrawItem: TVirtualListDrawItemEvent;
     FOnAdvancedDrawItem: TVirtualListDrawItemEvent;
 
+    //列表项Style初始事件
+    FOnNewListItemStyleFrameCacheInit:TNewListItemStyleFrameCacheInitEvent;
 
     function GetOnPrepareItemPanDrag:TVirtualListPrepareItemPanDragEvent;
 
@@ -1367,6 +1501,7 @@ type
     function GetOnStartEditingItem: TVirtualListEditingItemEvent;
     function GetOnStopEditingItem: TVirtualListEditingItemEvent;
 
+    function GetOnNewListItemStyleFrameCacheInit:TNewListItemStyleFrameCacheInitEvent;
 
     function GetVirtualListProperties:TVirtualListProperties;
     procedure SetVirtualListProperties(Value:TVirtualListProperties);
@@ -1422,6 +1557,8 @@ type
 
     property OnStartEditingItem:TVirtualListEditingItemEvent read GetOnStartEditingItem write FOnStartEditingItem;
     property OnStopEditingItem:TVirtualListEditingItemEvent read GetOnStopEditingItem write FOnStopEditingItem;
+    //列表项样式Frame初始事件
+    property OnNewListItemStyleFrameCacheInit:TNewListItemStyleFrameCacheInitEvent read GetOnNewListItemStyleFrameCacheInit write FOnNewListItemStyleFrameCacheInit;
 
 
     //获取缓存标记,判断是否需要重新调用OnPrepareDrawItem事件
@@ -1446,6 +1583,9 @@ type
 
 var
   GlobalSkinItemMaterialStylePackage:TSkinItemMaterialStylePackage;
+
+//自动调整列表项设计器的宽度和高度
+procedure AutoAdjustItemDesignerPanelSize(AItemDesignerPanel:TSkinItemDesignerPanel;AItem:TBaseSkinItem;AItemDrawRect:TRectF);
 
 implementation
 
@@ -1472,13 +1612,28 @@ begin
 
 
     FDefaultItemStyleSetting:=TListItemTypeStyleSetting.Create(Self,sitDefault);
+    FDefaultItemStyleSetting.FOnInit:=Self.DoNewListItemStyleFrameCacheInit;
+
     FItem1ItemStyleSetting:=TListItemTypeStyleSetting.Create(Self,sitItem1);
+    FItem1ItemStyleSetting.FOnInit:=Self.DoNewListItemStyleFrameCacheInit;
+
     FItem2ItemStyleSetting:=TListItemTypeStyleSetting.Create(Self,sitItem2);
+    FItem2ItemStyleSetting.FOnInit:=Self.DoNewListItemStyleFrameCacheInit;
+
     FItem3ItemStyleSetting:=TListItemTypeStyleSetting.Create(Self,sitItem3);
+    FItem3ItemStyleSetting.FOnInit:=Self.DoNewListItemStyleFrameCacheInit;
+
     FItem4ItemStyleSetting:=TListItemTypeStyleSetting.Create(Self,sitItem4);
+    FItem4ItemStyleSetting.FOnInit:=Self.DoNewListItemStyleFrameCacheInit;
+
     FHeaderItemStyleSetting:=TListItemTypeStyleSetting.Create(Self,sitHeader);
+    FHeaderItemStyleSetting.FOnInit:=Self.DoNewListItemStyleFrameCacheInit;
+
     FFooterItemStyleSetting:=TListItemTypeStyleSetting.Create(Self,sitFooter);
+    FFooterItemStyleSetting.FOnInit:=Self.DoNewListItemStyleFrameCacheInit;
+
     FSearchBarItemStyleSetting:=TListItemTypeStyleSetting.Create(Self,sitSearchBar);
+    FSearchBarItemStyleSetting.FOnInit:=Self.DoNewListItemStyleFrameCacheInit;
 
 
 
@@ -1658,14 +1813,33 @@ var
 begin
   inherited;
 
-  if (Self.FMouseOverItem<>nil)
-    and (Self.MouseOverItem.FDrawItemDesignerPanel<>nil)
-    and (TSkinItemDesignerPanel(Self.MouseOverItem.FDrawItemDesignerPanel).SkinControlType<>nil) then
+//  if (Self.FMouseOverItem<>nil)
+//    and (Self.MouseOverItem.FDrawItemDesignerPanel<>nil)
+//    and (TSkinItemDesignerPanel(Self.MouseOverItem.FDrawItemDesignerPanel).SkinControlType<>nil) then
+//  begin
+//    AMouseOverItemDrawItemDesignerPanel:=TSkinItemDesignerPanel(Self.MouseOverItem.FDrawItemDesignerPanel);
+//    AMouseOverItemDrawItemDesignerPanel.SkinControlType.CustomMouseLeave;
+//  end;
+
+  //原来那个Item的设计面板要处理鼠标离开事件
+  if (AOldItem<>nil)
+    and (TSkinItem(AOldItem).FDrawItemDesignerPanel<>nil)
+    and (TSkinItemDesignerPanel(TSkinItem(AOldItem).FDrawItemDesignerPanel).SkinControlType<>nil) then
   begin
-    AMouseOverItemDrawItemDesignerPanel:=TSkinItemDesignerPanel(Self.MouseOverItem.FDrawItemDesignerPanel);
+    AMouseOverItemDrawItemDesignerPanel:=TSkinItemDesignerPanel(TSkinItem(AOldItem).FDrawItemDesignerPanel);
     AMouseOverItemDrawItemDesignerPanel.SkinControlType.CustomMouseLeave;
   end;
 
+end;
+
+procedure TVirtualListProperties.DoNewListItemStyleFrameCacheInit(
+  Sender: TObject; AListItemTypeStyleSetting: TListItemTypeStyleSetting;
+  ANewListItemStyleFrameCache: TListItemStyleFrameCache);
+begin
+  if Assigned(Self.FSkinVirtualListIntf.OnNewListItemStyleFrameCacheInit) then
+  begin
+    Self.FSkinVirtualListIntf.OnNewListItemStyleFrameCacheInit(Sender,AListItemTypeStyleSetting,ANewListItemStyleFrameCache);
+  end;
 end;
 
 procedure TVirtualListProperties.DoSetValueToEditingItem;
@@ -1808,6 +1982,11 @@ begin
       //默认不缓存
       AItemBufferCacheTag:=-1;
 
+      //自动调整ItemDesignerPanel的尺寸(区分设计时与运行时)
+//      if  ASkinVirtualListMaterial.FIsAutoAdjustItemDesignerPanelSize then
+      begin
+        AutoAdjustItemDesignerPanelSize(AItemDesignerPanel,AItem,AItemDrawRect);
+      end;
 
 //      //使用了Style,
 //      //而且使用了缓存
@@ -2345,7 +2524,7 @@ end;
 procedure TVirtualListProperties.SetItem1ItemStyleConfig(
   const Value: TStringList);
 begin
-  FItem1ItemStyleSetting.FConfig.Assign(Value);
+  FItem1ItemStyleSetting.Config:=Value;
 end;
 
 procedure TVirtualListProperties.SetItem2DesignerPanel(const Value: TSkinItemDesignerPanel);
@@ -2368,7 +2547,7 @@ end;
 procedure TVirtualListProperties.SetItem2ItemStyleConfig(
   const Value: TStringList);
 begin
-  FItem2ItemStyleSetting.FConfig.Assign(Value);
+  FItem2ItemStyleSetting.Config:=Value;
 end;
 
 procedure TVirtualListProperties.SetItem3DesignerPanel(const Value: TSkinItemDesignerPanel);
@@ -2391,7 +2570,7 @@ end;
 procedure TVirtualListProperties.SetItem3ItemStyleConfig(
   const Value: TStringList);
 begin
-  FItem3ItemStyleSetting.FConfig.Assign(Value);
+  FItem3ItemStyleSetting.Config:=Value;
 end;
 
 procedure TVirtualListProperties.SetItem4DesignerPanel(const Value: TSkinItemDesignerPanel);
@@ -2414,7 +2593,7 @@ end;
 procedure TVirtualListProperties.SetItem4ItemStyleConfig(
   const Value: TStringList);
 begin
-  FItem4ItemStyleSetting.FConfig.Assign(Value);
+  FItem4ItemStyleSetting.Config:=Value;
 end;
 
 procedure TVirtualListProperties.SetHeaderDesignerPanel(const Value: TSkinItemDesignerPanel);
@@ -2437,7 +2616,7 @@ end;
 procedure TVirtualListProperties.SetHeaderItemStyleConfig(
   const Value: TStringList);
 begin
-  FHeaderItemStyleSetting.FConfig.Assign(Value);
+  FHeaderItemStyleSetting.Config:=Value;
 end;
 
 procedure TVirtualListProperties.SetFooterDesignerPanel(const Value: TSkinItemDesignerPanel);
@@ -2460,7 +2639,7 @@ end;
 procedure TVirtualListProperties.SetFooterItemStyleConfig(
   const Value: TStringList);
 begin
-  FFooterItemStyleSetting.FConfig.Assign(Value);
+  FFooterItemStyleSetting.Config:=Value;
 end;
 
 procedure TVirtualListProperties.SetSearchBarDesignerPanel(const Value: TSkinItemDesignerPanel);
@@ -2483,7 +2662,7 @@ end;
 procedure TVirtualListProperties.SetSearchBarItemStyleConfig(
   const Value: TStringList);
 begin
-  FSearchBarItemStyleSetting.FConfig.Assign(Value);
+  FSearchBarItemStyleSetting.Config:=Value;
 end;
 
 procedure TVirtualListProperties.SetDefaultItemStyle(const Value: String);
@@ -2494,7 +2673,7 @@ end;
 procedure TVirtualListProperties.SetDefaultItemStyleConfig(
   const Value: TStringList);
 begin
-  FDefaultItemStyleSetting.FConfig.Assign(Value);
+  FDefaultItemStyleSetting.Config:=Value;
 end;
 
 procedure TVirtualListProperties.SetIconDownloadPictureManager(const Value: TDownloadPictureManager);
@@ -2832,19 +3011,41 @@ begin
 end;
 
 procedure TVirtualListProperties.SetPropJson(ASuperObject: ISuperObject);
+var
+  I: Integer;
+  AConfig:TStringList;
 begin
   inherited;
 //  DefaultItemStyle
 
   {$IF CompilerVersion >= 30.0}
+
   if ASuperObject.Contains('DefaultItemStyle') then
   begin
     DefaultItemStyle:=ASuperObject.S['DefaultItemStyle'];
   end;
+
+
+  if ASuperObject.Contains('DefaultItemStyleConfigStr') then
+  begin
+    AConfig:=TStringList.Create;
+    try
+      AConfig.StrictDelimiter:=True;
+      AConfig.Delimiter:=';';
+      AConfig.DelimitedText:=ASuperObject.S['DefaultItemStyleConfigStr'];
+      DefaultItemStyleConfig:=AConfig;
+    finally
+      FreeAndNil(AConfig);
+    end;
+  end;
+
+
+
   if ASuperObject.Contains('ItemHeight') then
   begin
-    ItemHeight:=ASuperObject.I['ItemHeight'];
+    ItemHeight:=ASuperObject.F['ItemHeight'];
   end;
+
   {$IFEND}
 
 end;
@@ -2914,9 +3115,9 @@ end;
 
 { TSkinVirtualListDefaultType }
 
-procedure TSkinVirtualListDefaultType.AutoAdjustItemDesignerPanelSize(AItemDesignerPanel: TSkinItemDesignerPanel; AItem: TSkinItem);
+procedure AutoAdjustItemDesignerPanelSize(AItemDesignerPanel: TSkinItemDesignerPanel; AItem: TBaseSkinItem;AItemDrawRect:TRectF);
 begin
-  AItemDesignerPanel.Width:=ControlSize(Self.FSkinVirtualListIntf.Prop.CalcItemWidth(AItem));
+  AItemDesignerPanel.Width:=ControlSize(AItemDrawRect.Width);//Self.FSkinVirtualListIntf.Prop.CalcItemWidth(AItem));
 
 //  if (Self.FSkinVirtualListIntf.Prop.FListLayoutsManager.ItemSizeCalcType=isctFixed) then
 //  begin
@@ -2927,7 +3128,7 @@ begin
 //  if IsSameDouble(AItem.Height,-1) then
 //  begin
     //设计时固定尺寸
-    AItemDesignerPanel.Height:=ControlSize(Self.FSkinVirtualListIntf.Prop.FListLayoutsManager.CalcItemHeight(AItem));
+    AItemDesignerPanel.Height:=ControlSize(AItemDrawRect.Height);//Self.FSkinVirtualListIntf.Prop.FListLayoutsManager.CalcItemHeight(AItem));
 //  end
 //  else
 ////if (AItem.ItemType<>sitDefault)
@@ -3414,8 +3615,10 @@ begin
   ASkinVirtualListMaterial:=TSkinVirtualListDefaultMaterial(ASkinMaterial);
 
   //确定出绘制的设计面板
-  ASkinItem.FDrawItemDesignerPanel:=Self.FSkinVirtualListIntf.Prop.DecideItemDesignerPanel(ASkinItem);
-
+  if ASkinItem.ItemType<>sitUseDrawItemDesignerPanel then
+  begin
+    ASkinItem.FDrawItemDesignerPanel:=Self.FSkinVirtualListIntf.Prop.DecideItemDesignerPanel(ASkinItem);
+  end;
 
 
   //调用OnPrepareDrawItem事件
@@ -3585,20 +3788,20 @@ begin
 
 
       //自动调整ItemDesignerPanel的尺寸(区分设计时与运行时)
-      if  ASkinVirtualListMaterial.FIsAutoAdjustItemDesignerPanelSize then
+//      if  ASkinVirtualListMaterial.FIsAutoAdjustItemDesignerPanelSize then
       begin
-        AutoAdjustItemDesignerPanelSize(AItemDesignerPanel,ASkinItem);
+        AutoAdjustItemDesignerPanelSize(AItemDesignerPanel,ASkinItem,AItemDrawRect);
       end;
 
 
 
-      //准备绘制列表项
-      FSkinVirtualListIntf.Prop.CallOnPrepareDrawItemEvent(
-            Self,
-            ACanvas,
-            ASkinItem,
-            AItemDrawRect,
-            AIsDrawItemInteractiveState);
+//      //准备绘制列表项
+//      FSkinVirtualListIntf.Prop.CallOnPrepareDrawItemEvent(
+//            Self,
+//            ACanvas,
+//            ASkinItem,
+//            AItemDrawRect,
+//            AIsDrawItemInteractiveState);
 
 
 
@@ -4703,7 +4906,10 @@ begin
   Result:=FOnPrepareItemPanDrag;
 end;
 
-
+function TSkinVirtualList.GetOnNewListItemStyleFrameCacheInit:TNewListItemStyleFrameCacheInitEvent;
+begin
+  Result:=FOnNewListItemStyleFrameCacheInit;
+end;
 
 
 
@@ -4774,6 +4980,205 @@ function TSkinListItemMaterials.GetItem(Index: Integer): TSkinListItemMaterialIt
 begin
   Result:=TSkinListItemMaterialItem(Inherited Items[Index]);
 end;
+
+
+
+
+{ TSkinListViewDefaultMaterial }
+
+
+procedure TSkinListViewDefaultMaterial.AssignTo(Dest: TPersistent);
+var
+  DestObject:TSkinListViewDefaultMaterial;
+begin
+  if Dest is TSkinListViewDefaultMaterial then
+  begin
+    DestObject:=TSkinListViewDefaultMaterial(Dest);
+
+    DestObject.FIsDrawColLine:=FIsDrawColLine;
+    DestObject.FIsDrawRowLine:=FIsDrawRowLine;
+
+    DestObject.FIsDrawColEndLine:=FIsDrawColEndLine;
+    DestObject.FIsDrawRowEndLine:=FIsDrawRowEndLine;
+    DestObject.FIsDrawColBeginLine:=FIsDrawColBeginLine;
+    DestObject.FIsDrawRowBeginLine:=FIsDrawRowBeginLine;
+
+  end;
+
+  inherited;
+end;
+
+constructor TSkinListViewDefaultMaterial.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+
+  FDrawColLineParam:=CreateDrawLineParam('DrawColLineParam','列分隔线绘制参数');
+  FDrawColLineParam.PenDrawColor.Color:=$FFD4D0C8;
+
+  FDrawRowLineParam:=CreateDrawLineParam('DrawRowLineParam','行分隔线绘制参数');
+  FDrawRowLineParam.PenDrawColor.Color:=$FFD4D0C8;
+
+
+  FIsDrawColLine:=False;
+  FIsDrawRowLine:=False;
+
+  FIsDrawColEndLine:=False;
+  FIsDrawRowEndLine:=False;
+  FIsDrawColBeginLine:=False;
+  FIsDrawRowBeginLine:=False;
+
+end;
+
+function TSkinListViewDefaultMaterial.LoadFromDocNode(ADocNode: TBTNode20_Class): Boolean;
+var
+  I: Integer;
+  ABTNode:TBTNode20;
+begin
+  Result:=False;
+
+  Inherited LoadFromDocNode(ADocNode);
+
+
+  for I := 0 to ADocNode.ChildNodes.Count - 1 do
+  begin
+    ABTNode:=ADocNode.ChildNodes[I];
+
+    if ABTNode.NodeName='IsDrawRowLine' then
+    begin
+      FIsDrawRowLine:=ABTNode.ConvertNode_Bool32.Data;
+    end
+    else if ABTNode.NodeName='IsDrawRowBeginLine' then
+    begin
+      FIsDrawRowBeginLine:=ABTNode.ConvertNode_Bool32.Data;
+    end
+    else if ABTNode.NodeName='IsDrawRowEndLine' then
+    begin
+      FIsDrawRowEndLine:=ABTNode.ConvertNode_Bool32.Data;
+    end
+    else if ABTNode.NodeName='IsDrawColLine' then
+    begin
+      FIsDrawColLine:=ABTNode.ConvertNode_Bool32.Data;
+    end
+    else if ABTNode.NodeName='IsDrawColBeginLine' then
+    begin
+      FIsDrawColBeginLine:=ABTNode.ConvertNode_Bool32.Data;
+    end
+    else if ABTNode.NodeName='IsDrawColEndLine' then
+    begin
+      FIsDrawColEndLine:=ABTNode.ConvertNode_Bool32.Data;
+    end
+
+    ;
+  end;
+
+  Result:=True;
+end;
+
+function TSkinListViewDefaultMaterial.SaveToDocNode(ADocNode: TBTNode20_Class): Boolean;
+var
+  ABTNode:TBTNode20;
+begin
+  Result:=False;
+
+  Inherited SaveToDocNode(ADocNode);
+
+  //是否绘制行分隔线
+  ABTNode:=ADocNode.AddChildNode_Bool32('IsDrawRowLine','是否绘制行分隔线');
+  ABTNode.ConvertNode_Bool32.Data:=FIsDrawRowLine;
+  //是否绘制开始行分隔线
+  ABTNode:=ADocNode.AddChildNode_Bool32('IsDrawRowBeginLine','是否绘制开始行分隔线');
+  ABTNode.ConvertNode_Bool32.Data:=FIsDrawRowBeginLine;
+  //是否绘制结束行分隔线
+  ABTNode:=ADocNode.AddChildNode_Bool32('IsDrawRowEndLine','是否绘制结束行分隔线');
+  ABTNode.ConvertNode_Bool32.Data:=FIsDrawRowEndLine;
+
+
+  //是否绘制列分隔线
+  ABTNode:=ADocNode.AddChildNode_Bool32('IsDrawColLine','是否绘制列分隔线');
+  ABTNode.ConvertNode_Bool32.Data:=FIsDrawColLine;
+  //是否绘制开始列分隔线
+  ABTNode:=ADocNode.AddChildNode_Bool32('IsDrawColBeginLine','是否绘制开始列分隔线');
+  ABTNode.ConvertNode_Bool32.Data:=FIsDrawColBeginLine;
+  //是否绘制结束列分隔线
+  ABTNode:=ADocNode.AddChildNode_Bool32('IsDrawColEndLine','是否绘制结束列分隔线');
+  ABTNode.ConvertNode_Bool32.Data:=FIsDrawColEndLine;
+
+
+  Result:=True;
+end;
+
+destructor TSkinListViewDefaultMaterial.Destroy;
+begin
+  FreeAndNil(FDrawColLineParam);
+  FreeAndNil(FDrawRowLineParam);
+  inherited;
+end;
+
+
+procedure TSkinListViewDefaultMaterial.SetDrawColLineParam(const Value: TDrawLineParam);
+begin
+  FDrawColLineParam.Assign(Value);
+end;
+
+procedure TSkinListViewDefaultMaterial.SetDrawRowLineParam(const Value: TDrawLineParam);
+begin
+  FDrawRowLineParam.Assign(Value);
+end;
+
+procedure TSkinListViewDefaultMaterial.SetIsDrawColBeginLine(const Value: Boolean);
+begin
+  if FIsDrawColBeginLine<>Value then
+  begin
+    FIsDrawColBeginLine := Value;
+    Self.DoChange;
+  end;
+end;
+
+procedure TSkinListViewDefaultMaterial.SetIsDrawColEndLine(const Value: Boolean);
+begin
+  if FIsDrawColEndLine<>Value then
+  begin
+    FIsDrawColEndLine := Value;
+    Self.DoChange;
+  end;
+end;
+
+procedure TSkinListViewDefaultMaterial.SetIsDrawColLine(const Value: Boolean);
+begin
+  if FIsDrawColLine<>Value then
+  begin
+    FIsDrawColLine := Value;
+    Self.DoChange;
+  end;
+end;
+
+procedure TSkinListViewDefaultMaterial.SetIsDrawRowBeginLine(const Value: Boolean);
+begin
+  if FIsDrawRowBeginLine<>Value then
+  begin
+    FIsDrawRowBeginLine := Value;
+    Self.DoChange;
+  end;
+end;
+
+procedure TSkinListViewDefaultMaterial.SetIsDrawRowEndLine(const Value: Boolean);
+begin
+  if FIsDrawRowEndLine<>Value then
+  begin
+    FIsDrawRowEndLine := Value;
+    Self.DoChange;
+  end;
+end;
+
+procedure TSkinListViewDefaultMaterial.SetIsDrawRowLine(const Value: Boolean);
+begin
+  if FIsDrawRowLine<>Value then
+  begin
+    FIsDrawRowLine := Value;
+    Self.DoChange;
+  end;
+end;
+
 
 
 

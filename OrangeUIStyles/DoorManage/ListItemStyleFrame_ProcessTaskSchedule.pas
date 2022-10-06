@@ -91,7 +91,13 @@ begin
     else
     begin
       Self.lblSchedule.Visible:=True;
+      //需要计算进度Label的高度
+//      Self.lblSchedule.Height:=
     end;
+
+
+
+
 
     if AItem.Json.S['异常'] = '' then
     begin
@@ -101,6 +107,8 @@ begin
     begin
       Self.lblError.Visible:=True;
     end;
+
+
 
     if (lblBillNO<>nil)
       and (lblSchedule<>nil)
@@ -138,7 +146,10 @@ begin
 end;
 
 initialization
-  RegisterListItemStyle('ProcessTaskSchedule',TFrameListItemStyle_ProcessTaskSchedule,-1,True);
+  RegisterListItemStyle('ProcessTaskSchedule',
+                      TFrameListItemStyle_ProcessTaskSchedule,
+                      -1,
+                      True);
 
 finalization
   UnRegisterListItemStyle(TFrameListItemStyle_ProcessTaskSchedule);

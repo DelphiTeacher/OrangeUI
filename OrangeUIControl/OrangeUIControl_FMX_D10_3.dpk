@@ -9,21 +9,21 @@ package OrangeUIControl_FMX_D10_3;
 {$EXTENDEDSYNTAX ON}
 {$IMPORTEDDATA ON}
 {$IOCHECKS ON}
-{$LOCALSYMBOLS ON}
+{$LOCALSYMBOLS OFF}
 {$LONGSTRINGS ON}
 {$OPENSTRINGS ON}
-{$OPTIMIZATION OFF}
+{$OPTIMIZATION ON}
 {$OVERFLOWCHECKS OFF}
 {$RANGECHECKS OFF}
-{$REFERENCEINFO ON}
+{$REFERENCEINFO OFF}
 {$SAFEDIVIDE OFF}
-{$STACKFRAMES ON}
+{$STACKFRAMES OFF}
 {$TYPEDADDRESS OFF}
 {$VARSTRINGCHECKS ON}
 {$WRITEABLECONST OFF}
 {$MINENUMSIZE 1}
 {$IMAGEBASE $400000}
-{$DEFINE DEBUG}
+{$DEFINE RELEASE}
 {$DEFINE SKIN_SUPEROBJECT}
 {$ENDIF IMPLICITBUILDING}
 {$RUNONLY}
@@ -171,30 +171,11 @@ contains
   uComponentType in 'Source\Base\uComponentType.pas',
   uUrlPicture in 'Source\Base\uUrlPicture.pas',
   uVersion in 'Source\Base\uVersion.pas',
-  SelectMonthFrame in 'Source\Common\CommonFrames\SelectMonthFrame.pas',
-  SelectTimeFrame in 'Source\Common\CommonFrames\SelectTimeFrame.pas',
-  SingleSelectFrame in 'Source\Common\CommonFrames\SingleSelectFrame.pas',
-  TakePictureMenuFrame in 'Source\Common\CommonFrames\TakePictureMenuFrame.pas',
-  WaitingFrame in 'Source\Common\CommonFrames\WaitingFrame.pas',
-  AddressBookListFrame in 'Source\Common\CommonFrames\AddressBookListFrame.pas',
-  CalendarFrame in 'Source\Common\CommonFrames\CalendarFrame.pas',
-  ClipHeadFrame in 'Source\Common\CommonFrames\ClipHeadFrame.pas',
-  HintFrame in 'Source\Common\CommonFrames\HintFrame.pas',
-  InputFrame in 'Source\Common\CommonFrames\InputFrame.pas',
-  InputMemoFrame in 'Source\Common\CommonFrames\InputMemoFrame.pas',
-  LoadingFrame in 'Source\Common\CommonFrames\LoadingFrame.pas',
-  LoadingProgressFrame in 'Source\Common\CommonFrames\LoadingProgressFrame.pas',
-  MessageBoxFrame in 'Source\Common\CommonFrames\MessageBoxFrame.pas',
-  SavePictureMenuFrame in 'Source\Common\CommonFrames\SavePictureMenuFrame.pas',
-  SelectCityFrame in 'Source\Common\CommonFrames\SelectCityFrame.pas',
   uUIFunction in 'Source\Common\uUIFunction.pas',
-  uMobileUtils in 'Source\Common\uMobileUtils.pas',
-  uSelectContactor in 'Source\Common\uSelectContactor.pas',
   iOSApi.CNContact in '..\OrangeProjectCommon\IOS\Contacts\iOSApi.CNContact.pas',
   iOSApi.CNLabeledValue in '..\OrangeProjectCommon\IOS\Contacts\iOSApi.CNLabeledValue.pas',
   iOSApi.CNPhoneNumber in '..\OrangeProjectCommon\IOS\Contacts\iOSApi.CNPhoneNumber.pas',
   iOSApi.CNContactPickerViewController in '..\OrangeProjectCommon\IOS\iOSApi.CNContactPickerViewController.pas',
-  uAndroidPermission_D10_2 in 'Source\Common\uAndroidPermission_D10_2.pas',
   HzSpell in '..\OrangeProjectCommon\HzSpell\HzSpell.pas',
   uBasePageStructure in 'Source\Common\uBasePageStructure.pas',
   Androidapi.JNI.TTS in 'Source\SystemTTS\Androidapi.JNI.TTS.pas',
@@ -205,14 +186,7 @@ contains
   uSystemTTS in 'Source\SystemTTS\uSystemTTS.pas',
   Winapi.SpVoice in 'Source\SystemTTS\Winapi.SpVoice.pas',
   Android.SpeechTTS in 'Source\SystemTTS\Android.SpeechTTS.pas',
-  uPhotoManager.Android in 'Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.Android.pas',
-  uPhotoManager.iOS in 'Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.iOS.pas',
-  uPhotoManager in 'Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.pas',
-  uPhotoManager.Windows in 'Source\Common\CommonFrames\MultiSelectPhotos\uPhotoManager.Windows.pas',
-  iOSapi.Photos.Manager in 'Source\Common\CommonFrames\MultiSelectPhotos\iOSapi.Photos.Manager.pas',
-  iOSapi.Photos in 'Source\Common\CommonFrames\MultiSelectPhotos\iOSapi.Photos.pas',
   uSkinRegExTagLabelViewType in 'Source\Controls\uSkinRegExTagLabelViewType.pas',
-  UpdateTextFrame in 'Source\Common\CommonFrames\UpdateTextFrame.pas' {FrameUpdateText},
   uBaseHttpControl in '..\OrangeProjectCommon\OrangeUI\uBaseHttpControl.pas',
   uBaseList in '..\OrangeProjectCommon\OrangeUI\uBaseList.pas',
   uBaseLog in '..\OrangeProjectCommon\OrangeUI\uBaseLog.pas',
@@ -223,7 +197,8 @@ contains
   uBitmapOperation in 'Source\uBitmapOperation.pas',
   MD5_OrangeUI in '..\OrangeProjectCommon\MD5\MD5_OrangeUI.pas',
   uSkinSuperJSON in '..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperJSON.pas',
-  uSkinSuperObject in '..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperObject.pas';
+  uSkinSuperObject in '..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperObject.pas',
+  uBasePageStructureControls in 'Source\Controls\uBasePageStructureControls.pas';
 
 end.
 

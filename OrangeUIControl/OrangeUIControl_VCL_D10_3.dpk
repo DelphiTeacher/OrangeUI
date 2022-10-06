@@ -25,6 +25,7 @@ package OrangeUIControl_VCL_D10_3;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$DEFINE SKIN_SUPEROBJECT}
+{$DEFINE NEED_SystemHttpControl}
 {$ENDIF IMPLICITBUILDING}
 {$RUNONLY}
 {$IMPLICITBUILD ON}
@@ -38,7 +39,6 @@ requires
   IndyProtocols,
   IndyCore,
   xmlrtl;
-
 
 contains
   uSkinWindowsControl in 'Source\Controls\Windows\uSkinWindowsControl.pas',
@@ -56,7 +56,6 @@ contains
   uSkinPanelType in 'Source\Controls\uSkinPanelType.pas',
   uSkinRadioButtonType in 'Source\Controls\uSkinRadioButtonType.pas',
   uSkinImageListPlayerType in 'Source\Controls\uSkinImageListPlayerType.pas',
-  uSkinListViewType in 'Source\Controls\uSkinListViewType.pas',
   uSkinPublic in 'Source\Base\uSkinPublic.pas',
   uSkinPicture in 'Source\Base\uSkinPicture.pas',
   uSkinMaterial in 'Source\Base\uSkinMaterial.pas',
@@ -77,7 +76,6 @@ contains
   uSkinGDIPlus in 'Source\Engines\VCL\GDIPlus\GDIPlus\uSkinGDIPlus.pas',
   uSkinAnimator in 'Source\Controls\uSkinAnimator.pas',
   uSkinControlGestureManager in 'Source\Controls\uSkinControlGestureManager.pas',
-  uSkinDBGridType in 'Source\Controls\uSkinDBGridType.pas',
   uSkinImageListViewerType in 'Source\Controls\uSkinImageListViewerType.pas',
   uSkinMultiColorLabelType in 'Source\Controls\uSkinMultiColorLabelType.pas',
   uSkinNotifyNumberIconType in 'Source\Controls\uSkinNotifyNumberIconType.pas',
@@ -92,8 +90,6 @@ contains
   uSkinSwitchPageListControlGestureManager in 'Source\Controls\uSkinSwitchPageListControlGestureManager.pas',
   uSkinSwitchPageListPanelType in 'Source\Controls\uSkinSwitchPageListPanelType.pas',
   uSkinSwitchType in 'Source\Controls\uSkinSwitchType.pas',
-  uSkinTreeViewType in 'Source\Controls\uSkinTreeViewType.pas',
-  uSkinVirtualGridType in 'Source\Controls\uSkinVirtualGridType.pas',
   uSkinVirtualListType in 'Source\Controls\uSkinVirtualListType.pas',
   uSkinDrawPanelType in 'Source\Controls\uSkinDrawPanelType.pas',
   uBinaryObjectList in 'Source\Base\uBinaryObjectList.pas',
@@ -109,7 +105,6 @@ contains
   uBaseSkinControl in 'Source\Controls\Windows\uBaseSkinControl.pas',
   uTimerTaskEvent in 'Source\Base\uTimerTaskEvent.pas',
   uSkinCustomListType in 'Source\Controls\uSkinCustomListType.pas',
-  uSkinItemGridType in 'Source\Controls\uSkinItemGridType.pas',
   uSkinGIFImage in 'Source\Base\uSkinGIFImage.pas',
   uComponentType in 'Source\Base\uComponentType.pas',
   uVersion in 'Source\Base\uVersion.pas',
@@ -135,6 +130,10 @@ contains
   uFrameContext in 'Source\Base\uFrameContext.pas',
   MD5_OrangeUI in '..\OrangeProjectCommon\MD5\MD5_OrangeUI.pas',
   uSkinSuperJSON in '..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperJSON.pas',
-  uSkinSuperObject in '..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperObject.pas';
+  uSkinSuperObject in '..\OrangeProjectCommon\SkinXSuperObject\uSkinSuperObject.pas',
+  uUIFunction in 'Source\Common\uUIFunction.pas',
+  uSkinCommonFrames in 'Source\Controls\uSkinCommonFrames.pas',
+  uBasePageStructureControls in 'Source\Controls\uBasePageStructureControls.pas',
+  uSkinVirtualChartType in 'Source\Controls\uSkinVirtualChartType.pas';
 
 end.

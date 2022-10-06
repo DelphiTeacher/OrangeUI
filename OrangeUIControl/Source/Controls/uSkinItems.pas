@@ -13,6 +13,9 @@ unit uSkinItems;
 interface
 {$I FrameWork.inc}
 
+{$I Version.inc}
+
+
 uses
   Classes,
   SysUtils,
@@ -21,23 +24,26 @@ uses
 
   {$IFDEF VCL}
   Controls,
+  Forms,
+  Dialogs,
   {$ENDIF}
   {$IFDEF FMX}
   FMX.Controls,
   FMX.Types,
   FMX.Dialogs,
+  FMX.Forms,
   {$ENDIF}
 
   DB,
   uLang,
 
 
-  {$IFDEF SKIN_SUPEROBJECT}
+//  {$IFDEF SKIN_SUPEROBJECT}
   uSkinSuperObject,
-  {$ELSE}
-  XSuperObject,
-  XSuperJson,
-  {$ENDIF}
+//  {$ELSE}
+//  XSuperObject,
+//  XSuperJson,
+//  {$ENDIF}
 
 
 
@@ -103,8 +109,8 @@ type
     FSelected:Boolean;
 
 
-    FWidth: TControlSize;
-    FHeight: TControlSize;
+    FWidth: Double;
+    FHeight: Double;
 
     FVisible:Boolean;
 
@@ -116,9 +122,9 @@ type
     FChecked: Boolean;
 
   public
-    function GetHeight: TControlSize;
+    function GetHeight: Double;
     function GetVisible: Boolean;
-    function GetWidth: TControlSize;virtual;
+    function GetWidth: Double;virtual;
     //层级
     function GetLevel:Integer;virtual;
     function GetObject:TObject;
@@ -129,12 +135,15 @@ type
     procedure SetItemRect(Value:TRectF);
     procedure SetItemDrawRect(Value:TRectF);
     function GetIsRowEnd:Boolean;
+    function GetThisRowItemCount:Integer;
 
     procedure SetVisible(const Value: Boolean);
     procedure SetSelected(const Value: Boolean);virtual;
 
-    procedure SetHeight(const Value: TControlSize);
+    procedure SetHeight(const Value: Double);
     procedure SetChecked(const Value: Boolean);
+    //鼠标是否在Item里面
+    function PtInItem(APoint:TPointF):Boolean;virtual;
   protected
     //实现ISkinItem接口,用于排列
 
@@ -202,15 +211,6 @@ type
 
 
     FOnChange:TNotifyEvent;
-    /// <summary>
-    ///   <para>
-    ///     属性更改
-    ///   </para>
-    ///   <para>
-    ///     Property change
-    ///   </para>
-    /// </summary>
-    procedure DoPropChange;virtual;
   protected
 
     /// <summary>
@@ -233,6 +233,15 @@ type
     /// </summary>
     procedure DoVisibleChange;virtual;
   public
+    /// <summary>
+    ///   <para>
+    ///     属性更改
+    ///   </para>
+    ///   <para>
+    ///     Property change
+    ///   </para>
+    /// </summary>
+    procedure DoPropChange(Sender:TObject=nil);virtual;
 //    procedure AfterConstruction; override;
     constructor Create;virtual;
     //这个方法可以不用了,因为Add的时候会设置FOwner一遍
@@ -248,6 +257,7 @@ type
     IsNotNeedDrawDevide:Boolean;
     //是否需要重绘,用了缓存设计面板功能之后需要
     IsBufferNeedChange:Boolean;
+    FItemStyleConfig:TStringList;
 
     /// <summary>
     ///   <para>
@@ -296,8 +306,8 @@ type
     ///   </para>
     /// </summary>
     property ItemDrawRect:TRectF read GetItemDrawRect write SetItemDrawRect;
-    property StaticHeight:TControlSize read FHeight write FHeight;
-    property StaticWidth:TControlSize read FWidth write FWidth;
+    property StaticHeight:Double read FHeight write FHeight;
+    property StaticWidth:Double read FWidth write FWidth;
   published
 
     /// <summary>
@@ -327,7 +337,7 @@ type
     ///     Height ,if it is -1,means use default height
     ///   </para>
     /// </summary>
-    property Height:TControlSize read GetHeight write SetHeight;
+    property Height:Double read GetHeight write SetHeight;
 
     /// <summary>
     ///   <para>
@@ -394,6 +404,8 @@ type
     procedure DoAdd(AObject:TObject);override;
     procedure DoDelete(AObject:TObject;AIndex:Integer);override;
     procedure DoInsert(AObject:TObject;AIndex:Integer);override;
+    function SelectedCount:Integer;
+    function SelectedList:TBaseList;
   public
     /// <summary>
     ///   <para>
@@ -564,7 +576,7 @@ type
 
     //设置自带的数据
     procedure SetItemType(const Value: TSkinItemType);
-    procedure SetWidth(const Value: TControlSize);
+    procedure SetWidth(const Value: Double);
     procedure SetDataObject(const Value: TObject);
 
 
@@ -672,7 +684,7 @@ type
   public
     //IControlForPageFramework接口
     //针对页面框架的控件接口
-    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+    function LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;
     //获取与设置自定义属性
     function GetPropJsonStr:String;
     procedure SetPropJsonStr(AJsonStr:String);
@@ -691,9 +703,10 @@ type
                             AValueCaption:String;
                             //要设置多个值,整个字段的记录
                             AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
-    //设置属性
-    function GetProp(APropName:String):Variant;
-    procedure SetProp(APropName:String;APropValue:Variant);
+//    //设置属性
+//    function GetProp(APropName:String):Variant;
+//    procedure SetProp(APropName:String;APropValue:Variant);
+    procedure DoReturnFrame(AFromFrame:TFrame);virtual;
   public
 
     /// <summary>
@@ -754,6 +767,7 @@ type
     FDrawItemDesignerPanel: TControl;
 //    //当前Item绘制所使用的风格设置
 //    FDrawListItemTypeStyleSetting:TObject;
+    FDrawColIndex:Integer;
 
 
 
@@ -893,7 +907,7 @@ type
     ///     Width ,if it is -1,means use default width
     ///   </para>
     /// </summary>
-    property Width:TControlSize read GetWidth write SetWidth;
+    property Width:Double read GetWidth write SetWidth;
 
     /// <summary>
     ///   <para>
@@ -2051,9 +2065,9 @@ type
     procedure CalcVisibleItems;override;
 
     //右偏移固定
-    function CalcItemWidth(AItem:ISkinItem):TControlSize;override;
-    function CalcItemHeight(AItem:ISkinItem):TControlSize;override;
-    function CalcItemLevelLeftOffsetAtVerticalLayout(AItem:ISkinItem):TControlSize;override;
+    function CalcItemWidth(AItem:ISkinItem):Double;override;
+    function CalcItemHeight(AItem:ISkinItem):Double;override;
+    function CalcItemLevelLeftOffsetAtVerticalLayout(AItem:ISkinItem):Double;override;
     function CalcItemLevelRightIsFitControlWidthAtVerticalLayout:Boolean;
   public
     constructor Create(ASkinList:ISkinList);override;
@@ -2718,6 +2732,34 @@ begin
   Result:=Self;
 end;
 
+function TBaseSkinItems.SelectedCount: Integer;
+var
+  I: Integer;
+begin
+  Result:=0;
+  for I := 0 to Self.Count-1 do
+  begin
+    if Items[I].Selected then
+    begin
+      Inc(Result);
+    end;
+  end;
+end;
+
+function TBaseSkinItems.SelectedList: TBaseList;
+var
+  I: Integer;
+begin
+  Result:=TBaseList.Create(ooReference);
+  for I := 0 to Self.Count-1 do
+  begin
+    if Items[I].Selected then
+    begin
+      Result.Add(Items[I]);
+    end;
+  end;
+end;
+
 procedure TBaseSkinItems.SetBaseSkinItem(Index: Integer;const Value: TBaseSkinItem);
 begin
   Inherited Items[Index]:=Value;
@@ -3169,6 +3211,10 @@ begin
   begin
     Result:=FAccessory;
   end
+  else if AFieldName='ItemColor' then
+  begin
+    Result:=FColor.Color;
+  end
   else if {$IF CompilerVersion >= 30.0}AFieldName.Substring(0,12){$ELSE}Copy(AFieldName,1,12){$IFEND}='ItemSubItems' then
   begin
       Result:=GetValueByBindItemSubItems(SubItems,AFieldName);
@@ -3435,6 +3481,10 @@ begin
   begin
     Accessory:=AValue;
   end
+  else if AFieldName='ItemColor' then
+  begin
+    FColor.Color:=AValue;
+  end
   else if {$IF CompilerVersion >= 30.0}AFieldName.Substring(0,12){$ELSE}Copy(AFieldName,1,12){$IFEND}='ItemSubItems' then
   begin
     SetValueByBindItemSubItems(SubItems,AFieldName,AValue,APageDataDir,AImageServerUrl);
@@ -3633,9 +3683,10 @@ begin
   FVisible:=True;
 
   FTempBindDrawPictureList:=TDrawPictureList.Create;
+  FItemStyleConfig:=TStringList.Create;
 end;
 
-procedure TBaseSkinItem.SetHeight(const Value: TControlSize);
+procedure TBaseSkinItem.SetHeight(const Value: Double);
 begin
   if FHeight<>Value then
   begin
@@ -3701,6 +3752,7 @@ destructor TBaseSkinItem.Destroy;
 begin
 
   FreeAndNil(FTempBindDrawPictureList);
+  FreeAndNil(FItemStyleConfig);
 
   //删除
   if FOwner<>nil then
@@ -3711,7 +3763,7 @@ begin
   inherited;
 end;
 
-procedure TBaseSkinItem.DoPropChange;
+procedure TBaseSkinItem.DoPropChange(Sender:TObject);
 begin
   IsBufferNeedChange:=True;
 
@@ -3743,7 +3795,7 @@ begin
   end;
 end;
 
-function TBaseSkinItem.GetHeight: TControlSize;
+function TBaseSkinItem.GetHeight: Double;
 begin
   Result:=FHeight;
 end;
@@ -3751,6 +3803,11 @@ end;
 function TBaseSkinItem.GetSelected: Boolean;
 begin
   Result:=FSelected;
+end;
+
+function TBaseSkinItem.GetThisRowItemCount: Integer;
+begin
+  Result:=0;
 end;
 
 function TBaseSkinItem.GetObject: TObject;
@@ -3809,7 +3866,7 @@ begin
   Result:=FVisible;
 end;
 
-function TBaseSkinItem.GetWidth: TControlSize;
+function TBaseSkinItem.GetWidth: Double;
 begin
   Result:=FWidth;
 end;
@@ -3837,7 +3894,7 @@ begin
         if ABTNode is TBTNode20_Real64 then
         begin
           //现在是浮点型
-          FHeight:=ControlSize(ABTNode.ConvertNode_Real64.Data);
+          FHeight:=ABTNode.ConvertNode_Real64.Data;
         end
         else
         if ABTNode is TBTNode20_Int32 then
@@ -3851,7 +3908,7 @@ begin
         if ABTNode is TBTNode20_Real64 then
         begin
           //现在是浮点型
-          FWidth:=ControlSize(ABTNode.ConvertNode_Real64.Data);
+          FWidth:=ABTNode.ConvertNode_Real64.Data;
         end
         else
         if ABTNode is TBTNode20_Int32 then
@@ -3876,6 +3933,11 @@ begin
   end;
 
   Result:=True;
+end;
+
+function TBaseSkinItem.PtInItem(APoint:TPointF): Boolean;
+begin
+  Result:=PtInRect(Self.FItemDrawRect,APoint);
 end;
 
 function TBaseSkinItem.SaveToDocNode(ADocNode: TBTNode20_Class): Boolean;
@@ -4289,6 +4351,10 @@ end;
 //  begin
 //    Result:=Accessory;
 //  end
+//  else if AFieldName='ItemColor' then
+//  begin
+//    Result:=FColor.Color;
+//  end
 //  else if AFieldName.Substring(0,12)='ItemSubItems' then
 //  begin
 //      Result:=GetValueByBindItemSubItems(SubItems,AFieldName);
@@ -4420,7 +4486,7 @@ begin
 
 end;
 
-procedure TSkinItem.SetWidth(const Value: TControlSize);
+procedure TSkinItem.SetWidth(const Value: Double);
 begin
   if FWidth<>Value then
   begin
@@ -4624,7 +4690,7 @@ end;
 
 //IControlForPageFramework接口
 //针对页面框架的控件接口
-function TSkinItem.LoadFromFieldControlSetting(ASetting:TFieldControlSetting):Boolean;
+function TSkinItem.LoadFromFieldControlSetting(ASetting:TFieldControlSetting;AFieldControlSettingMap:TObject):Boolean;
 begin
   Name:=ASetting.name;
   Caption:=ASetting.field_caption;
@@ -4637,25 +4703,25 @@ begin
   //初始值
   Detail:=ASetting.value;
   Visible:=(ASetting.visible=1);
-  Width:=ControlSize(ASetting.width);
-  Height:=ControlSize(ASetting.height);
+  Width:=ASetting.width;
+  Height:=ASetting.height;
 end;
 
-//获取与设置自定义属性
-function TSkinItem.GetProp(APropName: String): Variant;
-begin
-  Result:='';
-end;
+////获取与设置自定义属性
+//function TSkinItem.GetProp(APropName: String): Variant;
+//begin
+//  Result:='';
+//end;
 
 function TSkinItem.GetPropJsonStr:String;
 begin
   Result:='';
 end;
-
-procedure TSkinItem.SetProp(APropName: String; APropValue: Variant);
-begin
-
-end;
+//
+//procedure TSkinItem.SetProp(APropName: String; APropValue: Variant);
+//begin
+//
+//end;
 
 procedure TSkinItem.SetPropJsonStr(AJsonStr:String);
 begin
@@ -4683,6 +4749,10 @@ procedure TSkinItem.SetControlValue(ASetting:TFieldControlSetting;
                                     AGetDataIntfResultFieldValueIntf:IGetDataIntfResultFieldValue);
 begin
   Detail:=AValue;
+end;
+
+procedure TSkinItem.DoReturnFrame(AFromFrame:TFrame);
+begin
 end;
 
 procedure TSkinItem.SetValueByBindItemField(AFieldName: String;AValue: Variant;APageDataDir:String;AImageServerUrl:String);
@@ -5080,6 +5150,10 @@ begin
   else if AFieldName='ItemAccessory' then
   begin
     Result:=Accessory;
+  end
+  else if AFieldName='ItemColor' then
+  begin
+    Result:=FColor.Color;
   end
   else if (SubItems<>nil) and ({$IF CompilerVersion >= 30.0}AFieldName.Substring(0,12){$ELSE}Copy(AFieldName,1,12){$IFEND}='ItemSubItems') then
   begin
@@ -5624,7 +5698,7 @@ end;
 
 { TSkinTreeViewLayoutsManager }
 
-function TSkinTreeViewLayoutsManager.CalcItemHeight(AItem: ISkinItem): TControlSize;
+function TSkinTreeViewLayoutsManager.CalcItemHeight(AItem: ISkinItem): Double;
 begin
   if (Self.FItemSizeCalcType<>isctFixed)
     and TBaseSkinTreeViewItem(AItem.GetObject).IsParent
@@ -5639,7 +5713,7 @@ begin
   end;
 end;
 
-function TSkinTreeViewLayoutsManager.CalcItemLevelLeftOffsetAtVerticalLayout(AItem: ISkinItem): TControlSize;
+function TSkinTreeViewLayoutsManager.CalcItemLevelLeftOffsetAtVerticalLayout(AItem: ISkinItem): Double;
 begin
   //根据层级
   Result:=AItem.GetLevel*Self.FLevelLeftOffset;
@@ -5650,7 +5724,7 @@ begin
   Result:=Self.FLevelRightIsFitControlWidth;
 end;
 
-function TSkinTreeViewLayoutsManager.CalcItemWidth(AItem: ISkinItem): TControlSize;
+function TSkinTreeViewLayoutsManager.CalcItemWidth(AItem: ISkinItem): Double;
 begin
   Result:=Inherited CalcItemWidth(AItem);
 
@@ -5955,6 +6029,15 @@ begin
   if FExpanded<>Value then
   begin
     FExpanded := Value;
+
+
+
+    if (Self.GetListLayoutsManager<>nil) then
+    begin
+      Self.GetListLayoutsManager.DoItemExpandedChange(Self);
+    end;
+
+
 
     Self.DoPropChange;
 
@@ -6430,6 +6513,10 @@ begin
   begin
     Accessory:=AValue;
   end
+  else if AFieldName='ItemColor' then
+  begin
+    FColor.Color:=AValue;
+  end
   else if NewDelphiSubString(AFieldName,0,12)='ItemSubItems' then
   begin
       SetValueByBindItemSubItems(SubItems,AFieldName,AValue,APageDataDir,AImageServerUrl);
@@ -6509,6 +6596,14 @@ begin
   else if AFieldName='ItemAccessory' then
   begin
     Result:=FAccessory;
+  end
+  else if AFieldName='ItemColor' then
+  begin
+    Result:=FColor.Color;
+  end
+  else if AFieldName='ItemExpanded' then
+  begin
+    Result:=Self.FExpanded;
   end
   else if NewDelphiSubString(AFieldName,0,12)='ItemSubItems' then
   begin

@@ -40,7 +40,7 @@ uses
   uSkinMultiColorLabelType, uSkinImageType, uSkinItemDesignerPanelType,
   uSkinCustomListType, uSkinVirtualListType, uSkinLabelType, uSkinPanelType,
   uSkinScrollBoxContentType, uSkinScrollControlType, uSkinScrollBoxType,
-  uDrawCanvas, uSkinItems;
+  uDrawCanvas, uSkinItems, FMX.Memo.Types;
 
 type
   TFrameTakeOrder = class(TFrame,IFrameVirtualKeyboardAutoProcessEvent,IFrameVirtualKeyboardEvent)
@@ -89,6 +89,8 @@ type
     //当前需要处理的控件
     function GetCurrentPorcessControl(AFocusedControl:TControl):TControl;
     function GetVirtualKeyboardControlParent:TControl;
+    //获取虚拟键盘的高度校正
+    function GetVirtualKeyboardHeightAdjustHeight:Double;
   private
     //显示虚拟键盘
     procedure DoVirtualKeyboardShow(KeyboardVisible: Boolean; const Bounds: TRect);
@@ -622,6 +624,11 @@ end;
 function TFrameTakeOrder.GetVirtualKeyboardControlParent: TControl;
 begin
   Result:=Self;
+end;
+
+function TFrameTakeOrder.GetVirtualKeyboardHeightAdjustHeight: Double;
+begin
+  Result:=0;
 end;
 
 procedure TFrameTakeOrder.DoGetHotelRecvAddrListExecute(

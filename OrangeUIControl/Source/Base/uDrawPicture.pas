@@ -21,7 +21,9 @@ uses
   Types,
   DateUtils,
   StrUtils,
-
+  {$IF CompilerVersion>=30.0}
+  Zip,
+  {$IFEND}
 
   {$IFDEF VCL}
 //  VCL.Graphics,
@@ -48,6 +50,7 @@ uses
 
 
   Math,
+  MD5_OrangeUI,
   uFileCommon,
   uBaseList,
   uBinaryObjectList,
@@ -390,9 +393,17 @@ type
     IsLoadUrlPictureToSelf:Boolean;
 
 
+    //可能是用来判断数据是否更改过
     Base64Length:Integer;
 
+    //获取图片的事件
     OnGetPicture:TGetPictureEvent;
+
+
+    SkinImageListName:String;
+    //当Url为空时的默认头像
+    DefaultImageName:String;
+    DefaultImageIndex:Integer;
 
 
     /// <summary>
@@ -1092,6 +1103,7 @@ type
     /// </summary>
     procedure ReplaceFileNameOnly(const AIndex: Integer;const AFileName: String);
   public
+    function FindImageNameIndex(AImageName:String):Integer;
     property Items[Index:Integer]:TDrawPicture read GetItem write SetItem;default;
     //使用ImageName
     property ItemsByName[const Name:String]:TDrawPicture read GetItemByName;
@@ -1211,6 +1223,15 @@ type
 
 
 
+  TSkinBaseImageListList=class(TBaseList)
+  private
+    function GetItem(Index: Integer): TSkinBaseImageList;
+  public
+    function Find(AComponentName:String):TSkinBaseImageList;
+    property Items[Index:Integer]:TSkinBaseImageList read GetItem;default;
+  end;
+
+
 
 //设置设计时图片根路径的获取
 //可以弹出设置,保存在注册表,
@@ -1221,8 +1242,6 @@ type
 
 
 
-//var
-//  FilePictureSearchPaths:TStringList;
 
 
 
@@ -1233,8 +1252,10 @@ type
 //{$ENDIF}
 
 
+var
+  GlobalSkinBaseImageListList:TSkinBaseImageListList;
 
-
+procedure ExtractIconsZip(AIconsZipFilePath:String;AIconsZipExtractDir:String);
 
 
 implementation
@@ -1249,8 +1270,65 @@ uses
   uGDIPlusDrawCanvas,
   {$ENDIF}
   uDrawCanvas,
+  uGraphicCommon,
   uDownloadPictureManager;
 
+
+procedure ExtractIconsZip(AIconsZipFilePath:String;AIconsZipExtractDir:String);
+var
+  AIconsMD5:String;
+  ALastIconsMD5:String;
+begin
+
+  //解压assets\internal\icons.zip中的图标
+//  Zlib.DirectoryDecompression()
+//  {$IFNDEF MSWINDOWS}
+  //在Android上测试，花了169毫秒
+  //判断是否需要再次解压
+  if FileExists(AIconsZipFilePath) then
+  begin
+
+    if not DirectoryExists(AIconsZipExtractDir) then
+    begin
+      ForceDirectories(AIconsZipExtractDir);
+    end;
+    
+
+    uBaseLog.HandleException(nil,'ExtractIconsZip '+AIconsZipFilePath+' To '+AIconsZipExtractDir+' Begin ');
+
+    ALastIconsMD5:='';
+    if FileExists(AIconsZipFilePath+'.md5') then
+    begin
+      ALastIconsMD5:=GetStringFromFile(AIconsZipFilePath+'.md5',TEncoding.UTF8);
+    end;
+    AIconsMD5:=MD5Print(MD5File(AIconsZipFilePath));
+
+    if ALastIconsMD5<>AIconsMD5 then
+    begin
+      uBaseLog.HandleException(nil,'ExtractIconsZip '+AIconsZipFilePath+' Changed ');
+
+      //icons.zip文件改过了,需要重新解压
+      {$IF CompilerVersion>=30.0}
+      TZipFile.ExtractZipFile(AIconsZipFilePath,AIconsZipExtractDir);
+      {$IFEND}
+
+      SaveStringToFile(AIconsMD5,AIconsZipFilePath+'.md5',TEncoding.UTF8);
+    end
+    else
+    begin
+      uBaseLog.HandleException(nil,'ExtractIconsZip '+AIconsZipFilePath+' Same ');
+
+    end;
+
+    uBaseLog.HandleException(nil,'ExtractIconsZip '+AIconsZipFilePath+' To '+AIconsZipExtractDir+' End ');
+//    //再删除
+//    DeleteFile(GetApplicationPath+'icons.zip');
+  end;
+//  {$ENDIF}
+
+
+
+end;
 
 
 //{$IFDEF MSWINDOWS}
@@ -1635,6 +1713,8 @@ begin
 
 
 
+  DefaultImageIndex:=-1;
+
 
   FSkinImageListChangeLink:=TSkinObjectChangeLink.Create;
   FSkinImageListChangeLink.OnChange:=OnSkinImageListChange;
@@ -1683,6 +1763,8 @@ begin
 end;
 
 function TBaseDrawPicture.CurrentPicture: TSkinPicture;
+var
+  ASkinBaseImageList:TSkinBaseImageList;
 begin
   Result:=nil;
   case Self.FPictureDrawType of
@@ -1755,8 +1837,6 @@ begin
       end;
 
 
-
-
     end;
     pdtPicture:
     begin
@@ -1808,7 +1888,41 @@ begin
       Result:=OnGetPictureEventPicture;
     end;
 
+
+
   end;
+
+
+  //默认显示的图片
+  if ((Self.DefaultImageName<>'') or (Self.DefaultImageIndex<>-1))
+    and ((Result=nil) or ((Result<>nil) and Result.IsEmpty)) then
+  begin
+    ASkinBaseImageList:=FSkinImageList;
+
+
+    if (ASkinBaseImageList=nil) and (Self.SkinImageListName<>'') then
+    begin
+      ASkinBaseImageList:=GlobalSkinBaseImageListList.Find(SkinImageListName);
+    end;
+
+
+
+    if (ASkinBaseImageList<>nil) and (Self.DefaultImageName<>'') then
+    begin
+      Result:=ASkinBaseImageList.PictureList.ItemsByName[DefaultImageName];
+    end;
+
+
+    if (ASkinBaseImageList<>nil) and (Self.DefaultImageIndex<>-1) then
+    begin
+      Result:=ASkinBaseImageList.PictureList.Items[DefaultImageIndex];
+    end;
+
+
+  end;
+
+
+
 end;
 
 procedure TBaseDrawPicture.SetDownloadPictureManager(const Value: TBaseDownloadPictureManager);
@@ -1821,6 +1935,7 @@ begin
   if FFileName<>Value then
   begin
     FFileName := Value;
+    Inherited Clear;
     FreeAndNil(FFilePicture);
 
     Self.FIsLoadedFromFile:=False;
@@ -1928,6 +2043,9 @@ begin
 
 
         DoChange;
+
+
+
   end;
 end;
 
@@ -1943,6 +2061,10 @@ end;
 function TBaseDrawPicture.FileNamePicture: TSkinPicture;
 var
   I: Integer;
+  AScale:Integer;
+  AScaleName:String;
+  AFileNameNoExt:String;
+  AFileExt:String;
 begin
   if Not FIsLoadedFromFile then
   begin
@@ -1950,21 +2072,20 @@ begin
       FreeAndNil(FFilePicture);
 
 
-      if FileExists(FFileName) then
-      begin
-        //找到了
-        FLoadedFilePath:=FFileName;
-      end
-      else if FileExists(uFileCommon.GetApplicationPath+FFileName) then
-      begin
-        //找到了
-        FLoadedFilePath:=uFileCommon.GetApplicationPath+FFileName;
-      end
-      else
-      begin
+//      if FileExists(FFileName) then
+//      begin
+//        //找到了
+//        FLoadedFilePath:=FFileName;
+//      end
+//      else if FileExists(uFileCommon.GetApplicationPath+FFileName) then
+//      begin
+//        //找到了
+//        FLoadedFilePath:=uFileCommon.GetApplicationPath+FFileName;
+//      end
+//      else
+//      begin
   //      if FilePictureSearchPaths=nil then
   //      begin
-  //        FilePictureSearchPaths:=TStringList.Create;
   //        //初始搜索路径
   //        {$IFDEF MSWINDOWS}
   //        //访问注册表,在设计时
@@ -1972,16 +2093,55 @@ begin
   //
   //        {$ENDIF}
   //      end;
-  //      //搜索路径
-  //      for I := 0 to FilePictureSearchPaths.Count-1 do
-  //      begin
-  //        if FileExists(FilePictureSearchPaths[I]+FFileName) then
-  //        begin
-  //          FLoadedFilePath:=FilePictureSearchPaths[I]+FFileName;
-  //          Break;
-  //        end;
-  //      end;
-      end;
+
+
+//var
+//  I: Integer;
+//  AScale:Integer;
+//  AScaleName:String;
+//begin
+//  Result:=nil;
+//
+        uBaseLog.HandleException(nil,'OrangeUI TBaseDrawPicture.FileNamePicture FFileName:'+FFileName+' Const_BufferBitmapScale:'+FloatToStr(Const_BufferBitmapScale));
+
+        AFileNameNoExt:=GetFileNameWithoutExt(FFileName);
+        AFileExt:=ExtractFileExt(FFileName);
+
+        //搜索路径
+//        uBaseLog.HandleException(nil,'OrangeUI TBaseDrawPicture.FileNamePicture GlobalFilePictureSearchPaths.Count:'+IntToStr(GlobalFilePictureSearchPaths.Count));
+        for I := 0 to GlobalFilePictureSearchPaths.Count-1 do
+        begin
+
+//            uBaseLog.HandleException(nil,'OrangeUI TBaseDrawPicture.FileNamePicture GlobalFilePictureSearchPaths:'+GlobalFilePictureSearchPaths[I]);
+
+            for AScale := Ceil(Const_BufferBitmapScale) downto 1 do
+            begin
+              AScaleName:=AFileNameNoExt;
+              if AScale>1 then
+              begin
+                AScaleName:=AScaleName+'@'+IntToStr(AScale)+'x';
+              end;
+
+              if FileExists(GlobalFilePictureSearchPaths[I]+AScaleName+AFileExt) then
+              begin
+                FLoadedFilePath:=GlobalFilePictureSearchPaths[I]+AScaleName+AFileExt;
+                //uBaseLog.HandleException(nil,'OrangeUI TBaseDrawPicture.FileNamePicture FLoadedFilePath:'+FLoadedFilePath+' Exists');
+                Break;
+              end
+              else
+              begin
+                uBaseLog.HandleException(nil,'OrangeUI TBaseDrawPicture.FileNamePicture FLoadedFilePath:'+GlobalFilePictureSearchPaths[I]+AScaleName+AFileExt+' None');
+              end;
+
+
+            end;
+
+
+        end;
+
+
+
+//      end;
 
 
       if FLoadedFilePath<>'' then
@@ -2888,6 +3048,23 @@ end;
 
 
 
+function TDrawPictureList.FindImageNameIndex(AImageName: String): Integer;
+var
+  I: Integer;
+begin
+  Result:=-1;
+
+  for I := 0 to Self.Count-1 do
+  begin
+    if Items[I].ImageName=AImageName then
+    begin
+      Result:=I;
+      Break;
+    end;
+  end;
+
+end;
+
 { TSkinBaseImageList }
 
 constructor TSkinBaseImageList.Create(AOwner: TComponent);
@@ -2898,6 +3075,10 @@ begin
 
   FPictureList:=TDrawPictureList.Create;
   FPictureList.OnChange:=DoPictureListChange;
+
+
+
+  GlobalSkinBaseImageListList.Add(Self);
 end;
 
 destructor TSkinBaseImageList.Destroy;
@@ -2914,6 +3095,12 @@ begin
 
   //才能再释放FSkinObjectChangeManager
   FreeAndNil(FSkinObjectChangeManager);
+
+
+  if GlobalSkinBaseImageListList<>nil then
+  begin
+    GlobalSkinBaseImageListList.Remove(Self,False);
+  end;
 
 end;
 
@@ -2973,6 +3160,36 @@ begin
 end;
 
 
+
+
+{ TSkinBaseImageListList }
+
+function TSkinBaseImageListList.Find(
+  AComponentName: String): TSkinBaseImageList;
+var
+  I: Integer;
+begin
+  Result:=nil;
+  for I := 0 to Count-1 do
+  begin
+    if Items[I].Name=AComponentName then
+    begin
+      Result:=Items[I];
+      Break;
+    end;
+  end;
+end;
+
+function TSkinBaseImageListList.GetItem(Index: Integer): TSkinBaseImageList;
+begin
+  Result:=TSkinBaseImageList(Inherited Items[Index]);
+end;
+
+initialization
+  GlobalSkinBaseImageListList:=TSkinBaseImageListList.Create(ooReference);
+
+finalization
+  FreeAndNil(GlobalSkinBaseImageListList);
 
 end.
 

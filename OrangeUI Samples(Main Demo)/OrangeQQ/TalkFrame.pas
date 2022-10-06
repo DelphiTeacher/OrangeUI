@@ -46,6 +46,8 @@ type
     function GetCurrentPorcessControl(AFocusedControl:TControl):TControl;
     //虚拟键盘放在哪里
     function GetVirtualKeyboardControlParent:TControl;
+    //获取虚拟键盘的高度校正
+    function GetVirtualKeyboardHeightAdjustHeight:Double;
     { Private declarations }
   public
 //    FrameHistroy:TFrameHistroy;
@@ -139,6 +141,11 @@ end;
 function TFrameTalk.GetVirtualKeyboardControlParent: TControl;
 begin
   Result:=Self;
+end;
+
+function TFrameTalk.GetVirtualKeyboardHeightAdjustHeight: Double;
+begin
+  Result:=0;
 end;
 
 procedure TFrameTalk.btnReturnClick(Sender: TObject);

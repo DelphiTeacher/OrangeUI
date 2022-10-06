@@ -4,10 +4,17 @@ object FrameDrawPanel: TFrameDrawPanel
   Size.PlatformDefault = False
   object dpDraw: TSkinFMXDrawPanel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = claWhite
     SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.IsTransparent = False
     SelfOwnMaterial.DrawLineParam.Color.Color = claRed
     SelfOwnMaterial.DrawLineParam.PenWidth = 3.000000000000000000
@@ -22443,11 +22450,18 @@ object FrameDrawPanel: TFrameDrawPanel
   end
   object pnlButtons: TSkinFMXPanel
     ParentMouseEvent = True
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = xFFDDDDDD
     SelfOwnMaterial.BackColor.IsFill = True
     SelfOwnMaterial.BackColor.FillColor.Color = xFFDDDDDD
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.IsTransparent = False
     SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
     SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
@@ -22463,9 +22477,22 @@ object FrameDrawPanel: TFrameDrawPanel
     Properties.IsToolBar = False
     object lvLineColor: TSkinFMXListView
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = claWhite
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.Color = claWhite
+      SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.PullDownRefreshPanelMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.PullDownRefreshPanelMaterial.IndicatorColor = claBlack
       SelfOwnMaterial.PullDownRefreshPanelMaterial.LoadingPicture.IsClipRound = False
       SelfOwnMaterial.PullDownRefreshPanelMaterial.DrawLoadingCaptionParam.FontTrimming = fttNone
@@ -22477,6 +22504,12 @@ object FrameDrawPanel: TFrameDrawPanel
       SelfOwnMaterial.PullDownRefreshPanelMaterial.LoadingCaption = #27491#22312#21047#26032'...'
       SelfOwnMaterial.PullDownRefreshPanelMaterial.DecidedLoadCaption = #26494#24320#21047#26032
       SelfOwnMaterial.PullDownRefreshPanelMaterial.UnDecidedLoadCaption = #19979#25289#21047#26032
+      SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.Color = claWhite
+      SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.PullUpLoadMorePanelMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.PullUpLoadMorePanelMaterial.IndicatorColor = claBlack
       SelfOwnMaterial.PullUpLoadMorePanelMaterial.LoadingPicture.IsClipRound = False
       SelfOwnMaterial.PullUpLoadMorePanelMaterial.DrawLoadingCaptionParam.FontTrimming = fttNone
@@ -22498,6 +22531,7 @@ object FrameDrawPanel: TFrameDrawPanel
       SelfOwnMaterial.ItemBackHoverPicture.IsClipRound = False
       SelfOwnMaterial.ItemBackDownPicture.IsClipRound = False
       SelfOwnMaterial.ItemBackPushedPicture.IsClipRound = False
+      SelfOwnMaterial.DrawItemBackColorParam.Color = claBlack
       SelfOwnMaterial.DrawItemBackColorParam.IsFill = True
       SelfOwnMaterial.DrawItemBackColorParam.FillColor.Color = claBlack
       SelfOwnMaterial.DrawItemBackColorParam.IsRound = True
@@ -22510,9 +22544,26 @@ object FrameDrawPanel: TFrameDrawPanel
       SelfOwnMaterial.DrawItemBackColorParam.DrawRectSetting.PositionHorzType = dpphtCenter
       SelfOwnMaterial.DrawItemBackColorParam.DrawRectSetting.PositionVertType = dppvtCenter
       SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+      SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.ItemAccessoryPicture.IsClipRound = False
       SelfOwnMaterial.IsDrawCenterItemRect = False
+      SelfOwnMaterial.DrawCenterItemRectParam.Color = xFFEDEDED
+      SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawCenterItemRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.IsSimpleDrawItemDevide = True
+      SelfOwnMaterial.DrawItemDevideParam.Color = xFFEDEDED
+      SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawItemDevideParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawItemCaptionParam.FontTrimming = fttNone
       SelfOwnMaterial.DrawItemCaptionParam.FontHorzAlign = fhaLeft
       SelfOwnMaterial.DrawItemCaptionParam.FontVertAlign = fvaTop
@@ -22542,6 +22593,7 @@ object FrameDrawPanel: TFrameDrawPanel
       SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackHoverPicture.IsClipRound = False
       SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackDownPicture.IsClipRound = False
       SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackPushedPicture.IsClipRound = False
+      SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.Color = claBlack
       SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.IsFill = True
       SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.FillColor.Color = claBlack
       SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.IsRound = True
@@ -22554,6 +22606,11 @@ object FrameDrawPanel: TFrameDrawPanel
       SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawRectSetting.PositionHorzType = dpphtCenter
       SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawRectSetting.PositionVertType = dppvtCenter
       SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+      SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontTrimming = fttNone
       SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontHorzAlign = fhaLeft
       SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontVertAlign = fvaTop
@@ -22583,6 +22640,12 @@ object FrameDrawPanel: TFrameDrawPanel
       SelfOwnMaterial.Item1TypeItemMaterial.ItemBackHoverPicture.IsClipRound = False
       SelfOwnMaterial.Item1TypeItemMaterial.ItemBackDownPicture.IsClipRound = False
       SelfOwnMaterial.Item1TypeItemMaterial.ItemBackPushedPicture.IsClipRound = False
+      SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.Color = claWhite
+      SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.Item1TypeItemMaterial.DrawItemBackColorParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontTrimming = fttNone
       SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontHorzAlign = fhaLeft
       SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontVertAlign = fvaTop
@@ -22607,9 +22670,27 @@ object FrameDrawPanel: TFrameDrawPanel
       SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.FontTrimming = fttNone
       SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.FontHorzAlign = fhaLeft
       SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawSpaceParam.Color = claWhite
+      SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawSpaceParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.IsSimpleDrawGroupRoundRect = False
       SelfOwnMaterial.IsSimpleDrawGroupBeginDevide = True
       SelfOwnMaterial.IsSimpleDrawGroupEndDevide = True
+      SelfOwnMaterial.DrawGroupBeginDevideParam.Color = xFFEDEDED
+      SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawGroupBeginDevideParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawGroupEndDevideParam.Color = xFFEDEDED
+      SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.DrawGroupEndDevideParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.IsAutoAdjustItemDesignerPanelSize = True
       SelfOwnMaterial.IsDrawRowLine = False
       SelfOwnMaterial.IsDrawRowBeginLine = False
@@ -22631,12 +22712,26 @@ object FrameDrawPanel: TFrameDrawPanel
       Size.PlatformDefault = False
       TabOrder = 0
       VertScrollBar.ParentMouseEvent = False
+      VertScrollBar.DirectUIVisible = False
       VertScrollBar.ComponentTypeUseKind = ctukDefault
       VertScrollBar.MaterialUseKind = mukSelfOwn
       VertScrollBar.KeepSelfOwnMaterial = True
+      VertScrollBar.SelfOwnMaterial.BackColor.Color = claWhite
+      VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      VertScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       VertScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
       VertScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
       VertScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+      VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.Color = x64000000
+      VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Color = x64000000
+      VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      VertScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       VertScrollBar.MouseDownFocus = False
       VertScrollBar.Size.Width = 7.000000000000000000
       VertScrollBar.Size.Height = 120.000000000000000000
@@ -22647,12 +22742,26 @@ object FrameDrawPanel: TFrameDrawPanel
       VertScrollBar.Properties.LargeChange = 10
       VertScrollBar.Properties.CanOverRangeTypes = [cortMin, cortMax]
       HorzScrollBar.ParentMouseEvent = False
+      HorzScrollBar.DirectUIVisible = False
       HorzScrollBar.ComponentTypeUseKind = ctukDefault
       HorzScrollBar.MaterialUseKind = mukSelfOwn
       HorzScrollBar.KeepSelfOwnMaterial = True
+      HorzScrollBar.SelfOwnMaterial.BackColor.Color = claWhite
+      HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      HorzScrollBar.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       HorzScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
       HorzScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
       HorzScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+      HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.Color = x64000000
+      HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.FillColor.Color = x64000000
+      HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      HorzScrollBar.SelfOwnMaterial.ThumbBtnRectParam.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       HorzScrollBar.MouseDownFocus = False
       HorzScrollBar.CanFocus = True
       HorzScrollBar.Position.Y = 52.000000000000000000
@@ -22665,9 +22774,16 @@ object FrameDrawPanel: TFrameDrawPanel
       HorzScrollBar.Properties.LargeChange = 10
       HorzScrollBar.Properties.CanOverRangeTypes = []
       ScrollControlCorner.ParentMouseEvent = False
+      ScrollControlCorner.DirectUIVisible = False
       ScrollControlCorner.ComponentTypeUseKind = ctukDefault
       ScrollControlCorner.MaterialUseKind = mukSelfOwn
       ScrollControlCorner.KeepSelfOwnMaterial = True
+      ScrollControlCorner.SelfOwnMaterial.BackColor.Color = claWhite
+      ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      ScrollControlCorner.SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       ScrollControlCorner.MouseDownFocus = False
       ScrollControlCorner.CanFocus = True
       ScrollControlCorner.Position.X = 193.000000000000000000
@@ -22727,7 +22843,7 @@ object FrameDrawPanel: TFrameDrawPanel
         000000001810040000004900730043006C006900700052006F0075006E006400
         00002F6626546A52C18810620657625F00000000000007000000001200040000
         004900740065006D00540079007000650000000000000019000000000C000500
-        000043006F006C006F0072000000000000FF2F04000000001000000000004300
+        000043006F006C006F0072000000000000FFC004000000001000000000004300
         61007000740069006F006E00000004000000000E000000000044006500740061
         0069006C0000000400000000100000000000440065007400610069006C003100
         00000400000000100000000000440065007400610069006C0032000000040000
@@ -22762,7 +22878,7 @@ object FrameDrawPanel: TFrameDrawPanel
         040000004900730043006C006900700052006F0075006E00640000002F662654
         6A52C18810620657625F00000000000007000000001200040000004900740065
         006D00540079007000650000000000000019000000000C000500000043006F00
-        6C006F007200000039C6F3FFD904000000001000000000004300610070007400
+        6C006F007200000039C6F3FF0004000000001000000000004300610070007400
         69006F006E00000004000000000E0000000000440065007400610069006C0000
         000400000000100000000000440065007400610069006C003100000004000000
         00100000000000440065007400610069006C0032000000040000000010000000
@@ -22797,7 +22913,7 @@ object FrameDrawPanel: TFrameDrawPanel
         730043006C006900700052006F0075006E00640000002F6626546A52C1881062
         0657625F00000000000007000000001200040000004900740065006D00540079
         007000650000000000000019000000000C000500000043006F006C006F007200
-        00002273FEFF000400000000100000000000430061007000740069006F006E00
+        00002273FEFFFC0400000000100000000000430061007000740069006F006E00
         000004000000000E0000000000440065007400610069006C0000000400000000
         100000000000440065007400610069006C003100000004000000001000000000
         00440065007400610069006C0032000000040000000010000000000044006500
@@ -22832,7 +22948,7 @@ object FrameDrawPanel: TFrameDrawPanel
         6900700052006F0075006E00640000002F6626546A52C18810620657625F0000
         0000000007000000001200040000004900740065006D00540079007000650000
         000000000019000000000C000500000043006F006C006F0072000000402CE9FF
-        000400000000100000000000430061007000740069006F006E00000004000000
+        0E0400000000100000000000430061007000740069006F006E00000004000000
         000E0000000000440065007400610069006C0000000400000000100000000000
         440065007400610069006C003100000004000000001000000000004400650074
         00610069006C0032000000040000000010000000000044006500740061006900
@@ -22866,7 +22982,7 @@ object FrameDrawPanel: TFrameDrawPanel
         72FE94A563000015000000001810040000004900730043006C00690070005200
         6F0075006E00640000002F6626546A52C18810620657625F0000000000000700
         0000001200040000004900740065006D00540079007000650000000000000019
-        000000000C000500000043006F006C006F00720000001713C6FF000400000000
+        000000000C000500000043006F006C006F00720000001713C6FF780400000000
         100000000000430061007000740069006F006E00000004000000000E00000000
         00440065007400610069006C0000000400000000100000000000440065007400
         610069006C00310000000400000000100000000000440065007400610069006C
@@ -22901,7 +23017,7 @@ object FrameDrawPanel: TFrameDrawPanel
         0015000000001810040000004900730043006C006900700052006F0075006E00
         640000002F6626546A52C18810620657625F0000000000000700000000120004
         0000004900740065006D00540079007000650000000000000019000000000C00
-        0500000043006F006C006F0072000000FFFFFFFF000400000000100000000000
+        0500000043006F006C006F0072000000FFFFFFFF100400000000100000000000
         430061007000740069006F006E00000004000000000E00000000004400650074
         00610069006C0000000400000000100000000000440065007400610069006C00
         310000000400000000100000000000440065007400610069006C003200000004
@@ -22936,7 +23052,7 @@ object FrameDrawPanel: TFrameDrawPanel
         1810040000004900730043006C006900700052006F0075006E00640000002F66
         26546A52C18810620657625F0000000000000700000000120004000000490074
         0065006D00540079007000650000000000000019000000000C00050000004300
-        6F006C006F0072000000178B50FF000400000000100000000000430061007000
+        6F006C006F0072000000178B50FF960400000000100000000000430061007000
         740069006F006E00000004000000000E0000000000440065007400610069006C
         0000000400000000100000000000440065007400610069006C00310000000400
         000000100000000000440065007400610069006C003200000004000000001000
@@ -22971,7 +23087,7 @@ object FrameDrawPanel: TFrameDrawPanel
         4900730043006C006900700052006F0075006E00640000002F6626546A52C188
         10620657625F00000000000007000000001200040000004900740065006D0054
         0079007000650000000000000019000000000C000500000043006F006C006F00
-        7200000093510AFF7C0400000000100000000000430061007000740069006F00
+        7200000093510AFF230400000000100000000000430061007000740069006F00
         6E00000004000000000E0000000000440065007400610069006C000000040000
         0000100000000000440065007400610069006C00310000000400000000100000
         000000440065007400610069006C003200000004000000001000000000004400
@@ -23006,7 +23122,7 @@ object FrameDrawPanel: TFrameDrawPanel
         6C006900700052006F0075006E00640000002F6626546A52C18810620657625F
         00000000000007000000001200040000004900740065006D0054007900700065
         0000000000000019000000000C000500000043006F006C006F00720000009351
-        0AFF740400000000100000000000430061007000740069006F006E0000000400
+        0AFFCE0400000000100000000000430061007000740069006F006E0000000400
         0000000E0000000000440065007400610069006C000000040000000010000000
         0000440065007400610069006C00310000000400000000100000000000440065
         007400610069006C003200000004000000001000000000004400650074006100
@@ -23040,7 +23156,7 @@ object FrameDrawPanel: TFrameDrawPanel
         564772FE94A563000015000000001810040000004900730043006C0069007000
         52006F0075006E00640000002F6626546A52C18810620657625F000000000000
         07000000001200040000004900740065006D0054007900700065000000000000
-        0019000000000C000500000043006F006C006F00720000009D2E4AFF00040000
+        0019000000000C000500000043006F006C006F00720000009D2E4AFF32040000
         0000100000000000430061007000740069006F006E00000004000000000E0000
         000000440065007400610069006C000000040000000010000000000044006500
         7400610069006C00310000000400000000100000000000440065007400610069
@@ -23058,9 +23174,16 @@ object FrameDrawPanel: TFrameDrawPanel
     end
     object pnlLIneWidth: TSkinFMXPanel
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukSelfOwn
       KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.Color = claWhite
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+      SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
       SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
       SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
       SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
@@ -23079,7 +23202,7 @@ object FrameDrawPanel: TFrameDrawPanel
         Min = 1.000000000000000000
         Orientation = Horizontal
         Size.Width = 114.000000000000000000
-        Size.Height = 20.000000000000000000
+        Size.Height = 19.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         Value = 2.000000000000000000
@@ -23087,9 +23210,11 @@ object FrameDrawPanel: TFrameDrawPanel
       end
       object pnlLineSetting: TSkinFMXPanel
         ParentMouseEvent = False
+        DirectUIVisible = False
         ComponentTypeUseKind = ctukDefault
         MaterialUseKind = mukSelfOwn
         KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.Color = claSienna
         SelfOwnMaterial.BackColor.IsFill = True
         SelfOwnMaterial.BackColor.FillColor.Color = claSienna
         SelfOwnMaterial.BackColor.IsRound = True
@@ -23101,6 +23226,11 @@ object FrameDrawPanel: TFrameDrawPanel
         SelfOwnMaterial.BackColor.DrawRectSetting.SizeType = dpstPixel
         SelfOwnMaterial.BackColor.DrawRectSetting.PositionHorzType = dpphtCenter
         SelfOwnMaterial.BackColor.DrawRectSetting.PositionVertType = dppvtCenter
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+        SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
         SelfOwnMaterial.IsTransparent = False
         SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
         SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
@@ -23118,11 +23248,18 @@ object FrameDrawPanel: TFrameDrawPanel
   end
   object pnlToolBar: TSkinFMXPanel
     ParentMouseEvent = False
+    DirectUIVisible = False
     ComponentTypeUseKind = ctukDefault
     MaterialUseKind = mukSelfOwn
     KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.Color = xFF615D5C
     SelfOwnMaterial.BackColor.IsFill = True
     SelfOwnMaterial.BackColor.FillColor.Color = xFF615D5C
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    SelfOwnMaterial.BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     SelfOwnMaterial.IsTransparent = False
     SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
     SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
@@ -23137,6 +23274,7 @@ object FrameDrawPanel: TFrameDrawPanel
     Properties.IsToolBar = False
     object btnRedo: TSkinFMXButton
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukRef
       KeepSelfOwnMaterial = False
@@ -23160,7 +23298,7 @@ object FrameDrawPanel: TFrameDrawPanel
         89504E470D0A1A0A0000000D4948445200000030000000260806000000828D18
         01000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
         029C494441545847D5993B68535118C7939BA47191288828080A1D52C4820A82
-        92B1825327757473735074725677E70E82288E8263D1A182281504F1054A2A3E
+        92B1825327757473735074725677E70E82288E8263D1A182281504F1051A2A3E
         8854519228D7BC137F27F74FF5DADC3C86A65F7E7038DF3DE73B37DFFFBC93C4
         C641ABD5BAD3E974B6EB71F220F84EBD5EFFD46EB7E754345938018E7C3EDF66
         34AE636E51D5641084FF9746A3F19AD138A46AFB28EE108542A18E88CB9809B9
@@ -23179,14 +23317,15 @@ object FrameDrawPanel: TFrameDrawPanel
         9F9A9861A4EBB403BF57AC9BA77CD15EA6DD478A3E9356296B91CA5DA73162FE
         0B0D9DD2F73C5A5BA0F4E80A5BEA7144ACA8682208ED3088788B88238CC66D15
         9967DD16C98815590B6798DF39843C50B15906DE771032831027681E61B32A1E
-        1B83D6C04001FF8290DD6439DE79003B8B28F7D3E286FED3D25F402CF607DF50
-        410EE9EEBA9F0000000049454E44AE426082}
+        1B83D6C04001FF8290DD6439DE79003B8B28F7D3E286FED3D25F402CF607199B
+        4105401DB7570000000049454E44AE426082}
       Properties.PushedIcon.IsClipRound = False
       Properties.ButtonIndex = -1
       Properties.PushedGroupIndex = 0
     end
     object btnUndo: TSkinFMXButton
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukRef
       KeepSelfOwnMaterial = False
@@ -23209,34 +23348,35 @@ object FrameDrawPanel: TFrameDrawPanel
       Properties.Icon.PNG = {
         89504E470D0A1A0A0000000D4948445200000030000000260806000000828D18
         01000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-        028C494441545847D598CF8AD35014879BB4EA62182A282882741005110517FE
-        1B107421FA00EA4EDF411CDF4057EA13B89119DDEACAC520EE67218CA22E8C30
-        6E54B42A4C8BD4FEAF7E37F959084D3A55ECE4E483CBBDB939A1DFBD3D39495B
-        F8DF0C0683D97EBFBFA8C37C81FCB16EB7FBEE17682A1FE0EB21BF50AD56DB4E
-        DEA153F6417C1729B32CEF213A6D1BE4CFB7DBEDCF728EA1109BE0B7855DBF1D
-        04C120D21D45A1F660D7F7F77ABDE7F24C45E1B640FE4AA3D1A8CB712CBAC406
-        88BBDABE24B789D0A5D983FCB0B6FF0DBA7CEA78EA47C0C1A35DF73CEFAEA6A6
-        02DFEC2A9F11D0DE72F89A7E85F6253AFB8FB0EB89B57DB3A048BCE2F36F313C
-        28A5C9413EB5B66F36AE4CB390A7389D925E3AC4BBDA7E675C6DCF12DC1ED06D
-        976E1C5638516DCF1A574C703D20ED082626AEED16E8743A1FE8F6493FBD0A4D
-        1304B6D2CDD0CFD0EFA0EDA11DA2FA1C2113CE944AA5398E53219D568BC5E23C
-        F11D4DD982AC9847F291DBF134885950B85D90BC54ABD57ECA3946ABD5FA4AE7
-        BE49DB207939344E80055E54986D48A7C4872AF3F77CC598869BF5BE863158C3
-        510D6D43AA54A23D8FC37DF03D17DF0024BEDCD5EBF5D9BCA450EAF32A170B20
-        5B2A1AC62897CB3FF2924217D4C7E089FDDEFC02B881B7512EAFE9300699F552
-        439B903A3EF28B61C949C03DA9156A0FFC7622FF38521D8512FA8DCEDEAB0452
-        7388DF6C369BEBA1690AECFE0D179FD5EB74995664B89BB6975CAE207492B913
-        BC261F0E83C6C00287AFD31B2EC0AD564313F0ABEC23D5E7ACEFFB6BEE382F65
-        34841F3B6BC89FFB23EFC8CD0248B187C81F473ED054481E9E03CFC8E2D3E4FC
-        55727E5DD3434CDE03DCA4EE1FBA27ECF612BDFBC72E95CC1780EC0B2403971A
-        7CD41BA656187F8ACE6E44A1F01B9E42DCDDF101D4C40000000049454E44AE42
-        6082}
+        028D494441545847D598CF6A135114873393A88B5222282882A4888288820BFF
+        15045D883E80BAD37710EB1BE84A7D0237D2EA56572E44DC775168455D2442DD
+        A868546882C4FC8F7E77E66760C84C1AC574CE7C70B977EE9C21DFBD39736692
+        DCFF663018CCF6FBFD451D660BE44F74BBDD77BF4053D9005F0FF9856AB5DA76
+        F20E9DB20FE27B4899E7F21EA2D3B641FE62BBDDFE2CE7080AB1097EDBD8F5BB
+        E5727910EA8EA2507BB0EB077BBDDE8A3C1351B82D90BFD66834EA721C8B2EB1
+        01E2AEB62FC96D227469FA203FACED7F832E9F3A9EFA1170F068373DCFBBAFA9
+        A9C037BBCA675468650EDFD02FD3BE8467FF11763DB6B66F151489D77CFE1D86
+        87A53439C827D6F6ADC6956916F202A733D24B867857DBEF8DABED6982DB23BA
+        9DD28DC20A27AAED69E38A09AE87A41DC2C4C4B5DD029D4EE703DD01E92757A1
+        6982C076BA19FA19FA5DB47DB423549F6364C2B942A130C77122A4D36A3E9F9F
+        27BEA3295B9015F3483E713B9E04310B0AB70B92576AB5DA4F394768B55A5FE9
+        DC37691B24AF06C631B0C0CB0AB30DE914FB5065FE81AF18D370B33ED430026B
+        38AEA16D489552B8E751B80FBE67E21B80D897BB7ABD3E9B95144A7C5E656201
+        644B49C308C562F1475652E892FA083CB1DF9B5F0037F00ECAE50D1D4620B35E
+        69681352C7477E31283931B827B542ED81DF6EE49F86AAA35042BFD1D97B9540
+        6A0EF1DBCD667323304D80DDBFE5E2D37A9D2ED2F20CF7D2F693CB25844E3377
+        8AD7E4A341D01858E0F0757AD305B8D56A68027E957DA4FA9CF77D7FDD1D67A5
+        8C06F063671DF90B7FE41D99590029F618F993C85734159085E7C04BB2F82C39
+        7F9D9CDFD0F41093F70037A9FB87EE19BBBD44EFFEB14B24F50520BB8664C5A5
+        061FF596A965C69FC2B39B91CBFD06E301DCD4D5D591000000000049454E44AE
+        426082}
       Properties.PushedIcon.IsClipRound = False
       Properties.ButtonIndex = -1
       Properties.PushedGroupIndex = 0
     end
     object btnReturn: TSkinFMXButton
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukRef
       KeepSelfOwnMaterial = False
@@ -23260,6 +23400,7 @@ object FrameDrawPanel: TFrameDrawPanel
     end
     object btnSave: TSkinFMXButton
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukRef
       KeepSelfOwnMaterial = False
@@ -23301,6 +23442,7 @@ object FrameDrawPanel: TFrameDrawPanel
     end
     object btnClear: TSkinFMXButton
       ParentMouseEvent = False
+      DirectUIVisible = False
       ComponentTypeUseKind = ctukDefault
       MaterialUseKind = mukRef
       KeepSelfOwnMaterial = False
@@ -23326,6 +23468,12 @@ object FrameDrawPanel: TFrameDrawPanel
     end
   end
   object btnIconButtonMaterial: TSkinButtonDefaultMaterial
+    BackColor.Color = claWhite
+    BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     IsAutoCenterIconAndCaption = False
     DrawDetailParam.FontTrimming = fttNone
     DrawDetailParam.FontHorzAlign = fhaLeft
@@ -23367,7 +23515,13 @@ object FrameDrawPanel: TFrameDrawPanel
     Top = 56
   end
   object bdmReturnButton: TSkinButtonDefaultMaterial
+    BackColor.Color = claWhite
     BackColor.IsFill = True
+    BackColor.DrawEffectSetting.MouseDownEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.MouseOverEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.PushedEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.DisabledEffect.FillColorChangeType = cctNone
+    BackColor.DrawEffectSetting.FocusedEffect.FillColorChangeType = cctNone
     IsAutoCenterIconAndCaption = False
     DrawDetailParam.FontTrimming = fttNone
     DrawDetailParam.FontHorzAlign = fhaLeft
@@ -23400,7 +23554,7 @@ object FrameDrawPanel: TFrameDrawPanel
       89504E470D0A1A0A0000000D494844520000001E0000003208060000004B5E6B
       EF000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
       0252494441545847C5983F8B13411C86E37D0111E1C042B8C242440EEF140E41
-      0BB1D0422C44F03850041139AE112CC446B0B1B2B4123F891F4150B0118460B0
+      0BB1D0422C44F03850041139AE112CC446B0B1B2B4123F891F4150B0112460B0
       102F1A359718F37FE3B3D9F707CACC6DE1FD76EE69069237EFC3669399D9A955
       CD6C363B389D4E5F655976492F550FD24393C9E435E3ACD56A0D905FD15BD581
       E430D237B9D468369B435EBFA6883F942F227D27DF3F341A8D31EFDF50D40F4A
@@ -23417,7 +23571,7 @@ object FrameDrawPanel: TFrameDrawPanel
       14A75F160D8AD36F040C8AD36F7D0C8AD36FF60C8AD36F6F0D8AD36FE80D8ACF
       308BFD902B4072DF471883E215E6EF6F724521E3FBD066509CFE31D5A03BFD83
       B9C155A53F8A30284D7FF86270E5E98F9B0CE4E90FD80CE4E98F140DCAF343D4
-      B7F2CDA97425FB1B5CE98F8D0D9C9183F25AED0F2D9AD99EF60D028600000000
+      B7F2CDA97425FB1B5CE98F8D0D9C9183F25AED0FACA8D9685A34749E00000000
       49454E44AE426082}
     HoverPicture.IsClipRound = False
     DownPicture.IsClipRound = False

@@ -225,10 +225,14 @@
                     <Source Name="MainSource">OrangeUIDesign_FMX_D10_3.dpk</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\FMDHTMLEditD2010.bpl">ProfDHTMLEdit for Delphi 2010</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k260.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp260.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi26.win32\Bin\DclTeePro926.bpl">TeeChart Pro 2020 VCL Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\Compiled\Delphi26.win32\Bin\DclTeeMaker126.bpl">TeeMaker</Excluded_Packages>
+                    <Excluded_Packages Name="C:\三方控件\TeeChart Pro VCL FMX Source Code 2020.29\Source\..\TeeTree\Compiled\Delphi26.win32\Bin\DclTree2D26Tee9.bpl">TeeTree 2 Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">

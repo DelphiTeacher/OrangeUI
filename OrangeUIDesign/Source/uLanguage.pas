@@ -50,8 +50,18 @@ const
 
   Langs_NewItem : array[Low(TLangKind)..High(TLangKind)] of string =
       ('创建新项','New Item','');
+  Langs_NewChartAxisItem : array[Low(TLangKind)..High(TLangKind)] of string =
+      ('创建新的坐标刻度项','New Axis Item','');
   Langs_ItemsEditor : array[Low(TLangKind)..High(TLangKind)] of string =
       ('项目编辑器','Items Editor','');
+  Langs_ChartAxisItemsEditor : array[Low(TLangKind)..High(TLangKind)] of string =
+      ('坐标刻度列表编辑器','Axis Items Editor','');
+  Langs_ChartSeriesListEditor : array[Low(TLangKind)..High(TLangKind)] of string =
+      ('序列列表编辑器','Series List Editor','');
+  Langs_ChartFirstSeriesDataItemsEditor : array[Low(TLangKind)..High(TLangKind)] of string =
+      ('第一个序列的数据列表编辑器','Fist Series DataItems Editor','');
+  Langs_SelectDefaultItemStyle : array[Low(TLangKind)..High(TLangKind)] of string =
+      ('默认列表项样式选择(需要安装OrangeUIStyles包)','Select DefaultItemStyle(Need Install OrangeUIStyles Package)','');
   Langs_GridColumnsEditor : array[Low(TLangKind)..High(TLangKind)] of string =
       ('表格列编辑器','Grid Columns Editor','');
 
@@ -74,6 +84,8 @@ const
       ('图片列表编辑器','PictureList Editor','');
   Langs_PictureListCount : array[Low(TLangKind)..High(TLangKind)] of string =
       ('(%d张图片)','(%d Pictures)','');
+  Langs_SkinItemsCount : array[Low(TLangKind)..High(TLangKind)] of string =
+      ('(%d项)','(%d items)','');
 
   Langs_NewButton : array[Low(TLangKind)..High(TLangKind)] of string =
       ('创建一个新按钮','New Button','');

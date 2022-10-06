@@ -234,6 +234,7 @@ type
     //是否为空
     function IsEmpty:Boolean;
     procedure SetSize(const AWidth:Integer;const AHeight:Integer);
+    function Canvas:TCanvas;
     {$ENDIF}
   public
     constructor Create;virtual;
@@ -472,7 +473,7 @@ function RoundSkinPicture(ABitmap:TBitmap;
                           AYRadius:Double=-1;
                           ACorners: TCorners=[TCorner.TopLeft, TCorner.TopRight, TCorner.BottomLeft, TCorner.BottomRight];
                           const AQuality: TCanvasQuality = TCanvasQuality.SystemDefault):TSkinPicture;
-{$ENDIF FMX}
+{$ENDIF}
 
 
 {$IFDEF ANDROID}
@@ -1437,6 +1438,11 @@ end;
 function TSkinPicture.IsEmpty:Boolean;
 begin
   Result:=(Graphic=nil) or (Graphic.Empty);
+end;
+
+function TSkinPicture.Canvas:TCanvas;
+begin
+  Result:=Bitmap.Canvas;
 end;
 
 procedure TSkinPicture.SetSize(const AWidth:Integer;const AHeight:Integer);

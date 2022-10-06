@@ -38,6 +38,7 @@ uses
   uBaseList,
   FMX.Text,
   FMX.Objects,
+//  FMX.Graphics,
   uDrawPicture,
   FMX.Edit.Style,
   FMX.Controls.Presentation,
@@ -72,7 +73,6 @@ Type
 //    FPaintData:TPaintData;
 
     FContent: TControl;
-
   protected
     //背景
     FStyleObj_background: TControl;
@@ -126,7 +126,20 @@ end;
 procedure TSkinFMXStyledEdit.ApplyStyle;
 var
   I,J: Integer;
+//  BrushObject: TBrushObject;
+//  ATextObject:TFmxObject;
 begin
+//  //如果当前的主题是深色，把字体颜色改为黑色
+//  Self.TextSettings.FontColor:=TAlphaColorRec.Black;
+//
+//
+//  { Default text color }
+//  if FindStyleResource<TBrushObject>('foreground', BrushObject) then
+//    //Model.TextSettingsInfo.DefaultTextSettings.FontColor :=
+//    BrushObject.Brush.Color:=TAlphaColorRec.Black;
+
+
+
   inherited ApplyStyle;
 
 
@@ -157,6 +170,17 @@ begin
     end;
   end;
 
+//  ATextObject:=FindStyleResource('text');
+//  if ATextObject<>nil then
+//  begin
+//    uBaseLog.HandleException(nil,'TSkinFMXStyledEdit.ApplyStyle Find text');
+//    TText(ATextObject).TextSettings.FontColor:=TAlphaColorRec.Black;
+//  end
+//  else
+//  begin
+//    uBaseLog.HandleException(nil,'TSkinFMXStyledEdit.ApplyStyle not Find text');
+//  end;
+
 
 
   if Self.FIsUseDefaultStyle then Exit;
@@ -182,6 +206,14 @@ begin
 
     end;
   end;
+
+
+
+
+//  Self.TextSettings.FontColor:=TAlphaColorRec.Black;
+
+
+
 end;
 
 
