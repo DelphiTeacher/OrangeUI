@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B5F5C411-2F89-412F-8A50-01F2634D142D}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\..\OrangeUIControl\OrangeUIControl_FMX_XE10.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="BusLive.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="OrangeUIControl_FMX_XE10">
+        <MSBuild Projects="..\..\OrangeUIControl\OrangeUIControl_FMX_XE10.dproj"/>
+    </Target>
+    <Target Name="OrangeUIControl_FMX_XE10:Clean">
+        <MSBuild Projects="..\..\OrangeUIControl\OrangeUIControl_FMX_XE10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeUIControl_FMX_XE10:Make">
+        <MSBuild Projects="..\..\OrangeUIControl\OrangeUIControl_FMX_XE10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BusLive">
+        <MSBuild Projects="BusLive.dproj"/>
+    </Target>
+    <Target Name="BusLive:Clean">
+        <MSBuild Projects="BusLive.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BusLive:Make">
+        <MSBuild Projects="BusLive.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="OrangeUIControl_FMX_XE10;BusLive"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="OrangeUIControl_FMX_XE10:Clean;BusLive:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="OrangeUIControl_FMX_XE10:Make;BusLive:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

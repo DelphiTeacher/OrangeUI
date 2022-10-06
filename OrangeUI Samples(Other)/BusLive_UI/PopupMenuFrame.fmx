@@ -1,0 +1,235 @@
+object FramePopupMenu: TFramePopupMenu
+  Size.Width = 283.000000000000000000
+  Size.Height = 362.000000000000000000
+  Size.PlatformDefault = False
+  object BackRectangle: TRectangle
+    Align = Client
+    Fill.Color = claBlack
+    Opacity = 0.100000001490116100
+    Size.Width = 283.000000000000000000
+    Size.Height = 362.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    OnClick = BackRectangleClick
+  end
+  object pnlPopupMenu: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.IsTransparent = False
+    MouseDownFocus = False
+    ClipChildren = True
+    Position.Y = 54.000000000000000000
+    Size.Width = 283.000000000000000000
+    Size.Height = 175.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Properties.IsToolBar = False
+    Top = 54
+    object pnlTopDevide: TSkinFMXPanel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.BackColor.FillColor.Color = xFF1C9DC6
+      SelfOwnMaterial.BackColor.DrawRectSetting.Left = 10.000000000000000000
+      SelfOwnMaterial.BackColor.DrawRectSetting.Right = 10.000000000000000000
+      SelfOwnMaterial.BackColor.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.BackColor.DrawRectSetting.SizeType = dpstPixel
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.Left = 5.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.Right = 5.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.SizeType = dpstPixel
+      MouseDownFocus = False
+      Align = Top
+      ClipChildren = True
+      Position.Y = 60.000000000000000000
+      Size.Width = 283.000000000000000000
+      Size.Height = 2.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Properties.IsToolBar = False
+      Top = 40
+    end
+    object lbMenus: TSkinFMXListBox
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.IsDrawCenterItemRect = False
+      SelfOwnMaterial.DrawCenterItemRectParam.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.DrawCenterItemRectParam.BorderColor.Color = xFFEDEDED
+      SelfOwnMaterial.DrawItemCaptionParam.DrawFont.Size = 16.000000000000000000
+      SelfOwnMaterial.DrawItemCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.DrawItemCaptionParam.DrawRectSetting.Left = 24.000000000000000000
+      SelfOwnMaterial.DrawItemCaptionParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawItemCaptionParam.DrawRectSetting.SizeType = dpstPixel
+      SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.IsFill = True
+      SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.FillColor.Color = claLightgray
+      SelfOwnMaterial.DrawItemBackColorParam.DrawEffectSetting.MouseDownEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange]
+      SelfOwnMaterial.IsSimpleDrawGroupRoundRect = False
+      SelfOwnMaterial.IsSimpleDrawItemDevide = True
+      SelfOwnMaterial.IsSimpleDrawGroupBeginDevide = True
+      SelfOwnMaterial.IsSimpleDrawGroupEndDevide = True
+      SelfOwnMaterial.DrawItemDevideParam.IsFill = True
+      SelfOwnMaterial.DrawItemDevideParam.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.DrawItemDevideParam.BorderColor.Color = xFFEDEDED
+      SelfOwnMaterial.DrawItemDevideParam.DrawRectSetting.Left = 10.000000000000000000
+      SelfOwnMaterial.DrawItemDevideParam.DrawRectSetting.Right = 10.000000000000000000
+      SelfOwnMaterial.DrawItemDevideParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawItemDevideParam.DrawRectSetting.SizeType = dpstPixel
+      SelfOwnMaterial.DrawGroupBeginDevideParam.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.DrawGroupBeginDevideParam.BorderColor.Color = xFFEDEDED
+      SelfOwnMaterial.DrawGroupEndDevideParam.FillColor.Color = xFFEDEDED
+      SelfOwnMaterial.DrawGroupEndDevideParam.BorderColor.Color = xFFEDEDED
+      SelfOwnMaterial.IsAutoAdjustItemDesignerPanelSize = True
+      MouseDownFocus = False
+      Align = Client
+      ClipChildren = True
+      Size.Width = 283.000000000000000000
+      Size.Height = 113.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      VertScrollBar.ParentMouseEvent = False
+      VertScrollBar.ComponentTypeUseKind = ctukDefault
+      VertScrollBar.MaterialUseKind = mukSelfOwn
+      VertScrollBar.KeepSelfOwnMaterial = True
+      VertScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
+      VertScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+      VertScrollBar.MouseDownFocus = False
+      VertScrollBar.Position.X = 276.000000000000000000
+      VertScrollBar.Size.Width = 7.000000000000000000
+      VertScrollBar.Size.Height = 113.000000000000000000
+      VertScrollBar.Size.PlatformDefault = False
+      VertScrollBar.Properties.AutoSize = False
+      VertScrollBar.Properties.Kind = sbVertical
+      VertScrollBar.Properties.SmallChange = 1
+      VertScrollBar.Properties.LargeChange = 10
+      VertScrollBar.Properties.StrictScroll = False
+      VertScrollBar.Properties.StrictScrollPrecision = 10
+      VertScrollBar.Properties.CanOverRangeTypes = []
+      HorzScrollBar.ParentMouseEvent = False
+      HorzScrollBar.ComponentTypeUseKind = ctukDefault
+      HorzScrollBar.MaterialUseKind = mukSelfOwn
+      HorzScrollBar.KeepSelfOwnMaterial = True
+      HorzScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
+      HorzScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+      HorzScrollBar.MouseDownFocus = False
+      HorzScrollBar.Position.Y = 106.000000000000000000
+      HorzScrollBar.Size.Width = 283.000000000000000000
+      HorzScrollBar.Size.Height = 7.000000000000000000
+      HorzScrollBar.Size.PlatformDefault = False
+      HorzScrollBar.Properties.AutoSize = False
+      HorzScrollBar.Properties.Kind = sbHorizontal
+      HorzScrollBar.Properties.SmallChange = 1
+      HorzScrollBar.Properties.LargeChange = 10
+      HorzScrollBar.Properties.StrictScroll = False
+      HorzScrollBar.Properties.StrictScrollPrecision = 10
+      HorzScrollBar.Properties.CanOverRangeTypes = []
+      ScrollControlCorner.ParentMouseEvent = False
+      ScrollControlCorner.ComponentTypeUseKind = ctukDefault
+      ScrollControlCorner.MaterialUseKind = mukSelfOwn
+      ScrollControlCorner.KeepSelfOwnMaterial = True
+      ScrollControlCorner.MouseDownFocus = False
+      ScrollControlCorner.Position.X = 276.000000000000000000
+      ScrollControlCorner.Position.Y = 106.000000000000000000
+      ScrollControlCorner.Size.Width = 7.000000000000000000
+      ScrollControlCorner.Size.Height = 7.000000000000000000
+      ScrollControlCorner.Size.PlatformDefault = False
+      Properties.ContentWidth = -1.000000000000000000
+      Properties.ContentHeight = -1.000000000000000000
+      Properties.VertScrollBarShowType = sbstAutoCoverShow
+      Properties.HorzScrollBarShowType = sbstNone
+      Properties.Items.Data = {
+        140000020000000400000000005C00000018110000001A000000000042006900
+        6E006100720079004F0062006A00650063007400000004000000000A06000000
+        004E0061006D00650000000D54F0790000040000000010060800000043006100
+        7000740069006F006E000000076898980000DC835553004E000004000000000E
+        0600000000440065007400610069006C0000000E66C67E000004000000001008
+        00000000440065007400610069006C00310000000E66C67E3100000004000000
+        00100800000000440065007400610069006C00320000000E66C67E3200000004
+        00000000100800000000440065007400610069006C00330000000E66C67E3300
+        00000400000000100800000000440065007400610069006C00340000000E66C6
+        7E340000000400000000100800000000440065007400610069006C0035000000
+        0E66C67E350000000400000000100800000000440065007400610069006C0036
+        0000000E66C67E360000000E000000000E060800000048006500690067006800
+        74000000D89AA65E0000000000000000F0BF0E000000000C0608000000570069
+        006400740068000000BD5BA65E0000000000000000F0BF070000000008060400
+        000054006100670000000768B08B00000000000007000000000A080400000054
+        0061006700310000000768B08B31000000000000001500000000100604000000
+        43006800650063006B00650064000000FE520990000000000000150000000012
+        0604000000530065006C0065006300740065006400000009902D4E0000000000
+        001500000000100604000000560069007300690062006C00650000003E663A79
+        0000FFFFFFFF07000000001206040000004900740065006D0054007900700065
+        0000007B7C8B5700000000000018110000001A0000000000420069006E006100
+        720079004F0062006A00650063007400000004000000000A06000000004E0061
+        006D00650000000D54F079000004000000001006080000004300610070007400
+        69006F006E000000076898980000DC8355538C4E000004000000000E06000000
+        00440065007400610069006C0000000E66C67E00000400000000100800000000
+        440065007400610069006C00310000000E66C67E310000000400000000100800
+        000000440065007400610069006C00320000000E66C67E320000000400000000
+        100800000000440065007400610069006C00330000000E66C67E330000000400
+        000000100800000000440065007400610069006C00340000000E66C67E340000
+        000400000000100800000000440065007400610069006C00350000000E66C67E
+        350000000400000000100800000000440065007400610069006C00360000000E
+        66C67E360000000E000000000E06080000004800650069006700680074000000
+        D89AA65E0000000000000000F0BF0E000000000C060800000057006900640074
+        0068000000BD5BA65E0000000000000000F0BF07000000000806040000005400
+        6100670000000768B08B00000000000007000000000A08040000005400610067
+        00310000000768B08B3100000000000000150000000010060400000043006800
+        650063006B00650064000000FE52099000000000000015000000001206040000
+        00530065006C0065006300740065006400000009902D4E000000000000150000
+        0000100604000000560069007300690062006C00650000003E663A790000FFFF
+        FFFF07000000001206040000004900740065006D00540079007000650000007B
+        7C8B57000000000000}
+      Properties.EnableBuffer = False
+      Properties.IsAutoSelected = True
+      Properties.IsEnabledCenterItemSelectMode = False
+      Properties.ItemWidth = -1.000000000000000000
+      Properties.ItemHeight = 50.000000000000000000
+      Properties.SelectedItemHeight = -1.000000000000000000
+      Properties.ItemDrawType = idtAuto
+      Properties.ItemSizeCalcType = isctFixed
+      Properties.ItemWidthCalcType = isctFixed
+      Properties.ItemHeightCalcType = isctFixed
+      Properties.ItemLayoutType = iltVertical
+      OnClickItem = lbMenusClickItem
+    end
+    object lblCaption: TSkinFMXLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 18.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = xFF1C9DC6
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = xFF1C9DC6
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.Left = 20.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.SizeType = dpstPixel
+      MouseDownFocus = False
+      Align = Top
+      ClipChildren = True
+      Size.Width = 283.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      OnClick = lblCaptionClick
+      Caption = #25552#31034
+      Text = #25552#31034
+      Properties.AutoSize = False
+      Left = 10
+      Top = 10
+    end
+  end
+  object tmrBringToFont: TTimer
+    Interval = 100
+    OnTimer = tmrBringToFontTimer
+    Left = 128
+    Top = 256
+  end
+end

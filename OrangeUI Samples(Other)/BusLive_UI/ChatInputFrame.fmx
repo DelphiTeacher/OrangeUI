@@ -1,0 +1,247 @@
+object FrameChatInput: TFrameChatInput
+  Size.Width = 320.000000000000000000
+  Size.Height = 334.000000000000000000
+  Size.PlatformDefault = False
+  object pnlInput: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.BorderEadges = [beTop]
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.FillColor.Color = xFFEBECEE
+    SelfOwnMaterial.BackColor.BorderColor.Color = claGray
+    SelfOwnMaterial.IsTransparent = False
+    SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+    MouseDownFocus = False
+    Align = Top
+    Size.Width = 320.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Properties.IsToolBar = False
+    object memMsgInput: TSkinFMXMemo
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      DataDetectorTypes = []
+      StyledSettings = [Family, Style, FontColor]
+      TextSettings.Font.Size = 15.000000000000000000
+      TextSettings.WordWrap = True
+      OnChangeTracking = memMsgInputChangeTracking
+      Align = Client
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 260.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.BackColor.IsRound = True
+      SelfOwnMaterial.BackColor.RoundWidth = 8.000000000000000000
+      SelfOwnMaterial.BackColor.RoundHeight = 8.000000000000000000
+      SelfOwnMaterial.IsTransparent = False
+      SelfOwnMaterial.DrawPictureParam.IsStretch = True
+      SelfOwnMaterial.DrawPictureParam.StretchStyle = issSquare
+      SelfOwnMaterial.NormalPicture.IsClipRound = False
+      SelfOwnMaterial.NormalPicture.PNG = {
+        89504E470D0A1A0A0000000D49484452000000760000004408060000005415C1
+        B7000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        028E49444154785EEDDDBF6B13611CC7F1DC9DDC20E214328864F62F5090D221
+        543727314E0E0E925FD2D5A943100757497209191C9C1A717253C8D0A122F40F
+        E81C8A9090A93835C99DDFCFDD2355DA3F20CF87CF0BC23DF7E432BDFB24775D
+        9EA0748DC160500B82E0B90D6B9BCDA61A45515CBC23DBC09A5C5893990DA759
+        961DB6DBED69F1CEA5FFC28E46A37BEBF53A09C330C507D2349D562A9559BD5E
+        BF7097C816984C26F162B1A85A272CC067D6E98669351A8D5377C965D8E170B8
+        6B31BFDAEBC0FE023EB869F1807DC3EE5BE0B7F67AD26C368F309787C54AB5EA
+        3F6DF8AAD56A4D30277E4992A46E87B1ADE20758B921262DEA47AC5445F517DA
+        A1215AE23CB065BC674BF88DBDF128BF42BC662BF7BB057E1FE2C7D706876E5E
+        3C8796688AAFE29ABDAEDC2E8BB7D0B216E239B55C2E9F1573E23BB444D310FF
+        7CD0732A0FB444D3FCAE58F8282C298525A5B0A4149694C2925258520A4B4A61
+        49292C298525A5B0A4149694C2925258520A4B4A6149292C298525A5B0A41496
+        94C2925258520A4B4A6149292C298525A5B0A4149694C2925258520A4B4A6149
+        292C298525A5B0A4149694C2925258520A4B4A6149292C298525A5B0A4149694
+        C2925258520A4B4A614921EC79AFD7BB559C8AEFB08B16B6480BD334FD15C7F1
+        1D372F9E5B2E9777A3283A0BCDC96AB5BAEFE6C57359963DB4C33156EC278BFB
+        A29816DFA1259AE6274992FCC0C677F98978CB3ABE464B8CF3BB62ABFC12BB19
+        BA8DEFC443AEDD3BB4C4791E16BB17628B4A1B8EB572FDE39A8DD1F0EF1EB257
+        360676BB199EDB8FF0673B4EE7F3F9ACDBEDAEF30B642B58A79B76A8DA63CD0E
+        F6B1B3F16DACD46B3706FE57BFDF7F6C173EB5E19E7D18B7CFDACA7BBBFCB605
+        88479A233B7EE9743ADFDCBC532AFD01AE79E1487066E7FF0000000049454E44
+        AE426082}
+      SelfOwnMaterial.HoverPicture.IsClipRound = False
+      SelfOwnMaterial.FocusedPicture.IsClipRound = False
+      SelfOwnMaterial.DisabledPicture.IsClipRound = False
+      SelfOwnMaterial.DrawTextParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawTextParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawTextParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawCharCountTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawCharCountTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawCharCountTextParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawCharCountTextParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCharCountTextParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCharCountTextParam.FontVertAlign = fvaTop
+      OnStayClick = memMsgInputStayClick
+      ContentMarginsLeft = 0
+      ContentMarginsTop = 0
+      ContentMarginsRight = 0
+      ContentMarginsBottom = 0
+      IsUseDefaultStyle = False
+      IsInScrollBox = False
+      MemoProperties.IsDrawHelpWhenFocused = False
+      MemoProperties.IsDrawCharCount = False
+      MemoProperties.IsAutoHeight = False
+      MemoProperties.AutoHeightMaxLineCount = 3
+      MemoProperties.HelpIcon.IsClipRound = False
+      Properties.IsDrawHelpWhenFocused = False
+      Properties.IsDrawCharCount = False
+      Properties.IsAutoHeight = False
+      Properties.AutoHeightMaxLineCount = 3
+      Properties.HelpIcon.IsClipRound = False
+      Viewport.Width = 260.000000000000000000
+      Viewport.Height = 30.000000000000000000
+    end
+    object pnlSendButton: TSkinFMXPanel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      MouseDownFocus = False
+      Align = Right
+      Position.X = 270.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Properties.IsToolBar = False
+      object btnSendMsg: TSkinFMXButton
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.IsFill = True
+        SelfOwnMaterial.BackColor.IsRound = True
+        SelfOwnMaterial.BackColor.RoundWidth = 8.000000000000000000
+        SelfOwnMaterial.BackColor.RoundHeight = 8.000000000000000000
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.IsFill = True
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.FillColor.Color = xFF18B4ED
+        SelfOwnMaterial.BackColor.DrawEffectSetting.PushedEffect.EffectTypes = [drpetFillColorChange, drpetIsFillChange]
+        SelfOwnMaterial.IsTransparent = False
+        SelfOwnMaterial.IsAutoCenterIconAndCaption = False
+        SelfOwnMaterial.DrawDetailParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawDetailParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawDetailParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawDetail1Param.FontTrimming = fttNone
+        SelfOwnMaterial.DrawDetail1Param.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawDetail1Param.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+        SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+        SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+        SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawCaptionParam.FontColor = xFFA6A6A6
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = xFFA6A6A6
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = xFFA6A6A6
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.PushedEffect.FontColor.Color = claWhite
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.PushedEffect.EffectTypes = [dtpetFontColorChange]
+        SelfOwnMaterial.NormalPicture.IsClipRound = False
+        SelfOwnMaterial.NormalPicture.PNG = {
+          89504E470D0A1A0A0000000D49484452000000760000004408060000005415C1
+          B7000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          028E49444154785EEDDDBF6B13611CC7F1DC9DDC20E214328864F62F5090D221
+          543727314E0E0E925FD2D5A943100757497209191C9C1A717253C8D0A122F40F
+          E81C8A9090A93835C99DDFCFDD2355DA3F20CF87CF0BC23DF7E432BDFB24775D
+          9EA0748DC160500B82E0B90D6B9BCDA61A45515CBC23DBC09A5C5893990DA759
+          961DB6DBED69F1CEA5FFC28E46A37BEBF53A09C330C507D2349D562A9559BD5E
+          BF7097C816984C26F162B1A85A272CC067D6E98669351A8D5377C965D8E170B8
+          6B31BFDAEBC0FE023EB869F1807DC3EE5BE0B7F67AD26C368F309787C54AB5EA
+          3F6DF8AAD56A4D30277E4992A46E87B1ADE20758B921262DEA47AC5445F517DA
+          A1215AE23CB065BC674BF88DBDF128BF42BC662BF7BB057E1FE2C7D706876E5E
+          3C8796688AAFE29ABDAEDC2E8BB7D0B216E239B55C2E9F1573E23BB444D310FF
+          7CD0732A0FB444D3FCAE58F8282C298525A5B0A4149694C2925258520A4B4A61
+          49292C298525A5B0A4149694C2925258520A4B4A6149292C298525A5B0A41496
+          94C2925258520A4B4A6149292C298525A5B0A4149694C2925258520A4B4A6149
+          292C298525A5B0A4149694C2925258520A4B4A6149292C298525A5B0A4149694
+          C2925258520A4B4A614921EC79AFD7BB559C8AEFB08B16B6480BD334FD15C7F1
+          1D372F9E5B2E9777A3283A0BCDC96AB5BAEFE6C57359963DB4C33156EC278BFB
+          A29816DFA1259AE6274992FCC0C677F98978CB3ABE464B8CF3BB62ABFC12BB19
+          BA8DEFC443AEDD3BB4C4791E16BB17628B4A1B8EB572FDE39A8DD1F0EF1EB257
+          360676BB199EDB8FF0673B4EE7F3F9ACDBEDAEF30B642B58A79B76A8DA63CD0E
+          F6B1B3F16DACD46B3706FE57BFDF7F6C173EB5E19E7D18B7CFDACA7BBBFCB605
+          88479A233B7EE9743ADFDCBC532AFD01AE79E1487066E7FF0000000049454E44
+          AE426082}
+        SelfOwnMaterial.HoverPicture.IsClipRound = False
+        SelfOwnMaterial.DownPicture.IsClipRound = False
+        SelfOwnMaterial.DownPicture.PNG = {
+          89504E470D0A1A0A0000000D494844520000000D0000000F08060000003F2345
+          77000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          00F449444154384F63648001FB7A0E3E4DEE82FFCC4CD18C8C4C3A505186FFFF
+          FF5D61F8FB6FEEE7EB5F67301C6CFC0112036BE28C6B9166E1E5D881AC181D80
+          34FFF9FCC3E3FBA29AA78C201B7875784FE3D30003208D9FAF7C366502398918
+          0D200052C7A3C99BC804F203548C28F08F91219A89585B6080F9DF7F3526289B
+          68C0C8CA2C4AB22610A08FA6FFBFFFBE6602C73809E02F13E32D26501281F289
+          04FFE73281D214B1B6FDF9FBEFE8B76B5F9633811221284D11D208D2F0FFEB8F
+          70907A66B0C0C57D9F7F7159CE6715667BF6F7FF7F01C6BFFF38199999B8419E
+          FECBC070E1DFFF7F0D401BCAFE6CAA7FCFC0C0C00000F56C743CBDF3B6300000
+          000049454E44AE426082}
+        SelfOwnMaterial.DisabledPicture.IsClipRound = False
+        SelfOwnMaterial.FocusedPicture.IsClipRound = False
+        SelfOwnMaterial.PushedPicture.IsClipRound = False
+        SelfOwnMaterial.PushedPicture.PNG = {
+          89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+          CC000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          00DA49444154384F63644006657FF2189818E21818BE683130F273424531C1FF
+          8FDF191878AE31FC6358C4D0C532092ACA0031ACF0AB34033BFB460646666330
+          9F14F0FFEF59869F3FFD19FAB99F328105C835080440FA40FA414C86F23FB90C
+          4CCC70A7920DFEFDCD63021A170FE5520680E600BD090C6CAA802F5A4097E189
+          355200D01C480450098C1A463AA0B261E04C4B05003407E83260EEA70AE0B9C6
+          042E46A80180E6408AA08A3F67C82E354000540C75B098402200541E8104C801
+          B0F20C08504BDAF23FF9409158A24BDAFF0C8B193A592642041918007C494202
+          8C5137FB0000000049454E44AE426082}
+        SelfOwnMaterial.DrawPictureParam.IsStretch = True
+        SelfOwnMaterial.DrawPictureParam.StretchStyle = issSquare
+        MouseDownFocus = False
+        Align = Center
+        Size.Width = 47.000000000000000000
+        Size.Height = 28.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        OnClick = btnSendMsgClick
+        Caption = #21457#36865
+        Text = #21457#36865
+        Properties.AutoSize = False
+        Properties.IsAutoPush = False
+        Properties.IsPushed = False
+        Properties.Icon.IsClipRound = False
+        Properties.PushedIcon.IsClipRound = False
+        Properties.ButtonIndex = -1
+        Properties.PushedGroupIndex = 0
+      end
+    end
+  end
+  object tmrSyncMemoHeight: TTimer
+    Interval = 200
+    OnTimer = tmrSyncMemoHeightTimer
+    Left = 117
+    Top = 85
+  end
+end

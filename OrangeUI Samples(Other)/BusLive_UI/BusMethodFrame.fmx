@@ -1,0 +1,1218 @@
+object FrameBusMethod: TFrameBusMethod
+  Size.Width = 320.000000000000000000
+  Size.Height = 758.000000000000000000
+  Size.PlatformDefault = False
+  object pnlToolBar: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukRef
+    KeepSelfOwnMaterial = False
+    RefMaterial = BusLiveDataModuleCommonSkinMaterial.pnlToolBarMaterial
+    MouseDownFocus = False
+    Align = Top
+    ClipChildren = True
+    Size.Width = 320.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Caption = #20986#34892#26041#26696
+    Text = #20986#34892#26041#26696
+    Properties.IsToolBar = False
+    object btnReturn: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      RefMaterial = BusLiveDataModuleCommonSkinMaterial.bdmReturnButton
+      MouseDownFocus = False
+      Align = Left
+      ClipChildren = True
+      Size.Width = 80.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      OnClick = btnReturnClick
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.Icon.IsClipRound = False
+      Properties.PushedIcon.IsClipRound = False
+      Properties.ButtonIndex = -1
+      Properties.PushedGroupIndex = 0
+    end
+  end
+  object SkinFMXPanel1: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukRef
+    KeepSelfOwnMaterial = False
+    RefMaterial = BusLiveDataModuleCommonSkinMaterial.pnlInputPanelMaterial
+    MouseDownFocus = False
+    Align = Top
+    ClipChildren = True
+    Position.Y = 50.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 60.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Properties.IsToolBar = False
+    object SkinFMXButton1: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.IsAutoCenterIconAndCaption = False
+      SelfOwnMaterial.DrawDetailParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawDetailParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawDetailParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawDetail1Param.FontTrimming = fttNone
+      SelfOwnMaterial.DrawDetail1Param.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawDetail1Param.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawHelpTextParam.FontColor = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.DrawFont.FontColor.Color = claGray
+      SelfOwnMaterial.DrawHelpTextParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawHelpTextParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawHelpTextParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawIconParam.IsAutoFit = True
+      SelfOwnMaterial.DrawIconParam.PictureHorzAlign = phaCenter
+      SelfOwnMaterial.DrawIconParam.PictureVertAlign = pvaCenter
+      SelfOwnMaterial.DrawIconParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.NormalPicture.IsClipRound = False
+      SelfOwnMaterial.HoverPicture.IsClipRound = False
+      SelfOwnMaterial.DownPicture.IsClipRound = False
+      SelfOwnMaterial.DisabledPicture.IsClipRound = False
+      SelfOwnMaterial.FocusedPicture.IsClipRound = False
+      SelfOwnMaterial.PushedPicture.IsClipRound = False
+      MouseDownFocus = False
+      Align = Left
+      ClipChildren = True
+      Size.Width = 59.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.Icon.IsClipRound = False
+      Properties.Icon.PNG = {
+        89504E470D0A1A0A0000000D49484452000000500000005008060000008E11F2
+        AD000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        029649444154785EEDD9314E025110C67114123A3A8EA09527B0B3C498587A07
+        0EC021883577B0B4D1CAD879006345BC81DD762402EEA70F23F880B73BF36667
+        C8FC1303ABD19DF7E3B1486879061BBE3D2FF1150E4D77146EC5DA849B9C5D88
+        CFC099E8F0DB769D6544B1C1F73D65AD228A0C9D7ABDB388987DE018DE0A6AD7
+        CFAC9475D81420EB88D906AD02631931CB907540AC22B20F4881B088C83A1C07
+        803544B6C138176E099165A81C0BB682481E28E7422D20AADF25DA116B0F22B9
+        30CD88B5866862415A118FC36D72C397FB45B8FB9BC44262E788CD225DA5857F
+        0FDCEBADFD8EF42EF8B7138B623939BFAEBC11B84A5EBC06BC559A109300CA81
+        3FCB9BF6CF517A758163D7BB84E6E5F93AE1BE587B1FB5BA780DD40EB38AB613
+        D010DE2A71C4AD80C3D7A7697963096F553BCC2E12EB8BC0E6B58BEB1A487DB1
+        9A3D8ED6FE5E7730665B77632FFF879203127340620E48CC01893920310724E6
+        80C41C9098CA7722DCF93B11C53920310724E680C41C909803127340620E48CC
+        0189A906C43B88BF5FE1DBAAF21D48CC01893920310724E680C41C9098031273
+        40620E484CEC338BD9C3685A9EED241CD6AAEE6719E47731F3C57BF7EA363ABB
+        D80EEC5E8E4F8B7294706826CCBC0D0F893E85FB8371C7122266C5CCE1309AF8
+        35D00A620A1E6AEC73DB8FBBD1A2D75B3F3FE7E7B555DABC4616456BD9BF1927
+        6DAEC6009106440A1E6A1410358948C5438D03A2D8BF19B911B9CEA902104922
+        729E4B0D209240E43E872A40941331C7DF560788722C34D703A31210712E38E7
+        AE560B8838169E130FA906441480DC78483D20AA032181874C00A22A205278C8
+        0C204A8191C443A600D12E20693C640E10C5A062E5C6432601D13E44093C6416
+        106D4394C243A601D126A224DEC104C4D4EBA2A7AA56EB0BCF628306AD452B7F
+        0000000049454E44AE426082}
+      Properties.PushedIcon.IsClipRound = False
+      Properties.PushedIcon.PNG = {
+        89504E470D0A1A0A0000000D49484452000000500000005008060000008E11F2
+        AD000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        02A649444154785EEDDA314E1B4114C6F18989946E3B8E00559403A48B525151
+        7207D7910FE103F80E2923A15045E97200440547A0DBCE12B6C3A78C236C76BD
+        E3F966DEBE87DE5FB2608D60DFFC18AF4176F00CB6BC996D708B87A67B173F8A
+        B50FF7E1622E3E43C94487EFDB759611C5061F7AC85A4514193AF57A6711B1FA
+        C05D785BA8435FB352D5615380AC23561BF41818CB885586CC01B18A587C4006
+        C22262D1E14A0058432C3658C9855B422C32548D055B41A407AAB9500B88EA77
+        8976C4EC412417A619316B883116A41571123F26F7F87DB68E9FFE4F62215DE7
+        E89A45BAA3168E819B66F77BA477C1FE4E6CDBB039BD9A1FBD114A95BC780D78
+        DB342126013CDECC9E9A104EE26172B9C05DD7BBA1DA1056A717F3F7F150ACC1
+        DF5A2E9E749811B3C643B10E025AC1DB3606622FE0F2FADB8325BC6D9879F973
+        761F0FAB57F44960FFDA55EA1AC83E594DEF7EEFFCBCC5C72FC5D63DDAD3FF5B
+        C901C91C90CC01C91C90CC01C91C90CC01C91C904C2520FEF378798B77ABCC77
+        209903923920990392392099039239209903923920996A40BC96F1F216EF5695
+        EF40320724734032072473403207247340320724734032B1D71BA6B7BFEEC364
+        72160FB3CA7D5715FD5FCC7AFDB0F8F4F53C1EED24B603E300AB7F47A65AF5E1
+        21D187F0F30EC27B982D21AEE2CCBD895F030D210EE2A1D15E739DFEF9B10E4D
+        B373FEDC6B1CDBAB6B64DB6E169F2F9336D7688048032283874605446322B278
+        687440D4F567466DC452E754018824114B9E4B0D2092402C7D0E5580A826628D
+        9FAD0E10D55868AD5F8C4A405472C13577B55A405462E135F1906A40C400D4C6
+        43EA01510E84041E3201888E0191C2436600510A8C241E3205880E0149E32173
+        80A80BAAABDA78C824201A4294C0436601511FA2141E320D88F61125F1DE4C40
+        4CBD2E7AAA0AE12FD2117AF9134EA2F20000000049454E44AE426082}
+      Properties.ButtonIndex = -1
+      Properties.PushedGroupIndex = 0
+    end
+    object SkinFMXMultiColorLabel1: TSkinFMXMultiColorLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.FontSize = 14.000000000000000000
+      MouseDownFocus = False
+      Anchors = [akLeft, akTop, akRight]
+      ClipChildren = True
+      Position.X = 64.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 217.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Caption = #20174#25105#30340#20301#32622
+      Text = #20174#25105#30340#20301#32622
+      Properties.AutoSize = False
+      Properties.ColorTextCollection = <
+        item
+          Text = #20174
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end
+        item
+          Text = #25105#30340#20301#32622
+          DrawFont.Color = xFF70C3A5
+          DrawFont.FontColor.Color = xFF70C3A5
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end>
+      Properties.Text1 = #20174
+      Properties.Text2 = #25105#30340#20301#32622
+      Properties.Color1 = claBlack
+      Properties.Color2 = xFF70C3A5
+      Properties.Color3 = claBlack
+      Properties.Color4 = claBlack
+    end
+    object SkinFMXMultiColorLabel2: TSkinFMXMultiColorLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.FontSize = 14.000000000000000000
+      MouseDownFocus = False
+      Anchors = [akLeft, akTop, akRight]
+      ClipChildren = True
+      Position.X = 64.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 217.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Caption = #21040#24191#35199#22823#23398
+      Text = #21040#24191#35199#22823#23398
+      Properties.AutoSize = False
+      Properties.ColorTextCollection = <
+        item
+          Text = #21040
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end
+        item
+          Text = #24191#35199#22823#23398
+          DrawFont.Color = xFF70C3A5
+          DrawFont.FontColor.Color = xFF70C3A5
+          IsUseDefaultDrawFont = True
+          IsUseDefaultDrawFontColor = False
+          IsBindingItem = False
+        end>
+      Properties.Text1 = #21040
+      Properties.Text2 = #24191#35199#22823#23398
+      Properties.Color1 = claBlack
+      Properties.Color2 = xFF70C3A5
+      Properties.Color3 = claBlack
+      Properties.Color4 = claBlack
+    end
+  end
+  object SkinFMXListBox1: TSkinFMXListBox
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.IndicatorColor = claBlack
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.LoadingPicture.IsClipRound = False
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.DrawLoadingCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.DrawLoadingCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.DrawLoadingCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.EnableAutoCenterPosition = False
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.EnableLoadingImageBiggerEffect = False
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.EnableLoadingImageRotateEffect = True
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.LoadingCaption = #27491#22312#21047#26032'...'
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.DecidedLoadCaption = #26494#24320#21047#26032
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.UnDecidedLoadCaption = #19979#25289#21047#26032
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.IndicatorColor = claBlack
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.LoadingPicture.IsClipRound = False
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.DrawLoadingCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.DrawLoadingCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.DrawLoadingCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.EnableAutoCenterPosition = False
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.EnableLoadingImageBiggerEffect = False
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.EnableLoadingImageRotateEffect = True
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.LoadingCaption = #27491#22312#21152#36733'...'
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.DecidedLoadCaption = #26494#24320#21152#36733#26356#22810
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.UnDecidedLoadCaption = #19978#25289#21152#36733#26356#22810
+    SelfOwnMaterial.DrawEmptyContentCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawEmptyContentCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawEmptyContentCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawEmptyContentDescriptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawEmptyContentDescriptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawEmptyContentDescriptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.ItemBackNormalPicture.IsClipRound = False
+    SelfOwnMaterial.ItemBackHoverPicture.IsClipRound = False
+    SelfOwnMaterial.ItemBackDownPicture.IsClipRound = False
+    SelfOwnMaterial.ItemBackPushedPicture.IsClipRound = False
+    SelfOwnMaterial.ItemAccessoryPicture.IsClipRound = False
+    SelfOwnMaterial.IsDrawCenterItemRect = False
+    SelfOwnMaterial.IsSimpleDrawItemDevide = True
+    SelfOwnMaterial.DrawItemDevideParam.IsFill = True
+    SelfOwnMaterial.DrawItemCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetailParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetailParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetailParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail1Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail1Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail1Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail2Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail2Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail2Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail3Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail3Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail3Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail4Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail4Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail4Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail5Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail5Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail5Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail6Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail6Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail6Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.ItemAccessoryPicture.IsClipRound = False
+    SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackNormalPicture.IsClipRound = False
+    SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackHoverPicture.IsClipRound = False
+    SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackDownPicture.IsClipRound = False
+    SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackPushedPicture.IsClipRound = False
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetailParam.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetailParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetailParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail1Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail1Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail1Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail2Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail2Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail2Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail3Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail3Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail3Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail4Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail4Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail4Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail5Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail5Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail5Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail6Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail6Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail6Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.ItemAccessoryPicture.IsClipRound = False
+    SelfOwnMaterial.Item1TypeItemMaterial.ItemBackNormalPicture.IsClipRound = False
+    SelfOwnMaterial.Item1TypeItemMaterial.ItemBackHoverPicture.IsClipRound = False
+    SelfOwnMaterial.Item1TypeItemMaterial.ItemBackDownPicture.IsClipRound = False
+    SelfOwnMaterial.Item1TypeItemMaterial.ItemBackPushedPicture.IsClipRound = False
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetailParam.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetailParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetailParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail1Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail1Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail1Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail2Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail2Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail2Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail3Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail3Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail3Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail4Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail4Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail4Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail5Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail5Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail5Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.IsSimpleDrawGroupRoundRect = False
+    SelfOwnMaterial.IsSimpleDrawGroupBeginDevide = True
+    SelfOwnMaterial.IsSimpleDrawGroupEndDevide = True
+    SelfOwnMaterial.IsAutoAdjustItemDesignerPanelSize = True
+    MouseDownFocus = False
+    Align = Client
+    ClipChildren = True
+    Size.Width = 320.000000000000000000
+    Size.Height = 648.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    VertScrollBar.ParentMouseEvent = False
+    VertScrollBar.ComponentTypeUseKind = ctukDefault
+    VertScrollBar.MaterialUseKind = mukSelfOwn
+    VertScrollBar.KeepSelfOwnMaterial = True
+    VertScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
+    VertScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
+    VertScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    VertScrollBar.MouseDownFocus = False
+    VertScrollBar.ClipChildren = True
+    VertScrollBar.Position.X = 312.000000000000000000
+    VertScrollBar.Size.Width = 7.000000000000000000
+    VertScrollBar.Size.Height = 648.000000000000000000
+    VertScrollBar.Size.PlatformDefault = False
+    VertScrollBar.Properties.AutoSize = False
+    VertScrollBar.Properties.Kind = sbVertical
+    VertScrollBar.Properties.SmallChange = 1
+    VertScrollBar.Properties.LargeChange = 10
+    VertScrollBar.Properties.CanOverRangeTypes = [cortMin, cortMax]
+    HorzScrollBar.ParentMouseEvent = False
+    HorzScrollBar.ComponentTypeUseKind = ctukDefault
+    HorzScrollBar.MaterialUseKind = mukSelfOwn
+    HorzScrollBar.KeepSelfOwnMaterial = True
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
+    HorzScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    HorzScrollBar.MouseDownFocus = False
+    HorzScrollBar.ClipChildren = True
+    HorzScrollBar.Position.Y = 640.000000000000000000
+    HorzScrollBar.Size.Width = 320.000000000000000000
+    HorzScrollBar.Size.Height = 7.000000000000000000
+    HorzScrollBar.Size.PlatformDefault = False
+    HorzScrollBar.Properties.AutoSize = False
+    HorzScrollBar.Properties.Kind = sbHorizontal
+    HorzScrollBar.Properties.SmallChange = 1
+    HorzScrollBar.Properties.LargeChange = 10
+    HorzScrollBar.Properties.CanOverRangeTypes = []
+    ScrollControlCorner.ParentMouseEvent = False
+    ScrollControlCorner.ComponentTypeUseKind = ctukDefault
+    ScrollControlCorner.MaterialUseKind = mukSelfOwn
+    ScrollControlCorner.KeepSelfOwnMaterial = True
+    ScrollControlCorner.MouseDownFocus = False
+    ScrollControlCorner.ClipChildren = True
+    ScrollControlCorner.Position.X = 313.000000000000000000
+    ScrollControlCorner.Position.Y = 641.000000000000000000
+    ScrollControlCorner.Size.Width = 7.000000000000000000
+    ScrollControlCorner.Size.Height = 7.000000000000000000
+    ScrollControlCorner.Size.PlatformDefault = False
+    Properties.ContentWidth = -1.000000000000000000
+    Properties.ContentHeight = -1.000000000000000000
+    Properties.EnableAutoPullDownRefreshPanel = False
+    Properties.EnableAutoPullUpLoadMorePanel = False
+    Properties.VertCanOverRangeTypes = [cortMin, cortMax]
+    Properties.HorzCanOverRangeTypes = []
+    Properties.VertScrollBarShowType = sbstAutoCoverShow
+    Properties.HorzScrollBarShowType = sbstNone
+    Properties.MultiSelect = False
+    Properties.IsAutoSelected = True
+    Properties.ItemHeight = 140.000000000000000000
+    Properties.ItemSpaceType = sistDefault
+    Properties.SelectedItemHeight = -1.000000000000000000
+    Properties.ItemHeightCalcType = isctFixed
+    Properties.ItemPanDragGestureDirection = ipdgdtLeft
+    Properties.IsEmptyContent = False
+    Properties.EmptyContentPicture.IsClipRound = False
+    Properties.IsEnabledCenterItemSelectMode = False
+    Properties.ItemWidth = -1.000000000000000000
+    Properties.SelectedItemWidth = -1.000000000000000000
+    Properties.ItemWidthCalcType = isctFixed
+    Properties.ItemLayoutType = iltVertical
+    Properties.ItemColorType = sictNone
+    Properties.Items.Data = {
+      140000030000000400000000005C00000018140000001A000000000042006900
+      6E006100720079004F0062006A0065006300740000000E000000000E00080000
+      004800650069006700680074000000000000000000F0BF0E000000000C000800
+      0000570069006400740068000000000000000000F0BF15000000001000040000
+      00560069007300690062006C0065000000FFFFFFFF04000000000A0000000000
+      4E0061006D006500000007000000000800040000005400610067000000000000
+      0007000000000A00040000005400610067003100000000000000150000000010
+      000400000043006800650063006B006500640000000000000007000000001200
+      040000004900740065006D005400790070006500000000000000180C0000000A
+      001A000000490063006F006E0000005400440072006100770050006900630074
+      007500720065000000040000000014000000000049006D006100670065004E00
+      61006D00650000001700000000180000000000470049004600460069006C0065
+      004400610074006100000004000000000A060A0000004E0061006D0065000000
+      0D54F0790000490063006F006E00000004000000001006060000004300610070
+      00740069006F006E000000076898980000FE560768000004000000000C060000
+      0000470072006F007500700000000652C47E00000700000000200A0400000050
+      00690063007400750072006500440072006100770054007900700065000000D8
+      7E36527B7C8B570000000000000700000000160A0400000049006D0061006700
+      650049006E006400650078000000FE5647720B4E07680000FFFFFFFF04000000
+      00140A0000000049006D006100670065004E0061006D0065000000FE5647720D
+      54F07900000400000000120C00000000460069006C0065004E0061006D006500
+      0000FE5647728765F64E0D54000004000000001A0E000000005200650073006F
+      0075007200630065004E0061006D0065000000FE564772448D906E0D54F07900
+      000400000000080A00000000550072006C000000FE564772FE94A56300001500
+      0000001810040000004900730043006C006900700052006F0075006E00640000
+      002F6626546A52C18810620657625F0000000000000700000000120004000000
+      4900740065006D005400790070006500000000000000040000000010001A0000
+      00430061007000740069006F006E000000656B4C88350030003400737C200028
+      5720004E86B190D97A000004000000000E001000000044006500740061006900
+      6C00000031002E00300043512F00BA4E216B0000040000000010000C00000044
+      0065007400610069006C00310000000E66C079EF8D2D4ED97A00000400000000
+      100018000000440065007400610069006C003200000031003300EF8D2F003400
+      3400EF8D2F0036003600EF8D0000040000000010000E00000044006500740061
+      0069006C00330000003800EF8D2F0035003200EF8D0000040000000010000400
+      0000440065007400610069006C00340000003100000004000000001000000000
+      00440065007400610069006C0035000000040000000010000000000044006500
+      7400610069006C00360000000700000000140004000000410063006300650073
+      0073006F0072007900000000000000170000000012004F000000530075006200
+      4900740065006D0073000000EFBBBFE98094E5BE843130E4B8AAE7AB99E782B9
+      0D0AE88097E697B6E7BAA63333E58886E9929F0D0AE8BDA6E7A88BE7BAA6352E
+      3735E585ACE9878C0D0AE6ADA5E8A18CE7BAA6393338E7B1B30D0A1814000000
+      1A0000000000420069006E006100720079004F0062006A006500630074000000
+      0E000000000E00080000004800650069006700680074000000000000000000F0
+      BF0E000000000C0008000000570069006400740068000000000000000000F0BF
+      1500000000100004000000560069007300690062006C0065000000FFFFFFFF04
+      000000000A00000000004E0061006D0065000000070000000008000400000054
+      006100670000000000000007000000000A000400000054006100670031000000
+      00000000150000000010000400000043006800650063006B0065006400000000
+      00000007000000001200040000004900740065006D0054007900700065000000
+      00000000180C0000000A001A000000490063006F006E00000054004400720061
+      0077005000690063007400750072006500000004000000001400000000004900
+      6D006100670065004E0061006D00650000001700000000180000000000470049
+      004600460069006C0065004400610074006100000004000000000A060A000000
+      4E0061006D00650000000D54F0790000490063006F006E000000040000000010
+      0606000000430061007000740069006F006E000000076898980000FE56076800
+      0004000000000C0600000000470072006F007500700000000652C47E00000700
+      000000200A040000005000690063007400750072006500440072006100770054
+      007900700065000000D87E36527B7C8B570000000000000700000000160A0400
+      000049006D0061006700650049006E006400650078000000FE5647720B4E0768
+      0000FFFFFFFF0400000000140A0000000049006D006100670065004E0061006D
+      0065000000FE5647720D54F07900000400000000120C00000000460069006C00
+      65004E0061006D0065000000FE5647728765F64E0D54000004000000001A0E00
+      0000005200650073006F0075007200630065004E0061006D0065000000FE5647
+      72448D906E0D54F07900000400000000080A00000000550072006C000000FE56
+      4772FE94A563000015000000001810040000004900730043006C006900700052
+      006F0075006E00640000002F6626546A52C18810620657625F00000000000007
+      000000001200040000004900740065006D005400790070006500000000000000
+      040000000010001E000000430061007000740069006F006E000000656B4C8831
+      00340030003800737C2000285720002D4E6D6FEF8DD97A000004000000000E00
+      10000000440065007400610069006C00000031002E00300043512F00BA4E216B
+      0000040000000010000C000000440065007400610069006C00310000000E66C0
+      79EF8D2D4ED97A00000400000000100018000000440065007400610069006C00
+      3200000031003300EF8D2F0034003400EF8D2F0036003600EF8D000004000000
+      0010000E000000440065007400610069006C00330000003800EF8D2F00350032
+      00EF8D00000400000000100004000000440065007400610069006C0034000000
+      320000000400000000100000000000440065007400610069006C003500000004
+      00000000100000000000440065007400610069006C0036000000070000000014
+      00040000004100630063006500730073006F0072007900000000000000170000
+      000012004F0000005300750062004900740065006D0073000000EFBBBFE98094
+      E5BE843130E4B8AAE7AB99E782B90D0AE88097E697B6E7BAA63333E58886E992
+      9F0D0AE8BDA6E7A88BE7BAA6352E3735E585ACE9878C0D0AE6ADA5E8A18CE7BA
+      A6393338E7B1B30D0A18140000001A0000000000420069006E00610072007900
+      4F0062006A0065006300740000000E000000000E000800000048006500690067
+      00680074000000000000000000F0BF0E000000000C0008000000570069006400
+      740068000000000000000000F0BF150000000010000400000056006900730069
+      0062006C0065000000FFFFFFFF04000000000A00000000004E0061006D006500
+      0000070000000008000400000054006100670000000000000007000000000A00
+      0400000054006100670031000000000000001500000000100004000000430068
+      00650063006B0065006400000000000000070000000012000400000049007400
+      65006D005400790070006500000000000000180C0000000A001A000000490063
+      006F006E00000054004400720061007700500069006300740075007200650000
+      00040000000014000000000049006D006100670065004E0061006D0065000000
+      1700000000180000000000470049004600460069006C00650044006100740061
+      00000004000000000A060A0000004E0061006D00650000000D54F07900004900
+      63006F006E0000000400000000100606000000430061007000740069006F006E
+      000000076898980000FE560768000004000000000C0600000000470072006F00
+      7500700000000652C47E00000700000000200A04000000500069006300740075
+      0072006500440072006100770054007900700065000000D87E36527B7C8B5700
+      00000000000700000000160A0400000049006D0061006700650049006E006400
+      650078000000FE5647720B4E07680000FFFFFFFF0400000000140A0000000049
+      006D006100670065004E0061006D0065000000FE5647720D54F0790000040000
+      0000120C00000000460069006C0065004E0061006D0065000000FE5647728765
+      F64E0D54000004000000001A0E000000005200650073006F0075007200630065
+      004E0061006D0065000000FE564772448D906E0D54F07900000400000000080A
+      00000000550072006C000000FE564772FE94A563000015000000001810040000
+      004900730043006C006900700052006F0075006E00640000002F6626546A52C1
+      8810620657625F00000000000007000000001200040000004900740065006D00
+      5400790070006500000000000000040000000010001C00000043006100700074
+      0069006F006E000000656B4C883100350035003600737C200028572000856847
+      96D97A000004000000000E0010000000440065007400610069006C0000003100
+      2E00300043512F00BA4E216B0000040000000010000C00000044006500740061
+      0069006C00310000000E66C079EF8D2D4ED97A00000400000000100018000000
+      440065007400610069006C003200000031003300EF8D2F0034003400EF8D2F00
+      36003600EF8D0000040000000010000E000000440065007400610069006C0033
+      0000003800EF8D2F0035003200EF8D0000040000000010000400000044006500
+      7400610069006C00340000003300000004000000001000000000004400650074
+      00610069006C0035000000040000000010000000000044006500740061006900
+      6C003600000007000000001400040000004100630063006500730073006F0072
+      007900000000000000170000000012004F000000530075006200490074006500
+      6D0073000000EFBBBFE98094E5BE843130E4B8AAE7AB99E782B90D0AE88097E6
+      97B6E7BAA63333E58886E9929F0D0AE8BDA6E7A88BE7BAA6352E3735E585ACE9
+      878C0D0AE6ADA5E8A18CE7BAA6393338E7B1B30D0A}
+    Properties.EnableBuffer = False
+    Properties.ItemDesignerPanel = SkinFMXItemDesignerPanel1
+    object SkinFMXItemDesignerPanel1: TSkinFMXItemDesignerPanel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      MouseDownFocus = False
+      Align = Bottom
+      ClipChildren = True
+      Position.Y = 508.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 140.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Properties.IsPreview = False
+      Properties.PreviewItem.Selected = False
+      Properties.PreviewItem.Checked = False
+      Properties.PreviewItem.Height = -1.000000000000000000
+      Properties.PreviewItem.Visible = True
+      Properties.PreviewItem.Color = claNull
+      Properties.PreviewItem.Width = -1.000000000000000000
+      Properties.PreviewItem.Icon.IsClipRound = False
+      Properties.PreviewItem.Pic.IsClipRound = False
+      Properties.PreviewItem.Tag = 0
+      Properties.PreviewItem.Tag1 = 0
+      Properties.PreviewItem.ItemType = sitDefault
+      Properties.PreviewItem.IsParent = False
+      Properties.PreviewItem.Expanded = True
+      Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+      Properties.PreviewItem.Accessory = satNone
+      Properties.ItemCaptionBindingControl = SkinFMXLabel1
+      Properties.ItemDetail1BindingControl = lblDetail1
+      Properties.ItemDetail2BindingControl = lblDetail2
+      Properties.ItemDetail3BindingControl = lblDetail3
+      Properties.ItemDetail4BindingControl = SkinFMXLabel6
+      Properties.ItemStringsBindingControlCollection = <
+        item
+          StringsIndex = 0
+          BindingControl = SkinFMXLabel9
+        end
+        item
+          StringsIndex = 1
+          BindingControl = SkinFMXLabel7
+        end
+        item
+          StringsIndex = 2
+          BindingControl = SkinFMXLabel8
+        end
+        item
+          StringsIndex = 3
+          BindingControl = SkinFMXLabel5
+        end>
+      object SkinFMXLabel1: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        Anchors = [akLeft, akTop, akRight]
+        ClipChildren = True
+        HitTest = False
+        Position.X = 48.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Caption = #27493#34892'1556'#31859' '#22312' '#26757#38471#31449
+        Text = #27493#34892'1556'#31859' '#22312' '#26757#38471#31449
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel2: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 48.000000000000000000
+        Position.Y = 32.000000000000000000
+        Size.Width = 51.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Caption = #20056#22352#65306
+        Text = #20056#22352#65306
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel3: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 48.000000000000000000
+        Position.Y = 52.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Caption = #25442#20056#31449#65306
+        Text = #25442#20056#31449#65306
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel4: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 48.000000000000000000
+        Position.Y = 71.000000000000000000
+        Size.Width = 77.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Caption = #25442#20056#65306
+        Text = #25442#20056#65306
+        Properties.AutoSize = False
+      end
+      object lblDetail1: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 111.000000000000000000
+        Position.Y = 51.000000000000000000
+        Size.Width = 122.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 11
+        Caption = #26126#31168#36335#20013#31449
+        Text = #26126#31168#36335#20013#31449
+        Properties.AutoSize = False
+      end
+      object lblDetail2: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claLightcoral
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claLightcoral
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claLightcoral
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 88.000000000000000000
+        Position.Y = 31.000000000000000000
+        Size.Width = 201.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Caption = '13'#36335'/44'#36335'/66'#36335
+        Text = '13'#36335'/44'#36335'/66'#36335
+        Properties.AutoSize = False
+      end
+      object lblDetail3: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontColor = claLightcoral
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claLightcoral
+        SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claLightcoral
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 90.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 201.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Caption = '8'#36335'/52'#36335
+        Text = '8'#36335'/52'#36335
+        Properties.AutoSize = False
+      end
+      object SkinFMXLabel6: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        MouseDownFocus = False
+        Align = Left
+        ClipChildren = True
+        Size.Width = 41.000000000000000000
+        Size.Height = 140.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 13
+        Caption = '3'
+        Text = '3'
+        Properties.AutoSize = False
+      end
+      object SkinFMXImage1: TSkinFMXImage
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+        SelfOwnMaterial.DrawPictureParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 48.000000000000000000
+        Position.Y = 93.000000000000000000
+        Size.Width = 23.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 15
+        Properties.AutoSize = False
+        Properties.Picture.IsClipRound = False
+        Properties.Picture.ImageIndex = 0
+        Properties.Picture.SkinImageList = imglistInfo
+        Properties.Animated = False
+        Properties.AnimateSpeed = 10.000000000000000000
+        Properties.GIFDelayExp = 12
+        Properties.CurrentRotateAngle = 0
+        Properties.Rotated = False
+        Properties.RotateSpeed = 5.000000000000000000
+        Properties.RotateIncrement = 20
+        Properties.IsToolBar = False
+      end
+      object SkinFMXLabel5: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 201.000000000000000000
+        Position.Y = 117.000000000000000000
+        Size.Width = 88.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        Caption = #27493#34892#32422'938'#31859
+        Text = #27493#34892#32422'938'#31859
+        Properties.AutoSize = False
+      end
+      object SkinFMXImage2: TSkinFMXImage
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+        SelfOwnMaterial.DrawPictureParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 176.000000000000000000
+        Position.Y = 94.000000000000000000
+        Size.Width = 23.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 14
+        Properties.AutoSize = False
+        Properties.Picture.IsClipRound = False
+        Properties.Picture.ImageIndex = 1
+        Properties.Picture.SkinImageList = imglistInfo
+        Properties.Animated = False
+        Properties.AnimateSpeed = 10.000000000000000000
+        Properties.GIFDelayExp = 12
+        Properties.CurrentRotateAngle = 0
+        Properties.Rotated = False
+        Properties.RotateSpeed = 5.000000000000000000
+        Properties.RotateIncrement = 20
+        Properties.IsToolBar = False
+      end
+      object SkinFMXLabel7: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 201.000000000000000000
+        Position.Y = 95.000000000000000000
+        Size.Width = 88.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        Caption = #32791#26102#32422'33'#20998#38047
+        Text = #32791#26102#32422'33'#20998#38047
+        Properties.AutoSize = False
+      end
+      object SkinFMXImage3: TSkinFMXImage
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+        SelfOwnMaterial.DrawPictureParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 48.000000000000000000
+        Position.Y = 116.000000000000000000
+        Size.Width = 23.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 12
+        Properties.AutoSize = False
+        Properties.Picture.IsClipRound = False
+        Properties.Picture.ImageIndex = 2
+        Properties.Picture.SkinImageList = imglistInfo
+        Properties.Animated = False
+        Properties.AnimateSpeed = 10.000000000000000000
+        Properties.GIFDelayExp = 12
+        Properties.CurrentRotateAngle = 0
+        Properties.Rotated = False
+        Properties.RotateSpeed = 5.000000000000000000
+        Properties.RotateIncrement = 20
+        Properties.IsToolBar = False
+      end
+      object SkinFMXLabel8: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 73.000000000000000000
+        Position.Y = 116.000000000000000000
+        Size.Width = 88.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Caption = #36710#31243#32422'5.75'#20844#37324
+        Text = #36710#31243#32422'5.75'#20844#37324
+        Properties.AutoSize = False
+      end
+      object SkinFMXImage4: TSkinFMXImage
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+        SelfOwnMaterial.DrawPictureParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 176.000000000000000000
+        Position.Y = 117.000000000000000000
+        Size.Width = 23.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 10
+        Properties.AutoSize = False
+        Properties.Picture.IsClipRound = False
+        Properties.Picture.ImageIndex = 3
+        Properties.Picture.SkinImageList = imglistInfo
+        Properties.Animated = False
+        Properties.AnimateSpeed = 10.000000000000000000
+        Properties.GIFDelayExp = 12
+        Properties.CurrentRotateAngle = 0
+        Properties.Rotated = False
+        Properties.RotateSpeed = 5.000000000000000000
+        Properties.RotateIncrement = 20
+        Properties.IsToolBar = False
+      end
+      object SkinFMXLabel9: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+        SelfOwnMaterial.DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+        MouseDownFocus = False
+        ClipChildren = True
+        HitTest = False
+        Position.X = 73.000000000000000000
+        Position.Y = 94.000000000000000000
+        Size.Width = 88.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Caption = #36884#24452'10'#20010#31449#28857
+        Text = #36884#24452'10'#20010#31449#28857
+        Properties.AutoSize = False
+      end
+    end
+  end
+  object imglistInfo: TSkinImageList
+    PictureList.Data = {
+      140000040000000400000000005C000000180E0000001A001A00000042006900
+      6E006100720079004F0062006A00650063007400000054004400720061007700
+      50006900630074007500720065000000040000000014000000000049006D0061
+      00670065004E0061006D00650000000400000000180008000000470072006100
+      70006800690063005400790070006500000050006E0067000000170000000020
+      0010030000470072006100700068006900630044006100740061002E0050006E
+      006700000089504E470D0A1A0A0000000D494844520000001C0000001C080600
+      0000720DDF94000000017352474200AECE1CE90000000467414D410000B18F0B
+      FC6105000002BA49444154484BED95CB6B1A5114C647C7B742A05008884A2050
+      1A4829B8882901054B2818BA8A040AA1292D85488A680C0A5DF8C045FF80D25D
+      A1AB6E2C5D6769779A4D1715172550E82AABE0425ADFF63BE68CEDD471BC0359
+      E683CB65BEFBF89D73EE9D19E946D72D997B61C5E371391A8D7E0F8542BFEAF5
+      FA57B68565E65E587EBFFF89DBED5E75381CAF09CEB6B00C036559CE0126D9ED
+      F6954020B0C7B6B00C01D3E9F46380D600952C160B59B9C98001190202922390
+      C96492CC66B3E4743AD78F8F8F633C2C2461602A950ADB6CB64D0211901A658A
+      DE5096C240ABD53ACD8EA400719E5B28F5D6C414901030994CDE07F01167C4EE
+      159482A08BC4D642090171517200AA6024254B943A8692AFB3ADAB8540647707
+      B0DDFFB353441E0543178A2D5D2D0422FA136C266BC148E4D345C2BC3DDCD815
+      B6E74A1788327947A3D1FEBCEC14119082427FC2D65CE902B149DAE3F1D86843
+      3D513014144A7B90C96496D9D6D4DC9D90DDADF178FC522B3BF83F7ABDDE901F
+      27A2A00074622CC996A6E602B1C191CBE5F2FC9B1D36930683C169BFDFBF87C7
+      1D3CB7AF46FE66891B7D98CD6697D89E912630914878D01DD13BA664C7B0B78D
+      4663A7582CB6D14E3B9DCE039CF1CFC9048882C39AA5E17078C8D68C3481F87A
+      3CC72FE8B6921D603DC05E140A8557954A655ACA72B9FC0DFE06DA190544C151
+      9068C97C3E6FE3692ACD0069229456CE0E195C76BBDD6DC0DEF3149590E945AB
+      D58A00FA91A01424D62FB7DBED039EA2D2CC0F34180CEE23C3A714293638C746
+      9152A9A4FB67AFD56A836AB5FA391C0E77017C481E2ED55DAFD7FBAED96C8E27
+      9358AA0CE90F0E10BDE804FB42E54206E73CBC50A8CE1B5CA838AAF21BBFAE55
+      9FCFB7CB4353A98098104339D600FB8083DF06EC92878485359FD045B0FE02C7
+      32F3215001016AA2D1E57886853DB60D0B6BCFF04E6EE00E689EFB8DAE5192F4
+      078D2AE7F5AF2C605C0000000049454E44AE4260821700000000200000000000
+      470049004600460069006C00650044006100740061002E0050006E0067000000
+      04000000000A06000000004E0061006D00650000000D54F07900000400000000
+      100600000000430061007000740069006F006E00000007689898000004000000
+      000C0600000000470072006F007500700000000652C47E00000700000000200A
+      0400000050006900630074007500720065004400720061007700540079007000
+      65000000D87E36527B7C8B570000000000000700000000160A0400000049006D
+      0061006700650049006E006400650078000000FE5647720B4E07680000FFFFFF
+      FF0400000000140A0000000049006D006100670065004E0061006D0065000000
+      FE5647720D54F07900000400000000120C00000000460069006C0065004E0061
+      006D0065000000FE5647728765F64E0D54000004000000001A0E000000005200
+      650073006F0075007200630065004E0061006D0065000000FE564772448D906E
+      0D54F07900000400000000080A00000000550072006C000000FE564772FE94A5
+      63000015000000001810040000004900730043006C006900700052006F007500
+      6E00640000002F6626546A52C18810620657625F000000000000180E0000001A
+      001A000000420069006E006100720079004F0062006A00650063007400000054
+      0044007200610077005000690063007400750072006500000004000000001400
+      0000000049006D006100670065004E0061006D00650000000400000000180008
+      00000047007200610070006800690063005400790070006500000050006E0067
+      00000017000000002000A2030000470072006100700068006900630044006100
+      740061002E0050006E006700000089504E470D0A1A0A0000000D494844520000
+      001C0000001C0806000000720DDF94000000017352474200AECE1CE900000004
+      67414D410000B18F0BFC61050000034C49444154484BED96DF4B545110C7EFFE
+      7065210802A1A7607141108440080A410882C050EC41210882DE8220945D77DD
+      404CD1D5657B8DA0FE011324498A7CA9272114042110D22521088220E8415757
+      FBCCB9B3A7BDBBB7AB426FF585C399EFD9B9E73B77CE99B9EBFCC7DF4648E740
+      CCCDCD454AA5524FA552190C87C36D7B7B7BEDCDCDCD717EFAC1F8C45863CC67
+      329965E6401C2B383D3DDD1F0A852631DBDD9540ACE13B3C3232F25E7903FE28
+      383636168BC7E34F31EFB82B27C7E1E1617E747434ABD4035F41112365AF48DF
+      355D3220A51B914864E1E8E8E80B6383B7E9604E300F3212EA56C50229BEA9B6
+      85AF20697CC60677953AFBFBFB3BD168F441369B5D105E2C16E3E572B91D2E67
+      67303333731BBF59FCCEEB92EF9B3608F2602F51BF542A58E1CDFA72B9DC3721
+      7281B6B6B65609E8227E8B88F6192F90CFE72F30BD66D8F346F40AA22B4A9DB0
+      CE06B2199B14953AD8A55A3101B73529626233F7CADB9A1F0029DC21E53730AD
+      3F7BCCAA69E01124F2EB4C499719DCAF151310714C4D03D2E8E1A954AA84C843
+      A50E01744D4D4D5D56EA15C4B1474DB1D749D792D253A1B5B5F5F9C1C1C157A5
+      825E9DBD82E0AACE92AE79350321E9E592752A35181818A8707916958A8FFF1B
+      921E9B4E393F350381DF3B365C9D9898F84CEA6A9FFFA8A6C3DBDA92B1827261
+      A8BD885289CA737655509B65353D686A6ABAC06FDD4AC5EFBB9AF2DB59357F0B
+      4A1A98EC6644D8A2A6078944427AA7A9C75A70993611B1675EFB3CB6158FEA5C
+      856C666A08A70E99EBA1813574907A10402701189B6CD9E3F19C214EB54DB75F
+      D2ACF6A920AD91494ACC80E0FD0B1FD89B45746D14F92DA5A7024D7F88E7CF29
+      955AB437DE23984C269789665DA944562C140AF54D391094881C45CE65266B4B
+      E974DAEEE91194F321DF69A582165ADB5B7AE425E581A00F77F3BCF4D233C2F9
+      504B3DDAAE23F0FD5A2020FD2FE532F7C1582C96DFDDDD7D343E3EDE5016FAF5
+      98446C4897AA18A6BF3E56DBC057502ECBF6F6F60BCC7E77C585B42BCE43AEFE
+      0777C5A00B21B9209E3222954FF84ADC536AE12B58059D639AC3CF283D11341B
+      B4E16C41973C08141448A747543E59B61F06E00DBED9DA4B528F6305AB90064D
+      EAA4EBCBDF0EA933B98D1BDCE49FAC2F33E6F9F3B4C9DA3F0DC7F9054F635D88
+      101997950000000049454E44AE42608217000000002000000000004700490046
+      00460069006C00650044006100740061002E0050006E00670000000400000000
+      0A06000000004E0061006D00650000000D54F079000004000000001006000000
+      00430061007000740069006F006E00000007689898000004000000000C060000
+      0000470072006F007500700000000652C47E00000700000000200A0400000050
+      00690063007400750072006500440072006100770054007900700065000000D8
+      7E36527B7C8B570000000000000700000000160A0400000049006D0061006700
+      650049006E006400650078000000FE5647720B4E07680000FFFFFFFF04000000
+      00140A0000000049006D006100670065004E0061006D0065000000FE5647720D
+      54F07900000400000000120C00000000460069006C0065004E0061006D006500
+      0000FE5647728765F64E0D54000004000000001A0E000000005200650073006F
+      0075007200630065004E0061006D0065000000FE564772448D906E0D54F07900
+      000400000000080A00000000550072006C000000FE564772FE94A56300001500
+      0000001810040000004900730043006C006900700052006F0075006E00640000
+      002F6626546A52C18810620657625F000000000000180E0000001A001A000000
+      420069006E006100720079004F0062006A006500630074000000540044007200
+      6100770050006900630074007500720065000000040000000014000000000049
+      006D006100670065004E0061006D006500000004000000001800080000004700
+      7200610070006800690063005400790070006500000050006E00670000001700
+      000000200002030000470072006100700068006900630044006100740061002E
+      0050006E006700000089504E470D0A1A0A0000000D494844520000001C000000
+      1C0806000000720DDF94000000017352474200AECE1CE90000000467414D4100
+      00B18F0BFC6105000002AC49444154484BDD955DA4146118C76777F6EB307455
+      22BAD9A5BBC4A1AB885D275D7495631D51A473D3B96C99FD642DED2773E8268A
+      E8E61C45C4B93D3612D1E1105DC5215DC451441CB53BF6A3FF33F3CC34B333F3
+      EE6C1CD28FD7F3B133EFFF7DDEF77967A5FF9E08DBD0B4DBED6598E548247266
+      3A9D1EC27E43BC5B2A957E180FCC21B460A7D3B90353C2C8180907C3E1701C8F
+      C71FC3AA8D46E388D3BECC1584D009986718578D840054FC291A8DDE2E168BAF
+      39E5412858AFD713C964F20D26B9C8A95040F87AB95C7EC9A18B285B5F52A994
+      B6A818A1EBFA1676E62C872E0205BBDDEE39BC7897431B3A2F98E7A842C5D89C
+      4C261FCD5FFE805D59C26FF7397411B8A5E8460D1D788F430BEAC42BE8C83D33
+      94244DD396B0B04778F626A70C68618AA29C2A140ADF396510582126B8CCAE93
+      82538CC084BF0683C106350CA70C50A58C8578E6109DE1EC19E868FD6DF65DD0
+      55C0025F70E8C4738E8182D812855D0B9DAA61DF0FBF8B9F606B1328882DF9C2
+      AE85D26AB53C97DE025B7A815D1B74F821BB3681827EDD071EB2758106CB624B
+      5739B4C11CEFD9B51175E90D4CB2C5A1935718656A9E66B3791255ACE2B91E72
+      AE23188FC71FAAD5EA790E6D022B4CA7D374D73C2B04598C77B8D8535996BF42
+      8CAA9E3D6FDACE0EBB2E0205F3F93C5DF075348FA8517CC14277F069F3EDE840
+      41022FEDE3F3B6C65F9750E0DCF61289C41A871E848204BEFC3B986083432174
+      6EA8EE9AE8FAC86C85F4FBFDFD5C2EF713E7B5C2293F0E50DD4AAD56F35C0527
+      A1040988BECD66B329885EE294CD683422911CBAF2B3990966EE963AC9643235
+      6C99E7CF35168BDDAA542A071C0A5948903A1782EB7075336374E413DCC95D0E
+      E7B29020C1953C3023E9088D52673F140B0B12B8D49B303AAA7B8A2699FDE60A
+      F92B415555A949B62168557AFCF47ABDD3ECFECB48D26F3FC101762D0315ED00
+      00000049454E44AE426082170000000020000000000047004900460046006900
+      6C00650044006100740061002E0050006E006700000004000000000A06000000
+      004E0061006D00650000000D54F0790000040000000010060000000043006100
+      7000740069006F006E00000007689898000004000000000C0600000000470072
+      006F007500700000000652C47E00000700000000200A04000000500069006300
+      7400750072006500440072006100770054007900700065000000D87E36527B7C
+      8B570000000000000700000000160A0400000049006D0061006700650049006E
+      006400650078000000FE5647720B4E07680000FFFFFFFF0400000000140A0000
+      000049006D006100670065004E0061006D0065000000FE5647720D54F0790000
+      0400000000120C00000000460069006C0065004E0061006D0065000000FE5647
+      728765F64E0D54000004000000001A0E000000005200650073006F0075007200
+      630065004E0061006D0065000000FE564772448D906E0D54F079000004000000
+      00080A00000000550072006C000000FE564772FE94A563000015000000001810
+      040000004900730043006C006900700052006F0075006E00640000002F662654
+      6A52C18810620657625F000000000000180E0000001A001A000000420069006E
+      006100720079004F0062006A0065006300740000005400440072006100770050
+      006900630074007500720065000000040000000014000000000049006D006100
+      670065004E0061006D0065000000040000000018000800000047007200610070
+      006800690063005400790070006500000050006E006700000017000000002000
+      9B030000470072006100700068006900630044006100740061002E0050006E00
+      6700000089504E470D0A1A0A0000000D494844520000001C0000001C08060000
+      00720DDF94000000017352474200AECE1CE90000000467414D410000B18F0BFC
+      61050000034549444154484BBD96514854411486DD5D5D5D5808ECC527B15508
+      82C0200CC2209422287A90B05E8C5E93C06869550C978556972B0B8551242D45
+      D28B84BEF8103D44811005812F4182124841200482B0BABADA7766E75EAE7A77
+      EF08D20FC33967E6CEFC73CE9C3973ABFE37025A1A2193C9DC43DCA6B5ECECEC
+      FC0C0402B97C3E3F964AA50AEA030304B5F405648F10595A8BD8901D433CACAD
+      AD7D29B6298C3C4CA7D32742A1D0776DEE03E4E7FBFBFB3F69B3228C3C0C0683
+      6D5AF5C4F6F676C571374C43BAAA6539F88D3B30220C87C3EF2449B4B9172B78
+      38A3755F1811C6E3F13CE77403F577A9C7C10AAD77686848A4110E7A2DAEE1A9
+      A533D4C1E6E6E6724D4DCD182D279BD3DD9E3026D4D7A2AF6479636B6BEB4F75
+      7575BA12B11121641710EF4B963F6CE2582CF6ACBBBBBBA8BB157CCF309BCDD6
+      B3C06B6D568293A9903520C6979696F615055FC242A1F05C2F20D89B340E385B
+      B9F817699F5507E0AC7B884EBB36153C439A4C26A37575753D2CD2C7A53FAEBB
+      A55E9EA3BDA1A9F2E6C6C6C6463E1A8D1E95B31B19199965DE65E9678DF9E6E6
+      E6D376687779C86E1A69562412F9C5EE9EBAC804F1818181AFC86F257337A8A9
+      1148AF8A4E441EA02B02D66925B4D74517388410B5F1D10FD4FBB423AA13C80E
+      997413B227DA7642E60145984824E6C9D409D503986F11B5B0E80E210BB5CA2E
+      B52998A1AF737070F0148579523A482019BF257A195CD252D64B225422E14803
+      D54A39E110AEAFAFBFE2A304652AC3CB10C3A32EC83EE8610526BE901069BDC8
+      F739D4093B7C1C41FDE8E8E849D1A5FAC886651C6FAFD8D5E820175F1E5F790F
+      1558EC2E1B7A2C3A49F2C57E51DCFD5EF0BD160276DD8117963665D19C7B51C8
+      DC6F6187969EF025948B4F18A739DF90D8C562718EF0F7AA410D36E010A2B74F
+      4D4DA96FBDE04B084123421D385E4A7DECDAFB0FC386E6DCE7B8B8B858F64136
+      21746A215E16BC9E22126C95C470EE2789372DD74C9BBB60748626C0B338624D
+      74298578FC916472AE898D4323C4CB3944A7BC1462CB9DE69D9CC5D33B62DB38
+      344281943EBC3B434817C4D689360E694A6CC1810859C839CF72807419A2B3EE
+      CC05C39665A917C797902BB0C0E4B7A8AB9C93AAA77EE0C5F8CB3C79AAA49EAE
+      317FB2A9A98964ABAAFA07BB6A6E7E4DF602A60000000049454E44AE42608217
+      00000000200000000000470049004600460069006C0065004400610074006100
+      2E0050006E006700000004000000000A06000000004E0061006D00650000000D
+      54F07900000400000000100600000000430061007000740069006F006E000000
+      07689898000004000000000C0600000000470072006F007500700000000652C4
+      7E00000700000000200A04000000500069006300740075007200650044007200
+      6100770054007900700065000000D87E36527B7C8B5700000000000007000000
+      00160A0400000049006D0061006700650049006E006400650078000000FE5647
+      720B4E07680000FFFFFFFF0400000000140A0000000049006D00610067006500
+      4E0061006D0065000000FE5647720D54F07900000400000000120C0000000046
+      0069006C0065004E0061006D0065000000FE5647728765F64E0D540000040000
+      00001A0E000000005200650073006F0075007200630065004E0061006D006500
+      0000FE564772448D906E0D54F07900000400000000080A00000000550072006C
+      000000FE564772FE94A563000015000000001810040000004900730043006C00
+      6900700052006F0075006E00640000002F6626546A52C18810620657625F0000
+      00000000}
+    Left = 256
+    Top = 270
+  end
+end

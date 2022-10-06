@@ -1,0 +1,1884 @@
+object FrameNearBy: TFrameNearBy
+  Size.Width = 320.000000000000000000
+  Size.Height = 1035.000000000000000000
+  Size.PlatformDefault = False
+  object lbClassify: TSkinFMXListBox
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.IndicatorColor = claBlack
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.LoadingPicture.IsClipRound = False
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.DrawLoadingCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.DrawLoadingCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.DrawLoadingCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.EnableAutoCenterPosition = False
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.EnableLoadingImageBiggerEffect = False
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.EnableLoadingImageRotateEffect = True
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.LoadingCaption = #27491#22312#21047#26032'...'
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.DecidedLoadCaption = #26494#24320#21047#26032
+    SelfOwnMaterial.PullDownRefreshPanelMaterial.UnDecidedLoadCaption = #19979#25289#21047#26032
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.IndicatorColor = claBlack
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.LoadingPicture.IsClipRound = False
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.DrawLoadingCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.DrawLoadingCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.DrawLoadingCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.EnableAutoCenterPosition = False
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.EnableLoadingImageBiggerEffect = False
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.EnableLoadingImageRotateEffect = True
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.LoadingCaption = #27491#22312#21152#36733'...'
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.DecidedLoadCaption = #26494#24320#21152#36733#26356#22810
+    SelfOwnMaterial.PullUpLoadMorePanelMaterial.UnDecidedLoadCaption = #19978#25289#21152#36733#26356#22810
+    SelfOwnMaterial.DrawEmptyContentCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawEmptyContentCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawEmptyContentCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawEmptyContentDescriptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawEmptyContentDescriptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawEmptyContentDescriptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.ItemBackNormalPicture.IsClipRound = False
+    SelfOwnMaterial.ItemBackHoverPicture.IsClipRound = False
+    SelfOwnMaterial.ItemBackDownPicture.IsClipRound = False
+    SelfOwnMaterial.ItemBackPushedPicture.IsClipRound = False
+    SelfOwnMaterial.ItemAccessoryPicture.IsClipRound = False
+    SelfOwnMaterial.IsDrawCenterItemRect = False
+    SelfOwnMaterial.IsSimpleDrawItemDevide = True
+    SelfOwnMaterial.DrawItemCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetailParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetailParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetailParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail1Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail1Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail1Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail2Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail2Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail2Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail3Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail3Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail3Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail4Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail4Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail4Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail5Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail5Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail5Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DrawItemDetail6Param.FontTrimming = fttNone
+    SelfOwnMaterial.DrawItemDetail6Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawItemDetail6Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.ItemAccessoryPicture.IsClipRound = False
+    SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackNormalPicture.IsClipRound = False
+    SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackHoverPicture.IsClipRound = False
+    SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackDownPicture.IsClipRound = False
+    SelfOwnMaterial.DefaultTypeItemMaterial.ItemBackPushedPicture.IsClipRound = False
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetailParam.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetailParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetailParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail1Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail1Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail1Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail2Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail2Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail2Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail3Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail3Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail3Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail4Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail4Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail4Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail5Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail5Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail5Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail6Param.FontTrimming = fttNone
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail6Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DefaultTypeItemMaterial.DrawItemDetail6Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.ItemAccessoryPicture.IsClipRound = False
+    SelfOwnMaterial.Item1TypeItemMaterial.ItemBackNormalPicture.IsClipRound = False
+    SelfOwnMaterial.Item1TypeItemMaterial.ItemBackHoverPicture.IsClipRound = False
+    SelfOwnMaterial.Item1TypeItemMaterial.ItemBackDownPicture.IsClipRound = False
+    SelfOwnMaterial.Item1TypeItemMaterial.ItemBackPushedPicture.IsClipRound = False
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemCaptionParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetailParam.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetailParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetailParam.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail1Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail1Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail1Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail2Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail2Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail2Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail3Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail3Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail3Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail4Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail4Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail4Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail5Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail5Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail5Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.FontTrimming = fttNone
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.Item1TypeItemMaterial.DrawItemDetail6Param.FontVertAlign = fvaTop
+    SelfOwnMaterial.IsSimpleDrawGroupRoundRect = False
+    SelfOwnMaterial.IsSimpleDrawGroupBeginDevide = True
+    SelfOwnMaterial.IsSimpleDrawGroupEndDevide = True
+    SelfOwnMaterial.IsAutoAdjustItemDesignerPanelSize = True
+    MouseDownFocus = False
+    Align = Client
+    ClipChildren = True
+    Size.Width = 320.000000000000000000
+    Size.Height = 945.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    VertScrollBar.ParentMouseEvent = False
+    VertScrollBar.ComponentTypeUseKind = ctukDefault
+    VertScrollBar.MaterialUseKind = mukSelfOwn
+    VertScrollBar.KeepSelfOwnMaterial = True
+    VertScrollBar.SelfOwnMaterial.BackColor.IsFill = True
+    VertScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
+    VertScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
+    VertScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    VertScrollBar.MouseDownFocus = False
+    VertScrollBar.ClipChildren = True
+    VertScrollBar.Position.X = 312.000000000000000000
+    VertScrollBar.Size.Width = 7.000000000000000000
+    VertScrollBar.Size.Height = 945.000000000000000000
+    VertScrollBar.Size.PlatformDefault = False
+    VertScrollBar.Properties.AutoSize = False
+    VertScrollBar.Properties.Kind = sbVertical
+    VertScrollBar.Properties.SmallChange = 1
+    VertScrollBar.Properties.LargeChange = 10
+    VertScrollBar.Properties.CanOverRangeTypes = [cortMin, cortMax]
+    HorzScrollBar.ParentMouseEvent = False
+    HorzScrollBar.ComponentTypeUseKind = ctukDefault
+    HorzScrollBar.MaterialUseKind = mukSelfOwn
+    HorzScrollBar.KeepSelfOwnMaterial = True
+    HorzScrollBar.SelfOwnMaterial.BackColor.IsFill = True
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnMinSize = 20
+    HorzScrollBar.SelfOwnMaterial.ThumbBtnDrawSize = 4
+    HorzScrollBar.SelfOwnMaterial.IsDefaultDrawThumbBtn = True
+    HorzScrollBar.MouseDownFocus = False
+    HorzScrollBar.ClipChildren = True
+    HorzScrollBar.Position.Y = 937.000000000000000000
+    HorzScrollBar.Size.Width = 320.000000000000000000
+    HorzScrollBar.Size.Height = 7.000000000000000000
+    HorzScrollBar.Size.PlatformDefault = False
+    HorzScrollBar.Properties.AutoSize = False
+    HorzScrollBar.Properties.Kind = sbHorizontal
+    HorzScrollBar.Properties.SmallChange = 1
+    HorzScrollBar.Properties.LargeChange = 10
+    HorzScrollBar.Properties.CanOverRangeTypes = []
+    ScrollControlCorner.ParentMouseEvent = False
+    ScrollControlCorner.ComponentTypeUseKind = ctukDefault
+    ScrollControlCorner.MaterialUseKind = mukSelfOwn
+    ScrollControlCorner.KeepSelfOwnMaterial = True
+    ScrollControlCorner.SelfOwnMaterial.BackColor.IsFill = True
+    ScrollControlCorner.MouseDownFocus = False
+    ScrollControlCorner.ClipChildren = True
+    ScrollControlCorner.Position.X = 313.000000000000000000
+    ScrollControlCorner.Position.Y = 938.000000000000000000
+    ScrollControlCorner.Size.Width = 7.000000000000000000
+    ScrollControlCorner.Size.Height = 7.000000000000000000
+    ScrollControlCorner.Size.PlatformDefault = False
+    Properties.ContentWidth = -1.000000000000000000
+    Properties.ContentHeight = -1.000000000000000000
+    Properties.EnableAutoPullDownRefreshPanel = False
+    Properties.EnableAutoPullUpLoadMorePanel = False
+    Properties.VertCanOverRangeTypes = [cortMin, cortMax]
+    Properties.HorzCanOverRangeTypes = []
+    Properties.VertScrollBarShowType = sbstAutoCoverShow
+    Properties.HorzScrollBarShowType = sbstNone
+    Properties.MultiSelect = False
+    Properties.IsAutoSelected = True
+    Properties.ItemHeight = 150.000000000000000000
+    Properties.ItemSpaceType = sistDefault
+    Properties.SelectedItemHeight = -1.000000000000000000
+    Properties.ItemHeightCalcType = isctFixed
+    Properties.ItemPanDragGestureDirection = ipdgdtLeft
+    Properties.IsEmptyContent = False
+    Properties.EmptyContentPicture.IsClipRound = False
+    Properties.IsEnabledCenterItemSelectMode = False
+    Properties.ItemWidth = -1.000000000000000000
+    Properties.SelectedItemWidth = -1.000000000000000000
+    Properties.ItemWidthCalcType = isctFixed
+    Properties.ItemLayoutType = iltVertical
+    Properties.ItemColorType = sictNone
+    Properties.Items.Data = {
+      140000050000000400000000005C00000018140000001A000000000042006900
+      6E006100720079004F0062006A0065006300740000000E000000000E00080000
+      004800650069006700680074000000000000000000F0BF0E000000000C000800
+      0000570069006400740068000000000000000000F0BF15000000001000040000
+      00560069007300690062006C0065000000FFFFFFFF04000000000A0000000000
+      4E0061006D006500000007000000000800040000005400610067000000000000
+      0007000000000A00040000005400610067003100000000000000150000000010
+      000400000043006800650063006B006500640000000000000007000000001200
+      040000004900740065006D005400790070006500000000000000180C0000000A
+      001A000000490063006F006E0000005400440072006100770050006900630074
+      007500720065000000040000000014000000000049006D006100670065004E00
+      61006D00650000001700000000180000000000470049004600460069006C0065
+      004400610074006100000004000000000A060A0000004E0061006D0065000000
+      0D54F0790000490063006F006E00000004000000001006060000004300610070
+      00740069006F006E000000076898980000FE560768000004000000000C060000
+      0000470072006F007500700000000652C47E00000700000000200A0400000050
+      00690063007400750072006500440072006100770054007900700065000000D8
+      7E36527B7C8B570000000000000700000000160A0400000049006D0061006700
+      650049006E006400650078000000FE5647720B4E07680000FFFFFFFF04000000
+      00140A0000000049006D006100670065004E0061006D0065000000FE5647720D
+      54F07900000400000000120C00000000460069006C0065004E0061006D006500
+      0000FE5647728765F64E0D54000004000000001A0E000000005200650073006F
+      0075007200630065004E0061006D0065000000FE564772448D906E0D54F07900
+      000400000000080A00000000550072006C000000FE564772FE94A56300001500
+      0000001810040000004900730043006C006900700052006F0075006E00640000
+      002F6626546A52C18810620657625F0000000000000700000000120004000000
+      4900740065006D00540079007000650000000000000004000000001000060000
+      00430061007000740069006F006E000000A44E1A90000004000000000E000400
+      0000440065007400610069006C00000030000000040000000010000400000044
+      0065007400610069006C00310000003000000004000000001000000000004400
+      65007400610069006C0032000000040000000010000000000044006500740061
+      0069006C00330000000400000000100000000000440065007400610069006C00
+      340000000400000000100000000000440065007400610069006C003500000004
+      00000000100000000000440065007400610069006C0036000000070000000014
+      00040000004100630063006500730073006F0072007900000000000000170000
+      00001200770000005300750062004900740065006D0073000000EFBBBFE585AC
+      E4BAA4E7AB990D0AE58AA0E6B2B9E7AB990D0AE5819CE8BDA6E59CBA0D0AE781
+      ABE8BDA6E7AB990D0AE995BFE98094E6B1BDE8BDA6E7AB990D0AE69CBAE7A5A8
+      E4BBA3E594AEE782B90D0A45E9809AE58DA1E58585E580BCE782B90D0AE781AB
+      E8BDA6E7A5A8E4BBA3E594AEE782B90D0A18140000001A000000000042006900
+      6E006100720079004F0062006A0065006300740000000E000000000E00080000
+      004800650069006700680074000000000000000000F0BF0E000000000C000800
+      0000570069006400740068000000000000000000F0BF15000000001000040000
+      00560069007300690062006C0065000000FFFFFFFF04000000000A0000000000
+      4E0061006D006500000007000000000800040000005400610067000000000000
+      0007000000000A00040000005400610067003100000000000000150000000010
+      000400000043006800650063006B006500640000000000000007000000001200
+      040000004900740065006D005400790070006500000000000000180C0000000A
+      001A000000490063006F006E0000005400440072006100770050006900630074
+      007500720065000000040000000014000000000049006D006100670065004E00
+      61006D00650000001700000000180000000000470049004600460069006C0065
+      004400610074006100000004000000000A060A0000004E0061006D0065000000
+      0D54F0790000490063006F006E00000004000000001006060000004300610070
+      00740069006F006E000000076898980000FE560768000004000000000C060000
+      0000470072006F007500700000000652C47E00000700000000200A0400000050
+      00690063007400750072006500440072006100770054007900700065000000D8
+      7E36527B7C8B570000000000000700000000160A0400000049006D0061006700
+      650049006E006400650078000000FE5647720B4E07680000FFFFFFFF04000000
+      00140A0000000049006D006100670065004E0061006D0065000000FE5647720D
+      54F07900000400000000120C00000000460069006C0065004E0061006D006500
+      0000FE5647728765F64E0D54000004000000001A0E000000005200650073006F
+      0075007200630065004E0061006D0065000000FE564772448D906E0D54F07900
+      000400000000080A00000000550072006C000000FE564772FE94A56300001500
+      0000001810040000004900730043006C006900700052006F0075006E00640000
+      002F6626546A52C18810620657625F0000000000000700000000120004000000
+      4900740065006D00540079007000650000000000000004000000001000060000
+      00430061007000740069006F006E0000008E7FDF98000004000000000E000400
+      0000440065007400610069006C00000031000000040000000010000400000044
+      0065007400610069006C00310000003100000004000000001000000000004400
+      65007400610069006C0032000000040000000010000000000044006500740061
+      0069006C00330000000400000000100000000000440065007400610069006C00
+      340000000400000000100000000000440065007400610069006C003500000004
+      00000000100000000000440065007400610069006C0036000000070000000014
+      00040000004100630063006500730073006F0072007900000000000000170000
+      00001200360000005300750062004900740065006D0073000000EFBBBFE4B8AD
+      E9A4900D0AE8A5BFE9A4900D0AE5B79DE88F9C0D0AE5BFABE9A4900D0AE781AB
+      E994850D0AE882AFE5BEB7E59FBA0D0A18140000001A0000000000420069006E
+      006100720079004F0062006A0065006300740000000E000000000E0008000000
+      4800650069006700680074000000000000000000F0BF0E000000000C00080000
+      00570069006400740068000000000000000000F0BF1500000000100004000000
+      560069007300690062006C0065000000FFFFFFFF04000000000A00000000004E
+      0061006D00650000000700000000080004000000540061006700000000000000
+      07000000000A0004000000540061006700310000000000000015000000001000
+      0400000043006800650063006B00650064000000000000000700000000120004
+      0000004900740065006D005400790070006500000000000000180C0000000A00
+      1A000000490063006F006E000000540044007200610077005000690063007400
+      7500720065000000040000000014000000000049006D006100670065004E0061
+      006D00650000001700000000180000000000470049004600460069006C006500
+      4400610074006100000004000000000A060A0000004E0061006D00650000000D
+      54F0790000490063006F006E0000000400000000100606000000430061007000
+      740069006F006E000000076898980000FE560768000004000000000C06000000
+      00470072006F007500700000000652C47E00000700000000200A040000005000
+      690063007400750072006500440072006100770054007900700065000000D87E
+      36527B7C8B570000000000000700000000160A0400000049006D006100670065
+      0049006E006400650078000000FE5647720B4E07680000FFFFFFFF0400000000
+      140A0000000049006D006100670065004E0061006D0065000000FE5647720D54
+      F07900000400000000120C00000000460069006C0065004E0061006D00650000
+      00FE5647728765F64E0D54000004000000001A0E000000005200650073006F00
+      75007200630065004E0061006D0065000000FE564772448D906E0D54F0790000
+      0400000000080A00000000550072006C000000FE564772FE94A5630000150000
+      00001810040000004900730043006C006900700052006F0075006E0064000000
+      2F6626546A52C18810620657625F000000000000070000000012000400000049
+      00740065006D0054007900700065000000000000000400000000100006000000
+      430061007000740069006F006E0000005291975E000004000000000E00040000
+      00440065007400610069006C0000003200000004000000001000040000004400
+      65007400610069006C0031000000320000000400000000100000000000440065
+      007400610069006C003200000004000000001000000000004400650074006100
+      69006C00330000000400000000100000000000440065007400610069006C0034
+      0000000400000000100000000000440065007400610069006C00350000000400
+      000000100000000000440065007400610069006C003600000007000000001400
+      040000004100630063006500730073006F007200790000000000000017000000
+      001200480000005300750062004900740065006D0073000000EFBBBFE5BFABE6
+      8DB7E98592E5BA970D0AE6989FE7BAA7E98592E5BA970D0AE69785E9A6860D0A
+      E68B9BE5BE85E689800D0AE5AEBEE9A6860D0AE99D92E5B9B4E69785E8888D0D
+      0A18140000001A0000000000420069006E006100720079004F0062006A006500
+      6300740000000E000000000E0008000000480065006900670068007400000000
+      0000000000F0BF0E000000000C00080000005700690064007400680000000000
+      00000000F0BF1500000000100004000000560069007300690062006C00650000
+      00FFFFFFFF04000000000A00000000004E0061006D0065000000070000000008
+      000400000054006100670000000000000007000000000A000400000054006100
+      67003100000000000000150000000010000400000043006800650063006B0065
+      00640000000000000007000000001200040000004900740065006D0054007900
+      70006500000000000000180C0000000A001A000000490063006F006E00000054
+      0044007200610077005000690063007400750072006500000004000000001400
+      0000000049006D006100670065004E0061006D00650000001700000000180000
+      000000470049004600460069006C006500440061007400610000000400000000
+      0A060A0000004E0061006D00650000000D54F0790000490063006F006E000000
+      0400000000100606000000430061007000740069006F006E0000000768989800
+      00FE560768000004000000000C0600000000470072006F007500700000000652
+      C47E00000700000000200A040000005000690063007400750072006500440072
+      006100770054007900700065000000D87E36527B7C8B57000000000000070000
+      0000160A0400000049006D0061006700650049006E006400650078000000FE56
+      47720B4E07680000FFFFFFFF0400000000140A0000000049006D006100670065
+      004E0061006D0065000000FE5647720D54F07900000400000000120C00000000
+      460069006C0065004E0061006D0065000000FE5647728765F64E0D5400000400
+      0000001A0E000000005200650073006F0075007200630065004E0061006D0065
+      000000FE564772448D906E0D54F07900000400000000080A0000000055007200
+      6C000000FE564772FE94A563000015000000001810040000004900730043006C
+      006900700052006F0075006E00640000002F6626546A52C18810620657625F00
+      000000000007000000001200040000004900740065006D005400790070006500
+      0000000000000400000000100006000000430061007000740069006F006E0000
+      00315A504E000004000000000E0004000000440065007400610069006C000000
+      330000000400000000100004000000440065007400610069006C003100000033
+      0000000400000000100000000000440065007400610069006C00320000000400
+      000000100000000000440065007400610069006C003300000004000000001000
+      00000000440065007400610069006C0034000000040000000010000000000044
+      0065007400610069006C00350000000400000000100000000000440065007400
+      610069006C003600000007000000001400040000004100630063006500730073
+      006F0072007900000000000000170000000012004C0000005300750062004900
+      740065006D0073000000EFBBBFE98592E590A70D0A4B54560D0AE794B5E5BDB1
+      E999A20D0AE59296E595A1E58E850D0AE7BD91E590A70D0AE699AFE782B90D0A
+      E7BE8EE5AEB9E7BE8EE58F910D0AE6B497E6B5B40D0A18140000001A00000000
+      00420069006E006100720079004F0062006A0065006300740000000E00000000
+      0E00080000004800650069006700680074000000000000000000F0BF0E000000
+      000C0008000000570069006400740068000000000000000000F0BF1500000000
+      100004000000560069007300690062006C0065000000FFFFFFFF04000000000A
+      00000000004E0061006D00650000000700000000080004000000540061006700
+      00000000000007000000000A0004000000540061006700310000000000000015
+      0000000010000400000043006800650063006B00650064000000000000000700
+      0000001200040000004900740065006D00540079007000650000000000000018
+      0C0000000A001A000000490063006F006E000000540044007200610077005000
+      6900630074007500720065000000040000000014000000000049006D00610067
+      0065004E0061006D006500000017000000001800000000004700490046004600
+      69006C0065004400610074006100000004000000000A060A0000004E0061006D
+      00650000000D54F0790000490063006F006E0000000400000000100606000000
+      430061007000740069006F006E000000076898980000FE560768000004000000
+      000C0600000000470072006F007500700000000652C47E00000700000000200A
+      0400000050006900630074007500720065004400720061007700540079007000
+      65000000D87E36527B7C8B570000000000000700000000160A0400000049006D
+      0061006700650049006E006400650078000000FE5647720B4E07680000FFFFFF
+      FF0400000000140A0000000049006D006100670065004E0061006D0065000000
+      FE5647720D54F07900000400000000120C00000000460069006C0065004E0061
+      006D0065000000FE5647728765F64E0D54000004000000001A0E000000005200
+      650073006F0075007200630065004E0061006D0065000000FE564772448D906E
+      0D54F07900000400000000080A00000000550072006C000000FE564772FE94A5
+      63000015000000001810040000004900730043006C006900700052006F007500
+      6E00640000002F6626546A52C18810620657625F000000000000070000000012
+      00040000004900740065006D0054007900700065000000000000000400000000
+      100006000000430061007000740069006F006E0000001F753B6D000004000000
+      000E0004000000440065007400610069006C0000003400000004000000001000
+      04000000440065007400610069006C0031000000300000000400000000100000
+      000000440065007400610069006C003200000004000000001000000000004400
+      65007400610069006C0033000000040000000010000000000044006500740061
+      0069006C00340000000400000000100000000000440065007400610069006C00
+      350000000400000000100000000000440065007400610069006C003600000007
+      000000001400040000004100630063006500730073006F007200790000000000
+      0000170000000012006E0000005300750062004900740065006D0073000000EF
+      BBBFE59586E59CBA0D0AE8B685E5B8820D0AE58CBBE999A20D0AE88DAFE5BA97
+      0D0AE887AAE58AA8E68F90E6ACBEE69CBA0D0AE993B6E8A18C0D0AE5AEA0E789
+      A90D0AE58E95E689800D0AE794B5E8AEAFE890A5E4B89AE58E850D0AE5BDA9E7
+      A5A8E99480E594AEE782B90D0A}
+    Properties.EnableBuffer = False
+    Properties.ItemDesignerPanel = ItemDefault
+    object ItemDefault: TSkinFMXItemDesignerPanel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.BackColor.IsRound = True
+      SelfOwnMaterial.BackColor.BorderColor.Color = xFFEDEDED
+      SelfOwnMaterial.BackColor.BorderWidth = 2.000000000000000000
+      SelfOwnMaterial.BackColor.DrawRectSetting.Left = 10.000000000000000000
+      SelfOwnMaterial.BackColor.DrawRectSetting.Top = 10.000000000000000000
+      SelfOwnMaterial.BackColor.DrawRectSetting.Right = 10.000000000000000000
+      SelfOwnMaterial.BackColor.DrawRectSetting.Bottom = 2.000000000000000000
+      SelfOwnMaterial.BackColor.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.BackColor.DrawRectSetting.SizeType = dpstPixel
+      SelfOwnMaterial.IsTransparent = False
+      MouseDownFocus = False
+      Align = Bottom
+      ClipChildren = True
+      Padding.Left = 10.000000000000000000
+      Padding.Top = 10.000000000000000000
+      Padding.Right = 10.000000000000000000
+      Padding.Bottom = 2.000000000000000000
+      Position.Y = 795.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 150.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Properties.IsPreview = False
+      Properties.PreviewItem.Selected = False
+      Properties.PreviewItem.Checked = False
+      Properties.PreviewItem.Height = -1.000000000000000000
+      Properties.PreviewItem.Visible = True
+      Properties.PreviewItem.Color = claNull
+      Properties.PreviewItem.Width = -1.000000000000000000
+      Properties.PreviewItem.Icon.IsClipRound = False
+      Properties.PreviewItem.Pic.IsClipRound = False
+      Properties.PreviewItem.Tag = 0
+      Properties.PreviewItem.Tag1 = 0
+      Properties.PreviewItem.ItemType = sitDefault
+      Properties.PreviewItem.IsParent = False
+      Properties.PreviewItem.Expanded = True
+      Properties.PreviewItem.Childs.Data = {140000000000000400000000005C000000}
+      Properties.PreviewItem.Accessory = satNone
+      Properties.ItemCaptionBindingControl = lblCaption
+      Properties.ItemDetailBindingControl = imgDetail1
+      Properties.ItemDetail1BindingControl = imgDetail
+      Properties.ItemStringsBindingControlCollection = <
+        item
+          StringsIndex = 0
+          BindingControl = lblSubItem0
+        end
+        item
+          StringsIndex = 1
+          BindingControl = lblSubItem1
+        end
+        item
+          StringsIndex = 2
+          BindingControl = lblSubItem2
+        end
+        item
+          StringsIndex = 3
+          BindingControl = lblSubItem3
+        end
+        item
+          StringsIndex = 4
+          BindingControl = lblSubItem4
+        end
+        item
+          StringsIndex = 5
+          BindingControl = lblSubItem5
+        end
+        item
+          StringsIndex = 6
+          BindingControl = lblSubItem6
+        end
+        item
+          StringsIndex = 7
+          BindingControl = lblSubItem7
+        end
+        item
+          StringsIndex = 8
+          BindingControl = lblSubItem8
+        end
+        item
+          StringsIndex = 9
+          BindingControl = lblSubItem9
+        end>
+      object imgDetail1: TSkinFMXImage
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukSelfOwn
+        KeepSelfOwnMaterial = True
+        SelfOwnMaterial.BackColor.BorderEadges = [beRight]
+        SelfOwnMaterial.BackColor.BorderColor.Color = xFFEDEDED
+        SelfOwnMaterial.BackColor.BorderWidth = 1.000000000000000000
+        SelfOwnMaterial.IsTransparent = False
+        SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+        SelfOwnMaterial.DrawPictureParam.PictureHorzAlign = phaRight
+        SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaBottom
+        SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+        SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+        SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+        MouseDownFocus = False
+        Align = Left
+        ClipChildren = True
+        HitTest = False
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 138.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Properties.AutoSize = False
+        Properties.Picture.IsClipRound = False
+        Properties.Picture.ImageIndex = 4
+        Properties.Picture.SkinImageList = imglistClassifyBack
+        Properties.Animated = False
+        Properties.AnimateSpeed = 10.000000000000000000
+        Properties.GIFDelayExp = 12
+        Properties.CurrentRotateAngle = 0
+        Properties.Rotated = False
+        Properties.RotateSpeed = 5.000000000000000000
+        Properties.RotateIncrement = 20
+        Properties.IsToolBar = False
+        object lblCaption: TSkinFMXLabel
+          ParentMouseEvent = False
+          ComponentTypeUseKind = ctukDefault
+          MaterialUseKind = mukSelfOwn
+          KeepSelfOwnMaterial = True
+          SelfOwnMaterial.BackColor.IsFill = True
+          SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+          SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+          SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+          SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+          SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+          MouseDownFocus = False
+          ClipChildren = True
+          HitTest = False
+          Position.X = 8.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 41.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Caption = #29983#27963
+          Text = #29983#27963
+          Properties.AutoSize = False
+        end
+        object imgDetail: TSkinFMXImage
+          ParentMouseEvent = False
+          ComponentTypeUseKind = ctukDefault
+          MaterialUseKind = mukSelfOwn
+          KeepSelfOwnMaterial = True
+          SelfOwnMaterial.BackColor.IsFill = True
+          SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+          SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+          SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+          SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+          MouseDownFocus = False
+          ClipChildren = True
+          HitTest = False
+          Position.X = 48.000000000000000000
+          Position.Y = 7.000000000000000000
+          Size.Width = 28.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Properties.AutoSize = False
+          Properties.Picture.IsClipRound = False
+          Properties.Picture.ImageIndex = 0
+          Properties.Picture.SkinImageList = imglistClassify
+          Properties.Animated = False
+          Properties.AnimateSpeed = 10.000000000000000000
+          Properties.GIFDelayExp = 12
+          Properties.CurrentRotateAngle = 0
+          Properties.Rotated = False
+          Properties.RotateSpeed = 5.000000000000000000
+          Properties.RotateIncrement = 20
+          Properties.IsToolBar = False
+        end
+      end
+      object lblSubItem0: TSkinFMXLabel
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = lblMenuItemMaterial
+        MouseDownFocus = False
+        ClipChildren = True
+        Position.X = 130.000000000000000000
+        Position.Y = 11.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 10
+        OnClick = lblSubItem0Click
+        Caption = #21830#22330
+        Text = #21830#22330
+        Properties.AutoSize = False
+      end
+      object lblSubItem1: TSkinFMXLabel
+        Tag = 1
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = lblMenuItemMaterial
+        MouseDownFocus = False
+        ClipChildren = True
+        Position.X = 219.000000000000000000
+        Position.Y = 11.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        OnClick = lblSubItem0Click
+        Caption = #36229#24066
+        Text = #36229#24066
+        Properties.AutoSize = False
+      end
+      object lblSubItem2: TSkinFMXLabel
+        Tag = 2
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = lblMenuItemMaterial
+        MouseDownFocus = False
+        ClipChildren = True
+        Position.X = 130.000000000000000000
+        Position.Y = 38.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        OnClick = lblSubItem0Click
+        Caption = #21307#38498
+        Text = #21307#38498
+        Properties.AutoSize = False
+      end
+      object lblSubItem3: TSkinFMXLabel
+        Tag = 3
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = lblMenuItemMaterial
+        MouseDownFocus = False
+        ClipChildren = True
+        Position.X = 219.000000000000000000
+        Position.Y = 38.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        OnClick = lblSubItem0Click
+        Caption = #33647#24215
+        Text = #33647#24215
+        Properties.AutoSize = False
+      end
+      object lblSubItem4: TSkinFMXLabel
+        Tag = 4
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = lblMenuItemMaterial
+        MouseDownFocus = False
+        ClipChildren = True
+        Position.X = 130.000000000000000000
+        Position.Y = 65.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        OnClick = lblSubItem0Click
+        Caption = #33258#21160#25552#27454#26426
+        Text = #33258#21160#25552#27454#26426
+        Properties.AutoSize = False
+      end
+      object lblSubItem5: TSkinFMXLabel
+        Tag = 5
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = lblMenuItemMaterial
+        MouseDownFocus = False
+        ClipChildren = True
+        Position.X = 219.000000000000000000
+        Position.Y = 65.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        OnClick = lblSubItem0Click
+        Caption = #38134#34892
+        Text = #38134#34892
+        Properties.AutoSize = False
+      end
+      object lblSubItem6: TSkinFMXLabel
+        Tag = 6
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = lblMenuItemMaterial
+        MouseDownFocus = False
+        ClipChildren = True
+        Position.X = 130.000000000000000000
+        Position.Y = 92.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        OnClick = lblSubItem0Click
+        Caption = #23456#29289
+        Text = #23456#29289
+        Properties.AutoSize = False
+      end
+      object lblSubItem7: TSkinFMXLabel
+        Tag = 7
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = lblMenuItemMaterial
+        MouseDownFocus = False
+        ClipChildren = True
+        Position.X = 219.000000000000000000
+        Position.Y = 92.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        OnClick = lblSubItem0Click
+        Caption = #21397#25152
+        Text = #21397#25152
+        Properties.AutoSize = False
+      end
+      object lblSubItem8: TSkinFMXLabel
+        Tag = 8
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = lblMenuItemMaterial
+        MouseDownFocus = False
+        ClipChildren = True
+        Position.X = 130.000000000000000000
+        Position.Y = 119.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        OnClick = lblSubItem0Click
+        Caption = #30005#35759#33829#19994#21381
+        Text = #30005#35759#33829#19994#21381
+        Properties.AutoSize = False
+      end
+      object lblSubItem9: TSkinFMXLabel
+        Tag = 9
+        ParentMouseEvent = False
+        ComponentTypeUseKind = ctukDefault
+        MaterialUseKind = mukRef
+        KeepSelfOwnMaterial = False
+        RefMaterial = lblMenuItemMaterial
+        MouseDownFocus = False
+        ClipChildren = True
+        Position.X = 219.000000000000000000
+        Position.Y = 119.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        OnClick = lblSubItem0Click
+        Caption = #24425#31080#38144#21806#28857
+        Text = #24425#31080#38144#21806#28857
+        Properties.AutoSize = False
+      end
+    end
+  end
+  object pnlToolBar: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukRef
+    KeepSelfOwnMaterial = False
+    RefMaterial = BusLiveDataModuleCommonSkinMaterial.pnlToolBarMaterial
+    MouseDownFocus = False
+    Align = Top
+    ClipChildren = True
+    Size.Width = 320.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Caption = #21608#36793#21830#22478
+    Text = #21608#36793#21830#22478
+    Properties.IsToolBar = False
+    object btnReturn: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukRef
+      KeepSelfOwnMaterial = False
+      RefMaterial = BusLiveDataModuleCommonSkinMaterial.bdmReturnButton
+      MouseDownFocus = False
+      Align = Left
+      ClipChildren = True
+      Size.Width = 80.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      OnClick = btnReturnClick
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.Icon.IsClipRound = False
+      Properties.PushedIcon.IsClipRound = False
+      Properties.ButtonIndex = -1
+      Properties.PushedGroupIndex = 0
+    end
+  end
+  object pnlLineFromTo: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+    SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+    SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+    MouseDownFocus = False
+    Align = Top
+    ClipChildren = True
+    Position.Y = 50.000000000000000000
+    Size.Width = 320.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Properties.IsToolBar = False
+    object lblFromStation: TSkinFMXLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      Align = Left
+      ClipChildren = True
+      Position.X = 14.000000000000000000
+      Size.Width = 56.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Caption = #29275#30382#22616#31449
+      Text = #29275#30382#22616#31449
+      Properties.AutoSize = True
+    end
+    object imgArrow: TSkinFMXImage
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.DrawPictureParam.IsAutoFit = True
+      SelfOwnMaterial.DrawPictureParam.PictureHorzAlign = phaCenter
+      SelfOwnMaterial.DrawPictureParam.PictureVertAlign = pvaCenter
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Height = 60.000000000000000000
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.PositionHorzType = dpphtCenter
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.PositionVertType = dppvtCenter
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaTop
+      MouseDownFocus = False
+      Align = Left
+      ClipChildren = True
+      Position.X = 70.000000000000000000
+      Size.Width = 32.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Properties.AutoSize = True
+      Properties.Picture.IsClipRound = False
+      Properties.Picture.PNG = {
+        89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+        F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        023D494441545847ED96CF4B1B5110C7E7ED6A35112DD8532F5EFA0714F52C5E
+        DA7AA852829040218924296BC47AB13F040F42415BB096526CDD90C690C54B02
+        0D11A1E245C81FA2073D78D2425BB26649F6394F46B0D2C6B7BB911EF473D99D
+        6FD8FDCE9B99300B375C7B185D2F454FE79E82C21F7677FA13C160B04EB26754
+        BA36445FCD850EF677D73A6FDFE9332DABA7BFF7FE46B95CE6F4B32714BA36C4
+        B659E06ECF3D4A5619C3FB34E75CBA7A8D904A40AD9B611BA048A120A6670CBD
+        194948BFA05028DC3AFA795CC0279E900498949E8C85271863AEDBE1E80494C4
+        377C6A9824842F6BB1C894DB24A45A70064EBFD5DDD53ECA6DD824096193D88E
+        8F1438C6510202918455F911000E5B24019E7EEA4BC658A2D011AE8768299FF7
+        F97F574BF8824724614EB0988C475E512885E30A9C311D0A994ACDC44AD8DB24
+        89D3BC5CF96ABCA5500AD70908344DABB07A750467A24C12B603665632B9790A
+        2FC5750BCE63184647C5B23781290324897EBC194F44E628FA279E2AD00C3C57
+        20954AF96DC5F79D293048121E9E2F24E3D1590A1BE2A902C29CAB6D1B7F9873
+        78276B2E90DA867F43FC0D5B6B7C1DFBFE802484BF4F26A2AF2990C2550BB2D9
+        6C7BB5AE96F0E92192C45EF830118F4C53288DE316887D705C538BE7CD712B7E
+        C2A5F482424738AA80303FFC651619B0C724A1B9FD793C1E7DEE76194927F05F
+        D7314E7B2B577C796C588024415A8B85352FE602A919E02D6DC605F3D566980B
+        E48690B1D2C1DECEE997303AE6F0FE5933CC05D23370559FE5375C77004E00EB
+        5DCB5C0648DB3F0000000049454E44AE426082}
+      Properties.Animated = False
+      Properties.AnimateSpeed = 10.000000000000000000
+      Properties.GIFDelayExp = 12
+      Properties.CurrentRotateAngle = 0
+      Properties.Rotated = False
+      Properties.RotateSpeed = 5.000000000000000000
+      Properties.RotateIncrement = 20
+      Properties.IsToolBar = False
+    end
+    object lblFindHint: TSkinFMXLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      Align = Left
+      ClipChildren = True
+      Position.X = 102.000000000000000000
+      Size.Width = 42.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Caption = #38468#36817#25214
+      Text = #38468#36817#25214
+      Properties.AutoSize = True
+    end
+    object lblAt: TSkinFMXLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 14.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontTrimming = fttNone
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaLeft
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      MouseDownFocus = False
+      Align = Left
+      ClipChildren = True
+      Size.Width = 14.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Caption = #22312
+      Text = #22312
+      Properties.AutoSize = True
+    end
+  end
+  object imglistClassify: TSkinImageList
+    PictureList.Data = {
+      140000040000000400000000005C000000180E0000001A001A00000042006900
+      6E006100720079004F0062006A00650063007400000054004400720061007700
+      50006900630074007500720065000000040000000014000000000049006D0061
+      00670065004E0061006D00650000000400000000180008000000470072006100
+      70006800690063005400790070006500000050006E0067000000170000000020
+      00BE030000470072006100700068006900630044006100740061002E0050006E
+      006700000089504E470D0A1A0A0000000D494844520000001C0000001C080600
+      0000720DDF94000000017352474200AECE1CE90000000467414D410000B18F0B
+      FC61050000036849444154484BBD964F4F13411887E7DD6DBBBB45B0A2824830
+      888AA2C6C404345489E1202191188D073F80C6E85913D468881713C327506322
+      E2173031E0C1E8450DA2311A825C00312A1453FE3460B77677677C673AADD476
+      DB2D1A9F4BE7FD15F6E9CCBCB3BB404AA0F7E55295034ABDA380A610564909CC
+      FB8099AAEA4C5D6AAE88CA3F2B485161EF7B5A66C7CD0E06A49931D820E31CF0
+      07CCE2C79B00319E5E0C2B662ACDC555D8F39CF934FD47075EAA9331A2C9B828
+      784113083C4EB4EACF6E00501967C82BBCF582965335718E32D228A3920160A3
+      1A33EEFE39DB1C61CFF38590A605BA19814A19AD1ABECC0A357ABB0F2B4B32C2
+      6C05B7DF32BFA66917FE858C834D554D15F32CDF1E19650B172CF31423A45E96
+      59E82AF39D6EF2B79DDFAF9E68AB5577C8B82828DDA51BF163B2FC2DE42D8FB2
+      23B2CCA165936FEBB690AFA9520F54B56D09B477D4FBF7CAAF8AC2281CE55BC5
+      C719219EAF93D82459335E49344132FBC069AEF185BD4A71227E5DD38EF3B110
+      F0B386FBB68F8FDD189B7322EF66ED61590A4A92E239E63D22844EDCDC830726
+      B3B16E3C99B4DEA3F4B52C055EA5FC2CCF2797770921DAEB44EA01947E58B514
+      A02E2524A45A241EE1D237D3F6902C055CBA73BD5AF83A4CD9288450C2AD2BCD
+      44CCFEBA105B4ACA5250A5930A39748119E9195AA2F64843082A3B6BACAE756B
+      CB0332227366323234E34CC8322F7808ACD40C011645E281B42C142AD7652464
+      FDA3F6A045F19C174001BA2884B89B11F159043759DF883D10B7A0E82A51F408
+      A143E898480A501584323759C2015B4605D149724C08AF85CBBE29C06644EA42
+      E33AA576A52C6A26674A910190C98BE1D07C6A4911ECD40139CCCBA7188D2CC6
+      96C4B2CDC4ACE90723F6A05719079823AE9F791EF630A6E843E655BC9FBADE04
+      36E8100C194A702AE6CCD99437B7377056E357C2C15E394EC15F07F022FDF80B
+      5C373F9A60F1F105275A8A8CBF72387EFA5096D94F87EB87829F5595DD97E55F
+      A300A1409C7BD75AD664FA234BC8E93E58F65665A40FBFF0BC3FF9E02BE5307A
+      F74AB87C4446829C779A34375F99DBF1E49C59CDEB0610F6DDF1C19DEB07825F
+      6494C155C8E1CFAFF964E20823AC0B37CD90B12BD8FA3FF031F428F9D37879A3
+      3D7F071714A6E11D6C0C2F373147DD8D8FB2063C42B8EA6433FEF3347E6D61CF
+      4F02513F5E6ED58BDE40FE3384FC021633645ECDE5A4220000000049454E44AE
+      4260821700000000200000000000470049004600460069006C00650044006100
+      740061002E0050006E006700000004000000000A06000000004E0061006D0065
+      0000000D54F07900000400000000100600000000430061007000740069006F00
+      6E00000007689898000004000000000C0600000000470072006F007500700000
+      000652C47E00000700000000200A040000005000690063007400750072006500
+      440072006100770054007900700065000000D87E36527B7C8B57000000000000
+      0700000000160A0400000049006D0061006700650049006E0064006500780000
+      00FE5647720B4E07680000FFFFFFFF0400000000140A0000000049006D006100
+      670065004E0061006D0065000000FE5647720D54F07900000400000000120C00
+      000000460069006C0065004E0061006D0065000000FE5647728765F64E0D5400
+      0004000000001A0E000000005200650073006F0075007200630065004E006100
+      6D0065000000FE564772448D906E0D54F07900000400000000080A0000000055
+      0072006C000000FE564772FE94A5630000150000000018100400000049007300
+      43006C006900700052006F0075006E00640000002F6626546A52C18810620657
+      625F000000000000180E0000001A001A000000420069006E006100720079004F
+      0062006A00650063007400000054004400720061007700500069006300740075
+      00720065000000040000000014000000000049006D006100670065004E006100
+      6D00650000000400000000180008000000470072006100700068006900630054
+      00790070006500000050006E0067000000170000000020007F04000047007200
+      6100700068006900630044006100740061002E0050006E006700000089504E47
+      0D0A1A0A0000000D494844520000001C0000001C0806000000720DDF94000000
+      017352474200AECE1CE90000000467414D410000B18F0BFC6105000004294944
+      4154484BAD96CB6F13471CC77FB35EBFB2711C3BB6439E25B64820751EB41555
+      5B1EE985AA2D50CAE38004EAAD8F23975E7BEE050EBDF50FA804A2470A9734B4
+      A402248213252540B1838DB15DC7A913DB71BCF6EE4E7FB39950DC786327E223
+      8DE637DF59EFD7BF79ED1068104A29A1E3973A41CD05800876504A2E106D59A2
+      68AB547286C9E18B294208E58F1BB2A5213381D99F5AE9F3B98F69A534026AA5
+      95776D46109788AD791A5C0337C9BBE7F346E686867461C2469FDC3A468BD931
+      D0343397EB430499D89DE310B87053E8EF97B9FA924D86FAD085AE7A207EFF2B
+      5A59EBE1F2B621162942DE38F4230C7DBAFC6AB65586BAD9F4D54E1ABD7711D4
+      B283CB3B46305BB274F791CB64E8447AC354D07B107DBE22532D341EFAFA7598
+      31B44AD905CFEF7C49338F9AB9F49F2162A6E1EBE7A05CF0F1763566ABA87DF0
+      CD21E5A3EF4EC2DEA37BB85A175A2A7493999F4F6342FA3AD00DF5A19CBB1EA0
+      85CC286BD72470A44F6C1FDC67913C3E61F0F88774E47490F7D445CBA70FD0BF
+      7EED653E1B8636929AFA0C03E36D52C8E479A4630A8CBDDFB0A9A699E0D99DE3
+      18594DCC95A4E77AB4C8E42740B7D897B96441B3B5A882ABB78B2B20B877F768
+      962699FC3D9FE69231EA9A0BBCC1072C4391C6A6F683465F9DCF9A90D0956935
+      FCDB3DDED4693853551521F6FBB0C08613E45CC3FB8DCC5C9BD9B16929DF2BE0
+      FEB052B9E8E6524370D3BBBCA9C34CA163B49D376B23AF7A588616D0542B971A
+      862467E3F9E57FCABCB98ED3D7C2A39A50AA5AD9BC097822D43DE5ABF00DB857
+      83E78F395ADD16AE4079F9450A9E4E8479B33682595F281A58A4D2BAD2002FCD
+      5A6D5CD1CDC43F7EB8014A45E3524D884D2A314395DA5D557BCC1023B3DB977F
+      C1F9A970C9187BDB0A5B3432F1ED8B71C918C72EC9D0AC222B5CDA9A8ED128CB
+      B0443B4716406ADBFA1F76EDEFAA364B24B765E6EC2811AF3FCE0CCB986586F4
+      1D8CAEF718909A4FE557B2FA9FAAAC2412E2ED4B371A364388FF700477C4927E
+      9461E0A48AF20EBDF5FDE7904B197FDD1D9E26907C4D909E5FC293A9F195EDEA
+      96C9D8B7D7300AB10C19AB44141748F0E43C88A2F18BF29922A41E66B665265A
+      A93074660EA3288E645137C4800D4D1ADA07EF93374F2598F6BA20A36763B4CD
+      FF003D16B1A81B19328A2884C17F7012864FA5C164E2F20E31994178EB5C127A
+      0E4C622B8245DFEBFFBFD3B0CF9507C320A4FE7C8F86AE744369D9F8936584E4
+      D684B7BF8882C77F17DFF710135962D9B1AE4D2FC307442C2E0CF710450E6A91
+      897E783CDE0C8A5CDFD862A73070348F2BF2111E636CDE9EA211BBB5E9668C9A
+      2F414376A8B38BCF2E2C013CFDFA6862B60B161F3743366601AA10C82F127078
+      2998F01C76F596C1D39F231DC3717CFE1996089A24B166D35475DC19FE6B3464
+      7D2C5B768363C3ECC51F7BB1DD82B50D6B116B05EB35ECCB61596405B50CD6EC
+      E65D638F02FC0BCFE0DE5140F207B10000000049454E44AE4260821700000000
+      200000000000470049004600460069006C00650044006100740061002E005000
+      6E006700000004000000000A06000000004E0061006D00650000000D54F07900
+      000400000000100600000000430061007000740069006F006E00000007689898
+      000004000000000C0600000000470072006F007500700000000652C47E000007
+      00000000200A0400000050006900630074007500720065004400720061007700
+      54007900700065000000D87E36527B7C8B570000000000000700000000160A04
+      00000049006D0061006700650049006E006400650078000000FE5647720B4E07
+      680000FFFFFFFF0400000000140A0000000049006D006100670065004E006100
+      6D0065000000FE5647720D54F07900000400000000120C00000000460069006C
+      0065004E0061006D0065000000FE5647728765F64E0D54000004000000001A0E
+      000000005200650073006F0075007200630065004E0061006D0065000000FE56
+      4772448D906E0D54F07900000400000000080A00000000550072006C000000FE
+      564772FE94A563000015000000001810040000004900730043006C0069007000
+      52006F0075006E00640000002F6626546A52C18810620657625F000000000000
+      180E0000001A001A000000420069006E006100720079004F0062006A00650063
+      0074000000540044007200610077005000690063007400750072006500000004
+      0000000014000000000049006D006100670065004E0061006D00650000000400
+      0000001800080000004700720061007000680069006300540079007000650000
+      0050006E006700000017000000002000DD030000470072006100700068006900
+      630044006100740061002E0050006E006700000089504E470D0A1A0A0000000D
+      494844520000001C0000001C0806000000720DDF94000000017352474200AECE
+      1CE90000000467414D410000B18F0BFC61050000038749444154484BBD964B4C
+      134118C7E79BDD1668056915AB2C2548C408D1188C46A33186448D4F828FC444
+      3D29209E3C7830F142387B37C177D4AB518CD198183D11351A8DEF8BA020B495
+      6729227DECCEE7EC742C56BAED568D3F12BADF7FCBFE98C7CE0C903CB8113CBB
+      00128E2A50B08012E265848C81CEA6A90A9F1BB56323F26B59C929BC1FBCEA9E
+      4E44B7128AAB79393F996600E12B023C8BB3C883039527A7653A0B4BE1236C57
+      C303155B01D8365E1624D3DC2081692078E7A51678D8011DBC13D2C928BC357C
+      A118637A2B10582AA3FC417C17C3A9F3BFB77696F0E6A7CBA5C49138C5FF4BAF
+      8CFE1CDECDA4909E692A6B9E9409E1633F43E7F34E0755E3C7FF89CC04D047A2
+      46B3393C324917FA16927D08A44A9669A8B4405DE7D9BE7173D9FEA69AE2FA1A
+      19E706C8B24840DB29AB19A139E591914DB29CC56277DD629FCB5FEB767A17D4
+      95AC69583177ED72792B278CE11631549C9490EACA1EA0E92DFE95EFFA446A1C
+      4CAAE7AC5C6F570A401CA0261ACD6BC5FC65BE6B3A330EF3E65B0A27F5F16F85
+      D465943ACB3419118F73A1DF49D5D8506C704846D600F1351CDCFD4008F79ED8
+      510FC9173B2B5F63FD210775EA5EA7AF4246F94855B70B7B458BF8CBED17910D
+      DE4E3C7ED5F3EDCD53590A6C772F28FE6417F2E68A4F9B24A56F9FC852604A17
+      1555657D0E05A32CD942B4BF74FD2418ED1B0847C6E3B214CC513D25F2322348
+      68515248494224369957A079973B37EC2A2DF1386544C2F170A877F2758F2C33
+      C2DFF184101A8C86456283195969A18C84ECF1E8ED7B067F928C32C3302C8414
+      58480439B092758F76DD8DB368CE5EA29486845061EC8348B250AC78DD56329D
+      C5741965256A900F42B8BBF2F82022098AD402CD55ADA5CBC683F9C810A1F740
+      65CB98109A20D2BBF23223A1687F68221216DD3691180B74F331B32B132013CF
+      4FED87EDD84EEB07B5D3FC8EE522E0564A5C2EC5E31A897F19453E03646C03F8
+      D854D17AC6BC4AB5D03C0EE8945EE35D6B39F85346E4FB70BC6F241F9979E430
+      74765D96E98BF5FEF2E63E607845967F0DDFEEF80FBBB8AFAA2D353F329E696E
+      0E74AE0784437C094AEDD4F962F69442F152A3D6F6424602CB535B57FFF9258C
+      E2D13F396E70D91001C7B93D1547BEC82885A5D0C43CE3F063C7263E0EBBB8B8
+      48C6963002537C78BB3CFE40770374649CC159853F3167F0AA7EAD962858C710
+      AA79C4F7512CE77F1EE0BB7902117B51A1EFF796B7E45C40FE3384FC00B3436F
+      18BD90BBA60000000049454E44AE426082170000000020000000000047004900
+      4600460069006C00650044006100740061002E0050006E006700000004000000
+      000A06000000004E0061006D00650000000D54F0790000040000000010060000
+      0000430061007000740069006F006E00000007689898000004000000000C0600
+      000000470072006F007500700000000652C47E00000700000000200A04000000
+      5000690063007400750072006500440072006100770054007900700065000000
+      D87E36527B7C8B570000000000000700000000160A0400000049006D00610067
+      00650049006E006400650078000000FE5647720B4E07680000FFFFFFFF040000
+      0000140A0000000049006D006100670065004E0061006D0065000000FE564772
+      0D54F07900000400000000120C00000000460069006C0065004E0061006D0065
+      000000FE5647728765F64E0D54000004000000001A0E00000000520065007300
+      6F0075007200630065004E0061006D0065000000FE564772448D906E0D54F079
+      00000400000000080A00000000550072006C000000FE564772FE94A563000015
+      000000001810040000004900730043006C006900700052006F0075006E006400
+      00002F6626546A52C18810620657625F000000000000180E0000001A001A0000
+      00420069006E006100720079004F0062006A0065006300740000005400440072
+      0061007700500069006300740075007200650000000400000000140000000000
+      49006D006100670065004E0061006D0065000000040000000018000800000047
+      007200610070006800690063005400790070006500000050006E006700000017
+      0000000020009903000047007200610070006800690063004400610074006100
+      2E0050006E006700000089504E470D0A1A0A0000000D494844520000001C0000
+      001C0806000000720DDF94000000017352474200AECE1CE90000000467414D41
+      0000B18F0BFC61050000034349444154484BBD965D48544114C7CFCCEEBAEAE2
+      BADECC0DCDB034D30A120A2A212CB008B24F5F238222087AF123845EC44759A4
+      678BA0A887EC2D087B317B0A8ABEACA85E4CB40FBF707735D7D65C774E67EE9D
+      5D5977EFEEDD927E0F3BE7FCEF65FE3B73E6CE0C832C103E5F09705E018C39C1
+      061A44214072980931CADADB678CB7D293D1904C5CE0E04710610FA5C5869A92
+      2986EC25200EF0B6B6B0D2923035C4CE4E3B16B9A5D1514A9D866A893047F608
+      E6E606595797505A9C9486A2BBBB009CF64B6456ADA4ACA18E3F82809BAB479B
+      6488D7AF7B04880E0A3543F927A6D8D2B28F7774CCAB1CB86A75B0B7D781202E
+      53B81666122F381D17657954BECA301C6A46800A9526929B6B17C74F1E583E77
+      FE14ECDDB755A91941C41AD40A8FA974C5502E797AD8A0D26476D56DB65756D6
+      E6685A09DF5F7F080F36EC544F3242FD1E96A592F1CA08EDFC34953461C40904
+      83F13A486C75BBEB2D9B22C8529D90A14DFEC86F0D393F4BA1B9A1DF1F122E57
+      947BBD654A01BEA1B45CE4E6FC66A363D34A4A87B7EB4CF38061C0F90EFA1BF1
+      C29AC19E0C0C45DFBF7DA1529D2C46EAC450A8C630B441B9DE5A800D3E7DF7D7
+      A6E4139B42AF6A2DA19B0E0D3D57A98E3485AAEA0CFDB0F5CA9036E32C61C3C3
+      DFE783C125951AACD3DC2A32234F1962C4682DB27193B6D0D8D854505494A314
+      580A0626E1CDEB2F2A350123B1299D556D6662661E4FAE5274337B5FDF638844
+      9236EB55CCEA864CB0493DCD84A9D9FD7E580C679E25F2D10D6927F8AC0BE9D0
+      8A5DE6668BCB4A4A0FF9E8867484FCA0604217CDD85655966016F04F646346C7
+      D208F90462350414D0AFC2D48C8C4DCECFCEEAD316999818B73FA09A591D9944
+      F51F3F0FE908E1E8715FA3D3C27C13D0B47C707BF2E1EB981F44945EB506990C
+      F396369F8CE323D4AF030E71979E9A173F10F805A32333D998116140764FC589
+      9B35BF72758C56EC6D95AE012898805BBCB535BE3E120C25F4F015E37887C66C
+      BD3EA9A09962C8E59DE683527492EE3431444F4F1572B84061F6D70DC6A6D9B2
+      B8C1DBDBBF29258EA9A144DE716061A141306CA234CF50D3B24047F84316F8F9
+      8CD644CA194A6B18435FC18585B534D5DBE9EAB885466043C052066C9C3EE608
+      F53202C83FF19696CC1BC8FF05E00F8E7744E75A91C69D0000000049454E44AE
+      4260821700000000200000000000470049004600460069006C00650044006100
+      740061002E0050006E006700000004000000000A06000000004E0061006D0065
+      0000000D54F07900000400000000100600000000430061007000740069006F00
+      6E00000007689898000004000000000C0600000000470072006F007500700000
+      000652C47E00000700000000200A040000005000690063007400750072006500
+      440072006100770054007900700065000000D87E36527B7C8B57000000000000
+      0700000000160A0400000049006D0061006700650049006E0064006500780000
+      00FE5647720B4E07680000FFFFFFFF0400000000140A0000000049006D006100
+      670065004E0061006D0065000000FE5647720D54F07900000400000000120C00
+      000000460069006C0065004E0061006D0065000000FE5647728765F64E0D5400
+      0004000000001A0E000000005200650073006F0075007200630065004E006100
+      6D0065000000FE564772448D906E0D54F07900000400000000080A0000000055
+      0072006C000000FE564772FE94A5630000150000000018100400000049007300
+      43006C006900700052006F0075006E00640000002F6626546A52C18810620657
+      625F000000000000}
+    Left = 32
+    Top = 338
+  end
+  object imglistClassifyBack: TSkinImageList
+    PictureList.Data = {
+      140000060000000400000000005C000000180E0000001A001A00000042006900
+      6E006100720079004F0062006A00650063007400000054004400720061007700
+      50006900630074007500720065000000040000000014000000000049006D0061
+      00670065004E0061006D00650000000400000000180008000000470072006100
+      70006800690063005400790070006500000050006E0067000000170000000020
+      004E0C0000470072006100700068006900630044006100740061002E0050006E
+      006700000089504E470D0A1A0A0000000D494844520000008700000078080600
+      0000D823E1C6000000017352474200AECE1CE90000000467414D410000B18F0B
+      FC610500000BF849444154785EED9DDB6F1BC715C625DE2992BA44D728726DA7
+      915B3B757A8BD1344981A2850B072D7A451ED30BFA77F5A1FD03F2D6873E1828
+      D0BC14BD2036D236B6E33AB5155BA47811B9D4F24EF6FBA8A12029B2BDB312C9
+      19EEF90183991D52F69CC36FCFCCECEECC4E0982200882200882200882200882
+      2008822008822008822008822008822008822008822008822008822098CDB4CA
+      8543F47ABDD0D6D6D67A18A8AAB1D1011B1B1B8FA7A7A7BBAA6A6488381410C4
+      74369B5DE976BB37902EE0C730C637685B0F3A7D148FC76F2E2C2C3C1A955044
+      1C80BECFE572575BADD68FE0F888AA360EB4B3138BC5FEB8BCBC7C0BEDECA8EA
+      A11152796061C4D8DBDB5B46F4FEA1C9C220685FB8DD6EBFE3BAEE2ADBADAA87
+      46E0C501A210C7DB7076541D1B0DDB59AD56DF4471E8ED15714C4DCDC0E15F50
+      652B50ED9DD93F1A1E228EA9A90406A04377F459C2F64220228E61020787CAE5
+      F239E4468F358EC3F63A8EC3760FF5F70B7AE4886186B2A9CA5681767F09E288
+      ABC3A11074712431FA3FAFCA5681766F60F69252874321B0E2505DCACBE8BF87
+      7AF60D0B4CBD636CFF30BB9620478E58B3D9BCA4CA5682E8F1E561762D411647
+      1267DF0555B69261772D811487ED5DCA8061772D8113071C398D69E062A3D1B8
+      AAAAAC065DE36BD56A759976A9AA3363A26FBCD161BBBBBB7370E0AB88121C5F
+      2C211FEA087FCCB8A1506807E96E2C16FBD7FCFC7C19DD4E4F7DA6CD448A8361
+      B6542A6D203A7C1F62B072AA7A1640248F90DD5C5B5B7B089168DFE69F287130
+      52A00F5EA8D56AD7218ACBAA5A989ABA97C964FE8454D0892413230E468B6C36
+      7B01F92F26BCEBF04B2D1A8DBEBFBCBC7CDF6B149908714010E17C3EFF757423
+      EFC0F0B13FDA672AF0530702B9B9B2B2F257F8E9B90F0B593F5B39240C3EAC23
+      C27806F44FABD5BA5E2814AED16FAAFAA9582D0E18C8D9C839187C03864FF4CC
+      EBACA09FEAF5FAF54AA5F2DCEB23B68B630611E327C8ADBAE53E6E1841F6F6F6
+      7E0CBF3D736C66AD38288862B1F856A7D35950558206F05F06DDCB779F7562D9
+      1C3932881ADF5065C107E88E5F731C67010239B14BB6521C543B06A1144662BF
+      46F003FC18C5F8E31A8A270E4EAD1CC4C1A8F4F6F6F6AFBBDDEE92AA3A15E170
+      B8178944BAA15068E4ABCA7481CDA176BB1D42777A26BF1D6C2F636AFB3BD85E
+      51550758270E8640A47588E3B7C87D473E0CCA7AE974BA9148244A10C62EAA5C
+      A41692C902A1BD5C92300381CCBBAEBB8014A74FFA9FFA007FDB5B5C5CFC3DFC
+      F03FFA4455F7B1511CE152A9F456AD56FB9EAAD226994C36676767B7D4BD872C
+      9283D48073BA7416BF6322681F4F0C760131A459A45544927398CEF33E92EF75
+      2CF178FC0308E4CFF8E7DBAAAA8F75E2E0A5F19D9D9D5FE1CC5951555A401495
+      542AF56F141F20EDC02155E42DFA9D9FDB0004C2DF2D8A3C8D76AF20BF88A9E9
+      E54AA542C16883C89943D7F207E58B03AC1A90D2298818F3E86F7D8D35D08D50
+      187F47916B4D1F2095909A48D60883B0BDAADD25F88422BF45BB68DFFE37F4A0
+      3FE1D74525BA036C9BAD8461C41518A1DD6E84CE462693F9078A1FC3A98C18D6
+      89E2386C3FBA467687391C7E8CA8F84FDAB9FFA977E84F8C5DF8BCCB91598B6D
+      918383AF8BEAD03374E2DCDCDC7F50FC04E522D291BED576680FED826F3E41F4
+      B84B7BD5479E517E3D7269C0B6C8916AB55ADA630D9C4D0EA66C7751CC4F9A30
+      062881E463B1D81DD87B64ECE005FA150239B2C4D21A71A0E121C7712E22D7BA
+      8FC2B308FDF17F91E7909AAA7A52619792C5B494E329ADE841BF2AFF1E68C2A6
+      C8C175265F5465CF60DA5AC1D9740FC5AAAEC36C83F62139B0F92EED56D59E51
+      FEE534B98F4DE2E0D2C59754D93398A63D41B68334E9516300EDCC29BBB550FE
+      4DEE1F59220E84BA69CCE1B95F97D6E37F3C93D0A5F0B138460DE32F8D9F05B4
+      93F62ABBB52225FD4B3FD3DF3CB62572443017D75EBA188D467949BC88A43DBD
+      B31CDA5B54F66BA1FCDC1FD7D9123912184D6BEFBE83B146011947EE81881A87
+      A0BD5565BF161C77C0DFFDAEC57871A810370B452FEED77807CEF90C594D37BC
+      DA8EB2B7A6ECD702E38EB946A3F102FD6E43E40897CB65AE26D76A6B381CEE60
+      BEBF0547D55555A0A0DDCA7EADEB3AF83E7757EC5F2DB52172C4A166ED292C46
+      EB15D8C9BBAD1379D1CB03BC28E6207AD0075AC0E7DC7D206143E4F07B55741B
+      46EEC141411B6FF4A1DDB49F7E50559E195C2D355A1C68A0AFABA2F87E0F4EF9
+      140EAAA9AA4042FB31A57D407FA82A4FD0DF98D29E373D72F8BA2A8A295C03DD
+      0A47EA419BC21E6730A5D5F60326002F9B2E0E5F574511354AC8F69002D9A51C
+      82F6B36BA13FB440D7B26EAC3810DA7C5D15258944826F1670910235853D0EED
+      A71FE80F55E519F83D6D72E4F0755514CEE09B051E425C819CC21E877EA03F38
+      B557555E31F73A078CF2755514219433144E63F92479E0A11FE80F8C3BD8CD6A
+      61A438D8A520F37555940FCBE2EF795534E8E38D3ECA0F2EFDB25FE31D532307
+      77FBBB841F59BB7DC96432F053D813A8D32FAAEC19532307BB9457D4A1677076
+      D4D51922E38DA3F4FD42FFA8634F981A395298C2AEAAB267607C1919EFC20EFD
+      155796417F38CA3F9E314E1CEC4AFC5C152598B23D419712F829EC71E80F76B5
+      F0CF6355E589238B584C805D4A3E9FFF79D3F27DC96D0762EA1A15390651035D
+      8A55AFD59A548C891C10462C9BCDDEC0F45536643100468EB18B03A2E86F41ED
+      BAEEBB38D4BE8F220C87B18B83C2E0A6EEE84ADE4339A3AA050318AB38288C52
+      A9345BABD57E83C3F9FD5AC114C63D208D361A8D9F21176118CA58C481A8112E
+      168BAF77BB5DABDF9434E98C2B72A4EBF5FA7754593094918B035123522814BE
+      85E2C19A4CC14CC6210E3EFAF715752818CC48C5C1190AA6AE1B9D4EC7D7C666
+      C2681975E488226A68DF8A17C6C3A8230757AF69DF8A17C6C3A823470CD357B9
+      126A09A3164704D1C3F74EBBC26819E9E573448DF56C36FB4BE4A77ADB413C1E
+      6F2712897A381CE64AAE1EFEBD48ABD54AD4EBF53806BBC6DC69360DF8AB07BF
+      35A2D1683D140A7181F934BAF9187C97ACD56A471EAE1AF9BD95D38A03A26865
+      32992C8CE3E260EE27EA2212F1E96A6E7296C1F192EBBA1BE57279963323FE8D
+      D0FFA17BF3F3F30E84B185C33C123793E326BD21F889D79B5EC06FB2BABBBBFB
+      E2600FF57188E32588E33D3FE248A7D37B1006F72CE7D3E50518C5F5292DE47C
+      048E3BEF72035B4E91D7F1EF5FCAE7F3E7114546DD6D1A07A245776161E1214E
+      28EEC3FA197C456134E0AB0ECADC68BFFF1606242E0339EF38CE956AB5CA13CD
+      0E71CCCCCCB87373737F4371B0D1EC895B53C3508A248D7C03FFC75773B9DC26
+      CA818D20F4D1E2E2E27D08E34394B924921BE77DEEE16BFA0889D19702D944E4
+      BD866E2669FC990563BA10C62D14B9677956EDF57DE203C4CA709E199FE27BB7
+      116DB8C5646041A4CD4318F41D37CFE72AC0139FCAA73F077BA823DD41174431
+      358C1787FA81B96DA2A7ADA9F19DFEE261A42D38E7B68F35A21301ECEFA652A9
+      8FE807E58FE73E918FEFD0BFECB2EF637C72CF787140F91406DF72E079EDAB72
+      04D7AF3C8E4422DADB1E4D026ABB270E401D2FC218A0FC5C80383E345A1C6868
+      7FD33714B59737E26F79167001B1F6768B930022265F4DC6AE447B4F34FC8D0B
+      BF6F1B2D0EF483EC12B83ADCD78A7984470E5C031939200E0AC3EF96DE9CC9D4
+      8D1607661C6C1F1BEA392C1E03B3D9604E67E13BCEDC7C8DB7E86F26D3C5116E
+      369BC9534C47F98ACD40DECB69B7DB33F09BAFDF97FE468A1A2D0EA897CF7FF0
+      0D42475E2FA541B4E5639BCA490076AF21F37B1F2BF4E4C9934DE3432ECE00BE
+      D34DFB91429E35954AE515441FED3DC52601D89D28954ADCF959FBC4C2DF2470
+      5EBE61BC38D02DCC178BC537748CC477D90D655CD77D7BBF2698A04B7E135946
+      F9C313F4733E9F7F1DF98BC68B83D4EBF56FE772B9AB68B0D7F626B3D9ECBBF8
+      7EA01F4764D4A41F504C791108FD8B68F32AA23557064C8FF4BE031AEBFBC61B
+      1ADEC5F4EC2F6B6B6B1F20E49D38B5A50320A255449B9FA2CC3E5700A150281F
+      8944DE5F5A5AE2FE259F9BF929E1F084FA017CF735D6E17BA37DF6E134E238C4
+      2EEF9BA452A9DB994CA64063416C7B7B7B139F5D817197516745441C25F0114F
+      AE3B287E8413EC1E7CD4A4281CC759446466B4F8268E0F222D3EB7E796BD305A
+      280E39C384A722E2109E8A8843782AA316071F2AE95FB757C782B14CF5FE0F4C
+      A71F09DB4702A80000000049454E44AE42608217000000002000000000004700
+      49004600460069006C00650044006100740061002E0050006E00670000000400
+      0000000A06000000004E0061006D00650000000D54F079000004000000001006
+      00000000430061007000740069006F006E00000007689898000004000000000C
+      0600000000470072006F007500700000000652C47E00000700000000200A0400
+      0000500069006300740075007200650044007200610077005400790070006500
+      0000D87E36527B7C8B570000000000000700000000160A0400000049006D0061
+      006700650049006E006400650078000000FE5647720B4E07680000FFFFFFFF04
+      00000000140A0000000049006D006100670065004E0061006D0065000000FE56
+      47720D54F07900000400000000120C00000000460069006C0065004E0061006D
+      0065000000FE5647728765F64E0D54000004000000001A0E0000000052006500
+      73006F0075007200630065004E0061006D0065000000FE564772448D906E0D54
+      F07900000400000000080A00000000550072006C000000FE564772FE94A56300
+      0015000000001810040000004900730043006C006900700052006F0075006E00
+      640000002F6626546A52C18810620657625F000000000000180E0000001A001A
+      000000420069006E006100720079004F0062006A006500630074000000540044
+      0072006100770050006900630074007500720065000000040000000014000000
+      000049006D006100670065004E0061006D006500000004000000001800080000
+      0047007200610070006800690063005400790070006500000050006E00670000
+      0017000000002000C20D00004700720061007000680069006300440061007400
+      61002E0050006E006700000089504E470D0A1A0A0000000D4948445200000087
+      000000780806000000D823E1C6000000017352474200AECE1CE9000000046741
+      4D410000B18F0BFC610500000D6C49444154785EED9DF98F9B471DC6F1ED5D7B
+      4FEF153525479328F44A42D2D24B8140292D47455B50818A7214C1BF8500097E
+      2B14090A3FA00A44850A2D14AA06DAA6D926CDDA6B7B0FEFAED7E77AF93CEB49
+      944D5689EDF5DAF3DAF348A399F97AF73D669EF77BCCCC3BEF271C1C1C1C1C1C
+      1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1A86CFE40E7B84CDCD4D5F3299
+      9C080402A7ABD5EA3144E3F55FB6B04E7A9FDFDE9E9E9E9EF5F97CB5BAD80E38
+      72EC21204638954A3DB1B1B1718A8E0F18F18EE0F70BD168F495B1B1B115CA9B
+      46DC553872EC01A42D4883E974FADB1063BF11DF169062351C0EFF2A9148CCD9
+      4010BFC91DDA8B101AE31BCD1043805043E572F9F95C2E372A821971D7E0C8D1
+      66D0A981A5A5A507C90F195153E0FF868BC5E29314437549F7E0C8D17E0CD0B9
+      0F99724B90E38AF6D8DF6DEDE1C8D146D099FEE5E5E563E471236A09F81B3E08
+      72826257B58723477B11AED56A7799F2AE60FC95817AAD3B70E4682F2290E3FA
+      718C96C1716268A088A976058E1C6D049D192453DA353896C6459C59E915C857
+      F0FBFD1553DD150281C0069973487B081BE1703867CABB02E4C89389205D8323
+      477B518AC562B398845D8F6E4622911459A95EEB0EDCF0798BA0FF7D84AD2395
+      4AE510E920A209ACCA30F2A1FA5FEC1E98A8458EB74C314BBA383333F321E728
+      933A32B4EEC8D12044866C361B57A84AF920A1A608315AFFB533E0BC9B102649
+      F1326976DFBE7D174496AD1FF7008E1CB78008313B3B1BC154DC0D19EE271DA0
+      336C6AB31264F920180CFE676262E23D2EADAD53FE8E1C3B400F285AE2984629
+      CDA056B8FE8BBD80247260CF8742A17F261289643B88E2C8711D204520994C7E
+      9AFC335427EA52EF01A25C26DAF9CBE4E4E407BB21892307403B443299CC19CC
+      866653478CD8F38018F390E4F5A9A9A97728371D16F73539A42952A9D469C8F1
+      39AA8375694F62311C0EFFB159BFA42FC9219F626969697FB1587C8AF23E23EE
+      79408C0B64AF12E56429DF361CEE2B724084AD7014F3F138CEE6FD3450DF3D1C
+      B4C1064EEB1BF8237FE6F68BB72249DF348EB4C5C2C2C2F152A9F455AABD6C42
+      1A02A4C80D0C0CFC7A7474F423CA3B9A9ABE2007C4D85A058E6F71C6881C00ED
+      520B0683AF4F4F4FBF0641AA467C0D3D4D0E9991743A3D8D197996F294113BDC
+      00229A8FD1222F0F0F0F2F5E6F667A961C9021303F3F7F0FDAE26B94BBBE58D7
+      0328462291571289C47FAF9A999E24878881C678B852A97C9E1B7533CF0D8276
+      AB45A3D15721C89BB4DB46CF91831B0C6632992720C68346D416F8FD7E39719B
+      98A89EF7D3E4874C4D4DFDA9A76E54239D989267C88F1BD1AE81AAADC662B11C
+      B9A6CE6B84C0A38B8B8B0948D2D31A093FE4ED9E21878881C6789ECE3B6C442D
+      431A221E8F1706070733680C2DBA515A969C3C512C16EF83209AB2EF59F48C59
+      1131F031BEC9D37CC4885A82214511527CACC92B445BA420ADF29B5665891C5A
+      157E9CF33DC5F96EF972B497C1FDD63C4F0E4522A954EA5908F229236A098472
+      6542B9CB90E212D52B348E565F691ABC2AD2E86F04CEE7271DE09CDF55D9887B
+      0E2287A76F8ECE91F3F9F86E88816DDD1C1D1D5D20FD0362BC41A3FC9BF4113F
+      E5C82BD713C3C097CBE50EF73231AEC2B39A83CE0964B3D953E57259C3E12D01
+      27B30C296621C5FB542F418425F29D08A1F3891463444127488FE9FCE6A79E04
+      6DE04DB3A28EC221DC5F2A955EA4DCD2001726648528E45D8A9AA94CD118EBA4
+      9BD63CE8F890F07E85C694A78DB8E7E16572C4E7E6E67E44B1A505BE688B2C3E
+      C6DB14B54057BEC54DDA8273F4CB5A8F1DE14972E8499E9F9F5764A2FDB59A82
+      08303636368739915F218DA1F074DB8413C7BFBAD6E3CB94678CB8EFE03972E8
+      69A6E31E2E140A8F1B51C310311289C4A55028F42FCA1711293CDD6646387E10
+      6DF118C43BCB6F7D3DECEE2972D071BE7C3E3FB3B2B2F243CA4DF91922061AE3
+      0A1AE3EF542F525FD3CDD77FAD1F3B9D4EC72085666F773D88D60B50FB78E6E9
+      A0D3C26B6B6B5F699618C2C8C8481A62BC4571476260A6A6AAD5EA4B8E18DBE1
+      0972D06901A293933CD94D6DC026C4E3F1659C4FCD32EE480C453D1CF7FB54C7
+      EA5287ABF08AE688134A9E35E586817F511E1A1A7A0B427C4855FB7BDE440C1C
+      CF17A87675071D5B613D39E8448D823E4A481933A2860011E4679CA72862282A
+      B9E67C8A18F82FD3A552E979AAD1BAD4E146584D0E75E2EAEAAA46254F1A51C3
+      C0CF480683C1F39042CBF0AF85AB3AA6DE8ECFE572DFA2BCAB8DDD7A1DB66B8E
+      60B95C7E8CBCA97755C3E17051835C74FE1CD56D7B5C200B634A9EA3D8D137E4
+      BD086BC9A1279C6C04D5DFF4A4DAF0F0B006B82EA331F2322F75E9D63165A2CE
+      61A2EE3422875BC066CD11A023B5D4AF59ADB18E23FA3F8A4B37F8197A6FE598
+      E6488CC8E136B059730C1262DE6BAA0D83E84433ACF310E3C62D930631515F42
+      6EBB29B5065636949E72C2CCBB51FF4D4D78496B90B4ED80D6625C1FB6CA9C9C
+      25EF9937E83B015B9FA2A8DE6535E586118BC5B4B42F4DBAA63520846F7D7D7D
+      9AE39D36228706611D394C678EA3359A9A11957F118D46DF27D784DAF5D3EFA1
+      7C3EDFF38B73F602366A8E00A1E63D746653D70631B4103843DAA635204602AD
+      D1F4F4BE839DE49049697A15B9DFEFD7A21DCD9D5C3F0D1F440B9D765AA33558
+      450E3DE9A461A2948411350CCC9008B06D6B698E1545DEF4649D431DB6690E7D
+      AFE4089DDAF475618A0EE672B971114C751D83FA11B450DFACFB6C37AC5AEC43
+      870E66B3D9E7CAE572ABDF2C29078341BD259ED12828C4B88BB233292D8076B3
+      6B25181D3A9E4EA77F805969DB16D10EAD41E4B0C6ACC81C601A8678DADD4CA9
+      25B0C9E7F0572A951918EB9975ADBD0E9B34471073D2B7AF02D8089B34471893
+      D27408EBB077B0891C211C52E7885A04ABC88169710B7D2D824DE408420EEB3F
+      5DD14FB0821C0A634184DC26B2F63D6CE90C5FB95C6EEAD50387BD872DE4F013
+      A9B8F7472C83359A03B4E54BCE0EED8315A39172440B85C2E9959595737EBFDF
+      91C402D027255BC8A148451FC5D18A2DF7B251F7A16596195BC8A1ED1B231435
+      E9E636B1B70337BEDAE1E0E0E0D000AC312B737373FB15B218914397B101BAD6
+      1910626BBBA55AADF624E9A023865DA07FAA5DE9104EAC3D3EF591DF2FBAF10D
+      3B41BF747E99A04C483A9DBE0F623CE9886137BA418E018871CE9911FBD15172
+      486BE4F3F983E4EE6D770FA0D39A43EB44EF306507CBD169CD11C09AB8053D1E
+      4147C9213F231C0EAF99AA83E5E8B459A9462291742010D8F6C2B3839DE83839
+      48FAC07EB25E75B0199D362BDAA76B656868E89D6834AA8FEB39588C4E6B0E11
+      649DECA3B1B1B137E3F1B8F33F2C46B786CFF58ECA24C5BB6AB5DAE142A13051
+      A954B49EA3E9EBA956AB018EE1BB3A4F140A8536FD7E7F4D69EB0F1C5AC1266D
+      BADAB5514AC8A1A1F321F209F2719216FA34B297868830B0BABAFAC962B138A2
+      F0D8C8B7010DA50DE49663B1580AC2AC227264690C7A1360309FCF47BB3A844D
+      C7EAFC2289DE59D1F8C7EDAE2790CBE5EE45D33C62C8D510B45F1804F9C7F8F8
+      B8BEA070D31720FB1C011EB4433C68DAF27B124DAC659AEA0FEF7CAE5C64989F
+      9F3F87D678D4889A0624393F3333F35B8A0534CB4DDF8EED07E881CC66B371F2
+      A31041BB368A14370D4C2A78F00439B801ED15760255F73417BDAB6B96168944
+      223FC721D6C779FA822022442A95928F772FF77C9807ECB69BE879861C3847C3
+      688D9F90B7E5AD386E3C8906F91944291851CFE1AA86403B9CA1DDEE4324BFAE
+      6178821CDCA43E4B7E1627E9B346D416E083BC3B3939F9328DD053A3B5D2B2B4
+      97BE0E21521CE6FE5A1AAEF00439A42DB8D9EF70B36D9FCD259AF9034EEA1B34
+      84A79D5469091CF5519C4A7D41FB04F55DEF73E215CD3181BD7C899B6EFBDE1D
+      D21A2323233F1D1C1C9CA3EC39FF435A02737B90B67984A46D35DBD69F2247C7
+      47489B050D105632D5B682E386D6D6D69EA6A80138CF80EB0E408A93C964F2C7
+      38972F523FD24E625C8517CCCA9D688EEFD1007BB6DE341C0EBF393131F17BDA
+      77DB77ED6D02F7AFADBFA310E20CD7F900E561F3D39E409AC30BE4D89FC9645E
+      C0EBDEB32DA168E84DC2DBDF41107D83D62AFF43A4D0D72C0B85C2C394F595CC
+      8E68394F90830699595C5C7C06676B4FF730A7312AF81EBFC4079955C31871D7
+      2052E088EFE3A17814D3719C6BEAE836DD5E21C768A9547A646161A1131FEE2B
+      A0417E914824BAE6A072BF0A45357A2927F38011771C9E20070D24357A646969
+      E929B44727B6BEEE3841A425E6E6E60682C1E02948710A912623BB0AAF680E6D
+      CF9040B59E417B3C40DE8908AB8093FA1B7C90F7D44846D676E8DE148A92EBED
+      BFA39CCB9AED273C410E81C653387BA7BE098B0639DA098270BECD5028F4B7C9
+      C9C9D7FC7E7FDBF6AAE0B0FA047B022D780FF773025153C3DA9D8297C8A1EB1C
+      203F809939994EA78F19D99E83465A831C7F9D9A9A7AAB1592E83A09C507F9DF
+      A35435E9750899F53B357B861C821A99A4EFCC1ECEE5725F585F5FEFE8F6509C
+      BB42075F26BF88C9C9E01B2CCECCCC6468C42DBF44D7A7216CAE4BE30F838140
+      401A6106324CF19BA7BE16C5B56F12B9253D430E411D401A2B97CB0F75287AE9
+      2B8814F1783C0F312E41FA0B9E22870039E47F1CC5B47C9DA7D2ED1FD60648FB
+      C562B1F5A1A1217DB4F932F52BB4F1A217C921ED71C7F2F2F2D3387593AA9B9F
+      1C9A8434C5C0C080487105425CA22DAF205EA0BCEEF3F9AAFF07BCC402BA30AE
+      78A20000000049454E44AE426082170000000020000000000047004900460046
+      0069006C00650044006100740061002E0050006E006700000004000000000A06
+      000000004E0061006D00650000000D54F0790000040000000010060000000043
+      0061007000740069006F006E00000007689898000004000000000C0600000000
+      470072006F007500700000000652C47E00000700000000200A04000000500069
+      0063007400750072006500440072006100770054007900700065000000D87E36
+      527B7C8B570000000000000700000000160A0400000049006D00610067006500
+      49006E006400650078000000FE5647720B4E07680000FFFFFFFF040000000014
+      0A0000000049006D006100670065004E0061006D0065000000FE5647720D54F0
+      7900000400000000120C00000000460069006C0065004E0061006D0065000000
+      FE5647728765F64E0D54000004000000001A0E000000005200650073006F0075
+      007200630065004E0061006D0065000000FE564772448D906E0D54F079000004
+      00000000080A00000000550072006C000000FE564772FE94A563000015000000
+      001810040000004900730043006C006900700052006F0075006E00640000002F
+      6626546A52C18810620657625F000000000000180E0000001A001A0000004200
+      69006E006100720079004F0062006A0065006300740000005400440072006100
+      770050006900630074007500720065000000040000000014000000000049006D
+      006100670065004E0061006D0065000000040000000018000800000047007200
+      610070006800690063005400790070006500000050006E006700000017000000
+      0020004E080000470072006100700068006900630044006100740061002E0050
+      006E006700000089504E470D0A1A0A0000000D49484452000000870000007808
+      06000000D823E1C6000000017352474200AECE1CE90000000467414D410000B1
+      8F0BFC6105000007F849444154785EED9DE96E14471485338BF182C7E305E185
+      250B081224FE8004091128120A649192BC40A23C439E288F90E708094904210B
+      821043BC8C3D8BEDD9A77B26E7D8E5082237F2DA75DB9C4FBAEAAAEA999EAAEA
+      D3B76EF536AF0921841042082184104208218410420821841042082184104208
+      218410420821841042D826E59689A5D7EBA5161616863299CCB92008CEA06802
+      657DB0B1542A95D9F89488027DB4026BC34AC81660F72727270BC8F7122B0EEC
+      FC74A15078ABDBEDDE08C3F0141A9378A15B015DB986C50F89EB508AA2582CCE
+      B4DBED9B48BFE98AC53E83BE0D13250E5438B3BCBC7CA9D56A7D04756BC83840
+      D0BFDDC48803C2C82E2E2E7E8221E4922B120708C5917669D35018083A3F9630
+      E2C5BC38389420C6B88CC0F3B22B1231615A1C1046AA5C2E9F6C369BB75C9188
+      11EB9EA31FB392DB0A3EFD60561CF01AE94AA5720171C68C2B123163D9730C60
+      CA7AC5A585074C8A83B146A3D1381604C1A42B121EB0EA3932F57AFD3C620D9D
+      12F78855CFD18FA9EB2997159EB0EA3906208EBC4B0B4F98140746933E2C0637
+      72C2175687950C3C8755AFF6CA607507B05E1287674CEE00CD526CA0A3534422
+      718848240E1189C9B11DB395D3F3F3F35FF3E29B2BDA15994CA6974EA77BD96C
+      3674457B220802D627DDE97462EDB7FD6E076782B497B503619FCDDB04F7220E
+      76E4D0D05003564687AEA1914D6CA785557BED58DE36C0F32F3C41976B369B63
+      D56AF568181ECC7DB8A8776F7878B8B9D90E1435619BEDE8C1760BFB94EDE887
+      0DB6DBED71B423D76AB5B25CB9C9A113472E97ABA3439F22F90F6C095645233B
+      D80E3BB40BDB0BEB5E03C68E3D0A9B80CDD46AB5D75757577348EF1B1437DAF2
+      0CA27886EC12DA50451B3A4807B03DB503DB4A615B147A06C9012CC7909F8657
+      3C5DA9548EC19BACF739D61D0E71B0BDF97C7E797070F001D27FA3880FE8D460
+      01D7F133FB05EAC43ECB60C933B8E3B0D338EA2E94CBE529B76ED7B87614D90E
+      6467915FC6B20EEBEC773B08EA4B91D0838C203D8DE59952A9740EED3982DF3B
+      1C6721D1A14BE8D03B68D03D64E939F814D7817428B7090BDC90C523FBD7FEFE
+      FE3B636363731B9FD83DD8C602DAF13D92F7B06D8A7CF369B47D6F07C1764318
+      C5C727DCFE80DD1D1F1FFF19ED69737DE2C501175C4587DE45C31E225BC6F240
+      44B115F81D766E05F6081DFA1386B415B76AC7E0BB656C83EDF8135682C5D90E
+      0E550DD8BAD871B0519CAD448B839D874EBD8FE463D82AF2FB12CDEF04D7B1F4
+      224F20D4FBACD3C69AED83203A1C1919F905499FEDA047A4C758407D7E435B1E
+      245A1C0303031534E4311AC5A337F60EDD04BF4D81ACA02E4F50A7F246E9F6C1
+      8E98C7E209B6C36164AF81F39EC0EF53208B10EB9D448B036E98F14511C648DE
+      379C49945027BAE66D839DD183A01E2220E450C26D7885F581310E2926561C6C
+      04628DBFB0AC31ED8ABDE13AB5E6EAB4EDFAC0DBB4B2D9EC3CBEC31D6202D485
+      B1D4C69C368960B6C0692A03C0F5C8DA08ACCB2A6CDB431CC4C1935B5598B761
+      318AC48A83A77FE18A19D17B1DA39FC7D5A58D1DBEED610EDFA138629B99EC84
+      24C71CE84F93F77DD003EC44B08C33CC790D92E880D4283BF200F07E8C55CC79
+      0D62561C88294C1E4DDB20C0D4741653C14A3E9FAFBECCF09922662A9CDD9819
+      1A9FC7E4B515C41327171717BFC492E7FDB704475B777A7AFA5B2C675D910950
+      675E94E3F3BD63B017AE74FE1FD49D5759798190A7AF197B98C2AA384E3871F0
+      AAE1965815074689CD4BFB598E18EB8511A0EE1C55188C9A0AAC3739B4E240A7
+      F3C572D3D8C6F1300C47919FC067B937F80A4AEEBC570AB4B984BEA0085B18B2
+      999E832DCECCCC34D82DEE632F7068C4819D9EC2778E237911E953F82E2F411F
+      E13AF1528A987ACFA2CF1E4D4D4DFD8EFEFCEF2CAD4971A0A2532B2B2B9F6107
+      F3869AAD82662A7D757474F4BB52A9B41A04C11578877750C6CF8BDDD384381E
+      C27E845066AD8A230F7B03C963B02DDFEAD36AB5BA10D07108E30C1AB3E567C4
+      EEC1D0F3D4AA3818CCF14EAB1786058820D56C3687ABD5EAFB10C759E6DD2AB1
+      CFA06B93F3925A0A666161E13A869AF790552C71C0401CF65F520B51A4D6D6D6
+      266AB5DAE71086DED91113E6C50161703AFA3686902F9095B78811D3E2803032
+      8542E1DD4EA7731315D535A098312B0EC6174B4B4BB7200CBD4DD0131487B923
+      D209E34309C33FA6C441612C2F2FDF8030AEBA22E11133E260F0592E972F20F8
+      BCEE8A84674C8803C248F12259A3D1F814635D62CEBD1C76AC788EFE300C3FE3
+      72232B2CE05D1CF01AFC6BAE6B815E656D0EAFE2E07052AD56F9D8FF3557240C
+      E1DB73F421CEF880B314971786F0260E7A0D08832F0D39EF8A84317C7A8E3E0C
+      29572112EF718FD81A9F9E6318B1C659971506F1220E082353A9542E22A92BAD
+      86F1258E01C41AE75C5618C5D7B032A4F31AF6895D1C0C40EBF5FA092C357D35
+      8E0FCF916DB7DBBADD2F01F8F01CFCFF363E72208CE3C373F421DED0FFB72580
+      D8C5914AA58EC0730CBBAC308C8F618581A8EED948003E3C077F53E248003E62
+      0E9110240E1189C421229138442412878844E21091481C2292D8CF3774BBDD99
+      B5B5B5DBE9747A5C0F30D9250CC3920F718C607112C6EB2B12874DF842BE95D8
+      774EAFD7E33F2BF2F640DDCF611838F5A4BE5E5CC4810FCF31303737F70D92BA
+      B9D830D84FEBFFCD1E2BF8D1BCBBF8260C830943FC3B09C2E093F412877D7404
+      8B68240E1189C421229138442412878844E21091481C221289434411FF25F35E
+      AF777A7E7EFE2B2CF774E12D97CB35FAFAFAEA489AFC4FD62493C9F0DA686FE9
+      5FE0028AC5F425D8020000000049454E44AE4260821700000000200000000000
+      470049004600460069006C00650044006100740061002E0050006E0067000000
+      04000000000A06000000004E0061006D00650000000D54F07900000400000000
+      100600000000430061007000740069006F006E00000007689898000004000000
+      000C0600000000470072006F007500700000000652C47E00000700000000200A
+      0400000050006900630074007500720065004400720061007700540079007000
+      65000000D87E36527B7C8B570000000000000700000000160A0400000049006D
+      0061006700650049006E006400650078000000FE5647720B4E07680000FFFFFF
+      FF0400000000140A0000000049006D006100670065004E0061006D0065000000
+      FE5647720D54F07900000400000000120C00000000460069006C0065004E0061
+      006D0065000000FE5647728765F64E0D54000004000000001A0E000000005200
+      650073006F0075007200630065004E0061006D0065000000FE564772448D906E
+      0D54F07900000400000000080A00000000550072006C000000FE564772FE94A5
+      63000015000000001810040000004900730043006C006900700052006F007500
+      6E00640000002F6626546A52C18810620657625F000000000000180E0000001A
+      001A000000420069006E006100720079004F0062006A00650063007400000054
+      0044007200610077005000690063007400750072006500000004000000001400
+      0000000049006D006100670065004E0061006D00650000000400000000180008
+      00000047007200610070006800690063005400790070006500000050006E0067
+      000000170000000020004F110000470072006100700068006900630044006100
+      740061002E0050006E006700000089504E470D0A1A0A0000000D494844520000
+      0087000000780806000000D823E1C6000000017352474200AECE1CE900000004
+      67414D410000B18F0BFC6105000010F949444154785EED9DDB731CC515C6D16A
+      6F5AADA45D4996847C01DF2F9890C46508040C540284E2166E492A5452A95425
+      7F5A78CB1B793179208F8122D8C6806D6CC736BA4B2BAF25EDAEB417E5F7AD5A
+      94634BC6DADDE99E95FBABEAEA995E69A6FBF4D7E79CEE993EF3908787878787
+      8787878787878787878787878787878787878787878787878787878787878787
+      8787878787878787878787878787874D7498DCA3C5585D5DED20C5272626863B
+      8029FE1EFCB63A3A3AFA1D3FD54C51E8E0C9D120D4F9636363FD89446247AD56
+      1BA856AB0F5396A5B37BC97BCC9F6D05F3FCEF4DFE371F8D4667389FECECEC9C
+      19181858A07C75ED4FECC293E33E2132CCCCCC8C542A95839C3ECAF94EF244FD
+      C7001189449620C71804BC944AA52EF7F5F5894456C8E2C9B1094486F1F1F1AE
+      783C7E746565E50845BB485DF51F1D02622C905D23FF666464E46BF2EADA2FAD
+      8727C71D801411FC84238CD827D012FB107ECCFC144694303D5F53E73310E53A
+      756DA9FFE2C901A4252627277770F824EAFB3172E71AA201CC4394F3F82BFF6E
+      959FF2409343A4989D9D7D180D710A87F230026D7B79D0A60A043987A3FC4926
+      93C937439207921C321DB95C6E67A9543AC5A91CCC6D07DA588DC562E7BBBABA
+      FED5D3D333D708491E28724853E04F0C72F82B8EF7AF956E6FD0CE1A24F9121F
+      EAF4E0E0E0E25648F2C090035F22C154F4F972B9FC1402EA34C50F128AF8249F
+      0C0F0F7F4AFBEF6B86B3EDC921133237377784E9E82B1CF799E20716106382E9
+      F94738ADE31CDF7376B36DC9211382B3994653BCC5F10153EC0190C72A5AE433
+      A6BFFF842025537C17B6253968BBB4C5E1E5E5E537384DAD957A6C801CB39ABF
+      A345C620C95DBEC8B62307C4884E4E4EBE828F71D21479DC03C8ABCAD4F7F446
+      BEC8B621078DECB879F3661FDAE2BD6AB5AAA56E8F2D00829C1D1A1AFAC7ED66
+      665B9043C4989E9E1E86141F70DCC813D140C014B286D02B388065EAA5296505
+      C4D06A11E538C951EA1C9A3E801813D4F16FEB53DEB62707428FA0311E29140A
+      BFE534B956EA0E387AABE974BA904C26E72391C83C455ACA2E50CF32C752DB51
+      529C245FA80F9264A97B869410C929730AEA3CD7DDDDFD617DE1CC94B525448C
+      5C2E771453F26B8E9D3E20D348EBEDED5D42B0D7389D20CD52273D41959A2EF3
+      BBA68D4A1192D65962FCAE67389A5E0FA14D762E2E2EEE5C5A5A724E70EABA80
+      06F9B06DC981603B99AAFE0462BC4A639C2E6AC95CF4F7F75F63D45DA12E63D4
+      2D475EE4A70AF9A62B92FC5DFD6D310EBB4903A4DD689203107E04732312B944
+      A92DC9711B315E43F84EDBD0D5D555CA6432E7A9C6254EA531F4724EA5FEE37D
+      4224218B92F792EF428B1C852007CAE5B24C9033B41D3910A04CC9B162B1F836
+      9DE05463A452A9625F5FDFE7D4E302F59A225F2135FC14546D23C9D4ECE43AC7
+      6666661E8720CEDAE85A756D09125E3E9FDF8BC678CB353130256588F105875F
+      91263029CBCD1043E0FF6BA402E93A6D3D87A9FA4665E667EB681B72202C2D87
+      8FE0B0BDC7B173E7339BCD7ECDA13A6F9AA499484BA06B934AA431663EE7B8CF
+      75F39375B40539440C34460615FB7B4E9DBFA5C554759A8ED3FB9B32252D23C6
+      1D58267DC794F81C6969ADC82EDA851C717C8C77C8D3A6C8192045B5A7A7E71C
+      A418E7541D1808B8BE4C94D6476E303D96866ACA643582D09303E14471404FE1
+      C1EF36454EC1289E25FB8EB4A517671A01D797BF918FC7E397F1713435B68A50
+      93036244F0330E944AA5A74D9173308A3565D5DE91C0B604DC0EEEB342360729
+      C7D64AEC21B4E48018753FA352A9BC818042514F4C4A99A44E2AAC95040FA39D
+      161389C4556462D5B4845973C498B2BE8E39D1EA6128108D4617C9B424BEA545
+      AE66014196B9F78C1EE299222B082539644E6EDEBC791CADB1CF148502688D5B
+      7494A699B69D4399B0622412B1EA7784951C69FC8C5F98D3D00052A873829ABA
+      6E0A4346ADBE06363BDA08A12307C488CECDCD3D1F2673B20EEAB64272B26209
+      31745F2B4EF03A42450E04AFB7B97697CBE51F9BA250810E8A9A516C1DC846F7
+      B5DA5F61D31C099CD0979083D3E7269B011FA88BBAB992991ECAE9F1BE358486
+      1C12FAC2C2C2BE6AB53A6A8A4207EA9646733821AEEE0B39AD9ADA30698E78A1
+      50F8B9390E25204716125B7FE8C73D3B161717076CDF3B14E4305AE351464668
+      B586403DA3B76EDDDAA3FA9A225B88317BB3BE312B2C9A430FD69E467586FEE5
+      237C22C5EFB06AFB41175AEBC1238754663E9FDFC90C658F290A35E8A44720F2
+      B0EA6D8A0285B41453FBA3DCD7FA968B309023BEB2B272B21DB486A0CEC2049E
+      52BD4D51A0E03EDDC8E719736A1561302B6946C55E73DC16C037DACF68FE111D
+      17E8CC85EB6B41F04572BD786C1D4EC921E1CECFCF1FAAD56A81876C6C353083
+      2F6BC18E3604A2F1241B887102ADF15353641DAE354702AD71CC1CB715E8BC18
+      BEC77B4C3177B49A205C4FEFB11C6486F2B229720267E4904049DA0E18EAE9EB
+      BD40FDD34C6DFF343535B5571D6A8A9B02D7D19E9C13CC8ADED7C29729760297
+      9AA33397CB3D266198F376450A827F303D3DFD74336DE17F35585210ED354C89
+      366B39978BB319829EBA62533F40106DAB3936C05C2291F8786060E0029D7BDF
+      4F6F21450C729D8464CF721A9A60332EC931343939F95704E374CB5F40988D46
+      A397485FF5F7F72B6ACE5D44A1DD8A947C3812891CE2584E79E85E5170420E09
+      065B7D1267EE555314083A3B3B57E3F178850EA8C7C9A068954E506C8C2879A7
+      B61A92AFFD7140A0ADDAA4A438A035EAA1AF2264B9A7064476ED2F828369BFDE
+      01A9294608B91EFB77A0ADF58C2682C3DBA9EA71BC215C912389BFF126956BF9
+      4C450249A552A56432A94F53D4E36390F46ADFFA8B3AEA184D9DB539AA17410D
+      140A8534330FA7BBE85A05DAA9F6AF60DE6E91E6285A6FFFB2697F27C78A05A2
+      F6F7E0F80E907A969696EE5AD473458E0C36F60F8C60851D68092494743A5D24
+      E90337E3DC43FB4BF22409A6C2B9469046B1DE8B104194529CF7733E8416D985
+      8086DA9924DDDDDD25DA3F8686D2862B7DB345EDAF87823069BDFD7276631C8B
+      2019B51F6D368A361FA5FDDF93C40939A8C830FEC65F4C27358D582C56C5B6DF
+      40285738958DCF716D6D48BEE7AE7723248D22EDA45360FC3D08E7403E9F1761
+      9CC8A611A02D6BD96C56219B2E737A832433A6ED136AFFA67693368A2809FE46
+      FECE20C78A0FB21FADAE105AF69F6748E8F81AC761E9BBA6A8297475752D6732
+      19ED74BF4423151F436A9496DDFFEB7C860832351A457BD022C7E6E7E7F72020
+      D78B843F084C4799F65F64605CE05403E316F93D83C6DC09D37E451A5294A1F5
+      F820FB5C9023C6C87C0115DEF48B3DD8D6820983A0A9E31479536110A89B1C34
+      8DA23D08E871AD528699201063058D7996436DEAD6C02836D97EB53545AEAF50
+      1D71D1F01802970A6F0A120C23E6730E155547A19A9BDE4FC2FF4BE348F35C45
+      55FF0755FD6DB3D70C0AC6948A18E748DABBDB143104FE5F2648918914D7ECAC
+      0B72C419954D3D655423D0185FC2F0A0E263C85E5FA703CE2ADCC2DA2FE181EA
+      48FB6546BF22B52470CC3A741D9282DC8DBB2087626F36B5E08360A618D9B2B1
+      3334A4E59B8C8CA035126F408E2FD052563713FD109895CC43DCF30C8E09EAA8
+      8DD62D87AE6B9D1C3448415A1B0EA708292A38A152A58109463004D1DED8EBF8
+      3657EB852180EA457DCE7328E773D3A0F6CD42F771A139B42AD9F01416C148CD
+      4B30B28D81FA035C5F6B23B964327981911A1811B702EA729301A2AF4306FEBD
+      59ABE4406B68E9B69B46353C4B426B5C24B3191F43266506726851C9398C16CB
+      9102DF716F5B73E8B946C3FE46341AD5A732654EACED36E75EF2E06F3162E5C1
+      3B8506443C1EFF2F87816B4DC13A3970461BF63718BD9A662A598D5341479470
+      4A377CBA6A13B45FB3287DF1D1CA4E7FDBE4E860DAD5F05BDB688DF56725818F
+      9A3BA0CE58E4FE4EFD0E64270759B3282B24B5AE39480DBFE184501472D1AAD6
+      100C19CB748E9511BB19A8C7FA43342BB04D0E6D0A6AF8A9270EAD3AC76A8C8A
+      DB50E5FED689793B444E0862ADFD56C9A1D98AD629CC6923889851EC02BAAFF5
+      6751B7A356ABE9D98FB5F65B2587E9D8861BC74CC7E5076B3AD07AB6F7C8FE1F
+      687B12195AEB33DB9A439FAC6CD86E3372B208A725EF8034003DD276FAA19C72
+      B99C9608CD69E0B0AE3940C31E3F9A234366FD4D2DEAAC775E47959B22276070
+      6833B535ED65BBB17AD157D3B1868070520B0B0B4374926DD3A2CDDECEC35ED2
+      EE4EDAAF0D5456B4877572C462B1A6D6294AA5D2718463D5F673BF6EFC8D47CD
+      A9532C2F2F1F25B3B2B7D83639440AAD17343C63C1B41C2A168B0A8164457B70
+      1F05E63F81D672FE613E010DB60B1317D806EEDB61DDE720D3DB560D3BA5EAAC
+      A5A5A5E7390CDCF75007A0C6338C56673BDDEF04B2EB6070A8FD816B0FEB0E16
+      6DAB306369EAC119A3E7209DB69FCE0BBAFE513AE205F250688D7560E246E7E6
+      E69EA0FD81FA1ED6C901448E869D52018229BACE9BA4C0CC8B043F3D3DFD1466
+      ECB8290A151820BFCCE7F38F043540745D17E4D06729B413AD5974615E7EC708
+      EA6935412418AE7BB85C2EBF688A4207EA182B140AEF2C2E2E6ABF49ABDBDF41
+      FB47AD93831BAF2493C996BCB48B93A8AD7C7F9E9A9A6AD9F496EBD4E363302B
+      7A170D656DC1A91150D77A7C107DAE9DE396F4A5AE0331F495EF3F06EEF1DE09
+      6EAE8FEBEE9F9C9CFC0D79AB84AF97803E1A1E1ED63685861F67539F24F57A09
+      D29D30456D01EA5D8946A31FD3FE4F697FC30FE6D437B4FF397C9AE764BA5D90
+      43F7DCCDE87C1FBBD9D2F0894C916F241289D3D96C56FB65EF9B242229DAE749
+      F2672146E84221DC2F68FF0C83E4F48E1D3BB4DF66ABED7F0C52C88C7EBFFBDF
+      3A39043A600867EA756C6620B14745121A7C29954A7DD9D7D7A7F74DEF5A74E3
+      F7080EE75E047298D3239C3B89D8170468EF2432F896369D1D1919D1F68D0DDB
+      9FCBE576E2701F231DA2E8AE4DEDAEC8D18B4D7B86CAFDCC14050604A3AF2B69
+      D3CF3C02D1FA8A4890541DC8035D2B50A7C4E371C5E550AAA2FA6B7484DEBED7
+      BBB48A0F12B8CF471DF415CB226DD7DBEA5A42D0A6F11475507ECF6FF4BA2287
+      3AE52023F76D466EA89DBEAD4284406395316F0B24C5C7D0B45D8F0C141F44FE
+      809E2AABFDF5F820C56231CB40517C10574F9B3785137248A591EDC22B7E17C1
+      6867F7B68076FCF7F6F68EA325B477575B1914C9A7FE6A1FE72286D4BBDAAE97
+      76B4C22BFF464F9A87D1245A16DF813C42431227E41010CE2073F49710886C7E
+      5B0327B0D6DFDF3F198BC5AED0AE1B10618E5CDB0764CE36740CF95DB2577C0C
+      BDC0A3B59AF5F820FBF1C7F4E90E677DB30E97E4D056FFC7993ABD426E7DBDA5
+      55C074543299CC25B4853675EB9BB38A8FA1773DEF72023783697F9C5C3385F5
+      F820BB31B94EE5E2F2E61A553308B7A9A57497A0EE6534C61988F1396DD197AA
+      1551E79ED18436027F5F23C92F51C4806FD0409F0D0E0E5E9246327FE2042EC9
+      5163A42C60A7AD7F86BB15A0E3AA0A0341676A53F775522BE263C82F91E6B902
+      E1BEC866B3579BBD663370460E359AB40439BE95A04D715B4075A7E32E53EF7A
+      18043AB2D5F131D6E3839C51B889B55FECC3A94D030A7F389B4C2635E56B1B98
+      F818E7E844CD4A5ABE0BCE10449AE83A83E70CE6CB497C10A7E4A0F17AF1278F
+      B015D3CB99FADC0AA8674D2BAF1CCA1C366D4A3683EE43A67DC1D7D2E9B4FC19
+      EB70AD398425D4F30D4688F6C1861E1023477DADC4C7E0FA32B7F3F178FC2229
+      B0402D9B210CE4D0FBA4738C0E4D0543AF3DD0727AA865253E86C0BDEAF14118
+      3C8A166815CEC921429016A2D1E87FB1AD52A3A1051A436FB12908AC95F81802
+      F7D1347701CDA100BC561106CD21E881D86C6F6FEF455B426F041058BBFCEB8B
+      5CF5027B2871EF698869F5BEA1208708A1350F1A7F25CCDA83FAA96E2EE283C8
+      F7906F66D5EF088BE61041B4B2388DF6506CCD506A0FEA2573625B6BD4070F99
+      96E42D4E691F7AE87F994BB3A2669F2A5E0000000049454E44AE426082170000
+      0000200000000000470049004600460069006C00650044006100740061002E00
+      50006E006700000004000000000A06000000004E0061006D00650000000D54F0
+      7900000400000000100600000000430061007000740069006F006E0000000768
+      9898000004000000000C0600000000470072006F007500700000000652C47E00
+      000700000000200A040000005000690063007400750072006500440072006100
+      770054007900700065000000D87E36527B7C8B57000000000000070000000016
+      0A0400000049006D0061006700650049006E006400650078000000FE5647720B
+      4E07680000FFFFFFFF0400000000140A0000000049006D006100670065004E00
+      61006D0065000000FE5647720D54F07900000400000000120C00000000460069
+      006C0065004E0061006D0065000000FE5647728765F64E0D5400000400000000
+      1A0E000000005200650073006F0075007200630065004E0061006D0065000000
+      FE564772448D906E0D54F07900000400000000080A00000000550072006C0000
+      00FE564772FE94A563000015000000001810040000004900730043006C006900
+      700052006F0075006E00640000002F6626546A52C18810620657625F00000000
+      0000180E0000001A001A000000420069006E006100720079004F0062006A0065
+      0063007400000054004400720061007700500069006300740075007200650000
+      00040000000014000000000049006D006100670065004E0061006D0065000000
+      0400000000180008000000470072006100700068006900630054007900700065
+      00000050006E0067000000170000000020005C0D000047007200610070006800
+      6900630044006100740061002E0050006E006700000089504E470D0A1A0A0000
+      000D4948445200000087000000780806000000D823E1C6000000017352474200
+      AECE1CE90000000467414D410000B18F0BFC610500000D0649444154785EED9D
+      FD6F1C4719C793B35D3BB875D2C6AFE7F325C669DD9724542401A22684948616
+      B594524A2344C58B7811FC8A90103F232124FE80A24A54952A9597366DA900B5
+      2AA8040186904409891239897162DF9D6D398913E3C8CE9DEFC2E7F18D83E3DC
+      FA76D7BBB77BEBE723AD77677CBB3B3BF39D675E76766695A2288AA2288AA228
+      8AA2288AA2288AA2288AA2288AA2288AA2288AA2288AA228CA3CABCD5E09984C
+      26F300BB6D376EDC48B06F60BBC876369BCD1EECEEEE9EE1B8E2A83802666868
+      68CDEAD5AB9F8CC5629B8DD72D20966BECDE492412FD459FCA11337B250048F8
+      1A78C14A1802C26964B73F954ADD57F4A91C2A8E00A128F904BBCEA2CB1A0422
+      E9F4D4E1C387EB8A3E9541C511208542E163E6B02C08A4A9B5B5F57EE3AC082A
+      8E80B878F16213C5C95AE3B40502E9328715412BA415666C6CECCE999999A6BA
+      BABA7BA973EC35DE7649B3BD97CFE7A792C9E4E5A2977FA8387C820A641796A1
+      150134B3ADE5781DC5481BB9BFC6FC64D970DD71AE7B95EB5E659F999D9DBD3A
+      393939B479F3E6ACF9C9B2507178C0E0E06003AD8E04099F34A65FF69E89C029
+      88660CB10C128614166AA8B9B979D2FCCB112A0E97D0D268C1BC6F26017AD9DA
+      8D772811CB421807D89FA2383A67BCCBA2E270C0BC20C8955B70DE53F4AD2EB0
+      2AD2A9D66F47282A8E32480F2645C6360E1F666B9EF38C082214B6533CDFA178
+      3C3E6EBC6FA2E2B040AC04B94B3AA9B662922BDAF914048864905D5F22913853
+      F45171DC069662536D6DED4E22ABC778AD342E9319FA2E5FBE7C5CC561105150
+      97D847C4B419AF150D99636AC58B636C6CAC3D97CB3D8E28BA8D97028823B762
+      C5313030B0B6A1A1417A28A5A2A92C62458A83878E8D8C8CECA2B2B97B255434
+      DDB2E2C4914EA7A529FA05B6B2AFC9573A228EC0BA782B4D2A95DAC9EE4B588B
+      75459FCA4264E7A9F08EB23F8BF3DF84A39EBDA3B7B290E5FC3ECE1D66CB62FD
+      6AD8CB90423F2844DE725CB870E1EE9A9A9ACF13891B8D57A590B7A6A7B96F8A
+      041DEFECEC9431A173EF61EAEBEB9FC36F93B85D90E59A6FC5E3F1D3E23879F2
+      E41D4D4D4D2DF8C98B3EA954CB7687FC6F3910BE68172BD23C4518CF73B8ECC8
+      B281BC0995975DE7A6A7A7CFF4F4F45C2D7AFF1FE95823D2BFCCE1B2BBDEB11A
+      7F4924127FE67E05E33507D78FF1DCDD3CB78844DEFBB414FFE38C488B83FAC5
+      233CE0A7891C3F07344D9348276A6B6B4F777474480FA32558B01E7EB79F432F
+      857A86CAF5EBDBB76FCF19F76DC8A0A26C36DB4B381F222E6C5BCF488A8387AA
+      21877E8E435F9AA85CBF40249F657F94A2E2ECE29C5B0AC2F32089F3457EEB79
+      1D8F709CBF72E5CA6B76C67048114BD1F330DB569C77177D4B133971C828ABD9
+      D959C99D7E0CA7936F478E90FBFBDADADAA68A5EE5C1827D94887ECA4F0BC6B5
+      65A0CFABC96472DA789505C13E806077726ED278DD42A4C4613AB5BECEE19239
+      C20513F97CBE6F7272F298D3115624C00E22F949E3F415EE334E3DE3158A3779
+      256F1BAC491CC17F9CF3B72C147064C4E18730889C29CCEF4122FB089156B6E8
+      58CCF0F0F047385FFA542A499A3AC82B4BD541AC90CA3296642FCFFAA0B82321
+      0E1F8421C5C75F2726260EB91D8B994AA57AD9ED5F98132B05F73C87A07FC93E
+      6FBC1C414BA713513FC661A2AAC5E183308E5384BCEBA4EC5ECCE8E8681BE5FF
+      B7489CC0BAE6B9F789783C7EC0385D215FD855AD38A48976FDFAF56F70E88530
+      2648D0DF6DD8B061C0B85D41AE935163DFE1D0EB7A8F632822DEEDEAEAFA8771
+      BAA22A3F6A925EC6999999AF70E84522F45184BCB85C61080843EA18810B43C0
+      7AECA3A554B2256297AAB31C54946A78E81778F8658DBFE03AD748CC37CA755E
+      D9850ADD1EAEE9F423255F914A35CFF8A2D316CC3C556739280BBD189893A648
+      7AC92B6148250E33BEC7384303F17427E17ADA381D5355E22011B65093B6FDF1
+      7129C84D47A9ACBD5CEADD871BC49211A6674888B0C665AF34ABCDB123AA461C
+      D20E27115CE7028196C81F1289C43B24A4AB665E29B0647BB89EAB975B958278
+      7B427A8F8DD33655210EC99D98C7E7490457CD43CE2FB0BD4D13F590F1F20419
+      3C4498761967985943C678DC1CDBA62AC481D578CC6DEE1461C05B588C63C6CB
+      4B3E43B8AA25836D91BA9171DA22F40F669A63328ACB3144888CBE7A038B71C2
+      787986BC826757F1A998960371E1C87A845A1C24AEBCE27EA6E8720E917180CA
+      E729E3F4149A88FBCC61D580954B628565D6425B845A1C54F63EC9CED5A82922
+      E203BF8431D7B51CF22FEB9760B7D99725B4E29081292480ABCA1E16E734C238
+      689C7E500D95D09210377153249625B4E2A8ABAB7B1471381E39C5C38F8D8E8E
+      BE699C9E333232B251CCB37156251489B6C41D4A7160B6BB48649903C3119C73
+      8D26DBAFDC8C67B00BF790E918AA1AC4DD2DCD70E3B42494E2A022F92973E808
+      CE9337AB13C6E939588D469AC573836122405991874E1CC66AB899FEE038F58C
+      B96F39FC02AB24737544E24330E2782BDB92CF123A7190FB1DBFC0E221276590
+      8E71FA89AB77146104913752B42C990943250E69A160B63F6C9CB6E19CF79733
+      7ACB0E434343F710A1D5DA7C2D09CFF390392C49A8C4412D7A1B01761426ACC6
+      901F3DA08B216C51A96B2CE43EE2CF32BE43230E53FE39FE100931FDD11CFA0A
+      F759EE189230B22693C9C8FA2E25098D386809C8779D8E5E2BF3FB81CECECE21
+      E3F40D59AD80A2ABAAFB36AC20535ABE1F0A53B1E2B8FF8007F3B317F4262D2D
+      2D32237154277AB1147D28C4219F1890D08E9AAFFC7EA8125643A8ABABB334BD
+      11A0C314E9B7110A7110F9F2119023A8207A3A70672988BCC8CE042416717878
+      B8642B2C14E2882DB18C552948ACA9F6F6765FDEB89682FB45AA09BB18325AC9
+      E9350317877C08C4CEA9D93E86E21D7FBFEA06F946867B35196724E1F95ACDE1
+      2D042E0EAC46178173148EDADA5ADFFB35E6217C553901BE13B08C259F310CE2
+      70D423CA838C53A48C19A7EF6072EF32879185382DF9955EE0E228140A8E2672
+      434C27CDA12D78F098CC4161B195FD7491FB45BA4811B0DC253340A09F434AE7
+      1256E0470E8B95974B35616556BDF5EBD7C7F3F97C07091AC76B3DC29359F696
+      EC9F403C397E3FCE7969ACC47F3299CCB985E341A8C93FCAFF65B862A489C7E3
+      3F26AE6E7ECF934AA5D6072A0E192A4F827CDB38ED30CD43FC8C872818614991
+      243DABD291E3D55A2832BFE719C275907B8D23962710902CAD1169B2D9EC4F37
+      6EDC9823336C2333ECC06B5DA0E220E265ED7699DCCD16FC7690809F64DFCBD6
+      83287C1D5BC13D8EB293E5C46D8FD8AE5678D6F7784E11C55CE51477B033FBA4
+      D36919DEFF48D1A584091147D015D2482D8B1535021507EA8C7C1F423513A838
+      28E322DF8750CD04260EAC865426FD9AF15FF180C0C471E9D2A54673A88494C0
+      C4313B3B2B2FDC9410139838A86F54DD64752B8D202D4725D64051964160B9D7
+      4C32FB550E3DEFEBA0B23B1E8BC5260B85C215E3750BFC6F2DFFBB0BE315E81A
+      B28453269719633FC5F65FE37D1B8453061B7D88AD62739C129E607B4853A9D4
+      77CD832F9761B6FE7C3E3F984C26D3452F7BC8BAB258B11E22E35EC2E2EB525F
+      08F26A4D4D8D7CB279617A7A3AE3664643799B8CA0926CDD84791361F6E51542
+      A0E2306BA3FCC0381D43E025D7FD2B97CBFDD3AB8FA78D3593A5CAB713E99E8C
+      369770B23B86708F10CE4CD1D71BCCFA6EBDB5C5E5D5E54DB427702DB1BC1F04
+      260EF9609A04F8A6713A82C00F918807BC9A4B74312292999999673DB024FDF5
+      F5F5BF6F6E6E9E346EDF203E6590F6D384D97517810899EDFDF939D3031387AC
+      2E406EFA9E713AA13F1E8FFF8648F06C2ED15210493122FC597290A3C1CFF310
+      3E9976AA22DFD5CC23D6184BFA35EEED78E6459EB74091F7EAC2599D036BAD10
+      F1B2B4A6AC6D621B1E40266779DB6F6108DCA3202B29704FDB4B762D40045C51
+      6108B2BC18E1FE356176133F7F5F3CDD7760E290D15654D06C0F1496CA1CB9F8
+      90DF5FD32FA4BBBB7B86C83E679CB6E11C3FE63CB58559BF562AE88E2835683B
+      D0D68A3183D26229FB8D2CB9E1B5442271C6382B8A4CCFC8FD6561C1251101F3
+      BB9F3B11B07C9A41C248D1753FE7B7131737EB0C5C4B0652A7D8FA9D3E7B3A9D
+      9679BF64C5A525E17E192CC62FD8DF666D021587609A92CF7168D5DF214B74CB
+      9CE581E5460181EC20F13E4B2496B4B69290FCEF7593736D6126E0954588CBBE
+      4AE0FAE729527FEBA46526E35F09D3AE25C27CBEA1A1E14DAB0A73E0E210643C
+      28E5E56E1E42C683CE754C492E6437CCFE4F7ECEF3E504E963A0D226F3787612
+      CEB951E944F028C5DD2972DFDFF0B35DD6735E0C717C9F736CCF2CC06F33D465
+      5E324E5BC8385D2CD35EE2B183F31BB9AFAC8B3B82D08E63E196FCA43414E258
+      0881AFA125D34064BB5A40A6524891D8DADA3AED44100B91E204A1FDD0386D33
+      3131F113B70B134A13DD49B33AB00AA91512D9611786605A06AE5B4DE4DC1BE6
+      D0118D8D8DAED3CC697F4BE8C4A18407158762898A43B144C5A158A2E2502C51
+      712896A838144B541C8A252A0EC512158762898A43B144C5A158A2E2502C5171
+      2896A838144B541C8A252A8E80C8E5723740FE38DAE43C73099F59B5EA7F65B2
+      BCA8A77592720000000049454E44AE4260821700000000200000000000470049
+      004600460069006C00650044006100740061002E0050006E0067000000040000
+      00000A06000000004E0061006D00650000000D54F07900000400000000100600
+      000000430061007000740069006F006E00000007689898000004000000000C06
+      00000000470072006F007500700000000652C47E00000700000000200A040000
+      0050006900630074007500720065004400720061007700540079007000650000
+      00D87E36527B7C8B570000000000000700000000160A0400000049006D006100
+      6700650049006E006400650078000000FE5647720B4E07680000FFFFFFFF0400
+      000000140A0000000049006D006100670065004E0061006D0065000000FE5647
+      720D54F07900000400000000120C00000000460069006C0065004E0061006D00
+      65000000FE5647728765F64E0D54000004000000001A0E000000005200650073
+      006F0075007200630065004E0061006D0065000000FE564772448D906E0D54F0
+      7900000400000000080A00000000550072006C000000FE564772FE94A5630000
+      15000000001810040000004900730043006C006900700052006F0075006E0064
+      0000002F6626546A52C18810620657625F000000000000180E0000001A001A00
+      0000420069006E006100720079004F0062006A00650063007400000054004400
+      7200610077005000690063007400750072006500000004000000001400000000
+      0049006D006100670065004E0061006D00650000000400000000180008000000
+      47007200610070006800690063005400790070006500000050006E0067000000
+      17000000002000E5050000470072006100700068006900630044006100740061
+      002E0050006E006700000089504E470D0A1A0A0000000D494844520000008700
+      0000780806000000D823E1C6000000017352474200AECE1CE90000000467414D
+      410000B18F0BFC61050000058F49444154785EEDDD5D6B23551CC77133939468
+      2B8B6D254D9A862DB517BB54945A4154AC8FAC2F4041F6CA5B2FBDF325ECAB90
+      BDF525C8AA5DA1226AD505C127B6ADAD4E93E0A2562A59D24CE2EF6CFE88BAFD
+      6F9ECECC99497E1F28397374B34DF3CD247332E9DE4744444444444444444444
+      444444A3CBC82545ECE0E0A094CBE5563B9D4E2993C93C68E6DAED760BDB356C
+      EFD66AB5BD8D8D8DD33BFF7342308E88054150C1C5257C2DDE99D03510CBC7E5
+      72F90BC412CA9C538C2322D823784747472F61F84C77A63F08E3A8D168BCB7B2
+      B2722C53CE308E089830B0C7781D77F405991A08FEFC09F622EF562A95DF64CA
+      094F2EC922B3C718360C037F76C6F7FDCBFBFBFB799972827158767878685E5B
+      0CF454A298CF66B3E669C919C66199E779AFC87064D883AC23B659D98C1DE3B0
+      C8DC91B843CFCBE6C8705D7876F19F94CDD8310E8B70475E94A14DAB72193BC6
+      61111EE90519DA348FA3175FC6B1621C16E1F073468656EDEDED4572BDBD300E
+      8BB0E79892A155D3D3D34E0E6919875D277269150E691B328C15E3B0C8AC6CCA
+      D01A5C67383737174974BD300E8BF09AA32E436BF05465DEB56DCB66AC188745
+      7894FF22436B10C6CF328C1DE3B0A852A9D41088D573325AAD5620C3D8310E8B
+      64F77FB3BB353A8466F5FA06C5382CC3EB8E6F653832C476137B2327472A06E3
+      B02C97CB593BB240687FC8D0099EEC638979D32D9BCDBE80A7824765CA96C0F3
+      BC0F8AC5E2BE6CC786718CA85EAFCF349BCD4D3C05ACE32BB2F74070DDBBBEEF
+      5F2B140A35998A1CE31892394B0B7B8AA7F1A87E0A9B912C9B9F05917C832398
+      AD384E21641C03DAD9D9C92D2C2C6CE04E7A0E9BF77767E365564DF1F515E2BC
+      8EA79BBF64DA3AC6D127DC19E66CF2C7F12271137B8B7332ED5A13DFCFA7C7C7
+      C79FACADAD3565CE1AC6D10744710177C28BD85B3C2C5349D308C3706B6969E9
+      4B7C8FD63EF3C238EEA15AAD9E4714E69CD05E1F484A8ADFB187331F8CBA21DB
+      23611C67C011C8021E892FE307FD884CA50ABE6FF306E08788E4C7EECC7018C7
+      BF44B856E1046EC721F67CEFE3C866A8F7671807C4B556E10A22F90E2FA23F2A
+      954ABFCA545F263A0E576B152E2010F326DE8D7C3E7F7D7E7EFECFEEECBD4D64
+      1C4958AB7005919CE2767F8ED754DBBDDED49BA838F08349E25A852BB7F1B58D
+      23B2CFB4DF0B323171A460ADC2093C604EF040D92A168B5FE367F39FD311C73E
+      8E14AE55B8720B719817ADFF9C8F32B671A47DADC221738AC035EC497E1ABB38
+      C66DADC215FCFCBE1F9B38C67DAD226E88E334F5714CD25A459C521DC724AF55
+      C421B5710441B0CEB58A68A52E0EAE55C42735710CF08B5EC992C4C7C1B50A77
+      121B8759ABF07D7F13C3C7BA3314B7C4C551AD56A75BADD6F35CAB702F317170
+      AD22799CC761D62A0A85C21388C23C8570AD22414C1C4E3F485D2E976711C6AB
+      18328C04E2A7EC49C53848C53848C53848C53848C53848C53848C53848C53848
+      C5384895E8F339FE2F08827770E1F49FD39C14CEDF5B1942472E2906A98A0335
+      3BFF27BC2749DAE2F84186148354C551AFD7B77171ABBB45514BD50B52A356AB
+      15C2307C03C387BA331405E767820D4BCE207BD6F7FD55DC88924C9345A98DE3
+      2CE63CD4A9A92973A8DB8FDB8B8B8B5764DCB7DDDDDD73F97CFE6DD9ECA9D96C
+      5E595E5E36BF41672071DC16D903BF259B77317170118C548C83548C83548C83
+      548C83548C83548C83548C83548C83548C83548C83548C83548C83548C83548C
+      83548C83548C83548C83548C83548C83548C83548C83548C83548C83548C8354
+      8C83548C83548C83548C83548C83548C83548C83548C83548C83548C83548C83
+      548C83548C8354A9FE55939D4EC70B8260310CC32908DBEDF69BF29F7A69B65A
+      ADAB32EE9BEFFB33994CE6B26CF6E479DED526C866DFCC8D89FAB6E0AF98C5DF
+      F19A6CDE053FDB562AE340100FE0E2126EC0C5EE0CD996C9644EFF06FC5F27FF
+      8159397A0000000049454E44AE42608217000000002000000000004700490046
+      00460069006C00650044006100740061002E0050006E00670000000400000000
+      0A06000000004E0061006D00650000000D54F079000004000000001006000000
+      00430061007000740069006F006E00000007689898000004000000000C060000
+      0000470072006F007500700000000652C47E00000700000000200A0400000050
+      00690063007400750072006500440072006100770054007900700065000000D8
+      7E36527B7C8B570000000000000700000000160A0400000049006D0061006700
+      650049006E006400650078000000FE5647720B4E07680000FFFFFFFF04000000
+      00140A0000000049006D006100670065004E0061006D0065000000FE5647720D
+      54F07900000400000000120C00000000460069006C0065004E0061006D006500
+      0000FE5647728765F64E0D54000004000000001A0E000000005200650073006F
+      0075007200630065004E0061006D0065000000FE564772448D906E0D54F07900
+      000400000000080A00000000550072006C000000FE564772FE94A56300001500
+      0000001810040000004900730043006C006900700052006F0075006E00640000
+      002F6626546A52C18810620657625F000000000000}
+    Left = 256
+    Top = 338
+  end
+  object lblMenuItemMaterial: TSkinLabelDefaultMaterial
+    BackColor.IsFill = True
+    DrawCaptionParam.FontTrimming = fttNone
+    DrawCaptionParam.FontHorzAlign = fhaCenter
+    DrawCaptionParam.FontVertAlign = fvaCenter
+    DrawCaptionParam.DrawEffectSetting.MouseDownEffect.CommonEffectTypes = [dpcetOffsetChange, dpcetAlphaChange]
+    Left = 144
+    Top = 336
+  end
+end

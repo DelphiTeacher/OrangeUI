@@ -1,0 +1,118 @@
+object FramePictureFile: TFramePictureFile
+  Size.Width = 353.000000000000000000
+  Size.Height = 437.000000000000000000
+  Size.PlatformDefault = False
+  object imgPicture: TImageViewer
+    Align = Client
+    Size.Width = 353.000000000000000000
+    Size.Height = 393.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 349.000000000000000000
+    Viewport.Height = 389.000000000000000000
+  end
+  object pnlToolBar: TSkinFMXPanel
+    ParentMouseEvent = False
+    ComponentTypeUseKind = ctukDefault
+    MaterialUseKind = mukSelfOwn
+    KeepSelfOwnMaterial = True
+    SelfOwnMaterial.BackColor.IsFill = True
+    SelfOwnMaterial.BackColor.FillColor.Color = xFF038FFD
+    SelfOwnMaterial.BackColor.DrawRectSetting.Width = 100.000000000000000000
+    SelfOwnMaterial.BackColor.DrawRectSetting.Height = 100.000000000000000000
+    SelfOwnMaterial.IsTransparent = False
+    MouseDownFocus = False
+    Align = Top
+    ClipChildren = True
+    Size.Width = 353.000000000000000000
+    Size.Height = 44.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Properties.IsToolBar = False
+    object btnReturn: TSkinFMXButton
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukName
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      ComponentTypeName = 'NormalPushed'
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.BackColor.DrawRectSetting.Width = 100.000000000000000000
+      SelfOwnMaterial.BackColor.DrawRectSetting.Height = 100.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 16.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontColor = claWhite
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 16.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claWhite
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claWhite
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.Left = 20.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.Enabled = True
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.SizeType = dpstPixel
+      SelfOwnMaterial.DrawIconParam.IsAutoFit = True
+      SelfOwnMaterial.DrawIconParam.DrawRectSetting.Width = 100.000000000000000000
+      SelfOwnMaterial.DrawIconParam.DrawRectSetting.Height = 100.000000000000000000
+      SelfOwnMaterial.DrawPictureParam.IsStretch = True
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Width = 100.000000000000000000
+      SelfOwnMaterial.DrawPictureParam.DrawRectSetting.Height = 100.000000000000000000
+      SelfOwnMaterial.NormalPicture.ImageIndex = 0
+      SelfOwnMaterial.PushedPicture.ImageIndex = 0
+      MouseDownFocus = False
+      ClipChildren = True
+      Size.Width = 73.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      OnClick = btnReturnClick
+      Caption = #36820#22238
+      Text = #36820#22238
+      Properties.AutoSize = False
+      Properties.IsAutoPush = False
+      Properties.IsPushed = False
+      Properties.PushedGroupIndex = 0
+      Properties.Icon.ImageIndex = 0
+      Properties.Icon.PNG = {
+        89504E470D0A1A0A0000000D49484452000000660000003C080600000094CACF
+        F3000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        012649444154785EEDD93D6EC240144561CF141469E3749414D90555DAAC2755
+        96918E9520C41EA274ACC04DFAC87F79233D2364B0881CD9BEC5F9A4117A662A
+        1F0D0593010000000000009856D3344F6559BEF80805294A55559F4551FC589C
+        577F8C255994B545F9AAEBBA4D8B380252148B70EAA21067BCE89FFF96A25884
+        638C71E38FCEF23C5F85109E7DC45C864E4AB7ECA7EDCDB7622E441144144144
+        11441441441144144144114414414411441441441164511EEF4479F7AD98C8CD
+        7F974308DF31C6BD8F57ECFB6DDBB60F3E624EF6E2839D8E8FFE69B95807E22C
+        8438C288238C38C288238C38C288238C38C288238C38C288238C38C2FE1067E7
+        5B31B7A138E90A21DDEFF8362CA11F872842BA38441194E2A49B501F01000000
+        00000060842CFB05AE89336E665FEABB0000000049454E44AE426082}
+      Properties.PushedIcon.ImageIndex = 0
+      Properties.ButtonIndex = -1
+    end
+    object lblFileName: TSkinFMXLabel
+      ParentMouseEvent = False
+      ComponentTypeUseKind = ctukDefault
+      MaterialUseKind = mukSelfOwn
+      KeepSelfOwnMaterial = True
+      SelfOwnMaterial.BackColor.IsFill = True
+      SelfOwnMaterial.BackColor.DrawRectSetting.Width = 100.000000000000000000
+      SelfOwnMaterial.BackColor.DrawRectSetting.Height = 100.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontSize = 16.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.FontColor = claWhite
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Size = 16.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.Color = claWhite
+      SelfOwnMaterial.DrawCaptionParam.DrawFont.FontColor.Color = claWhite
+      SelfOwnMaterial.DrawCaptionParam.FontHorzAlign = fhaCenter
+      SelfOwnMaterial.DrawCaptionParam.FontVertAlign = fvaCenter
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.Width = 100.000000000000000000
+      SelfOwnMaterial.DrawCaptionParam.DrawRectSetting.Height = 100.000000000000000000
+      MouseDownFocus = False
+      ClipChildren = True
+      Position.X = 73.000000000000000000
+      Size.Width = 280.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Caption = #22270#29255#25991#20214#21517
+      Text = #22270#29255#25991#20214#21517
+      Properties.AutoSize = False
+      Left = 73
+    end
+  end
+end

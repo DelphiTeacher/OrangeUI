@@ -1,0 +1,15 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = #35838#31243#34920
+  ClientHeight = 480
+  ClientWidth = 322
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 0
+end

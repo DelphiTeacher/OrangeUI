@@ -1,0 +1,180 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{297CBDF7-12D1-4DCD-8984-19FFA37DB359}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="BusLive.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\筋斗云配送\Delivery.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\常州农业通\cznyt_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeWeiBo\WeiBo_FMX_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeViewNews\OrangeViewNews_FMX_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeShopping\OrangeShopping_FMX_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeQQ\OrangeQQ_FMX_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangePictureView\OrangePictureView_FMX_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeMobileDisk\OrangeMobileDisk_FMX_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeGuide\OrangeGuide_FMX_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeCateringManage\OrangeCateringManage_FMX_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeBuy\OrangeBuy_FMX_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\ListBoxMultiPicDemo\ListBoxMultiPicDemo_FMX_XE8.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="BusLive">
+        <MSBuild Projects="BusLive.dproj"/>
+    </Target>
+    <Target Name="BusLive:Clean">
+        <MSBuild Projects="BusLive.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BusLive:Make">
+        <MSBuild Projects="BusLive.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Delivery">
+        <MSBuild Projects="..\筋斗云配送\Delivery.dproj"/>
+    </Target>
+    <Target Name="Delivery:Clean">
+        <MSBuild Projects="..\筋斗云配送\Delivery.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Delivery:Make">
+        <MSBuild Projects="..\筋斗云配送\Delivery.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="cznyt_XE8">
+        <MSBuild Projects="..\常州农业通\cznyt_XE8.dproj"/>
+    </Target>
+    <Target Name="cznyt_XE8:Clean">
+        <MSBuild Projects="..\常州农业通\cznyt_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="cznyt_XE8:Make">
+        <MSBuild Projects="..\常州农业通\cznyt_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="WeiBo_FMX_XE8">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeWeiBo\WeiBo_FMX_XE8.dproj"/>
+    </Target>
+    <Target Name="WeiBo_FMX_XE8:Clean">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeWeiBo\WeiBo_FMX_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="WeiBo_FMX_XE8:Make">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeWeiBo\WeiBo_FMX_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangeViewNews_FMX_XE8">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeViewNews\OrangeViewNews_FMX_XE8.dproj"/>
+    </Target>
+    <Target Name="OrangeViewNews_FMX_XE8:Clean">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeViewNews\OrangeViewNews_FMX_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeViewNews_FMX_XE8:Make">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeViewNews\OrangeViewNews_FMX_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangeShopping_FMX_XE8">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeShopping\OrangeShopping_FMX_XE8.dproj"/>
+    </Target>
+    <Target Name="OrangeShopping_FMX_XE8:Clean">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeShopping\OrangeShopping_FMX_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeShopping_FMX_XE8:Make">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeShopping\OrangeShopping_FMX_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangeQQ_FMX_XE8">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeQQ\OrangeQQ_FMX_XE8.dproj"/>
+    </Target>
+    <Target Name="OrangeQQ_FMX_XE8:Clean">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeQQ\OrangeQQ_FMX_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeQQ_FMX_XE8:Make">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeQQ\OrangeQQ_FMX_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangePictureView_FMX_XE8">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangePictureView\OrangePictureView_FMX_XE8.dproj"/>
+    </Target>
+    <Target Name="OrangePictureView_FMX_XE8:Clean">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangePictureView\OrangePictureView_FMX_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangePictureView_FMX_XE8:Make">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangePictureView\OrangePictureView_FMX_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangeMobileDisk_FMX_XE8">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeMobileDisk\OrangeMobileDisk_FMX_XE8.dproj"/>
+    </Target>
+    <Target Name="OrangeMobileDisk_FMX_XE8:Clean">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeMobileDisk\OrangeMobileDisk_FMX_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeMobileDisk_FMX_XE8:Make">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeMobileDisk\OrangeMobileDisk_FMX_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangeGuide_FMX_XE8">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeGuide\OrangeGuide_FMX_XE8.dproj"/>
+    </Target>
+    <Target Name="OrangeGuide_FMX_XE8:Clean">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeGuide\OrangeGuide_FMX_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeGuide_FMX_XE8:Make">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeGuide\OrangeGuide_FMX_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangeCateringManage_FMX_XE8">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeCateringManage\OrangeCateringManage_FMX_XE8.dproj"/>
+    </Target>
+    <Target Name="OrangeCateringManage_FMX_XE8:Clean">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeCateringManage\OrangeCateringManage_FMX_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeCateringManage_FMX_XE8:Make">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeCateringManage\OrangeCateringManage_FMX_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrangeBuy_FMX_XE8">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeBuy\OrangeBuy_FMX_XE8.dproj"/>
+    </Target>
+    <Target Name="OrangeBuy_FMX_XE8:Clean">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeBuy\OrangeBuy_FMX_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrangeBuy_FMX_XE8:Make">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\OrangeBuy\OrangeBuy_FMX_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ListBoxMultiPicDemo_FMX_XE8">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\ListBoxMultiPicDemo\ListBoxMultiPicDemo_FMX_XE8.dproj"/>
+    </Target>
+    <Target Name="ListBoxMultiPicDemo_FMX_XE8:Clean">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\ListBoxMultiPicDemo\ListBoxMultiPicDemo_FMX_XE8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ListBoxMultiPicDemo_FMX_XE8:Make">
+        <MSBuild Projects="..\..\OrangeUI Tutorial And Samples\OrangeUISamples_FMX\ListBoxMultiPicDemo\ListBoxMultiPicDemo_FMX_XE8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="BusLive;Delivery;cznyt_XE8;WeiBo_FMX_XE8;OrangeViewNews_FMX_XE8;OrangeShopping_FMX_XE8;OrangeQQ_FMX_XE8;OrangePictureView_FMX_XE8;OrangeMobileDisk_FMX_XE8;OrangeGuide_FMX_XE8;OrangeCateringManage_FMX_XE8;OrangeBuy_FMX_XE8;ListBoxMultiPicDemo_FMX_XE8"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="BusLive:Clean;Delivery:Clean;cznyt_XE8:Clean;WeiBo_FMX_XE8:Clean;OrangeViewNews_FMX_XE8:Clean;OrangeShopping_FMX_XE8:Clean;OrangeQQ_FMX_XE8:Clean;OrangePictureView_FMX_XE8:Clean;OrangeMobileDisk_FMX_XE8:Clean;OrangeGuide_FMX_XE8:Clean;OrangeCateringManage_FMX_XE8:Clean;OrangeBuy_FMX_XE8:Clean;ListBoxMultiPicDemo_FMX_XE8:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="BusLive:Make;Delivery:Make;cznyt_XE8:Make;WeiBo_FMX_XE8:Make;OrangeViewNews_FMX_XE8:Make;OrangeShopping_FMX_XE8:Make;OrangeQQ_FMX_XE8:Make;OrangePictureView_FMX_XE8:Make;OrangeMobileDisk_FMX_XE8:Make;OrangeGuide_FMX_XE8:Make;OrangeCateringManage_FMX_XE8:Make;OrangeBuy_FMX_XE8:Make;ListBoxMultiPicDemo_FMX_XE8:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
