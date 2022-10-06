@@ -1,0 +1,2 @@
+brcc32 country_icons.rc
+pause
